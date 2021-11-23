@@ -123,4 +123,4 @@ compress_html:
   # ignore:
   #   envs: all
 
-theme: jekyll-theme-minimal
+theme: jekyll-theme-time-machine

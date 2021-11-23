@@ -89,11 +89,12 @@ ncatted -a NVARS,global,o,i,49 $nc
 - tip
 NVARS及VAR-LIST是CCMS必讀屬性，一定要修到正確。NVARS為整數、VAR-LIST為A16序列(順序倒無所謂)
   - 產生VAR-LIST的程式碼:
-```python
+
+  ```python
 s=''
 for v in V[3]:
   s+='{:16s}'.format(v)
-```
+  ```
 
 ### Reference
 - [NCO](https://github.com/nco/nco)

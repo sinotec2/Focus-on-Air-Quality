@@ -43,6 +43,7 @@ nav_order: 8
   - 所謂「可增加」，在[ncdump -h]()結果會看到該維度有一長度，且是`UNLIMITED`。(範例如下，維度TSTEP的長度是UNLIMITED，目前是121，其餘維度長度則為固定的數字)
   - 須先將檔案的維度定義成可增加，才能進行[ncrcat](https://boostnote.io/shared/9bd4d899-ecd2-4891-8d50-dc0856d1c191)或使用python增加該維度之長度。
   - eg. [expand_xy.csh:擴展nc檔案的水平格點數](https://boostnote.io/shared/4450b3a4-673b-4c7f-98c7-a24368abfe67)
+
 ```bash
 $ ncdump -h $nc|head
 netcdf BCON_v53_1912_run9_regrid_20191217_TWN_3X3 {
@@ -63,12 +64,14 @@ variables:
 ### 變數+維度複合變更
 m3.nc檔案中的變數本身也是一個維度(`VAR`)，其長度為全域屬性`nc.NVARS`，變數的項目也是全域屬性`nc.VAR-LIST`的內容。雖然變更變數項目只涉及到時間標籤(`TFLAG[TSTEP,VAR,DATE-TIME]`)的長度，然CMAQ對其檢驗非常仔細，必須修剪到完全正確。如下列模版的製作過程：
 1. 先以`ncks -d`由CMAQ模式結果檔案取出時間、高度、與變數，縮減檔案大小：
+
 ```bash
 ncks -d LAY,0,33 -d TSTEP,0,0 -v TFLAG,AALJ,ACAJ,ACLI,ACLJ,ACLK,ACORS,AECI,AECJ,AFEJ,AISO3J,AKJ,AMGJ,AMNJ,ANAI,ANAJ,ANH4I,\
 ANH4J,ANH4K,ANO3I,ANO3J,ANO3K,AOLGAJ,AOLGBJ,AORGCJ,AOTHRJ,APNCOMI,APOCI,APOCJ,ASEACAT,ASIJ,ASO4I,ASO4J,ASO4K,ASOIL,ASQTJ,\
 CO,ETH,FORM,HNO3,ISOP,NO,NO2,O3,OLE,PAN,PAR,PRPA,SO2,XPAR $nc templateD2.nc
 ```
 1. 暫時改變TFLAG維度的順序，將第一順位設成是VAR(其餘順序不影響結果)、並且令其為筆數維度(rec_dmn)：
+
 ```bash
 ncpdq -O -a VAR,TSTEP,DATE-TIME $nc a;ncks -O --mk_rec_dmn VAR a $nc
 ```
@@ -76,12 +79,14 @@ ncpdq -O -a VAR,TSTEP,DATE-TIME $nc a;ncks -O --mk_rec_dmn VAR a $nc
 1. 使用ncrename來更改變數的名稱。如果2個變數名稱相同，仍然可以合併(後者會增加註釋)，然後續處理將更加複雜。
 1. 進行ncrcat進行擴充(如有必要)
 1. 改回原來的維度順序。如果不改回來後續程式就讀不到TFLAG了。同時也要打開TSTEP成為筆數維度(rec_dmn)，讓TSTEP可以增加、延長。(倒不必特別做`--fix_rec_dmn`指令，因為不能同時有2個rec_dmn)：
+
 ```bash
 ncpdq -O -a TSTEP,VAR,DATE-TIME a $nc
 ncks -O --mk_rec_dmn TSTEP $nc a
 mv a $nc
 ```
 1. 修改全域屬性。因為`VAR-LIST`變數的`-`在python是保留的符號，不能成為變數的一部分，所以直接用bash指令是比較方便的作法。
+
 ```bash
 ncatted -a VAR-LIST,global,o,c,"AALJ            ACAJ            ACLI            ACLJ            ACLK            ACORS           AECI            AECJ            AFEJ            AISO3J          AKJ             AMGJ            AMNJ            ANAI            ANAJ            ANH4I           ANH4J           ANH4K           ANO3I           ANO3J           ANO3K           AOLGAJ          AOLGBJ          AORGCJ          AOTHRJ          APNCOMI         APOCI           APOCJ           ASEACAT         ASIJ            ASO4I           ASO4J           ASO4K           ASOIL           ASQTJ           CO              ETH             FORM            HNO3            ISOP            NO              NO2             O3              OLE             PAN             PAR             PRPA            SO2             XPAR            " $nc
 ncatted -a NVARS,global,o,i,49 $nc
@@ -89,6 +94,7 @@ ncatted -a NVARS,global,o,i,49 $nc
 - tip
 NVARS及VAR-LIST是CCMS必讀屬性，一定要修到正確。NVARS為整數、VAR-LIST為A16序列(順序倒無所謂)
   - 產生VAR-LIST的程式碼:
+
 ```python
 s=''
 for v in V[3]:

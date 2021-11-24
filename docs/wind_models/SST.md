@@ -1,7 +1,8 @@
 ---
 layout: default
 title: 海溫的讀取
-nav_order: 9
+parent: 氣象模式
+nav_order: 1
 ---
 # 海溫的讀取
 {: .no_toc }

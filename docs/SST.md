@@ -99,9 +99,11 @@ GFS檔案格式是`grib2`，下載後可以用`ungrib.exe`來解讀。
 ### nc檔案轉WPS/ungrib.exe暫存檔格式(intermediate format)
 WPS歷來解讀grib檔之後，在進入metgrid.exe之前有個暫存檔案，其格式為Fortran binary檔案，稱之為**WPS暫存檔格式**([intermediate format](https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Writing_Meteorological_Data))，FNL檔案經ungrib.exe轉檔成為FILE:YYYY-MM-DD-HH_00, 之暫存檔，海溫則轉成SST:YYYY-MM-DD-HH_00。因此如果另有海溫數據來源，在WPS過程中即可跳過SST之ungrib.exe，直接將數據寫成暫存檔格式，以進行下一步驟metgrid.exe的整併與轉檔。
 轉換方式有fortran及python兩種：
-- fortran：網友提供[WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)MUR的轉檔fortran檔案。執行時會讀取工作目錄中的namelist.wps與geo_em.d01.nc來切割時間與空間範圍。
+#### fortran
+網友[WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)提供[MUR](https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1)的轉檔fortran檔案。執行時會讀取工作目錄中的namelist.wps與geo_em.d01.nc來切割時間與空間範圍。
 
-- python：使用netCDF4與[pywinter](https://pywinter.readthedocs.io/en/latest)之模組進行讀寫，以下範例為2018年全年日均海溫檔案中提取4/5~4/8日數據：
+#### python
+使用netCDF4與[pywinter](https://pywinter.readthedocs.io/en/latest)之模組進行讀寫，以下範例為2018年全年日均海溫檔案中提取4/5~4/8日數據：
 
 ```python   
 $ cat /Users/WRF4.1/NCEP/SST/2018/transNC2inter.py

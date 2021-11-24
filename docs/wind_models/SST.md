@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 海溫的讀取
-parent: wind models
-nav_order: 1
-date:               2021-11-24  8:22:00 +0000
-last_modified_at:   2021-11-24 16:30:00 +0000
+title: "海溫的讀取"
+parent: "氣象模式"
+nav_order: 2
+date:               
+last_modified_at:   
 ---
 
 {: .no_toc }

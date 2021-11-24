@@ -49,9 +49,11 @@ nc=https://cmr.earthdata.nasa.gov/virtual-directory/collections/C1996881146-POCL
     yyyy=4碼年代1981~迄今
     nc=https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2.highres/sst.day.mean.$yyyy.nc
     ```
-    - NASA或NOAA的再分析數據都是`nc`檔案，使以用wget或curl都可以直接下載。下載後`nc`檔案可以用fortran或python程式解讀、切割、轉檔。
+    - NASA或NOAA的再分析數據都是`nc`檔案，使用wget或curl都可以直接下載。下載後`nc`檔案可以用fortran或python程式解讀、切割、轉檔。
 
-- [ECMWF再分析數據(ERA5)](https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation)，有提供31公里逐時之高解析度檔(HRES)、以及10個叢集低解析度檔案(EDA)。最早回溯到1950年1月。每月更新到前3個月的數據。檔案格式為`grib2`檔案。下載方式為[網頁](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land?tab=form)選取及(或)CDS API python模組，如以下範例
+- [ECMWF再分析數據(ERA5)](https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation)
+    - 提供有31公里逐時之高解析度檔(HRES)、以及10個叢集低解析度檔案(EDA)。最早回溯到1950年1月。每月更新到前3個月的數據。檔案格式為`grib2`檔案(也有試驗性質的`nc`檔)。
+    - 下載點為`ERA5 hourly data on single levels from 1979 to present`，方式為[網頁](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form)選取登入下載，及(或)[CDS API](https://cds.climate.copernicus.eu/api-how-to)(也需要登入取得API鑰匙) python模組，如以下範例
 
 ```python
 import cdsapi
@@ -59,27 +61,20 @@ import cdsapi
 c = cdsapi.Client()
 
 c.retrieve(
-    'reanalysis-era5-land',
+    'reanalysis-era5-single-levels',
     {
+        'product_type': 'reanalysis',
         'format': 'grib',
-        'variable': 'skin_temperature',
-        'year': '2008',
-        'month': '01',
-        'day': '21',
-        'time': [
-            '00:00', '01:00', '02:00',
-            '03:00', '04:00', '05:00',
-            '06:00', '07:00', '08:00',
-            '09:00', '10:00', '11:00',
-            '12:00', '13:00', '14:00',
-            '15:00', '16:00', '17:00',
-            '18:00', '19:00', '20:00',
-            '21:00', '22:00', '23:00',
-        ],
+        'variable': 'sea_surface_temperature',
+        'year': '2018',
+        'month': '04',
+        'day': ['{:02d}'.format(i) for i in range(1,31)],                
+        'time': ['{:02d}:00'.format(i) for i in range(24)],
     },
     'download.grib')
 ```
-ERA5檔案格式是`grib2`，下載後可以用`ungrib.exe`來解讀。
+    - ERA5檔案格式是`grib2`，下載後可以用`ungrib.exe`來解讀。
+    - ecmwf也綜合了NOAA、MetOP等眾多衛星所拍到的海溫數據，下載點：[Sea surface temperature daily data from 1981 to present derived from satellite observations](https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-sea-surface-temperature?tab=form)
 
 ### NOAA GFS模式輸出
 模式輸出的好處是有較高的系統性，也有逐時、高解析度的架構，雖然沒有歷史數據，但還是可以藉由每一天自動化下載排程，逐漸累積。

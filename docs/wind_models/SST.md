@@ -1,8 +1,9 @@
 ---
-layout: default
+layout: post
 title: 海溫的讀取
 parent: wind models
 nav_order: 1
+last_modified_at:
 ---
 
 # 海溫的讀取

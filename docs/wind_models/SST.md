@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 海溫的讀取
-parent: 氣象模式
+parent: wind models
 nav_order: 1
 ---
 # 海溫的讀取

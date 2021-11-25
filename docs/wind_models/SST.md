@@ -19,10 +19,12 @@ last_modified_date:   2021-11-25 08:58:23
 </details>
 ---
 
-### 背景
+# {title}
+
+## 背景
 海面溫度雖然變化緩慢，但牽動全球的大氣環流，因此在氣象模擬過程中是一項非常重要的地面強制邊界。
 
-### 再分析資料來源與下載
+## 再分析資料來源與下載
 - [NASS多尺度超高解析度海溫數據MUR](https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1)的解析度為0.01度網格，時間解析度為小時，年代自2002年5月底開始迄今。下載需要登入，只提供https點選方式下載。檔案以年代為目錄，每天一個檔案。檔名協定方式：
 ```bash
 yyyy=4碼年代2002~迄今
@@ -79,7 +81,7 @@ c.retrieve(
 ```
 
 
-### NOAA GFS模式輸出
+## NOAA GFS模式輸出
 模式輸出的好處是有較高的系統性，也有逐時、高解析度的架構，雖然沒有歷史數據，但還是可以藉由每一天自動化下載排程，逐漸累積。
 ```bash
 kuang@114-32-164-198 /Users/WRF4.1/NCEP/SST
@@ -97,13 +99,13 @@ $wget -q $ftp${yesd}/rtgssthr_grb_0.083.grib2 -O rtg_sst_grb_hr_0.083.$yesd
 GFS檔案格式是`grib2`，下載後可以用`ungrib.exe`來解讀。
 
 
-### nc檔案轉WPS/ungrib.exe暫存檔格式(intermediate format)
+## nc檔案轉WPS/ungrib.exe暫存檔格式(intermediate format)
 WPS歷來解讀grib檔之後，在進入metgrid.exe之前有個暫存檔案，其格式為Fortran binary檔案，稱之為**WPS暫存檔格式**([intermediate format](https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Writing_Meteorological_Data))，FNL檔案經ungrib.exe轉檔成為FILE:YYYY-MM-DD-HH_00, 之暫存檔，海溫則轉成SST:YYYY-MM-DD-HH_00。因此如果另有海溫數據來源，在WPS過程中即可跳過SST之ungrib.exe，直接將數據寫成暫存檔格式，以進行下一步驟metgrid.exe的整併與轉檔。
 轉換方式有fortran及python兩種：
-#### fortran
+### fortran
 網友[WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)提供[MUR](https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1)的轉檔fortran檔案。執行時會讀取工作目錄中的namelist.wps與geo_em.d01.nc來切割時間與空間範圍。
 
-#### python
+### python
 使用netCDF4與[pywinter](https://pywinter.readthedocs.io/en/latest)之模組進行讀寫，以下範例為2018年全年日均海溫檔案中提取4/5~4/8日數據：
 
 ```python   
@@ -148,7 +150,7 @@ for d in range(5,9):
 ```
 
 
-### Reference
+## Reference
 - discussion on **SST historical data download**, WRF & MPAS-A Support Forum, [Meteorological Input Data](https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?t=8763), Mon Jan 06, 2020 7:07 pm.
 - discussion on **RTG SST Product Discontinued, Replacements[issue #1159](https://github.com/wrf-model/WRF/issues/1159)**, 8 Apr 2020
 - [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)

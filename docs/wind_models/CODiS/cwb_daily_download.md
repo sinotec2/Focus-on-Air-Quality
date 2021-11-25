@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "中央氣象局日報表下載及轉檔"
-parent: "氣象模式"
+title: "中央氣象局日報表下載"
+parent: "CODiS"
 nav_order: 1
 date:               
 last_modified_date:   2021-11-25 17:13:11
@@ -104,7 +104,7 @@ grep cwb /etc/crontab
   - 異常標籤`mal`之定義
   - 輸入測站位置stats_tab.csv
   - `cgi`指令之文字片段
-  - 隨即休息之設計
+  - 隨機休息之設計
     - 早期氣象局網站設定了防火牆，倘若程式太過密集讀取網站，會被視為駭客攻擊而被拒絕，因此2次讀取中間需要有不同（隨機）長度的休息，此處設計程式日間執行會有較小的間距，
     - 日間定義：8～18點
     - 後來氣象局調整了管制政策，因此相關程式碼不必再作用
@@ -173,7 +173,9 @@ grep cwb /etc/crontab
     73	  ymd = int(ymd.replace('-', ''))
 ```
 - 依序讀取測值
-  - 異常值
+  - 異常值之處理
+  - 形成DataFrame(dfi)的各欄位序列
+  - 
 ```python
     74	  for i in range(4, len(tr)):
     75	    a = tr[i].find_all('td')
@@ -209,7 +211,7 @@ grep cwb /etc/crontab
    102	ftext.close()
    103	#sec=str(round(np.random.rand(1)[0]*dayt*12,2))
    104	#os.system('sleep '+sec+'s')
-
+```
 
 
 ## Reference

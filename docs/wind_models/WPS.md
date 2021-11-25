@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "WPS_WRF的前處理系統"
+title: "WPS:WRF的前處理系統"
 parent: "氣象模式"
 nav_order: 1
 date:               
@@ -19,7 +19,7 @@ last_modified_date:   2021-11-25 09:41:21
 </details>
 ---
 
-# WPS_WRF的前處理系統 
+# WPS:WRF的前處理系統 
 
 ## 背景
 - [WPS](https://github.com/wrf-model/WPS)顧名思義就是WRF的前處理系統(WRF Pre-processing System)，包括準備地理地形檔案的geogrid.exe、初始邊界檔案要讀取的觀測值準備ungrid.exe及網格化metgrid.exe等3支程式，而這三支程式共用同一個**名單**([namelist.wps demo](http://homepages.see.leeds.ac.uk/~lecag/wiser/namelist.wps.pdf))。
@@ -148,7 +148,7 @@ dimensions:
 
 ### met_em檔案的檢視
 因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如下圖2020年6月太平洋高壓範例。
-![](https://sinotec2.github.com/jtd/assets/images/a.png)
+![](https://github.com/sinotec2/jtd/assets/images/a.png)
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
 - Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.

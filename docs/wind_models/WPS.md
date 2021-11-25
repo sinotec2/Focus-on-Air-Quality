@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "WPS_WRF的前處理系統"
 parent: "氣象模式"
 nav_order: 1
@@ -106,10 +106,52 @@ namelist.wps中有關ungrib.exe的設定不多，主要定義都在Vtable的對�
 - out_format：'WPS'格式即為**暫存檔格式**([intermediate format](https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Writing_Meteorological_Data))，因ungrib.exe輸出結果只給metgrid.exe使用，不必另行偵錯，如欲檢查整體內容，可以直接察看metgrid.exe的結果，該結果是`nc`檔案，有許多顯示軟體可以分析。
 - prefix：產出檔案的檔頭，選項包括`FILE`、`SST`、`PRES`等等，視要ungrib的數據內容而定，此協定也是為下一階段metgrid.exe讀取。
 
+## metgrid.exe再分析數據之網格化
+這個階段的目標是形成`met_em.dNN.YYYY-MM-DD_HH:00:00.nc`(NN=01~巢狀網格層數)，其空間定義乃按照之前產生geo_em.d??.nc的內容，氣象數據則整併ungrib.exe的WPS暫存結果。`met_em`檔案為下一階段包括real(或obsgrid)的輸入檔案。
 
+### metgrid.exe名單的設定
+namelist.wps中有關metgrid.exe的設定包括2項：
+```bash
+&metgrid
+ fg_name = 'FILE','SST'
+ io_form_metgrid = 2,
+/
+```
+- fg_name：ungrib.exe結果檔名的前綴。如果找不到檔案，metgrid.exe會提出警告，不會停止。
+- io_form_metgrid：2為內設值，表示將產生`NETCDF`檔。其他選項還包括(僅限):`1:BINARY`、`3:GRIB1`。
+
+### met_em檔案範例與GFS版本問題
+檔頭如範例所示。
+```bash
+kuang@114-32-164-198 /Users/WRF4.3/WPS
+$ ncdump -h $nc|M
+netcdf met_em.d01.2018-04-05_00\:00\:00 {
+dimensions:
+        Time = UNLIMITED ; // (1 currently)
+        DateStrLen = 19 ;
+        west_east = 59 ;
+        south_north = 59 ;
+        num_metgrid_levels = 32 ;
+        num_st_layers = 4 ;
+        num_sm_layers = 4 ;
+        south_north_stag = 60 ;
+        west_east_stag = 60 ;
+        z-dimension0012 = 12 ;
+        z-dimension0016 = 16 ;
+        z-dimension0021 = 21 ;
+```
+- `num_metgrid_levels`：這個數字是GFS再分析檔的層數，會在後續`real`的名單中用到。
+  - GFS曾經在2019年6月12日12時(UTC)有進行改版([NCEP/GFS Version Update 12 June, 2019 at 1200 UTC](https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?f=94&t=5451))，層數由32增加到34，因此不同時間案例取用不同時間的GFS再分析數據，將會有不一樣的層數。(see [metgrid.exe error GFS FV3 transition](https://forum.wrfforum.com/viewtopic.php?f=6&t=11314))。
+  - 如果正好做到2019年6月12日的個案，解決方式：
+    - 將個案分成舊版與新版2個小個案執行wrf(不建議、涉個案初始化問題)
+    - 使用ncks工具減少(或)增加新、舊版本期間`met_em`檔案的層數，以符合整體個案層數的一致性。(建議方式)
+
+### met_em檔案的檢視
+因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如下圖2020年6月太平洋高壓範例。
+![](https://sinotec2.github.com/jtd/assets/images/a.png)
 ## Reference
-- University of Waterloo, [WRF Tutorial(https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
-- [pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py)), Commits on Nov 23, 2021.
+- University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
+- Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.
 - [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
 - [pywinter](https://pywinter.readthedocs.io/en/latest)
 - [Here](https://sinotec2.github.io/jdt/doc/SST.md)

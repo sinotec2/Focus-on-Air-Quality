@@ -149,7 +149,7 @@ dimensions:
 ### met_em檔案的檢視
 因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如[下圖](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)2020年6月太平洋高壓範例。
 
-![image](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)
+![image](/assets/images/a.png)
 
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.

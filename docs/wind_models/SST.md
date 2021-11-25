@@ -1,10 +1,10 @@
 ---
-layout: post
+layout: default
 title: "海溫的讀取"
 parent: "氣象模式"
 nav_order: 2
 date:               
-last_modified_at:   
+last_modified_at:   2021-11-25 08:58:23
 ---
 
 {: .no_toc }
@@ -149,6 +149,8 @@ for d in range(5,9):
 
 
 ### Reference
+- discussion on **SST historical data download**, WRF & MPAS-A Support Forum, [Meteorological Input Data](https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?t=8763), Mon Jan 06, 2020 7:07 pm.
+- discussion on **RTG SST Product Discontinued, Replacements[issue #1159](https://github.com/wrf-model/WRF/issues/1159)**, 8 Apr 2020
 - [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
 - [pywinter](https://pywinter.readthedocs.io/en/latest)
 - [Here](https://sinotec2.github.io/jdt/doc/SST.md)

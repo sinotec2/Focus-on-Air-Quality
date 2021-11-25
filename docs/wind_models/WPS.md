@@ -147,8 +147,8 @@ dimensions:
     - 使用ncks工具減少(或)增加新、舊版本期間`met_em`檔案的層數，以符合整體個案層數的一致性。(建議方式)
 
 ### met_em檔案的檢視
-因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如下圖2020年6月太平洋高壓範例。
-![](/assets/images/a.png)
+因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如[下圖](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)2020年6月太平洋高壓範例。
+![image](/assets/images/a.png)
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
 - Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.

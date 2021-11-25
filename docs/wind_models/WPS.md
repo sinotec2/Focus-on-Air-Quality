@@ -4,7 +4,7 @@ title: "WPS:WRF的前處理系統"
 parent: "氣象模式"
 nav_order: 1
 date:               
-last_modified_date:   2021-11-25 09:41:21
+last_modified_date:   2021-11-25 16:21:24
 ---
 
 {: .no_toc }
@@ -22,7 +22,7 @@ last_modified_date:   2021-11-25 09:41:21
 # WPS:WRF的前處理系統 
 
 ## 背景
-- [WPS](https://github.com/wrf-model/WPS)顧名思義就是WRF的前處理系統(WRF Pre-processing System)，包括準備地理地形檔案的geogrid.exe、初始邊界檔案要讀取的觀測值準備ungrid.exe及網格化metgrid.exe等3支程式，而這三支程式共用同一個**名單**([namelist.wps demo](http://homepages.see.leeds.ac.uk/~lecag/wiser/namelist.wps.pdf))。
+- [WPS](https://github.com/wrf-model/WPS)顧名思義就是WRF的前處理系統(WRF Pre-processing System)，包括準備地理地形檔案的`geogrid.exe`、初始邊界檔案要讀取的觀測值準備`ungrid.exe`及網格化`metgrid.exe`等3支程式，而這三支程式共用同一個**名單**([namelist.wps demo](http://homepages.see.leeds.ac.uk/~lecag/wiser/namelist.wps.pdf))。
 - WPS要處理的數據包括
   - 地理地形等[靜態數據](https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html)、
   - 再分析數據(如FNL)、
@@ -61,17 +61,17 @@ geog_data_path = '/Users/WRF4.1/WPS/WPS_GEOG',
   - Change LANDUSEF from 1 to 0 at soil category 20: `ncap2 -O -s 'LANDUSEF(:,20,y1:y2,x1:x2)=0;' geo_em.d01.nc geo_em.d01.nc`
   - change the land type to grassland in a rectangular region x1 to x2 and y1 to y2, type: `ncap2 -O -s 'LU_INDEX(:,y1:y2,x1:x2)=7;' geo_em.d01.nc geo_em.d01.nc`
 
-## 再分析數據之轉檔(ungrib.exe)
+## 再分析數據之轉檔
 
-### 何為「再分析」? 何為grib? 又為何要ungrib?
+### 何為「再分析」? 何為`grib`? 又為何要`ungrib`?
 - 為整合全球地面、高空、衛星等觀測成為系統性、網格化的數據，各大氣象中心作業單位持續投入所謂「再分析」工作，將觀測與模式整合成具系統性檔案。
 - 充分性：
   - 再分析數據的時、空解析度不會太高、但作為真實個案模式模擬的初始與邊界條件，已經非常足夠。
-  - 加上各單位再分析工作已經作業化、常態化，因此對ungrib.exe的支援非常充分、穩定。
+  - 加上各單位再分析工作已經作業化、常態化，因此對`ungrib.exe`的支援非常充分、穩定。
 - 必要性：
   - 因大多數再分析數據是以`grib`格式存檔，所以下載後要進行轉檔，以準備下一階段的切割與網格化([metgrid.exe]())。
   - 是否一定需要進行`ungrib.exe`？答案是否定也是肯定。
-    - 使用python當然也能進行grib檔案的讀取及metgrid的準備，程式也更為靈活、因應日新月異的再分析數據也有更短的更新週期(如[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py))，如有特殊需求可以參考應用。
+    - 使用`python`當然也能進行`grib`檔案的讀取及`metgrid`的準備，程式也更為靈活、因應日新月異的再分析數據也有更短的更新週期(如[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py))，如有特殊需求可以參考應用。
     - 因近年來很多單位也提供`nc`檔案，那就不需要`ungrib.exe`，反而是要進行`unNC`的工作，因為在所提供的`nc`檔案中，其變數名稱、單位、網格定義等等，也各不相同，要將其轉寫成WPS格式進入WRF系統，也會是一番工程(如[nc檔案轉WPS暫存檔格式](https://sinotec2.github.io/jtd/docs/wind_models/SST/#nc%E6%AA%94%E6%A1%88%E8%BD%89wpsungribexe%E6%9A%AB%E5%AD%98%E6%AA%94%E6%A0%BC%E5%BC%8Fintermediate-format))。
 
 ### 檔案解讀的工作核心：建立對照關係
@@ -81,7 +81,7 @@ geog_data_path = '/Users/WRF4.1/WPS/WPS_GEOG',
 for i in $(ls ./ungrib/Variable_Tables/Vtable.*|cut -d '.' -f3);do echo ${i},;done
 AFWAICE, AGRMETSNOW, AGRMETSOIL, AGRMETSOIL2, AGRWRF, ARW, ARWp, AVN0P5WRF, AWIP, CFSR, CFSR_mean, ECMWF, ECMWF_sigma, ERA-interim, ERA-interim, GFDL, GFS, GFSENS, GODAS, GSM, JMAGSM, NAM, NARR, NCEP2, NNRP, NOGAPS, NOGAPS_needs_GFS_soil, NavySST, RAP.hybrid.ncep, RAP.pressure.ncep, RAP.sigma.gsd, RUCb, RUCp, SREF, SST, TCRP, UKMO_ENDGame, UKMO_LANDSEA, UKMO_no_heights, raphrrr
 ```
-- 使用時，只須將``./ungrib/Variable_Tables/`目錄下該特定之Vtable.???連結到工作目錄，覆蓋既有的`Vtable`即可。
+- 使用時，只須將`./ungrib/Variable_Tables/`目錄下該特定之Vtable.???連結到工作目錄，覆蓋既有的`Vtable`即可。
 - Vtable的選用範例
   - FNL之分析：`ln -sf ./ungrib/Variable_Tables/Vtable.GFS Vtable`
   - SST grib檔之解析：`ln -sf ./ungrib/Variable_Tables/Vtable.SST Vtable`
@@ -95,30 +95,30 @@ Param| Type |Level1|Level2| Name     | Units   | Description                    
 -----+------+------+------+----------+---------+-----------------------------------------+-----------------------+
 ```
 
-### ungrib.exe名單的設定
-namelist.wps中有關ungrib.exe的設定不多，主要定義都在Vtable的對照關係中詳列，
+### `ungrib.exe`名單的設定
+namelist.wps中有關`ungrib.exe`的設定不多，主要定義都在Vtable的對照關係中詳列，
 ```bash
 &ungrib
  out_format = 'WPS',
  prefix = 'SST',
 /
 ```
-- out_format：'WPS'格式即為**暫存檔格式**([intermediate format](https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Writing_Meteorological_Data))，因ungrib.exe輸出結果只給metgrid.exe使用，不必另行偵錯，如欲檢查整體內容，可以直接察看metgrid.exe的結果，該結果是`nc`檔案，有許多顯示軟體可以分析。
-- prefix：產出檔案的檔頭，選項包括`FILE`、`SST`、`PRES`等等，視要ungrib的數據內容而定，此協定也是為下一階段metgrid.exe讀取。
+- out_format：'WPS'格式即為**暫存檔格式**([intermediate format](https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Writing_Meteorological_Data))，因`ungrib.exe`輸出結果只給`metgrid.exe`使用，不必另行偵錯，如欲檢查整體內容，可以直接察看`metgrid.exe`的結果，該結果是`nc`檔案，有許多顯示軟體可以分析。
+- prefix：產出檔案的檔頭，選項包括`FILE`、`SST`、`PRES`等等，視要`ungrib`的數據內容而定，此協定也是為下一階段`metgrid.exe`讀取。
 
-## metgrid.exe再分析數據之網格化
-這個階段的目標是形成`met_em.dNN.YYYY-MM-DD_HH:00:00.nc`(NN=01~巢狀網格層數)，其空間定義乃按照之前產生geo_em.d??.nc的內容，氣象數據則整併ungrib.exe的WPS暫存結果。`met_em`檔案為下一階段包括real(或obsgrid)的輸入檔案。
+## `metgrid.exe`再分析數據之網格化
+這個階段的目標是形成`met_em.dNN.YYYY-MM-DD_HH:00:00.nc`(NN=01~巢狀網格層數)，其空間定義乃按照之前產生`geo_em.d??.nc`的內容，氣象數據則整併`ungrib.exe`的WPS暫存結果。`met_em`檔案為下一階段包括real(或obsgrid)的輸入檔案。
 
-### metgrid.exe名單的設定
-namelist.wps中有關metgrid.exe的設定包括2項：
+### `metgrid.exe`名單的設定
+`namelist.wps`中有關`metgrid.exe`的設定包括2項：
 ```bash
 &metgrid
  fg_name = 'FILE','SST'
  io_form_metgrid = 2,
 /
 ```
-- fg_name：ungrib.exe結果檔名的前綴。如果找不到檔案，metgrid.exe會提出警告，不會停止。
-- io_form_metgrid：2為內設值，表示將產生`NETCDF`檔。其他選項還包括(僅限):`1:BINARY`、`3:GRIB1`。
+- `fg_name`：`ungrib.exe`結果檔名的前綴。如果找不到檔案，`metgrid.exe`會提出警告，不會停止。
+- `io_form_metgrid`：2為內設值，表示將產生`NETCDF`檔。其他選項還包括(僅限):`1:BINARY`、`3:GRIB1`。
 
 ### met_em檔案範例與GFS版本問題
 檔頭如範例所示。
@@ -149,11 +149,11 @@ dimensions:
 ### met_em檔案的檢視
 因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如[下圖](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)2020年6月太平洋高壓範例。
 
-![met_em.d01.2020-06-16_06:00:00.nc](/assets/images/a.png)
+![met_em.d01.2020-06-16_06:00:00.nc](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)
 
-## WPS之全月執行方案(dowps.cs)
+## WPS之全月執行方案
 
-### dowps.cs的執行
+### `dowps.cs`的執行
 此處以批次檔[dowps.cs](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/dowps.cs)做為處理全月之工具，則執行全年的迴圈為:
 ```bash
 ROOT=/data/WRF4.1
@@ -180,7 +180,7 @@ done
      2  PATH1=$PWD
      3  PATH2=/airappz/WRF4.1.3/NCEP
 ```
-- 模擬範圍、解析度等如有異動，要在ungrib前執行geogrid
+- 模擬範圍、解析度等如有異動，要在`ungrib`前執行`geogrid`
 ```bash
      5  #cp -f $PATH1/namelist.wps.loop namelist.wps
      6  #./geogrid.exe
@@ -214,7 +214,7 @@ done
     26    done
 ```
 - 因同步運作，必須避免不同月份間檔案發生衝突。
-- 創建WPS??(??=01~12)目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/jtd/docs/wind_models/WPS/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
+- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/jtd/docs/wind_models/WPS/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
 ```bash
     27    ii=$(printf "%02d" $(( $i + 1 )) )
     28    echo "ii:"$ii
@@ -242,7 +242,7 @@ done
 ```
 - 執行FNL檔案之解讀
   - 使用[link_grib.csh](https://github.com/wrf-model/WPS/blob/master/link_grib.csh)腳本將FNL檔案連結到工作目錄
-  - 執行ungrib.exe讀取FNL檔案
+  - 執行`ungrib.exe`讀取FNL檔案
 ```bash
     34    ./link_grib.csh $PATH2/FNL/$ym/fnl* .
     35    ln -sf ./ungrib/Variable_Tables/Vtable.GFS Vtable
@@ -251,7 +251,7 @@ done
 ```
 - 同樣方式讀取SST檔案。
   - 如SST檔案非`grib`格式，則不需要執行此段，
-  - 而需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。參[海溫的讀取](https://sinotec2.github.io/jtd/docs/wind_models/SST/#nc檔案轉WPS/ungrib.exe暫存檔格式(intermediate format))。
+  - 而需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。參[海溫的讀取](https://sinotec2.github.io/jtd/docs/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
 ```bash
     38    cp -f $PATH1/namelist.wps.loop namelist.wps
     39    for cmd in "s/YN/"$YN/g  "s/YP/"$YP/g  "s/MN/"$MN/g  "s/MP/"$MP/g  ;do sed -i $cmd namelist.wps;done
@@ -260,13 +260,13 @@ done
     42    ln -sf $PATH1/ungrib/Variable_Tables/Vtable.SST Vtable
     43    ./ungrib.exe
 ```
-- 執行metgrid
+- 執行`metgrid`
 ```bash
     44
     45    ./metgrid.exe
     46
 ```
-- 將WPS??(??=01~12)下的成果彙整到$PATH1/年月目錄下，以備REAL或OBSGRID使用。
+- 將`WPS??(??=01~12)`下的成果彙整到$PATH1/年月目錄下，以備`REAL`或`OBSGRID`使用。
 ```bash
     47    mkdir -p $PATH1/$ym/met
     48    mkdir -p $PATH1/$ym/SST_FILE

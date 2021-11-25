@@ -4,7 +4,7 @@ title: "海溫的讀取"
 parent: "氣象模式"
 nav_order: 2
 include: footer_custom               
-last_modified_date:   2021-11-25 08:58:23
+last_modified_date:   2021-11-25 16:21:12
 ---
 
 {: .no_toc }
@@ -99,7 +99,7 @@ $wget -q $ftp${yesd}/rtgssthr_grb_0.083.grib2 -O rtg_sst_grb_hr_0.083.$yesd
 GFS檔案格式是`grib2`，下載後可以用`ungrib.exe`來解讀。
 
 
-## nc檔案轉WPS/ungrib.exe暫存檔格式(intermediate format)
+## nc檔案轉WPS暫存檔格式(intermediate format)
 WPS歷來解讀grib檔之後，在進入metgrid.exe之前有個暫存檔案，其格式為Fortran binary檔案，稱之為**WPS暫存檔格式**([intermediate format](https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Writing_Meteorological_Data))，FNL檔案經ungrib.exe轉檔成為FILE:YYYY-MM-DD-HH_00, 之暫存檔，海溫則轉成SST:YYYY-MM-DD-HH_00。因此如果另有海溫數據來源，在WPS過程中即可跳過SST之ungrib.exe，直接將數據寫成暫存檔格式，以進行下一步驟metgrid.exe的整併與轉檔。
 轉換方式有fortran及python兩種：
 ### fortran

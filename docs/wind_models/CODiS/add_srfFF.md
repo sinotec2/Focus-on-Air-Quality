@@ -1,14 +1,12 @@
 ---
 layout: default
-title: "cwbsrf to little_R"
+title: "CWB地面自動站數據轉成little_R格式"
 parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 2
 date:               
 last_modified_date:   2021-11-25 17:13:11
-permalink: /docs/wind_models/CODiS/
 ---
-
 
 {: .no_toc }
 

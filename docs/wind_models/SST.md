@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "海溫的讀取"
-parent: "氣象模式"
+parent: "wind models"
 nav_order: 2
 include: footer_custom               
 last_modified_date:   2021-11-25 16:21:12

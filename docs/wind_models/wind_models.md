@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "氣象模式"
+title: "wind models"
 nav_order: 3
 has_children: true
 permalink: /docs/wind_models/

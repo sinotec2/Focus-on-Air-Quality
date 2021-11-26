@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CODiS"
-parent: "氣象模式"
+parent: "wind models"
 nav_order: 1
 has_children: true
 permalink: /docs/wind_models/CODiS/

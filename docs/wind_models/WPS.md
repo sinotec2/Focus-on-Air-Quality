@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "WPS:WRF的前處理系統"
-parent: "氣象模式"
+parent: "wind models"
 nav_order: 3
 date:               
 last_modified_date:   2021-11-25 16:21:24
@@ -149,7 +149,7 @@ dimensions:
 ### met_em檔案的檢視
 因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如[下圖](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)2020年6月太平洋高壓範例。
 
-![met_em.d01.2020-06-16_06:00:00.nc](https://github.com/sinotec2/jtd/blob/eccda57cc022e3ace78875c0b650ffd514cc087d/assets/images/a.png)
+![met_em.d01.2020-06-16_06:00:00.nc](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)
 
 ## WPS之全月執行方案
 

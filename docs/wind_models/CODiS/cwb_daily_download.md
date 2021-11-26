@@ -54,6 +54,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 ```
 
 ### 解決方案
+
 #### 現行既有方案
 - 年度數據之[購置](https://e-service.cwb.gov.tw/wdps/)
   - 傳統作法，數據約落後實際觀測時間**至少1個月**
@@ -62,6 +63,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
   - 數據來源：中央氣象局[氣象資料開放平台](https://opendata.cwb.gov.tw/index)、逐時下載
   - 分站提供最新(落後實際時間約**3~4小時**)之觀測數據
   - 也按照地區、月份、測站種類整理中央氣象局自動氣象站觀測資料，提供歷史檔。
+
 #### 方案考量
 - leading time
   - 國內外氣象中心主要數據更新頻率皆以**日**為單位，如非以災害應變為目標，似無需太過密集執行。
@@ -70,6 +72,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
   - 單站數據實在很難應用，應還是以綜整全臺數據為目標
 
 ## 爬蟲程式
+
 ### 作業方式
 - 原始碼公開於[github](https://github.com/sinotec2/rd_cwbDay.py/blob/main/rd_cwbDay.py)
 - 需要外部檔案[stats_tab.csv](https://raw.githubusercontent.com/sinotec2/rd_cwbDay.py/main/stats_tab.csv)為測站位置座標等內容輸出檔案

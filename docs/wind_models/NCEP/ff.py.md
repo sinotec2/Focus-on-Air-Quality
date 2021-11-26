@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "FNL檔案之自動化下載“
+title: "FNL檔案之自動化下載"
 parent: "NCEP"
 grand_parent: "wind models"
 nav_order: 1

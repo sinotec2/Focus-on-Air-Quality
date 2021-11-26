@@ -1,12 +1,13 @@
 ---
 layout: default
-title: "由CWB地面自動站數據計算軌跡"
+title: "由CWB數據計算軌跡"
 parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 3
 date:               
 last_modified_date:   2021-11-26 14:11:53
 ---
+# 由CWB數據計算軌跡
 
 {: .no_toc }
 
@@ -20,7 +21,6 @@ last_modified_date:   2021-11-26 14:11:53
 </details>
 ---
 
-# 由CWB地面自動站數據計算軌跡
 
 ## 背景
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "中央氣象局日報表下載"
+grand_parent:"氣象模式"
 parent: "CODiS"
 nav_order: 1
 date:               

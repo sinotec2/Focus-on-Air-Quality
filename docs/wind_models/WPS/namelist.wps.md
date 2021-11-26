@@ -6,7 +6,6 @@ grand_parent: "wind models"
 nav_order: 1
 date:               
 last_modified_date:   2021-11-25 16:21:24
-permalink: /docs/wind_models/WPS/
 ---
 
 # namelist.wps 

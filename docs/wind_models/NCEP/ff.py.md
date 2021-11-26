@@ -37,6 +37,7 @@ crontab -l|grep fus
 ## 程式分段說明
 - 使用py27、有較高的穩定性、避免更新可能造成的錯誤。
 - 引進模組
+
 ```python
 kuang@114-32-164-198 ~/python_eg/NCEP_fetch
 $ cat -n ff.py 
@@ -54,13 +55,17 @@ $ cat -n ff.py
     12	import subprocess
     13	
 ```
+
 - datetime轉str之副程式
+
 ```python
     14	def dt2str(dt):
     15	    a=[int(i) for i in str(dt).split()[0].split('-')]
     16	    return str(a[0]*100*100+a[1]*100+a[2])
 ```
+
 - 在command line 操作時相關指令(無用)
+
 ```python
     17	#
     18	#if (len(sys.argv) == 0):
@@ -75,9 +80,11 @@ $ cat -n ff.py
     27	  verbose=False
     28	#
 ```
+
 - cookie的管理
   - 同一批次登入時網站會先產生一登入驗證檔案，因此如有舊檔會需要先去除。
   - 需先在網站登錄email及密碼，將帳密寫在****處，如此才能登入網站。
+
 ```python
     29	cj=cookielib.MozillaCookieJar()
     30	opener=urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
@@ -102,7 +109,9 @@ $ cat -n ff.py
     49	  cj.save("auth.rda.ucar.edu",True,True)
     50	#
 ```
+
 - 由系統目錄讀取舊年代`yrold`、並讀取上次作業的最後日期`blk`
+
 ```python
     50	#
     51	# download the data file(s)
@@ -111,7 +120,9 @@ $ cat -n ff.py
     54	yrold=os.popen('ls -d '+path+'20*|tail -n1').read().strip('\n').split('/')[-1]
     55	blk=os.popen('ls '+path+yrold+'|tail -n1').read().strip('\n').split('_')
 ```
+
 - 計算下載起始日期`bdate`,由date指令取得今天日期。FNL更新到實際時間的**前2天**，即為結束日期。
+
 ```python
     56	try:
     57	  begd=int(blk[1])
@@ -123,7 +134,9 @@ $ cat -n ff.py
     63	tdate = datetime.datetime(nowd/100/100,nowd/100%100,nowd%100)
     64	edate = tdate+datetime.timedelta(days=-2)
 ```
+
 - 由起訖日期計算總日數`leng`
+
 ```python
     65	E_B=str(edate-bdate)
     66	if 'day' not in E_B:
@@ -132,7 +145,9 @@ $ cat -n ff.py
     69	  leng=int(str(edate-bdate).split('day')[0])+1
     70	if leng<=0:sys.exit('no need to download, bdate='+str(bdate)+' edate='+str(edate))
 ```
+
 - 產生需要下載的日期、年代(有可能要建新目錄)、月份
+
 ```python
     71	ymds=[dt2str(bdate+datetime.timedelta(days=i)) for i in xrange(leng)]
     72	yrs=[ymd[:4] for ymd in ymds]
@@ -141,7 +156,9 @@ $ cat -n ff.py
     75	  os.system('mkdir -p '+path+'/'+yr)
     76	mos=[ymd[4:6] for ymd in ymds]
 ```
+
 - 拆解檔案url、形成逐日、逐6小時之url序列`listoffiles`
+
 ```python
     77	head=['grib2/'+yr+'/'+yr+'.' for yr in yrs]
     78	med='/fnl_'
@@ -150,7 +167,9 @@ $ cat -n ff.py
     81	listoffiles=[head[i]+mos[i]+med+ymds[i]+udl+str(h)+tail for i in xrange(len(ymds)) for h in ['00','06','12','18']]
     82	#sys.exit('OK')
 ```
+
 - 逐一下載檔案。因部分作業系統對檔名中的冒號`:`會出現亂碼，先將其改成底線`_`
+
 ```python
     83	for file in listoffiles:
     84	  idx=file.rfind("/")

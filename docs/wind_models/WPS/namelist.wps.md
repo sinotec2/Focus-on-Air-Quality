@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "namelist.wps"
-parent: "WPS:WRF的前處理系統"
+parent: "WPS"
 grand_parent: "wind models"
 nav_order: 1
 date:               
@@ -10,6 +10,7 @@ permalink: /docs/wind_models/WPS/
 ---
 
 # namelist.wps 
+
 {: .no_toc }
 
 <details open markdown="block">

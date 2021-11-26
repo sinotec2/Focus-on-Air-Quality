@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "dowps.cs"
-parent: "WPS:WRF的前處理系統"
+parent: "WPS"
 grand_parent: "wind models"
 nav_order: 2
 date:               
@@ -10,6 +10,7 @@ permalink: /docs/wind_models/WPS/
 ---
 
 # dowps.cs 
+
 {: .no_toc }
 
 <details open markdown="block">

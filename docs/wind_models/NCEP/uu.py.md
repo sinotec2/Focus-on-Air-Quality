@@ -24,6 +24,13 @@ last_modified_date:   2021-11-26 19:47:53
 
 ## 背景
 
+## 自動執行
+- 設計夜間21:00進行下載，`crontab`如下：
+```bash
+crontab -l|grep fus
+0 21  *  *  * /Users/WRF4.1/NCEP/fus.cs &> /Users/WRF4.1/NCEP/crontab_log.txt 2>&1
+```
+
 ## 程式分段說明
 -
 ```python

@@ -202,4 +202,6 @@ $ cat -n add_srfFF.py
 ## Reference
 - MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式
 - Brendan Arnold, **FORTRAN format interpreter for Python**, [fortranformat 1.0.1](https://pypi.org/project/fortranformat/), Released: Apr 6, 2021
+- Brian Reen(2016), A Brief Guide to Observation Nudging in WRF, Battlefield Environment Division, Army Research Laboratory February 2016
+[ObsNudgingGuide](https://www2.mmm.ucar.edu/wrf/users/docs/ObsNudgingGuide.pdf)
 

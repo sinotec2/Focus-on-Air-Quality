@@ -34,7 +34,7 @@ last_modified_date:   2021-11-25 16:21:24
 ## WPS之全月執行方案
 
 ### `dowps.cs`的執行
-此處以批次檔[dowps.cs](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/dowps.cs)做為處理全月之工具，則執行全年的迴圈為:
+此處以批次檔[dowps.cs](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.cs)做為處理全月之工具，則執行全年的迴圈為:
 ```bash
 ROOT=/data/WRF4.1
 for i in {0..11};do 
@@ -101,7 +101,7 @@ done
     29    mkdir -p $PATH1/WPS$ii
     30    cd $PATH1/WPS$ii
 ```
-- 名單[模版](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/namelist.wps.loop)的應用
+- 名單[模版](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop)的應用
   - 從主目錄複製一份名單的模版`namelist.wps.loop`到工作目錄
     - namelist.wps.loop的起迄時間為此處要置換的變數
     ```bash
@@ -155,6 +155,10 @@ done
     51    cp  FILE:20* $PATH1/$ym/SST_FILE
     52    cp  SST:20* $PATH1/$ym/SST_FILE
 ```
+
+## 腳本出處
+- dowps.cs：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.cs
+- 模版：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop
 
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.

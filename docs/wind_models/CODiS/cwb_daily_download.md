@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "中央氣象局日報表下載及整併"
+title: "中央氣象局日報表下載整併"
 parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 1
@@ -21,13 +21,13 @@ permalink: /docs/wind_models/CODiS/
 </details>
 ---
 
-# 中央氣象局日報表下載及整併 
+# 中央氣象局日報表下載整併 
 
 ## 背景
-中央氣象局每天公開其地面自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬，等等作業化系統，由於整併後以全日所有測站同一檔案儲存，具備更高的可用性。
+中央氣象局每天公開其地面自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬，等等作業化系統，由於整併後以全日所有測站同一檔案儲存，具備更高的可用性。
 此處介紹台灣地區中央氣象局自動站數據之內容、下載作業方式、以及爬蟲程式設計之細節。
 CODiS數據目前作業情況：
-- 更新頻率時間：每日12(L)時更新，更新至前一日24時。
+- 更新頻率時間：每日12(L)時更新，更新至前一日24時(落後實際時間**12小時**)。
 - 日報(總)表之內容
   - 以每站報表格式，記錄前一日24小時觀測數據
   - 格式：為csv格式
@@ -54,16 +54,21 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 ```
 
 ### 解決方案
+#### 現行既有方案
 - 年度數據之[購置](https://e-service.cwb.gov.tw/wdps/)
-  - 傳統作法，數據約落後實際觀測時間至今1個月
+  - 傳統作法，數據約落後實際觀測時間**至少1個月**
   - 數據是以分站儲存，單站檔案為全年逐時之ASCII碼，購入數據後仍然需要整理、消化後方能應用。
 - 網友[鄭文吉](http://farmer.iyard.org/jwj/jwj.htm)自行維護之[中央氣象局自動氣象站觀測資料彙整](http://farmer.iyard.org/cwb/cwb.htm)網頁服務
   - 數據來源：中央氣象局[氣象資料開放平台](https://opendata.cwb.gov.tw/index)、逐時下載
-  - 分站提供最新(落後實際時間約3~4小時)之觀測數據
+  - 分站提供最新(落後實際時間約**3~4小時**)之觀測數據
   - 也按照地區、月份、測站種類整理中央氣象局自動氣象站觀測資料，提供歷史檔。
-  
-- 
-- 
+#### 方案考量
+- leading time
+  - 國內外氣象中心主要數據更新頻率皆以**日**為單位，如非以災害應變為目標，似無需太過密集執行。
+  - 對於空窗時間之氣象數據：仍有數值預報結果可供參考，不致造成數據空窗。
+- 資料結構
+  - 單站數據實在很難應用，應還是以綜整全臺數據為目標
+
 ## 爬蟲程式
 ### 作業方式
 - 原始碼公開於[github](https://github.com/sinotec2/rd_cwbDay.py/blob/main/rd_cwbDay.py)
@@ -155,7 +160,9 @@ grep cwb /etc/crontab
     df['url_nam25']=[i.replace('%','%25') for i in df.url_nam]
     df.set_index('stno').to_csv('stats_tab.csv')
     ``` 
-  - 使用`BeautifulSoup`讀取html
+  - 取得html檔案並解讀
+    - 使用`wget`或`curl`並沒有太大的差異，視工作平台能提供的程式為主。注意2個程式有`-O`/`-o`大小寫差別。
+    - 使用`BeautifulSoup`解析html成為`soup`備用
 ```python
     48	ib = 0
     49	for ii in range(ib, len(dfS)):
@@ -167,7 +174,7 @@ grep cwb /etc/crontab
     55	  soup = BeautifulSoup(fn, 'html.parser')
     56	
 ```
-- 第一個測站：讀取檔頭，並形成新的DataFrame(df),準備承接測站數據。
+- 第一個測站：讀取檔頭，並形成新的DataFrame(`df`),準備承接測站數據。
 ```python
     57	  if ii == ib:
     58	    col_tr = soup.find_all("tr", class_="third_tr")
@@ -178,9 +185,9 @@ grep cwb /etc/crontab
     63	    df.columns = col
     64	
 ```
-- 準備個別測站的空白DataFrame: dfi
-  - 讀取測站名稱(stno_name)
-  - 讀取年月日(ymd)
+- 準備個別測站的空白DataFrame: `dfi`
+  - 讀取測站名稱(`stno_name`)
+  - 讀取年月日(`ymd`)
 ```python
     65	  dfi = DataFrame({i: [] for i in col})
     66	  dfi.columns = col
@@ -194,7 +201,7 @@ grep cwb /etc/crontab
 ```
 - 依序讀取測值
   - 異常值之處理
-  - 形成DataFrame(dfi)的各欄位序列
+  - 形成DataFrame(`dfi`)的各欄位序列
   - 
 ```python
     74	  for i in range(4, len(tr)):
@@ -216,7 +223,7 @@ grep cwb /etc/crontab
     90	    dfi.loc[i - 4, :] = col_val
     91	
 ```
-- 累積測站DataFrame(dfi)、存檔
+- 累積測站DataFrame(`dfi`)、存檔
 ```python
     92	  if ii == ib:
     93	    df = dfi
@@ -232,7 +239,10 @@ grep cwb /etc/crontab
    103	#sec=str(round(np.random.rand(1)[0]*dayt*12,2))
    104	#os.system('sleep '+sec+'s')
 ```
-
+## Further Application
+- [cwbsrf to littleR]()
+- [反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤
+- [traj2_CAAS]()
 
 ## Reference
 

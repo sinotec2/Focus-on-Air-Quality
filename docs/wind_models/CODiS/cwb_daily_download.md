@@ -241,6 +241,18 @@ grep cwb /etc/crontab
    103	#sec=str(round(np.random.rand(1)[0]*dayt*12,2))
    104	#os.system('sleep '+sec+'s')
 ```
+
+## html之更新
+2020/10月底CWB更新了網頁CODiS內容，把第2等級的欄位訊息放在第3等級。
+```python
+* old
+    *     56     col_tr = soup.find_all("tr", class_="second_tr")
+    *     57     col_th = col_tr[1].find_all('th')
+* new
+    *     56     col_tr = soup.find_all("tr", class_="third_tr")
+    *     57     col_th = col_tr[0].find_all('th')
+```
+
 ## Further Application
 - [cwbsrf to littleR](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/add_srfFF/)
 - [反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤

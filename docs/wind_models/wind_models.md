@@ -3,7 +3,7 @@ layout: default
 title: "氣象模式"
 nav_order: 3
 has_children: true
-permalink: /docs/wind_models
+permalink: /docs/wind_models/
 last_modified_at:   2021-11-25 08:58:23
 ---
 

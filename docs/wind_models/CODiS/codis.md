@@ -4,7 +4,7 @@ title: "CODiS"
 parent: "氣象模式"
 nav_order: 1
 has_children: true
-permalink: /docs/wind_models/CODiS
+permalink: /docs/wind_models/CODiS/
 last_modified_at:   2021-11-25 08:58:23
 ---
 

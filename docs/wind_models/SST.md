@@ -2,7 +2,7 @@
 layout: default
 title: "海溫的讀取"
 parent: "wind models"
-nav_order: 2
+nav_order: 3
 include: footer_custom               
 last_modified_date:   2021-11-25 16:21:12
 ---
@@ -25,7 +25,7 @@ last_modified_date:   2021-11-25 16:21:12
 海面溫度雖然變化緩慢，但牽動全球的大氣環流，因此在氣象模擬過程中是一項非常重要的地面強制邊界。
 
 ## 再分析資料來源與下載
-- [NASS多尺度超高解析度海溫數據MUR](https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1)的解析度為0.01度網格，時間解析度為小時，年代自2002年5月底開始迄今。下載需要登入，只提供https點選方式下載。檔案以年代為目錄，每天一個檔案。檔名協定方式：
+- [NASA多尺度超高解析度海溫數據MUR](https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1)的解析度為0.01度網格，時間解析度為小時，年代自2002年5月底開始迄今。下載需要登入，只提供https點選方式下載。檔案以年代為目錄，每天一個檔案。檔名協定方式：
 ```bash
 yyyy=4碼年代2002~迄今
 mm=2碼月份01~12

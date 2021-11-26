@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "uu.py"
+title: "高空觀測數據之自動下載"
 parent: "NCEP"
 grand_parent: "wind models"
 nav_order: 2
@@ -8,7 +8,7 @@ date:
 last_modified_date:   2021-11-26 19:47:53
 ---
 
-# uu.py 
+# 高空觀測數據之自動下載 
 
 {: .no_toc }
 
@@ -22,6 +22,45 @@ last_modified_date:   2021-11-26 19:47:53
 </details>
 ---
 
+## 背景
+
+## 程式分段說明
+-
+```python
+
+```
+-
+```python
+
+```
+-
+```python
+
+```
+-
+```python
+
+```
+-
+```python
+
+```
+-
+```python
+
+```
+-
+```python
+
+```
+-
+```python
+
+```
+
+
+## 完整程式碼
+- [ff.py](https://raw.githubusercontent.com/sinotec2/python_eg/master/NCEP_fetch/ff.py)
 
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.

@@ -5,7 +5,7 @@ parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 2
 date:               
-last_modified_date:   2021-11-25 17:13:11
+last_modified_date:   2021-11-26 14:11:39
 ---
 
 {: .no_toc }
@@ -41,7 +41,7 @@ $ head SRF_ds461.0/2021/SURFACE_OBS:2021111918
 由於這些數據是驅動或修正模式模擬的重要依據，本地觀測數據如要併入模式系統，須符合其格式內容。
 
 ### 方案檢討
-- 過去是以`fortran`[程式](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/little_r_srf_v2.f)進行轉檔，因此有必要進行更新，應用`python`的新模組功能進行更簡潔的處理。
+- 過去是以`fortran`[程式](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/little_r_srf_v2.f)進行轉檔，因此有必要進行更新，應用`python`的新模組功能[fortranformat](https://pypi.org/project/fortranformat/)進行更簡潔的處理。
 
 ## 程式分段說明
 - 程式說明
@@ -195,6 +195,12 @@ $ cat -n add_srfFF.py
    109          srf.write(w_line204.write([1,0,0])+'\n')
 ```
 
+## 程式原始碼
+可以在公司內部網站找到:
+- `fortran`[程式](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/little_r_srf_v2.f)
+- `python`[程式](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/add_srfFF.py)
+
 ## Reference
 - MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式
+- Brendan Arnold, **FORTRAN format interpreter for Python**, [fortranformat 1.0.1](https://pypi.org/project/fortranformat/), Released: Apr 6, 2021
 

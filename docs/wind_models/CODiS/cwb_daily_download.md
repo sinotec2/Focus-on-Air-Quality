@@ -243,9 +243,9 @@ grep cwb /etc/crontab
    104	#os.system('sleep '+sec+'s')
 ```
 ## Further Application
-- [cwbsrf to littleR]()
+- [cwbsrf to littleR](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/add_srfFF/)
 - [反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤
-- [traj2_CAAS]()
+- [traj2_CAAS](http://114.32.164.198/traj2.html)
 
 ## Reference
 

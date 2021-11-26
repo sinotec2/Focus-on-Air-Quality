@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "中央氣象局日報表下載"
+title: "中央氣象局日報表下載及整併"
 parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 1
 date:               
-last_modified_date:   2021-11-25 17:13:11
+last_modified_date:   2021-11-26 09:57:40
 permalink: /docs/wind_models/CODiS/
 ---
 
@@ -21,16 +21,23 @@ permalink: /docs/wind_models/CODiS/
 </details>
 ---
 
-# 中央氣象局日報表下載及轉檔 
+# 中央氣象局日報表下載及整併 
 
 ## 背景
-中央氣象局數據每天公開其自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤等等作業化系統。
-此處介紹台灣地區中央氣象局自動站數據之內容、下載作業方式、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬。
+中央氣象局每天公開其地面自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬，等等作業化系統，由於整併後以全日所有測站同一檔案儲存，具備更高的可用性。
+此處介紹台灣地區中央氣象局自動站數據之內容、下載作業方式、以及爬蟲程式設計之細節。
+CODiS數據目前作業情況：
 - 更新頻率時間：每日12(L)時更新，更新至前一日24時。
 - 日報(總)表之內容
-  - 以每站報表格式
+  - 以每站報表格式，記錄前一日24小時觀測數據
   - 格式：為csv格式
-  - 表頭：包括站名、觀測時間、氣壓、海面氣壓、溫度、濕球溫度、相對濕度、風速、風向、陣風等數據，其中風速風向即用以計算軌跡線所需。
+  - 表頭項目(按順序)：
+    - 站名、觀測時間、
+    - 壓力(測站氣壓、海面氣壓)、
+    - 溫濕(溫度、濕球溫度、相對濕度)、
+    - 風(風速、風向、風速擾動、風向擾動)、
+    - 雲雨日(降雨、日照、幅射、能見度、UVI、雲量)等等數據。
+
 - 檔案範例
 ```
 stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGust,Precp,PrecpHour,SunShine,GloblRad,Visb,UVI,Cloud Amount
@@ -46,10 +53,21 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 ...
 ```
 
+### 解決方案
+- 年度數據之[購置](https://e-service.cwb.gov.tw/wdps/)
+  - 傳統作法，數據約落後實際觀測時間至今1個月
+  - 數據是以分站儲存，單站檔案為全年逐時之ASCII碼，購入數據後仍然需要整理、消化後方能應用。
+- 網友[鄭文吉](http://farmer.iyard.org/jwj/jwj.htm)自行維護之[中央氣象局自動氣象站觀測資料彙整](http://farmer.iyard.org/cwb/cwb.htm)網頁服務
+  - 數據來源：中央氣象局[氣象資料開放平台](https://opendata.cwb.gov.tw/index)、逐時下載
+  - 分站提供最新(落後實際時間約3~4小時)之觀測數據
+  - 也按照地區、月份、測站種類整理中央氣象局自動氣象站觀測資料，提供歷史檔。
+  
+- 
+- 
 ## 爬蟲程式
 ### 作業方式
 - 原始碼公開於[github](https://github.com/sinotec2/rd_cwbDay.py/blob/main/rd_cwbDay.py)
-- 需要外部檔案[stats_tab.csv]()為測站位置座標等內容輸出檔案
+- 需要外部檔案[stats_tab.csv](https://raw.githubusercontent.com/sinotec2/rd_cwbDay.py/main/stats_tab.csv)為測站位置座標等內容輸出檔案
 - 執行批次：執行date指令以驅動python程式，詳[get_cwb.sh](https://github.com/sinotec2/rd_cwbDay.py/blob/main/get_cwb.sh)
 - 自動執行排程：每天中午執行
 ```bash

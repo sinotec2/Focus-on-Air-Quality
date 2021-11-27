@@ -34,9 +34,9 @@ last_modified_at: 2021-11-27 08:45:19
 - 腳本說明
   - 每天登入網站，因此需刪除舊的登入許可檔`auth.rda.ucar.edu`
   - 依序執行再分析數據([ds.083.2](https://rda.ucar.edu/datasets/ds083.2/index.html#!description))、地面觀測([ds461.0](https://rda.ucar.edu/datasets/ds461.0/#!description))、以及探空觀測([ds351.0](https://rda.ucar.edu/datasets/ds351.0/#!description))等3項下載。
-  - 如果下載成功、每天將會增加12個檔案。
+  - 如果下載成功、每天將會增加12個檔案(3項每天4個)。
   - 檢查結果，如果`log`檔內不是12個，則呼叫`macOS`的`osascript`程式，印出錯誤訊息。
-  - 因隔天程式還是會補上遺失的檔案，檔案個數仍然不是12個3，所以還是會再報錯。但第三天報錯就一定要人工檢查、修正錯誤。
+  - 因隔天程式還是會補上遺失的檔案，檔案個數仍然不是12個，所以還是會再報錯。但第三天報錯就一定要人工檢查、修正錯誤。
 
 ```bash
 $ cat /Users/WRF4.1/NCEP/fus.cs

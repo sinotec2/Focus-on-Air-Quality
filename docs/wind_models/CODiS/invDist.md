@@ -24,21 +24,8 @@ last_modified_date:   2021-11-26 14:11:53
 
 
 ## 背景
-
-### 空間尺度之界定
-逆(反)軌跡圖是空氣污染來源追蹤、溯源解析過程中經常使用的圖像工具。按照污染源與受體空氣品質關係的遠近，分析的尺度有：
-- 近距離、~10公里範圍，高斯煙流擴散模式可以應用之範圍，時間約在小時解析度範圍。可以用代表性地面測站之風向直接進行(統計)解析研判。
-- 城市~地區尺度，中距離約數10~百公里範圍，受海陸風影響的平坦~平緩地區，時間範圍約在1日~3日之間。可以用地面站網、氣象模式進行解析。
-- 地區~長程傳輸現象，約數百~7千公里範圍，除前述現象外，也受到天氣現象的顯著影響，時間範圍約3日~週之間。須以氣象模式、[HYSPLIT](https://www.arl.noaa.gov/hysplit/hysplit/)等模式進行**三維**風場與軌跡解析。
-此處要處理的是城市~地區尺度，因此需應用全臺自動站的風速風向數據。
-
-### 軌跡正確性與風場模式
-軌跡正確性的關鍵在於風場，因此有以：
-- 高解析度觀測站數據內插、由於風場的正確性與測站所函蓋的範圍有關，密度較高的平地範圍，會有較高的正確性，而在海上或山區等測站密度較低範圍，可能有較低的正確性。
-- 數值氣象預報模式產品、如WRF，有解析度與範圍的限制。一般WRF最高解析度為3公里
-- 客觀分析等不同方式產生風場。(介於前2者之間)
-
-### 策略方案
+將CODiS數據整併成全台一天一檔之後，適合進行全島的分析。但仍然需要一有效率的內插工具，讓沒有測站的外海、高山，也有內插或外插值。
+此處以空氣品質最相關的風速、風向為分析主題，檢討如下：
 - CODiS提供的數據至少有300個測站是有風速、風向數據
   - 全台面積36,193平方公里，平均一站分攤119平方公里，約為11公里X11公里之解析度，平地還有更高的密度
   - 用以內插建立風場，應有其充分性與正確性
@@ -149,9 +136,4 @@ $ cat -n twn_cwbInverDist.py
 
 
 ## Reference
-- MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式
-- Brendan Arnold, **FORTRAN format interpreter for Python**, [fortranformat 1.0.1](https://pypi.org/project/fortranformat/), Released: Apr 6, 2021
-- NOAA, [HYSPLIT](https://www.arl.noaa.gov/hysplit/hysplit/)
-- Jimy Dudhia， **WRF Four Dimensional Data Assimilation (FDDA)**, [documen.site](https://documen.site/download/wrffddadudhia_pdf),  May 12, 2018 
-- Tom.Chen, **Python converter between TWD97 and WGS84**, [pypi.org](https://pypi.org/project/twd97/), Oct 22, 2014
 

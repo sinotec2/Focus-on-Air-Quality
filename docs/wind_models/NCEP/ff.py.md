@@ -27,12 +27,8 @@ last_modified_date:   2021-11-26 19:47:53
 - FNL在40項WPS可接受的再分析檔案中，屬於穩定性高、解析度較高的選擇。
 - 不過FNL沒有提供自動切割的界面，如果要下載全球0.25度的數據，檔案會非常大，要注意頻寬與磁碟空間。
 
-## 自動執行
-- 設計夜間21:00進行下載，`crontab`如下：
-```bash
-crontab -l|grep fus
-0 21  *  *  * /Users/WRF4.1/NCEP/fus.cs &> /Users/WRF4.1/NCEP/crontab_log.txt 2>&1
-```
+## 批次執行與自動執行
+詳見[樓上](https://sinotec2.github.io/jtd/docs/wind_models/NCEP/)。
 
 ## 程式分段說明
 - 使用py27、有較高的穩定性、避免更新可能造成的錯誤。
@@ -82,6 +78,7 @@ $ cat -n ff.py
 ```
 
 - cookie的管理
+  - 這段程式碼是NCEP網站自動產生的
   - 同一批次登入時網站會先產生一登入驗證檔案，因此如有舊檔會需要先去除。
   - 需先在網站登錄email及密碼，將帳密寫在****處，如此才能登入網站。
 
@@ -110,7 +107,7 @@ $ cat -n ff.py
     50	#
 ```
 
-- 由系統目錄讀取舊年代`yrold`、並讀取上次作業的最後日期`blk`
+- 由檔案系統目錄讀取舊年代`yrold`、並讀取上次作業的最後日期`blk`
 
 ```python
     50	#
@@ -168,7 +165,10 @@ $ cat -n ff.py
     82	#sys.exit('OK')
 ```
 
-- 逐一下載檔案。因部分作業系統對檔名中的冒號`:`會出現亂碼，先將其改成底線`_`
+- 逐一下載檔案
+  - 這段程式碼主要是NCEP網站自動產生的
+  - 因部分作業系統對檔名中的冒號`:`會出現亂碼，如果是，需將其改成底線`_`。
+  - 不適用fnl檔名命名規則
 
 ```python
     83	for file in listoffiles:
@@ -195,10 +195,5 @@ $ cat -n ff.py
 ## 完整程式碼
 - [ff.py](https://raw.githubusercontent.com/sinotec2/python_eg/master/NCEP_fetch/ff.py)
 
-## Reference
-- University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
-- Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.
-- [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
-- [pywinter](https://pywinter.readthedocs.io/en/latest)
-- [Here](https://sinotec2.github.io/jdt/doc/SST.md)
+
 

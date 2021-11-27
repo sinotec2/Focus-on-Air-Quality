@@ -18,7 +18,7 @@ last_modified_date: 2021-11-25 09:30:56
 ---
 
 ## What's New
-- 2021-11-27 [NCEP](https://sinotec2.github.io/jtd/docs/wind_models/NCEP/)檔案自動下載程式與排程
+- 2021-11-27 雖然程式有點舊，但還是忠實的進行著[NCEP](https://sinotec2.github.io/jtd/docs/wind_models/NCEP/)檔案自動下載與排程。
 - 2021-11-26 陸續將過去CWB相關筆記上載到jtd，花了一些時間測試建立grand_children層級
   - CODiS網站[爬蟲程式](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/cwb_daily_download/)、
   - [軌跡程式](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/traj/)、

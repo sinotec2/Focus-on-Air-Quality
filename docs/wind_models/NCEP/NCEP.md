@@ -8,9 +8,13 @@ permalink: /docs/wind_models/NCEP/
 last_modified_at: 2021-11-27 08:45:19
 ---
 
+{: .fs-6 .fw-300 }
+
+---
+
 # NCEP
 
-{: .fs-6 .fw-300 }
+{: .no_toc }
 
 ## What's Learned 
 - 自動批次[執行排程](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)及報錯方式的設定、監控。
@@ -59,5 +63,4 @@ crontab -l|grep fus
 - G. T. Wang, **Linux 設定 crontab 例行性工作排程教學與範例**,[G. T. Wang](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/), 2019/06/28
 - PengboGai, **Mac OS X 执行osascript命令**, [jianshu](https://www.jianshu.com/p/d42dff738d70), 2018.07.18
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
-- [Here](https://sinotec2.github.io/jdt/doc/wind_models/NCEP/)
-- 
+- [Here](https://sinotec2.github.io/jdt/doc/wind_models/NCEP/),2021-11-27 10:20:07

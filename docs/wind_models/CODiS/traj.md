@@ -183,7 +183,7 @@ last_modified_date:   2021-11-26 14:11:53
     82	
 ```
 - 主程式
-  - 設定`Proj`座標轉換工具`pnyc`。因本次使用CODIS數據，還是以臺灣本島為主，因此主要還是使用`twd97`系統。
+  - 設定`Proj`座標轉換工具`pnyc`。因本次使用CODiS數據，還是以臺灣本島為主，因此主要還是使用`twd97`系統。
   - 設定網格數及測站數`nx`, `ny`, `ns`
   - 讀取權重[計算](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/invDist/#內插程式說明)結果
   - 讀取環保署空品測站站名與編號對照表

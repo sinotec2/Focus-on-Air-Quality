@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "計算網格點與CODiS測站間距離反比加權值"
+title: "計算距離反比加權值"
 parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 3
@@ -8,7 +8,7 @@ date:
 last_modified_date:   2021-11-26 14:11:53
 ---
 
-# 計算網格點與CODiS測站間距離反比加權值
+# 計算距離反比加權值
 
 {: .no_toc }
 
@@ -55,7 +55,7 @@ last_modified_date:   2021-11-26 14:11:53
   - 以[WRFDA](https://ral.ucar.edu/solutions/products/wrfda)或其他模式合併觀測及模式  
 
 ## 內插程式說明
-- twn_cwbInverDist.py為準備測站與網格點間距離平方反比權重之程式，可以在[github](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/twn_cwbInverDist.py)下載。
+- twn_cwbInverDist.py為準備CODiS測站與網格點間距離反比權重之程式，可以在[github](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/twn_cwbInverDist.py)下載。
 - 所謂某一點的**內插**值，則將會是所有測站觀測值對該點之**加權平均**值。
 - 引用模組。此處會用到[twd97](https://pypi.org/project/twd97/)模組，會需要先安裝好。
 
@@ -115,7 +115,7 @@ $ cat -n twn_cwbInverDist.py
     36
 ```
 
-- 逐點計算與觀測站位置的距離、平方值倒數、加總、產生權重值
+- 逐點計算與觀測站位置的差值(`xm`, `ym`)、平方值倒數、加總、產生權重值
 
 ```python
     37  # distance square inverse as a weighting

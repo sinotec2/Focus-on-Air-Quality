@@ -359,7 +359,7 @@ last_modified_date:   2021-11-26 14:11:53
    219	    df, ymd0 = opendf(pdate)
    220	    if len(df)==0:break
 ```
-- 儲存軌跡點檔案(`twd97`座標值)
+- 儲存逐時軌跡點檔案(`twd97`座標值)
 
 ```python
    221	print('beyond:',beyond(xp[s], yp[s])[0],'len(df)=',len(df))
@@ -370,27 +370,48 @@ last_modified_date:   2021-11-26 14:11:53
    226	name='trj_results/'+dr+'trj'+nam[0]+DATE+'.csv'
    227	df[col].set_index('xp').to_csv(name)
 ```
-- 
+- 計算並寫出經緯度值、寫出測站名稱
 
 ```python
+   228	#geodetic LL
+   229	x,y=np.array(o_xp)-Xcent,np.array(o_yp)-Ycent
+   230	lon, lat = pnyc(x, y, inverse=True)
+   231	dfg=DataFrame({'lon':lon,'lat':lat})
+   232	dfg.set_index('lon').to_csv(name.replace('.csv','_mark.csv'),header=None)
+   233	with open('trj_results/filename.txt','w') as f:
+   234	  f.write(name.split('/')[1])
+   235	
 ```
--
+- 儲存逐點結果
 
 ```python
+   236	# output the line segments for each delta_t
+   237	dfL=DataFrame({'TWD97_x':l_xp,'TWD97_y':l_yp})
+   238	dfL.set_index('TWD97_x').to_csv(name.replace('.csv','L.csv'))
+   239	#geodetic LL
+   240	x,y=np.array(l_xp)-Xcent,np.array(l_yp)-Ycent
+   241	lon, lat = pnyc(x, y, inverse=True)
+   242	dfg=DataFrame({'lon':lon,'lat':lat})
+   243	dfg.set_index('lon').to_csv(name.replace('.csv','_line.csv'),header=None)
+   244	
 ```
--
+- 呼叫外部程式轉換成[KML](https://en.wikipedia.org/wiki/Keyhole_Markup_Language)檔案及bln檔(for `SURFER`)
+  - [csv2kml.py](https://raw.githubusercontent.com/sinotec2/python_eg/master/csv2kml.py)
 
 ```python
+   245	#make kml file
+   246	dir='NC'
+   247	if not BACK:dir='RC'
+   248	os.system('/opt/local/bin/csv2kml.py -f '+name+' -n '+dir+' -g TWD97')
+   249	os.system('/opt/local/bin/csv2bln.cs '+name)
 ```
--
+- csv2bln.cs為下列腳本。
+  - `alias awkk=awk '{print $'$1'}'`
 
-```python
+```bash
+echo $(( $(wc -l $1|/opt/local/bin/awkk 1) - 1 )) > $1.bln
+sed 1d $1 >> $1.bln
 ```
--
-
-```python
-```
-
 
 ## 程式原始碼
 可以在github找到:

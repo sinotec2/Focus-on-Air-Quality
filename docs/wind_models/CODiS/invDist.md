@@ -36,10 +36,7 @@ last_modified_date:   2021-11-26 14:11:53
 - 全區風場計算儲存的必要性
   - 全區風場事先計算儲存看似方便，然佔用空間龐大，因電腦速度提高了，因此在實際計算時似乎也沒有提高太多效率。
   - 主要由於軌跡線經過網格數有限，實在沒有必要進行全臺風場之計算或儲存。
-- 發展路徑
-  - 直接內插觀測值
-  - 直接內插模擬值、[FDDA](https://documen.site/download/wrffddadudhia_pdf)模擬值
-  - 以[WRFDA](https://ral.ucar.edu/solutions/products/wrfda)或其他模式合併觀測及模式  
+
 
 ## 內插程式說明
 - twn_cwbInverDist.py為準備CODiS測站與網格點間距離反比權重之程式，可以在[github](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/twn_cwbInverDist.py)下載。

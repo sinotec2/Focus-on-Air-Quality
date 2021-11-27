@@ -33,6 +33,7 @@ last_modified_date:   2021-11-25 16:21:24
 ### `final`之預備
 - `obsgrid`彙整所有little_r格式的觀測數據。由於little_r是個ASCII檔案，可以用`cat`指令將其整併
 - 如果不存在檔案，`cat`指令仍然繼續執行。
+
 ```bash
 y=2019
 f1=/Users/WRF4.1/NCEP/SRF_ds461.0/$y/SURFACE_OBS:${y}
@@ -58,6 +59,7 @@ done
 ### `obsYYMM_run.cs`的執行
 - 開啟12個月份的專屬目錄（OBS01~OBS12），其下再開啟12個批次run1~run12,共144個批次同時進行。
 - 每批次工作目錄執行：`obsYYMM_run.cs` YYMM RR，YYMM為年月(4碼)、RR批次編號(1~12)
+
 ```bash
 y=19
 for m in 0{1..9} {10..12};do
@@ -75,6 +77,7 @@ done
 - 讀進引數與連結`met_em`檔案
   - 第一引數：年月(4碼)
   - 第二引數：批次編號(1~12)
+
 ```bash
      1	#usage: obsYYMM_run.cs 1304 5
      2	path=/Users/WRF4.3/OBSGRID
@@ -82,9 +85,11 @@ done
      4	j=$2
      5	ln -sf $path/../WPS/20$ym/met/met_em* .
 ```
+
 - 起訖年月日之[計算](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)
   - 每批次起始日差**4天**
   - 每批次執行**5天**(1天重疊)
+
 ```bash
      6	begd=$(date -v-1m -j -f "%Y%m%d" "20${ym}15" +%Y%m%d)
      7	dd=`echo "4*($j-1)"|bc -l`
@@ -94,9 +99,11 @@ done
     11	yea2=`echo $ymd2|cut -c1-2`;mon2=`echo $ymd2|cut -c3-4`;day2=`echo $ymd2|cut -c5-6`
     12	
 ```
+
 - 每層網格**依序**執行
   - `namelist.oa.loop`模版的複製
   - 替換其中起訖年月日、網格編號。使用[sed](https://terryl.in/zh/linux-sed-command/)指令
+
 ```bash
     13	for d in {1..4};do #domain
     14	#copy the template and change the beg/end dates by sed
@@ -107,7 +114,9 @@ done
     19	  done
     20	
 ```
+
 - 依序執行`obsgrid`, `run_cat_obs_files.csh`, `filter_p`
+
 ```bash
     21	#execution the programs
     22	  $path/src/obsgrid$d.exe
@@ -116,7 +125,9 @@ done
     25	done
     26	
 ```
+
 - 儲存（整併）結果
+
 ```bash
     27	#store the results
     28	mkdir -p $path/20$ym/run$j

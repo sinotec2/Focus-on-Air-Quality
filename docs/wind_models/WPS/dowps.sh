@@ -1,3 +1,4 @@
+#!/bin/bash
 #usage: dowps.cs m (m=0~11)
 PATH1=$PWD
 PATH2=/airappz/WRF4.1.3/NCEP

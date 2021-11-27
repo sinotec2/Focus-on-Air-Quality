@@ -5,7 +5,7 @@ parent: "OBSGRID"
 grand_parent: "wind models"
 nav_order: 3
 date:               
-last_modified_date:   2021-11-25 16:21:24
+last_modified_date:   2021-11-27 22:32:45
 ---
 
 # namelist.oa 
@@ -23,12 +23,13 @@ last_modified_date:   2021-11-25 16:21:24
 ---
 
 ## 背景
-- 
+- `namelist.oa`是控制
 
 
-### `final`之預備
-
-### `namelist.oa`模版
+## `namelist.oa`模版分段說明
+- 批次執行的起訖時間，日期保持變數狀態，以便自動執行時能隨時替換。
+  - `SYEA`, `SMON`, `SDAY`:起始年、月、日
+  - `EYEA`, `EMON`, `EDAY`:結束年、月、日
 ```bash
      1	&record1
      2	 start_year                  =  SYEA
@@ -43,6 +44,7 @@ last_modified_date:   2021-11-25 16:21:24
     11	/
     12
 ```
+- 執行之網格編號、第幾層網格`GID`=1~4
 - little_r檔案的目錄    
 ```bash    	
     13	&record2
@@ -55,13 +57,16 @@ last_modified_date:   2021-11-25 16:21:24
     20	 trim_value                  = 5
     21	
 ```
-- 最大觀測站點設定    
+- 最大觀測站點`max_number_of_obs`之設定,執行過程並不更動。   
 ```bash    
     22	&record3
     23	 max_number_of_obs           = 50000
     24	 fatal_if_exceed_max_obs     = .TRUE.
     25	/
-    26	
+    26
+```
+- qc相關設定    
+```bash    	
     27	&record4
     28	 qc_test_error_max           = .TRUE.
     29	 qc_test_buddy               = .TRUE.
@@ -82,6 +87,9 @@ last_modified_date:   2021-11-25 16:21:24
     44	 max_p_extend_w              = 1300
     45	/
     46	
+```
+- 列印（不開啟）    
+```bash    	
     47	&record5
     48	 print_obs_files             = .FALSE.
     49	 print_found_obs             = .FALSE.
@@ -94,6 +102,9 @@ last_modified_date:   2021-11-25 16:21:24
     56	 print_oa                    = .FALSE.
     57	/
     58	
+```
+- 初始猜測、是否是f4d    
+```bash    	
     59	&record7
     60	 use_first_guess             = .TRUE.
     61	 f4d                         = .TRUE.
@@ -101,6 +112,9 @@ last_modified_date:   2021-11-25 16:21:24
     63	 lagtem                      = .FALSE. 
     64	/
     65	
+```
+- 平滑選項    
+```bash    	
     66	&record8
     67	 smooth_type                 =  1
     68	 smooth_sfc_wind             =  0
@@ -112,6 +126,9 @@ last_modified_date:   2021-11-25 16:21:24
     74	 smooth_upper_rh             =  0
     75	/
     76	
+```
+- 內插相關設定    
+```bash    	
     77	&record9
     78	 oa_type                     = 'Cressman'
     79	 radius_influence            = 0,
@@ -126,6 +143,10 @@ last_modified_date:   2021-11-25 16:21:24
     88	 radius_influence            = 5,4,3,2,
     89	
     90	
+```
+- 繪製探空圖    
+
+```bash    	
     91	&plot_sounding
     92	 file_type                   = 'raw'
     93	 read_metoa                  = .TRUE.
@@ -133,17 +154,9 @@ last_modified_date:   2021-11-25 16:21:24
     95	 file_type                   = 'used'
 
 ```
-### `obsYYMM_run.cs`的執行
 
-## `obsYYMM_run.cs`分段說明
 
-## 腳本出處
-- dowps.sh：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh
-- 模版：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop
 
 ## Reference
-- University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
-- Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.
-- [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
-- [pywinter](https://pywinter.readthedocs.io/en/latest)
-- [Here](https://sinotec2.github.io/jdt/doc/SST.md),2021-11-27 10:19:29
+- Brian Reen, **A Brief Guide to Observation Nudging in WRF**, [github](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/ObsNudgingGuide.pdf),February 2016.
+

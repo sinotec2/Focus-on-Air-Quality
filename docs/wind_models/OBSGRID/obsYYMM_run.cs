@@ -26,7 +26,5 @@ done
 
 #store the results
 mkdir -p $path/20$ym/run$j
-mv -f metoa_em* $path/20$ym/run$j
-mv -f OBS_DOMAIN* $path/20$ym/run$j
-mv -f wrfsfdda* $path/20$ym/run$j
+mv -f metoa_em* OBS_DOMAIN* wrfsfdda* $path/20$ym/run$j
 

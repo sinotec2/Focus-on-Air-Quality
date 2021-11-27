@@ -156,7 +156,8 @@ last_modified_date:   2021-11-27 22:32:45
 
 ```
 
-
+## 下載`namelist.oa.loop`
+點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/OBSGRID/namelist.oa.loop)
 
 ## Reference
 - Brian Reen, **A Brief Guide to Observation Nudging in WRF**, [github](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/ObsNudgingGuide.pdf),February 2016.

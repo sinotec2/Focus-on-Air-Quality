@@ -37,13 +37,8 @@ last_modified_date:   2021-11-25 16:21:24
 
 ## `obsYYMM_run.cs`分段說明
 
-## 腳本出處
-- dowps.sh：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh
-- 模版：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop
+## 下載`obsYYMM_run.cs`
+點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/OBSGRID/obsYYMM_run.cs)
 
 ## Reference
-- University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
-- Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.
-- [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
-- [pywinter](https://pywinter.readthedocs.io/en/latest)
-- [Here](https://sinotec2.github.io/jdt/doc/SST.md),2021-11-27 10:19:29
+

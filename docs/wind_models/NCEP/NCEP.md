@@ -17,16 +17,17 @@ last_modified_at: 2021-11-27 08:45:19
 {: .no_toc }
 
 ## What's Learned 
-- 自動批次[執行排程](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)及報錯方式的設定、監控。
-- 修改一個其他作者寫的`python2`的程式
+- 自動批次[執行排程](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)、[報錯](https://www.jianshu.com/p/d42dff738d70)、及監控方式的設定。
+- 修改一個其他作者寫的`python27`的程式
   - 讓`python`程式從檔案系統中讀取檔名、解析日期
-  - 日期的計算
+  - 使用`urllib2` + `cookielib`[下載](https://blog.m157q.tw/posts/2018/01/06/use-cookie-with-urllib-in-python/)
+  - [日期](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)的計算
   - 字串的連接、管理
 
 ## 背景
 - [NCEP](https://www.weather.gov/ncep/) (National Centers for Environmental Prediction)是美國海洋大氣總署NOAA轄下有關環境議題的預測研究及作業中心。所提供全球觀測數據是大氣動力模式必須之初始及邊界條件。
   - 此處介紹自動下載作業的細節，包括再分析數據([ds.083.2](https://rda.ucar.edu/datasets/ds083.2/index.html#!description))、地面觀測([ds461.0](https://rda.ucar.edu/datasets/ds461.0/#!description))、以及探空觀測([ds351.0](https://rda.ucar.edu/datasets/ds351.0/#!description))等3項。
-- NCEP提供下載的`python`腳本，早期是`python2`,現已更新至`python3`。此處依據的是舊版腳本。
+- NCEP提供下載的`python`腳本，早期是`python27`,現已更新至`python37`。此處依據的是舊版腳本。
 
 ## 批次執行
 - 3項下載**依序**執行。
@@ -63,4 +64,5 @@ crontab -l|grep fus
 - G. T. Wang, **Linux 設定 crontab 例行性工作排程教學與範例**,[G. T. Wang](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/), 2019/06/28
 - PengboGai, **Mac OS X 执行osascript命令**, [jianshu](https://www.jianshu.com/p/d42dff738d70), 2018.07.18
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
+- m157q, **Python 中讓 urllib 使用 cookie 的方法**, [blog.m157q](https://blog.m157q.tw/posts/2018/01/06/use-cookie-with-urllib-in-python/),07 January 2018
 - [Here](https://sinotec2.github.io/jdt/doc/wind_models/NCEP/),2021-11-27 10:20:07

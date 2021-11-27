@@ -35,8 +35,8 @@ CODiS數據目前作業情況：
     - 溫濕(溫度、濕球溫度、相對濕度)、
     - 風(風速、風向、風速擾動、風向擾動)、
     - 雲雨日(降雨、日照、幅射、能見度、UVI、雲量)等等數據。
-
 - 檔案範例
+
 ```
 stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGust,Precp,PrecpHour,SunShine,GloblRad,Visb,UVI,Cloud Amount
 466880_板橋,2020061901.0,1006.1,1007.3,27.7,24.6,83.0,1.1,200.0,3.0,190.0,0.0,0.0,,0.00,,,
@@ -77,12 +77,15 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 - 需要外部檔案[stats_tab.csv](https://raw.githubusercontent.com/sinotec2/rd_cwbDay.py/main/stats_tab.csv)為測站位置座標等內容輸出檔案
 - 執行批次：執行date指令以驅動python程式，詳[get_cwb.sh](https://github.com/sinotec2/rd_cwbDay.py/blob/main/get_cwb.sh)
 - 自動執行排程：每天中午執行
+
 ```bash
 grep cwb /etc/crontab
   0 12  *  *  * kuang /home/backup/data/cwb/e-service/get_cwb.sh >& /home/backup/data/cwb/e-service/get_cwb.out
 ```
+
 ### 程式說明
-- 輸入模組：包括pandas與bs4
+- 輸入模組：包括[pandas](https://hackmd.io/@wiimax/10-minutes-to-pandas)與[bs4](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
+
 ```python
      1	#!/opt/anaconda3/envs/py27/bin/python
      2	#coding='utf8'
@@ -92,7 +95,9 @@ grep cwb /etc/crontab
      6	
      7	
 ```
+
 - 副程式：取得引數、判斷日期的正確性
+
 ```python
      8	def getarg():
      9	  """ read time period and station name from argument(std input)
@@ -113,7 +118,9 @@ grep cwb /etc/crontab
     24	        return True
     25	
 ```
+
 - 取得引數、判斷正確性、預先開啟結果檔（避免覆蓋）
+
 ```python
     26	date = getarg()
     27	if not  is_date_valid(date):sys.exit('not invalid:'+date)
@@ -127,6 +134,7 @@ grep cwb /etc/crontab
     35	ftext=open(fnameO,'w')
     36	
 ```
+
 - 程式基本設定
   - 異常標籤`mal`之定義
   - 輸入測站位置stats_tab.csv
@@ -135,6 +143,7 @@ grep cwb /etc/crontab
     - 早期氣象局網站設定了防火牆，倘若程式太過密集讀取網站，會被視為駭客攻擊而被拒絕，因此2次讀取中間需要有不同（隨機）長度的休息，此處設計程式日間執行會有較小的間距，
     - 日間定義：8～18點
     - 後來氣象局調整了管制政策，因此相關程式碼不必再作用
+
 ```python
     37	#batcmd="date +%H"
     38	#ymdh = int(subprocess.check_output(batcmd, shell=True)[:-1])
@@ -148,10 +157,12 @@ grep cwb /etc/crontab
     46	h3 = '\&datepicker\='
     47	
 ```
+
 - 開始讀取`html`內容
   - 按照測站順序進行
   - 下載測站`url`成為本地固定檔名`cwbDay.html`
     - 因url有中文字，需要轉成%25格式，乃參考[網友](https://www.itread01.com/content/1545641490.html)的建議，使用下列程式進行轉換，存成`url_nam25`備用。
+
     ```python
     kuang@114-32-164-198 /Users/Data/cwb/e-service/read_web
     $ cat rd_url25.py
@@ -162,9 +173,11 @@ grep cwb /etc/crontab
     df['url_nam25']=[i.replace('%','%25') for i in df.url_nam]
     df.set_index('stno').to_csv('stats_tab.csv')
     ``` 
-  - 取得html檔案並解讀
-    - 使用`wget`或`curl`並沒有太大的差異，視工作平台能提供的程式為主。注意2個程式有`-O`/`-o`大小寫差別。
-    - 使用`BeautifulSoup`解析html成為`soup`備用
+
+- 取得html檔案並解讀
+  - 使用[wget](https://blog.gtwang.org/linux/linux-wget-command-download-web-pages-and-files-tutorial-examples/)或[curl](https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/)並沒有太大的差異，視工作平台能提供的程式為主。注意2個程式有`-O`/`-o`大小寫差別。
+  - 使用`BeautifulSoup`解析html成為`soup`備用
+
 ```python
     48	ib = 0
     49	for ii in range(ib, len(dfS)):
@@ -176,7 +189,9 @@ grep cwb /etc/crontab
     55	  soup = BeautifulSoup(fn, 'html.parser')
     56	
 ```
+
 - 第一個測站：讀取檔頭，並形成新的DataFrame(`df`),準備承接測站數據。
+
 ```python
     57	  if ii == ib:
     58	    col_tr = soup.find_all("tr", class_="third_tr")
@@ -187,9 +202,11 @@ grep cwb /etc/crontab
     63	    df.columns = col
     64	
 ```
+
 - 準備個別測站的空白DataFrame: `dfi`
   - 讀取測站名稱(`stno_name`)
   - 讀取年月日(`ymd`)
+
 ```python
     65	  dfi = DataFrame({i: [] for i in col})
     66	  dfi.columns = col
@@ -201,10 +218,11 @@ grep cwb /etc/crontab
     72	    .replace('\xc2', '').replace('\xa0', '').split(':')[1]
     73	  ymd = int(ymd.replace('-', ''))
 ```
+
 - 依序讀取測值
   - 異常值之處理
   - 形成DataFrame(`dfi`)的各欄位序列
-  - 
+
 ```python
     74	  for i in range(4, len(tr)):
     75	    a = tr[i].find_all('td')
@@ -225,7 +243,9 @@ grep cwb /etc/crontab
     90	    dfi.loc[i - 4, :] = col_val
     91	
 ```
+
 - 累積測站DataFrame(`dfi`)、存檔
+
 ```python
     92	  if ii == ib:
     93	    df = dfi
@@ -244,6 +264,7 @@ grep cwb /etc/crontab
 
 ## html之更新
 2020/10月底CWB更新了網頁CODiS內容，把第2等級的欄位訊息放在第3等級。
+
 ```python
 * old
     *     56     col_tr = soup.find_all("tr", class_="second_tr")
@@ -259,11 +280,10 @@ grep cwb /etc/crontab
 - [traj2_CAAS](http://114.32.164.198/traj2.html)
 
 ## Reference
-
 - disscusion on **About Convert csv data file format to little_r format** [WRF & MPAS-A Support Forum](https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?t=483), Mon Dec 03, 2018 6:23 am.
-- University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
-- Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.
-- [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
-- [pywinter](https://pywinter.readthedocs.io/en/latest)
-- [Here](https://sinotec2.github.io/jdt/doc/SST.md)
-
+- willismax, **10分鐘的Pandas入門**， [hackmd.io](https://hackmd.io/@wiimax/10-minutes-to-pandas), 2021-03
+- Leonard Richardson, **Beautiful Soup**, [crummy](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/), 2020-10-03
+- G. T. Wang, **Linux 設定 crontab 例行性工作排程教學與範例**,[gtwang.org](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/), 2019/06/28
+- G. T. Wang, **Linux 使用wget 指令自動下載網頁檔案教學與範例**, [gtwang.org](https://blog.gtwang.org/linux/linux-wget-command-download-web-pages-and-files-tutorial-examples/), 2017/08/25
+- KD Chang, **Linux Curl Command 指令與基本操作入門教學**, [techbridge](https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/), 2019-02-01 
+- [Here](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/cwb_daily_download/), 2021-11-26

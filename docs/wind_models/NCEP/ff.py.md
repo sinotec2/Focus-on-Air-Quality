@@ -32,7 +32,7 @@ last_modified_date:   2021-11-26 19:47:53
 
 ## 程式分段說明
 - 使用py27、有較高的穩定性、避免更新可能造成的錯誤。
-- 引進模組
+- 引進模組，使用urllib2、cookielib來下載，不從檔案匯入，直接讀取遠端cookie，詳見[Python 中讓 urllib 使用 cookie 的方法](https://blog.m157q.tw/posts/2018/01/06/use-cookie-with-urllib-in-python/)。
 
 ```python
 kuang@114-32-164-198 ~/python_eg/NCEP_fetch

@@ -23,13 +23,14 @@ last_modified_date:   2021-11-27 22:32:45
 ---
 
 ## 背景
-- `namelist.oa`是控制
+- `namelist.oa`是控制`obsgrid`的名單，其中起訖時間、網格編號，會隨著執行批次而異，此處以變數填入，以備隨時可以替換。
 
 
 ## `namelist.oa`模版分段說明
 - 批次執行的起訖時間，日期保持變數狀態，以便自動執行時能隨時替換。
   - `SYEA`, `SMON`, `SDAY`:起始年、月、日
   - `EYEA`, `EMON`, `EDAY`:結束年、月、日
+
 ```bash
      1	&record1
      2	 start_year                  =  SYEA

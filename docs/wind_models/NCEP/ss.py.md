@@ -123,4 +123,4 @@ $ diff ff.py ss.py
 ```
 
 ## 完整程式碼
-- [ff.py](https://raw.githubusercontent.com/sinotec2/python_eg/master/NCEP_fetch/ff.py)
+- [ss.py](https://raw.githubusercontent.com/sinotec2/python_eg/master/NCEP_fetch/ss.py)

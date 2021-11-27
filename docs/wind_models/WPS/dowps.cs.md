@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "dowps.cs"
+title: "dowps.sh"
 parent: "WPS"
 grand_parent: "wind models"
 nav_order: 2
@@ -8,7 +8,7 @@ date:
 last_modified_date:   2021-11-25 16:21:24
 ---
 
-# dowps.cs 
+# dowps.sh 
 
 {: .no_toc }
 
@@ -33,8 +33,8 @@ last_modified_date:   2021-11-25 16:21:24
 
 ## WPS之全月執行方案
 
-### `dowps.cs`的執行
-此處以批次檔[dowps.cs](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.cs)做為處理全月之工具，則執行全年的迴圈為:
+### `dowps.sh`的執行
+此處以批次檔[dowps.sh](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh)做為處理全月之工具，則執行全年的迴圈為:
 ```bash
 ROOT=/data/WRF4.1
 for i in {0..11};do 
@@ -44,19 +44,19 @@ for i in {0..11};do
     cd WPS$ii
     ln -s $ROOT/WPS/* .
     rm namelist.wps Vtable FILE* met_em* SST* PFILE* GRIBFILE*  
-  sub dowps.cs $i
+  sub dowps.sh $i
 done
 ```
 - 其中`sub`為將程序放在背景執行之小工具`bash=$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
-- `dowps.cs`的引數`m`為0~11的月份數。
+- `dowps.sh`的引數`m`為0~11的月份數。
 - 原本在WPS目錄中的檔案(`namelist.wps`, `Vtable`, `FILE*`, `met_em*`, `SST*`, `PFILE*`, `GRIBFILE*`等)會造成衝突，必須刪除工作目錄中的連結。
 
-### `dowps.cs`分段說明
+### `dowps.sh`分段說明
 - 路徑定義
   - PATH1：WPS路徑，結果將會在此目錄下產生，每月一個目錄，名稱為YYYYMM
   - PATH2：FNL及SST共同路徑
 ```bash
-     1  3#usage: dowps.cs m (m=0~11)
+     1  3#usage: dowps.sh m (m=0~11)
      2  PATH1=$PWD
      3  PATH2=/airappz/WRF4.1.3/NCEP
 ```
@@ -157,7 +157,7 @@ done
 ```
 
 ## 腳本出處
-- dowps.cs：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.cs
+- dowps.sh：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh
 - 模版：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop
 
 ## Reference

@@ -9,7 +9,7 @@ last_modified_date:   2021-11-25 16:21:24
 ---
 
 # obsYYMM_run.sh
-c
+
 {: .no_toc }
 
 <details open markdown="block">

@@ -87,7 +87,7 @@ done
 ```
 
 - 起訖年月日之[計算](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)
-  - 每批次起始日差**4天**
+  - 每批次起始日差**4天**，使用[bc](https://blog.gtwang.org/linux/linux-bc-command-tutorial-examples/)進行計算`"4*($j-1)"|bc -l`。
   - 每批次執行**5天**(1天重疊)
 
 ```bash
@@ -118,7 +118,7 @@ done
 - 依序執行`obsgrid`, [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh), `filter_p`
   - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/程式修改及編譯/)
   - [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh)為WRF系統提供的批次腳本，旨在將OBS_DOMAIN檔案合併，以備obs納進使用。
-  - [filter_p]()濾掉OBS_DOMAIN檔案中測站數據完全無效者。
+  - [filter_p]((http://200.200.31.47/nas1/WRF4.0/WRFv3.9/OBSGRID/filter_p.f))濾掉OBS_DOMAIN檔案中測站數據完全無效者。
 
 ```bash
     21	#execution the programs
@@ -143,5 +143,6 @@ done
 
 ## Reference
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
+- G. T. Wang, **Linux 計算機bc 指令用法教學與範例**, [gtwang](https://blog.gtwang.org/linux/linux-bc-command-tutorial-examples/), 2018/08/23
 - Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 
 - weikaiwei, **Linux教學：cat指令**, [weikaiwei.com](https://weikaiwei.com/linux/cat-command/), 2021

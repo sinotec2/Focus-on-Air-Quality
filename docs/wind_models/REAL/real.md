@@ -3,7 +3,6 @@ layout: default
 title: "REAL"
 parent: "wind models"
 nav_order: 6
-has_children: true
 permalink: /docs/wind_models/REAL/
 last_modified_at: 2021-11-28 15:52:50
 ---

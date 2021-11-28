@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "obsYYMM_run.cs"
+title: "obsYYMM_run.sh"
 parent: "OBSGRID"
 grand_parent: "wind models"
 nav_order: 3
@@ -8,8 +8,8 @@ date:
 last_modified_date:   2021-11-25 16:21:24
 ---
 
-# obsYYMM_run.cs 
-
+# obsYYMM_run.sh
+c
 {: .no_toc }
 
 <details open markdown="block">
@@ -56,9 +56,9 @@ done
 - 置換的方式採用linux [sed](https://terryl.in/zh/linux-sed-command/)指令
 - 模版詳見[namelist.oa](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/namelist.oa/)說明
 
-### `obsYYMM_run.cs`的執行
+### `obsYYMM_run.sh`的執行
 - 開啟12個月份的專屬目錄（OBS01~OBS12），其下再開啟12個批次run1~run12,共144個批次同時進行。
-- 每批次工作目錄執行：`obsYYMM_run.cs` YYMM RR，YYMM為年月(4碼)、RR批次編號(1~12)
+- 每批次工作目錄執行：`obsYYMM_run.sh` YYMM RR，YYMM為年月(4碼)、RR批次編號(1~12)
 
 ```bash
 y=19
@@ -67,19 +67,19 @@ for m in 0{1..9} {10..12};do
     dir=OBS$m/run$r
     mkdir -p $dir
     cd $dir
-    sub obsYYMM_run.cs $y$m $r
+    sub obsYYMM_run.sh $y$m $r
     cd ../..
   done
 done
 ```
 
-## `obsYYMM_run.cs`分段說明
+## `obsYYMM_run.sh`分段說明
 - 讀進引數與連結`met_em`檔案
   - 第一引數：年月(4碼)
   - 第二引數：批次編號(1~12)
 
 ```bash
-     1	#usage: obsYYMM_run.cs 1304 5
+     1	#usage: obsYYMM_run.sh 1304 5
      2	path=/Users/WRF4.3/OBSGRID
      3	ym=$1
      4	j=$2
@@ -115,7 +115,7 @@ done
     20	
 ```
 
-- 依序執行`obsgrid`, `run_cat_obs_files.csh`, `filter_p`
+- 依序執行`obsgrid`, [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh), `filter_p`
 
 ```bash
     21	#execution the programs
@@ -135,8 +135,8 @@ done
     30	
 ```
 
-## 下載`obsYYMM_run.cs`
-點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/OBSGRID/obsYYMM_run.cs)
+## 下載`obsYYMM_run.sh`
+點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/OBSGRID/obsYYMM_run.sh)
 
 ## Reference
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06

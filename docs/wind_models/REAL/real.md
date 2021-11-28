@@ -13,7 +13,8 @@ last_modified_at: 2021-11-28 15:52:50
 ---
 
 # REAL
-此處統合[OBSGRID](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/)結果，準備WRF所需的初始、邊界、四階同化檔。REAL與WRF使用同一個名單([namelist.input]())。
+此處統合[OBSGRID](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/)結果，準備WRF所需的初始、邊界、四階同化檔。REAL與WRF使用同一個名單(namelist.input)。
+
 {: .no_toc }
 
 ## What's Learned 

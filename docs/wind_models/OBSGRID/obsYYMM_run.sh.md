@@ -31,7 +31,7 @@ last_modified_date:   2021-11-25 16:21:24
 ## OBSGRID 之全月執行方案
 
 ### `final`之預備
-- `obsgrid`彙整所有little_r格式的觀測數據。由於little_r是個ASCII檔案，可以用`cat`指令將其整併
+- `obsgrid`彙整所有[little_R](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式的觀測數據。由於`little_r`是個[ASCII](https://zh.wikipedia.org/wiki/ASCII)檔案，可以用[cat](https://weikaiwei.com/linux/cat-command/)指令將其整併
 - 如果不存在檔案，`cat`指令仍然繼續執行。
 
 ```bash
@@ -141,3 +141,4 @@ done
 ## Reference
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
 - Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 
+- weikaiwei, **Linux教學：cat指令**, [weikaiwei.com](https://weikaiwei.com/linux/cat-command/), 2021

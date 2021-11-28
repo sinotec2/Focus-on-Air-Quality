@@ -56,7 +56,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 #### 現行既有方案
 - 年度數據之[購置](https://e-service.cwb.gov.tw/wdps/)
   - 傳統作法，數據約落後實際觀測時間**至少10日**
-  - 數據是以分站儲存，單站檔案為全年逐時之ASCII碼，購入數據後仍然需要整理、消化後方能應用。
+  - 數據是以分站儲存，單站檔案為全年逐時之[ASCII](https://zh.wikipedia.org/wiki/ASCII)碼，購入數據後仍然需要整理、消化後方能應用。
   - 一般以購置局屬地面氣象站(有人站)為主，所有自動站所費不貲。
 - 網友[鄭文吉](http://farmer.iyard.org/jwj/jwj.htm)自行維護之[中央氣象局自動氣象站觀測資料彙整](http://farmer.iyard.org/cwb/cwb.htm)網頁服務
   - 數據來源：中央氣象局[氣象資料開放平台](https://opendata.cwb.gov.tw/index)、逐時下載

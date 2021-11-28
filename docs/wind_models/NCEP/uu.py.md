@@ -25,7 +25,7 @@ last_modified_date:   2021-11-26 19:47:53
 ## 背景
 - [NCEP](https://www.weather.gov/ncep/) (National Centers for Environmental Prediction)彙整了全球高空觀測數據([ds351.0](https://rda.ucar.edu/datasets/ds351.0/#!description))，是MM5/WRF進行四階同化需要的數據，資料格式是[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，可以被`obsgrid`、`WRFDA`等程式接受。
 - 同樣的，NCEP並無提供指定範圍自動下載的工具，只能下載全球範圍所有觀測值。高空數據層數較多，檔案較地面數據更大。
-- 幸好檔案是ASCII格式，可以達到很高的壓縮率。
+- 幸好檔案是[ASCII](https://zh.wikipedia.org/wiki/ASCII)格式，可以達到很高的壓縮率。
 
 ## 批次執行與自動執行
 詳見[樓上](https://sinotec2.github.io/jtd/docs/wind_models/NCEP/)。

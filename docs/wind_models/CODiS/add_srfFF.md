@@ -24,7 +24,7 @@ last_modified_date:   2021-11-26 14:11:39
 ## 背景
 
 ### little_R格式
-多年以來[little_R](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式是NOAA/NCEP儲存全球地面與高空觀測數據所使用的格式，是一個很長的ASCII檔案，如下列範例：
+多年以來[little_R](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式是NOAA/NCEP儲存全球地面與高空觀測數據所使用的格式，是一個很長的[ASCII](https://zh.wikipedia.org/wiki/ASCII)檔案，如下列範例：
 ```bash
 kuang@master /home/backup/data/NOAA/NCEP
 $ head SRF_ds461.0/2021/SURFACE_OBS:2021111918

@@ -1,5 +1,5 @@
 #!/usr/local/bin/bash
-#usage: obsYYMM_run.cs 1304 5
+#usage: obsYYMM_run.sh 1304 5
 path=/Users/WRF4.3/OBSGRID
 ym=$1
 j=$2

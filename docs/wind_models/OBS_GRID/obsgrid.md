@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "OBSGRID"
+title: "OBS_GRID"
 parent: "wind models"
 nav_order: 5
 has_children: true

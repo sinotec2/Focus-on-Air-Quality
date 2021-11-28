@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "namelist.oa"
-parent: "OBSGRID"
+parent: "OBS_GRID"
 grand_parent: "wind models"
 nav_order: 3
 date:               

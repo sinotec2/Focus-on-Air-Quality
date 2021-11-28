@@ -116,6 +116,9 @@ done
 ```
 
 - 依序執行`obsgrid`, [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh), `filter_p`
+  - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/程式修改及編譯/)
+  - [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh)為WRF系統提供的批次腳本，旨在將OBS_DOMAIN檔案合併，以備obs納進使用。
+  - [filter_p]()濾掉OBS_DOMAIN檔案中測站數據完全無效者。
 
 ```bash
     21	#execution the programs

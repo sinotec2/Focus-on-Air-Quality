@@ -113,18 +113,17 @@ done
 #!/bin/bash
 tmux new-session -d -s run${j}${d} './real.exe'
 ```
+
 - 使用`tmux ls`指令，可以看到[tmux](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/)正在運作(假設`j=6;d=1`)
 ```bash
 kuang@114-32-164-198 /Users/WRF4.3/201804/run6
 $ tmux ls
 run6d1: 1 windows (created Mon Nov 29 21:15:09 2021)
 $ ps
-$ ps
   PID TTY           TIME CMD
 74431 ttys000    0:00.29 -bash
 98383 ttys001    0:00.05 -bash
  2488 ttys002    0:00.17 ./real.exe
-
 ```
 
 ## 下載`doreal_4Nests.sh`

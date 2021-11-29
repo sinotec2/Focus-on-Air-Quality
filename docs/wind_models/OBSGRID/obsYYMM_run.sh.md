@@ -138,6 +138,11 @@ done
     30	
 ```
 
+## 執行成果檢核
+- 正常執行結果，`wrfsfdda`檔案長度將會有`24*天數`個小時，可以用`ncdump -h $nc`指令來檢查。
+- `wrfsfdda`檔案可以使用`VERDI`、`METINFO`或其他軟體開啟。如[下圖](UV10_NDG_NEW_2018040500.png)所示：
+![]()
+
 ## 下載`obsYYMM_run.sh`
 點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/OBSGRID/obsYYMM_run.sh_txt)
 

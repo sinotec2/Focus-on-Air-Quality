@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "REAL"
+title: "REAL & WRF"
 parent: "wind models"
 nav_order: 6
 has_children: true
@@ -12,7 +12,7 @@ last_modified_at: 2021-11-28 15:52:50
 
 ---
 
-# REAL
+# REAL & WRF
 此處統合[OBSGRID](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/)結果，準備WRF所需的初始、邊界、四階同化檔。REAL與WRF使用同一個名單([namelist.input]())。
 {: .no_toc }
 

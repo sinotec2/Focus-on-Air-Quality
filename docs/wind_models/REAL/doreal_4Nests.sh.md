@@ -113,7 +113,7 @@ done
 #!/bin/bash
 tmux new-session -d -s run${j}${d} './real.exe'
 ```
-- 使用`tmux ls`指令，可以看到tmux正在運作(假設`j=6;d=1`)
+- 使用`tmux ls`指令，可以看到[tmux](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/)正在運作(假設`j=6;d=1`)
 ```bash
 kuang@114-32-164-198 /Users/WRF4.3/201804/run6
 $ tmux ls

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "namelist.input"
-parent: "REAL"
+parent: "REAL & WRF"
 grand_parent: "wind models"
 nav_order: 1
 date:               

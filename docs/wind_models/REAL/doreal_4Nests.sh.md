@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "doreal_4Nests.sh"
-parent: "REAL"
+parent: "REAL & WRF"
 grand_parent: "wind models"
 nav_order: 2
 date:               

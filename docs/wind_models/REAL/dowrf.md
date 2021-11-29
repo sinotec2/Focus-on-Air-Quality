@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "dowrf"
-parent: "REAL"
+parent: "REAL & WRF"
 grand_parent: "wind models"
 nav_order: 3
 date:               

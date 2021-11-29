@@ -137,3 +137,4 @@ $ ps
 - G. T. Wang, **Linux 計算機bc 指令用法教學與範例**, [gtwang](https://blog.gtwang.org/linux/linux-bc-command-tutorial-examples/), 2018/08/23
 - G. T. Wang, **Linux 的nohup 指令使用教學與範例，登出不中斷程式執行**, [gtwang](https://blog.gtwang.org/linux/linux-nohup-command-tutorial/), 2017/09/12
 - Nick, **How to write a shell script that starts tmux session, and then runs a ruby script**, [stackoverflow](https://stackoverflow.com/questions/31902929/how-to-write-a-shell-script-that-starts-tmux-session-and-then-runs-a-ruby-scrip), 2016,Sep 14.
+- G. T. Wang, **Linux tmux 終端機管理工具使用教學**, gtwang](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/), 2019/12/04

@@ -3,7 +3,7 @@ layout: default
 title: "WPS"
 parent: "wind models"
 has_children: true
-nav_order: 4
+nav_order: 3
 date:               
 last_modified_date:   2021-11-25 16:21:24
 permalink: /docs/wind_models/WPS/

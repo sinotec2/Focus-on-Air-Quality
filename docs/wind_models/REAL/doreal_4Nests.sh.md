@@ -106,7 +106,7 @@ done
 ```
 
 ## 下載`doreal_4Nests.sh`
-點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/REAL/doreal_4Nests.sh)
+點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/REAL/doreal_4Nests.sh_txt)
 
 ## Reference
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06

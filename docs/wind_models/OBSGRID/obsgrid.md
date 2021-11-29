@@ -3,6 +3,7 @@ layout: default
 title: "OBSGRID"
 parent: "wind models"
 nav_order: 5
+has_children: true
 permalink: /docs/wind_models/OBSGRID/
 last_modified_at: 2021-11-27 17:15:30
 ---

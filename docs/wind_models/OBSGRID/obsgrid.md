@@ -19,6 +19,7 @@ last_modified_at: 2021-11-27 17:15:30
 ## What's Learned 
 - Fortran程式修改、[編譯](https://github.com/wrf-model/OBSGRID/blob/master/README)、
 - linux [sed](https://terryl.in/zh/linux-sed-command/)、[date](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)、[cat](https://weikaiwei.com/linux/cat-command/)指令
+- 使用[METINFO](http://meteothink.org/)繪製向量與流線圖
 
 ## Reference
 - Brian Reen, **A Brief Guide to Observation Nudging in WRF**, [github](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/ObsNudgingGuide.pdf),February 2016.
@@ -26,3 +27,4 @@ last_modified_at: 2021-11-27 17:15:30
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
 - Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 
 - weikaiwei, **Linux教學：cat指令**, [weikaiwei.com](https://weikaiwei.com/linux/cat-command/), 2021
+- Yaqiang Wang, **MeteoInfo Introduction**, [meteothink](http://meteothink.org/), 2021,10,16

@@ -17,10 +17,11 @@ last_modified_at: 2021-11-28 15:52:50
 {: .no_toc }
 
 ## What's Learned 
-- linux [sed](https://terryl.in/zh/linux-sed-command/)、[日期計算](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)指令
+- linux [sed](https://terryl.in/zh/linux-sed-command/)、[日期計算](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)指令、背景執行[nohup](https://blog.gtwang.org/linux/linux-nohup-command-tutorial/)與[tmux](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/)指令。
 
 ## Reference
 - Brian Reen, **A Brief Guide to Observation Nudging in WRF**, [github](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/ObsNudgingGuide.pdf),February 2016.
 - kkeene44, **WRF Objective Analysis Program**, [github](https://github.com/wrf-model/OBSGRID/blob/master/README),12 Oct 2018.
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
 - Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 
+- G. T. Wang, **Linux tmux 終端機管理工具使用教學**, gtwang](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/), 2019/12/04

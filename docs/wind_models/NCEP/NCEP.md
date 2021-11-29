@@ -2,7 +2,7 @@
 layout: default
 title: "NCEP"
 parent: "wind models"
-nav_order: 1
+nav_order: 2
 has_children: true
 permalink: /docs/wind_models/NCEP/
 last_modified_at: 2021-11-27 08:45:19

@@ -91,7 +91,7 @@ done
     20	  done
 ```
 - 複製模版、使用[sed](https://terryl.in/zh/linux-sed-command/)指令置換起訖日期
-  - 
+  - 一般`sed`指令使用`-i`(Edit files in-place)選項即可，`macOS`需要用`-ie`(editing commands)
 ```bash
     21	  cp -f $PATH1/20$ym/namelist.input.loop namelist.input
     22	  for cmd in "s/SYEA/20$yea1/g" "s/SMON/$mon1/g" "s/SDAY/$day1/g" "s/SHOU/00/g"\
@@ -100,9 +100,31 @@ done
     25	  done
 ```
 - 使用[nohup](https://blog.gtwang.org/linux/linux-nohup-command-tutorial/)將`real.exe`放在背景執行。
+  
 ```bash
     26	  nohup ./real.exe&
     27	done
+```
+
+### 用`tmux` 取代`nohup`
+- 由於`nohup`的年代有點久遠，現在大多的OS提供了[tmux](https://stackoverflow.com/questions/31902929/how-to-write-a-shell-script-that-starts-tmux-session-and-then-runs-a-ruby-scrip)來取代`nohup`，zsh甚至不主動提供nohup.
+- 此處的`nohup`將會變成...
+```bash
+#!/bin/bash
+tmux new-session -d -s run${j}${d} './real.exe'
+```
+- 使用`tmux ls`指令，可以看到tmux正在運作(假設`j=6;d=1`)
+```bash
+kuang@114-32-164-198 /Users/WRF4.3/201804/run6
+$ tmux ls
+run6d1: 1 windows (created Mon Nov 29 21:15:09 2021)
+$ ps
+$ ps
+  PID TTY           TIME CMD
+74431 ttys000    0:00.29 -bash
+98383 ttys001    0:00.05 -bash
+ 2488 ttys002    0:00.17 ./real.exe
+
 ```
 
 ## 下載`doreal_4Nests.sh`
@@ -114,3 +136,4 @@ done
 - weikaiwei, **Linux教學：cat指令**, [weikaiwei.com](https://weikaiwei.com/linux/cat-command/), 2021
 - G. T. Wang, **Linux 計算機bc 指令用法教學與範例**, [gtwang](https://blog.gtwang.org/linux/linux-bc-command-tutorial-examples/), 2018/08/23
 - G. T. Wang, **Linux 的nohup 指令使用教學與範例，登出不中斷程式執行**, [gtwang](https://blog.gtwang.org/linux/linux-nohup-command-tutorial/), 2017/09/12
+- Nick, **How to write a shell script that starts tmux session, and then runs a ruby script**, [stackoverflow](https://stackoverflow.com/questions/31902929/how-to-write-a-shell-script-that-starts-tmux-session-and-then-runs-a-ruby-scrip), 2016,Sep 14.

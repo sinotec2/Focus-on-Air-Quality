@@ -25,8 +25,8 @@ last_modified_date:   2021-11-30 10:43:16
 ## 背景
 - 續[樓上](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/)的討論，此處進一步說明下載細節。
 - 目前為止CWB是要求會員登錄的，登入後方能瀏覽檔案網址，經網址定位與確認後，實際自動下載時(如用`wget`)反而不必帳密。
-  - 其會員帳號為電子郵件、密碼須包括大小寫、數字、特殊字元（shift 1～0）
-- 檔案網址的資訊，寫在xml檔案內容內，範例如下：
+  - 其會員帳號為電子郵件、密碼須包括大小寫、數字、特殊字元（`shift 1～0`）
+- 檔案網址的資訊，寫在`xml`檔案內容內，範例如下：
   - 2021/10/12前舊址：
     - `https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A006${dom}-0$i.grb2`
   - 新址：
@@ -34,7 +34,7 @@ last_modified_date:   2021-11-30 10:43:16
     - 舊版`wget`(1.12)會需要加上選項`--no-check-certificate`
 - 檔案為逐6小時，按小時分檔儲存。
   - 自0時開始計算，直到第84小時(3天半)
-  - 因macOS對數字與文字的檢核較為嚴格，`for`迴圈的設法有些差異
+  - 因`macOS`對數字與文字的檢核較為嚴格，`for`迴圈的設法有些差異
 
 ## centos的下載程式
 - `for`使用`range`的寫法，分別為`{起..迄..間隔}`。
@@ -53,7 +53,7 @@ last_modified_date:   2021-11-30 10:43:16
 ```
 
 ## macOS的下載程式
-- 前2行的語言設定(`LANG`、`LC_ALL`)是因應新python(3.9)的檢核
+- 前2行的語言設定(`LANG`、`LC_ALL`)是因應新`python(3.9)`的檢核
 - `for`完全採數字的寫法，再使用`printf`將數字改成文字
 
 ```bash
@@ -88,6 +88,8 @@ $ crontab -l|grep 3Km
 ```
 
 ## 檢核
+
+### 個數與大小
 - 檔案個數大小：每層共**15個檔**(84/6+1)，3Km檔案共約**2.8G**，15Km檔案共約**0.8G**。
 ```bash
 kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
@@ -99,6 +101,14 @@ $ du -ach M-A0064-0??.grb2|tail -n1
 kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
 $ du -ach M-A0061-0??.grb2|tail -n1
 878M    total
+```
+
+### 轉成`nc`檔案
+- `wgrib2`：`wgrib2 xx.grb2 –netcdf xx.nc`，參[blog.csdn](https://blog.csdn.net/jiangshuanshuan/article/details/93466122)。
+- `ncl_convert2nc`：先啟動`ncl_stable`環境
+```bash
+source ~/conda_ini ncl_stable
+for I in $(ls *.grib2);do ncl_convert2nc $i;done
 ```
 
 ## Reference

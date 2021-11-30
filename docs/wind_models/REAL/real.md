@@ -2,7 +2,6 @@
 layout: default
 title: "REAL & WRF"
 parent: "WRF"
-grand_parent: "wind models"
 nav_order: 3
 has_children: true
 permalink: /docs/wind_models/REAL/

@@ -2,7 +2,6 @@
 layout: default
 title: "OBSGRID"
 parent: "WRF"
-grand_parent: "wind models"
 nav_order: 2
 has_children: true
 permalink: /docs/wind_models/OBSGRID/

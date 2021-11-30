@@ -127,4 +127,7 @@ source ~/conda_ini ncl_stable
 for I in $(ls *.grib2);do ncl_convert2nc $i;done
 ```
 
+## 批次腳本
+整體下載、轉檔、提取近地面風等作業可以詳見[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)的腳本原始碼
+
 ## Reference

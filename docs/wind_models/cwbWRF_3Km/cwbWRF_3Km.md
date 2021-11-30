@@ -2,7 +2,7 @@
 layout: default
 title: "cwb WRF_3Km"
 parent: "wind models"
-nav_order: 7
+nav_order: 5
 has_children: true
 permalink: /docs/wind_models/cwbWRF_3Km/
 last_modified_at: 2021-11-28 15:52:50

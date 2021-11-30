@@ -27,7 +27,7 @@ last_modified_date:   2021-11-30 10:43:16
 - 雖然`grb2`格式也有其解讀、應用的軟體，然而在空氣污染領域還並不多。因此還是需要轉成`wrfout`的`nc`格式。
 - 此處應用pygrib模組進行`grb2`檔案的解析
 
-## rd_grbCubicA.py分段說明
+## [rd_grbCubicA.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/rd_grbCubicA.py_txt)分段說明
 
 ### 宣告與基本設定
 - 引用模組
@@ -322,8 +322,6 @@ $ cat -n rd_grbCubicA.py
 ### 行星邊界層高度
 - 求解行星邊界層高度
   - 先求出`dt/dz`值(使用`np.diff`指令)
-  - 無逆溫者使用`interp1d`內插到符合地面溫度的高度
-  - 有逆溫者找到逆溫層高度
 ```python
    193  v='PBLH'
    194  #PBLH=nc.variables[v][:]
@@ -339,12 +337,18 @@ $ cat -n rd_grbCubicA.py
    204  for k in range(nk):
    205    HT[:,k,:,:]=(H[:,k,:,:]+H[:,k+1,:,:])/2.-H[:,0,:,:]
    206
+```
+- 地面溫度少於其他高度者：混合層限制在最低高度
+```python
    207  mixH=np.zeros(shape=T0.shape)
    208  minT=np.min(T,axis=1)
    209  idx=np.where(T0<=minT)
    210  HT0=np.array([max(35,i) for i in HT[:,0,:,:].flatten()]).reshape(HT[:,0,:,:].shape)
    211  mixH[idx[:]]=HT0[idx[:]]
    212
+```
+- 無逆溫者使用`interp1d`內插到符合地面溫度的高度  
+```python
    213  #potential temperature vertical profile is increasingly sorted
    214  dT=np.diff(T,axis=1)
    215  dTmin=np.min(dT,axis=1)
@@ -354,6 +358,9 @@ $ cat -n rd_grbCubicA.py
    219    f=interp1d(T[t,:,j,i],HT[t,:,j,i])
    220    mixH[t,j,i]=f(T0[t,j,i])
    221
+```
+- 有逆溫者找到逆溫層高度
+```python
    222  #with inversions
    223  idx=np.where((dTmin<0)&(T0>minT))
    224  for n in range(len(idx[0])):
@@ -365,7 +372,9 @@ $ cat -n rd_grbCubicA.py
 ```
 
 ### 時間標籤與屬性資料之寫入
-- 
+- 寫入時間標籤
+- 修改開始時間
+- 修改垂直層數
 ```python
    230  v='Times'
    231  nc.variables[v][:,:]=b[Hstart-14:Hstart+10][:]
@@ -381,6 +390,8 @@ $ cat -n rd_grbCubicA.py
    241  os.system('mv wrfout_d04 wrfout_d04_'+wname)
 ```
 
+## 下載程式碼
+- 可以由[github]](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/rd_grbCubicA.py_txt)找到原始碼。
 
 ## 檢核
 - 可以使用[MeteoInfo](http://meteothink.org/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)

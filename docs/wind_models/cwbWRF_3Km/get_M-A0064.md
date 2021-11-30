@@ -3,9 +3,9 @@ layout: default
 title: "中央氣象局WRF_3Km數值預報產品之下載"
 parent: "cwb WRF_3Km"
 grand_parent: "wind models"
-nav_order: 3
+nav_order: 1
 date:               
-last_modified_date:   2021-11-29 16:48:48
+last_modified_date:   2021-11-30 10:43:16
 ---
 
 # 中央氣象局WRF_3Km數值預報產品之下載
@@ -24,49 +24,81 @@ last_modified_date:   2021-11-29 16:48:48
 
 ## 背景
 - 續[樓上](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/)的討論，此處進一步說明下載細節。
+- 目前為止CWB是要求會員登錄的，登入後方能瀏覽檔案網址，經網址定位與確認後，實際自動下載時(如用`wget`)反而不必帳密。
+  - 其會員帳號為電子郵件、密碼須包括大小寫、數字、特殊字元（shift 1～0）
+- 檔案網址的資訊，寫在xml檔案內容內，範例如下：
+  - 2021/10/12前舊址：
+    - `https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A006${dom}-0$i.grb2`
+  - 新址：
+    - `https://cwbopendata.s3.ap-northeast-1.amazonaws.com/MIC/M-A006${dom}-0$i.grb2`
+    - 舊版`wget`(1.12)會需要加上選項`--no-check-certificate`
+- 檔案為逐6小時，按小時分檔儲存。
+  - 自0時開始計算，直到第84小時(3天半)
+  - 因macOS對數字與文字的檢核較為嚴格，`for`迴圈的設法有些差異
 
-## dowrf
+## centos的下載程式
+- `for`使用`range`的寫法，分別為`{起..迄..間隔}`。
 
-### 基本`mpirun`指令
-- dowrf的基本指令就是運用`mpirun`啟動`wrf.exe`，如在macOS的環境：
 ```bash
-wrf=/Users/WRF4.3/main/wrf.exe
-/usr/local/Cellar/open-mpi/4.1.1_2/bin/mpirun --use-hwthread-cpus $wrf
+    for i in {00..84..6};do
+      hour=`printf "%02d" $i`
+      echo "### DOWNLOADING DATA FOR FORECAST HOUR "${hour}" ###"
+      if ! [ -e M-A0061-0$i.grb2 ];then
+        wget -q --no-check-certificate https://cwbopendata.s3.ap-northeast-1.amazonaws.com/MIC/M-A0061-0$i.grb2
+      fi
+      if ! [ -e M-A0064-0$i.grb2 ];then
+        wget -q --no-check-certificate https://cwbopendata.s3.ap-northeast-1.amazonaws.com/MIC/M-A0064-0$i.grb2
+      fi
+    done
 ```
 
-### 全年執行
-- 因為run1~4的日子大多落在前一個月，除了1月以外，應沒有必要重新執行，實際執行run5~12即可，如centos的環境：
-  - 即使各批次起迄有異，各批次結果皆按日分檔儲存，易於管理。
-- 因`wrf.exe`編譯採`dmp`(Distributed Memory Parallelism)設定，會均勻使用工作站核心。過多核心反而會超過範圍內的水平網格數(至今1核負責2個網格點)，由於d01設定是60X60，因此核心數無法超過30。
+## macOS的下載程式
+- 前2行的語言設定(`LANG`、`LC_ALL`)是因應新python(3.9)的檢核
+- `for`完全採數字的寫法，再使用`printf`將數字改成文字
 
 ```bash
-kuang@centos8 /data/WRF2019
-$ cat dowrf.cs
-yyyy=2019
-y=$(date -ud "${yyyy}-01-01" +%Y)
-exe=/opt/bld/WRF4.3/main/wrf.exe
-p=$PWD
-for mt in {01..12};do
-  ym=${y}${mt}
-  if [ $ym == '201901' ];then
-    for r in {1..4};do
-      cd $p/$ym/run$r
-      /opt/mpich/bin/mpirun -np 30 $exe
-    done
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+today=$(date +%Y%m%d)
+rundate=$(date -v-1d -j -f "%Y%m%d" "$today" +%Y%m%d)
+yr=$(date -v-1d -j -f "%Y%m%d" "$today" +%Y)
+pth=/Users/Data/cwb/WRF_3Km/$yr/${rundate}
+mkdir -p $pth
+
+WGET=/usr/local/bin/wget
+cd $pth
+for ((d=0;d<=84;d+=6));do
+  i=`printf "%02d" $d`
+  echo "### DOWNLOADING DATA FOR FORECAST HOUR "${i}" ###"
+  for dom in 1 4;do
+  if ! [ -f M-A006${dom}-0$i.grb2 ];then
+#    $WGET -q https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A006${dom}-0$i.grb2
+    $WGET -q https://cwbopendata.s3.ap-northeast-1.amazonaws.com/MIC/M-A006${dom}-0$i.grb2
   fi
-  for r in {5..12};do
-      cd $p/$ym/run$r
-      /opt/mpich/bin/mpirun -np 30 $exe
   done
 done
 ```
 
+## 自動下載排程
+- 設定每天0時30分開始下載
+```bash
+kuang@MiniWei /Users/Data/cwb/WRF_3Km
+$ crontab -l|grep 3Km
+30 0  *  *  *   /Users/Data/cwb/WRF_3Km/get_M-A0064.cs &> /Users/Data/cwb/WRF_3Km/get_M-A0064.out 2>&1
+```
+
+## 檢核
+- 檔案個數大小：每層共**15個檔**(84/6+1)，3Km檔案共約**2.8G**，15Km檔案共約**0.8G**。
+```bash
+kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
+$ ls M-A0064-0??.grb2|wc -l
+      15
+kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
+$ du -ach M-A0064-0??.grb2|tail -n1
+2.8G    total
+kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
+$ du -ach M-A0061-0??.grb2|tail -n1
+878M    total
+```
+
 ## Reference
-Mesoscale and Microscale Meteorology Laboratory, NCAR, **Weather Research & Forecasting Model ARW Version 4 Modeling System User’s Guide**, [pdfcoffee](https://pdfcoffee.com/version-4-modeling-system-users-guide-january-2019-pdf-free.html), 2019,1.
-黃光遠、劉聖宗, **赴美研習WRF數值天氣預報模式報告書**, [交通部民用航空局飛航服務總台](https://report.nat.gov.tw/ReportFront/PageSystem/reportFileDownload/C09502689/001), 2006,10,13
-[ESRL](https://esrl.noaa.gov/), **WRF NAMELIST.INPUT FILE DESCRIPTION**, [namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html), 
-- akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
-- Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 
-- weikaiwei, **Linux教學：cat指令**, [weikaiwei.com](https://weikaiwei.com/linux/cat-command/), 2021
-- G. T. Wang, **Linux 計算機bc 指令用法教學與範例**, [gtwang](https://blog.gtwang.org/linux/linux-bc-command-tutorial-examples/), 2018/08/23
-- G. T. Wang, **Linux 的nohup 指令使用教學與範例，登出不中斷程式執行**, [gtwang](https://blog.gtwang.org/linux/linux-nohup-command-tutorial/), 2017/09/12

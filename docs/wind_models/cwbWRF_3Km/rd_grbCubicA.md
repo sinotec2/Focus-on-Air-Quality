@@ -25,14 +25,14 @@ last_modified_date:   2021-11-30 10:43:16
 ## 背景
 - 續[樓上](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/)、以及[下載](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/get_M-A0064/)程序之說明，此處詳述轉檔歷程。
 - 雖然`grb2`格式也有其解讀、應用的軟體，然而在空氣污染領域還並不多。因此還是需要轉成`wrfout`的`nc`格式。
-- 此處應用pygrib模組進行`grb2`檔案的解析
+- 此處應用[pygrib](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085)模組進行`grb2`檔案的解析
 
 ## [rd_grbCubicA.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/rd_grbCubicA.py_txt)分段說明
 
 ### 宣告與基本設定
 - 引用模組
   - pygrib的建置比較特別，可以參考[pygrib的安裝、重要語法](http://www.evernote.com/l/AH12nyLrGkBL2qg3WTonSwDC-0Rtq_S9npA/)
-  - 時間內插使用到`CubicSpline`，垂直空間內插使用到`interp1d`
+  - 空間內插之標籤與權重檔案是以`FortranFile`儲存的，時間內插使用到`CubicSpline`，垂直空間內插使用到`interp1d`。
 ```python
 kuang@MiniWei /Users/Data/cwb/WRF_3Km
 $ cat -n rd_grbCubicA.py
@@ -57,8 +57,9 @@ $ cat -n rd_grbCubicA.py
     15
     16
 ```
-- 開啟模版、讀取d04的網格數
-  - 由於wrfout的變數較`grb2`檔案還多，需事先處理好(`ncks -O -x -v VAR1,VAR2... $oldNC $newNC`)。
+- 開啟模版、讀取`d04`的網格數
+  - 由於`wrfout`的變數較`grb2`檔案還多，需事先處理好(`ncks -O -x -v VAR1,VAR2... $oldNC $newNC`)。
+  - 當然做為模版，也要有正確的時間、空間結構，可以使用`ncks -d`指令裁切既有檔案。
 ```python
     17  fname='wrfout_d04'
     18  tmax=36+1

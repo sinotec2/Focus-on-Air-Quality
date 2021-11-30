@@ -88,7 +88,7 @@ diff fil_grb_nc.py rd_grbCubicA.py
 <   exec(v+'=nc.variables["'+v+'"][:]')
 < 
 ```
-- 提前寫入時間標籤，而不是最後才寫。（模版內地時間筆數有限）
+- 提前寫入時間標籤，而不是最後才寫。（模版內的時間筆數有限）
 ```python
 < #time stamps
 < fname=root+'-0'+'{:02d}'.format(0)+'.grb2'
@@ -129,7 +129,8 @@ diff fil_grb_nc.py rd_grbCubicA.py
 104c68
 <   fname=root+'-0'+'{:02d}'.format(t)+'.grb2'
 ---
->   fname='M-A0064-0'+'{:02d}'.format(t)+'.grb2'```
+>   fname='M-A0064-0'+'{:02d}'.format(t)+'.grb2'
+```
 - 計算累積雨量所開啟的`grb2`檔案
 ```python
 131,136c96

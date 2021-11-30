@@ -4,7 +4,7 @@ title: "cwb WRF_3Km"
 parent: "wind models"
 nav_order: 4
 has_children: true
-permalink: /docs/wind_models/cwbWRF_3Km/
+permalink: /docs/wind_models/FDS/
 last_modified_at: 2021-11-28 15:52:50
 ---
 

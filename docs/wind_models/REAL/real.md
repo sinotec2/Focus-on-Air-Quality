@@ -1,8 +1,9 @@
 ---
 layout: default
 title: "REAL & WRF"
-parent: "wind models"
-nav_order: 6
+parent: "WRF"
+grand_parent: "wind models"
+nav_order: 3
 has_children: true
 permalink: /docs/wind_models/REAL/
 last_modified_at: 2021-11-28 15:52:50

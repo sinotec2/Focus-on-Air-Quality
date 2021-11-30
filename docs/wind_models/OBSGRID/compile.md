@@ -2,7 +2,7 @@
 layout: default
 title: "程式修改及編譯"
 parent: "OBSGRID"
-grand_parent: "wind models"
+grand_parent: "WRF"
 nav_order: 1
 date:               
 last_modified_date:   2021-11-27 22:48:34

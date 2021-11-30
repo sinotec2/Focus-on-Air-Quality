@@ -29,7 +29,8 @@ last_modified_date:   2021-11-30 10:43:16
 
 ## rd_grbCubicA.py分段說明
 - 引用模組
-  - pygrib的建置比較特別，
+  - pygrib的建置比較特別，可以參考[pygrib的安裝、重要語法](http://www.evernote.com/l/AH12nyLrGkBL2qg3WTonSwDC-0Rtq_S9npA/)
+  - 其餘時間內插使用到CubicSpline，空間內差使用到interp1d
 ```python
 kuang@MiniWei /Users/Data/cwb/WRF_3Km
 $ cat -n rd_grbCubicA.py
@@ -45,7 +46,7 @@ $ cat -n rd_grbCubicA.py
     10  import subprocess
     11
 ```
--
+- 溫濕度轉換
 ```python
     12  def buck(K):
     13      C=K-273.
@@ -80,17 +81,7 @@ $ cat -n rd_grbCubicA.py
 
 
 ## 檢核
-- 檔案個數大小：每層共**15個檔**(84/6+1)，3Km檔案共約**2.8G**，15Km檔案共約**0.8G**。
-```bash
-kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
-$ ls M-A0064-0??.grb2|wc -l
-      15
-kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
-$ du -ach M-A0064-0??.grb2|tail -n1
-2.8G    total
-kuang@MiniWei /Users/Data/cwb/WRF_3Km/2021/20211129
-$ du -ach M-A0061-0??.grb2|tail -n1
-878M    total
-```
+- 可以使用MeteoInfo(*)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)
 
 ## Reference
+- sinotec2, **pygrib的安裝、重要語法**, [evernote](http://www.evernote.com/l/AH12nyLrGkBL2qg3WTonSwDC-0Rtq_S9npA/), 2021年4月1日

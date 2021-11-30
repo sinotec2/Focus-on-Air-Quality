@@ -17,12 +17,12 @@ last_modified_at: 2021-11-28 15:52:50
 {: .no_toc }
 
 ## What's Learned 
-- 設定與執行相關說明詳見[User Guide](https://pdfcoffee.com/version-4-modeling-system-users-guide-january-2019-pdf-free.html)，如需中文可見[谷哥首搜](https://report.nat.gov.tw/ReportFront/PageSystem/reportFileDownload/C09502689/001)
+- 設定與執行相關說明詳見[User Guide](https://pdfcoffee.com/version-4-modeling-system-users-guide-january-2019-pdf-free.html)，如需中文可見[谷哥首搜](https://report.nat.gov.tw/ReportFront/PageSystem/reportFileDownload/C09502689/001)。
 - linux [sed](https://terryl.in/zh/linux-sed-command/)、[日期計算](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95)指令、背景執行[nohup](https://blog.gtwang.org/linux/linux-nohup-command-tutorial/)與[tmux](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/)指令。
 
 ## Reference
-Mesoscale and Microscale Meteorology Laboratory, NCAR, **Weather Research & Forecasting Model ARW Version 4 Modeling System User’s Guide**, [pdfcoffee](https://pdfcoffee.com/version-4-modeling-system-users-guide-january-2019-pdf-free.html), 2019,1.
-黃光遠、劉聖宗, **赴美研習WRF數值天氣預報模式報告書**, [交通部民用航空局飛航服務總台](https://report.nat.gov.tw/ReportFront/PageSystem/reportFileDownload/C09502689/001), 2006,10,13
+- Mesoscale and Microscale Meteorology Laboratory, NCAR, **Weather Research & Forecasting Model ARW Version 4 Modeling System User’s Guide**, [pdfcoffee](https://pdfcoffee.com/version-4-modeling-system-users-guide-january-2019-pdf-free.html), 2019,1.
+- 黃光遠、劉聖宗, **赴美研習WRF數值天氣預報模式報告書**, [交通部民用航空局飛航服務總台](https://report.nat.gov.tw/ReportFront/PageSystem/reportFileDownload/C09502689/001), 2006,10,13
 [ESRL](https://esrl.noaa.gov/), **WRF NAMELIST.INPUT FILE DESCRIPTION**, [namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html), 
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
 - Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 

@@ -1,10 +1,10 @@
 ---
 layout: default
-title: "REAL & WRF"
+title: "cwb WRF_3Km"
 parent: "wind models"
-nav_order: 6
+nav_order: 7
 has_children: true
-permalink: /docs/wind_models/REAL/
+permalink: /docs/wind_models/cwbWRF_3Km/
 last_modified_at: 2021-11-28 15:52:50
 ---
 
@@ -12,7 +12,7 @@ last_modified_at: 2021-11-28 15:52:50
 
 ---
 
-# REAL & WRF
+# cwb WRF_3Km
 此處統合[OBSGRID](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/)結果，準備WRF所需的初始、邊界、四階同化檔。`rea.exe`與`wrf.exe`使用同一個名單([namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html))，依序執行。
 {: .no_toc }
 

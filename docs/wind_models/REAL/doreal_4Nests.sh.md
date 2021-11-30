@@ -2,7 +2,7 @@
 layout: default
 title: "doreal_4Nests.sh"
 parent: "REAL & WRF"
-grand_parent: "wind models"
+grand_parent: "WRF"
 nav_order: 2
 date:               
 last_modified_date:   2021-11-28 20:30:22

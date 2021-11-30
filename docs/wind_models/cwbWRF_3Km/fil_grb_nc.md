@@ -44,7 +44,7 @@ last_modified_date:   2021-11-30 10:43:16
 
 ## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)差異說明
 
-### 模版的差異
+### 模版名稱的差異
 - 開啟模版
   - 用模版東西向的網格數(`ncol`)來區別`grb2`檔案的解析度
   - 總小時數`tmax`：`fil_grb_nc.py`目標是承接所有**85小時**、`rd_grbCubicA.py`只有**37小時**。
@@ -80,6 +80,8 @@ diff fil_grb_nc.py rd_grbCubicA.py
 > 
 > one=np.ones(shape=(nrow1,ncol1),dtype=np.int64)
 ```
+
+### 延長模版的時間軸
 - 延長檔案的筆數(時間座標軸)
   - 以填滿經緯度變數，來延長時間軸長度
 ```python
@@ -123,6 +125,8 @@ diff fil_grb_nc.py rd_grbCubicA.py
 < v='Times'
 < nc.variables[v][:,:]=[b[t][:] for t in range(tmax)]
 ```
+
+### 留存常數內容
 - 將常數內容填入`wrfout`檔案
 ```python
 < for v in sV:

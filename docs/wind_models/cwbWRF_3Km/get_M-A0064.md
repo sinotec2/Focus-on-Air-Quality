@@ -79,6 +79,22 @@ for ((d=0;d<=84;d+=6));do
 done
 ```
 
+## 日期的計算
+CWB每日的檔案名稱都一樣，因此儲存時必須要加以命名，涉及日期的計算。就此，`macOS`和`centos`的指令是不同的：
+- `centos`的指令是將增減時間放在引數的後面。
+- `macOS`則是在引數日期之前，進行時間的加、減。
+```bash
+$ diff get_M-A0064.cs ~/mac/Data/cwb/WRF_3Km/get_M-A0064.cs
+4,6c4,6
+< rundate=$(date -ud "${today}-1days" +"%Y%m%d")
+< yr=$(date -ud "$today" +%Y)
+< pth=/nas1/Data/cwb/WRF_3Km/$yr/${rundate}
+---
+> rundate=$(date -v-1d -j -f "%Y%m%d" "$today" +%Y%m%d)
+> yr=$(date -v-1d -j -f "%Y%m%d" "$today" +%Y)
+> pth=/Users/Data/cwb/WRF_3Km/$yr/${rundate}
+```
+
 ## 自動下載排程
 - 設定每天0時30分開始下載
 ```bash

@@ -31,6 +31,7 @@ last_modified_date:   2021-11-28 20:31:23
   - `SYEA`, `SMON`, `SDAY`:起始年、月、日
   - `EYEA`, `EMON`, `EDAY`:結束年、月、日
   - 起訖小時：為方便後續光化學模式的執行，一律設為**00UTC**
+
 ```bash
 &time_control
  run_days                            = 5,

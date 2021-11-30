@@ -2,7 +2,7 @@
 layout: default
 title: "namelist.input"
 parent: "REAL & WRF"
-grand_parent: "wind models"
+grand_parent: "WRF"
 nav_order: 1
 date:               
 last_modified_date:   2021-11-28 20:31:23

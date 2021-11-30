@@ -9,7 +9,7 @@ last_modified_date:   2021-11-25 16:21:24
 ---
 
 # WRF
+- WRF可說是整合了目前所有觀測數據、已知的大氣動力、輻射及雲物理等等知識的數學模式，也經常使用在驅動空氣品質模式。
+- 此處介紹WRF的前處理系統[WPS](https://sinotec2.github.io/jtd/docs/wind_models/WPS/)、整合觀測數據的[OBSGRID](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/)、模式初始及邊界條件[REAL及WRF](https://sinotec2.github.io/jtd/docs/wind_models/REAL/)的執行。
 
-WRF的前處理系統
-[WPS](https://github.com/wrf-model/WPS)顧名思義就是WRF的前處理系統(WRF Pre-processing System)，包括準備地理地形檔案的`geogrid.exe`、初始邊界檔案要讀取的觀測值準備`ungrid.exe`及網格化`metgrid.exe`等3支程式，而這三支程式共用同一個**名單**([namelist.wps demo](http://homepages.see.leeds.ac.uk/~lecag/wiser/namelist.wps.pdf))。
 {: .fs-6 .fw-300 }

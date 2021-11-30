@@ -13,11 +13,12 @@ last_modified_date: 2021-11-25 09:30:56
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[What's New](https://sinotec2.github.io/jtd/docs/wind_models/REAL/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Leave messages on GitHub](https://github.com/sinotec2/jtd/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[What's New](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Leave messages on GitHub](https://github.com/sinotec2/jtd/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
+- 2021-11-30 一篇[evernote筆記](https://www.evernote.com/shard/s125/sh/b3f7003a-fd1d-4918-b617-1acb90b45219/25b5cbe6b72feca8dc5f0cec636eee78)拆成4篇[github.io](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/)，應該可以把CWB數值預報的下載轉檔過程講解得清楚啦。慶幸的是這一題也有[網友](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085)在作，可能我們做得比較「硬斗」一點，我個人覺得內容比較豐富。
 - 2021-11-29 與github-page經過一番奮戰，陸續完成了WPS、OBSGRID、REAL & WRF的架構，what's learned與圖片再慢慢加，應該有點參考價值啦。
 - 2021-11-27 雖然程式有點舊，但還是忠實的進行著[NCEP](https://sinotec2.github.io/jtd/docs/wind_models/NCEP/)檔案自動下載與排程。
 - 2021-11-26 陸續將過去CWB相關筆記上載到jtd，花了一些時間測試建立grand_children層級

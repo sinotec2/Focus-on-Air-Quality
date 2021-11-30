@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "grb2wrfout_d03_3Km轉檔"
+title: "相同網格系統之轉檔"
 parent: "cwb WRF_3Km"
 grand_parent: "wind models"
 nav_order: 4
@@ -8,7 +8,7 @@ date:
 last_modified_date:   2021-11-30 10:43:16
 ---
 
-# grb2wrfout_d03_3Km轉檔
+# 相同網格系統之轉檔
 
 {: .no_toc }
 

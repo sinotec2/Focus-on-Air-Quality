@@ -1,0 +1,170 @@
+---
+layout: default
+title: "grb2wrfout_d03_3Km轉檔"
+parent: "cwb WRF_3Km"
+grand_parent: "wind models"
+nav_order: 4
+date:               
+last_modified_date:   2021-11-30 10:43:16
+---
+
+# grb2wrfout_d03_3Km轉檔
+
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+
+## 背景
+- [grb2wrfout_d04轉檔](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)針對台灣本島`d04`範圍進行空間內插。既然`grb2`檔案涵蓋範圍夠大，甚至比[geo_grid](https://sinotec2.github.io/jtd/docs/wind_models/WPS/namelist.wps/#地形網格設定)所定義`d03`範圍還大，是否可以準備一樣大小、解析度、網格數的網格系統（`wrfout_d03_3Km`），來直接承接`grb2`的內容，而不需任何的內插？似為一合理的作法。
+- 如此的python程式，應為[rd_grbCubicA.py](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)的簡單版。
+
+## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)差異說明
+
+### 模版的差異
+- 開啟模版
+  - 用模版東西向的網格數(`ncol`)來區別`grb2`檔案的解析度
+  - 總小時數`tmax`：`fil_grb_nc.py`目標是承接所有**85小時**、`rd_grbCubicA.py`只有**37小時**。
+```python
+diff fil_grb_nc.py rd_grbCubicA.py
+17,22c16,18
+< #parameter settings
+< M14={661:'1',1158:'4'}
+< tmax=84+1
+< path='/Users/Data/cwb/WRF_3Km/'
+< #OPEN THE TEMPLATE
+< fname=sys.argv[1]
+---
+> 
+> fname='wrfout_d04'
+> tmax=36+1
+```
+- 再不需要內插使用的標籤、權重。
+```python
+25a22,35
+> 
+> #path='/Users/kuang/MyPrograms/UNRESPForecastingSystem/CWB_data/raw/'
+> #path='/home/cpuff/UNRESPForecastingSystem/CWB_data/raw/'
+> #path='/nas1/backup/data/CWB_data/raw/'
+> path='/Users/Data/cwb/WRF_3Km/'
+> f=FortranFile(path+'idxD4.bin', 'r')
+> idx=f.read_record(dtype=np.int64)
+> idx=idx.reshape(nrow1,ncol1,2)
+> 
+> f=FortranFile(path+'wtsD4.bin', 'r')
+> wts=f.read_record(dtype=np.float64)
+> wts=wts.reshape(nrow1,ncol1,4)
+> 
+> one=np.ones(shape=(nrow1,ncol1),dtype=np.int64)
+```
+- 延長檔案的筆數(時間座標軸)
+  - 以填滿經緯度變數，來延長時間軸長度
+```python
+46,91d55
+< #FILL THE lon/lat FROM NC FILE(s)
+< root='M-A006'+M14[ncol1]
+< fname=path+root+'-0'+'{:02d}'.format(84)+'.nc'
+< nc1= netCDF4.Dataset(fname,'r')
+< lon,lat=nc1.variables['gridlon_0'][:,:],nc1.variables['gridlat_0'][:,:]
+< nc1.close()
+< dll={'XLAT':lat,'XLONG':lon}
+< for ll in ['XLAT','XLONG']:
+<   for t in range(max(nt1,tmax)):
+<     nc.variables[ll][t,:,:]=dll[ll][:,:]
+```
+- 備份wrfout常數部分、非`grb2`項目之內容
+```python
+< #store the constants before time stretching
+< sV=Vs[0]+Vs[1]+Vs[2]+Vs[3]
+< sV=[i for i in sV if i not in set(atbs)|set(atbs2) and 'Time' in nc.variables[i].dimensions and i != 'Times']
+< for v in sV:
+<   exec(v+'=nc.variables["'+v+'"][:]')
+< 
+```
+- 提前寫入時間標籤，而不是最後才寫。（模版內地時間筆數有限）
+```python
+< #time stamps
+< fname=root+'-0'+'{:02d}'.format(0)+'.grb2'
+< grbs = pygrib.open(fname)
+< V=grbs[1]
+< beg_time=V.analDate
+< if beg_time.hour != 6:
+<   beg_time=beg_time-datetime.timedelta(days=beg_time.hour/24)+datetime.timedelta(days=6/24)
+< b=[t for t in range(0,tmax)]
+< for t in range(0,tmax):
+<   time=beg_time+datetime.timedelta(days=t/24.)
+<   b[t]=np.array([bytes(i,encoding='utf-8') for i in time.strftime("%Y-%m-%d_%H:%M:%S")])
+< wname=''
+< for i in b[0]:
+<   wname+=i.decode('utf-8')
+< v='Times'
+< nc.variables[v][:,:]=[b[t][:] for t in range(tmax)]
+```
+- 將常數內容填入`wrfout`檔案
+```python
+< for v in sV:
+<   if nc.variables[v].ndim==1:
+<     exec('nc.variables["'+v+'"][:]='+v+'[0]')
+<   elif nc.variables[v].ndim==2:
+<     exec(v+'='+v+'[0,:]')
+<     exec('nc.variables["'+v+'"][:,:]='+v+'[None,:]')
+<   elif nc.variables[v].ndim==3:
+<     exec(v+'='+v+'[0,:,:]')
+<     exec('nc.variables["'+v+'"][:,:,:]='+v+'[None,:,:]')
+<   elif nc.variables[v].ndim==4:
+<     exec(v+'='+v+'[0,:,:,:]')
+<     exec('nc.variables["'+v+'"][:,:,:,:]='+v+'[None,:,:,:]')
+```
+
+### `grb2`檔案命名方式的差異
+- 開啟逐6小時檔案
+```python
+104c68
+<   fname=root+'-0'+'{:02d}'.format(t)+'.grb2'
+---
+>   fname='M-A0064-0'+'{:02d}'.format(t)+'.grb2'```
+- 計算累積雨量所開啟的`grb2`檔案
+```python
+131,136c96
+<   if 'd01' in sys.argv[1]:
+<     fname='M-A0061-0'+'{:02d}'.format(t6)+'.grb2'
+<   elif 'd03' in sys.argv[1]:
+<     fname='M-A0064-0'+'{:02d}'.format(t6)+'.grb2'
+<   else:
+<     sys.exit('wrong in sys.argv')  
+---
+>   fname='M-A0064-0'+'{:02d}'.format(t6)+'.grb2'
+```
+
+### 跳過空間內插過程
+- 直接將逐6時變數內容，存到全時間變數陣列。跳過空間內插過程。
+```python
+149,150c109,114
+<       vr=var[:,:]
+<       exec('s'+a+'[t,:,:]=vr[:,:]')
+---
+>       kk=0
+>       for jj in [0,1]:
+>         for ii in [0,1]:
+>           vr=var[idx[:,:,0]+one*jj,idx[:,:,1]+one*ii]
+>           exec('s'+a+'[t,:,:]+=vr[:,:]*wts[:,:,kk]')
+>           kk+=1
+```
+
+
+## 下載程式碼
+- 可以由[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)找到原始碼。
+
+## 檢核
+- 可以使用[MeteoInfo](http://meteothink.org/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)
+
+## Reference
+- sinotec2, **pygrib的安裝、重要語法**, [evernote](http://www.evernote.com/l/AH12nyLrGkBL2qg3WTonSwDC-0Rtq_S9npA/), 2021年4月1日
+- Yaqiang Wang, **MeteoInfo Introduction**, [meteothink](http://meteothink.org/), 2021,10,16

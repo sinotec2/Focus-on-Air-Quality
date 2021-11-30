@@ -320,8 +320,8 @@ $ cat -n rd_grbCubicA.py
 ```
 
 ### 行星邊界層高度
-- 求解行星邊界層高度
-  - 先求出`dt/dz`值(使用`np.diff`指令)
+- 求解行星邊界層高度。由於`grb2`沒有相關任何訊息，此處以混合層高度代之。
+  - 先求出`dt/dz`值(使用`np.diff`[指令](https://vimsky.com/zh-tw/examples/usage/numpy-diff-in-python.html))
 ```python
    193  v='PBLH'
    194  #PBLH=nc.variables[v][:]
@@ -347,7 +347,7 @@ $ cat -n rd_grbCubicA.py
    211  mixH[idx[:]]=HT0[idx[:]]
    212
 ```
-- 無逆溫者使用`interp1d`內插到符合地面溫度的高度  
+- 無逆溫者使用`interp1d`[指令](https://vimsky.com/zh-tw/examples/usage/python-scipy.interpolate.interp1d.html)內插到符合地面溫度的高度  
 ```python
    213  #potential temperature vertical profile is increasingly sorted
    214  dT=np.diff(T,axis=1)
@@ -373,8 +373,10 @@ $ cat -n rd_grbCubicA.py
 
 ### 時間標籤與屬性資料之寫入
 - 寫入時間標籤
-- 修改開始時間
-- 修改垂直層數
+- 修改`wrfout`檔案屬性訊息  
+  - 修改開始時間
+  - 修改垂直層數：因變數`BOTTOM-TOP_GRID_DIMENSION`含減號`-`，不能在`python`中處理，必須用`ncatted`[指令](https://atmosai.github.io/2019/04/2019-04-12-ncattednetcdf%E5%B1%9E%E6%80%A7%E7%BC%96%E8%BE%91/)在OS處理。
+  - 將`wrfout_d04`更名
 ```python
    230  v='Times'
    231  nc.variables[v][:,:]=b[Hstart-14:Hstart+10][:]
@@ -391,7 +393,7 @@ $ cat -n rd_grbCubicA.py
 ```
 
 ## 下載程式碼
-- 可以由[github]](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/rd_grbCubicA.py_txt)找到原始碼。
+- 可以由[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/rd_grbCubicA.py_txt)找到原始碼。
 
 ## 檢核
 - 可以使用[MeteoInfo](http://meteothink.org/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)

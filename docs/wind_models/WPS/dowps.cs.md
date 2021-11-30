@@ -34,7 +34,7 @@ last_modified_date:   2021-11-25 16:21:24
 ## WPS之全月執行方案
 
 ### `dowps.sh`的執行
-此處以批次檔[dowps.sh](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh)做為處理全月之工具，則執行全年的迴圈為:
+此處以批次檔[dowps.sh](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh_txt)做為處理全月之工具，則執行全年的迴圈為:
 ```bash
 ROOT=/data/WRF4.1
 for i in {0..11};do 
@@ -157,8 +157,8 @@ done
 ```
 
 ## 腳本出處
-- dowps.sh：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh
-- 模版：https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop
+- dowps.sh：[github](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh_txt)
+- 模版：[github](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop)
 
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.

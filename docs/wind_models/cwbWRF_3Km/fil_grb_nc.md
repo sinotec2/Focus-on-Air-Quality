@@ -27,7 +27,7 @@ last_modified_date:   2021-11-30 10:43:16
 - 如此的python程式，應為[rd_grbCubicA.py](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)的簡單版。
 
 ## 自動轉檔排程
-- 在``之中，有關轉檔的指令
+- 在[get_M-A0064.cs](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)之中，有關轉檔的指令
   - 完全符合WRF_3Km`grb2`的模版：wrfout_d03_3Km
   - 完全符合WRF_15Km`grb2`的模版：wrfout_d01_15Km
 ```bash
@@ -42,7 +42,7 @@ last_modified_date:   2021-11-30 10:43:16
     28	
 ```
 
-## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)差異說明
+## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)與[rd_grbCubicA.py](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)差異說明
 
 ### 模版名稱的差異
 - 開啟模版

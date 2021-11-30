@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "grb2nc轉檔"
+title: "WRF_3Km空間內插"
 parent: "cwb WRF_3Km"
 grand_parent: "wind models"
 nav_order: 2
@@ -8,7 +8,7 @@ date:
 last_modified_date:   2021-11-30 10:43:16
 ---
 
-# grb2nc轉檔
+# WRF_3Km空間內插
 
 {: .no_toc }
 

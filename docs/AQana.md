@@ -1,6 +1,6 @@
 ---
 layout: default
-title: “AQ Data Analysis“
+title: "AQ Data Analysis"
 nav_order: 2
 ---
 

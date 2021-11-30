@@ -17,7 +17,7 @@ last_modified_at: 2021-11-28 15:52:50
 - 唯該檔案格式為WMO約定的GRIB2格式(下略grb2)，並非wrfout.nc格式(下略wrfout)，因此在應用上須另外建置應用軟體。
 - 目前已經發展完成該產品應用在`CALPUFF`模式之逐日預報、地面風之軌跡線([臺灣地區高解析度軌跡產生/自動分析系統](http://114.32.164.198/traj2.html)、以及即期`AERMOD`之模式模擬作業之中。前者應用`python gribapi`直接讀取，後2者則應用`pygrib`，程式設計較為單純。
 - 中央氣象局WRF預報3公里解析度之模式模擬範圍
-![https://github.com/sinotec2/jtd/raw/main/assets/images/geo_emWRF_3Km.PNG]
+![](https://github.com/sinotec2/jtd/raw/main/assets/images/geo_emWRF_3Km.PNG)
 {: .no_toc }
 
 ## What's Learned 

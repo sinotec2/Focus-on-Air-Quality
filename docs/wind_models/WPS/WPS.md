@@ -2,6 +2,7 @@
 layout: default
 title: "WPS"
 parent: "WRF"
+grand_parent: "wind models"
 has_children: true
 nav_order: 1
 date:               

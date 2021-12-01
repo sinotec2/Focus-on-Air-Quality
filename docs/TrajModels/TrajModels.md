@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Plume Models
+title: Trajectory Models
 nav_order: 7
 has_children: true
 permalink: /docs/TrajModels/

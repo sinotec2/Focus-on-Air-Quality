@@ -75,6 +75,7 @@ $ cat -n include3.py
     32	  return dmg
     33	
 ```
+
 ### PM成份劃分
 - 理論上PM的劃分也應從[SPECIATE](https://www.epa.gov/air-emissions-modeling/speciate-4)資料庫來，但目前本程式尚未引用，只有CCRS、FCRS、CPRM、FPRM 4項。只用簡單邏輯的劃分：
   - 如果是燃燒源(C+N+S) > 0：所有細顆粒都是FPRM、PM-PM25則為CPRM
@@ -168,7 +169,8 @@ $ cat -n include3.py
    103	  return dm
    104	
 ```
-### VOCs資料庫之讀取`rd_ASnPRnCBM`
+
+### VOCs資料庫之讀取`rd_ASnPRnCBM_A`
 ```ptython
    102	def rd_ASnPRnCBM_A():
    103	    from pandas import DataFrame, read_csv
@@ -208,6 +210,7 @@ $ cat -n include3.py
    137	    return (df_asgn,df_prof,df_cbm)
    138	
 ```
+
 ## 檔案下載
 - `python`程式：[include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include2.py)、[include3.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include3.py)。
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "include3"
+title: "DEF's used"
 parent: "area"
 grand_parent: "Emission Processing"
 nav_order: 3
@@ -168,7 +168,46 @@ $ cat -n include3.py
    103	  return dm
    104	
 ```
-
+### VOCs資料庫之讀取`rd_ASnPRnCBM`
+```ptython
+   102	def rd_ASnPRnCBM_A():
+   103	    from pandas import DataFrame, read_csv
+   104	    import subprocess
+   105	    ROOT='/'+subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[1]
+   106	    fname=ROOT+'/TEDS/teds10_camx/HourlyWeighted/area/ASSIGN-A.TXT'
+   107	    df_asgn=read_csv(fname,header=None,delim_whitespace = True)
+   108	    df_asgn.columns=['NSC','PRO_NO']+[str(i) for i in range(len(df_asgn.columns)-2)]
+   109	    df_asgn.fillna(0,inplace=True)
+   110	    df_asgn.PRO_NO=['{:04d}'.format(int(m)) for m in df_asgn.PRO_NO]
+   111	    for i in range(len(df_asgn)):
+   112	        nsc=df_asgn.NSC[i]
+   113	        if not nsc[-1].isalpha():
+   114	            df_asgn.loc[i,'NSC']=nsc.strip()+'b'                
+   115	    fname=ROOT+'/TEDS/teds10_camx/HourlyWeighted/area/V_PROFIL.TXT'
+   116	    with open(fname) as text_file:
+   117	        d=[line[:41] for line in text_file]
+   118	    PRO_NO,SPE_NO,WT=[i[:4] for i in d],[int(i[11:14]) for i in d],[float(i[24:30]) for i in d]
+   119	    df_prof=DataFrame({'PRO_NO':PRO_NO,'SPE_NO':SPE_NO,'WT':WT})
+   120	    NC=20
+   121	    fname=ROOT+'/TEDS/teds10_camx/HourlyWeighted/line/CBM.DAT'
+   122	    with open(fname) as text_file:
+   123	        d=[line.strip('\n') for line in text_file]
+   124	    d=d[1:]
+   125	    SPE_NO,MW=[int(i[41:44]) for i in d],[float(i[57:63]) for i in d]
+   126	    BASE=[[i[63+j*6:63+(j+1)*6] for j in range(NC)] for i in d]
+   127	    d=BASE
+   128	    for i in range(len(d)):
+   129	        ii=d[i]
+   130	        for j in range(NC):
+   131	            s=ii[j].strip(' ')
+   132	            if len(s)==0:
+   133	                BASE[i][j]=0.
+   134	            else:
+   135	                BASE[i][j]=float(s)
+   136	    df_cbm=DataFrame({'SPE_NO':SPE_NO,'MW':MW,'BASE':BASE})
+   137	    return (df_asgn,df_prof,df_cbm)
+   138	
+```
 ## 檔案下載
 - 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/week.csv)
 - `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_json.py)

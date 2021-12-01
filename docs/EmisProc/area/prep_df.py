@@ -1,9 +1,6 @@
 import numpy as np
 from pandas import *
 from pypinyin import pinyin, lazy_pinyin
-import subprocess
-import json
-from datetime import datetime, timedelta
 #prepare the dataframe
 def PrepDf(fname):
   path=''#'/home/sespub/teds10/08-時間分配權重/月週日時間權重/'

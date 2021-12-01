@@ -66,4 +66,5 @@ except:
 ```
 
 ## Reference
+- Discussion on **pandas transform a dbf table into a dataframe**, [stackoverflow](https://stackoverflow.com/questions/41898561/pandas-transform-a-dbf-table-into-a-dataframe), 2018/8/3
 - Ryan Nelson, simpledbf 0.2.6, [pypi](https://pypi.org/project/simpledbf/), Released: May 14, 2015

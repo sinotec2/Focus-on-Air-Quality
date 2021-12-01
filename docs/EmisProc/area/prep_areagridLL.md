@@ -31,8 +31,9 @@ last_modified_date:   2021-12-01 14:16:46
 
 ### 程式說明
 - 使用[pyproj](https://pyproj4.github.io/pyproj/stable/)進行座標系統的轉換
-- 座標原點採臺灣島的中心`(23.61000, 120.9900)`，以`twd97`模組進行該點絕對值之計算。
+- 座標原點採臺灣島的中心`(23.61000, 120.9900)`，以[twd97](https://pypi.org/project/twd97/)模組進行該點絕對值之計算。
 - 合併面源的2層分類代碼，以利後續的計算。
+
 ```python
 kuang@114-32-164-198 /Users/TEDS/teds11/area
 $ cat prep_areagridLL.py

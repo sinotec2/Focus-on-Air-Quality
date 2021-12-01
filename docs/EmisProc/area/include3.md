@@ -209,7 +209,6 @@ $ cat -n include3.py
    138	
 ```
 ## 檔案下載
-- 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/week.csv)
-- `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_json.py)
+- `python`程式：[include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include2.py)、[include3.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include3.py)。
 
 ## Reference

@@ -59,3 +59,8 @@ for t in 'mwd':
     exec(df+'=PrepDf("'+csvs[t]+'")')
     exec(df+'.set_index("nsc2").to_csv("'+df+'")')
 
+# output the dictionary
+for kc in ['cnty','kpq']:
+  with open('d_'+kc+'.json', 'w', newline='') as jsonfile:
+    exec('json.dump(d_'+kc+', jsonfile)')
+

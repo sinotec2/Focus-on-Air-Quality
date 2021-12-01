@@ -50,7 +50,7 @@ for c in ['CNTY','nsc2','YX']:
   exec('d'+c+'={'+c+'[i]:i for i in range(n'+c+')}')
   exec('df["i'+c+'"]=[d'+c+'[i] for i in df.'+c+']')
 
-#
+#same NSC in df_A? and df, but without NSC_SUB, all add tp s_nsc2
 nsc2b=set([i for i in s_nsc2 if i[-1]=='b'])
 for ii in nsc2b-set(df.nsc2):
   i=int(ii[:-1])

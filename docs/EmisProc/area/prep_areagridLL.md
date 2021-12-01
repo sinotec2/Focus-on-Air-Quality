@@ -56,5 +56,5 @@ df.set_index('UTME').to_csv('areagrid11LL.csv')
 ```
 
 ## Reference
--alan.d.snow and jswhit, **pyproj 3.3.0**, [pypi.org](https://pypi.org/project/pyproj/), Released: Nov 18, 2021
+- alan.d.snow and jswhit, **pyproj 3.3.0**, [pypi.org](https://pypi.org/project/pyproj/), Released: Nov 18, 2021
 - Tom.Chen, **Python converter between TWD97 and WGS84**, [pypi.org](https://pypi.org/project/twd97/), Oct 22, 2014

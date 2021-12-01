@@ -1,19 +1,18 @@
 ---
 layout: default
-title: "CODiS"
-parent: "wind models"
+title: "area"
+parent: "Emission Processing"
 nav_order: 1
 has_children: true
-permalink: /docs/wind_models/CODiS/
-last_modified_at:   2021-11-28 22:04:23
+permalink: /docs/EmisProc/area/
+last_modified_at:   2021-12-01 13:06:16
 ---
 
 {: .fs-6 .fw-300 }
 
-# CODiS
-中央氣象局數據每天公開其自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉換成little_R格式以進行4階同化等等作業過程。
+# 面源之處理
+面源處理相對其他點源單純一些，與線源、點源處理都有些雷同，同樣是先對時間變化、及空間變化先行展開，之後再按光化模式的網格定義予以合併。此處介紹完整的程序，分項另有詳述。
 
 ## What's Learned
-- 資料處理[pandas](https://hackmd.io/@wiimax/10-minutes-to-pandas)、網頁[爬蟲程式](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)、自動執行[排程](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)、下載程式[wget](https://blog.gtwang.org/linux/linux-wget-command-download-web-pages-and-files-tutorial-examples/)及[curl](https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/)
-- [twd97座標轉換](https://pypi.org/project/twd97/)、
-- 檔案格式：[FortranFile](https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.FortranFile.html)、[fortranformat](https://pypi.org/project/fortranformat/)、[KML](https://en.wikipedia.org/wiki/Keyhole_Markup_Language)
+- 
+## Reference

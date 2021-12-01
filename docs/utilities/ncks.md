@@ -1,7 +1,7 @@
 ---
 layout: default
 title: NCKS 在空品模式中的應用
-nav_order: 8
+parent: Utilities
 ---
 # NCKS 在空品模式中的應用
 {: .no_toc }

@@ -354,7 +354,7 @@ $ cat -n prep_json.py
    108    hrs=np.array([dts[i].hour for i in range(nty)])
    109
 ```
-- 將df_A?的2欄內容(`df_A.nsc2`,`df_A.REGION`)，轉變成單一組合(`f_A[(n,c)]`)
+- 將df_A?的2欄內容(`df_A.nsc2`,`df_A.REGION`)，轉變成單一組合(`f_A[(n,c)]`)對照表
   - 先將`df_A`拉長
 ```python
    110    nts={'m':12,'w':7,'d':24}

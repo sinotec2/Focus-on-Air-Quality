@@ -32,6 +32,7 @@ last_modified_date:   2021-12-01 14:16:46
 
 ### 引用模組及時間標籤轉換`dt2jul`, `jul2dt`
 - `m3.nc`檔案的時間標籤`TFLAG`是個整數的序列`jul`，而為能計算，需轉成`datetime`。
+
 ```python
 kuang@114-32-164-198 /Users/TEDS/teds10_camx/HourlyWeighted/area
 $ cat -n include3.py 
@@ -60,6 +61,7 @@ $ cat -n include3.py
 ### 資料庫的網格化`disc`
 - 座標軸中心點(`Xcent`,`Ycent`)、轉成`nc`檔案的`IX`、`IY`標籤
 - 使用`pivot_table`加總，會自動啟動平行化作業。
+
 ```python
     21	def disc(dm,nc):
     22	#discretizations
@@ -81,6 +83,7 @@ $ cat -n include3.py
   - 如果是燃燒源(C+N+S) > 0：所有細顆粒都是FPRM、PM-PM25則為CPRM
   - 如果非燃燒源(C+N+S) == 0 且 V==0： 所有細顆粒都是FCRS、PM-PM25則為CCRS
   - 如果非燃燒源且為VOC逸散源(事實上無PM排放，但還是留下邏輯)：一半為CRS、一半為PRM， 粗細皆同
+
 ```python
     34	#A simple scheme is in place for PM splitting, and the SPECCIATE is not adopted.
     35	def add_PMS(dm):
@@ -127,6 +130,7 @@ $ cat -n include3.py
     - 由於PRO_NO的個數有限，沒有必要臨時再計算累加各物質碳鍵，
     - 可以事先準備好，做好對照關係(prof_cbm)，
     - 計算時只要叫出PRO_NO對照到的(每單位重量)碳鍵莫耳數(prod)，直接與排放量相乘即可。
+
 ```python
     65	def add_VOC(dm,n):
     66	  df_asgn,df_prof,df_cbm=rd_ASnPRnCBM_A()
@@ -171,7 +175,8 @@ $ cat -n include3.py
 ```
 
 ### VOCs資料庫之讀取`rd_ASnPRnCBM_A`
-- [include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include2.py)
+- 來自[include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include2.py)
+
 ```python
    102	def rd_ASnPRnCBM_A():
    103	    from pandas import DataFrame, read_csv
@@ -214,6 +219,7 @@ $ cat -n include3.py
 
 ### mostfreqword
 - 序列中最常使用到的字串，作為`pivot_table`的`aggfunc`
+
 ```python
 def compareItems(wc1,wc2):
     (w1,c1), (w2,c2)=wc1,wc2

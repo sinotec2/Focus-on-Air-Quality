@@ -78,6 +78,11 @@ $ cat -n area_YYMMinc.py
 ```
 
 ### `nc`模版之準備
+- `nc`模版如何形成？
+  - 修改CAMx提供的範例檔案
+  - 使用`pncgen`轉換一個既有的`uamiv`檔案
+  - 從CMAQ排放量檔案轉換而來
+
 ```python
     37	#prepare the template
     38	fname='fortBE.413_teds'+teds+'.area'+mm+'.nc'
@@ -97,6 +102,10 @@ $ cat -n area_YYMMinc.py
     52	#nc.NAME='EMISSIONS '
     53	if 'ETFLAG' not in V[2]:
     54	  zz=nc.createVariable('ETFLAG',"i4",("TSTEP","VAR","DATE-TIME"))
+```
+- 延長模版時間維度的長度
+
+```python
     55	if nt!=ntm or (nc.variables['TFLAG'][0,0,0]!=nc.SDATE and nc.variables['TFLAG'][0,0,1]!=nc.STIME):
     56	  for t in range(ntm):
     57	    sdate,stime=dt2jul(bdate+timedelta(days=t/24.))
@@ -105,6 +114,9 @@ $ cat -n area_YYMMinc.py
     60	    ndate,ntime=dt2jul(bdate+timedelta(days=(t+1)/24.))
     61	    nc.variables['ETFLAG'][t,:,0]=[ndate for i in range(nv)]
     62	    nc.variables['ETFLAG'][t,:,1]=[ntime for i in range(nv)]
+```
+- 所有項目歸零。否則會出現`mask`導致錯誤。
+```python
     63	for v in V[3]:
     64	  nc.variables[v][:]=0.
     65	sdatetime=[jul2dt(nc.variables['TFLAG'][t,0,:]) for t in range(ntm)]

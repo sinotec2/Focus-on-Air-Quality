@@ -29,7 +29,8 @@ last_modified_at:   2021-12-01 13:06:16
 
 ### 方案及策略
 - 如前所述，使用資料庫軟體查詢、修改，會因應**資料筆數太長**而失敗
-- python提供了許多`dbf`檔案格式的reader
+- `fortran`無法直接讀取`dbf`檔案，只能讀取`sdf`檔案，須先將`dbf`轉成`sdf`。
+- `python`提供了許多`dbf`檔案格式的`reader`
   - 包括pandas即可直接讀取，[網友](https://stackoverflow.com/questions/41898561/pandas-transform-a-dbf-table-into-a-dataframe)也曾充分討論並速度評比，
   - 經測試，[simpledbf](https://pypi.org/project/simpledbf/)可以正確解讀[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)之`.dbf`檔，具有簡捷之特性  
 

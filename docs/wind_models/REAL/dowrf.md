@@ -38,7 +38,7 @@ wrf=/Users/WRF4.3/main/wrf.exe
 ### 全年執行
 - 因為run1~4的日子大多落在前一個月，除了1月以外，應沒有必要重新執行，實際執行run5~12即可，如centos的環境：
   - 即使各批次起迄有異，各批次結果皆按日分檔儲存，易於管理。
-- 因`wrf.exe`編譯採`dmp`(Distributed Memory Parallelism)設定，會均勻使用工作站核心。過多核心反而會超過範圍內的水平網格數(至今1核負責2個網格點)，由於d01設定是60X60，因此核心數無法超過30。
+- 因`wrf.exe`編譯採`dmp`(Distributed Memory Parallelism)設定，會均勻使用工作站核心。過多核心反而會超過範圍內的水平網格數(至少1核負責2個網格點)，由於d01設定是60X60，因此核心數無法超過30。
 
 ```bash
 kuang@centos8 /data/WRF2019

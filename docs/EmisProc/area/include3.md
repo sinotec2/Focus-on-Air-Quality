@@ -171,7 +171,8 @@ $ cat -n include3.py
 ```
 
 ### VOCs資料庫之讀取`rd_ASnPRnCBM_A`
-```ptython
+- [include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include2.py)
+```python
    102	def rd_ASnPRnCBM_A():
    103	    from pandas import DataFrame, read_csv
    104	    import subprocess

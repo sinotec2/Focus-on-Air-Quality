@@ -32,6 +32,7 @@ last_modified_date:   2021-12-01 14:16:46
 
 ### 引用模組
 - `include2`, `include2`, `mostfreqword`詳見[面源計算用到的副程式](https://sinotec2.github.io/jtd/docs/EmisProc/area/include3/)
+
 ```python
 kuang@114-32-164-198 /Users/TEDS/teds10_camx/HourlyWeighted/area
 $ cat -n area_YYMMinc.py 
@@ -142,6 +143,7 @@ $ cat -n area_YYMMinc.py
     90	YX_DICT={i:j for i,j in zip(YX_DICT.YX,YX_DICT.DICT)}
 ```
 - 氨氣排放量讀取
+
 ```python
     91	df['EM_NH3']=0.
     92	fname=P+'nh3.csv'
@@ -170,6 +172,7 @@ $ cat -n area_YYMMinc.py
    115	  df['CNTY']=[str(int(s/100)) for s in list(df['DICT'])]
 ```
 - 加總縣市邊界上的重複資料
+
 ```python
    116	coli=['CNTY', 'nsc2','YX']
    117	df=pivot_table(df,index=coli,values=cole,aggfunc=np.sum).reset_index()

@@ -131,7 +131,8 @@ $ cat -n prep_dfAdmw.py
 ```python
      1  import numpy as np
      2  from pandas import *
-     3  from pypinyin import pinyin, lazy_pinyi```
+     3  from pypinyin import pinyin, lazy_pinyi
+```
 - 先將中文改成英文，以便對照
 ```python
      4  #prepare the dataframe
@@ -407,5 +408,8 @@ $ cat -n prep_json.py
    148      json.dump(nc_fac, jsonfile)
    149
 ```
+## 檔案下載
+- 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/week.csv)
+- `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_json.py)
 
 ## Reference

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Emission_Processing
+title: Emission Processing
 nav_order: 5
 has_children: true
 permalink: /docs/EmsProc/

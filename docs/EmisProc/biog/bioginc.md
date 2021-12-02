@@ -26,6 +26,8 @@ last_modified_date:   2021-12-02 11:08:53
 - 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[植物源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
 ## 程式分段說明
+
+### 初始段
 - 引用模組。此處用到[include3.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include3.py)的[dt2jul, jul2dt](https://sinotec2.github.io/jtd/docs/EmisProc/area/include3/#引用模組及時間標籤轉換dt2jul-jul2dt), [disc](https://sinotec2.github.io/jtd/docs/EmisProc/area/include3/#資料庫的網格化disc)
 
 ```python
@@ -156,6 +158,8 @@ $ cat -n bioginc.py
    103  for i in range(NC):
    104    fact[:,i]=f24[hr,i]
 ```
+
+### 網格化、VOCs劃分
 - 按照光化模式規格進行網格化、篩選出本月排放量
 
 ```python
@@ -186,7 +190,8 @@ $ cat -n bioginc.py
    125    df[v]=ssum
    126
 ```
-- 時間與空間之展開
+
+### 時間與空間之展開
 
 ```python
    127  #Expand to ntm*NREC
@@ -209,8 +214,9 @@ $ cat -n bioginc.py
    144    dfT[c]=val[:,v]
    145
 ```
-- 填入`nc`模版
 
+### 線性之DataFrame填入3維矩陣
+- 每個污染項目逐一進行
 ```python
    146  #Filling to the template
    147  df=dfT
@@ -228,6 +234,14 @@ $ cat -n bioginc.py
    159    if imn<0 and imx+imn<ncol:sys.exit('negative indexing error in i')
    160    if jmn<0 and jmx+jmn<nrow:sys.exit('negative indexing error in j')
    161
+```
+- 填入過程
+  - 先使矩陣所以內容為0
+  - 3個相同長度的序列`(idt,iy,ix)`，分別為矩陣的3個標籤內容
+  - 第4個同長度的序列`ss`，即為要給定的值
+  - 填入此序列
+  - 再整批匯入至`nc`檔案
+```python
    162    z=np.zeros(shape=(ntm,jmx,imx))
    163    idx=dfc.index
    164    idt=np.array(dfc.loc[idx,'idt'])
@@ -242,6 +256,7 @@ $ cat -n bioginc.py
    173  #pncgen(nc, fname, format = 'uamiv')
    174  nc.close()
 ```
+
 ## 結果檢核
 - 比較teds10及teds11之植物排放[如圖](https://github.com/sinotec2/jtd/raw/main/assets/images/teds11-10biog.PNG)
 ![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds11-10biog.PNG)

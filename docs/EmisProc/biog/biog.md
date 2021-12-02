@@ -24,7 +24,7 @@ last_modified_at:   2021-12-02 09:55:34
 - 經轉檔可以供CMAQ模式使用
 
 ## What's Learned
-- 線性序列填入矩陣的作法
+- 線性序列填入矩陣的[作法](https://sinotec2.github.io/jtd/docs/EmisProc/biog/bioginc/#線性之DataFrame填入3維矩陣)
 
 ## Reference
 純淨天空, **python numpy tensordot用法及代碼示例- 純淨天空**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html), 27 May 2019

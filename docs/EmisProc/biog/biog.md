@@ -20,12 +20,11 @@ last_modified_at:   2021-12-02 09:55:34
 - 網格化、劃分VOCs物種、乘上日變化係數、存入`nc`模版
 
 ## 後續處理
-- CAMx面源檔案可以使用VERDI或MeteoInfo開啟、繪圖，如[下圖](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11CCRS.PNG)所示。
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11CCRS.PNG)
+- CAMx面源檔案可以使用VERDI或MeteoInfo開啟、繪圖
 - 經轉檔可以供CMAQ模式使用
 
 ## What's Learned
-- 使用[np.tensordot](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html)指令進行矩陣相乘，啟動程式的[平行化](https://sinotec2.github.io/jtd/docs/EmsProc/#numpyscipy的平行運作)。
+- 線性序列填入矩陣的作法
 
 ## Reference
 純淨天空, **python numpy tensordot用法及代碼示例- 純淨天空**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html), 27 May 2019

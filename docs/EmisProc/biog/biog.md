@@ -10,15 +10,14 @@ last_modified_at:   2021-12-02 09:55:34
 
 {: .fs-6 .fw-300 }
 
-# 生物源之處理
+# 植物源之處理
 
-面源處理相對其他點源單純一些，與線源、點源處理都有些雷同，同樣是先對時間變化、及空間變化先行展開，之後再按光化模式的網格定義予以合併，詳見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)及[面源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/area/)。此處介紹完整的程序，分項另有詳述。
+由於環保署提供的生物源(植物)排放檔案是已經處理過的全年排放量網格分布，而沒有**時變係數**，僅有手冊中的月變化係數，以及文獻中找到的日變化係數，沒有類別與空間的相依性，較為單純。處理程式部分仍為舊版`fortran`並未更新。
 
 ## 主要步驟程序
 - 讀取TEDS之dbf檔案(環保署提供的`.dbf`檔案過於龐大，超過一般資料庫軟體可以處理，詳見[dbf2csv.py](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/))
-- 轉換到直角座標系統([prep_areagridLL.py](https://sinotec2.github.io/jtd/docs/EmisProc/area/prep_areagridLL/))
-- 進行**時變係數**的展開([prep_dfAdmw.py](https://sinotec2.github.io/jtd/docs/EmisProc/area/prep_TimVar/))
-- 併入NH3檔案、進行VOCs及PM的展開、整合成nc(uamiv)檔案([area_YYMM.py](https://sinotec2.github.io/jtd/docs/EmisProc/area/area_YYMMinc/))
+- 乘上月變化係數成為逐月排放量([fortran]())，整合成一個大的`DataFrame`
+- 網格化、劃分VOCs物種、乘上日變化係數、存入`nc`模版
 
 ## 後續處理
 - CAMx面源檔案可以使用VERDI或MeteoInfo開啟、繪圖，如[下圖](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11CCRS.PNG)所示。

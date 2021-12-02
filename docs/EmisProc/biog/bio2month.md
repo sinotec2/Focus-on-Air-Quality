@@ -102,7 +102,26 @@ $ cat -n bio2month-teds11.f
     58        end
 ```
 
+## DataFrame整合
+- 將逐月檔整合成一個大的DataFrame(`biogrid2019.csv`)、另存備有
+```python
+kuang@node03 /nas1/TEDS/teds11/biog
+$ cat wrt_csv.py
+from pandas import *
+
+P='/nas1/TEDS/teds11/merg/bioemis.space/'
+col=['UTME','UTMN','tnmhc','iso','mono','onmhc','mbo']
+df=DataFrame({})
+for m in range(1,13):
+  mo='{:02d}'.format(m)
+  dfT=read_csv(P+'bioemis.space.'+mo,header=None,delim_whitespace = True)
+  dfT.columns=col
+  dfT['mon']=[m for i in dfT.index]
+  df=df.append(dfT,ignore_index=True)
+df.set_index('UTME').to_csv('biogrid2019.csv')
+```
+
 ## 檔案下載
-- `fortran`程式：[include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/biog/bio2month-teds11.f)。
+- `fortran`程式：[bio2month-teds11.f](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/biog/bio2month-teds11.f)。
 
 ## Reference

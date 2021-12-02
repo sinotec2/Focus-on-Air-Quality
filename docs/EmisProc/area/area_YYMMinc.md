@@ -212,7 +212,7 @@ $ cat -n area_YYMMinc.py
    135	
 ```
 
-### 儲存陣列
+### 儲存排放量矩陣`TPY`
 ```python
    136	#df store to matrix 
    137	for c in ['CNTY','nsc2','YX']:
@@ -231,12 +231,18 @@ $ cat -n area_YYMMinc.py
    150	
 ```
 
-### 加入時間變化效果
+### 時間變化係數矩陣`fac`
+- 讀取對照表`json`檔，將展開成為完整的`DataFrame`，最後形成**矩陣**`fac`以利相乘
+
 ```python
    151	#processing all the time-variation and constant categories
    152	with open('nc_fac.json', 'r', newline='') as jsonfile:
    153	  nc_fac=json.load(jsonfile)
    154	
+```
+- 全年的時間標籤(`dts`)，用在序列數據的拮取
+
+```python
    155	yr=2016+(int(teds)-10)*3
    156	bdate0=datetime(yr,1,1)-timedelta(days=1)
    157	nd365=365
@@ -244,6 +250,10 @@ $ cat -n area_YYMMinc.py
    159	nty=(nd365+2)*24
    160	dts=[bdate0+timedelta(days=i/24.) for i in range(nty)]
    161	
+```
+- 具有時間變化的排放類別
+
+```python
    162	#time-variant part of nsc2
    163	ll=list(nc_fac)
    164	df=DataFrame({'nsc2':[i.split('_')[0] for i in ll],\
@@ -270,6 +280,10 @@ $ cat -n area_YYMMinc.py
    185	fac[iCNTY[:],insc2[:],it[:]]=fac1[:]
    186	fac1=0#clean_up of mem
    187	
+```
+- 常數類別，其**時變係數**為一定值
+
+```python
    188	#constant part of nsc2
    189	insc2=np.array([dnsc2[n] for n in set(nsc2)-set(df.nsc2)])
    190	nnsc2=len(insc2)
@@ -279,11 +293,19 @@ $ cat -n area_YYMMinc.py
    194	var3[:,:,:]=  np.arange(nty)[None,None,:];it   =var3.flatten()
    195	fac[iCNTY[:],insc2[:],it[:]]=1./nty
    196	
+```
+- 由全年序列中，按照`dts`拮取本月之**時變係數**備用
+
+```python
    197	#cutting for desired month from whole year time-factors
    198	ib=dts.index(bdate)
    199	dts=dts[ib:ib+ntm]
    200	fac=fac[:,:,ib:ib+ntm] #clean_up of mem
    201	
+```
+- 採用[np.tensordot](https://sinotec2.github.io/jtd/docs/EmisProc/area/#whats-learned)矩陣內積，消除中間的2個維度(`nsc2`, `cnty`)，成為單純的(物種、空間、時間)3維度矩陣
+
+```python
    202	#eliminate the nsc2 and CNTY dimensions (multiply-and-sum by tensordot)
    203	df,var2,var3,iCNTY,insc2,it=0,0,0,0,0,0 			#clean_up of mem
    204	aTPY = np.tensordot(TPY,fac, axes=([1,2],[0,1])) 	#in shape of (isp, nYX, ntm)
@@ -292,6 +314,7 @@ $ cat -n area_YYMMinc.py
 ```
 
 ### 網格化與存檔
+
 ```python
    207	idx=np.where(np.sum(aTPY[:,:,:],axis=0)>0)
    208	dd,ic={},0
@@ -321,6 +344,18 @@ $ cat -n area_YYMMinc.py
    232	
 ```
 
+## 程式之執行
+- 依月份呼叫即可
+- machine-dependancy
+  - 如要改寫成`uamiv`檔案，系統必須要有`pncgen`程式
+  - 因pandas及no.tensordot會自己啟動多工運作，同時執行3個月份node01~03尚能消化(CPU~4500%)，如太多月份同時運作，系統資源將會耗盡。不但拖慢速度，結果也不正確
+
+```bash
+for m in {01..04};do sub python area_YYMM.py 19$m >&/dev/null;done
+for m in {05..08};do sub python area_YYMM.py 19$m >&/dev/null;done
+for m in {09..12};do sub python area_YYMM.py 19$m >&/dev/null;done
+```
+  
 ## 檔案下載
 - `python`程式：[area_YYMMinc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/area_YYMMinc.py)。
 

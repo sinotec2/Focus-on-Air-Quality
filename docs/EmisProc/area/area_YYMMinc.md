@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "area_YYMM"
-parent: "area"
+parent: "Area Sources"
 grand_parent: "Emission Processing"
 nav_order: 4
 date:               

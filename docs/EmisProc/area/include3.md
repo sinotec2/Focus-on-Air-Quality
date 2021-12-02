@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "DEF's used"
-parent: "area"
+parent: "Area Sources"
 grand_parent: "Emission Processing"
 nav_order: 3
 date:               

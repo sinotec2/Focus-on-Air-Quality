@@ -20,6 +20,11 @@ last_modified_at:   2021-12-01 13:06:16
 - 進行**時變係數**的展開([prep_dfAdmw.py](https://sinotec2.github.io/jtd/docs/EmisProc/area/prep_TimVar/))
 - 併入NH3檔案、進行VOCs及PM的展開、整合成nc(uamiv)檔案([area_YYMM.py](https://sinotec2.github.io/jtd/docs/EmisProc/area/area_YYMMinc/))
 
+## 後續處理
+- CAMx面源檔案可以使用VERDI或MeteoInfo開啟、繪圖，如[下圖](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11CCRS.PNG)所示。
+![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11CCRS.PNG)
+- 經轉檔可以供CMAQ模式使用
+
 ## What's Learned
 - 使用[np.tensordot](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html)指令進行矩陣相乘，啟動程式的[平行化](https://sinotec2.github.io/jtd/docs/EmsProc/#numpy/scipy的平行運作)。
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "prep_areagridLL.py"
-parent: "area"
+parent: "Area Sources"
 grand_parent: "Emission Processing"
 nav_order: 1
 date:               

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "area"
+title: "Area Sources"
 parent: "Emission Processing"
 nav_order: 2
 has_children: true

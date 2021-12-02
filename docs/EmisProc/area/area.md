@@ -26,7 +26,7 @@ last_modified_at:   2021-12-01 13:06:16
 - 經轉檔可以供CMAQ模式使用
 
 ## What's Learned
-- 使用[np.tensordot](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html)指令進行矩陣相乘，啟動程式的[平行化](https://sinotec2.github.io/jtd/docs/EmsProc/#numpy/scipy的平行運作)。
+- 使用[np.tensordot](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html)指令進行矩陣相乘，啟動程式的[平行化](https://sinotec2.github.io/jtd/docs/EmsProc/#numpyscipy的平行運作)。
 
 ## Reference
 純淨天空, **python numpy tensordot用法及代碼示例- 純淨天空**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html), 27 May 2019

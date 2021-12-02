@@ -1,8 +1,8 @@
 ---
 layout: default
 title: "Prepare for LineS"
-parent: "Biogenic Sources"
-grand_parent: "Mobile Processing"
+parent: "Mobile Sources"
+grand_parent: "Emission Processing"
 nav_order: 1
 date:               
 last_modified_date:   2021-12-02 11:08:53

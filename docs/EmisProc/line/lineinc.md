@@ -26,6 +26,8 @@ last_modified_date:   2021-12-02 11:08:53
 - 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[植物源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
 ## 程式分段說明
+
+### 引用與檔案輸入
 - 引用模組。
   - 此處用到[include2.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include2.py)的`rd_hwcsv`,`rd_ASnPRnCBM`
   - 還包括[include3.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include3.py)的[dt2jul, jul2dt](https://sinotec2.github.io/jtd/docs/EmisProc/area/include3/#引用模組及時間標籤轉換dt2jul-jul2dt)
@@ -177,6 +179,7 @@ $ cat -n lineinc.py
    125
 ```
 
+### 時空基準與模版之應用
 - 時間與空間之基準
 ```python
    126  #Temporal and Spatial bases
@@ -237,7 +240,8 @@ $ cat -n lineinc.py
    173
 ```
 
--
+### 時變係數之整理與應用
+- 形成時變係數矩陣
 ```python
    174  #Expand and store the hourly factors into facs and fact matrix
    175  DICT=list(set(df_t.DICT))
@@ -268,7 +272,10 @@ $ cat -n lineinc.py
    200
    201  facs=0
 ```
--
+- 排放量(時間、空間)矩陣=全年排放量*時變係數矩陣
+  - 一般污染物
+  - 無法使用np.tensordot的理由：因為不是每個矩陣都有一樣、明確的長度。必須依序執行相乘與加總
+
 ```python
    202  #expand the POLs matrixs
    203  EM4=np.zeros(shape=(ntm,NREC,NC[0],NVTYP))
@@ -277,12 +284,19 @@ $ cat -n lineinc.py
    206
    207  #sum-up the vehicle dimension
    208  POL=np.sum(EM4[:,:,:,:],axis=3)
+```
+
+- VOCs成分項目矩陣之相乘
+```python
    209  #expand the VOCs matrixs
    210  EM4=np.zeros(shape=(ntm,NREC,NETYP,NVTYP))
    211  EM4[:,:,:,:]=EM3[None,:,NC[0]:NC[0]+NETYP,:]*fact[:,:,None,:]
    212  VOC=np.dot(EM4.reshape(ntm, NREC, NETYP*NVTYP), prod.reshape(NETYP*NVTYP,NC[1]))
 ```
--
+
+### 整併與輸出
+- 矩陣轉DataFrame，以便進行網格排放量之整併
+
 ```python
    213  sdt,ix,iy=(np.zeros(shape=(ntm*NREC),dtype=int) for i in range(3))
    214  idatetime=np.array([i for i in range(ntm)],dtype=int)
@@ -300,7 +314,8 @@ $ cat -n lineinc.py
    226      dfT[colv[ic]]=VOC[:,:,ic].flatten()
    227  pv=pivot_table(dfT,index=['YJH','IX','IY'],values=colv+cole,aggfunc=sum).reset_index()
 ```
--
+- 準備矩陣各維度之標籤序列
+
 ```python
    228  pv.IX=[int(i) for i in pv.IX]
    229  pv.IY=[int(i) for i in pv.IY]
@@ -315,7 +330,8 @@ $ cat -n lineinc.py
    238  ix=np.array(pv.loc[idx,'IX'])
    239
 ```
--
+- 對每一污染項目逐一輸出到`nc`檔案
+
 ```python
    240  for c in colv+cole:
    241    if c not in V[3]:continue
@@ -333,30 +349,8 @@ $ cat -n lineinc.py
    253  #pncg=subprocess.check_output('which pncgen',shell=True).decode('utf8').strip('\n')
    254  #result=os.system(pncg+' -O --out-format=uamiv '+fname+' '+fname.replace('.nc',''))
 ```
--
-```python
-```
-
-## DataFrame整合
-- 將逐月檔整合成一個大的DataFrame(`biogrid2019.csv`)、另存備有
-```python
-kuang@node03 /nas1/TEDS/teds11/biog
-$ cat wrt_csv.py
-from pandas import *
-
-P='/nas1/TEDS/teds11/merg/bioemis.space/'
-col=['UTME','UTMN','tnmhc','iso','mono','onmhc','mbo']
-df=DataFrame({})
-for m in range(1,13):
-  mo='{:02d}'.format(m)
-  dfT=read_csv(P+'bioemis.space.'+mo,header=None,delim_whitespace = True)
-  dfT.columns=col
-  dfT['mon']=[m for i in dfT.index]
-  df=df.append(dfT,ignore_index=True)
-df.set_index('UTME').to_csv('biogrid2019.csv')
-```
 
 ## 檔案下載
-- `fortran`程式：[bio2month-teds11.f](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/biog/bio2month-teds11.f)。
+- `python`程式：[lineinc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/line/lineinc.py)。
 
 ## Reference

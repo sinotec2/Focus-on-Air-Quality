@@ -131,7 +131,12 @@ $ cat -n prep_dfAdmw.py
 ```python
      1  import numpy as np
      2  from pandas import *
+<<<<<<< HEAD
      3  from pypinyin import pinyin, lazy_pinyi```
+=======
+     3  from pypinyin import pinyin, lazy_pinyi
+```
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 - 先將中文改成英文，以便對照
 ```python
      4  #prepare the dataframe
@@ -265,7 +270,11 @@ $ cat -n prep_json.py
     43  coli=['CNTY', 'nsc2','YX']
     44  df=pivot_table(df,index=coli,values=cole,aggfunc=np.sum).reset_index()
 ```
+<<<<<<< HEAD
 - 
+=======
+- 形成縣市代碼、面源類別、位置的序列、序列長度、標籤對照表
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
     45  #nXXX:len of list XXX; dXXX:index dictionary of listXXX, iXXX:index of XXX
     46  for c in ['CNTY','nsc2','YX']:
@@ -276,15 +285,25 @@ $ cat -n prep_json.py
     51    exec('df["i'+c+'"]=[d'+c+'[i] for i in df.'+c+']')
     52
 ```
+<<<<<<< HEAD
 -
 ```python
     53  #same NSC in df_A? and df, but without NSC_SUB, all add tp s_nsc2
+=======
+- **時變係數檔**之面源類別可能只有大類，而資料表中含細類，必須全都適用大類的係數
+```python
+    53  #same NSC in df_A? and df, but without NSC_SUB, all add to s_nsc2
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
     54  nsc2b=set([i for i in s_nsc2 if i[-1]=='b'])
     55  for ii in nsc2b-set(df.nsc2):
     56    i=int(ii[:-1])
     57    s_nsc2=s_nsc2|set(df.loc[df.nsc2.map(lambda x:x[:-1]==i),'nsc2'])
 ```
+<<<<<<< HEAD
 -
+=======
+- 區域代碼組合(`rgn`)的個數`n_rgn`,、集合`s_rgn`、對照表`d_rgn`
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
     58  #Tuple_of_Length ={0, 101, 10000, 10101, 131313, 171717, 202020, 212121, 250101}
     59  n_rgn,s_rgn,d_rgn={},[],{}
@@ -296,7 +315,12 @@ $ cat -n prep_json.py
     65  s_rgn=set(s_rgn) #tuple of region numbers
     66
 ```
+<<<<<<< HEAD
 -
+=======
+- 由teds版本計算年代(`yr`)
+  - `dts`為全年逐時之**時間標籤**（`datetime`）
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
     67  yr=2016+(int(teds)-10)*3
     68  bdate=datetime(yr,1,1)-timedelta(days=1)
@@ -306,7 +330,11 @@ $ cat -n prep_json.py
     72  dts=[bdate+timedelta(days=i/24.) for i in range(nty)]
     73
 ```
+<<<<<<< HEAD
 -
+=======
+- 讀取或產生`nsc2`及可能應用的縣市代碼`CNTY`對照表
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
     74  #n_cnty: the dictionary of nsc2 vs cnties applied
     75  if os.path.exists('n_cnty.json'):
@@ -321,7 +349,13 @@ $ cat -n prep_json.py
     84      else:
     85        sys.exit('d_'+kc+'.json not found, please re-run prep_dfAdmw.py ')
 ```
+<<<<<<< HEAD
 -
+=======
+- 對每種區域代碼組合進行迴圈
+  - 挑出符合對類別、建立二者的對照關係
+  - 存檔備用
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
     86    n_cntys={}
     87    for tl in s_rgn: #tuple of lengs
@@ -343,7 +377,11 @@ $ cat -n prep_json.py
    103
    104
 ```
+<<<<<<< HEAD
 -
+=======
+- 如果沒有`nc_fac.json`，建立逐時**時間標籤**的月份、星期、小時序列備用
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
    105  if not os.path.exists('nc_fac.json'):
    106    mns=np.array([dts[i].month-1 for i in range(nty)])
@@ -351,7 +389,12 @@ $ cat -n prep_json.py
    108    hrs=np.array([dts[i].hour for i in range(nty)])
    109
 ```
+<<<<<<< HEAD
 -
+=======
+- 將df_A?的2欄內容(`df_A.nsc2`,`df_A.REGION`)，轉變成單一組合(`f_A[(n,c)]`)對照表
+  - 先將`df_A`拉長
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
    110    nts={'m':12,'w':7,'d':24}
    111    for t in 'mwd':
@@ -370,7 +413,11 @@ $ cat -n prep_json.py
    124          a.CNTY=c
    125          df=df.append(a,ignore_index=True)
 ```
+<<<<<<< HEAD
 -
+=======
+  - 整併標籤與其後的**時變係數**欄位內容 
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
    126      f_A={}
    127      for j in range(len(df)):
@@ -379,7 +426,11 @@ $ cat -n prep_json.py
    130        f_A[(n,c)]=[df.loc[j,str(i)] for i in range(1,nts[t]+1)]
    131      exec('f_A'+t+'=f_A')
 ```
+<<<<<<< HEAD
 -
+=======
+- 有月變化而無週變化者，週變化係數設為1.0、有月變化而無日變化者，日變化係數設為1.0、
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
    132    for i in set(f_Am)-set(f_Aw):
    133      f_Aw[i]=np.ones(shape=7)
@@ -387,10 +438,14 @@ $ cat -n prep_json.py
    135      f_Ad[i]=np.ones(shape=24)
    136
 ```
+<<<<<<< HEAD
 -
 ```python
 ```
 -
+=======
+- 對每一個`(nsc2,cnty)`組合，計算全年的**時變係數**、存檔
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 ```python
    137    nc_fac={}
    138    for n in s_nsc2:
@@ -406,5 +461,11 @@ $ cat -n prep_json.py
    148      json.dump(nc_fac, jsonfile)
    149
 ```
+<<<<<<< HEAD
+=======
+## 檔案下載
+- 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/week.csv)
+- `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_json.py)
+>>>>>>> 09a6df22c15e02e4911d2b6b530e07cc3a8faf1f
 
 ## Reference

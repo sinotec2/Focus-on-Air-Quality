@@ -30,7 +30,6 @@ last_modified_at:   2021-12-01 11:24:33
   - 行政區代碼、排放類別代碼、碳鍵機制物種等等，都有更新的需求
   - `fortran`無法直接讀取`dbf`檔案，只能讀取`sdf`檔案，[TEDS11](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)以後環保署不再提供詳細面源資料庫之`sdf`檔案格式，`sdf`只有網格加總結果。還需轉檔。
 
-
 ## 處理程序總綱
 - [轉檔](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)
 - 整理時間變化係數檔案(形成fac[nCNTY,nNSC, NTm]矩陣)
@@ -39,10 +38,18 @@ last_modified_at:   2021-12-01 11:24:33
 - 空間之整併：按照模式的網格系統進行
 - 填入nc檔案
 
+## numpy/scipy的[平行運作](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html)
+- 基本上numpy使用“BLAS”（基本線性代數副程式）來獲得優化。這通常是一個經過精心調整的程式庫，通過利用個別電腦高速緩存和組合，實現計算速度的提升。
+- 現在許多電腦架構本身都有自己的 BLAS，它會利用了多核機器。如果 numpy/scipy 是使用其中之一編譯的，則矩陣計算(如`dot`)將採平行計算（如果速度確實更快），**使用者無需執行任何操作**。
+- 類似的其他矩陣運算，如反矩陣、張量內積、奇異值分解、行列式等。
+- 此外如開源庫 ATLAS 允許在編譯時選擇平行級別（線程數）。英特爾專有的 MKL 庫亦提供了在運行時選擇並行級別的可能性。還有 GOTO 庫，允許在運行時選擇並行級別。這些是商業產品，但有向學術使用提供免費分發程式碼。
+
+
 {: .fs-6 .fw-300 }
 
 ---
 
 ## Reference
--行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
+- 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
+- AMArchibald, Unknown[153], Unknown[154], Unknown[155], MartinSpacek, Pauli Virtanen, **Parallel Programming with numpy and scipy**, [cipy-cookbook](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html), 2015-10-30
 

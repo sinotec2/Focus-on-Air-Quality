@@ -25,7 +25,7 @@ last_modified_date:   2021-12-03 09:54:07
 - 主要是確認(解決)環保署點源資料庫的數據品質(問題)，避免後續造成錯誤。
 - 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
-## 副程式說明
+## 確認資料庫的正確性
 
 ### 修正不合理的煙道參數`CORRECT`
 ```python
@@ -151,7 +151,7 @@ $ cat -n ptse_sub.py
     89    return df
     90
 ```
-## 確認工廠座標都落在陸地上
+### 確認工廠座標都落在陸地上
 
 ```python
     91  def check_landsea(df):
@@ -193,6 +193,8 @@ $ cat -n ptse_sub.py
    123    return df
    124
 ```
+## 重新計算座標、處理地面PM過大問題
+
 ### 重新計算點源座標`WGS_TWD`
 
 ```python

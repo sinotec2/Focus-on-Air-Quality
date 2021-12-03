@@ -321,6 +321,6 @@ $ cat -n ptseE_ONS.py
 
 
 ## 檔案下載
-- `python`程式：[prep_linegridLL.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/line/prep_linegridLL.py)。
+- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE_ONS.py)。
 
 ## Reference

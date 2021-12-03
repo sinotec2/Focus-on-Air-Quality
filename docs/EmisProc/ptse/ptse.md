@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "Mobile Sources"
+title: "Point Sources"
 parent: "Emission Processing"
-nav_order: 4
+nav_order: 5
 has_children: true
-permalink: /docs/EmisProc/line/
+permalink: /docs/EmisProc/ptse/
 last_modified_at:   2021-12-02 09:55:34
 ---
 
 {: .fs-6 .fw-300 }
 
-# 交通源之處理
-- 交通源排放量視道路種類、車種及排放型態、鄉鎮區編號、座標等條件(**索引維度**)而異，其時變係數車種又與主資料庫不同，也只有主要道路才有時變係數，因此在展開時需要對照表的情形，較其他類型污染源更複雜。
+# 點源之處理
+- 。
 - 原則詳見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)。此處介紹完整的程序，分項另有詳述。
 
 ## 主要步驟程序

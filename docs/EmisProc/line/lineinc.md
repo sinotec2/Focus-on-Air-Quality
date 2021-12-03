@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Construct the LineS"
+title: "Construct the MobileS"
 parent: "Mobile Sources"
 grand_parent: "Emission Processing"
 nav_order: 2
@@ -95,7 +95,8 @@ $ cat -n lineinc.py
     50
 ```
 
--  時變係數以及VOCs成份劃分所需資料庫 
+-  時變係數以及VOCs成份劃分所需資料庫
+
 ```python
     51  #Time varied factors
     52  (df_t,sdf2csv)=rd_hwcsv()
@@ -142,6 +143,7 @@ $ cat -n lineinc.py
     93    prof_cbm.set_index('PRO_NO').to_csv('prof_cbm.csv')
 ```
 - 車輛形態(排放量資料庫)、車輛大小(時變係數)、與排放種類等對照表
+
 ```python
     95  cart=['CAR_LT','CAR_LV','CAR_HT','CAR_HV']
     96  ncar=len(cart)
@@ -193,8 +195,8 @@ $ cat -n lineinc.py
    134
    135
 ```
-
 - `nc`模版之開啟、時間維度之延長
+
 ```python
    136  #prepare the uamiv template
    137  fname='fortBE.413_teds10.line'+mm+'.nc'
@@ -228,8 +230,8 @@ $ cat -n lineinc.py
    165    nc.variables[c][:]=0.
    166
 ```
-
 - 資料庫增加`IX`,`IY`以備(最終)整併使用
+
 ```python
    167  #Horizontal Grid system, which is dependent to template
    168  df['UTME']=df.X*1000.
@@ -240,8 +242,9 @@ $ cat -n lineinc.py
    173
 ```
 
-### 時變係數之整理與應用
+### 時變係數之整理與相乘
 - 形成時變係數矩陣
+
 ```python
    174  #Expand and store the hourly factors into facs and fact matrix
    175  DICT=list(set(df_t.DICT))
@@ -250,6 +253,10 @@ $ cat -n lineinc.py
    178  idict.update({i:DICT.index(i) for i in DICT})
    179  NSLT=ncar+1 #0 for motorcycles, 1/2/3/4 are small, light and heavy T and V
    180  facs=np.ones(shape=(ntm,NCNT,NSLT))
+```
+   - 依次進行逐時、逐行政區迴圈
+   - `facs`:大、中、小車的時變係數，`fact`:按照資料庫之21種車型
+```python
    181  #loop for time
    182  for it in range(ntm):
    183    year,mo,da,hr=sdatetime[it].year,sdatetime[it].month,sdatetime[it].day,sdatetime[it].hour

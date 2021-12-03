@@ -283,7 +283,9 @@ $ cat -n ptseE_ONS.py
 - 該廠所有**煙編**逐一進行
   - 如果是CEMS煙道，其全年變化即為cems資料表中數值
   - 如果不是，則由資料庫中讀取工作日數及小時數
-    - 如果每天工作不是24小時，最有可能的小時，則由前面準備好的`cems_HROD.SOX_HR_ODER`依序填入時數。
+    - 如果每天工作不是24小時，最有可能的小時，則由前面準備好的`cems_HROD.SOX_HR_ODER`第1小時開始，依序填入工作時數。
+    - 工作日則由為前述最可能工作的**日期標籤之序位**依序填入
+    - 這些有運作的時間，其`ons`值為1(其餘內設為0)
 
 ```python
    139      #loop for every NO_S in this factory
@@ -306,25 +308,17 @@ $ cat -n ptseE_ONS.py
    156          idx=days.flatten()
    157          ons[i,idx]=1.
 ```
-- 
+### 輸出結果 
 
 ```python
+  158  #other sources
+   159    fnameO=spe+'_ECP'+str(len(cp))+'_MDH'+str(len(mdh))+'_ONS.bin'
+   160    with FortranFile(fnameO, 'w') as f:
+   161      f.write_record(cp)
+   162      f.write_record(mdh)
+   163      f.write_record(ons)
 ```
-- 
 
-```python
-```
-- 
-
-```python
-```
-- 
-
-```python
-```
-- 
-
-```python
 
 ## 檔案下載
 - `python`程式：[prep_linegridLL.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/line/prep_linegridLL.py)。

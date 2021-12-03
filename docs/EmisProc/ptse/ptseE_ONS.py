@@ -22,10 +22,10 @@ nhrs=ndays*24
 
 Hs=0 #cutting height of stacks
 #Input the TEDS csv file
-#try:
-df = read_csv('point.csv', encoding='big5')
-#except:
-#  df = read_csv('point.csv')
+try:
+  df = read_csv('point.csv', encoding='big5')
+except:
+  df = read_csv('point.csv')
 # check_NOPandSCC(0)
 df = check_nan(df)
 # check and correct the X coordinates for isolated islands

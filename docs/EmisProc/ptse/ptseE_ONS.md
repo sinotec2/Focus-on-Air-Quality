@@ -27,6 +27,17 @@ last_modified_date:   2021-12-06 12:09:47
 
 ## 程式說明
 
+### 程式執行
+因排放物質類別與污染源製造程序的特徵有關，必須分開個別處理，此處則以個別污染項目執行`ptseE_ONS.py`，執行方式如下：
+
+```bash
+for spe in CO NMHC NOX PM SOX;do python ptseE_ONS.py $spe;done
+```
+
+- 由於程式消耗記憶體非常大量，如要同時進行，需注意記憶體的使用情形。
+- 污染源個數與排放高度限值的設定、地面PM排放條件之給定、以及數據年代等等都有關係，需配套紀錄。
+
+
 ### 排放與CEMS資料檔之讀取及準備
 - 引用模組
   - 程式用到[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/)中的副程式`CORRECT`, `add_PMS`, `check_nan`, `check_landsea`, `FillNan`, `WGS_TWD`, `Elev_YPM`

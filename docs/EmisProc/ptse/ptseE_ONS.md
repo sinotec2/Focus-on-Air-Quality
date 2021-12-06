@@ -234,7 +234,9 @@ $ cat -n ptseE_ONS.py
    108  colT=['HD1','DY1','HY1']
    109  col=['C_NO','CP_NO','HD1','DY1','HY1']+[i for i in df.columns if 'EMI' in i]
 ```
-- `s`為物質種類，須由引數讀取，且限定在`BLS`的索引範圍()
+- `s`為物質種類，須由引數讀取，且限定在`BLS`的索引範圍(`c2v`)
+
+```python
    110  for spe in [s for s in [sys.argv[1]] if s in BLS]:
    111    dfV=df[col].loc[BLS[spe]].reset_index(drop=True)   
 ```
@@ -302,8 +304,8 @@ $ cat -n ptseE_ONS.py
     - 如果是全天連續操作，則逐時都需標籤
 ```python
    144        else:
-   145          dy1=dfV.DY1[i]
-   146          hd1=dfV.HD1[i]
+   145          dy1=dfV.DY1[ip]
+   146          hd1=dfV.HD1[ip]
    147          md3=pv2MD[:dy1]
    148          days=np.zeros(shape=(dy1,hd1),dtype=int)
    149          if hd1==24:

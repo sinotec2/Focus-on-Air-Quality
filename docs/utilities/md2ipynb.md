@@ -23,12 +23,13 @@ parent: Utilities
 ### Markdown
 - 此處以`jtd`內設版面為例，包含：
   - **jekyll**表頭([front matter](https://jekyllrb.com/docs/front-matter/))、內容表(`{:toc}`)、程式碼區段等。
-- 包括程式碼編號
+  - 因每個表頭可能有差異，程式未設計偵測去除這一段，不影響jupyter的執行。
+- 包括程式碼編號：在jupyter無法執行，必須去除
 
 ### ipynb
-基本上ipynb檔案是個dict，可以用json來解讀(假設為變數`js`)，其架構如下：
+基本上`ipynb`檔案是個`dict`，可以用`json`來解讀(假設為變數`js`)，其架構如下：
 - 第1層：共有4項物件`[i for i in js]=['cells', 'metadata', 'nbformat', 'nbformat_minor']`，主要各命令列的內容放在'cells'，另外說明，其餘3項分別核心及格式編號：
-  - 'metadata'為python核心相關說明(dict)：
+  - 'metadata'為python核心相關說明(`dict`)：
 
   ```python
   {
@@ -98,7 +99,8 @@ $ cat -n md2ipynb.py
 ```
 - `codes`及`marks`2個序列的起迄行數標籤
   - `codes`必須規避quotation起始行(\`\`\`python)，因此行數要加**1**。
-  - `marks`則必須規避quotation結束行(\`\`\`)，因此行數要加**1**。
+  - `marks`則必須規避quotation結束行(\`\`\`)，因此行數也要加**1**。
+    - 含有quotation的`ipynb`說明，jupyter是不會執行的，**一定**要予以去除。
   - 如果有結尾的說明，`marks`序列的長度會比`codes`多一項
 
 ```python

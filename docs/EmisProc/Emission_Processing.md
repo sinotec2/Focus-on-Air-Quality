@@ -50,5 +50,5 @@ last_modified_at:   2021-12-01 11:24:33
 
 ## Reference
 - 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
-- AMArchibald, Unknown[153], Unknown[154], Unknown[155], MartinSpacek, Pauli Virtanen, **Parallel Programming with numpy and scipy**, [cipy-cookbook](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html), 2015-10-30
+- AMArchibald, Unknown[153], Unknown[154], Unknown[155], MartinSpacek, Pauli Virtanen, **Parallel Programming with numpy and scipy**, [scipy-cookbook](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html), 2015-10-30
 

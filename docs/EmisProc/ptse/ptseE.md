@@ -28,6 +28,13 @@ last_modified_date:   2021-12-06 12:09:47
 
 ## 程式說明
 
+### 程式之執行
+- 此處按月執行。由於nc檔案時間展開後，檔案延長非常緩慢，拆分成主程式（`ptseE.py`）與輸出程式（`wrtE.py`）二段進行。
+```bash
+for m in 0{1..9} 1{0..2};do python ptseE.py $m;done
+for m in 0{1..9} 1{0..2};do python python wrtE.py $m;done
+```
+
 ### 排放與CEMS資料檔之讀取及準備
 
 ### 輸出結果 

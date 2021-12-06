@@ -5,7 +5,7 @@ parent: "Point Sources"
 grand_parent: "Emission Processing"
 nav_order: 2
 date:               
-last_modified_date:   2021-12-03 09:54:07
+last_modified_date:   2021-12-06 12:09:47
 ---
 
 # 高空點源之時變係數

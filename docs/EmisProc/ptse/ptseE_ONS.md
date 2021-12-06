@@ -341,5 +341,7 @@ $ cat -n ptseE_ONS.py
 ## 檔案下載
 - `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse
 /ptseE_ONS.py)。
+- `jupyter-notebook`檔案[ptseE_ONS.ipynb](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse
+/ptseE_ONS.ipynb)
 
 ## Reference

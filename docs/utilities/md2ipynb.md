@@ -4,7 +4,7 @@ title: md2ipynb
 parent: Utilities
 ---
 
-# Markdown轉Jupyter筆記
+# Markdown轉Jupyter筆記檔
 {: .no_toc }
 
 ## Table of contents
@@ -28,7 +28,10 @@ parent: Utilities
 ### ipynb
 基本上ipynb檔案是個dict，可以用json來解讀(假設為變數`js`)，其架構如下：
 - 第1層：共有4項物件`[i for i in js]=['cells', 'metadata', 'nbformat', 'nbformat_minor']`，主要各命令列的內容放在'cells'，另外說明，其餘3項分別核心及格式編號：
-  - 'metadata'為python核心相關說明(dict)：{
+  - 'metadata'為python核心相關說明(dict)：
+
+  ```python
+  {
   'kernelspec': {'display_name': 'Python 3 (ipykernel)',
   'language': 'python',
   'name': 'python3'},
@@ -39,11 +42,11 @@ parent: Utilities
   'nbconvert_exporter': 'python',
   'pygments_lexer': 'ipython3',
   'version': '3.9.7'}}
+  ```
   - nbformat'：為格式編號(整數4)
   - nbformat_minor：為次格式編號(整數5)
-
-- 命令列內容'cells'是個dict，每行命令列(md、code)各有4、6個內容，
-  - markdown命令列項目：['cell_type', 'id', 'metadata', 'source']
+- 命令列內容`cells`是個dict，每行命令列(md、code)各有4、6個內容，
+  - markdown命令列項目：`['cell_type', 'id', 'metadata', 'source']`
     - `[i for i in js['cells'][0]]`=`['cell_type', 'id', 'metadata', 'source']`
     - cell_type：值為`markdown`(string)
     - id：為每行不一樣的8位亂碼(0~9、a~Z)(string length 8)
@@ -94,8 +97,8 @@ $ cat -n md2ipynb.py
     17
 ```
 - `codes`及`marks`2個序列的起迄行數標籤
-  - `codes`必須規避quotation起始行(`\`\`\`python`)，因此行數要加**1**。
-  - `marks`則必須規避quotation結束行(`\`\`\`)，因此行數要加**1**。
+  - `codes`必須規避quotation起始行(\`\`\`python)，因此行數要加**1**。
+  - `marks`則必須規避quotation結束行(\`\`\`)，因此行數要加**1**。
   - 如果有結尾的說明，`marks`序列的長度會比`codes`多一項
 
 ```python
@@ -152,7 +155,7 @@ $ cat -n md2ipynb.py
 ```
 - 形成`marks`序列
   - 按照每個說明區段的行號(`mbeg`、`mend`)依序產生序列即可，再與前述`codes`序列交叉合併
-  - `marks`的內容有**6**項
+  - `marks`的內容有**4**項
 
 ```python
     56  #mark lines

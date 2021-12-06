@@ -329,7 +329,7 @@ $ cat -n ptseE_ONS.py
 ### 輸出結果 
 
 ```python
-  158  #other sources
+   158  #other sources
    159    fnameO=spe+'_ECP'+str(len(cp))+'_MDH'+str(len(mdh))+'_ONS.bin'
    160    with FortranFile(fnameO, 'w') as f:
    161      f.write_record(cp)

@@ -280,19 +280,24 @@ $ cat -n ptseE_ONS.py
    137      if len(pv2MD)<ndays: pv2MD=np.array(list(pv2MD)+list(s365-set(pv2MD)))
    138      df_cp=dfV.loc[dfV.C_NO==c].reset_index(drop=True)
 ```
-- 該廠所有**煙編**逐一進行
-  - 如果是CEMS煙道，其全年變化即為cems資料表中數值
-  - 如果不是，則由資料庫中讀取工作日數及小時數
-    - 如果每天工作不是24小時，最有可能的小時，則由前面準備好的`cems_HROD.SOX_HR_ODER`第1小時開始，依序填入工作時數。
-    - 工作日則由為前述最可能工作的**日期標籤之序位**依序填入
-    - 這些有運作的時間，其`ons`值為1(其餘內設為0)
+- 該廠所有**煙編**逐一進行  
 
 ```python
    139      #loop for every NO_S in this factory
    140      for p in set(df_cp.CP_NO):
-   141        i=cp.index(p)
+   141        ip=cp.index(p)
+```
+  - 如果是CEMS煙道，其全年變化即為CEMS資料表中數值
+  - **point_cems.csv**檔案內容須事先確認其單位，此處要求其全年總合為1.0
+
+```python
    142        if p in set(cems.CP_NO):
-   143          ons[i,:]=cems.loc[cems.CP_NO==p,c2v[spe]]*nhrs
+   143          ons[ip,:]=cems.loc[cems.CP_NO==p,c2v[spe]]*nhrs
+```
+  - 將工廠操作矩陣(維度為`(日數、時數)`)先設定為0
+  - 如果不是，則由資料庫中讀取工作日數及小時數
+    - 如果是全天連續操作，則逐時都需標籤
+```python
    144        else:
    145          dy1=dfV.DY1[i]
    146          hd1=dfV.HD1[i]
@@ -300,14 +305,22 @@ $ cat -n ptseE_ONS.py
    148          days=np.zeros(shape=(dy1,hd1),dtype=int)
    149          if hd1==24:
    150            hrs=np.array([i for i in range(24)],dtype=int)
+```   
+  - 不是24小時，最有可能的小時，則由前面準備好的`cems_HROD.SOX_HR_ODER`第1小時開始，依序填入工作時數。
+    - 工作日則由為前述最可能工作的**日期標籤之序位**依序填入，形成`days`(月、日、時標籤)
+    - 將`days`呀平成為一維矩陣
+    - 這些有運作的時間，其`ons`值為1(其餘內設為0)   
+
+```python    
    151          else:
    152            first=np.array(list(cems_HROD.loc[cems_HROD.C_NO==c_cems,'SOX_HR_ODER'])[0].split(),dtype=int)[0]
-   153            hrs=np.array([(first+i)%24 for i in range(hd1)])
+   153            hrs=np.array([(first+ih)%24 for ih in range(hd1)])
    154          for id in range(dy1):
    155            days[id,:]=md3[id]+hrs[:]
    156          idx=days.flatten()
-   157          ons[i,idx]=1.
+   157          ons[ip,idx]=1.
 ```
+
 ### 輸出結果 
 
 ```python
@@ -321,6 +334,7 @@ $ cat -n ptseE_ONS.py
 
 
 ## 檔案下載
-- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE_ONS.py)。
+- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse
+/ptseE_ONS.py)。
 
 ## Reference

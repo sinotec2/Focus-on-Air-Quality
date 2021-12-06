@@ -225,13 +225,16 @@ $ cat -n ptseE_ONS.py
    104
 ```
 - `BLS`為污染項目與布林值的對照表。以直接提取資料庫中符合布林值、要處理的筆數。
+  - `{'NMHC':'PM', 'NMHC':'PM'}`因為`NMHC`及`CO`沒有`CEMS`數據，假設與`PM`、`NOX`一樣。
 
 ```python
    105  #booleans for pollutant selection
-   106  c2v={'NMHC':'PM','SOX':'SOX','NOX':'NOX','PM':'PM','CO':'NOX'} #point.csv vs cems.csv
+   106  c2v={'NMHC':'PM','SOX':'SOX','NOX':'NOX','PM':'PM','NMHC':'PM'} #point.csv vs cems.csv
    107  BLS={c:df[c+'_EMI']>0 for c in c2v}
    108  colT=['HD1','DY1','HY1']
    109  col=['C_NO','CP_NO','HD1','DY1','HY1']+[i for i in df.columns if 'EMI' in i]
+```
+- `s`為物質種類，須由引數讀取，且限定在`BLS`的索引範圍()
    110  for spe in [s for s in [sys.argv[1]] if s in BLS]:
    111    dfV=df[col].loc[BLS[spe]].reset_index(drop=True)   
 ```
@@ -308,7 +311,7 @@ $ cat -n ptseE_ONS.py
 ```   
   - 不是24小時，最有可能的小時，則由前面準備好的`cems_HROD.SOX_HR_ODER`第1小時開始，依序填入工作時數。
     - 工作日則由為前述最可能工作的**日期標籤之序位**依序填入，形成`days`(月、日、時標籤)
-    - 將`days`呀平成為一維矩陣
+    - 將`days`壓平成為一維矩陣
     - 這些有運作的時間，其`ons`值為1(其餘內設為0)   
 
 ```python    

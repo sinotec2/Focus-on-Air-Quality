@@ -138,23 +138,23 @@ for spe in [s for s in [sys.argv[1]] if s in BLS]:
     df_cp=dfV.loc[dfV.C_NO==c].reset_index(drop=True)
     #loop for every NO_S in this factory
     for p in set(df_cp.CP_NO):
-      i=cp.index(p)
+      ip=cp.index(p)
       if p in set(cems.CP_NO):
-        ons[i,:]=cems.loc[cems.CP_NO==p,c2v[spe]]*nhrs
+        ons[ip,:]=cems.loc[cems.CP_NO==p,c2v[spe]]*nhrs
       else:
-        dy1=dfV.DY1[i]
-        hd1=dfV.HD1[i]
+        dy1=dfV.DY1[ip]
+        hd1=dfV.HD1[ip]
         md3=pv2MD[:dy1] 
         days=np.zeros(shape=(dy1,hd1),dtype=int)
         if hd1==24:
-          hrs=np.array([i for i in range(24)],dtype=int)
+          hrs=np.array([ih for ih in range(24)],dtype=int)
         else:
           first=np.array(list(cems_HROD.loc[cems_HROD.C_NO==c_cems,'SOX_HR_ODER'])[0].split(),dtype=int)[0]
-          hrs=np.array([(first+i)%24 for i in range(hd1)])
+          hrs=np.array([(first+ih)%24 for ih in range(hd1)])
         for id in range(dy1):
           days[id,:]=md3[id]+hrs[:]
         idx=days.flatten()
-        ons[i,idx]=1.
+        ons[ip,idx]=1.
 #other sources
   fnameO=spe+'_ECP'+str(len(cp))+'_MDH'+str(len(mdh))+'_ONS.bin'
   with FortranFile(fnameO, 'w') as f:

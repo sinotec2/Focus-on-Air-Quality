@@ -184,3 +184,6 @@ $ cat -n md2ipynb.py
     71
     72  sys.exit()
 ```
+
+### 程式下載
+- 程式碼可自[github](https://sinotec2.github.io/jtd/docs/utilities/md2ipynb.py)下載。

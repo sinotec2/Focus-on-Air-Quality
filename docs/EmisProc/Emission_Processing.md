@@ -22,7 +22,7 @@ last_modified_at:   2021-12-01 11:24:33
 - 檔案儲存：減少檔案存取的次數及規模。此處以**一月儲存一檔**為原則(直接適用CAMx模式)。
 
 ### 解決方案比較
-目前可行、皆為營運中之系統方式包括使用[SMOKE](https://www.cmascenter.org/smoke/)(`fortran`)、自行撰寫`fortran`、與`python`程式等系統方式，比較如下：
+目前可行、營運中之系統方式包括使用[SMOKE](https://www.cmascenter.org/smoke/)(`fortran`)、自行撰寫`fortran`、與`python`程式等系統方式，比較如下：
 - 程式可讀性、模組化、長遠發展可維護性：`fortran`不如`python`
 - 平行運作：理論上`fortran`應有最好的平行計算特性，但目前尚未發展這一方面，反倒是`python`可以啟動單機之平行計算(`smp`)。
 - [TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)適應性：[SMOKE](https://www.cmascenter.org/smoke/)為美國系統，編碼方式修改、適應不易、事倍功半，如遇改版將遭遇困難。

@@ -16,7 +16,7 @@ parent: Utilities
 ---
 
 雖然Jupyter提供了轉換MyST格式的[小工具](https://jupyterbook.org/file-types/myst-notebooks.html)，但對大多數的markdown並不能適用。
-此處記錄簡易的轉檔歷程，以簡單的sed指令進行，有需要的讀者也許可以參考一下。
+此處記錄簡易的轉檔歷程，以簡單[python程式](https://sinotec2.github.io/jtd/docs/utilities/md2ipynb.py)下進行，有需要的讀者也許可以參考一下。
 
 ## 基本格式定義
 

@@ -291,7 +291,7 @@ $ cat -n ptseE.py
    114  print('NMHC/PM splitting and expanding')
 ```
 
-### VOCs的劃分
+### VOCs與PM的劃分
 - 讀取profile number、preference table
 
 ```python   
@@ -364,7 +364,7 @@ $ cat -n ptseE.py
    162  nscc=len(sccV)
    163  prod=np.zeros(shape=(nscc,len(cbm)))
 ```
-- 
+- 對得到SCC，但是資料庫中卻沒有`TOG`也沒有`VOC`。記下、執行下個SCC
 
 ```python   
    164  #dfV but with PM scc(no TOG/VOC in gspro), modify those SCC to '0'*10 in dfV, drop the pro_no in gsproV
@@ -376,6 +376,9 @@ $ cat -n ptseE.py
    170    if 'TOG' not in set(a.Pollutant_ID) and 'VOC' not in set(a.Pollutant_ID):
    171      noTOG_scc.append(s)
    172      continue
+```
+- 找到對應的profile number，將分率存入乘數矩陣`prod`
+```python   
    173    boo=(gsproV.Speciation_profile_number==p) & (gsproV.Pollutant_ID=='TOG')
    174    a=gsproV.loc[boo]
    175    for c in a.Species_ID:
@@ -384,6 +387,10 @@ $ cat -n ptseE.py
    178      f=a.loc[a.Species_ID==c,'Mass_Fraction']
    179      d=a.loc[a.Species_ID==c,'Divisor']
    180      prod[i,j]+=f/d
+```
+- `NMHC_EMI`排放量乘上乘數矩陣，形成`CBM`排放量
+
+```python   
    181  df.loc[df.SCC.map(lambda x:x in noTOG_scc),'SCC']='0'*10
    182  for c in cbm:
    183    df[c]=0.
@@ -394,22 +401,148 @@ $ cat -n ptseE.py
    188      j=cbm.index(c)
    189      df.loc[idx,c]=[prod[i,j]*k for k in df.loc[idx,'NMHC_EMI']]
 ```
--
+- PM的劃分，詳見[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/#%E7%B0%A1%E5%96%AE%E7%9A%84pm%E5%8A%83%E5%88%86%E5%89%AF%E7%A8%8B%E5%BC%8F)
 ```python   
+   190  #PM splitting
+   191  df=add_PMS(df)
+   192
 ```
--
+
+### 年均排放量乘上時變係數
+- **時變係數**檔案，因筆數與不同的定義高度有關，須先執行後，將檔名寫在程式內。
+  - 此處的`fns0`~`fns30`分別是高度0~30所對應的**時變係數**檔案
+  - 好處是：如此可以將對照關係記錄下來
+  - 壞處是：必須手動修改程式碼、每版teds的檔案名稱會不一樣
+
 ```python   
+   193  #pivot along the axis of XY coordinates
+   194  #def. of columns and dicts
+   195  fns0={
+   196  'CO'  :'CO_ECP7496_MDH8760_ONS.bin',
+   197  'NMHC':'NMHC_ECP2697_MDH8760_ONS.bin',
+   198  'NOX' :'NOX_ECP13706_MDH8760_ONS.bin',
+   199  'PM'  :'PM_ECP17835_MDH8760_ONS.bin',
+   200  'SOX' :'SOX_ECP8501_MDH8760_ONS.bin'}
+   201
+   202  fns10={
+   203  'CO'  :'CO_ECP4919_MDH8784_ONS.bin',
+   204  'NMHC':'NMHC_ECP3549_MDH8784_ONS.bin',
+   205  'NOX' :'NOX_ECP9598_MDH8784_ONS.bin',
+   206  'PM'  :'PM_ECP11052_MDH8784_ONS.bin',
+   207  'SOX' :'SOX_ECP7044_MDH8784_ONS.bin'}
+   208  fns30={
+   209  'CO'  :'CO_ECP1077_MDH8784_ONS.bin',
+   210  'NMHC':'NMHC_ECP1034_MDH8784_ONS.bin',
+   211  'NOX' :'NOX_ECP1905_MDH8784_ONS.bin',
+   212  'PM'  :'PM_ECP2155_MDH8784_ONS.bin',
+   213  'SOX' :'SOX_ECP1468_MDH8784_ONS.bin'}
+   214  F={0:fns0,10:fns10,30:fns30}
+   215  fns=F[Hs]
 ```
--
+- 排放名稱與空品名稱對照表、排放名稱與分子量對照表
+
 ```python   
+   216  cols={i:[c2s[i]] for i in c2s}
+   217  cols.update({'NMHC':cbm,'PM':colc})
+   218  colp={c2s[i]:i+'_EMI' for i in fns}
+   219  colp.update({i:i for i in cbm+colc})
+   220  lspec=[i for i in list(colp) if i not in ['NMHC','PM']]
+   221  c2m={i:1 for i in colp}
+   222  c2m.update({'SO2':64,'NO2':46,'CO':28})
+   223  col_id=["C_NO","XY"]
+   224  col_em=list(colp.values())
+   225  col_mn=['TEMP','VEL','UTM_E', 'UTM_N','HY1','HD1','DY1']
+   226  col_mx=['HEI']
+   227  df['XY']=[(x,y) for x,y in zip(df.UTM_E,df.UTM_N)]
+   228  df["C_NO"]=[x[:8] for x in df.CP_NO]
+   229
+   230
 ```
--
+- 讀取**時變係數**並將其常態化(時間軸加總為1.0)
+  - SPECa為每煙道逐時排放量
+  
 ```python   
+   231  print('Time fraction multiplying and expanding')
+   232  #matching of the bin filenames
+   233  nopts=len(df)
+   234  SPECa=np.zeros(shape=(ntm,nopts,len(lspec)))
+   235  id365=365
+   236  if yr%4==0:id365=366
 ```
--
+  - 依序開啟各污染物之**時變係數**檔案
+
 ```python   
+   237  for spe in fns:
+   238    fnameO=fns[spe]
+   239    with FortranFile(fnameO, 'r') as f:
+   240      cp = f.read_record(dtype=np.dtype('U12'))
+   241      mdh = f.read_record(dtype=np.int)
+   242      ons = f.read_record(dtype=float)
 ```
--
+  - `FortranFile`的特色是只有總長度，沒有形狀，需要`reshape`
+  - 對時間軸加總
+
+```python   
+   243    ons=ons.reshape(len(cp),len(mdh))
+   244    s_ons=np.sum(ons,axis=1)
+```
+  - 重新整理順序，只處理有排放的煙道(加總>0者)、且**管煙**編號存在於資料庫(確認用)
+```python   
+   245    #only those CP with emission accounts
+   246    idx=np.where(s_ons>0)
+   247    cp1 = [i for i in cp[idx[0]] if i in list(df.CP_NO)]
+```
+  - 因為序列的`index`指令會很耗時，先將做成`array`。
+```python   
+   248    idx= np.array([list(cp).index(i) for i in cp1])
+   249    cp, ons, s_ons =cp1,ons[idx,:],s_ons[idx]
+   250    #normalize to be the fractions in a year
+```
+  - 常態化
+
+```python   
+   251    ons=ons/s_ons[:,None]
+```
+- 製作煙道、當月啟始及終結時間的標籤
+  - 從全年的**時變**係數矩陣中提取當月部分，存成`ons2`矩陣
+```python   
+   252    idx_cp=[list(df.CP_NO).index(i) for i in cp]
+   253    ibdate=list(mdh).index(int(bdate.strftime('%m%d%H')))
+   254    iedate=list(mdh).index(int(edate.strftime('%m%d%H')))
+   255    ons2=np.zeros(shape=(nopts,ntm)) #time fractions for this month
+   256    if ibdate>iedate:
+   257      endp=id365*24-ibdate
+   258      ons2[idx_cp,:endp]=ons[:,ibdate:]
+   259      ons2[idx_cp,endp:ntm]=ons[:,:iedate]
+   260    else:
+   261      ons2[idx_cp,:]=ons[:,ibdate:iedate]
+```
+- `SPEC`為全年排放總量(時間軸為定值)，單位轉成gmole，或g。
+
+```python   
+   262    NREC,NC=nopts,len(cols[spe])
+   263    ons =np.zeros(shape=(ntm,NREC,NC))
+   264    SPEC=np.zeros(shape=(ntm,NREC,NC))
+   265    for c in cols[spe]:
+   266      ic=cols[spe].index(c)
+   267      for t in range(ntm):
+   268        SPEC[t,:,ic]=df[colp[c]]/c2m[c]
+```
+- 借用之前用過的`ons`矩陣來儲存ons2的轉置結果。並進行排放總量與**時變**係數相乘
+
+```python   
+   269    OT=ons2.T[:,:]
+   270    for ic in range(NC):
+   271      ons[:,:,ic]=OT
+   272    #whole matrix production is faster than idx_cp selectively manupilated
+   273    for c in cols[spe]:
+   274      if c not in V[1]:continue
+   275      ic=cols[spe].index(c)
+   276      icp=lspec.index(c)
+   277      SPECa[:,:,icp]=SPEC[:,:,ic]*ons[:,:,ic]
+```
+### 
+- 
 ```python   
 ```
 -

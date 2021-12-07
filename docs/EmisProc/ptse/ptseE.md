@@ -105,6 +105,7 @@ $ cat -n cluster_xy.py
     35    df_pv3=pivot_table(df,index=col_id,values=col_mx,aggfunc=max).reset_index()
 ```
 - 整併、求取等似直徑、以使流量能守恒
+
 ```python   
     36    df1=merge(df_pv1,df_pv2,on=col_id)
     37    df=merge(df1,df_pv3,on=col_id)
@@ -119,7 +120,7 @@ $ cat -n cluster_xy.py
 
 ```bash
 for m in 0{1..9} 1{0..2};do python ptseE.py 19$m;done
-for m in 0{1..9} 1{0..2};do python python wrtE.py 19$m;done
+for m in 0{1..9} 1{0..2};do python wrtE.py 19$m;done
 ```
 
 ### 程式基本定義、資料庫檔案QC、nc檔案之延展
@@ -159,9 +160,9 @@ $ cat -n ptseE.py
     23
     24  #time and space initiates
     25  ym=sys.argv[1]
-    26  mm=sys.argv[1][2:4]
+    26  mm=ym[2:4]
     27  mo=int(mm)
-    28  yr=2000+int(sys.argv[1][:2])
+    28  yr=2000+int(ym[:2]);TEDS='teds'+str((yr-2016)/3+10)
 ```
 - 使用`Hs`進行篩選「高空」點源
 
@@ -169,6 +170,7 @@ $ cat -n ptseE.py
     29  Hs=0 #cutting height of stacks
 ```
 - 起迄日期、模擬範圍中心點位置
+ 
 ```python   
     30  ntm=(monthrange(yr,mo)[1]+2)*24+1
     31  bdate=datetime.datetime(yr,mo,1)+datetime.timedelta(days=-1+8./24)
@@ -181,7 +183,7 @@ $ cat -n ptseE.py
 ```python   
     35  #prepare the uamiv template
     36  print('template applied')
-    37  NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
+    37  NCfname='fortBE.413_'+TEDS+'.ptsE'+mm+'.nc'
     38  try:
     39    nc = netCDF4.Dataset(NCfname, 'r+')
     40  except:
@@ -263,6 +265,7 @@ $ cat -n ptseE.py
     - 排放量(`col_em`)：加總
     - 煙道高度(`col_mx`)：最大值
     - 煙道其他參數(`col_mn`)：平均
+
 ```python   
    101  #pivot table along the dimension of NO_S (P???)
    102  df_cp=pivot_table(df,index='CP_NO',values=cole+['ORI_QU1'],aggfunc=sum).reset_index()
@@ -284,6 +287,7 @@ $ cat -n ptseE.py
 - CAMx版本差異在此選擇
   - 6~7版的差異可以參考[CMAQ/CAMx排放量檔案之轉換](http://www.evernote.com/l/AH1z_n2U--lM-poNlQnghsjFBfDEY6FalgM/)，
   - 如要做不同版本，應重新準備模版階段
+
 ```python   
    111  #determination of camx version
    112  ver=7
@@ -336,6 +340,7 @@ $ cat -n ptseE.py
 ```
 - 只篩選有關的SCC以縮減資料庫長度、提升對照速度
   - 因有些profile number含有英文字，在此先做整理，以使格式一致
+
 ```python   
    145  #reduce gsref and gspro
    146  dfV=df.loc[df.NMHC_EMI>0].reset_index(drop=True)
@@ -345,6 +350,7 @@ $ cat -n ptseE.py
    150  gsproV=gspro.loc[gspro.Speciation_profile_number.map(lambda x:x in set(gsrefV.Speciation_profile_number))].reset_index(drop=True)
 ```
 - 只篩選有關的profile number且污染物含有`TOG`者
+
 ```python   
    151  pp=[]
    152  for p in set(gspro.Speciation_profile_number):
@@ -378,6 +384,7 @@ $ cat -n ptseE.py
    172      continue
 ```
 - 找到對應的profile number，將分率存入乘數矩陣`prod`
+
 ```python   
    173    boo=(gsproV.Speciation_profile_number==p) & (gsproV.Pollutant_ID=='TOG')
    174    a=gsproV.loc[boo]
@@ -402,6 +409,7 @@ $ cat -n ptseE.py
    189      df.loc[idx,c]=[prod[i,j]*k for k in df.loc[idx,'NMHC_EMI']]
 ```
 - PM的劃分，詳見[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/#%E7%B0%A1%E5%96%AE%E7%9A%84pm%E5%8A%83%E5%88%86%E5%89%AF%E7%A8%8B%E5%BC%8F)
+
 ```python   
    190  #PM splitting
    191  df=add_PMS(df)
@@ -487,12 +495,14 @@ $ cat -n ptseE.py
    244    s_ons=np.sum(ons,axis=1)
 ```
   - 重新整理順序，只處理有排放的煙道(加總>0者)、且**管煙**編號存在於資料庫(確認用)
+
 ```python   
    245    #only those CP with emission accounts
    246    idx=np.where(s_ons>0)
    247    cp1 = [i for i in cp[idx[0]] if i in list(df.CP_NO)]
 ```
   - 因為序列的`index`指令會很耗時，先將做成`array`。
+
 ```python   
    248    idx= np.array([list(cp).index(i) for i in cp1])
    249    cp, ons, s_ons =cp1,ons[idx,:],s_ons[idx]
@@ -505,6 +515,7 @@ $ cat -n ptseE.py
 ```
 - 製作煙道、當月啟始及終結時間的標籤
   - 從全年的**時變**係數矩陣中提取當月部分，存成`ons2`矩陣
+
 ```python   
    252    idx_cp=[list(df.CP_NO).index(i) for i in cp]
    253    ibdate=list(mdh).index(int(bdate.strftime('%m%d%H')))
@@ -541,29 +552,81 @@ $ cat -n ptseE.py
    276      icp=lspec.index(c)
    277      SPECa[:,:,icp]=SPEC[:,:,ic]*ons[:,:,ic]
 ```
+
 ### 
-- 
-```python   
-```
--
-```python   
-```
--
-```python   
-```
--
-```python   
-```
+- 形成新的逐時資料表(`dfT`)
+  - **管煙**編號序列重新整理，取得順位標籤`CP_NOi`
+  - 時間標籤`idatetime`
 
-### 輸出結果 
-
--
 ```python   
+   278  print('pivoting along the C_NO axis')
+   279  #forming the DataFrame
+   280  CPlist=list(set(df.CP_NO))
+   281  CPlist.sort()
+   282  pwrt=int(np.log10(len(CPlist))+1)
+   283  CPdict={i:CPlist.index(i) for i in CPlist}
+   284  df['CP_NOi']=[CPdict[i] for i in df.CP_NO]
+   285  idatetime=np.array([i for i in range(ntm) for j in range(nopts)],dtype=int)
+   286  dfT=DataFrame({'idatetime':idatetime})
 ```
+- 將原來的排放資料表`df`展開成`dft`
 
+```python   
+   287  ctmp=np.zeros(shape=(ntm*nopts))
+   288  for c in col_mn+col_mx+['CP_NOi']+['ORI_QU1']:
+   289    clst=np.array(list(df[c]))
+   290    for t in range(ntm):
+   291      t1,t2=t*nopts,(t+1)*nopts
+   292      a=clst
+   293      if c=='CP_NOi':a=t*10**(pwrt)+clst
+   294      ctmp[t1:t2]=a
+   295    dfT[c]=ctmp
+```
+- 將排放量矩陣壓平後，覆蓋原本的資料庫`df`內容。
+```python   
+   296  #dfT.C_NOi=np.array(dfT.C_NOi,dtype=int)
+   297  for c in lspec:
+   298    icp=lspec.index(c)
+   299    dfT[c]=SPECa[:,:,icp].flatten()
+   300  #usage: orig df, index, sum_cols, mean_cols, max_cols
+   301  df=XY_pivot(dfT,['CP_NOi'],lspec,col_mn+['ORI_QU1'],col_mx).reset_index()
+   302  df['CP_NO']=[int(j)%10**pwrt for j in df.CP_NOi]
+   303
+```
+- 進行pivot_table整併
+
+```python   
+   304  pv=XY_pivot(df,['CP_NO'],lspec,col_mn+['ORI_QU1'],col_mx).reset_index()
+   305  Bdict={CPdict[j]:[bytes(i,encoding='utf-8') for i in j] for j in CPlist}
+   306  pv['CP_NOb'] =[Bdict[i] for i in pv.CP_NO]
+   307  nopts=len(set(pv))
+   308
+```
+- 控制料堆排放量
+  - 將`df`另存成`fth`檔案，釋放記憶體，以接續nc檔案之儲存。
+
+```python   
+   309  #blanck the PY sources
+   310  PY=pv.loc[pv.CP_NOb.map(lambda x:x[8:10]==[b'P', b'Y'])]
+   311  nPY=len(PY)
+   312  a=np.zeros(ntm*nPY)
+   313  for t in range(ntm):
+   314    t1,t2=t*nPY,(t+1)*nPY
+   315    a[t1:t2]=t*nopts+np.array(PY.index,dtype=int)
+   316  for c in colc:
+   317    ca=df.loc[a,c]/5.
+   318    df.loc[a,c]=ca
+   319  df.to_feather('df'+mm+'.fth')
+   320  pv.set_index('CP_NO').to_csv('pv'+mm+'.csv')
+   321
+   322  sys.exit()
+```
 
 ## 檔案下載
-- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE_ONS.py)。
-- `jupyter-notebook`檔案[ptseE_ONS.ipynb](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE_ONS.ipynb)
+- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.py)。
+- `jupyter-notebook`檔案
+  - [ptseE_ONS.ipynb](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.ipynb)
+  - [nbviewer](https://nbviewer.org/raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.ipynb)
+
 
 ## Reference

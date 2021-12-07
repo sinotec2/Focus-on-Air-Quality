@@ -625,8 +625,8 @@ $ cat -n ptseE.py
 ## 檔案下載
 - `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.py)。
 - `jupyter-notebook`檔案
-  - [ptseE_ONS.ipynb](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.ipynb)
-  - [nbviewer](https://nbviewer.org/raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.ipynb)
+  - [ptseE_ONS.ipynb](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/ptse/ptseE.ipynb)
+  - [nbviewer](https://nbviewer.org/github/sinotec2/jtd/blob/main/docs/EmisProc/ptse/ptseE.ipynb)
 
 
 ## Reference

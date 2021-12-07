@@ -178,7 +178,7 @@ $ cat -n ptseE.py
     33  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
     34  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 ```
-- nc模版的應用與延展
+- nc模版的應用與延展。注意`name`在新版`NCF`可能會被保留不能更改。(另在`CAMx`程式碼中處理)
 
 ```python   
     35  #prepare the uamiv template
@@ -198,7 +198,7 @@ $ cat -n ptseE.py
     49  nc.NOTE=nc.NOTE+(60-len(nc.NOTE))*' '
     50  nc.NVARS=nv
     51  #Name-names may encounter conflicts with newer versions of NCFs and PseudoNetCDFs.
-    52  nc.name='PTSOURCE  '
+    52  #nc.name='PTSOURCE  '
     53  nc.NSTEPS=ntm
     54  if 'ETFLAG' not in V[2]:
     55    zz=nc.createVariable('ETFLAG',"i4",("TSTEP","VAR","DATE-TIME"))
@@ -226,7 +226,7 @@ $ cat -n ptseE.py
     73  colc=['CCRS','FCRS','CPRM','FPRM']
     74
 ```
-- 讀取點源資料庫並進行品質管控
+- 讀取點源資料庫並進行品質管控。新版`coding`只接受`big5`
 
 ```python   
     75  #Input the TEDS csv file

@@ -30,6 +30,7 @@ except:
 df = check_nan(df)
 # check and correct the X coordinates for isolated islands
 df = check_landsea(df)
+df = WGS_TWD(df)
 df = Elev_YPM(df)
 df=df.loc[(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))].reset_index(drop=True)
 df['SUM']=[i+j+k+l+m for i,j,k,l,m in zip(df.SOX_EMI,df.NOX_EMI,df.CO_EMI,df.PM_EMI,df.NMHC_EMI)]
@@ -72,7 +73,6 @@ if 'CP_NO' not in cems.columns: #pre-process
   cems['C_NO']=[i[:8] for i in cems.CP_NO]
   cems['MD']=[i//100 for i in cems.MDH]
   cems.set_index('CP_NO').to_csv(fname)
-
 for MC in ['CP_NO','MDH','MD','C_NO']:
   mc=MC.lower()
   exec(mc+'=list(set(cems.'+MC+'))');exec(mc+'.sort()')

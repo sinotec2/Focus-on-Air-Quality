@@ -86,91 +86,91 @@ $ cat -n ptseE_ONS.py
     30  df = check_nan(df)
     31  # check and correct the X coordinates for isolated islands
     32  df = check_landsea(df)
-    33  df = Elev_YPM(df)
+    33  df = WGS_TWD(df)
+    34  df = Elev_YPM(df)
 ```
 - 使用`Hs`進行篩選「高空」點源
 
 ```python
-    34  df=df.loc[(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))].reset_index(drop=True)
+    35  df=df.loc[(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))].reset_index(drop=True)
 ```
 - 排除沒有SNCPV排放者
 
 ```python
-    35  df['SUM']=[i+j+k+l+m for i,j,k,l,m in zip(df.SOX_EMI,df.NOX_EMI,df.CO_EMI,df.PM_EMI,df.NMHC_EMI)]
-    36  df=df.loc[df.SUM>0].reset_index(drop=True)
-    37  df['CP_NO'] = [i + j for i, j in zip(list(df['C_NO']), list(df['NO_S']))]
-    38  df['DY1']=[i*j for i,j in zip(df.DW1,df.WY1)]
-    39  df['HY1']=[i*j for i,j in zip(df.HD1,df.DY1)]
-    40
+    36  df['SUM']=[i+j+k+l+m for i,j,k,l,m in zip(df.SOX_EMI,df.NOX_EMI,df.CO_EMI,df.PM_EMI,df.NMHC_EMI)]
+    37  df=df.loc[df.SUM>0].reset_index(drop=True)
+    38  df['CP_NO'] = [i + j for i, j in zip(list(df['C_NO']), list(df['NO_S']))]
+    39  df['DY1']=[i*j for i,j in zip(df.DW1,df.WY1)]
+    40  df['HY1']=[i*j for i,j in zip(df.HD1,df.DY1)]
+    41
 ```
 ### 讀取並填滿CEMS資料檔
 - 填滿資料表
   - 程式運作需要每筆**管煙**(**管編**+**煙編**)、每個小時都要有數值。將DataFrame轉成矩陣，再轉回DataFrame即可。
 
 ```python
-    41  #71 factories with sCEMS will emit (at ground) when stacks are operating
-    42  fname=P+'point_cems.csv'
-    43  cems=read_csv(fname)
-    44  val='SOX PM NOX FLOW X_BLANK1 X_BLANK2'.split()
-    45  nval=len(val)
+    42  #71 factories with CEMS will emit (at ground) when stacks are operating
+    43  fname=P+'point_cems.csv'
+    44  cems=read_csv(fname)
+    45  val='SOX PM NOX FLOW X_BLANK1 X_BLANK2'.split()
+    46  nval=len(val)
 ```
 - **管煙**欄位為處理過後檔案的特徵
 
 ```python
-    46  if 'CP_NO' not in cems.columns: #pre-process
-    47    cems=cems.drop(cems.loc[cems.C_NO=='C_NO'].index).reset_index(drop=True)
+    47  if 'CP_NO' not in cems.columns: #pre-process
+    48    cems=cems.drop(cems.loc[cems.C_NO=='C_NO'].index).reset_index(drop=True)
 ```
 - 新增**管編**+**煙編**(**管煙**)之新標籤、新增PM(設為SN之平均值)
 
 ```python
-    48    cems['CP_NO'] = [i + j for i, j in zip(list(cems['C_NO']), list(cems['NO_S']))]
-    49    cems['PM']=[(i+j)/2 for i,j in zip(cems.SOX,cems.NOX)]
+    49    cems['CP_NO'] = [i + j for i, j in zip(list(cems['C_NO']), list(cems['NO_S']))]
+    50    cems['PM']=[(i+j)/2 for i,j in zip(cems.SOX,cems.NOX)]
 ```
 - 新增時間標籤`MDH`。有的年度提供的CEMS檔案小時標記為0000~2300，有的是0~23，因此需要判斷一下
 
 ```python
-    50    if max(cems.HOUR)>100:
-    51      cems['MDH']=[int(i*10000+j*100+k/100) for i,j,k in zip(cems.MONTH,cems.DATE,cems.HOUR)]
-    52    else:
-    53      cems['MDH']=[int(i*10000+j*100+k) for i,j,k in zip(cems.MONTH,cems.DATE,cems.HOUR)]
+    51    if max(cems.HOUR)>100:
+    52      cems['MDH']=[int(i*10000+j*100+k/100) for i,j,k in zip(cems.MONTH,cems.DATE,cems.HOUR)]
+    53    else:
+    54      cems['MDH']=[int(i*10000+j*100+k) for i,j,k in zip(cems.MONTH,cems.DATE,cems.HOUR)]
 ```
 - 一個(**管煙**,**時籤**)組合只應對應一組CEMS數據，以`pivot_table sum`進行整併  
 
 ```python
-    54    cems=pivot_table(cems,index=['CP_NO','MDH'],values=val,aggfunc=sum).reset_index()
+    55    cems=pivot_table(cems,index=['CP_NO','MDH'],values=val,aggfunc=sum).reset_index()
 ```
 - 維度標籤之計算。如果使用`標籤=序列.index(值)`指令將會非常耗時，直接使用`dict{值:標籤}`，會快很多。
 
 ```python
-    55    #cems(df) convert to cemsM(matrix)
-    56    for MC in ['CP_NO','MDH']:
-    57      mc=MC.lower()
-    58      exec(mc+'=list(set(cems.'+MC+'))');exec(mc+'.sort()')
-    59      exec('n'+MC+'=len('+mc+')')
-    60      exec('d'+MC+'={'+mc+'[i]:i for i in range(n'+MC+')}')
-    61      exec('cems["i'+MC+'"]=[d'+MC+'[i] for i in cems.'+MC+']')
-    62    if len(mdh)!=ndays*24:sys.exit('mdh coverage not enough!')    
+    56    #cems(df) convert to cemsM(matrix)
+    57    for MC in ['CP_NO','MDH']:
+    58      mc=MC.lower()
+    59      exec(mc+'=list(set(cems.'+MC+'))');exec(mc+'.sort()')
+    60      exec('n'+MC+'=len('+mc+')')
+    61      exec('d'+MC+'={'+mc+'[i]:i for i in range(n'+MC+')}')
+    62      exec('cems["i'+MC+'"]=[d'+MC+'[i] for i in cems.'+MC+']')
+    63    if len(mdh)!=ndays*24:sys.exit('mdh coverage not enough!')
 ```
 - `DataFrame`轉成`Array`，因所有值預設為0，如此就補滿空缺值了。有數據的部分再填入`Array`。
 
 ```python
-    63    cemsM=np.zeros(shape=(nMDH,nCP_NO,nval))
-    64    for i in range(nval):
-    65      cemsM[cems.iMDH[:],cems.iCP_NO[:],i]=cems[val[i]]
+    64    cemsM=np.zeros(shape=(nMDH,nCP_NO,nval))
+    65    for i in range(nval):
+    66      cemsM[cems.iMDH[:],cems.iCP_NO[:],i]=cems[val[i]]
 ```
 - Array再轉回`DataFrame`。因後面CEMS數據使用邏輯太多樣了，`Array`形式不敷應用。
 
 ```python
-    66    DD={}
-    67    for i in range(nval):
-    68      DD[val[i]]=cemsM[:,:,i].flatten()
-    69    DD['MDH']  =[i for i in mdh for j in cp_no]
-    70    DD['CP_NO']=[j for i in mdh for j in cp_no]
-    71    cems=DataFrame(DD)
-    72    cems['C_NO']=[i[:8] for i in cems.CP_NO]
-    73    cems['MD']=[i//100 for i in cems.MDH]
-    74    cems.set_index('CP_NO').to_csv(fname)
-    75
+    67    DD={}
+    68    for i in range(nval):
+    69      DD[val[i]]=cemsM[:,:,i].flatten()
+    70    DD['MDH']  =[i for i in mdh for j in cp_no]
+    71    DD['CP_NO']=[j for i in mdh for j in cp_no]
+    72    cems=DataFrame(DD)
+    73    cems['C_NO']=[i[:8] for i in cems.CP_NO]
+    74    cems['MD']=[i//100 for i in cems.MDH]
+    75    cems.set_index('CP_NO').to_csv(fname)
 ```
 
 ### 整理CEMS各廠運作時間模式

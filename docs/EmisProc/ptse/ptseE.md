@@ -553,7 +553,7 @@ $ cat -n ptseE.py
    277      SPECa[:,:,icp]=SPEC[:,:,ic]*ons[:,:,ic]
 ```
 
-### 
+### 將逐時排放量存成fth檔案並清空記憶體
 - 形成新的逐時資料表(`dfT`)
   - **管煙**編號序列重新整理，取得順位標籤`CP_NOi`
   - 時間標籤`idatetime`

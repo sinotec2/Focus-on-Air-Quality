@@ -73,10 +73,10 @@ $ cat -n ptseE_ONS.py
     22
 ```
 - 檔案讀取與品質確認
-  - 此個案將所有點源資料庫的數據都以「高空」方式處理(cutting height of stacks`Hs=0`)
+  - 此個案將所有點源資料庫的數據都以「高空」方式處理(cutting height of stacks`Hs=10`)
 
 ```python
-    23  Hs=0 #cutting height of stacks
+    23  Hs=10 #cutting height of stacks
     24  #Input the TEDS csv file
     25  try:
     26    df = read_csv('point.csv', encoding='big5')

@@ -167,7 +167,7 @@ $ cat -n ptseE.py
 - 使用`Hs`進行篩選「高空」點源
 
 ```python   
-    29  Hs=0 #cutting height of stacks
+    29  Hs=10 #cutting height of stacks
 ```
 - 起迄日期、模擬範圍中心點位置
  

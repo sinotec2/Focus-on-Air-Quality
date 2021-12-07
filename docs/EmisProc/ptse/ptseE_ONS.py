@@ -20,7 +20,7 @@ if yr%4==0:ndays=366
 s365=set([i*24 for i in range(ndays)])
 nhrs=ndays*24
 
-Hs=0 #cutting height of stacks
+Hs=10 #cutting height of stacks
 #Input the TEDS csv file
 try:
   df = read_csv('point.csv', encoding='big5')

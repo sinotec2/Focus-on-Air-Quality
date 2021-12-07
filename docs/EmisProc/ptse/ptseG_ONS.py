@@ -14,7 +14,7 @@ from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan, WGS_TW
 #Main
 hmp=subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[1]
 P='./'
-Hs=0 #cutting height of stacks
+Hs=10 #cutting height of stacks
 #Input the TEDS csv file
 try:
   df = read_csv('point.csv', encoding='utf8')

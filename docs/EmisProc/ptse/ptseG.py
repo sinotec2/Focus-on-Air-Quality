@@ -79,7 +79,7 @@ ym=sys.argv[1]
 mm=sys.argv[1][2:4]
 mo=int(mm)
 yr=2000+int(sys.argv[1][:2])
-Hs=0 #cutting height of stacks
+Hs=10 #cutting height of stacks
 ntm=(monthrange(yr,mo)[1]+2)*24+1
 bdate=datetime.datetime(yr,mo,1)+datetime.timedelta(days=-1+8./24)
 edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
@@ -119,7 +119,7 @@ for v in V[3]:
 
 #Input the TEDS csv file
 try:
-  df = read_csv('point.csv', encoding='utf8')
+  df = read_csv('point.csv', encoding='big5')
 except:
   df = read_csv('point.csv')
 # check_NOPandSCC(0)

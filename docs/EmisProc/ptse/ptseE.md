@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "EPs Emis for CAMx"
+title: "Elev. PTse for CAMx"
 parent: "Point Sources"
 grand_parent: "Emission Processing"
 nav_order: 3
@@ -122,7 +122,7 @@ for m in 0{1..9} 1{0..2};do python ptseE.py 19$m;done
 for m in 0{1..9} 1{0..2};do python python wrtE.py 19$m;done
 ```
 
-###
+### 程式基本定義、資料庫檔案QC、nc檔案之延展
 - 調用模組
   - 因無另存處理過後的資料庫，因此程式還是會用到[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/)中的副程式`CORRECT`, `add_PMS`, `check_nan`, `check_landsea`, `FillNan`, `WGS_TWD`, `Elev_YPM`
 
@@ -176,7 +176,7 @@ $ cat -n ptseE.py
     33  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
     34  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 ```
-- nc模版的應用與延長
+- nc模版的應用與延展
 
 ```python   
     35  #prepare the uamiv template
@@ -258,8 +258,11 @@ $ cat -n ptseE.py
     99  df.SCC=[str(int(i)) for i in df.SCC]
    100  df.loc[df.SCC=='0','SCC']='0'*10
 ```
-- 對
-
+- 對**管煙**編號進行資料庫重整
+  - 3類不同屬性欄位適用不同的`aggfunc`
+    - 排放量(`col_em`)：加總
+    - 煙道高度(`col_mx`)：最大值
+    - 煙道其他參數(`col_mn`)：平均
 ```python   
    101  #pivot table along the dimension of NO_S (P???)
    102  df_cp=pivot_table(df,index='CP_NO',values=cole+['ORI_QU1'],aggfunc=sum).reset_index()
@@ -268,14 +271,128 @@ $ cat -n ptseE.py
    105  df1=merge(df_cp,df_xy,on='CP_NO')
    106  df=merge(df1,df_sc,on='CP_NO')
 ```
--
+- 排放量單位轉換
+  - 因小時數在`ons`中已經應用了(個別煙道加總為1.)，因此只需考量重量之轉換即可。
+  - 留下之前計算版本，以供對照
+
 ```python   
+   107  #T/year to g/hour
+   108  for c in cole:
+   109    df[c]=[i*1E6 for i in df[c]]
+   110  #  df[c]=[i*1E6/j/k for i,j,k in zip(df[c],df.DY1,df.HD1)]
 ```
--
+- CAMx版本差異在此選擇
+  - 6~7版的差異可以參考[CMAQ/CAMx排放量檔案之轉換](http://www.evernote.com/l/AH1z_n2U--lM-poNlQnghsjFBfDEY6FalgM/)，
+  - 如要做不同版本，應重新準備模版階段
 ```python   
+   111  #determination of camx version
+   112  ver=7
+   113  if 'XSTK' in V[0]:ver=6
+   114  print('NMHC/PM splitting and expanding')
 ```
--
+
+### VOCs的劃分
+- 讀取profile number、preference table
+
 ```python   
+   114  print('NMHC/PM splitting and expanding')
+   115  #prepare the profile and CBMs
+   116  fname='/'+hmp+'/SMOKE4.5/data/ge_dat/gsref.cmaq_cb05_soa.txt'
+   117  gsref=read_csv(fname,delimiter=';',header=None)
+   118  col='SCC Speciation_profile_number Pollutant_ID'.split()+['C'+str(i) for i in range(3,10)]
+   119  gsref.columns=col
+   120  for c in col[3:]:
+   121    del gsref[c]
+   122  fname='/'+hmp+'/SMOKE4.5/data/ge_dat/gspro.cmaq_cb05_soa.txt'
+   123  gspro=read_csv(fname,delimiter=';',header=None)
+   124  col=['Speciation_profile_number','Pollutant_ID','Species_ID','Split_factor','Divisor','Mass_Fraction']
+   125  gspro.columns=col
+```
+- 自從TEDS9之後，國內新增(或修正)很多資料庫中沒有的SCC。此處以對照既有SCC碼簡單處理。
+  - 對照方式：網站上找到最新的SCC資料庫，找到新SCC的製程類別特性
+  - 找到既有SCC profile number資料表中，前幾碼(4~6)相同的SCC，如果類似就指定取代
+  - 如果真的找不到，也只能找數字最接近的取代
+
+```python   
+   126  #new SCC since TEDS9,erase and substude
+   127  sccMap={
+   128  '30111103':'30111199', #not in df_scc2
+   129  '30112401':'30112403', #Industrial Processes  Chemical Manufacturing  Chloroprene Chlorination Reactor
+   130  '30115606':'30115607',#Industrial Processes  Chemical Manufacturing  Cumene  Aluminum Chloride Catalyst Process: DIPB Strip
+   131  '30118110':'30118109',#Industrial Processes  Chemical Manufacturing  Toluene Diisocyanate  Residue Vacuum Distillation
+   132  '30120554':'30120553', #not known, 548~  Propylene Oxide Mixed Hydrocarbon Wash-Decant System Vent
+   133  '30117410':'30117421',
+   134  '30117411':'30117421',
+   135  '30117614':'30117612',
+   136  '30121125':'30121104',
+   137  '30201111':'30201121',
+   138  '30300508':'30300615',
+   139  '30301024':'30301014',
+   140  '30400213':'30400237',
+   141  '30120543':'30120502',
+   142  '40300215':'40300212'} #not known
+   143  for s in sccMap:
+   144    df.loc[df.SCC==s,'SCC']=sccMap[s]   
+```
+- 只篩選有關的SCC以縮減資料庫長度、提升對照速度
+  - 因有些profile number含有英文字，在此先做整理，以使格式一致
+```python   
+   145  #reduce gsref and gspro
+   146  dfV=df.loc[df.NMHC_EMI>0].reset_index(drop=True)
+   147  gsrefV=gsref.loc[gsref.SCC.map(lambda x:x in set(dfV.SCC))].reset_index(drop=True)
+   148  prof_alph=set([i for i in set(gsrefV.Speciation_profile_number) if i.isalpha()])
+   149  gsrefV=gsrefV.loc[gsrefV.Speciation_profile_number.map(lambda x:x not in prof_alph)].reset_index(drop=True)
+   150  gsproV=gspro.loc[gspro.Speciation_profile_number.map(lambda x:x in set(gsrefV.Speciation_profile_number))].reset_index(drop=True)
+```
+- 只篩選有關的profile number且污染物含有`TOG`者
+```python   
+   151  pp=[]
+   152  for p in set(gspro.Speciation_profile_number):
+   153    a=gsproV.loc[gsproV.Speciation_profile_number==p]
+   154    if 'TOG' not in set(a.Pollutant_ID):pp.append(p)
+   155  boo=(gspro.Speciation_profile_number.map(lambda x:x not in pp)) & (gspro.Pollutant_ID=='TOG')
+   156  gsproV=gspro.loc[boo].reset_index(drop=True)
+   157
+```
+- 準備乘數矩陣，其大小為`(SCC總數,CBM物質項目總數)`
+
+```python   
+   158  cbm=list(set([i for i in set(gsproV.Species_ID) if i in V[1]]))
+   159  idx=gsproV.loc[gsproV.Species_ID.map(lambda x:x in cbm)].index
+   160  sccV=list(set(dfV.SCC))
+   161  sccV.sort()
+   162  nscc=len(sccV)
+   163  prod=np.zeros(shape=(nscc,len(cbm)))
+```
+- 
+
+```python   
+   164  #dfV but with PM scc(no TOG/VOC in gspro), modify those SCC to '0'*10 in dfV, drop the pro_no in gsproV
+   165  noTOG_scc=[]
+   166  for i in range(nscc):
+   167    s=sccV[i]
+   168    p=list(gsrefV.loc[gsrefV.SCC==s,'Speciation_profile_number'])[0]
+   169    a=gsproV.loc[gsproV.Speciation_profile_number==p]
+   170    if 'TOG' not in set(a.Pollutant_ID) and 'VOC' not in set(a.Pollutant_ID):
+   171      noTOG_scc.append(s)
+   172      continue
+   173    boo=(gsproV.Speciation_profile_number==p) & (gsproV.Pollutant_ID=='TOG')
+   174    a=gsproV.loc[boo]
+   175    for c in a.Species_ID:
+   176      if c not in cbm:continue
+   177      j=cbm.index(c)
+   178      f=a.loc[a.Species_ID==c,'Mass_Fraction']
+   179      d=a.loc[a.Species_ID==c,'Divisor']
+   180      prod[i,j]+=f/d
+   181  df.loc[df.SCC.map(lambda x:x in noTOG_scc),'SCC']='0'*10
+   182  for c in cbm:
+   183    df[c]=0.
+   184  for s in set(dfV.SCC):
+   185    i=sccV.index(s)
+   186    idx=df.loc[df.SCC==s].index
+   187    for c in cbm:
+   188      j=cbm.index(c)
+   189      df.loc[idx,c]=[prod[i,j]*k for k in df.loc[idx,'NMHC_EMI']]
 ```
 -
 ```python   

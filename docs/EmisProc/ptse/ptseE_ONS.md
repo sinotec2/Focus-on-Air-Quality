@@ -105,10 +105,10 @@ $ cat -n ptseE_ONS.py
 ```
 ### 讀取並填滿CEMS資料檔
 - 填滿資料表
-  - 程式運作需要每筆**管煙**、每個小時都要有數值。將DataFrame轉成矩陣，再轉回DataFrame即可。
+  - 程式運作需要每筆**管煙**(**管編**+**煙編**)、每個小時都要有數值。將DataFrame轉成矩陣，再轉回DataFrame即可。
 
 ```python
-    41  #71 factories with CEMS will emit (at ground) when stacks are operating
+    41  #71 factories with sCEMS will emit (at ground) when stacks are operating
     42  fname=P+'point_cems.csv'
     43  cems=read_csv(fname)
     44  val='SOX PM NOX FLOW X_BLANK1 X_BLANK2'.split()

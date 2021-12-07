@@ -83,7 +83,7 @@ $ cat -n cluster_xy.py
     26
 ```
 #### XY_pivot
-- 工廠點源個數太多者(如中鋼)，在座標叢集化之前，以pivot_tab取其管道(**管煙**編號)排放量之加總值
+- 工廠點源個數太多者(如中鋼)，在座標叢集化之前，以pivot_tab取其管道(**管煙**編號=**管編**+**煙編**)排放量之加總值
   - 調用模組
 
 ```python   
@@ -116,9 +116,10 @@ $ cat -n cluster_xy.py
 
 ### 程式之執行
 - 此處按月執行。由於nc檔案時間展開後，檔案延長非常緩慢，拆分成主程式（`ptseE.py`）與輸出程式（`wrtE.py`）二段進行。
+
 ```bash
-for m in 0{1..9} 1{0..2};do python ptseE.py $m;done
-for m in 0{1..9} 1{0..2};do python python wrtE.py $m;done
+for m in 0{1..9} 1{0..2};do python ptseE.py 19$m;done
+for m in 0{1..9} 1{0..2};do python python wrtE.py 19$m;done
 ```
 
 ###
@@ -145,20 +146,127 @@ $ cat -n ptseE.py
     15  from cluster_xy import cluster_xy, XY_pivot
     16
 ```
--
+- 程式相依性及年月定義(由引數)
+  - `pncgen`、`ncks`是在`wrtE.py`階段使用
+
 ```python   
+    17  #Main
+    18  #locate the programs and root directory
+    19  pncg=subprocess.check_output('which pncgen',shell=True).decode('utf8').strip('\n')
+    20  ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
+    21  hmp=subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[1]
+    22  P='./'
+    23
+    24  #time and space initiates
+    25  ym=sys.argv[1]
+    26  mm=sys.argv[1][2:4]
+    27  mo=int(mm)
+    28  yr=2000+int(sys.argv[1][:2])
 ```
--
+- 使用`Hs`進行篩選「高空」點源
+
 ```python   
+    29  Hs=0 #cutting height of stacks
 ```
--
+- 起迄日期、模擬範圍中心點位置
 ```python   
+    30  ntm=(monthrange(yr,mo)[1]+2)*24+1
+    31  bdate=datetime.datetime(yr,mo,1)+datetime.timedelta(days=-1+8./24)
+    32  edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
+    33  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+    34  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 ```
--
+- nc模版的應用與延長
+
 ```python   
+    35  #prepare the uamiv template
+    36  print('template applied')
+    37  NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
+    38  try:
+    39    nc = netCDF4.Dataset(NCfname, 'r+')
+    40  except:
+    41    os.system('cp '+P+'template_v7.nc '+NCfname)
+    42    nc = netCDF4.Dataset(NCfname, 'r+')
+    43  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+    44  nt,nv,dt=nc.variables[V[2][0]].shape
+    45  nv=len([i for i in V[1] if i !='CP_NO'])
+    46  nc.SDATE,nc.STIME=dt2jul(bdate)
+    47  nc.EDATE,nc.ETIME=dt2jul(edate)
+    48  nc.NOTE='Point Emission'
+    49  nc.NOTE=nc.NOTE+(60-len(nc.NOTE))*' '
+    50  nc.NVARS=nv
+    51  #Name-names may encounter conflicts with newer versions of NCFs and PseudoNetCDFs.
+    52  nc.name='PTSOURCE  '
+    53  nc.NSTEPS=ntm
+    54  if 'ETFLAG' not in V[2]:
+    55    zz=nc.createVariable('ETFLAG',"i4",("TSTEP","VAR","DATE-TIME"))
+    56  if nt!=ntm or (nc.variables['TFLAG'][0,0,0]!=nc.SDATE and nc.variables['TFLAG'][0,0,1]!=nc.STIME):
+    57    for t in range(ntm):
+    58      sdate,stime=dt2jul(bdate+datetime.timedelta(days=t/24.))
+    59      nc.variables['TFLAG'][t,:,0]=[sdate for i in range(nv)]
+    60      nc.variables['TFLAG'][t,:,1]=[stime for i in range(nv)]
+    61      ndate,ntime=dt2jul(bdate+datetime.timedelta(days=(t+1)/24.))
+    62      nc.variables['ETFLAG'][t,:,0]=[ndate for i in range(nv)]
+    63      nc.variables['ETFLAG'][t,:,1]=[ntime for i in range(nv)]
+    64  nc.close()
+    65  #template OK
+    66
 ```
--
+- 污染物名稱對照、變數群組定義
+
 ```python   
+    67  #item sets definitions
+    68  c2s={'NMHC':'NMHC','SOX':'SO2','NOX':'NO2','CO':'CO','PM':'PM'}
+    69  c2m={'SOX':64,'NOX':46,'CO':28,'PM':1}
+    70  cole=[i+'_EMI' for i in c2s]+['PM25_EMI']
+    71  XYHDTV=['UTM_E','UTM_N','HEI','DIA','TEMP','VEL']
+    72  colT=['HD1','DY1','HY1']
+    73  colc=['CCRS','FCRS','CPRM','FPRM']
+    74
+```
+- 讀取點源資料庫並進行品質管控
+
+```python   
+    75  #Input the TEDS csv file
+    76  try:
+    77    df = read_csv('point.csv', encoding='utf8')
+    78  except:
+    79    df = read_csv('point.csv')
+    80  df = check_nan(df)
+    81  df = check_landsea(df)
+    82  df = WGS_TWD(df)
+    83  df = Elev_YPM(df)
+    84  #only P??? an re tak einto account
+    85  boo=(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))
+    86  df=df.loc[boo].reset_index(drop=True)
+    87  #delete the zero emission sources
+    88  df['SUM']=[i+j+k+l+m for i,j,k,l,m in zip(df.SOX_EMI,df.NOX_EMI,df.CO_EMI,df.PM_EMI,df.NMHC_EMI)]
+    89  df=df.loc[df.SUM>0].reset_index(drop=True)
+    90  df['DY1']=[i*j for i,j in zip(df.DW1,df.WY1)]
+    91  df['HY1']=[i*j for i,j in zip(df.HD1,df.DY1)]
+    92  df=CORRECT(df)
+    93  df['CP_NO'] = [i + j for i, j in zip(list(df['C_NO']), list(df['NO_S']))]
+    94
+    95  #
+```
+- 座標轉換
+
+```python   
+    96  #Coordinate translation
+    97  df.UTM_E=df.UTM_E-Xcent
+    98  df.UTM_N=df.UTM_N-Ycent
+    99  df.SCC=[str(int(i)) for i in df.SCC]
+   100  df.loc[df.SCC=='0','SCC']='0'*10
+```
+- 對
+
+```python   
+   101  #pivot table along the dimension of NO_S (P???)
+   102  df_cp=pivot_table(df,index='CP_NO',values=cole+['ORI_QU1'],aggfunc=sum).reset_index()
+   103  df_xy=pivot_table(df,index='CP_NO',values=XYHDTV+colT,aggfunc=np.mean).reset_index()
+   104  df_sc=pivot_table(df,index='CP_NO',values='SCC', aggfunc=mostfreqword).reset_index()
+   105  df1=merge(df_cp,df_xy,on='CP_NO')
+   106  df=merge(df1,df_sc,on='CP_NO')
 ```
 -
 ```python   

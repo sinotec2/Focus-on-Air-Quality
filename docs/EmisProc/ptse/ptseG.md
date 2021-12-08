@@ -191,7 +191,7 @@ $ diff ptseG.py ptseE.py
 
 ## 結果檢視
 - [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG)
-![https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG]
+![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG)
 ## 檔案下載
 - `python`程式：[ptseG.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseG.py)。
 

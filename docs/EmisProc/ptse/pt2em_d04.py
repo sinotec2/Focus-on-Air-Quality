@@ -12,7 +12,11 @@ fname=MM
 nct = netCDF4.Dataset(fname,'r')
 Vt=[list(filter(lambda x:nct.variables[x].ndim==j, [i for i in nct.variables])) for j in [1,2,3,4]]
 ntt,nvt,dt=nct.variables[Vt[2][0]].shape
-nopts=nct.NOPTS
+try:
+  nopts=nct.NOPTS
+except:
+  nopts=nct.dimensions['COL'].size
+
 TFLAG=nct.variables['TFLAG'][:,0,:]
 ETFLAG=nct.variables['ETFLAG'][:,0,:]
 SDATE=nct.SDATE
@@ -43,19 +47,15 @@ nct.close()
 nc.close()
 
 #variable sets interception and with values
-sint=[]
-for v in set(Vt1)&set(V[3]):
-  if np.sum(var[Vt1.index(v),:,:])==0.:continue
-  sint.append(v)
-s=' '
-for c in set(V[3])-set(sint):
-  s+=c+','
-ftmp=fname+'tmp'
-res=os.system(ncks+' -O -x -v'+s.strip(',')+' '+fname+' '+ftmp)
-if res!=0: sys.exit(ncks+' -x var fail')
-ns=str(len(sint)-1) 
-res=os.system(ncks+' -O -d VAR,0,'+ns+' '+ftmp+' '+fname)
-if res!=0: sys.exit(ncks+' -d VAR fail')
+sint=[v for v in set(Vt1)&set(V[3]) if np.sum(var[Vt1.index(v),:,:])!=0.]
+if len(sint)!=len(V[3]):
+  s=''.join([c+',' for c in set(V[3])-set(sint)])
+  ftmp=fname+'tmp'
+  res=os.system(ncks+' -O -x -v'+s.strip(',')+' '+fname+' '+ftmp)
+  if res!=0: sys.exit(ncks+' -x var fail')
+  ns=str(len(sint)-1) 
+  res=os.system(ncks+' -O -d VAR,0,'+ns+' '+ftmp+' '+fname)
+  if res!=0: sys.exit(ncks+' -d VAR fail')
 #template is OK
 
 #pivoting

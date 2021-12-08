@@ -213,6 +213,8 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 ![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
 ## 檔案下載
 - `python`程式：[pt2em_d04.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/pt2em_d04.py)。
+- `ipynb`：[pt2em_d04.ipynb](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/pt2em_d04.ipynb)。
+- [nbviewer](https://nbviewer.org/github/sinotec2/jtd/blob/main/docs/EmisProc/ptse/pt2em_d04.ipynb)
 
 
 ## Reference

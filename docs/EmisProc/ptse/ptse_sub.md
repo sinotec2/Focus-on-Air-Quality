@@ -4,8 +4,8 @@ title: "Prepare for PointS"
 parent: "Point Sources"
 grand_parent: "Emission Processing"
 nav_order: 1
-date:               
-last_modified_date:   2021-12-03 09:54:07
+date: 2021-12-03 09:54:07               
+last_modified_date:   2021-12-08 13:33:38
 ---
 
 # 點源排放檔案準備相關副程式

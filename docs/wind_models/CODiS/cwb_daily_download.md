@@ -63,7 +63,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
   - 分站提供最新(落後實際時間約**3~4小時**)之觀測數據
   - 也按照地區、月份、測站種類整理中央氣象局自動氣象站觀測資料，提供歷史檔。
 - [Tien Yang](https://github.com/wy36101299/crawler-central-weather/blob/master/climate_crawler.py)及[Allen Chou](https://github.com/s3131212/CWB-Observation-Crawler)公開其2014~2018年的爬蟲專案，也是用`BeutifulSoup`來做，將所要下載的測站、年代直接改在程式碼中進行下載。
-- [muse648](http://muse6485.blogspot.com/2019/08/python1.html)這2篇網誌有完整`bs`批次下載的應用範例，是用`request.get`方式取得內容。不過因為不是氣象方面的專業，並沒有仔細處理缺漏值各項註記，程式執行應該會遭遇困難。不然就是僅儲存字串，這也是一個簡單的方案。
+- [muse648](http://muse6485.blogspot.com/2019/08/python1.html)這2篇網誌有完整`bs`批次下載的應用範例，是用`request.get`方式取得內容。不過因為不是氣象方面的專業，並沒有仔細處理缺漏值各項註記，程式執行應該會遭遇困難。不然就是僅儲存字串，這也不失為一個簡捷的方案。
 
 #### 方案考量
 - leading time

@@ -27,7 +27,7 @@ last_modified_date:   2021-12-07 17:06:30
 ## 程式說明
 
 ### 程式執行
-- [pt2em_d04.py]()只需要一個引數，就是CAMx點源排放量檔案。
+- [pt2em_d04.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/pt2em_d04.py)只需要一個引數，就是CAMx點源排放量檔案。
 - 程式會以`template_d4.nc`為模版，將點源排放量予以網格化填入模版相對應位置。
 - 時間標籤則與輸入檔案一致。
 
@@ -38,6 +38,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 
 ### 程式分段說明
 - 調用模組
+
 ```python
 #kuang@node03 /nas1/TEDS/teds11/ptse
 #$ cat -n pt2em_d04.py
@@ -48,7 +49,9 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
      5  from pandas import *
      6
 ```
-- 
+- 重要相依性
+  - 取得`ncks`、`ncatted`等程式之位置
+  - 取得引數(高空點源檔案名稱)
 ```python
      7  ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
      8  ncatted=subprocess.check_output('which ncatted',shell=True).decode('utf8').strip('\n')
@@ -56,7 +59,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
     10  fname=MM
 ```
 - 讀取高空排放量檔案(內設為CAMx 7版本)
-  - 變數讀取可能是最花時間的步驟
+  - 變數讀取是最花時間的步驟
 
 ```python
     11  #store the point source matrix
@@ -79,7 +82,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
     28    var[iv,:,:]=nct.variables[v][:,:]
     29
 ```
-- 開啟模版並讀取網格系統之設定內容
+- 開啟模版，並讀取網格系統之設定內容，用以計算網格位置標籤。
 
 ```python
     30  fname=MM+'_d04.nc'
@@ -144,7 +147,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
     75    dfT[v]=var[iv,:,:].flatten()
     76  pv=pivot_table(dfT,index=['YJH','IX','IY'],values=sint,aggfunc=sum).reset_index()
 ```
-- 再將pivot_table結果轉成矩陣輸出
+- 再將`pivot_table`結果轉成矩陣輸出
 
 ```python
     77  pv.IX=[int(i) for i in pv.IX]
@@ -205,6 +208,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 - [TEDS11高空2月排放檔案之網格分布](https://raw.githubusercontent.com/sinotec2/jtd/main/assets/images/pt2em_d04Demo.PNG)
 ![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04Demo.PNG)
 - [台中電廠之NO排放之時間變化](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
+  - 使用VERDI **Fast Tile Plot**、局部放大、再選取**Time Series of Probed Cell(s)**。
 ![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
 ## 檔案下載
 - `python`程式：[pt2em_d04.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/pt2em_d04.py)。

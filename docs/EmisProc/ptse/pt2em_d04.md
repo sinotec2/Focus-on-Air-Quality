@@ -52,6 +52,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 - 重要相依性
   - 取得`ncks`、`ncatted`等程式之位置
   - 取得引數(高空點源檔案名稱)
+
 ```python
      7  ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
      8  ncatted=subprocess.check_output('which ncatted',shell=True).decode('utf8').strip('\n')
@@ -208,7 +209,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 - [TEDS11高空2月排放檔案之網格分布](https://raw.githubusercontent.com/sinotec2/jtd/main/assets/images/pt2em_d04Demo.PNG)
 ![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04Demo.PNG)
 - [台中電廠之NO排放之時間變化](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
-  - 使用VERDI **Fast Tile Plot**、局部放大、再選取**Time Series of Probed Cell(s)**。
+  - 使用VERDI **Fast Tile Plot**、局部放大、再選取**Plot**、下拉**Time Series of Probed Cell(s)**。
 ![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
 ## 檔案下載
 - `python`程式：[pt2em_d04.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/pt2em_d04.py)。

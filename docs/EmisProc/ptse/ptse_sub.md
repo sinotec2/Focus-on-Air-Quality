@@ -263,7 +263,80 @@ $ cat -n ptse_sub.py
    170        df.loc[boo2,v]=[as_p[v] for i in range(nb2)]
    171    return df
    172
-   173
+```
+
+### 地面點源處理會用到的副程式
+- 此副程式會把逐時、逐煙道的排放量矩陣展開成資料庫形態，以便進行`pivot_table`，整併(加總)網格排放量。
+
+```python
+   173  def pv_nc(dfi,nc,spec):
+   174    NREC=len(dfi)
+   175    ntm,nrow,ncol=(nc.dimensions[c].size for c in ['TSTEP','ROW', 'COL'])
+   176    V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+   177    sdt,ix,iy=(np.zeros(shape=(ntm*NREC),dtype=int) for i in range(3))
+   178    for t in range(ntm):
+   179      t1,t2=t*NREC,(t+1)*NREC
+   180      ix[t1:t2]=list(dfi.IX)
+   181      iy[t1:t2]=list(dfi.IY)
+   182    for t in range(ntm):
+   183      sdt[t*NREC:(t+1)*NREC]=t
+   184    col=[i for i in dfi.columns if i not in ['YJH','IX','IY']]
+   185    dfT=DataFrame({'YJH':sdt,'IX':ix,'IY':iy})
+   186    if len(spec.shape)==2:
+   187      for c in col:
+   188        ic=col.index(c)
+   189        dfT[c]=spec[:,ic]
+   190    else:
+   191      for c in col:
+   192        dfT[c]=spec[:]
+   193    pv=pivot_table(dfT,index=['YJH','IX','IY'],values=col,aggfunc=sum).reset_index()
+   194    pv.IX=[int(i) for i in pv.IX]
+   195    pv.IY=[int(i) for i in pv.IY]
+   196    pv.YJH=[int(i) for i in pv.YJH]
+   197    imn,jmn=min(pv.IX),min(pv.IY)
+   198    imx,jmx=max(max(pv.IX)+abs(imn)*2+1,ncol), max(max(pv.IY)+abs(jmn)*2+1,nrow)
+   199    if imn<0 and imx+imn<ncol:sys.exit('negative indexing error in i')
+   200    if jmn<0 and jmx+jmn<nrow:sys.exit('negative indexing error in j')
+   201    idx=pv.index
+   202    idt=np.array(pv.loc[idx,'YJH'])
+   203    iy=np.array(pv.loc[idx,'IY'])
+   204    ix=np.array(pv.loc[idx,'IX'])
+   205    for c in col:
+   206      if c not in V[3]:continue
+   207      if sum(pv[c])==0:continue
+   208      z=np.zeros(shape=(ntm,jmx,imx))
+   209      ss=np.array(pv.loc[idx,c])
+   210      #Note that negative indices are not bothersome and are only at the end of the axis.
+   211      z[idt,iy,ix]=ss
+   212  #also mapping whole matrix, NOT by parts
+   213      nc.variables[c][:,0,:,:]=z[:,:nrow,:ncol]
+   214    return
+   215
+```
+- 將資料庫中的`UTM_E`及`UTM_N`按照網格系統的原點與解析度予以格點化。
+  - 為適應座標系統有可能先行平移，測驗座標值是否有負值，若是，則不必再平移
+
+```python
+   216  def disc(dm):
+   217  #discretizations
+   218    if min(dm.UTM_N)<0:
+   219      dm['IX']=np.array((dm.UTM_E-nc.XORIG)/nc.XCELL,dtype=int)
+   220      dm['IY']=np.array((dm.UTM_N-nc.YORIG)/nc.YCELL,dtype=int)
+   221    else:
+   222      dm['IX']=np.array((dm.UTM_E-Xcent-nc.XORIG)/nc.XCELL,dtype=int)
+   223      dm['IY']=np.array((dm.UTM_N-Ycent-nc.YORIG)/nc.YCELL,dtype=int)
+   224    return dm
+   225
+   226
+```
+-
+```python
+```
+-
+```python
+```
+-
+```python
 ```
 
 ## 檔案下載

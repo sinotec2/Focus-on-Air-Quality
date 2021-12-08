@@ -4,8 +4,8 @@ title: "CODiS日報表下載整併"
 parent: "CODiS"
 grand_parent: "wind models"
 nav_order: 1
-date:               
-last_modified_date:   2021-11-28 22:04:32
+date: 2021-11-28 22:04:32               
+last_modified_date: 2021-12-08 09:17:15
 ---
 
 # CODiS日報表下載整併 
@@ -62,6 +62,8 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
   - 數據來源：中央氣象局[氣象資料開放平台](https://opendata.cwb.gov.tw/index)、逐時下載
   - 分站提供最新(落後實際時間約**3~4小時**)之觀測數據
   - 也按照地區、月份、測站種類整理中央氣象局自動氣象站觀測資料，提供歷史檔。
+- [Tien Yang](https://github.com/wy36101299/crawler-central-weather/blob/master/climate_crawler.py)及[Allen Chou](https://github.com/s3131212/CWB-Observation-Crawler)公開其2014~2018年的爬蟲專案，也是用`BeutifulSoup`來做，將所要下載的測站、年代直接改在程式碼中進行下載。
+- [muse648](http://muse6485.blogspot.com/2019/08/python1.html)這2篇網誌有完整`bs`批次下載的應用範例，是用`request.get`方式取得內容。不過因為不是氣象方面的專業，並沒有仔細處理缺漏值各項註記，程式執行應該會遭遇困難。不然就是僅儲存字串，這也是一個簡單的方案。
 
 #### 方案考量
 - leading time
@@ -287,3 +289,6 @@ grep cwb /etc/crontab
 - G. T. Wang, **Linux 使用wget 指令自動下載網頁檔案教學與範例**, [gtwang.org](https://blog.gtwang.org/linux/linux-wget-command-download-web-pages-and-files-tutorial-examples/), 2017/08/25
 - KD Chang, **Linux Curl Command 指令與基本操作入門教學**, [techbridge](https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/), 2019-02-01 
 - [Here](https://sinotec2.github.io/jtd/docs/wind_models/CODiS/cwb_daily_download/), 2021-11-26
+- Allen Chou, **CWB-Observation-Crawler**, [github](https://github.com/s3131212/CWB-Observation-Crawler), 18 Dec 2018
+- TienYang, **crawler-central-weather**, [github](https://github.com/wy36101299/crawler-central-weather/blob/master/climate_crawler.py),12 Jan 2015
+- 臨床統計農莊, **python網路爬蟲輕鬆取得氣候資料(1)~(2)**, [blogspot](http://muse6485.blogspot.com/2019/08/python1.html), 8月 29, 2019

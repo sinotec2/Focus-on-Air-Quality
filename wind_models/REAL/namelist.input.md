@@ -53,7 +53,7 @@ last_modified_date:   2021-11-28 20:31:23
 ```
 
 ## 下載`namelist.input.loop`
-點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/real/namelist.input.loop)
+點選[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/real/namelist.input.loop)
 
 ## Reference
 - Brian Reen, **A Brief Guide to Observation Nudging in WRF**, [github](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/ObsNudgingGuide.pdf),February 2016.

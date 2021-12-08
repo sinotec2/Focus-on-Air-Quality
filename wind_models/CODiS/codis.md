@@ -4,7 +4,7 @@ title: "CODiS"
 parent: "wind models"
 nav_order: 1
 has_children: true
-permalink: /docs/wind_models/CODiS/
+permalink: /wind_models/CODiS/
 last_modified_at:   2021-11-28 22:04:23
 ---
 

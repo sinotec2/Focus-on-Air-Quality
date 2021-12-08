@@ -23,11 +23,11 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 ## 背景
-- [grb2wrfout_d04轉檔](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)針對台灣本島`d04`範圍進行空間內插。既然`grb2`檔案涵蓋範圍夠大，甚至比[geo_grid](https://sinotec2.github.io/jtd/docs/wind_models/WPS/namelist.wps/#地形網格設定)所定義`d03`範圍還大，是否可以準備一樣大小、解析度、網格數的網格系統（`wrfout_d03_3Km`或`wrfout_d01_15Km`），來直接承接`grb2`的內容，而不需任何的內插？似為一較為合理的作法。
-- 如此的python程式，應為[rd_grbCubicA.py](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)的簡單版。
+- [grb2wrfout_d04轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)針對台灣本島`d04`範圍進行空間內插。既然`grb2`檔案涵蓋範圍夠大，甚至比[geo_grid](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#地形網格設定)所定義`d03`範圍還大，是否可以準備一樣大小、解析度、網格數的網格系統（`wrfout_d03_3Km`或`wrfout_d01_15Km`），來直接承接`grb2`的內容，而不需任何的內插？似為一較為合理的作法。
+- 如此的python程式，應為[rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)的簡單版。
 
 ## 自動轉檔排程
-- 在[get_M-A0064.cs](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)之中，有關轉檔的指令
+- 在[get_M-A0064.cs](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)之中，有關轉檔的指令
   - 完全符合WRF_3Km`grb2`的模版：wrfout_d03_3Km
   - 完全符合WRF_15Km`grb2`的模版：wrfout_d01_15Km
 ```bash
@@ -42,7 +42,7 @@ last_modified_date:   2021-11-30 10:43:16
     28	
 ```
 
-## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)與[rd_grbCubicA.py](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/rd_grbCubicA/)差異說明
+## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)與[rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)差異說明
 
 ### 模版名稱的差異
 - 開啟模版
@@ -181,12 +181,12 @@ diff fil_grb_nc.py rd_grbCubicA.py
 
 
 ## 下載程式碼
-- 可以由[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)找到原始碼。
+- 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)找到原始碼。
 
 ## 檢核
 - 靜態檢核：可以使用[MeteoInfo](http://meteothink.org/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)
 - [動態檢核](http://114.32.164.198/traj2.html)：使用WRF_3Km`grb2`轉檔預報之反軌跡線 vs windy 動態風場
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/comp_trj_windy.png)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/comp_trj_windy.png)
 ## Reference
 - sinotec2, **pygrib的安裝、重要語法**, [evernote](http://www.evernote.com/l/AH12nyLrGkBL2qg3WTonSwDC-0Rtq_S9npA/), 2021年4月1日
 - Yaqiang Wang, **MeteoInfo Introduction**, [meteothink](http://meteothink.org/), 2021,10,16

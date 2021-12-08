@@ -3,7 +3,7 @@ layout: default
 title: Trajectory Models
 nav_order: 7
 has_children: true
-permalink: /docs/TrajModels/
+permalink: /TrajModels/
 last_modified_at:   2021-12-01 11:24:33
 ---
 

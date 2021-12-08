@@ -3,7 +3,7 @@ layout: default
 title: Plume Models
 nav_order: 6
 has_children: true
-permalink: /docs/PlumeModels/
+permalink: /PlumeModels/
 last_modified_at:   2021-12-01 11:24:33
 ---
 

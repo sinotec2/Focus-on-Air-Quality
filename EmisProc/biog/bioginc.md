@@ -23,12 +23,12 @@ last_modified_date:   2021-12-02 11:08:53
 
 ## 背景
 - 環保署全年排放量乘上月變化係數
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[植物源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[植物源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
 ## 程式分段說明
 
 ### 初始段
-- 引用模組。此處用到[include3.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/include3.py)的[dt2jul, jul2dt](https://sinotec2.github.io/jtd/docs/EmisProc/area/include3/#引用模組及時間標籤轉換dt2jul-jul2dt), [disc](https://sinotec2.github.io/jtd/docs/EmisProc/area/include3/#資料庫的網格化disc)
+- 引用模組。此處用到[include3.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/include3.py)的[dt2jul, jul2dt](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/include3/#引用模組及時間標籤轉換dt2jul-jul2dt), [disc](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/include3/#資料庫的網格化disc)
 
 ```python
 kuang@node03 /nas1/TEDS/teds11/biog
@@ -258,10 +258,10 @@ $ cat -n bioginc.py
 ```
 
 ## 結果檢核
-- 比較teds10及teds11之植物排放[如圖](https://github.com/sinotec2/jtd/raw/main/assets/images/teds11-10biog.PNG)
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds11-10biog.PNG)
+- 比較teds10及teds11之植物排放[如圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds11-10biog.PNG)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds11-10biog.PNG)
 
 ## 檔案下載
-- `python`程式：[bioginc.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/biog/bioginc.py)。
+- `python`程式：[bioginc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/biog/bioginc.py)。
 
 ## Reference

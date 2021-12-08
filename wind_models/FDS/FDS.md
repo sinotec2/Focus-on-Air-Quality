@@ -4,7 +4,7 @@ title: "FDS"
 parent: "wind models"
 nav_order: 5
 has_children: true
-permalink: /docs/wind_models/FDS/
+permalink: /wind_models/FDS/
 last_modified_at: 2021-11-28 15:52:50
 ---
 

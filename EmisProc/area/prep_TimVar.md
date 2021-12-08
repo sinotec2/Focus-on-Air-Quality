@@ -26,9 +26,9 @@ last_modified_date:   2021-12-01 14:16:46
   - 時間變異係數(`csv`)檔案前處理
   - `csv`檔案之產生
   - 將`csv`檔案應用到面源排放量資料庫，並展開至全年逐時之序列，存成`nc_fac.json`。
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[面源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/area/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)與[重新計算網格座標](https://sinotec2.github.io/jtd/docs/EmisProc/area/prep_areagridLL/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)與[重新計算網格座標](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/prep_areagridLL/)，為此處之前處理。  
 
-## 時間變異係數檔案前處理([prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py))分段說明
+## 時間變異係數檔案前處理([prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_dfAdmw.py))分段說明
 - 此程式為可執行的主程式，主要處理**縣市名稱**與**編號**的對照，中文改成英文。
 - 引用模組
   - 會用到中文轉英文的`pypinyin`模組，以使程式可以在py27/py37都可以使用
@@ -48,7 +48,7 @@ $ cat -n prep_dfAdmw.py
     10
     11
 ```
-- 從中文檔案[cnty.csv](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/cnty.csv)開始處理
+- 從中文檔案[cnty.csv](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/cnty.csv)開始處理
   - 補充連江縣
 ```python    
     12  #input and prepare the cnty names
@@ -125,7 +125,7 @@ $ cat -n prep_dfAdmw.py
     65      exec('json.dump(d_'+kc+', jsonfile)')
 ```
 
-## 副程式([prep_df.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_df.py))分段說明
+## 副程式([prep_df.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_df.py))分段說明
 主程式處理對照，副程式則處理**時變係數檔**內部的不一致性
 - 引用模組
 
@@ -203,7 +203,7 @@ $ cat -n prep_dfAdmw.py
     52    return df
 ```
 
-## `nc_fac.json`檔案產生程式([prep_json.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_json.py))分段說明
+## `nc_fac.json`檔案產生程式([prep_json.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_json.py))分段說明
 - 引用模組
 ```python
 kuang@node03 /nas1/TEDS/teds11/area
@@ -217,7 +217,7 @@ $ cat -n prep_json.py
      7  import sys, os
      8
 ```
-- 讀入前面[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py)的執行成果：`df_Am`、`df_Aw`、`df_Ad`三個檔案
+- 讀入前面[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_dfAdmw.py)的執行成果：`df_Am`、`df_Aw`、`df_Ad`三個檔案
 ```python
      9  # read the time variation factors
     10  csvs={'m':'mon.csv','w':'week.csv','d':'day.csv'}
@@ -411,7 +411,7 @@ $ cat -n prep_json.py
    149
 ```
 ## 檔案下載
-- 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/area/week.csv)
-- `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/area/prep_json.py)
+- 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/week.csv)
+- `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_json.py)
 
 ## Reference

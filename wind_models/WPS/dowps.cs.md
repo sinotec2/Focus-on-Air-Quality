@@ -27,14 +27,14 @@ last_modified_date:   2021-11-25 16:21:24
 - WPS要處理的數據包括
   - 地理地形等[靜態數據](https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html)、
   - 再分析數據(如FNL)、
-  - [海溫數據](https://sinotec2.github.io/jtd/docs/wind_models/SST/)等等。
+  - [海溫數據](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)等等。
   - 其結果可以成為OBSGRID、及(或)real的輸入檔案，為每一WRF作業必須的步驟。
   - 詳細編譯、安裝、namelist.wps設定、VTable的設定等等，可由[官網](https://github.com/wrf-model/WPS)找到相關資源。此處著眼在批次操作、作業瓶頸、以及結果檢核等注意事項。
 
 ## WPS之全月執行方案
 
 ### `dowps.sh`的執行
-此處以批次檔[dowps.sh](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh_txt)做為處理全月之工具，則執行全年的迴圈為:
+此處以批次檔[dowps.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/WPS/dowps.sh_txt)做為處理全月之工具，則執行全年的迴圈為:
 ```bash
 ROOT=/data/WRF4.1
 for i in {0..11};do 
@@ -94,14 +94,14 @@ done
     26    done
 ```
 - 因同步運作，必須避免不同月份間檔案發生衝突。
-- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/jtd/docs/wind_models/WPS/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
+- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
 ```bash
     27    ii=$(printf "%02d" $(( $i + 1 )) )
     28    echo "ii:"$ii
     29    mkdir -p $PATH1/WPS$ii
     30    cd $PATH1/WPS$ii
 ```
-- 名單[模版](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop)的應用
+- 名單[模版](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/WPS/namelist.wps.loop)的應用
   - 從主目錄複製一份名單的模版`namelist.wps.loop`到工作目錄
     - namelist.wps.loop的起迄時間為此處要置換的變數
     ```bash
@@ -131,7 +131,7 @@ done
 ```
 - 同樣方式讀取SST檔案。
   - 如SST檔案非`grib`格式，則不需要執行此段，
-  - 而需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。參[海溫的讀取](https://sinotec2.github.io/jtd/docs/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
+  - 而需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。參[海溫的讀取](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
 ```bash
     38    cp -f $PATH1/namelist.wps.loop namelist.wps
     39    for cmd in "s/YN/"$YN/g  "s/YP/"$YP/g  "s/MN/"$MN/g  "s/MP/"$MP/g  ;do sed -i $cmd namelist.wps;done
@@ -157,8 +157,8 @@ done
 ```
 
 ## 腳本出處
-- dowps.sh：[github](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/dowps.sh_txt)
-- 模版：[github](https://github.com/sinotec2/jtd/blob/main/docs/wind_models/WPS/namelist.wps.loop)
+- dowps.sh：[github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/WPS/dowps.sh_txt)
+- 模版：[github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/WPS/namelist.wps.loop)
 
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.

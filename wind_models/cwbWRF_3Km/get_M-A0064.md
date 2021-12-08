@@ -23,7 +23,7 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 ## 背景
-- 續[樓上](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/)的討論，此處進一步說明下載細節。
+- 續[樓上](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)的討論，此處進一步說明下載細節。
 - 目前為止CWB是要求會員登錄的，登入後方能瀏覽檔案網址，經網址定位與確認後，實際自動下載時(如用`wget`)反而不必帳密。
   - 其會員帳號為電子郵件、密碼須包括大小寫、數字、特殊字元（`shift 1～0`）
 - 檔案網址的資訊，寫在`xml`檔案內容內，範例如下：
@@ -128,6 +128,6 @@ for I in $(ls *.grib2);do ncl_convert2nc $i;done
 ```
 
 ## 批次腳本
-整體下載、轉檔、提取近地面風等作業可以詳見[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)的腳本原始碼
+整體下載、轉檔、提取近地面風等作業可以詳見[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)的腳本原始碼
 
 ## Reference

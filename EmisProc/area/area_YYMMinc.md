@@ -357,6 +357,6 @@ for m in {09..12};do sub python area_YYMM.py 19$m >&/dev/null;done
 ```
   
 ## 檔案下載
-- `python`程式：[area_YYMMinc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/docs/EmisProc/area/area_YYMMinc.py)。
+- `python`程式：[area_YYMMinc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/area_YYMMinc.py)。
 
 ## Reference

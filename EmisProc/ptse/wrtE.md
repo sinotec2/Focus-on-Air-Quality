@@ -23,8 +23,8 @@ last_modified_date:   2021-12-07 17:06:30
 
 ## 背景
 - 地面點源排放檔最大的特徵就是與其他面源一樣的格式，是網格化的分布，因此點源非但是某一切分煙囪高度以下的總合，也是某一網格解析度範圍內的總合。其逐時變化要先行展開，再針對網格範圍進行整併。
-- 須先行產生地面點源每一污染源的**時變係數**檔案，詳[地面點源之時變係數](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptseG_ONS/)。
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/)中的副程式
+- 須先行產生地面點源每一污染源的**時變係數**檔案，詳[地面點源之時變係數](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptseG_ONS/)。
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式
 
 ## 程式說明
 
@@ -190,12 +190,12 @@ $ diff ptseG.py ptseE.py
 ```
 
 ## 結果檢視
-- [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG)
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG)
-- [排放量時間變化](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
+- [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
+- [排放量時間變化](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
 ## 檔案下載
-- `python`程式：[ptseG.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseG.py)。
+- `python`程式：[ptseG.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptseG.py)。
 
 
 ## Reference

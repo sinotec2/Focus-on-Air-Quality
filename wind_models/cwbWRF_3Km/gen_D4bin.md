@@ -23,10 +23,10 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 ## 背景
-- 續[樓上](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/)、以及[下載](https://sinotec2.github.io/jtd/docs/wind_models/cwbWRF_3Km/get_M-A0064/)程序之說明，此處詳述水平內插之細節。
+- 續[樓上](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)、以及[下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064/)程序之說明，此處詳述水平內插之細節。
 - 由於`grb2`檔案與`wrfout_d04`的解析度相同、又是等間距直角座標系統，似乎網格系統的互換沒有問題，實則2個系統的原點不一樣，投影也略有差異，因此還是必須建立內插模式。
 
-## [gen_D4bin.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/gen_D4bin.py_txt)分段說明
+## [gen_D4bin.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/gen_D4bin.py_txt)分段說明
 - 引用模組
 ```python
      1  import netCDF4
@@ -126,7 +126,7 @@ last_modified_date:   2021-11-30 10:43:16
 ```
 
 ## 下載程式碼
-- 可以由[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/cwbWRF_3Km/gen_D4bin.py_txt)找到原始碼。
+- 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/gen_D4bin.py_txt)找到原始碼。
 
 ## 檢核
 

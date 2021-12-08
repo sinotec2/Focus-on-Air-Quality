@@ -23,12 +23,12 @@ last_modified_date:   2021-12-06 12:09:47
 
 ## 背景
 - 此處處理TEDS PM/VOCs年排放量之劃分、與時變係數相乘、整併到光化模式網格系統內。
-- 高空點源的**時變係數**檔案需按CEMS數據先行[展開](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptseE_ONS/)。
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/jtd/docs/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/jtd/docs/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/)中的副程式
+- 高空點源的**時變係數**檔案需按CEMS數據先行[展開](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptseE_ONS/)。
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式
 
 ## 副程式說明
 
-### [ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/)
+### [ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)
 
 ### 對煙道座標進行叢集整併
 如題所示。整併的理由有幾：
@@ -125,7 +125,7 @@ for m in 0{1..9} 1{0..2};do python wrtE.py 19$m;done
 
 ### 程式基本定義、資料庫檔案QC、nc檔案之延展
 - 調用模組
-  - 因無另存處理過後的資料庫，因此程式還是會用到[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/)中的副程式`CORRECT`, `add_PMS`, `check_nan`, `check_landsea`, `FillNan`, `WGS_TWD`, `Elev_YPM`
+  - 因無另存處理過後的資料庫，因此程式還是會用到[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式`CORRECT`, `add_PMS`, `check_nan`, `check_landsea`, `FillNan`, `WGS_TWD`, `Elev_YPM`
 
 ```python   
 kuang@node03 /nas1/TEDS/teds11/ptse
@@ -408,7 +408,7 @@ $ cat -n ptseE.py
    188      j=cbm.index(c)
    189      df.loc[idx,c]=[prod[i,j]*k for k in df.loc[idx,'NMHC_EMI']]
 ```
-- PM的劃分，詳見[ptse_sub](https://sinotec2.github.io/jtd/docs/EmisProc/ptse/ptse_sub/#%E7%B0%A1%E5%96%AE%E7%9A%84pm%E5%8A%83%E5%88%86%E5%89%AF%E7%A8%8B%E5%BC%8F)
+- PM的劃分，詳見[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#%E7%B0%A1%E5%96%AE%E7%9A%84pm%E5%8A%83%E5%88%86%E5%89%AF%E7%A8%8B%E5%BC%8F)
 
 ```python   
    190  #PM splitting
@@ -623,10 +623,10 @@ $ cat -n ptseE.py
 ```
 
 ## 檔案下載
-- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseE.py)。
+- `python`程式：[ptseE_ONS.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptseE.py)。
 - `jupyter-notebook`檔案
-  - [ptseE_ONS.ipynb](https://github.com/sinotec2/jtd/blob/main/docs/EmisProc/ptse/ptseE.ipynb)
-  - [nbviewer](https://nbviewer.org/github/sinotec2/jtd/blob/main/docs/EmisProc/ptse/ptseE.ipynb)
+  - [ptseE_ONS.ipynb](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.ipynb)
+  - [nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.ipynb)
 
 
 ## Reference

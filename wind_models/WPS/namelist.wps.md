@@ -27,7 +27,7 @@ last_modified_date:   2021-11-25 16:21:24
 - WPS要處理的數據包括
   - 地理地形等[靜態數據](https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html)、
   - 再分析數據(如FNL)、
-  - [海溫數據](https://sinotec2.github.io/jtd/docs/wind_models/SST/)等等。
+  - [海溫數據](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)等等。
   - 其結果可以成為OBSGRID、及(或)real的輸入檔案，為每一WRF作業必須的步驟。
   - 詳細編譯、安裝、namelist.wps設定、VTable的設定等等，可由[官網](https://github.com/wrf-model/WPS)找到相關資源。此處著眼在批次操作、作業瓶頸、以及結果檢核等注意事項。
 
@@ -73,7 +73,7 @@ geog_data_path = '/Users/WRF4.1/WPS/WPS_GEOG',
   - 因大多數再分析數據是以`grib`格式存檔，所以下載後要進行轉檔，以準備下一階段的切割與網格化([metgrid.exe]())。
   - 是否一定需要進行`ungrib.exe`？答案是否定也是肯定。
     - 使用`python`當然也能進行`grib`檔案的讀取及`metgrid`的準備，程式也更為靈活、因應日新月異的再分析數據也有更短的更新週期(如[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py))，如有特殊需求可以參考應用。
-    - 因近年來很多單位也提供`nc`檔案，那就不需要`ungrib.exe`，反而是要進行`unNC`的工作，因為在所提供的`nc`檔案中，其變數名稱、單位、網格定義等等，也各不相同，要將其轉寫成WPS格式進入WRF系統，也會是一番工程(如[nc檔案轉WPS暫存檔格式](https://sinotec2.github.io/jtd/docs/wind_models/SST/#nc%E6%AA%94%E6%A1%88%E8%BD%89wpsungribexe%E6%9A%AB%E5%AD%98%E6%AA%94%E6%A0%BC%E5%BC%8Fintermediate-format))。
+    - 因近年來很多單位也提供`nc`檔案，那就不需要`ungrib.exe`，反而是要進行`unNC`的工作，因為在所提供的`nc`檔案中，其變數名稱、單位、網格定義等等，也各不相同，要將其轉寫成WPS格式進入WRF系統，也會是一番工程(如[nc檔案轉WPS暫存檔格式](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#nc%E6%AA%94%E6%A1%88%E8%BD%89wpsungribexe%E6%9A%AB%E5%AD%98%E6%AA%94%E6%A0%BC%E5%BC%8Fintermediate-format))。
 
 ### 檔案解讀的工作核心：建立對照關係
 - 由於各作業單位再分析檔案內的變數名稱、單位等等都不相同，解讀時就需要逐一進行對照、單位與名稱轉換、這需要一個完整的對照表，稱之為**Vtable**(**V**ariable dictionary **table**)。
@@ -148,9 +148,9 @@ dimensions:
     - 使用ncks工具減少(或)增加新、舊版本期間`met_em`檔案的層數，以符合整體個案層數的一致性。(建議方式)
 
 ### met_em檔案的檢視
-因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如[下圖](https://github.com/sinotec2/jtd/blob/main/assets/images/a.png)2020年6月太平洋高壓範例。
+因為`met_em`是nc檔案，可以用VERDI或其他軟體開啟、檢視，如[下圖](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/assets/images/a.png)2020年6月太平洋高壓範例。
 - met_em.d01.2020-06-16_06:00:00.nc
-![met_em.d01.2020-06-16_06:00:00.nc](https://github.com/sinotec2/jtd/raw/main/assets/images/a.png)
+![met_em.d01.2020-06-16_06:00:00.nc](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/a.png)
 
 
 ## Reference

@@ -54,7 +54,7 @@ done
 ### `namelist.oa`模版
 - 因為每批次、每層網格的`namelist.oa`都有所不同，必須按照規則進行修改，此處以複製模版、局部置換的方式辦理。
 - 置換的方式採用linux [sed](https://terryl.in/zh/linux-sed-command/)指令
-- 模版詳見[namelist.oa](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/namelist.oa/)說明
+- 模版詳見[namelist.oa](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/namelist.oa/)說明
 
 ### `obsYYMM_run.sh`的執行
 - 開啟12個月份的專屬目錄（OBS01~OBS12），其下再開啟12個批次run1~run12,共144個批次同時進行。
@@ -116,7 +116,7 @@ done
 ```
 
 - 依序執行`obsgrid`, [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh), `filter_p`
-  - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](https://sinotec2.github.io/jtd/docs/wind_models/OBSGRID/程式修改及編譯/)
+  - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/程式修改及編譯/)
   - [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh)為WRF系統提供的批次腳本，旨在將OBS_DOMAIN檔案合併，以備obs納進使用。
   - [filter_p]((http://200.200.31.47/nas1/WRF4.0/WRFv3.9/OBSGRID/filter_p.f))濾掉OBS_DOMAIN檔案中測站數據完全無效者。
 
@@ -140,11 +140,11 @@ done
 
 ## 執行成果檢核
 - 正常執行結果，`wrfsfdda`檔案長度將會有`24*天數`個小時，可以用`ncdump -h $nc`指令來檢查。
-- `wrfsfdda`檔案可以使用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)、[METINFO](http://meteothink.org/)或其他軟體開啟。如[下圖](https://github.com/sinotec2/jtd/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)即以`wrfsfdda`中的`(U10_NDG_NEW,V10_NDG_NEW)`，使用[METINFO](http://meteothink.org/)繪製的向量與流線圖：
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)
+- `wrfsfdda`檔案可以使用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)、[METINFO](http://meteothink.org/)或其他軟體開啟。如[下圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)即以`wrfsfdda`中的`(U10_NDG_NEW,V10_NDG_NEW)`，使用[METINFO](http://meteothink.org/)繪製的向量與流線圖：
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)
 
 ## 下載`obsYYMM_run.sh`
-點選[github](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/wind_models/OBSGRID/obsYYMM_run.sh_txt)
+點選[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/OBSGRID/obsYYMM_run.sh_txt)
 
 ## Reference
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06

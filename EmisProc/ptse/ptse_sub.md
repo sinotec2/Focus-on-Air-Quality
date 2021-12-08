@@ -266,6 +266,8 @@ $ cat -n ptse_sub.py
 ```
 
 ## 地面點源處理會用到的副程式
+
+### 網格整併與轉寫到nc檔案
 - 此副程式會把逐時、逐煙道的排放量矩陣展開成資料庫形態，以便進行`pivot_table`，整併(加總)網格排放量。
 
 ```python
@@ -313,6 +315,8 @@ $ cat -n ptse_sub.py
    214    return
    215
 ```
+
+### 格點化
 - 將資料庫中的`UTM_E`及`UTM_N`按照網格系統的原點與解析度予以格點化。
   - 為適應座標系統有可能先行平移，測驗座標值是否有負值，若是，則不必再平移
 
@@ -413,6 +417,6 @@ def Mat2DF(a):
 ```
 
 ## 檔案下載
-- `python`程式：[pptse_sub.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptse_sub.py)。
+- `python`程式：[ptse_sub.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptse_sub.py)。
 
 ## Reference

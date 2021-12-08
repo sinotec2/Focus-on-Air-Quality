@@ -265,7 +265,7 @@ $ cat -n ptse_sub.py
    172
 ```
 
-### 地面點源處理會用到的副程式
+## 地面點源處理會用到的副程式
 - 此副程式會把逐時、逐煙道的排放量矩陣展開成資料庫形態，以便進行`pivot_table`，整併(加總)網格排放量。
 
 ```python
@@ -329,17 +329,90 @@ $ cat -n ptse_sub.py
    225
    226
 ```
--
+
+## 資料表與矩陣的互換
+
+### 資料表轉成矩陣
+- 目前既有的轉檔工具都假設資料表本身就是2階矩陣的內容，不適用在資料表含有字串的欄位，以其他欄位作為維度、多維度、不限維度的情況
+- 維度欄位令為`idx_lst`的序列，可以是任何物件、種類。
+- 資料表（名稱令為`dd`）的值在最後一欄，其欄位名稱令為`vname`，即為矩陣的值。
+- 目標矩陣(`mat`)維度階級數未知、形狀未知。
+
 ```python
+# input df, index cols(list), value cols name(str)
+# return matrix, index lists (in cols order)
+def DF2Mat(dd,idx_lst,vname):
+  import sys
+  import numpy as np
+  from pandas import DataFrame
 ```
--
+- 取出每個維度欄位的值(`lst`)，予以排序，將值反算成序位標籤(`'i'+c`)，存回資料表。
+  - 序列`lst`要取長度，並且準備回傳。
+  - 使用`dict`對照，而不要使用`list.index()`，後者耗費的時間會很長。
+
 ```python
+  ret_lst, num_lst=[],[]
+  for c in idx_lst:
+    lst=eval('list(set(dd.'+c+'))');lst.sort()
+    n=len(lst)
+    ret_lst.append(lst);num_lst.append(n)
+    dct={lst[i]:i for i in range(n)}
+    dd['i'+c]=[dct[i] for i in dd[c]]
 ```
--
+- 開啟新的矩陣，其形狀即為每個`lst`的長度。
+  - 每個欄位的序位標籤，將用在指示`mat`的空間位置，將`vname`的值存放在正確的位置。
+  - 此處使用`exec`指令，以因應不同的階級數的情況
+  - 在副程式內執行`exec`，需加上`locals()`,避免動到主程式的變數名稱。
+
 ```python
+  mat=np.zeros(shape=num_lst)
+  s='mat['+''.join(['dd.i'+c+'[:],' for c in idx_lst]).strip(',')+']=dd.'+vname+'[:]' 
+  exec(s,locals())
+  return mat, ret_lst
+```
+
+### 矩陣轉資料表
+- 目的是使用資料表的`pivot_table`平行計算功能
+   - 回傳資料表並未去 `0`，如果需要減少資料表的長度，使用者要自己執行篩選、刪除。
+   - 同樣不限矩陣階級數的上限，只有下限。
+
+```python
+# input any ranks of matrix a
+# return df which columns is [col_1,col_2 ... col_ndim, val]
+def Mat2DF(a):
+  import sys
+  import numpy as np
+  from pandas import DataFrame
+  ndim=a.ndim
+  if ndim<2:sys.exit('ndim too small, no need to convert')
+```
+- `ranks`是個字串序列，如果是3階，將會是`["[:,None,None]", "[None,:,None]", "[None,None,:]"]`套用在每個維度的標籤，1維轉多維的複製過程。
+
+```python
+  H,T,C,N='[', ']', ':,', 'None,'
+  ranks=[]
+  for n in range(ndim):
+    s=H
+    for i in range(ndim):
+      m=N
+      if i==n:m=C
+      s+=m    
+    ranks.append(s.strip(',')+T)
+```
+- 寫出每個維度的標籤當成新的維度欄位。實際的值需要前述`ret_lst`內容來套入。
+
+```python
+  DD={}
+  for i in range(ndim):
+    var=np.zeros(shape=a.shape,dtype=int)
+    var[:]=eval('np.array([j for j in range(a.shape[i])],dtype=int)'+ranks[i],locals())
+	DD['col_'+str(i+1)]=var[:].flatten()
+  DD['val']=a.flatten()
+  return DataFrame(DD)
+
 ```
 
 ## 檔案下載
-- `python`程式：[prep_linegridLL.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/line/prep_linegridLL.py)。
+- `python`程式：[pptse_sub.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptse_sub.py)。
 
 ## Reference

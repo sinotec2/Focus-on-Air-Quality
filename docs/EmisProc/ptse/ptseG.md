@@ -40,42 +40,153 @@ for spe in NMHC SNCP;do python ptseG_ONS.py $spe;done
 
 
 ### 程式差異
-`diff ptseG_ONS.py ptseE_ONS.py`
+`diff ptseG.py ptseE.py`
+- 調用模組，`ptseG`多調用`pv_nc`、`disc`2個程式，也有些沒有調用。
+
+```python
+kuang@node03 /nas1/TEDS/teds11/ptse
+$ diff ptseG.py ptseE.py
+12c12,13
+< from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan, WGS_TWD, Elev_YPM, pv_nc, disc
+---
+> from mostfreqword import mostfreqword
+> from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan, WGS_TWD, Elev_YPM
+13a15
+> from cluster_xy import cluster_xy, XY_pivot
+```
+- 用不一樣的模版，須使用地面排放源的模版
+  - 檔名不一樣
+
+```python
+30c36,37
+< fname='fortBE.413_teds10.ptsG'+mm+'.nc'
+---
+> print('template applied')
+> NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
+32c39
+<   nc = netCDF4.Dataset(fname, 'r+')
+---
+>   nc = netCDF4.Dataset(NCfname, 'r+')
+34,35c41,42
+<   os.system('cp '+P+'template_d4.nc '+fname)
+<   nc = netCDF4.Dataset(fname, 'r+')
+---
+>   os.system('cp '+P+'template_v7.nc '+NCfname)
+>   nc = netCDF4.Dataset(NCfname, 'r+')
+```
+  - 地面排放量是4維陣列，點源除了排放量之外，也有3維陣列(煙道參數)
+  - 屬性標籤
+```
+37,38c44,45
+< nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
+< nv=len(V[3])
+---
+> nt,nv,dt=nc.variables[V[2][0]].shape
+> nv=len([i for i in V[1] if i !='CP_NO'])
+41c48
+< nc.NOTE='grid Emission'
+---
+> nc.NOTE='Point Emission'
+42a50
+> nc.NVARS=nv
+44c52,53
+< #nc.NAME='EMISSIONS '
+---
+> nc.name='PTSOURCE  '
+> nc.NSTEPS=ntm
+55,56c64
+< for v in V[3]:
+<   nc.variables[v][:]=0.
+---
+> nc.close()
+```
 - 對切分高度的作法，還包括所有煙道編號不是以`P`起頭的所有污染源
 
 ```python
+70,71c84,85
+< #shorter stack or all NO_S other than 'P'
 < boo=(df.HEI<Hs) | (df.NO_S.map(lambda x:x[0]!='P'))
-< df=df.loc[boo].reset_index(drop=True)
 ---
-> df=df.loc[(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))].reset_index(drop=True)
+> #only P??? an re tak einto account
+> boo=(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))
 ```
-- 高空源是每污染物逐項執行，地面是`NMHC`和`SNCP`2項。
+- 點源須針對煙道重新整理資料庫，因為需要煙囪參數。地面點源不需要。
 
 ```python
-109,112c106,107
-< boo1=df.NMHC_EMI>0
-< boo2=(df.SOX_EMI+df.NOX_EMI+df.CO_EMI+df.PM_EMI)>0
-< BLS={'NMHC':boo1,'SNCP':boo2}
-< lsp={'NMHC':['NMHC_EMI'],'SNCP':'SOX_EMI,NOX_EMI,CO_EMI,PM_EMI'.split(',')}
+87,88c101,114
+< print('NMHC expanding')
+< dfV=df.loc[df.NMHC_EMI>0].reset_index(drop=True)
 ---
-> c2v={'NMHC':'PM','SOX':'SOX','NOX':'NOX','PM':'PM','CO':'NOX'} #point.csv vs cems.csv
-> BLS={c:df[c+'_EMI']>0 for c in c2v}
+> #pivot table along the dimension of NO_S (P???)
+> df_cp=pivot_table(df,index='CP_NO',values=cole+['ORI_QU1'],aggfunc=sum).reset_index()
+> df_xy=pivot_table(df,index='CP_NO',values=XYHDTV+colT,aggfunc=np.mean).reset_index()
+...
+> #determination of camx version
+> ver=7
+> if 'XSTK' in V[0]:ver=6
+> print('NMHC/PM splitting and expanding')
 ```
-- 地面源沒有`CEMS`，因此**時變係數**為整數(`0`或`1`)
+- 資料庫以外新的SCC是在執行過程中發現的，地面與高空自然會有不同
 
 ```python
-127c122
-<   ons=np.zeros(shape=(len(cp),len(mdh)),dtype=int)
+107,113c133,141
 ---
->   ons=np.zeros(shape=(len(cp),nMDH))#,dtype=int)
+> '30301024':'30301014',
+> '30400213':'30400237',
+> '30120543':'30120502',
 ```
-- 結果檔名也有點不一樣
+- 因`ons`矩陣為整數，沒有常態化的必要，因此排放量的時間單位須在此處一併處理
 
 ```python
-161c159
-<   fnameO=spe+'_CP'+str(len(cp))+'_MDH'+str(len(mdh))+'_ONS.bin'
+155,156c183
+<   dfV[c]=0.
+< dfV.NMHC_EMI=[i*1E6/j/k for i,j,k in zip(dfV.NMHC_EMI,dfV.DY1,dfV.HD1)]
 ---
->   fnameO=spe+'_ECP'+str(len(cp))+'_MDH'+str(len(mdh))+'_ONS.bin'
+>   df[c]=0.
+```
+- **時變係數**檔案名稱差異
+
+```python
+168,169c196,201
+< 'NMHC':'NMHC_CP9348_MDH8760_ONS.bin',
+< 'SNCP':'SNCP_CP4072_MDH8760_ONS.bin'}
+---
+> 'CO'  :'CO_ECP7496_MDH8760_ONS.bin',
+> 'NMHC':'NMHC_ECP2697_MDH8760_ONS.bin',
+> 'NOX' :'NOX_ECP13706_MDH8760_ONS.bin',
+> 'PM'  :'PM_ECP17835_MDH8760_ONS.bin',
+> 'SOX' :'SOX_ECP8501_MDH8760_ONS.bin'}
+>
+171,172c203,207
+< 'NMHC':'NMHC_CP9897_MDH8760_ONS.bin',
+< 'SNCP':'SNCP_CP9188_MDH8760_ONS.bin'}
+---
+> 'CO'  :'CO_ECP4919_MDH8784_ONS.bin',
+> 'NMHC':'NMHC_ECP3549_MDH8784_ONS.bin',
+> 'NOX' :'NOX_ECP9598_MDH8784_ONS.bin',
+> 'PM'  :'PM_ECP11052_MDH8784_ONS.bin',
+> 'SOX' :'SOX_ECP7044_MDH8784_ONS.bin'}
+174,175c209,213
+< 'NMHC':'NMHC_CP12581_MDH8784_ONS.bin',
+< 'SNCP':'SNCP_CP22614_MDH8784_ONS.bin'}
+---
+> 'CO'  :'CO_ECP1077_MDH8784_ONS.bin',
+> 'NMHC':'NMHC_ECP1034_MDH8784_ONS.bin',
+> 'NOX' :'NOX_ECP1905_MDH8784_ONS.bin',
+> 'PM'  :'PM_ECP2155_MDH8784_ONS.bin',
+> 'SOX' :'SOX_ECP1468_MDH8784_ONS.bin'}
+```
+- 整數的`ons`，binary檔案讀法有點不一樣，其餘作法大同小異。
+
+```python
+178,239c216,228
+< fnameO=fns['NMHC']
+< with FortranFile(fnameO, 'r') as f:
+<   cp = f.read_record(dtype=np.dtype('U12'))
+<   mdh = f.read_record(dtype=np.int)
+<   ons = f.read_record(dtype=np.int)
+< ons=ons.reshape(len(cp),len(mdh))
+...
 ```
 
 ## 檔案下載

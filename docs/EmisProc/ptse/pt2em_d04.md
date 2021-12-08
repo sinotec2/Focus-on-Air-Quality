@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Ele PTse Downgrade"
+title: "Elev PTse Downgrade"
 parent: "Point Sources"
 grand_parent: "Emission Processing"
 nav_order: 6
@@ -180,7 +180,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
    107  nc.close()
 ```
 - 座標微調
-  - 這一段是早期使用twd97座標系統套用VERDI(內政部縣市`shape`檔)時的誤差，後改用經緯度後已無需要執行。
+  - 這一段是早期使用twd97座標系統套用VERDI(內政部縣市`shape`檔)時的誤差，改用經緯度後已無需要執行。
 
 ```python
    108  #using CSC and XieHePP to calibrate the Map

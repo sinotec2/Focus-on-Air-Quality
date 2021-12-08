@@ -202,12 +202,12 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 ```
 
 ## 結果檢視
-- [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG)
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePAR.PNG)
-- [排放量時間變化](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
-![](https://github.com/sinotec2/jtd/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
+- [TEDS11高空2月排放檔案之網格分布](https://raw.githubusercontent.com/sinotec2/jtd/main/assets/images/pt2em_d04Demo.PNG)
+![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04Demo.PNG)
+- [台中電廠之NO排放之時間變化](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
+![](https://github.com/sinotec2/jtd/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
 ## 檔案下載
-- `python`程式：[ptseG.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/ptseG.py)。
+- `python`程式：[pt2em_d04.py](https://raw.githubusercontent.com/sinotec2/jtd/main/docs/EmisProc/ptse/pt2em_d04.py)。
 
 
 ## Reference

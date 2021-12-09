@@ -22,7 +22,7 @@ last_modified_at:   2021-12-02 09:55:34
 - 高空污染源進行同樣之程序，但需記載排放口之物理條件
 
 ## 後續處理
-- CAMx點源檔案無法使用什麼軟體開啟、繪圖，需使用[程式](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/pt2em_d04.py)將其轉成面源形態(按網格加總)
+- CAMx點源檔案無法使用什麼軟體開啟、繪圖，需使用[程式](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.py)將其轉成面源形態(按網格加總)
 - 經轉檔可以供CMAQ模式使用
 
 ## What's Learned

@@ -22,172 +22,218 @@ last_modified_date:   2021-12-07 17:06:30
 ---
 
 ## 背景
-- 地面點源排放檔最大的特徵就是與其他面源一樣的格式，是網格化的分布，因此點源非但是某一切分煙囪高度以下的總合，也是某一網格解析度範圍內的總合。其逐時變化要先行展開，再針對網格範圍進行整併。
-- 須先行產生地面點源每一污染源的**時變係數**檔案，詳[地面點源之時變係數](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptseG_ONS/)。
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式
+- 因程式記憶體耗用太大，nc檔案在輸出時遭到困難。最終決定先寫成`.fth`檔案，同時也有提供中間檢查、確認的方便性。
+- `feather`檔案可以說是目前壓縮比例最高、存取速度最快的資料庫檔案形式，詳情可以參考[知乎](https://zhuanlan.zhihu.com/p/247025752)。
 
 ## 程式說明
 
-### 程式執行
-因排放物質類別與污染源製造程序的特徵有關，必須分開個別處理，此處則以個別污染項目執行`ptseG_ONS.py`，執行方式如下：
-
-```bash
-for spe in NMHC SNCP;do python ptseG_ONS.py $spe;done
-```
-
-- 由於程式消耗記憶體非常大量，如要同時進行，需注意記憶體的使用情形。
-- 污染源個數與排放高度限值的設定、地面PM排放條件之給定、以及數據年代等等都有關係，需配套紀錄。
-
-
-### 程式差異
-`diff ptseG.py ptseE.py`
-- 調用模組，`ptseG`多調用`pv_nc`、`disc`2個程式，也有些沒有調用。
+### 程式分段說明
 
 ```python
-kuang@node03 /nas1/TEDS/teds11/ptse
-$ diff ptseG.py ptseE.py
-12c12,13
-< from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan, WGS_TWD, Elev_YPM, pv_nc, disc
----
-> from mostfreqword import mostfreqword
-> from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan, WGS_TWD, Elev_YPM
-13a15
-> from cluster_xy import cluster_xy, XY_pivot
+kuang@master /nas1/TEDS/teds11/ptse
+$ cat -n wrtE.py
+     1
+     2  #! crding = utf8
+     3  from pandas import *
+     4  import numpy as np
+     5  import os, sys, subprocess
+     6  import netCDF4
+     7  import twd97
+     8  import datetime
+     9  from calendar import monthrange
+    10  from scipy.io import FortranFile
+    11
+    12  from mostfreqword import mostfreqword
+    13  from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan
+    14  from ioapi_dates import jul2dt, dt2jul
+    15  from cluster_xy import cluster_xy, XY_pivot
+    16
+    17  def str2lst(A):
+    18      return [bytes(i,encoding='utf-8') for i in A[1:-1].replace("b'","").replace("'","").replace(" ","").split(',')][:8]
+    19
+    20
 ```
-- 用不一樣的模版，須使用地面排放源的模版
-  - 檔名不一樣
+- 外部程式之相依性
 
 ```python
-30c36,37
-< fname='fortBE.413_teds10.ptsG'+mm+'.nc'
----
-> print('template applied')
-> NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
-32c39
-<   nc = netCDF4.Dataset(fname, 'r+')
----
->   nc = netCDF4.Dataset(NCfname, 'r+')
-34,35c41,42
-<   os.system('cp '+P+'template_d4.nc '+fname)
-<   nc = netCDF4.Dataset(fname, 'r+')
----
->   os.system('cp '+P+'template_v7.nc '+NCfname)
->   nc = netCDF4.Dataset(NCfname, 'r+')
+    21  #Main
+    22  #locate the programs and root directory
+    23  pncg=subprocess.check_output('which pncgen',shell=True).decode('utf8').strip('\n')
+    24  ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
+    25  hmp=subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[1]
+    26  P='./'
+    27
 ```
-  - 地面排放量是4維陣列，點源除了排放量之外，也有3維陣列(煙道參數)
-  - 屬性標籤
-```
-37,38c44,45
-< nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
-< nv=len(V[3])
----
-> nt,nv,dt=nc.variables[V[2][0]].shape
-> nv=len([i for i in V[1] if i !='CP_NO'])
-41c48
-< nc.NOTE='grid Emission'
----
-> nc.NOTE='Point Emission'
-42a50
-> nc.NVARS=nv
-44c52,53
-< #nc.NAME='EMISSIONS '
----
-> nc.name='PTSOURCE  '
-> nc.NSTEPS=ntm
-55,56c64
-< for v in V[3]:
-<   nc.variables[v][:]=0.
----
-> nc.close()
-```
-- 對切分高度的作法，還包括所有煙道編號不是以`P`起頭的所有污染源
+- 時間之定義
 
 ```python
-70,71c84,85
-< #shorter stack or all NO_S other than 'P'
-< boo=(df.HEI<Hs) | (df.NO_S.map(lambda x:x[0]!='P'))
----
-> #only P??? an re tak einto account
-> boo=(df.HEI>=Hs) & (df.NO_S.map(lambda x:x[0]=='P'))
+    28  #time and space initiates
+    29  ym=sys.argv[1]
+    30  mm=sys.argv[1][2:4]
+    31  mo=int(mm)
+    32  yr=2000+int(sys.argv[1][:2])
+    33  Hs=0 #cutting height of stacks
+    34  ntm=(monthrange(yr,mo)[1]+2)*24+1
+    35  bdate=datetime.datetime(yr,mo,1)+datetime.timedelta(days=-1+8./24)
+    36  edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
+    37  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+    38  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 ```
-- 點源須針對煙道重新整理資料庫，因為需要煙囪參數。地面點源不需要。
+- 讀取模版並進行時間軸的延長
 
 ```python
-87,88c101,114
-< print('NMHC expanding')
-< dfV=df.loc[df.NMHC_EMI>0].reset_index(drop=True)
----
-> #pivot table along the dimension of NO_S (P???)
-> df_cp=pivot_table(df,index='CP_NO',values=cole+['ORI_QU1'],aggfunc=sum).reset_index()
-> df_xy=pivot_table(df,index='CP_NO',values=XYHDTV+colT,aggfunc=np.mean).reset_index()
-...
-> #determination of camx version
-> ver=7
-> if 'XSTK' in V[0]:ver=6
-> print('NMHC/PM splitting and expanding')
+    39  #prepare the uamiv template
+    40  print('template applied')
+    41  NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
+    42  try:
+    43    nc = netCDF4.Dataset(NCfname, 'r+')
+    44  except:
+    45    os.system('cp '+P+'template_v7.nc '+NCfname)
+    46    nc = netCDF4.Dataset(NCfname, 'r+')
+    47  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+    48  nt,nv,dt=nc.variables[V[2][0]].shape
+    49  nv=len([i for i in V[1] if i !='CP_NO'])
+    50  nc.SDATE,nc.STIME=dt2jul(bdate)
+    51  nc.EDATE,nc.ETIME=dt2jul(edate)
+    52  nc.NOTE='Point Emission'
+    53  nc.NOTE=nc.NOTE+(60-len(nc.NOTE))*' '
+    54  nc.NVARS=nv
+    55  #Name-names may encounter conflicts with newer versions of NCFs and PseudoNetCDFs.
+    56  nc.name='PTSOURCE  '
+    57  nc.NSTEPS=ntm
+    58  if 'ETFLAG' not in V[2]:
+    59    zz=nc.createVariable('ETFLAG',"i4",("TSTEP","VAR","DATE-TIME"))
+    60  if nt!=ntm or (nc.variables['TFLAG'][0,0,0]!=nc.SDATE and nc.variables['TFLAG'][0,0,1]!=nc.STIME):
+    61    for t in range(ntm):
+    62      sdate,stime=dt2jul(bdate+datetime.timedelta(days=t/24.))
+    63      nc.variables['TFLAG'][t,:,0]=[sdate for i in range(nv)]
+    64      nc.variables['TFLAG'][t,:,1]=[stime for i in range(nv)]
+    65      ndate,ntime=dt2jul(bdate+datetime.timedelta(days=(t+1)/24.))
+    66      nc.variables['ETFLAG'][t,:,0]=[ndate for i in range(nv)]
+    67      nc.variables['ETFLAG'][t,:,1]=[ntime for i in range(nv)]
+    68  for c in V[1]:
+    69    nc.variables[c].set_auto_mask(False)
+    70    if c=='CP_NO': continue
+    71    nc.variables[c][:]=0.
+    72  nc.close()
+    73  #template OK
+    74
 ```
-- 資料庫以外新的SCC是在執行過程中發現的，地面與高空自然會有不同
+- 讀取逐時、逐煙道之排放量`.fth`檔案
+- 讀取煙囪條件
 
 ```python
-107,113c133,141
----
-> '30301024':'30301014',
-> '30400213':'30400237',
-> '30120543':'30120502',
+    75  df=read_feather('df'+mm+'.fth')
+    76  pv=read_csv('pv'+mm+'.csv')
+    77  pv.CP_NOb=[str2lst(i) for i in pv.CP_NOb]
+    78  nopts=len(pv)
 ```
-- 因`ons`矩陣為整數，沒有常態化的必要，因此排放量的時間單位須在此處一併處理
+-  定義污染項目之對照關係
 
 ```python
-155,156c183
-<   dfV[c]=0.
-< dfV.NMHC_EMI=[i*1E6/j/k for i,j,k in zip(dfV.NMHC_EMI,dfV.DY1,dfV.HD1)]
----
->   df[c]=0.
+    79  #item sets definitions
+    80  c2s={'NMHC':'NMHC','SOX':'SO2','NOX':'NO2','CO':'CO','PM':'PM'}
+    81  c2m={'SOX':64,'NOX':46,'CO':28,'PM':1}
+    82  cole=[i+'_EMI' for i in c2s]+['PM25_EMI']
+    83  XYHDTV=['UTM_E','UTM_N','HEI','DIA','TEMP','VEL','ORI_QU1']
+    84  colT=['HD1','DY1','HY1']
+    85  colc=['CCRS','FCRS','CPRM','FPRM']
+    86
 ```
-- **時變係數**檔案名稱差異
+- CAMx版本在此設定
 
 ```python
-168,169c196,201
-< 'NMHC':'NMHC_CP9348_MDH8760_ONS.bin',
-< 'SNCP':'SNCP_CP4072_MDH8760_ONS.bin'}
----
-> 'CO'  :'CO_ECP7496_MDH8760_ONS.bin',
-> 'NMHC':'NMHC_ECP2697_MDH8760_ONS.bin',
-> 'NOX' :'NOX_ECP13706_MDH8760_ONS.bin',
-> 'PM'  :'PM_ECP17835_MDH8760_ONS.bin',
-> 'SOX' :'SOX_ECP8501_MDH8760_ONS.bin'}
->
-171,172c203,207
-< 'NMHC':'NMHC_CP9897_MDH8760_ONS.bin',
-< 'SNCP':'SNCP_CP9188_MDH8760_ONS.bin'}
----
-> 'CO'  :'CO_ECP4919_MDH8784_ONS.bin',
-> 'NMHC':'NMHC_ECP3549_MDH8784_ONS.bin',
-> 'NOX' :'NOX_ECP9598_MDH8784_ONS.bin',
-> 'PM'  :'PM_ECP11052_MDH8784_ONS.bin',
-> 'SOX' :'SOX_ECP7044_MDH8784_ONS.bin'}
-174,175c209,213
-< 'NMHC':'NMHC_CP12581_MDH8784_ONS.bin',
-< 'SNCP':'SNCP_CP22614_MDH8784_ONS.bin'}
----
-> 'CO'  :'CO_ECP1077_MDH8784_ONS.bin',
-> 'NMHC':'NMHC_ECP1034_MDH8784_ONS.bin',
-> 'NOX' :'NOX_ECP1905_MDH8784_ONS.bin',
-> 'PM'  :'PM_ECP2155_MDH8784_ONS.bin',
-> 'SOX' :'SOX_ECP1468_MDH8784_ONS.bin'}
+    87  #determination of camx version
+    88  ver=7
+    89  if 'XSTK' in V[0]:ver=6
+    90  fns=['CO','NMHC', 'NOX', 'PM', 'SOX' ]
+    91  col_id=["C_NO","XY"]
+    92  col_mn=['ORI_QU1','TEMP','VEL','UTM_E', 'UTM_N','HY1','HD1','DY1']
+    93  col_mx=['HEI']
+    94  lspec=[i for i in df.columns if i not in col_mn+['index','C_NO']]
+    95  c2m={i:1 for i in lspec}
+    96  c2m.update({'SO2':64,'NO2':46,'CO':28})
+    97
 ```
-- 整數的`ons`，binary檔案讀法有點不一樣，其餘作法大同小異。
+- 為延長煙道數(`COL`軸)，先將模版的`COL`軸設為可增加之記錄軸
 
 ```python
-178,239c216,228
-< fnameO=fns['NMHC']
-< with FortranFile(fnameO, 'r') as f:
-<   cp = f.read_record(dtype=np.dtype('U12'))
-<   mdh = f.read_record(dtype=np.int)
-<   ons = f.read_record(dtype=np.int)
-< ons=ons.reshape(len(cp),len(mdh))
-...
+    98  dimn={6:'NSTK',7:'COL'}
+    99  print(dimn[ver]+' expanding and reopening')
+   100  res=os.system(ncks+' -O --mk_rec_dmn '+dimn[ver]+' '+NCfname+' tmp'+mm)
+   101  if res!=0: sys.exit(ncks+' fail')
+   102  res=os.system('mv tmp'+mm+' '+NCfname)
+   103  if res!=0: sys.exit('mv fail')
+   104  #CP_NO in S1(byte) format
+   105  print('ncfile Enlargement')
+   106  #prepare the parameter dicts
+   107  PRM='XYHDTV'
+   108  v2n={PRM[i]:XYHDTV[i] for i in range(6)}
+   109  names={7:['xcoord','ycoord','stkheight','stkdiam','stktemp','stkspeed'],
+   110         6:[v+'STK' for v in PRM]}
+   111  v2c={PRM[i]:names[ver][i] for i in range(6)}
+   112  a=DataFrame({'SN':df.SO2+df.NO2})
+   113  a=a.sort_values('SN',ascending=False)
+   114  pig=[]#a.index[:100]
+   115  #filling the stack parameters for camx700nc
+   116
 ```
+- 再次開啟模版
+
+```python
+   117  nc = netCDF4.Dataset(NCfname, 'r+')
+   118  #enlarge the record dimension (COL)
+   119  z=np.zeros(shape=ntm)
+   120  for c in V[1]:
+   121    nc.variables[c].set_auto_mask(False)
+   122    if c in ['CP_NO']:continue
+   123    for i in range(nopts):
+   124      nc.variables[c][:ntm,i]=z
+   125  if ver==7:nc.variables['pigflag'][:nopts]=0
+   126  nc.close()
+   127  #res=os.system(ncks+' -O --mk_rec_dmn TSTEP '+NCfname+' tmp'+mm)
+   128  #if res!=0: sys.exit(ncks+' fail')
+   129  #res=os.system('mv tmp'+mm+' '+NCfname)
+   130  #if res!=0: sys.exit('mv fail')
+   131
+   132  nc = netCDF4.Dataset(NCfname, 'r+')
+   133  for v in PRM:
+   134    var=v2c[v]
+   135    nc.variables[var].set_auto_mask(False)
+   136    nc.variables[var][:nopts]=np.array(pv[v2n[v]])
+   137  nc.variables[v2c['V']][:nopts]=nc.variables[v2c['V']][:]*3600.
+   138  nc.variables[v2c['T']][:nopts]=nc.variables[v2c['T']][:]+273.
+   139  #first 100 for PiG
+   140  if len(pig)>0:
+   141    if ver==7:
+   142      nc.variables['pigflag'][pig]=1
+   143    else:
+   144      nc.variables[v2c['D']][pig]=nc.variables[v2c['D']][pig]*-1.
+   145  for c in V[1]:
+   146    if c not in lspec:continue
+   147    if c not in df.columns:continue
+   148    if c in ['CO', 'CP_NO']: continue
+   149    ic=lspec.index(c)
+   150    nc.variables[c][:,:nopts]=np.array(df[c]).reshape(ntm,nopts)
+   151    print(c)
+   152  #CO are store temperly in NO to speed up the process
+   153  c='CO'
+   154  if c in df.columns:
+   155    CO=np.array(df[c]).reshape(ntm,nopts)
+   156    nc.variables['NO'][:]=CO[:]
+   157    nc.variables['CO']=nc.variables['NO']
+   158    for v in ['long_name','var_desc']:
+   159      exec('nc.variables["CO"].'+v+'="CO              "')
+   160  nc.variables['CP_NO'][:nopts,:8]=np.array(list(pv.CP_NOb)).flatten().reshape(nopts,8)
+   161  nox=nc.variables['NO2'][:,:nopts]
+   162  nc.variables['NO'][:,:nopts]=nox[:,:nopts]*0.9
+   163  nc.variables['NO2'][:,:nopts]=nox-nc.variables['NO'][:,:nopts]
+   164  nc.NOPTS=nopts
+   165  nc.close()
+   166
+```
+
+### 程式
 
 ## 結果檢視
 - [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
@@ -199,3 +245,4 @@ $ diff ptseG.py ptseE.py
 
 
 ## Reference
+-数据如琥珀, **轻如“鸿毛（Feather）”的文件格式却重于泰山**, [知乎](https://zhuanlan.zhihu.com/p/247025752), 2020-09-16 

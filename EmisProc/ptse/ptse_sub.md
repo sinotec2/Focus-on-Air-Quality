@@ -427,6 +427,7 @@ $ cat -n ptse_sub.py
 ```
 - 寫出每個維度的標籤當成新的維度欄位。實際的值需要前述`ret_lst`內容來套入。
 
+```python
    256    DD={}
    257    for i in range(ndim):
    258      var=np.zeros(shape=a.shape,dtype=int)

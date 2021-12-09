@@ -417,6 +417,6 @@ def Mat2DF(a):
 ```
 
 ## 檔案下載
-- `python`程式：[ptse_sub.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptse_sub.py)。
+- `python`程式：[ptse_sub.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/ptse_sub.py)。
 
 ## Reference

@@ -336,17 +336,17 @@ $ cat -n ptse_sub.py
   - 為適應座標系統有可能先行平移，測驗座標值是否有負值，若是，則不必再平移
 
 ```python
-   216  def disc(dm):
-   217  #discretizations
-   218    if min(dm.UTM_N)<0:
-   219      dm['IX']=np.array((dm.UTM_E-nc.XORIG)/nc.XCELL,dtype=int)
-   220      dm['IY']=np.array((dm.UTM_N-nc.YORIG)/nc.YCELL,dtype=int)
-   221    else:
-   222      dm['IX']=np.array((dm.UTM_E-Xcent-nc.XORIG)/nc.XCELL,dtype=int)
-   223      dm['IY']=np.array((dm.UTM_N-Ycent-nc.YORIG)/nc.YCELL,dtype=int)
-   224    return dm
-   225
-   226
+   208  def disc(dm,nc):
+   209  #discretizations
+   210    if min(dm.UTM_N)<0:
+   211      dm['IX']=np.array((dm.UTM_E-nc.XORIG)/nc.XCELL,dtype=int)
+   212      dm['IY']=np.array((dm.UTM_N-nc.YORIG)/nc.YCELL,dtype=int)
+   213    else:
+   214      dm['IX']=np.array((dm.UTM_E-Xcent-nc.XORIG)/nc.XCELL,dtype=int)
+   215      dm['IY']=np.array((dm.UTM_N-Ycent-nc.YORIG)/nc.YCELL,dtype=int)
+   216    return dm
+   217
+   218
 ```
 
 ## 資料表與矩陣的互換
@@ -358,25 +358,27 @@ $ cat -n ptse_sub.py
 - 目標矩陣(`mat`)維度階級數未知、形狀未知。
 
 ```python
-# input df, index cols(list), value cols name(str)
-# return matrix, index lists (in cols order)
-def DF2Mat(dd,idx_lst,vname):
-  import sys
-  import numpy as np
-  from pandas import DataFrame
+   219  # input df, index cols(list), value cols name(str)
+   220  # return matrix, index lists (in cols order)
+   221  def DF2Mat(dd,idx_lst,vname):
+   222    import sys
+   223    import numpy as np
+   224    from pandas import DataFrame
 ```
 - 取出每個維度欄位的值(`lst`)，予以排序，使用`dict`將**值**反算成**序位標籤**(命名為`'i'+c`)，存回資料表。
   - 序列`lst`要取長度備用，並且準備回傳。
   - 使用`dict`對照，而不要使用`list.index()`，後者耗費的時間會很長。
+  - `eval`只指令在`centos`可能會有問題，其實此處也可以用別的方式調用資料表欄位。
 
 ```python
-  ret_lst, num_lst=[],[]
-  for c in idx_lst:
-    lst=eval('list(set(dd.'+c+'))');lst.sort()
-    n=len(lst)
-    ret_lst.append(lst);num_lst.append(n)
-    dct={lst[i]:i for i in range(n)}
-    dd['i'+c]=[dct[i] for i in dd[c]]
+   225    ret_lst, num_lst=[],[]
+   226    for c in idx_lst:
+   227  #mac    lst=eval('list(set(dd.'+c+'))');lst.sort()
+   228      lst=list(set(dd[c]));lst.sort()
+   229      n=len(lst)
+   230      ret_lst.append(np.array(lst));num_lst.append(n)
+   231      dct={lst[i]:i for i in range(n)}
+   232      dd['i'+c]=[dct[i] for i in dd[c]]
 ```
 - 開啟新的矩陣，其形狀即為每個`lst`的長度。
   - 每個欄位的序位標籤，將用在指示`mat`的空間位置，將`vname`的值存放在正確的位置。
@@ -384,10 +386,12 @@ def DF2Mat(dd,idx_lst,vname):
   - 在副程式內執行`exec`，需加上`locals()`,避免動到主程式的變數名稱。
 
 ```python
-  mat=np.zeros(shape=num_lst)
-  s='mat['+''.join(['dd.i'+c+'[:],' for c in idx_lst]).strip(',')+']=dd.'+vname+'[:]' 
-  exec(s,locals())
-  return mat, ret_lst
+   233    mat=np.zeros(shape=num_lst)
+   234    s='mat['+''.join(['dd.i'+c+'[:],' for c in idx_lst]).strip(',')+']=dd.'+vname+'[:]'
+   235    exec(s,locals())
+   236    return mat, ret_lst
+   237
+   238
 ```
 
 ### 矩陣轉資料表
@@ -399,36 +403,39 @@ def DF2Mat(dd,idx_lst,vname):
 ```python
 # input any ranks of matrix a
 # return df which columns is [col_1,col_2 ... col_ndim, val]
-def Mat2DF(a):
-  import sys
-  import numpy as np
-  from pandas import DataFrame
-  ndim=a.ndim
-  if ndim<2:sys.exit('ndim too small, no need to convert')
+   239  # input any ranks of matrix a
+   240  # return df which columns is [col_1,col_2 ... col_ndim, val]
+   241  def Mat2DF(a):
+   242    import sys
+   243    import numpy as np
+   244    from pandas import DataFrame
+   245    ndim=a.ndim
+   246    if ndim<2:sys.exit('ndim too small, no need to convert')
 ```
 - `ranks`是個字串序列，如果是3階，將會是`["[:,None,None]", "[None,:,None]", "[None,None,:]"]`套用在每個維度的標籤，1維轉多維的複製過程。
 
 ```python
-  H,T,C,N='[', ']', ':,', 'None,'
-  ranks=[]
-  for n in range(ndim):
-    s=H
-    for i in range(ndim):
-      m=N
-      if i==n:m=C
-      s+=m    
-    ranks.append(s.strip(',')+T)
+   247    H,T,C,N='[', ']', ':,', 'None,'
+   248    ranks=[]
+   249    for n in range(ndim):
+   250      s=H
+   251      for i in range(ndim):
+   252        m=N
+   253        if i==n:m=C
+   254        s+=m
+   255      ranks.append(s.strip(',')+T)
 ```
 - 寫出每個維度的標籤當成新的維度欄位。實際的值需要前述`ret_lst`內容來套入。
 
-```python
-  DD={}
-  for i in range(ndim):
-    var=np.zeros(shape=a.shape,dtype=int)
-    var[:]=eval('np.array([j for j in range(a.shape[i])],dtype=int)'+ranks[i],locals())
-	DD['col_'+str(i+1)]=var[:].flatten()
-  DD['val']=a.flatten()
-  return DataFrame(DD)
+   256    DD={}
+   257    for i in range(ndim):
+   258      var=np.zeros(shape=a.shape,dtype=int)
+   259  #mac    var[:]=eval('np.array([j for j in range(a.shape[i])],dtype=int)'+ranks[i],locals())
+   260      exec('var[:]=np.array([j for j in range(a.shape[i])],dtype=int)'+ranks[i],locals())
+   261      DD['col_'+str(i+1)]=var[:].flatten()
+   262    DD['val']=a.flatten()
+   263    return DataFrame(DD)
+   264
 ```
 
 ## 檔案下載

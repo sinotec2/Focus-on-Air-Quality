@@ -273,47 +273,62 @@ $ cat -n ptse_sub.py
 ```python
    173  def pv_nc(dfi,nc,spec):
    174    NREC=len(dfi)
-   175    ntm,nrow,ncol=(nc.dimensions[c].size for c in ['TSTEP','ROW', 'COL'])
-   176    V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
-   177    sdt,ix,iy=(np.zeros(shape=(ntm*NREC),dtype=int) for i in range(3))
-   178    for t in range(ntm):
-   179      t1,t2=t*NREC,(t+1)*NREC
-   180      ix[t1:t2]=list(dfi.IX)
-   181      iy[t1:t2]=list(dfi.IY)
-   182    for t in range(ntm):
-   183      sdt[t*NREC:(t+1)*NREC]=t
-   184    col=[i for i in dfi.columns if i not in ['YJH','IX','IY']]
-   185    dfT=DataFrame({'YJH':sdt,'IX':ix,'IY':iy})
-   186    if len(spec.shape)==2:
-   187      for c in col:
-   188        ic=col.index(c)
-   189        dfT[c]=spec[:,ic]
-   190    else:
-   191      for c in col:
-   192        dfT[c]=spec[:]
-   193    pv=pivot_table(dfT,index=['YJH','IX','IY'],values=col,aggfunc=sum).reset_index()
-   194    pv.IX=[int(i) for i in pv.IX]
-   195    pv.IY=[int(i) for i in pv.IY]
-   196    pv.YJH=[int(i) for i in pv.YJH]
-   197    imn,jmn=min(pv.IX),min(pv.IY)
-   198    imx,jmx=max(max(pv.IX)+abs(imn)*2+1,ncol), max(max(pv.IY)+abs(jmn)*2+1,nrow)
-   199    if imn<0 and imx+imn<ncol:sys.exit('negative indexing error in i')
-   200    if jmn<0 and jmx+jmn<nrow:sys.exit('negative indexing error in j')
-   201    idx=pv.index
-   202    idt=np.array(pv.loc[idx,'YJH'])
-   203    iy=np.array(pv.loc[idx,'IY'])
-   204    ix=np.array(pv.loc[idx,'IX'])
-   205    for c in col:
-   206      if c not in V[3]:continue
-   207      if sum(pv[c])==0:continue
-   208      z=np.zeros(shape=(ntm,jmx,imx))
-   209      ss=np.array(pv.loc[idx,c])
-   210      #Note that negative indices are not bothersome and are only at the end of the axis.
-   211      z[idt,iy,ix]=ss
-   212  #also mapping whole matrix, NOT by parts
-   213      nc.variables[c][:,0,:,:]=z[:,:nrow,:ncol]
-   214    return
-   215
+   175    col=[i for i in dfi.columns if i not in ['IX','IY']]
+   176    if len(col)!=spec.shape[-1]:sys.exit('last dimension must be ic')
+   177    ntm,nrow,ncol=(nc.dimensions[c].size for c in ['TSTEP','ROW', 'COL'])
+   178    V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+```
+- 先準備好`IX`, `IY`的序列，長度是`NREC*ntm`，**不可以**用list indexing、或者是DataFrame篩選。用`dict`是最快的。
+
+```python
+   179    z=np.zeros(shape=spec.shape[:-1],dtype=int)
+   180    z[:,:]=np.array([i for i in range(NREC)])[:,None]
+   181    z=z.flatten()
+   182    #Using dict, not DataFrame filtering, not list_indexing relatives methods
+   183    dIX, dIY={i:dfi.IX[i] for i in range(NREC)}, {i:dfi.IY[i] for i in range(NREC)}
+   184    ix,iy=[dIX[i] for i in z],[dIY[i] for i in z]
+```
+- 分污染物進行，以減少資料表的長度。寫進nc檔案也必須按個別污染物，因此即使一起使用pivot table還是要分污染物寫。
+
+```python
+   185    for ic in range(len(col)):
+   186      c=col[ic]
+   187      if c not in V[3]:continue
+   188      if np.sum(spec[:,:,ic])==0.: continue
+```
+- 使用`Mat2DF`副程式，並執行`pivot_table`進行網格排放量加總
+  - 考慮長度的一致性，必須先附加`IX`、`IY`序列，再刪除值排放。
+  - 刪除區外點，這樣套用nc檔時就不會出錯。
+
+```python
+   189      dfT=Mat2DF(spec[:,:,ic])
+   190      dfT['IX'],dfT['IY']=ix,iy
+   191      dfT=dfT.loc[dfT.val>0].reset_index(drop=True)
+   192      boo=(dfT.IX>=0) & (dfT.IY>=0) & (dfT.IX<ncol) & (dfT.IY<nrow)
+   193      dfT=dfT.loc[boo].reset_index(drop=True)
+   194      pv=pivot_table(dfT,index=['col_2','IY','IX'],values='val',aggfunc=sum).reset_index()
+```
+- 再執行`DF2Mat`轉回矩陣準備回存到nc檔案
+  - 依序產生時間、南北向、東西向索引標籤值。
+  - 壓平成**1維**序列，填入全為`0`的矩陣`z`。`z`的形狀必須與nc變數完全一致。
+```python
+   195      var,lst=DF2Mat(pv,['col_2','IY','IX'],'val')
+   196      i0,i1,i2=(np.zeros(shape=var.shape,dtype=int) for i in range(3))
+   197      i0[:]=lst[0][:,None,None]
+   198      i1[:]=lst[1][None,:,None]
+   199      i2[:]=lst[2][None,None,:]
+   200      #Note that negative indices are not bothersome and are only at the end of the axis.
+   201      z=np.zeros(shape=(ntm,nrow,ncol))
+   202      z[i0.flatten(),i1.flatten(),i2.flatten()]=var.flatten()
+```
+- 整批一次倒入
+
+```python
+   203  #also mapping whole matrix, NOT by parts
+   204      nc.variables[c][:,0,:,:]=z[:,:,:]
+   205      print(c)
+   206    return
+   207
 ```
 
 ### 格點化
@@ -414,7 +429,6 @@ def Mat2DF(a):
 	DD['col_'+str(i+1)]=var[:].flatten()
   DD['val']=a.flatten()
   return DataFrame(DD)
-
 ```
 
 ## 檔案下載

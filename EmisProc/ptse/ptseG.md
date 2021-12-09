@@ -189,6 +189,28 @@ $ diff ptseG.py ptseE.py
 ...
 ```
 
+### 矩陣作法說明
+此處說明**全年排放量**與**時變係數**相乘的矩陣作法。由於每個分項的階級數都不一致，如何不使用迴圈直接以矩陣形態相乘？
+- 宣告3個一樣階級數、一樣大小的矩陣，分別代表**全年排放量**、**時變係數**、以及逐時結果矩陣
+  - 因污染項目在資料庫表中是橫向不同的欄位。還好個數不多(`len(cbm)=16`)，用迴圈執行即可。
+  - **全年排放量**沒有時間的維度，填入`None`
+  - **時變係數**沒有污染項目的維度，同樣填入`None`
+  - 如此乘數與被乘數的矩陣形態完全一致，直接相乘即可。
+  
+```python
+   201  NREC,NC=len(dfV2),len(cbm)
+   202  VOC,a,b=(np.zeros(shape=(NREC,ntm,NC)) for i in range(3))
+   203  for c in cbm:
+   204    ic=cbm.index(c)
+   205    a[:,:,ic]=np.array(dfV2[c])[:,None]
+   206  b[:,:,:]=ons2[:,:,None]
+   207  VOC[:,:,:]=a[:,:,:]*b[:,:,:]
+   208  col=['IX','IY']+cbm
+   209  pv_nc(dfV2[col],nc,VOC)
+   210  a,b,VOC=0,0,0
+```
+
+
 ## 結果檢視
 - [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)

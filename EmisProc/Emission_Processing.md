@@ -31,11 +31,11 @@ last_modified_at:   2021-12-01 11:24:33
   - `fortran`無法直接讀取`dbf`檔案，只能讀取`sdf`檔案，[TEDS11](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)以後環保署不再提供詳細面源資料庫之`sdf`檔案格式，`sdf`只有網格加總結果。還是需要轉檔。
 
 ## 處理程序總綱
-- [轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)
-- 整理時間變化係數檔案(形成fac[nCNTY,nNSC, NTm]矩陣)
-- 讀取排放總量檔案、污染項目之彙總、展開形成TPY[nSP, nCNTY,nNSC, nYX]矩陣
-- 時間之展開：總量X時間係數(numpy.tensordot或pandas.pivot_table)
-- 空間之整併：按照模式的網格系統進行
+- 資料庫[轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，`dbf` to `csv`。
+- 應用[資料表與矩陣的互換](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#資料表與矩陣的互換)工具，整理全年時間變化係數(**時變係數**)矩陣、存檔備用。
+- 讀取排放總量檔案、污染項目之彙總、展開形成`TPY[nSP, nCNTY,nNSC, nYX]`矩陣
+- 時間之展開：總量`X`時間係數(`numpy.tensordot`)
+- 空間之整併：按照模式的網格系統進行加總(`pandas.pivot_table`)
 - 填入nc檔案
 
 ## numpy/scipy的[平行運作](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html)

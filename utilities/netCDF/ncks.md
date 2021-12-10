@@ -41,7 +41,7 @@ last_modified_date:   2021-12-10 11:31:33
 ### 維度
 類似的，如果要增加、延續維度的長度是用[ncrcat]()，如果要剪裁，則為ncks的強項。尤有進者[ncrcat]()只能針對UNLIMITED維度進行延長，如果要增加其他維度，則先要更改維度的定義，也是靠ncks才能更動。
 - `-d TSTEP,0,23,3` 切割特定維度的一部分。由0開始，到底(23不像python加1)、間距(3)。(eg. [brk_day2.cs:按照日期切割m3.nc](https://boostnote.io/shared/7fd2257f-ba2b-4bd1-9e80-54be96a3bfee))
-- `--mk_rec_dmn ROW` 定義「可增加」資料筆數之維度(**m**a**k**ing **rec**ord **d**i**m**e**n**sion)
+- `--mk_rec_dmn ROW` 定義「可增加」資料筆數之維度(**m**a**k**ing **rec**ord **d**i**m**e**n**sion，**記錄軸**)
   - 所謂「可增加」，在[ncdump -h]()結果會看到該維度有一長度，且是`UNLIMITED`。(範例如下，維度TSTEP的長度是UNLIMITED，目前是121，其餘維度長度則為固定的數字)
   - 須先將檔案的維度定義成可增加，才能進行[ncrcat](https://boostnote.io/shared/9bd4d899-ecd2-4891-8d50-dc0856d1c191)或使用python增加該維度之長度。
   - eg. [expand_xy.csh:擴展nc檔案的水平格點數](https://boostnote.io/shared/4450b3a4-673b-4c7f-98c7-a24368abfe67)

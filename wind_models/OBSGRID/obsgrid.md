@@ -5,7 +5,7 @@ parent: "WRF"
 nav_order: 2
 has_children: true
 permalink: /wind_models/OBSGRID/
-last_modified_at: 2021-11-27 17:15:30
+last_modified_date: 2021-11-27 17:15:30
 ---
 
 {: .fs-6 .fw-300 }

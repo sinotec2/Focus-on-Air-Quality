@@ -5,7 +5,7 @@ parent: "WRF"
 nav_order: 3
 has_children: true
 permalink: /wind_models/REAL/
-last_modified_at: 2021-11-28 15:52:50
+last_modified_date: 2021-11-28 15:52:50
 ---
 
 {: .fs-6 .fw-300 }

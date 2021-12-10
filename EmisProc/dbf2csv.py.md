@@ -3,7 +3,7 @@ layout: default
 title: "dbf2csv.py"
 parent: "Emission Processing"
 nav_order: 1
-last_modified_at:   2021-12-01 13:06:16
+last_modified_date::   2021-12-01 13:06:16
 ---
 
 # 龐大`.dbf`檔案之讀取

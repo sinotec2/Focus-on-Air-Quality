@@ -3,7 +3,7 @@ layout: default
 title:  "unMask a NCF"
 parent:   "NetCDF Relatives"
 grand_parent: "Utilities"
-last_modified_date:   2021-12-10 11:31:33
+last_modified_date:   2021-12-10 14:18:27
 ---
 # NC矩陣遮蔽之檢查與修改
 {: .no_toc }
@@ -54,6 +54,7 @@ Out[8]:
 array([[ True],
 [ True]])
 ```
+
   - 改不動，改了之後，似乎有個設定將其再改回True
 - 更改`nc`變數的2個屬性設定：[set_auto_mask](https://unidata.github.io/netcdf4-python/#Dataset.set_auto_mask)[、set_always_mask](https://unidata.github.io/netcdf4-python/#Dataset.set_always_mask)
 
@@ -72,6 +73,7 @@ Out[12]:
 array([[9.96921e+36],
 [9.96921e+36]], dtype=float32)
 ```
+
   - `set_auto_mask`、`set_always_mask`這2個設定似乎是將`masked array`整個換掉，所以連`mask`的屬性都沒有了，成了一般的`np.array`。
   - 其值為前述的極大值
 - 給定數值後存檔、再開
@@ -92,7 +94,7 @@ dtype=float32)
 - 其值已被改變，但仍然被程式改成`masked_array`，只是因為已有確定的數據，`mask`屬性都改成了`False`。
 
 ## Reference
--discussion, **Variables became numpy masked arrays**, [github.issues](https://github.com/Unidata/netcdf4-python/issues/849), 17 Oct 2018
+- discussion, **Variables became numpy masked arrays**, [github.issues](https://github.com/Unidata/netcdf4-python/issues/849), 17 Oct 2018
 - unidata, **netCDF4 Version 1.5.8**, [github.io](https://unidata.github.io/netcdf4-python), 
 - gujianmu, **netcdf4和masked array** [博客園](https://www.cnblogs.com/gujianmu/p/12865859.html)
 

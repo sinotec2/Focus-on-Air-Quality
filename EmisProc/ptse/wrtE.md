@@ -80,7 +80,7 @@ $ cat -n wrtE.py
     36  edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
 ```
 - 讀取模版並進行時間軸的延長
-  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文]()
+  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
 
 ```python
     37  #prepare the uamiv template
@@ -99,6 +99,10 @@ $ cat -n wrtE.py
     50  nc.NOTE='Point Emission'
     51  nc.NOTE=nc.NOTE+(60-len(nc.NOTE))*' '
     52  nc.NVARS=nv
+```
+  - 注意`name` 屬性之調用，可能會遭遇問題。
+
+```python
     53  #Name-names may encounter conflicts with newer versions of NCFs and PseudoNetCDFs.
     54  nc.name='PTSOURCE  '
     55  nc.NSTEPS=ntm
@@ -124,49 +128,39 @@ $ cat -n wrtE.py
 - 讀取煙囪條件
 
 ```python
-    75  df=read_feather('df'+mm+'.fth')
-    76  pv=read_csv('pv'+mm+'.csv')
-    77  pv.CP_NOb=[str2lst(i) for i in pv.CP_NOb]
-    78  nopts=len(pv)
-```
--  定義污染項目之對照關係
-
-```python
-    79  #item sets definitions
-    80  c2s={'NMHC':'NMHC','SOX':'SO2','NOX':'NO2','CO':'CO','PM':'PM'}
-    81  c2m={'SOX':64,'NOX':46,'CO':28,'PM':1}
-    82  cole=[i+'_EMI' for i in c2s]+['PM25_EMI']
-    83  XYHDTV=['UTM_E','UTM_N','HEI','DIA','TEMP','VEL','ORI_QU1']
-    84  colT=['HD1','DY1','HY1']
-    85  colc=['CCRS','FCRS','CPRM','FPRM']
-    86
+    73  df=read_feather('df'+mm+'.fth')
+    74  pv=read_csv('pv'+mm+'.csv')
+    75  pv.CP_NOb=[str2lst(i) for i in pv.CP_NOb]
+    76  nopts=len(pv)
+    77  #item sets definitions
+    78  XYHDTV=['UTM_E','UTM_N','HEI','DIA','TEMP','VEL','ORI_QU1']
+    79
 ```
 - CAMx版本在此設定
 
 ```python
-    87  #determination of camx version
-    88  ver=7
-    89  if 'XSTK' in V[0]:ver=6
-    90  fns=['CO','NMHC', 'NOX', 'PM', 'SOX' ]
-    91  col_id=["C_NO","XY"]
-    92  col_mn=['ORI_QU1','TEMP','VEL','UTM_E', 'UTM_N','HY1','HD1','DY1']
-    93  col_mx=['HEI']
-    94  lspec=[i for i in df.columns if i not in col_mn+['index','C_NO']]
-    95  c2m={i:1 for i in lspec}
-    96  c2m.update({'SO2':64,'NO2':46,'CO':28})
-    97
+    80  #determination of camx version
+    81  ver=7
+    82  if 'XSTK' in V[0]:ver=6
+    83  col_mn=['ORI_QU1','TEMP','VEL','UTM_E', 'UTM_N','HY1','HD1','DY1']
+    84  lspec=[i for i in df.columns if i not in col_mn+['index','C_NO']]
+    85
+    86  dimn={6:'NSTK',7:'COL'}
 ```
-- 為延長煙道數(`COL`軸)，先將模版的`COL`軸設為可增加之記錄軸
+- 為延長煙道數(`COL`軸)，須先將模版的`COL`軸設為可增加之[記錄軸](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E7%B6%AD%E5%BA%A6)(`--mk_rec_dmn`)
 
 ```python
-    98  dimn={6:'NSTK',7:'COL'}
-    99  print(dimn[ver]+' expanding and reopening')
-   100  res=os.system(ncks+' -O --mk_rec_dmn '+dimn[ver]+' '+NCfname+' tmp'+mm)
-   101  if res!=0: sys.exit(ncks+' fail')
-   102  res=os.system('mv tmp'+mm+' '+NCfname)
-   103  if res!=0: sys.exit('mv fail')
-   104  #CP_NO in S1(byte) format
-   105  print('ncfile Enlargement')
+    87  print(dimn[ver]+' expanding and reopening')
+    88  res=os.system(ncks+' -O --mk_rec_dmn '+dimn[ver]+' '+NCfname+' tmp'+mm)
+    89  if res!=0: sys.exit(ncks+' fail')
+    90  res=os.system('mv tmp'+mm+' '+NCfname)
+    91  if res!=0: sys.exit('mv fail')
+    92  #CP_NO in S1(byte) format
+    93  print('ncfile Enlargement')
+```
+- 
+
+```python
    106  #prepare the parameter dicts
    107  PRM='XYHDTV'
    108  v2n={PRM[i]:XYHDTV[i] for i in range(6)}

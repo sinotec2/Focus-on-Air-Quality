@@ -1,7 +1,9 @@
 ---
 layout: default
-title: NCKS 在空品模式中的應用
-parent: NetCDF Relatives
+title:  "NCKS 在空品模式中的應用"
+parent:   "NetCDF Relatives"
+grand_parent: "Utilities"
+last_modified_at:   2021-12-10 11:31:33
 ---
 # NCKS 在空品模式中的應用
 {: .no_toc }

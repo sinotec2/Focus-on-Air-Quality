@@ -231,7 +231,9 @@ $ cat -n wrtE.py
    138    nc.variables[c][:,:nopts]=np.array(df[c]).reshape(ntm,nopts)
    139    print(c)
 ```
-- **管煙編號**(=管編+煙道編號)，寫進檔案中。因非CAMx或CMAQ控制之變數名稱，程式會跳開不讀，並不會報錯。
+- 將**管煙編號**(=管編+煙道編號)寫進檔案中以備後續增、減排放源使用。
+  - CMAQ雖然有`FIP`編號可供追蹤，但因`FIP`編號是整數，與國內的編碼系統不符合，且為管編，不能指定到個別煙道，因此建立自己的編號系統是必須的。
+  - 且因非CAMx或CMAQ控制之變數名稱，程式會跳開不讀，並不會報錯。
 
 ```python
    140  nc.variables['CP_NO'][:nopts,:8]=np.array(list(pv.CP_NOb)).flatten().reshape(nopts,8)

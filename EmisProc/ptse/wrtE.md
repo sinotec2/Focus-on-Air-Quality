@@ -28,96 +28,97 @@ last_modified_date:   2021-12-07 17:06:30
 ## 程式說明
 
 ### 程式分段說明
+- 調用`pandas`的版本必須含有`pyarrow`，會連動到`numpy`、`xarray`的版本
+- `str2lst`：`netCDF`檔案內的字串內容必須是`bytes`格式，一般的字串要經過轉換。
 
 ```python
-kuang@master /nas1/TEDS/teds11/ptse
 $ cat -n wrtE.py
-     1
-     2  #! crding = utf8
-     3  from pandas import *
-     4  import numpy as np
-     5  import os, sys, subprocess
-     6  import netCDF4
-     7  import twd97
-     8  import datetime
-     9  from calendar import monthrange
-    10  from scipy.io import FortranFile
-    11
-    12  from mostfreqword import mostfreqword
-    13  from ptse_sub import CORRECT, add_PMS, check_nan, check_landsea, FillNan
-    14  from ioapi_dates import jul2dt, dt2jul
-    15  from cluster_xy import cluster_xy, XY_pivot
-    16
-    17  def str2lst(A):
-    18      return [bytes(i,encoding='utf-8') for i in A[1:-1].replace("b'","").replace("'","").replace(" ","").split(',')][:8]
+     1  '''
+     2  Purpose: Generate CAMx Elev. PtSe. NC file from dfMM.fth (MM=01~12)
+     3  Usage: python wrtE.py YYMM
+     4  see descriptions at https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/
+     5  '''
+     6  #! crding = utf8
+     7  from pandas import *
+     8  import numpy as np
+     9  import os, sys, subprocess
+    10  import netCDF4
+    11  import datetime
+    12  from calendar import monthrange
+    13
+    14  from ioapi_dates import dt2jul
+    15  if not sys.warnoptions:
+    16      import warnings
+    17      warnings.simplefilter("ignore")
+    18
     19
-    20
+    20  def str2lst(A):
+    21      return [bytes(i,encoding='utf-8') for i in A[1:-1].replace("b'","").replace("'","").replace(" ","").split(',')][:8]
+    22
+    23
 ```
 - 外部程式之相依性
 
 ```python
-    21  #Main
-    22  #locate the programs and root directory
-    23  pncg=subprocess.check_output('which pncgen',shell=True).decode('utf8').strip('\n')
-    24  ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
-    25  hmp=subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[1]
-    26  P='./'
-    27
+    24  #Main
+    25  #locate the programs and root directory
+    26  ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
+    27  P='./'
+    28
 ```
-- 時間之定義
+- 讀取引數(4碼年月)、定義起迄時間
+  - CAMx的時間是LST，因此自上月最末日的早上8時開始。以同時符合CMAQ的要求(自00UTC開始)。
 
 ```python
-    28  #time and space initiates
-    29  ym=sys.argv[1]
-    30  mm=sys.argv[1][2:4]
-    31  mo=int(mm)
-    32  yr=2000+int(sys.argv[1][:2])
-    33  Hs=0 #cutting height of stacks
+    29  #time and space initiates
+    30  ym=sys.argv[1]
+    31  mm=ym[2:4]
+    32  mo=int(mm)
+    33  yr=2000+int(ym[:2])
     34  ntm=(monthrange(yr,mo)[1]+2)*24+1
     35  bdate=datetime.datetime(yr,mo,1)+datetime.timedelta(days=-1+8./24)
     36  edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
-    37  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
-    38  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 ```
 - 讀取模版並進行時間軸的延長
+  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文]()
 
 ```python
-    39  #prepare the uamiv template
-    40  print('template applied')
-    41  NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
-    42  try:
-    43    nc = netCDF4.Dataset(NCfname, 'r+')
-    44  except:
-    45    os.system('cp '+P+'template_v7.nc '+NCfname)
-    46    nc = netCDF4.Dataset(NCfname, 'r+')
-    47  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
-    48  nt,nv,dt=nc.variables[V[2][0]].shape
-    49  nv=len([i for i in V[1] if i !='CP_NO'])
-    50  nc.SDATE,nc.STIME=dt2jul(bdate)
-    51  nc.EDATE,nc.ETIME=dt2jul(edate)
-    52  nc.NOTE='Point Emission'
-    53  nc.NOTE=nc.NOTE+(60-len(nc.NOTE))*' '
-    54  nc.NVARS=nv
-    55  #Name-names may encounter conflicts with newer versions of NCFs and PseudoNetCDFs.
-    56  nc.name='PTSOURCE  '
-    57  nc.NSTEPS=ntm
-    58  if 'ETFLAG' not in V[2]:
-    59    zz=nc.createVariable('ETFLAG',"i4",("TSTEP","VAR","DATE-TIME"))
-    60  if nt!=ntm or (nc.variables['TFLAG'][0,0,0]!=nc.SDATE and nc.variables['TFLAG'][0,0,1]!=nc.STIME):
-    61    for t in range(ntm):
-    62      sdate,stime=dt2jul(bdate+datetime.timedelta(days=t/24.))
-    63      nc.variables['TFLAG'][t,:,0]=[sdate for i in range(nv)]
-    64      nc.variables['TFLAG'][t,:,1]=[stime for i in range(nv)]
-    65      ndate,ntime=dt2jul(bdate+datetime.timedelta(days=(t+1)/24.))
-    66      nc.variables['ETFLAG'][t,:,0]=[ndate for i in range(nv)]
-    67      nc.variables['ETFLAG'][t,:,1]=[ntime for i in range(nv)]
-    68  for c in V[1]:
-    69    nc.variables[c].set_auto_mask(False)
-    70    if c=='CP_NO': continue
-    71    nc.variables[c][:]=0.
-    72  nc.close()
-    73  #template OK
-    74
+    37  #prepare the uamiv template
+    38  print('template applied')
+    39  NCfname='fortBE.413_teds10.ptsE'+mm+'.nc'
+    40  try:
+    41    nc = netCDF4.Dataset(NCfname, 'r+')
+    42  except:
+    43    os.system('cp '+P+'template_v7.nc '+NCfname)
+    44    nc = netCDF4.Dataset(NCfname, 'r+')
+    45  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+    46  nt,nv,dt=nc.variables[V[2][0]].shape
+    47  nv=len([i for i in V[1] if i !='CP_NO'])
+    48  nc.SDATE,nc.STIME=dt2jul(bdate)
+    49  nc.EDATE,nc.ETIME=dt2jul(edate)
+    50  nc.NOTE='Point Emission'
+    51  nc.NOTE=nc.NOTE+(60-len(nc.NOTE))*' '
+    52  nc.NVARS=nv
+    53  #Name-names may encounter conflicts with newer versions of NCFs and PseudoNetCDFs.
+    54  nc.name='PTSOURCE  '
+    55  nc.NSTEPS=ntm
+    56  if 'ETFLAG' not in V[2]:
+    57    zz=nc.createVariable('ETFLAG',"i4",("TSTEP","VAR","DATE-TIME"))
+    58  if nt!=ntm or (nc.variables['TFLAG'][0,0,0]!=nc.SDATE and nc.variables['TFLAG'][0,0,1]!=nc.STIME):
+    59    for t in range(ntm):
+    60      sdate,stime=dt2jul(bdate+datetime.timedelta(days=t/24.))
+    61      nc.variables['TFLAG'][t,:,0]=[sdate for i in range(nv)]
+    62      nc.variables['TFLAG'][t,:,1]=[stime for i in range(nv)]
+    63      ndate,ntime=dt2jul(bdate+datetime.timedelta(days=(t+1)/24.))
+    64      nc.variables['ETFLAG'][t,:,0]=[ndate for i in range(nv)]
+    65      nc.variables['ETFLAG'][t,:,1]=[ntime for i in range(nv)]
+    66  for c in V[1]:
+    67    nc.variables[c].set_auto_mask(False)
+    68    if c=='CP_NO': continue
+    69    nc.variables[c][:]=0.
+    70  nc.close()
+    71  #template OK
+    72
 ```
 - 讀取逐時、逐煙道之排放量`.fth`檔案
 - 讀取煙囪條件

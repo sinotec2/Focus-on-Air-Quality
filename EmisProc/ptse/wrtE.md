@@ -155,89 +155,98 @@ $ cat -n wrtE.py
     89  if res!=0: sys.exit(ncks+' fail')
     90  res=os.system('mv tmp'+mm+' '+NCfname)
     91  if res!=0: sys.exit('mv fail')
+```
+- 準備煙囪參數的對照表
+  - CAMx 6與CAMx 7的煙囪參數變數名稱有很大的改變
+  - CAMx設有開啟`pig`的機制。對CMAQ沒有效果。
+
+```python
     92  #CP_NO in S1(byte) format
     93  print('ncfile Enlargement')
+    94  #prepare the parameter dicts
+    95  PRM='XYHDTV'
+    96  v2n={PRM[i]:XYHDTV[i] for i in range(6)}
+    97  names={7:['xcoord','ycoord','stkheight','stkdiam','stktemp','stkspeed'],
+    98         6:[v+'STK' for v in PRM]}
+    99  v2c={PRM[i]:names[ver][i] for i in range(6)}
+   100  a=DataFrame({'SN':df.SO2+df.NO2})
+   101  a=a.sort_values('SN',ascending=False)
+   102  pig=[]#a.index[:100]
+   103  #filling the stack parameters for camx700nc
+   104
 ```
-- 
+- 再次開啟模版。關閉再開的理由是節省不必要的暫存記憶體。
+  - `set_auto_mask(False)`或`set_always_mask(False)`的原因，是因為模版中有被遮蔽的矩陣內容。須先在模版階段[解決](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)。
 
 ```python
-   106  #prepare the parameter dicts
-   107  PRM='XYHDTV'
-   108  v2n={PRM[i]:XYHDTV[i] for i in range(6)}
-   109  names={7:['xcoord','ycoord','stkheight','stkdiam','stktemp','stkspeed'],
-   110         6:[v+'STK' for v in PRM]}
-   111  v2c={PRM[i]:names[ver][i] for i in range(6)}
-   112  a=DataFrame({'SN':df.SO2+df.NO2})
-   113  a=a.sort_values('SN',ascending=False)
-   114  pig=[]#a.index[:100]
-   115  #filling the stack parameters for camx700nc
-   116
+   105  nc = netCDF4.Dataset(NCfname, 'r+')
+   106  #enlarge the record dimension (COL)
+   107  z=np.zeros(shape=ntm)
+   108  for c in V[1]:
+   109    nc.variables[c].set_auto_mask(False)
+   110    if c in ['CP_NO']:continue
+   111    for i in range(nopts):
+   112      nc.variables[c][:ntm,i]=z
+   113  if ver==7:nc.variables['pigflag'][:nopts]=0
+   114  nc.close()
 ```
-- 再次開啟模版
+- 如不再增加時間的長度，不必再將**記錄軸**設回來。
 
 ```python
-   117  nc = netCDF4.Dataset(NCfname, 'r+')
-   118  #enlarge the record dimension (COL)
-   119  z=np.zeros(shape=ntm)
-   120  for c in V[1]:
-   121    nc.variables[c].set_auto_mask(False)
-   122    if c in ['CP_NO']:continue
-   123    for i in range(nopts):
-   124      nc.variables[c][:ntm,i]=z
-   125  if ver==7:nc.variables['pigflag'][:nopts]=0
-   126  nc.close()
-   127  #res=os.system(ncks+' -O --mk_rec_dmn TSTEP '+NCfname+' tmp'+mm)
-   128  #if res!=0: sys.exit(ncks+' fail')
-   129  #res=os.system('mv tmp'+mm+' '+NCfname)
-   130  #if res!=0: sys.exit('mv fail')
-   131
-   132  nc = netCDF4.Dataset(NCfname, 'r+')
-   133  for v in PRM:
-   134    var=v2c[v]
-   135    nc.variables[var].set_auto_mask(False)
-   136    nc.variables[var][:nopts]=np.array(pv[v2n[v]])
-   137  nc.variables[v2c['V']][:nopts]=nc.variables[v2c['V']][:]*3600.
-   138  nc.variables[v2c['T']][:nopts]=nc.variables[v2c['T']][:]+273.
-   139  #first 100 for PiG
-   140  if len(pig)>0:
-   141    if ver==7:
-   142      nc.variables['pigflag'][pig]=1
-   143    else:
-   144      nc.variables[v2c['D']][pig]=nc.variables[v2c['D']][pig]*-1.
-   145  for c in V[1]:
-   146    if c not in lspec:continue
-   147    if c not in df.columns:continue
-   148    if c in ['CO', 'CP_NO']: continue
-   149    ic=lspec.index(c)
-   150    nc.variables[c][:,:nopts]=np.array(df[c]).reshape(ntm,nopts)
-   151    print(c)
-   152  #CO are store temperly in NO to speed up the process
-   153  c='CO'
-   154  if c in df.columns:
-   155    CO=np.array(df[c]).reshape(ntm,nopts)
-   156    nc.variables['NO'][:]=CO[:]
-   157    nc.variables['CO']=nc.variables['NO']
-   158    for v in ['long_name','var_desc']:
-   159      exec('nc.variables["CO"].'+v+'="CO              "')
-   160  nc.variables['CP_NO'][:nopts,:8]=np.array(list(pv.CP_NOb)).flatten().reshape(nopts,8)
-   161  nox=nc.variables['NO2'][:,:nopts]
-   162  nc.variables['NO'][:,:nopts]=nox[:,:nopts]*0.9
-   163  nc.variables['NO2'][:,:nopts]=nox-nc.variables['NO'][:,:nopts]
-   164  nc.NOPTS=nopts
-   165  nc.close()
-   166
+   115  #res=os.system(ncks+' -O --mk_rec_dmn TSTEP '+NCfname+' tmp'+mm)
+   116  #if res!=0: sys.exit(ncks+' fail')
+   117  #res=os.system('mv tmp'+mm+' '+NCfname)
+   118  #if res!=0: sys.exit('mv fail')
+   119
+```
+- 寫入煙囪參數，CAMx的單位是每小時
+
+```python   
+   120  nc = netCDF4.Dataset(NCfname, 'r+')
+   121  for v in PRM:
+   122    var=v2c[v]
+   123    nc.variables[var].set_auto_mask(False)
+   124    nc.variables[var][:nopts]=np.array(pv[v2n[v]])
+   125  nc.variables[v2c['V']][:nopts]=nc.variables[v2c['V']][:]*3600.
+   126  nc.variables[v2c['T']][:nopts]=nc.variables[v2c['T']][:]+273.
+```
+- 開啟`pig`設定
+
+```python
+   127  #first 100 for PiG
+   128  if len(pig)>0:
+   129    if ver==7:
+   130      nc.variables['pigflag'][pig]=1
+   131    else:
+   132      nc.variables[v2c['D']][pig]=nc.variables[v2c['D']][pig]*-1.
+```
+- 寫入每污染物之排放量
+
+```python
+   133  for c in V[1]:
+   134    if c not in lspec:continue
+   135    if c not in df.columns:continue
+   136    if c in ['CP_NO']: continue
+   137    ic=lspec.index(c)
+   138    nc.variables[c][:,:nopts]=np.array(df[c]).reshape(ntm,nopts)
+   139    print(c)
+```
+- **管煙編號**(=管編+煙道編號)，寫進檔案中。因非CAMx或CMAQ控制之變數名稱，程式會跳開不讀，並不會報錯。
+
+```python
+   140  nc.variables['CP_NO'][:nopts,:8]=np.array(list(pv.CP_NOb)).flatten().reshape(nopts,8)
+   141  nox=nc.variables['NO2'][:,:nopts]
+   142  nc.variables['NO'][:,:nopts]=nox[:,:nopts]*0.9
+   143  nc.variables['NO2'][:,:nopts]=nox-nc.variables['NO'][:,:nopts]
+   144  nc.NOPTS=nopts
+   145  nc.close()
+   146
 ```
 
-### 程式
-
-## 結果檢視
-- [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
-- [排放量時間變化](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
 ## 檔案下載
-- `python`程式：[ptseG.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/ptseG.py)。
+- `python`程式：[wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)。
 
 
 ## Reference
--数据如琥珀, **轻如“鸿毛（Feather）”的文件格式却重于泰山**, [知乎](https://zhuanlan.zhihu.com/p/247025752), 2020-09-16 
+- The NumPy community, [numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html), Jun 22, 2021
+- 数据如琥珀, **轻如“鸿毛（Feather）”的文件格式却重于泰山**, [知乎](https://zhuanlan.zhihu.com/p/247025752), 2020-09-16 

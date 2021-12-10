@@ -1,7 +1,7 @@
 ---
 layout: default
-title:  "NC矩陣遮蔽之檢查與修改"
-parent:   "unMask a NCF"
+title:  "unMask a NCF"
+parent:   "NetCDF Relatives"
 grand_parent: "Utilities"
 last_modified_date:   2021-12-10 11:31:33
 ---

@@ -23,7 +23,7 @@ last_modified_date:   2021-12-10 14:45:32
 
 ## 後續處理
 - CAMx點源檔案無法使用什麼軟體開啟、繪圖，需使用[程式](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.py)將其轉成面源形態(按網格加總)，使用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)來繪圖。如圖：
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ship_NO.PNG)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ships_NO.PNG)
 - 經轉檔可以供CMAQ模式使用
 
 ## [github](https://github.com/sinotec2/TEDS_ship/)

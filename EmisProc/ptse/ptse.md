@@ -13,7 +13,7 @@ last_modified_at:   2021-12-02 09:55:34
 # 點源之處理
 - 點源的**時變係數**有2處來源，一者設有自動連續監設施(CEMS)者，再者環保署資料庫中亦有每筆數據的工作時間(weeks of year, days of week, hours of day)。
 - 此外，光化模式因設有垂直網格，對於較小的點源、工廠的逸散性排放，煙流無法超越第1層範圍者，不必以點源處理，可以納入地面排放。
-- 其他原則詳見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)。此處介紹完整的程序，分項另有詳述。
+- 其他原則詳見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)。此處介紹完整的程序，分項另有[詳述](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/)。
 
 ## 主要步驟程序
 - 讀取TEDS之dbf檔案(環保署提供的`.dbf`檔案過於龐大，超過一般資料庫軟體可以處理，詳見[dbf2csv.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/))
@@ -26,7 +26,8 @@ last_modified_at:   2021-12-02 09:55:34
 - 經轉檔可以供CMAQ模式使用
 
 ## What's Learned
-- 
+- CAMx點源`nc`檔案跟其他光化模式`nc`檔案最大的差別，在於排放量是個2維變數(`時間`、`煙道根數`)，
 
+## [github](https://github.com/sinotec2/TEDS_PtSe/)
 ## Reference
 純淨天空, **python numpy tensordot用法及代碼示例- 純淨天空**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html), 27 May 2019

@@ -23,7 +23,7 @@ last_modified_date:   2021-12-07 17:06:30
 
 ## 背景
 - 因應船舶排放之處理，將原有之[area_YYMM.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)加設篩選條件，只針對特定類別進行處理轉寫。
-- 將環保署資料庫進行排放類別(`NSC`)之篩選，其餘程序完全一樣。
+- 將[環保署資料庫](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)進行排放類別(`NSC`)之篩選，其餘程序完全與[area_YYMM.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)一樣。
 
 ## 程式執行
 - 2個引數
@@ -63,4 +63,5 @@ $ diff area_YYMM_NSC.py  ../area/area_YYMM.py
 - `python`程式：[area_YYMM_NSC.py](https://github.com/sinotec2/TEDS_ship/blob/main/area_YYMM_NSC.py)。
 
 ## Reference
+- 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
 - `area_YYMM.py`程式說明：[面源資料庫轉CAMx排放nc檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)

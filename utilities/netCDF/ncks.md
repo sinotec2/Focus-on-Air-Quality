@@ -1,0 +1,104 @@
+---
+layout: default
+title: NCKS 在空品模式中的應用
+parent: NetCDF Relatives
+---
+# NCKS 在空品模式中的應用
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+
+---
+### 一般
+- `-O` 處理結果覆蓋(**O**verwrite)既有檔案
+- `-m teds10.1612.timvar.nc` 將檔案維度、變數說明(**m**etadata)印出(類似[ncdump]() -h)
+- ncks的`-a`, `--cdl`, `-F`, `--fmt_val`, `-H`, `--hdn`, `--jsn`, `-M`, `-m`, `-P`, `--prn_fl`, `-Q`, `-q`, `-s`, `--trd`, `-u`, `-V`, `--xml` 选项可以控制输出檔案的格式。
+
+### 全域屬性(global **att**ribute)
+逐一修改全域屬性是[ncatted]()的功能，但是ncks也有一次全部複製的能力，用來套用既有檔案的全域屬性。
+- `ncks -A -x in.nc out.nc` 複製in.nc全域屬性到新檔案out.nc
+
+### 變數(variable)
+- ncks經常使用來增、減nc檔案的變數。可以大幅減省在python(或其他)程式的coding工作，且一般程式只能增加nc檔案的變數(指令如`result=nc.createVariable(s,"f4",("TSTEP","LAY","ROW","COL"))`)，但不能更名、刪除一既有檔的變數，必須仰賴ncks由檔案外部來進行更動。
+- 減少變數的個數：刪去無關的變數，將大幅縮減檔案的大小，方便於網路傳送，使用VERDI或其他顯示軟體也較便利(VERDI對開啟大於1GB的檔案仍有困難)。以下範例將會刪除`base.grd02.1909.nc`檔案中的變數`NO2,O3`(2個以上變數名稱間以`,`隔開，最後變數之後不能再有逗號)，以形成新檔`a.nc`。
+
+```bash
+ ncks -x -v NO2,O3 base.grd02.1909.nc a.nc
+ ```
+ 
+- 增加變數：用以形成新的nc檔案模版。
+- `ncks -v NO,TFLAG,ETFLAG base.grd02.1909.nc NO.nc`提出特定之變數、形成新檔，程式會自帶相依座標，但不會有時間標籤。如不要座標，要多加`-C`。
+
+### 維度
+類似的，如果要增加、延續維度的長度是用[ncrcat]()，如果要剪裁，則為ncks的強項。尤有進者[ncrcat]()只能針對UNLIMITED維度進行延長，如果要增加其他維度，則先要更改維度的定義，也是靠ncks才能更動。
+- `-d TSTEP,0,23,3` 切割特定維度的一部分。由0開始，到底(23不像python加1)、間距(3)。(eg. [brk_day2.cs:按照日期切割m3.nc](https://boostnote.io/shared/7fd2257f-ba2b-4bd1-9e80-54be96a3bfee))
+- `--mk_rec_dmn ROW` 定義「可增加」資料筆數之維度(**m**a**k**ing **rec**ord **d**i**m**e**n**sion)
+  - 所謂「可增加」，在[ncdump -h]()結果會看到該維度有一長度，且是`UNLIMITED`。(範例如下，維度TSTEP的長度是UNLIMITED，目前是121，其餘維度長度則為固定的數字)
+  - 須先將檔案的維度定義成可增加，才能進行[ncrcat](https://boostnote.io/shared/9bd4d899-ecd2-4891-8d50-dc0856d1c191)或使用python增加該維度之長度。
+  - eg. [expand_xy.csh:擴展nc檔案的水平格點數](https://boostnote.io/shared/4450b3a4-673b-4c7f-98c7-a24368abfe67)
+```bash
+$ ncdump -h $nc|head
+netcdf BCON_v53_1912_run9_regrid_20191217_TWN_3X3 {
+dimensions:
+        TSTEP = UNLIMITED ; // (121 currently)
+        DATE-TIME = 2 ;
+        LAY = 40 ;
+        VAR = 226 ;
+        PERIM = 444 ;
+variables:
+        int TFLAG(TSTEP, VAR, DATE-TIME) ;
+                TFLAG:units = "<YYYYDDD,HHMMSS>" ;
+```
+
+- `--fix_rec_dmn TSTEP` 定義不可增加筆數之維度(**f**ix **rec**ord **d**i**m**e**n**sion)
+
+- ncks只能增減變數，如要更改變數名稱，則必須要使用[ncrename]()，如 `ncrename -O -v PM25_TOT,DIS_INCI stroke.nc stroke1.nc`
+### 變數+維度複合變更
+m3.nc檔案中的變數本身也是一個維度(`VAR`)，其長度為全域屬性`nc.NVARS`，變數的項目也是全域屬性`nc.VAR-LIST`的內容。雖然變更變數項目只涉及到時間標籤(`TFLAG[TSTEP,VAR,DATE-TIME]`)的長度，然CMAQ對其檢驗非常仔細，必須修剪到完全正確。如下列模版的製作過程：
+1. 先以`ncks -d`由CMAQ模式結果檔案取出時間、高度、與變數，縮減檔案大小：
+```bash
+ncks -d LAY,0,33 -d TSTEP,0,0 -v TFLAG,AALJ,ACAJ,ACLI,ACLJ,ACLK,ACORS,AECI,AECJ,AFEJ,AISO3J,AKJ,AMGJ,AMNJ,ANAI,ANAJ,ANH4I,\
+ANH4J,ANH4K,ANO3I,ANO3J,ANO3K,AOLGAJ,AOLGBJ,AORGCJ,AOTHRJ,APNCOMI,APOCI,APOCJ,ASEACAT,ASIJ,ASO4I,ASO4J,ASO4K,ASOIL,ASQTJ,\
+CO,ETH,FORM,HNO3,ISOP,NO,NO2,O3,OLE,PAN,PAR,PRPA,SO2,XPAR $nc templateD2.nc
+```
+1. 暫時改變TFLAG維度的順序，將第一順位設成是VAR(其餘順序不影響結果)、並且令其為筆數維度(rec_dmn)：
+```bash
+ncpdq -O -a VAR,TSTEP,DATE-TIME $nc a;ncks -O --mk_rec_dmn VAR a $nc
+```
+1. 取出其中的特定的某一項(名稱定義在全域變數VAR-LIST)`ncks -O -d VAR,0,0 $nc a`，如為VAR49即為`ncks -O -d VAR,0,48 $nc a`
+1. 使用ncrename來更改變數的名稱。如果2個變數名稱相同，仍然可以合併(後者會增加註釋)，然後續處理將更加複雜。
+1. 進行ncrcat進行擴充(如有必要)
+1. 改回原來的維度順序。如果不改回來後續程式就讀不到TFLAG了。同時也要打開TSTEP成為筆數維度(rec_dmn)，讓TSTEP可以增加、延長。(倒不必特別做`--fix_rec_dmn`指令，因為不能同時有2個rec_dmn)：
+```bash
+ncpdq -O -a TSTEP,VAR,DATE-TIME a $nc
+ncks -O --mk_rec_dmn TSTEP $nc a
+mv a $nc
+```
+1. 修改全域屬性。因為`VAR-LIST`變數的`-`在python是保留的符號，不能成為變數的一部分，所以直接用bash指令是比較方便的作法。
+```bash
+ncatted -a VAR-LIST,global,o,c,"AALJ            ACAJ            ACLI            ACLJ            ACLK            ACORS           AECI            AECJ            AFEJ            AISO3J          AKJ             AMGJ            AMNJ            ANAI            ANAJ            ANH4I           ANH4J           ANH4K           ANO3I           ANO3J           ANO3K           AOLGAJ          AOLGBJ          AORGCJ          AOTHRJ          APNCOMI         APOCI           APOCJ           ASEACAT         ASIJ            ASO4I           ASO4J           ASO4K           ASOIL           ASQTJ           CO              ETH             FORM            HNO3            ISOP            NO              NO2             O3              OLE             PAN             PAR             PRPA            SO2             XPAR            " $nc
+ncatted -a NVARS,global,o,i,49 $nc
+```
+- tip
+NVARS及VAR-LIST是CCMS必讀屬性，一定要修到正確。NVARS為整數、VAR-LIST為A16序列(順序倒無所謂)
+  - 產生VAR-LIST的程式碼:
+
+```python
+s=''
+for v in V[3]:
+  s+='{:16s}'.format(v)
+
+```
+
+### Reference
+- [NCO](https://github.com/nco/nco)
+- [ncks](https://linux.die.net/man/1/ncks)
+- [Here](https://boostnote.io/shared/7566f2e7-f9aa-4a00-ba74-616ea8f72d25)
+---

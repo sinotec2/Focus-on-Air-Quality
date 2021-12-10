@@ -54,8 +54,7 @@ Out[8]:
 array([[ True],
 [ True]])
 ```
-
-  - 改不動，改了之後，似乎有個設定將其再改回True
+- 改不動，改了之後，似乎有某些設定讓程式自動執行，將`mask`又再改回`True`
 - 更改`nc`變數的2個屬性設定：[set_auto_mask](https://unidata.github.io/netcdf4-python/#Dataset.set_auto_mask)[、set_always_mask](https://unidata.github.io/netcdf4-python/#Dataset.set_always_mask)
 
 ```python

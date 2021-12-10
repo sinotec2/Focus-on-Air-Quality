@@ -11,7 +11,7 @@ last_modified_date:   2021-12-02 09:55:34
 {: .fs-6 .fw-300 }
 
 # 點源之處理
-- 點源的**時變係數**有2處來源，一者設有自動連續監設施(CEMS)者，再者環保署資料庫中亦有每筆數據的工作時間(weeks of year, days of week, hours of day)。
+- 環保署[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)資料庫系統中點源的**時變係數**有2處來源，一者設有自動連續監設施(CEMS)者，再者資料庫中亦有每筆數據的工作時間(weeks of year, days of week, hours of day)。
 - 此外，光化模式因設有垂直網格，對於較小的點源、工廠的逸散性排放，煙流無法超越第1層範圍者，不必以點源處理，可以納入地面排放。
 - 其他原則詳見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)。此處介紹完整的程序，分項另有[詳述](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/)。
 
@@ -35,4 +35,5 @@ last_modified_date:   2021-12-02 09:55:34
 
 ## [github](https://github.com/sinotec2/TEDS_PtSe/)
 ## Reference
-純淨天空, **python numpy tensordot用法及代碼示例- 純淨天空**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html), 27 May 2019
+- 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
+- 純淨天空, **python numpy tensordot用法及代碼示例- 純淨天空**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.tensordot.html), 27 May 2019

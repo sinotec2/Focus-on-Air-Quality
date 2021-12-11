@@ -42,7 +42,7 @@ email, or any other method with the owners of this repository before making a ch
 <ul class="list-style-none">
 for contributor in site.github.contributors 
   <li class="d-inline-block mr-1">
-     <a href="{{ contributor.html_url }}"><img src="{{ contributor.avatar_url }}" width="32" height="32" alt=" contributor.login "/></a>
+ [contributor.login](https://github.com/sinotec2/Focus-on-Air-Quality/discussions/)
   </li>
 
 </ul>

@@ -80,7 +80,7 @@ $ cat -n wrtE.py
     36  edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
 ```
 - 讀取模版並進行時間軸的延長
-  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
+  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮罩遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
 
 ```python
     37  #prepare the uamiv template

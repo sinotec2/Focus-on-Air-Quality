@@ -11,7 +11,7 @@ last_modified_date:   2021-12-01 11:24:33
 
 除了準備光化模式所需要的排放檔案，此處也介紹排放數據的展示、檢視等等經驗。
 - 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)、以及東亞範圍的[REAS](https://www.nies.go.jp/REAS/)為主。
-- 程式除早期發展的`fortran`(無平行化)，以及持續發展之`python`平行處理程式。
+- 程式以2018年以來持續發展之`python`平行處理程式為主。
 
 ## 背景
 
@@ -50,5 +50,6 @@ last_modified_date:   2021-12-01 11:24:33
 
 ## Reference
 - 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
+- National Institute for Environmental Studies, **Regional Emission inventory in ASia (REAS) Data Download Site**,  [nies](https://www.nies.go.jp/REAS/), 29-October-2020
 - AMArchibald, Unknown[153], Unknown[154], Unknown[155], MartinSpacek, Pauli Virtanen, **Parallel Programming with numpy and scipy**, [scipy-cookbook](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html), 2015-10-30
 

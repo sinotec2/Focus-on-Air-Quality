@@ -3,7 +3,7 @@ layout: default
 title: "Global AQ Data Analysis"
 parent: "AQ Data Analysis"
 has_children: true
-permalink: /AQnan/GAQuality
+permalink: /AQana/GAQuality
 nav_order: 1
 ---
 

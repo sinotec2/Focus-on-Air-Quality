@@ -7,10 +7,10 @@ permalink: /EmsProc/
 last_modified_date:   2021-12-01 11:24:33
 ---
 
-# 排放處理相關程式
+# TEDS排放處理相關程式
 
 除了準備光化模式所需要的排放檔案，此處也介紹排放數據的展示、檢視等等經驗。
-- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)、以及東亞範圍的[REAS](https://www.nies.go.jp/REAS/)為主。
+- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。以及東亞範圍的[REAS](https://www.nies.go.jp/REAS/)另見[隔壁](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/)。
 - 程式以2018年以來持續發展之`python`平行處理程式為主。
 
 ## 背景

@@ -56,18 +56,8 @@ MOZART針對空氣品質模式使用者設有提供資料之網站(http://www.ac
 ## 程式說明
 
 ## 程式之執行
-- 依月份呼叫即可
-- machine-dependancy
-  - 如要改寫成`uamiv`檔案，系統必須要有`pncgen`程式
-  - 因pandas及no.tensordot會自己啟動多工運作，同時執行3個月份node01~03尚能消化(CPU~4500%)，如太多月份同時運作，系統資源將會耗盡。不但拖慢速度，結果也不正確
 
-```bash
-for m in {01..04};do sub python area_YYMM.py 19$m >&/dev/null;done
-for m in {05..08};do sub python area_YYMM.py 19$m >&/dev/null;done
-for m in {09..12};do sub python area_YYMM.py 19$m >&/dev/null;done
-```
   
 ## 檔案下載
-- `python`程式：[area_YYMMinc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/area_YYMMinc.py)。
 
 ## Reference

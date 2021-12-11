@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Biogenic Sources"
-parent: "Emission Processing"
+parent: "TEDS Processing"
 nav_order: 3
 has_children: true
 permalink: /EmisProc/biog/

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Emission Processing
+title: TEDS Processing
 nav_order: 5
 has_children: true
 permalink: /EmsProc/

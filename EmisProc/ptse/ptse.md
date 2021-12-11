@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Point Sources"
-parent: "Emission Processing"
+parent: "TEDS Processing"
 nav_order: 5
 has_children: true
 permalink: /EmisProc/ptse/

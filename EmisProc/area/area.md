@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Area Sources"
-parent: "Emission Processing"
+parent: "TEDS Processing"
 nav_order: 2
 has_children: true
 permalink: /EmisProc/area/

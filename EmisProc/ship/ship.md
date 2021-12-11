@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Marine Sources"
-parent: "Emission Processing"
+parent: "TEDS Processing"
 nav_order: 6
 has_children: true
 permalink: /EmisProc/ship/

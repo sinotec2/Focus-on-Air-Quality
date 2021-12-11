@@ -2,7 +2,7 @@
 layout: default
 title: "Grnd PTse for CAMx"
 parent: "Point Sources"
-grand_parent: "Emission Processing"
+grand_parent: "TEDS Processing"
 nav_order: 6
 date:               
 last_modified_date:   2021-12-07 17:06:30

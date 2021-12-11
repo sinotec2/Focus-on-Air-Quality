@@ -26,6 +26,7 @@ last_modified_date:   2021-12-10 17:43:45
 - 將[環保署資料庫](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)進行排放類別(`NSC`)之篩選，其餘程序完全與[area_YYMM.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)一樣。
 
 ## 程式執行
+- 程式名稱：[area_YYMM_NSC.py](https://github.com/sinotec2/TEDS_ship/blob/main/area_YYMM_NSC.py)
 - 2個引數
   - 4碼年月
   - `NSC`單一值或序列

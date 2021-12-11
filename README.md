@@ -5,7 +5,7 @@
 這裡分享有關空氣品質及模式的分析工具與經驗
 
 
-[What's New](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Leave messages on GitHub](https://github.com/sinotec2/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[What's New](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)、[Leave messages on GitHub](https://github.com/sinotec2/Focus-on-Air-Quality/discussions/)
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## About the project
 
-FAQ is &copy; 2021-{{ "now" | date: "%Y" }} by [sinotec2](http://github.com/sinotec2/).
+FAQ is &copy; 2021-now by [sinotec2](http://github.com/sinotec2/).
 
 ### License
 
@@ -40,10 +40,10 @@ email, or any other method with the owners of this repository before making a ch
 #### The contributor of FAQ
 
 <ul class="list-style-none">
-{% for contributor in site.github.contributors %}
+for contributor in site.github.contributors 
   <li class="d-inline-block mr-1">
-     <a href="{{ contributor.html_url }}"><img src="{{ contributor.avatar_url }}" width="32" height="32" alt="{{ contributor.login }}"/></a>
+     <a href="{{ contributor.html_url }}"><img src="{{ contributor.avatar_url }}" width="32" height="32" alt=" contributor.login "/></a>
   </li>
-{% endfor %}
+
 </ul>
 

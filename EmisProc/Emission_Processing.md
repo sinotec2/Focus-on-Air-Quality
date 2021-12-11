@@ -52,4 +52,3 @@ last_modified_date:   2021-12-01 11:24:33
 - 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
 - National Institute for Environmental Studies, **Regional Emission inventory in ASia (REAS) Data Download Site**,  [nies](https://www.nies.go.jp/REAS/), 29-October-2020
 - AMArchibald, Unknown[153], Unknown[154], Unknown[155], MartinSpacek, Pauli Virtanen, **Parallel Programming with numpy and scipy**, [scipy-cookbook](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html), 2015-10-30
-

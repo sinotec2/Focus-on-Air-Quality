@@ -2,6 +2,8 @@
 layout: default
 title: "AQ Data Analysis"
 nav_order: 2
+has_children: true
+permalink: /AQana/
 ---
 
 # AQ Data Analysis

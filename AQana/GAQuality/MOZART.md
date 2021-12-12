@@ -38,7 +38,7 @@ last_modified_date:   2021-12-11 22:21:03
 
 ### MOZART模擬結果之下載
 **MOZART**針對空氣品質模式使用者設有提供資料之網站(http://www.acom.ucar.edu/wrf-chem/mozart.shtml ) ，給定內容：
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/mozart_download.PNG)
+![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/mozart_download.png)
 1. 基本資料。用做通訊用。
 1. 模擬範圍大致的座標 
 如下列`ncdump`內容

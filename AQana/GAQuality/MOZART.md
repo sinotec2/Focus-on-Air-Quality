@@ -37,7 +37,7 @@ last_modified_date:   2021-12-12 16:29:36
   - 碳鍵機制採lump法，VOCs包括3個烯烴與烷烴類物質，以及4個碳以上與芳香烴類物質(BIGALK, BIGENE及TOLUENE)。
 
 ### MOZART模擬結果之下載
-**MOZART**針對空氣品質模式使用者設有提供資料之[acom網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)(`http://www.acom.ucar.edu/wrf-chem/mozart.shtml`) ，給定內容：
+**MOZART**針對空氣品質模式使用者設有提供資料之[下載網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)(`http://www.acom.ucar.edu/wrf-chem/mozart.shtml`) ，給定內容：
 ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/mozart_download.png)
 1. 基本資料。用做通訊用。
 1. 模擬範圍大致的座標 
@@ -53,11 +53,11 @@ last_modified_date:   2021-12-12 16:29:36
   - 2016123106~2017011100(前一年的最後一天6:00開始~1/10結束在1/11/0:00)，存檔名稱file1:  2016_12_31 ~ 2017_01_10
   - 2017011106~2017012100，存檔名稱file2:  2017_01_11 ~ 2017_01_20
   - 2017012106~2017020200(下個月第一天)，存檔名稱file3:  2017_01_21 ~ 2017_02_01 
-1. 注意：
+- 注意：
   - 選單順序：因為日的選單比較難選(有31日)，建議按照file1(每一月)→file2(每一月) →file3進行(每一月)，以加快速度。
   - file1要注意大、小月、注意潤年檔案會重疊，只能針對同一月份進行`ncrcat`
   - 這樣做法雖然前後檔案會大一些，日期也不具規律性，但在後續處理時3個檔案合併總是比較小，可以減省讀取的時間。
-1. Submit之後，等待系統寄來下載網址，約<1~2小時之久，網址只在48小時內有效，已足夠下載全年數據。 
+1. Submit之後，等待系統寄來下載網址，約<1~2小時之久。雖然網址只在48小時內有效，此一期間已足夠下載全年數據。 
 - 網址內容之萃取
   - 全選系統寄來信件之內容、貼在工作站系統成為一文字檔(如EMAIL.TXT)
   - 使用GREP指令：g`rep http EMAIL.TXT >http.txt`
@@ -65,7 +65,7 @@ last_modified_date:   2021-12-12 16:29:36
   ```bash
   for i in $(cat http.txt);do wget -q $i;done
   ```
-  - 由於[acom網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)提供的檔名數字，是隨機產生，不建議一一複製貼上、同步下載時將容易錯漏。
+  - 由於[下載網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)提供的檔名數字，是隨機產生，不建議一一複製貼上、同步下載時將容易錯漏。
 
 ### nc檔案更名
 1. 其檔案為netCDF格式，東亞範圍1天(6小時解析度)檔案大小約**57M**(2017年後更新模擬項目增加為**65M**)。

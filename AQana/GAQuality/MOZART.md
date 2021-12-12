@@ -25,7 +25,7 @@ last_modified_date:   2021-12-12 16:29:36
 - MOZART模式全名為臭氧及相關化學成分模式([Model for OZone and Related chemical Tracers](https://en.wikipedia.org/wiki/MOZART_(model)))。
 - MOZART模式為NCAR、NOAA轄下 Geophysical Fluid Dynamics Laboratory (GFDL)與德國漢堡大學 Max Planck Institute for Meteorology (MPI-Met)多年來合作發展應用的全球3維大氣化學成分模式，除了應用在對流層之外，平流層及中氣層範圍亦涵括在內。 
   - 氣象場部分，MOZART可以接受包括NWS的NCEP (National Centers for Environmental Prediction)、歐洲的ECMWF(European Centre for Medium-Range Weather Forecasts)、NASA GMAO(Global Modeling and Assimilation Office ) 的GCM等模式輸出。
-  - 其空品模擬結果多年來也用在WRF-CHEM模式的邊界與初始條件。
+  - 其空品模擬結果多年來也用在WRF-CHEM、[CAMx](https://www.camx.com/download/support-software/)等模式的邊界與初始條件。
 - MOZART數值產品過去也經常應用在地區模擬之邊界與初始條件，詳如下述。
 
 ### MOZART結果之解析度
@@ -108,5 +108,6 @@ done
 ```
 
 ## Reference
-wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021
-acom.ucar, **Mozart Download**, [ucar.edu](http://www.acom.ucar.edu/wrf-chem/mozart.shtml), 2013-08-30.
+- wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021
+- Ramboll, **mozart2camx.26feb19.tgz**, [CAMx](https://www.camx.com/download/support-software/), 2/26/2019
+- acom.ucar, **Mozart Download**, [ucar.edu](http://www.acom.ucar.edu/wrf-chem/mozart.shtml), 2013-08-30.

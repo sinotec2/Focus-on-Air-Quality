@@ -34,8 +34,9 @@ last_modified_date:   2021-12-12 16:29:14
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cam-chem_download.png)
 - CAM-chem有段時間提供全年、全球範圍的模擬結果檔案下載。2021年後因管理政策改變，鼓勵使用者直接上機檢視模擬結果，甚至鼓勵在本地工作站自行模擬，因此再沒有提供全年、全球檔案下載。
 
-## 
-成分對照如下表：
+## CAM-chem的成分
+CAM模式與CMAQ模式成分對照如下表：
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM-chemSpec.png)
 
 ## Reference
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021

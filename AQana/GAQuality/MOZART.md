@@ -103,7 +103,7 @@ done
 ```
   - 按照`ncks`指令內容更名方式
 ```bash
-for nc in $(ls cam*nc);do 
+for nc in $(ls *nc);do 
 i=$(ncdump -h $nc|grep ncks|cut -d'/' -f10|cut -d '.' -f11|cut -c -10)
 mv $nc $i.nc
 done

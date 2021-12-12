@@ -4,8 +4,8 @@ title: "MOZART"
 parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
 nav_order: 1
-date:               
-last_modified_date:   2021-12-11 22:21:03
+date: 2021-12-12 16:29:31              
+last_modified_date:   2021-12-12 16:29:36
 ---
 
 # MOZART模式結果之讀取及應用
@@ -106,13 +106,6 @@ i=$(ncdump -h $nc|grep ncks|cut -d'/' -f10|cut -d '.' -f11|cut -c -10)
 mv $nc $i.nc
 done
 ```
-
-## 程式說明
-
-## 程式之執行
-
-  
-## 檔案下載
 
 ## Reference
 wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021

@@ -37,7 +37,7 @@ last_modified_date:   2021-12-11 22:21:03
   - 碳鍵機制採lump法，VOCs包括3個烯烴與烷烴類物質，以及4個碳以上與芳香烴類物質(BIGALK, BIGENE及TOLUENE)。
 
 ### MOZART模擬結果之下載
-**MOZART**針對空氣品質模式使用者設有提供資料之網站(http://www.acom.ucar.edu/wrf-chem/mozart.shtml ) ，給定內容：
+**MOZART**針對空氣品質模式使用者設有提供資料之[acom網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)(`http://www.acom.ucar.edu/wrf-chem/mozart.shtml`) ，給定內容：
 ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/mozart_download.png)
 1. 基本資料。用做通訊用。
 1. 模擬範圍大致的座標 
@@ -57,6 +57,55 @@ last_modified_date:   2021-12-11 22:21:03
   - 選單順序：因為日的選單比較難選(有31日)，建議按照file1(每一月)→file2(每一月) →file3進行(每一月)，以加快速度。
   - file1要注意大、小月、注意潤年檔案會重疊，只能針對同一月份進行`ncrcat`
   - 這樣做法雖然前後檔案會大一些，日期也不具規律性，但在後續處理時3個檔案合併總是比較小，可以減省讀取的時間。
+1. Submit之後，等待系統寄來下載網址，約<1~2小時之久，網址只在48小時內有效，已足夠下載全年數據。 
+- 網址內容之萃取
+  - 全選系統寄來信件之內容、貼在工作站系統成為一文字檔(如EMAIL.TXT)
+  - 使用GREP指令：g`rep http EMAIL.TXT >http.txt`
+  - `wget`指令。範例如下：
+  ```bash
+  for i in $(cat http.txt);do wget -q $i;done
+  ```
+  - 由於[acom網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)提供的檔名數字，是隨機產生，不建議一一複製貼上、同步下載時將容易錯漏。
+
+### nc檔案更名
+1. 其檔案為netCDF格式，東亞範圍1天(6小時解析度)檔案大小約**57M**(2017年後更新模擬項目增加為**65M**)。
+1. 資料內容的確認方式： 
+```bash
+$ ncdump mozart4geos5-20160217200203502764.nc|more
+netcdf mozart4geos5-20160217200203502764 
+{dimensions:        time = UNLIMITED ; // (44 currently)
+        lev = 56 ;
+        lat = 26 ;
+        lon = 33 ;
+        nchar = 80 ;
+        ilev = 57 ;
+        …
+        history="Wed Feb 17 20:02:03 2016: ncks -d lat,-2.0,47.0 -d lon,80.0,160.0 /var/www/html/acd/wrf-chem/archive/mozart4geos5_20121231.nc /var/www/html/acd/wrf-chem/temp/20160217200203502764-20121231.nc" ;
+        :NCO = "4.0.5" ;
+```
+- 注意：檔案的**維度**必須完全一樣，才能進行檔案的合併`ncrcat`
+1. 由於檔名為下載檔案的時間序列資訊，並沒有檔案內容時間資訊，這些資訊會寫在檔頭(**history**)裏，可以用下列指令將其讀出並以起始時間命名之： 
+  - 按照`history`內容更名方式
+```bash
+for i in $(ls moz*.nc);do 
+nc=`ncdump $i|head -n 500|grep history|awkk 9|cut -d'-' -f3`
+mv $i $nc
+done
+```
+  - 按照`date`內容更名方式
+```bash
+for i in $(ls *3?.nc);do 
+nc=`ncdump -v date $i|tail|grep date|awkk 7|cut -c-8`
+mv $i $nc.nc
+done
+```
+  - 按照`ncks`指令內容更名方式
+```bash
+for nc in $(ls cam*nc);do 
+i=$(ncdump -h $nc|grep ncks|cut -d'/' -f10|cut -d '.' -f11|cut -c -10)
+mv $nc $i.nc
+done
+```
 
 ## 程式說明
 

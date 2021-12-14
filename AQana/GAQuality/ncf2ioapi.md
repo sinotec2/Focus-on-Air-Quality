@@ -43,7 +43,44 @@ last_modified_date:   2021-12-12 16:29:14
   - 目前IOAPI的程式庫只能自行編譯。
   - CMAQ**5.3**版之後可接受IOAPI**3.1**版本程式庫
 
-### 
+### NCF2IOAPI的編譯
+- IOAPI 3.1版本(ifort example)
+```bash
+kuang@master /cluster/src/CAMx/mozart2camx_v3.0/ncf2ioapi_mozart
+$ cat Makefile.NCF2IOAPI.kng
+FC = ifort
+OMPFLAGS  = -openmp -parallel
+FOPTFLAGS = -O3 -unroll -stack_temps -safe_cray_ptr \
+  -convert big_endian -assume byterecl  ${MFLAGS} ${OMPFLAGS}
+MFLAGS    = -traceback -xHost                                   # this-machine
+ARCHLIB   = -Bstatic
+OMPLIBS   = -openmp
+FFLAGS = -O3 -convert big_endian
+PROGRAM = NCF2IOAPI
+LIBS =    -L/cluster/bld/ioapi3.1/Linux2_x86_64ifort -lioapi \
+          -L/cluster/netcdf/lib -lnetcdf -lnetcdff \
+         $(OMPLIBS) $(ARCHLIB) $(ARCHLIBS)
+INCLUDE = -I/cluster/bld/ioapi3.1/ioapi \
+          -I/cluster/netcdf/include
+RAW = get_envlist.o \
+      NCF2IOAPI.opoutfile.o  NCF2IOAPI.o
+.f.o:
+        $(FC) $(FFLAGS) $(INCLUDE) -c -o $@ $<
+.F.o:
+        $(FC) $(FFLAGS) $(INCLUDE) -c -o $@ $<
+$(PROGRAM):     $(RAW)
+        $(FC) $(FFLAGS) $(INCLUDE) -o $(@) $(RAW) $(LIBS)
+clean:
+        rm -f $(PROGRAM)
+```
+- IOAPI 3.2版本
+
+```bash
+LIBS =    -L/opt/ioapi/Linux2_x86_64gfort -lioapi -L/opt/netcdf/lib -lnetcdf -lnetcdff
+INCLUDE = -I/opt/ioapi/fixed_src \
+          -I/opt/netcdf/include
+```
+
 ## CAM-chem的成分
 CAM模式與CMAQ模式成分對照如下表：
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM-chemSpec.png)

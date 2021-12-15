@@ -82,6 +82,8 @@ for kcrs in range(nlays):
       nc.variables[v4[ix]][:,kcrs,:,:]=A4[ix,:,:,:]
 nc.close()
 ```
+## 程式下載
+- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqV.py)
 
 ## Reference
 -  純淨天空, **Python numpy.searchsorted()用法及代碼示例** [vimsky](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)

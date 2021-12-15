@@ -4,8 +4,8 @@ title: "obsYYMM_run.sh"
 parent: "OBSGRID"
 grand_parent: "WRF"
 nav_order: 3
-date:               
-last_modified_date:   2021-11-28 20:33:12
+date: 2021-11-28 20:33:12 
+last_modified_date: 2021-12-15 21:02:40
 ---
 
 # obsYYMM_run.sh
@@ -93,8 +93,8 @@ done
 ```bash
      6	begd=$(date -v-1m -j -f "%Y%m%d" "20${ym}15" +%Y%m%d)
      7	dd=`echo "4*($j-1)"|bc -l`
-     8	ymd1=$(date -v+${dd}d -j -f "%Y%m%d" "${begd}" +%Y%m%d)
-     9	ymd2=$(date -v+5d     -j -f "%Y%m%d" "${ymd1}" +%Y%m%d)
+     8	ymd1=$(date -v+${dd}d -j -f "%Y%m%d" "${begd}" +%y%m%d)
+     9	ymd2=$(date -v+5d     -j -f "%y%m%d" "${ymd1}" +%y%m%d)
     10	yea1=`echo $ymd1|cut -c1-2`;mon1=`echo $ymd1|cut -c3-4`;day1=`echo $ymd1|cut -c5-6`
     11	yea2=`echo $ymd2|cut -c1-2`;mon2=`echo $ymd2|cut -c3-4`;day2=`echo $ymd2|cut -c5-6`
     12	
@@ -107,7 +107,7 @@ done
 ```bash
     13	for d in {1..4};do #domain
     14	#copy the template and change the beg/end dates by sed
-    15	  cp -f $path/namelist.oa.loop namelist.oa
+    15	  rm -f namelist.oa;cp -f $path/namelist.oa.loop namelist.oa
     16	  for cmd in   "s/SYEA/20$yea1/g" "s/SMON/$mon1/g" "s/SDAY/$day1/g" \
     17	    "s/GID/$d/g" "s/EYEA/20$yea2/g" "s/EMON/$mon2/g" "s/EDAY/$day2/g";do
     18	    sed -ie $cmd namelist.oa

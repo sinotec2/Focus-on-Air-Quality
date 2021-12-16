@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "全球模擬結果的水平內插與污染項目對照"
+title: "水平內插與污染項目對照"
 parent: "Boundary Condition"
 grand_parent: "CMAQ Models"
 nav_order: 3

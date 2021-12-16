@@ -8,10 +8,10 @@ date: 2021-12-16 11:34:01
 last_modified_date:   2021-12-16 11:34:05
 ---
 
-# 產生D1範圍之`CMAQ`初始濃度檔案序列
+# 產生D1範圍之**CMAQ**初始濃度檔案序列
 
 ## 背景
-- [全球模式模擬結果](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality)是以逐6小時儲存，不但檔案很大，難以管理，也不能同步處理，同時對需要逐時邊界條件而言，會需要進行時間的內插。
+- [全球模式模擬結果](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality)是以逐6小時儲存，不但檔案很大，難以管理，也不能同步處理，耗費處理的時間。
 - 因此需要有一個程式按其時間進行拆解，拆解前需要準備好各結果檔案的模版。此為本程式的目的。
 - 拆解後全球模擬結果之[水平的內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)、空品項目的對照等程序，便可按個別檔案同時進行，最後再以`ncrcat`、按批次需要的日期予以整併即可。
 
@@ -26,7 +26,7 @@ last_modified_date:   2021-12-16 11:34:05
 1. 全球模式模擬結果全月檔案(經`ncrcat`及[垂直內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)處理)
  - 檔名規則：`'moz_41_20'+yrmn+'.nc'`
  - 只讀取時間標籤
-2. D1範圍`CMAQ`濃度檔模版：`ICON_tmp.d1`
+2. D1範圍**CMAQ**濃度檔模版：`ICON_tmp.d1`
   - 除了可以用做初始檔，此檔亦將作為是邊界條件之數據來源。
   - 規格如下
 
@@ -49,7 +49,7 @@ variables:
 ```
 
 #### 輸出檔
-- 每個時間D1範圍`CMAQ`之濃度檔
+- 每個時間D1範圍**CMAQ**之濃度檔
 - 檔案命名規則：`ICON_20YYJJJHH.d1`，`YY`：年代、`JJJ`：Julian Date、`HH`：小時
 
 ### 分段說明
@@ -78,7 +78,7 @@ nc = netCDF4.Dataset(fname,'r')
 tflag=nc.variables['TFLAG'][:,0,:]
 nt,dt=tflag.shape
 ```
-- 將每個時間分別寫成`CMAQ`初始濃度檔案備用
+- 將每個時間分別寫成**CMAQ**初始濃度檔案備用
 
 ```python
 fname='ICON_tmp.d1'

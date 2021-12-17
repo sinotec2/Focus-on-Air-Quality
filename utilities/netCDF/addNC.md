@@ -5,8 +5,7 @@ parent:   "NetCDF Relatives"
 grand_parent: "Utilities"
 last_modified_date:   2021-12-17 14:44:41
 ---
-
-# 相同規格NC檔案序列之加總(addNC)
+# 相同規格NC檔案序列之加總
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,7 +18,7 @@ last_modified_date:   2021-12-17 14:44:41
 </details>
 
 ---
-## 程式內容
+## addNC程式內容
 
 ```python
 # /opt/miniconda3/envs/py37/bin/python

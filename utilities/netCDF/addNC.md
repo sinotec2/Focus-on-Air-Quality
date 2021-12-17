@@ -18,7 +18,10 @@ last_modified_date:   2021-12-17 14:44:41
 </details>
 
 ---
+
 ## addNC程式內容
+- 引數：欲加總的`nc`檔案名稱，以空格隔開，最後為結果檔名
+- 所有的`nc`檔案的規格(維度、變數、全域屬性等)，都必須完全一致。(程式不檢查)
 
 ```python
 # /opt/miniconda3/envs/py37/bin/python
@@ -42,3 +45,5 @@ for v in v4:
     nc[nf-1][v][:,:,:,:]+=nc[f][v][:,:,:,:]
 nc[nf-1].close()
 ```
+
+### Reference

@@ -10,7 +10,7 @@ last_modified_date:   2021-12-01 11:24:33
 # TEDS排放處理相關程式
 
 除了準備光化模式所需要的排放檔案，此處也介紹排放數據的展示、檢視等等經驗。
-- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。以及東亞範圍的[REAS](https://www.nies.go.jp/REAS/)另見[隔壁](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/)。
+- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。臺灣地區以外的東亞範圍，此處以[REAS](https://www.nies.go.jp/REAS/)資料庫為分析對象，另見[隔壁](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/)。
 - 程式以2018年以來持續發展之`python`平行處理程式為主。
 
 ## 背景
@@ -33,9 +33,9 @@ last_modified_date:   2021-12-01 11:24:33
 ## 處理程序總綱
 - 資料庫[轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，`dbf` to `csv`。
 - 應用[資料表與矩陣的互換](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#資料表與矩陣的互換)工具，整理全年時間變化係數(**時變係數**)矩陣、存檔備用。
-- 讀取排放總量檔案、污染項目之彙總、展開形成`TPY[nSP, nCNTY,nNSC, nYX]`矩陣
-- 時間之展開：總量`X`時間係數(`numpy.tensordot`)
-- 空間之整併：按照模式的網格系統進行加總(`pandas.pivot_table`)
+- 讀取排放總量檔案、污染項目之彙總、展開形成**總量**`TPY[nSP, nCNTY,nNSC, nYX]`矩陣
+- 時間之展開：**總量**`X`**時間係數**(`numpy.tensordot`)
+- 空間之整併：按照模式的網格系統進行**加總**(`pandas.pivot_table`)
 - 填入nc檔案
 
 ## numpy/scipy的[平行運作](https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html)

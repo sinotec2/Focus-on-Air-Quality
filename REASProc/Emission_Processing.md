@@ -1,6 +1,6 @@
 ---
 layout: default
-title: TEDS Processing
+title: TEDS Python
 nav_order: 5
 has_children: true
 permalink: /EmsProc/

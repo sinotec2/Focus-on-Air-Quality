@@ -31,7 +31,6 @@ import netCDF4
 import os,sys
 fname=sys.argv[1]
 nc = netCDF4.Dataset(fname,'r')
-V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
 v='TFLAG'
 print(np.array(nc.variables[v][:,0,:]))
 ```

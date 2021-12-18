@@ -2,7 +2,7 @@
 layout: default
 title: "Prepare for PointS"
 parent: "Point Sources"
-grand_parent: "TEDS Processing"
+grand_parent: TEDS Python
 nav_order: 1
 date: 2021-12-03 09:54:07               
 last_modified_date:   2021-12-08 13:33:38

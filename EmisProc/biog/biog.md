@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Biogenic Sources"
-parent: "TEDS Processing"
+parent: TEDS Python
 nav_order: 3
 has_children: true
 permalink: /EmisProc/biog/

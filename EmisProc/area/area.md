@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Area Sources"
-parent: "TEDS Processing"
+parent: TEDS Python
 nav_order: 2
 has_children: true
 permalink: /EmisProc/area/

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Marine Sources"
-parent: "TEDS Processing"
+parent: TEDS Python
 nav_order: 6
 has_children: true
 permalink: /EmisProc/ship/

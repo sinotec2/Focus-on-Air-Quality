@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Point Sources"
-parent: "TEDS Processing"
+parent: TEDS Python
 nav_order: 5
 has_children: true
 permalink: /EmisProc/ptse/

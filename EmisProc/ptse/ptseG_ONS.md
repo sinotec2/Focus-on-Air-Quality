@@ -2,7 +2,7 @@
 layout: default
 title: "TimVar for Ground PTS"
 parent: "Point Sources"
-grand_parent: "TEDS Processing"
+grand_parent: TEDS Python
 nav_order: 5
 date:               
 last_modified_date:   2021-12-06 12:09:47

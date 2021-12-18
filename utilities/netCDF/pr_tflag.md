@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  m3.nc檔案時間標籤的列印
+title:  列印m3.nc的時間標籤
 parent:   NetCDF Relatives
 grand_parent: Utilities
 last_modified_date:   2021-12-18 19:21:11
 ---
-# m3.nc檔案時間標籤的列印
+# 列印m3.nc的時間標籤
 {: .no_toc }
 
 <details open markdown="block">

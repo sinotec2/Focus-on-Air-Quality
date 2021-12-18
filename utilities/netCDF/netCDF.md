@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "NetCDF Relatives"
-parent: "Utilities"
+title: NetCDF Relatives
+parent: Utilities
 nav_order: 2
 has_children: true
 permalink: /utilities/netCDF/

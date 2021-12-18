@@ -2,7 +2,6 @@
 layout: default
 title: md2ipynb
 parent: Utilities
-nav_order: 2
 ---
 
 # Markdown轉Jupyter筆記檔

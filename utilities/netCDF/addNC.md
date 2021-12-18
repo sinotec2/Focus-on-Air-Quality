@@ -3,7 +3,6 @@ layout: default
 title:  sum of NCFs
 parent: NetCDF Relatives
 grand_parent: Utilities
-nav_order: 1
 last_modified_date:   2021-12-17 14:44:41
 ---
 # 相同規格NC檔案序列之加總

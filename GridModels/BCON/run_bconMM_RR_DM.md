@@ -292,3 +292,4 @@ $ cat -n run_bconMM_RR_DM.csh
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/run_bconMM_RR_DM.csh)
 
 ## 參考
+- [USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_bcon.csh](https://github.com/USEPA/CMAQ/blob/main/PREP/bcon/scripts/run_bcon.csh)

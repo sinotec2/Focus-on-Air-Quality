@@ -1,8 +1,8 @@
 ---
 layout: default
-title: "水平內插與污染項目對照"
-parent: "Boundary Condition"
-grand_parent: "CMAQ Models"
+title: 水平內插與污染項目對照
+parent: Boundary Condition
+grand_parent: CMAQ Models
 nav_order: 3
 date: 2021-12-16 10:59:00
 last_modified_date:   2021-12-16 10:59:04

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: REAS Python
-nav_order: 5
+title: TEDS Python
+nav_order: 6
 has_children: true
-permalink: /REASProc/
+permalink: /EmisProc/
 last_modified_date:   2021-12-01 11:24:33
 ---
 

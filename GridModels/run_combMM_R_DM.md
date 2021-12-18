@@ -11,7 +11,7 @@ nav_order: 99
 
 ## 腳本程式說明
 ### 程式名稱
-- [run_combMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/combine/run_combMM_RR_DM.csh)
+- [run_combMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/combine/run_combMM_R_DM.csh)
 - 修改自[USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_combine.csh](https://github.com/USEPA/CMAQ/blob/main/POST/combine/scripts/run_combine.csh)
 
 ### 分段說明

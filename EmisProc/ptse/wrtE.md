@@ -1,8 +1,8 @@
 ---
 layout: default
-title: "Writing Elev PTse"
-parent: "Point Sources"
-grand_parent: "TEDS Processing"
+title: Writing Elev PTse
+parent: Point Sources
+grand_parent: TEDS Processing
 nav_order: 4
 date: 2021-12-07 17:06:30 
 last_modified_date:   2021-12-07 17:06:30

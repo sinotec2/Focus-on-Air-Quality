@@ -56,6 +56,11 @@ done
 - 置換的方式採用linux [sed](https://terryl.in/zh/linux-sed-command/)指令
 - 模版詳見[namelist.oa](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/namelist.oa/)說明
 
+### 批次的定義
+- 由於WRF是一個時間積分的數值模式，需要有個時間的起始與終結，必須以批次方式進行模式模擬。
+- 此處以前月15日為所有批次的開始日期`begd`，以使在大範圍模擬有足夠的調適時間。
+- 每批次執行**5天**、兩批次重疊**1天**、每批次間隔**4天**。
+
 ### `obsYYMM_run.sh`的執行
 - 開啟12個月份的專屬目錄（OBS01~OBS12），其下再開啟12個批次run1~run12,共144個批次同時進行。
 - 每批次工作目錄執行：`obsYYMM_run.sh` YYMM RR，YYMM為年月(4碼)、RR批次編號(1~12)

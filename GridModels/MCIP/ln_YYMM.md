@@ -1,11 +1,11 @@
 ---
 layout: default
-title: 全球模擬結果的垂直內插
-parent: Boundary Condition
+title: wrfout檔案之連結
+parent: Met. Chem. Interface Proc.
 grand_parent: CMAQ Models
 nav_order: 1
-date: 2021-12-15 11:56:13
-last_modified_date:   2021-12-15 11:56:17
+date: 2021-12-19 21:21:37
+last_modified_date:   2021-12-19 21:21:33
 ---
 
 # wrfout檔案之連結

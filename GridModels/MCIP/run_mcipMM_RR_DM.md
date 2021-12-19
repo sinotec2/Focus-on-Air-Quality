@@ -1,4 +1,25 @@
+---
+layout: default
+title: mcip程式執行腳本
+parent: Met. Chem. Interface Proc.
+grand_parent: CMAQ Models
+nav_order: 2
+date: 2021-12-19 21:21:37
+last_modified_date:   2021-12-19 21:21:33
+---
+
 # **mcip**程式執行腳本
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
 
 ## 背景
 - **mcip**程式是**WRF**與**CMAQ**程式之間的橋樑，**mcip**程式結果也是許多程式包括`bcon`、`combine`等都會讀取的重要檔案，建構**CMAQ**模式模擬應優先進行**mcip**程式。

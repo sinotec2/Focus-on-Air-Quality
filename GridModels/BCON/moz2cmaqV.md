@@ -10,6 +10,18 @@ last_modified_date:   2021-12-15 11:56:17
 
 # MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照
 
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+
 ## 背景
 - 網格模式最外層範圍的濃度，必須由[全球空品模式](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/)給定，考量到空氣品質項目的完整性，此處以[NCAR](https://www2.acom.ucar.edu/)模式為主，以[ECMWF]()整合數據為輔。
 - NCAR的MOZARD/WACCM模式是全球範圍的模式，在垂直向有較大的模擬高度([Surface to 1 hPa with 56 levels.](https://data.ucar.edu/dataset/model-for-ozone-and-related-chemical-tracers-output-mozart))，而一般區域的**WRF**或**CMAQ**模擬只有到達**50hPa**(40 levels)，因此需要切割並進行內插。

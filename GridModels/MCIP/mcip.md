@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Meteo. - Chem. Interface Proc.
+title: Met. Chem. Interface Proc.
 parent: CMAQ Models
 nav_order: 1
 has_children: true
@@ -10,7 +10,7 @@ permalink: /GridModels/MCIP/
 # 氣象檔案之準備
 {: .no_toc }
 
-**CMAQ**模式的氣象檔案乃由[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF/)轉檔而來：
+**CMAQ**模式的氣象檔案乃由[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF/)轉檔而來。
 
 {: .fs-6 .fw-300 }
 

@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  KML/GML polygons cnvert to rasters
+title:  python解析KML(GML)檔
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date:   2021-12-17 14:44:41
 ---
-# KML/GML polygons cnvert to rasters
+# python解析KML(GML)檔
 {: .no_toc }
 
 <details open markdown="block">

@@ -20,29 +20,27 @@ last_modified_date:   2021-12-21 14:46:36
 ---
 ## 背景
 ### 目標
-- 本次作業的目標在於將內政部([MOI](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A))鄉鎮區界的`shape`檔，讀成`d5`範圍**1公里**解析度的`raster`檔(`ioapi nc`格式)備用。
+- 本次作業的目標在於將內政部([MOI](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A)鄉鎮區界的`shape`檔，讀成`d5`範圍**1公里**解析度的`raster`檔(`ioapi nc`格式)備用。
 
 ### 方案考量
 - `shape file`的讀取方式有很多種(詳參[GIS Stack Exchange](https://gis.stackexchange.com/questions/113799/how-to-read-a-shapefile-in-python))，大多藉由[gdal程式庫](https://ithelp.ithome.com.tw/articles/10215163)。
   - 然而因gdal套用其他軟體相依性太高，太過複雜，裝設不易，且有記憶體容量之限制。
   - 一般寫出方法以`tiff`為主，目前尚沒有`nc`的現成套件。
-- 此處選擇直讀式的[PyShp]()，其裝置、使用範例可以參考[PyPi官網](https://pypi.org/project/pyshp/)。
-  - [PyShp]()的弱點在沒有現成的寫出方法可以套用，必須另外自行撰寫。
+- 此處選擇直讀式的[PyShp](https://pypi.org/project/pyshp/)，其裝置、使用範例可以參考[PyPi官網](https://pypi.org/project/pyshp/)。
+  - [PyShp](https://pypi.org/project/pyshp/)的弱點在沒有現成的寫出方法可以套用，必須另外自行撰寫。
   - 然因作業所要求格式對GIS領域而言過於冷僻，因此勢必無法規避自行撰寫。
-- **vector to raster**的核心是網格點是否在多邊形之內的判定(`within`)，可以調用[shapely]()的程式庫，詳官網說明及及[python解析KML(GML)檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)範例。
+- **vector to raster**的核心是網格點是否在多邊形之內的判定(`within`)，可以調用[shapely](https://shapely.readthedocs.io/en/stable/manual.html)的程式庫，詳官網說明及及[python解析KML(GML)檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)範例。
 
 ### 檔案說明
-- shape 檔：（輸入）TOWN_MOI_1090727.shp 來自MOI官網
-- nc檔：（輸入及輸出）template_d4_1x1.nc
-- csv檔：（輸出）鄉鎮區屬性內容
+- `shape` 檔：（輸入）`TOWN_MOI_1090727.shp` 來自[MOI官網](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A)
+- `nc`檔：（輸入及輸出）`template_d5_1x1.nc`
+- `csv`檔：（輸出）鄉鎮區屬性內容
 
-## 程式設計重點
-
-
+## [withinD5.py](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/withinD5.py)程式設計重點
 
 ### shape檔屬性內容之讀取與紀錄
 - 基本上`shape`檔的骨幹也是以`dict`型式儲存多邊形座標點，其屬性內容儲存在`fields`內，如下所示。
-- 以[MOI]()檔案而言，共有7個`fields`，將其作成`DataFrame`的`columns(col)`，
+- 以[MOI](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A)檔案而言，共有7個`fields`，將其作成`DataFrame`的`columns(col)`，
   - 每個鄉鎮區紀錄(`rec`)前7項記住了各區的名稱代碼等。
   - 雖然是`dict`，但`shape`檔案的`fields`紀錄仍然是按照順序排列的。
 
@@ -61,7 +59,7 @@ last_modified_date:   2021-12-21 14:46:36
   - **單一多邊形**處理較為單純且佔多數，**多個多邊形**較為複雜但個數較少。在迴圈的設計上分別處理。
   - 先記錄前者(調用`shape.__geo_interface__['coordinates']`)及`multi`標籤。
   - `plgs`順序必須保持跟`df`相同，`multi`則不必。
-- 在`multi`之24個個案中，[MOI]()格式略有不同，原因不明。
+- 在`multi`之24個個案中，[MOI](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A)格式略有不同，原因不明。
   - 經嘗試錯誤發現，有的是2層套疊`list`，有的是單層，必須探究哪一層才是經緯度`tuple`，以此來判別。
   - 先將多個多邊形`lump`成一個序列(第46~48行)、保持正確的格式、能夠計算`Polygon.bounds`就好，後面會再依照多邊形個數依序讀取、判別`within`。
 
@@ -85,7 +83,7 @@ last_modified_date:   2021-12-21 14:46:36
 ```
 
 ### 經緯度轉置與邊界範圍
-- [MOI]座標是(經度、緯度)，`shaple`約定是(緯度、經度)，順序相反
+- [MOI](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A)座標是(經度、緯度)，`shaple`約定是(緯度、經度)，順序相反
 
 ```python
     52  Dplg=[] #(lat,lon)
@@ -156,17 +154,18 @@ last_modified_date:   2021-12-21 14:46:36
 ```
 
 ### 模版製作並輸出檔案
-- 由於nc檔案只能變動unlimited dimension，因此必須先將rec_dmn設成ROW及COL，
-- 第一次要在各維度依序展開(107~110)
-  - 以後只要維度相同，可以一次倒入數據，但是bound要設好(112)
-  - 只要一個變數及TFLAGS，其餘變數不必留存
-  - 將變數rename成NUM_TOWN
+- 由於nc檔案只能變動`unlimited dimension`，因此必須先將`rec_dmn`設成`ROW`及`COL`，
+- 第一次要在各維度依序展開(107~110行)
+  - 以後只要維度相同，可以一次倒入數據，但是bound要設好(112行)
+  - 只要一個變數及`TFLAGS`，其餘變數不必留存
+  - 使用`ncrename`程式將變數`rename`成`NUM_TOWN`
+
 ```python  
-    94  #ncks -O --mk_rec_dmn ROW template_d4_1x1.nc a.nc
+    94  #ncks -O --mk_rec_dmn ROW template_d5_1x1.nc a.nc
     95  #ncks -O --mk_rec_dmn COL b.nc c.nc
-    96  #ncks -O -v NO,TFLAG -d TSTEP,0 c.nc template_d4_1x1.nc
+    96  #ncks -O -v NO,TFLAG -d TSTEP,0 c.nc template_d5_1x1.nc
     97  #ncrename -v NO,NUM_TOWN $nc
-    98  nc = netCDF4.Dataset('template_d4_1x1.nc', 'r+')
+    98  nc = netCDF4.Dataset('template_d5_1x1.nc', 'r+')
     99  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
   100  nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
   101  nc.NCOLS=ncol2
@@ -199,13 +198,12 @@ last_modified_date:   2021-12-21 14:46:36
 
 ## Resource
 ### links
-- https://www.cmascenter.org/ioapi/documentation/all_versions/html/AVAIL.html#cmaq
-- Stack Exchange, How to read a shapefile in Python? https://gis.stackexchange.com/questions/113799/how-to-read-a-shapefile-in-python
-- PyShp 官網https://pypi.org/project/pyshp/
-- Point in Polygon & Intersect
-https://automating-gis-processes.github.io/CSC18/lessons/L4/point-in-polygon.html
-- shapely pypi site https://pypi.org/project/Shapely/
-- The Shapely User Manual https://shapely.readthedocs.io/en/stable/manual.html
+- disscussion, **How to read a shapefile in Python?**, [Stack Exchange](https://gis.stackexchange.com/questions/113799/how-to-read-a-shapefile-in-python), Sep 28 2018.
+- jlawhead, **PyShp 2.1.3**, [pypi](https://pypi.org/project/pyshp/), Jan 14, 2021
+- Henrikki Tenkanen, **Point in Polygon & Intersect**, [github.io](https://automating-gis-processes.github.io/CSC18/lessons/L4/point-in-polygon.html), Jan 17, 2018.
+- Sean Gillies, **Shapely 1.8.0** [pypi](https://pypi.org/project/Shapely/), Oct 26, 2021
+- Sean Gillies, **The Shapely User Manual**, [readthedocs](https://shapely.readthedocs.io/en/stable/manual.html), 
+Dec 10, 2021
 
 ### notes
 - [python解析KML(GML)檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)

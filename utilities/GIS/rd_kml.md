@@ -90,12 +90,17 @@ last_modified_date:   2021-12-17 14:44:41
      7	  doc = parser.parse(f).getroot()
 ```
 - 讀取所有的位置標籤(`Placemark`)，及其名稱(`names`)
+  - 名稱`names`(會出現在`KML`檔案的`Placemark`(`plms`)的名稱標籤)，此名稱與網站提供的`xls`資料表名稱一致。共57筆，有重複。(line 8~9)
 
 ```python
      8	plms=doc.findall('.//{http://www.opengis.net/kml/2.2}Placemark')
      9	names=[i.name for i in plms]
     10	
 ```
+- `pykml`並未內設一制式的從屬關係層次，而是用`getparent` 方法找出來物件之間的親子關係。
+  - 在本案例中`MultiGeometry`與`Polygon`之間是有關係的，而`MultiGeometry`與`Placemark`的順序相同，可以引用相同的名稱，因此就可以由下向上，串連找到每一個`Polygon`的名稱。
+  1. 先找到MultiGeometry物件，以及其個別的標籤(MultiGeometry 沒有名稱，只有標籤) (line 11~12)
+  2. 找到Polygon物件，及其上層MultiGeometry 物件的標籤(line 14~15)
 - 讀取幾何形狀(`mtgs`)與其標籤(`mtg_tag`)
 
 ```python
@@ -112,6 +117,7 @@ last_modified_date:   2021-12-17 14:44:41
 ```
 - 使用`pyval`指令收集多邊形頂點的座標值
   - 參考[pykml.parser.fromstring函數](https://vimsky.com/zh-tw/examples/detail/python-ex-pykml.parser---fromstring-function.html)及[Python fromstring Examples](https://python.hotexamples.com/examples/pykml.parser/-/fromstring/python-fromstring-function-examples.html)
+  - 因為MultiGeometry的順序和Placemark是一樣的，因此只要知道tag在MultiGeometry 序列中的序號，就可以知道它的名稱。(line 21~22)  
 
 ```python
     17	lon,lat,num,nam=[],[],[],[]
@@ -139,6 +145,7 @@ last_modified_date:   2021-12-17 14:44:41
     35	#   if n%100==0:print(n)
 ```
 - `DataFrame.to_csv`版本
+  - 功能主要在將每一個座標點輸出成`csv`檔，而將其名稱寫在**點位**的說明欄，可以應用[csv2kml.py]()程式再次轉成`kml`檔案，檢視其**多邊形**及**名稱**解析是否正確。
 
 ```python
     36	df=DataFrame({'lon':lon,'lat':lat,'num':num,'nam':nam})
@@ -147,6 +154,72 @@ last_modified_date:   2021-12-17 14:44:41
 ## 程式下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/rd_kml.py)
 
+## GML檔案之讀取
+- `GML`是open GIS的共通語言，但相關軟體和討論似乎並不是很普遍。
+- 樣式範例([鄉鎮市區界線(TWD97經緯度)](https://data.gov.tw/dataset/7442))
+
+```html
+<行政區域界線 xmlns="http://standards.moi.gov.tw/schema/pub" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ngis_primitive="http://standards.moi.gov.tw/schema/ngis_primitive" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:utility="http://standards.moi.gov.tw/schema/utility" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.moi.gov.tw/schema/pub pub.xsd">
+  <gml:metaDataProperty>
+    <ngis_primitive:NGIS_Primitive>
+      <ngis_primitive:資料描述>鄉鎮市區界線(TWD97經緯度)</ngis_primitive:資料描述>
+      <ngis_primitive:坐標參考系統識別碼>
+        <gmd:RS_Identifier>
+          <gmd:code>
+            <gco:CharacterString>EPSG:3824</gco:CharacterString>
+          </gmd:code>
+        </gmd:RS_Identifier>
+      </ngis_primitive:坐標參考系統識別碼>
+      <ngis_primitive:坐標參考系統定義 xlink:herf="http://standards.moi.gov.tw/schema/epsg/3824.xml" />
+      <ngis_primitive:資料內容對應時間>
+        <gml:TimeInstant>
+          <gml:timePosition indeterminatePosition="after">109-07-21</gml:timePosition>
+        </gml:TimeInstant>
+      </ngis_primitive:資料內容對應時間>
+    </ngis_primitive:NGIS_Primitive>
+  </gml:metaDataProperty>
+  <gml:featureMember>
+    <PUB_行政區域>
+      <名稱>臺東縣成功鎮</名稱>
+      <涵蓋範圍>
+        <gml:MultiPolygon>
+          <gml:polygonMember>
+            <gml:Polygon>
+              <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                  <gml:coordinates>121.40981573700003,23.213692785000092 121.40984267700003,23.213661019000085 ...</gml:coordinates>
+                </gml:LinearRing>
+              </gml:outerBoundaryIs>
+            </gml:Polygon>
+          </gml:polygonMember>
+        </gml:MultiPolygon>
+      </涵蓋範圍>
+      <行政區域代碼>10014020</行政區域代碼>
+      <比例尺分母>5000</比例尺分母>
+      <行政區域設置時間 />
+    </PUB_行政區域>
+  </gml:featureMember>
+  <gml:featureMember>
+    <PUB_行政區域>
+      <名稱>屏東縣佳冬鄉</名稱>
+      <涵蓋範圍>
+        <gml:MultiPolygon>
+          <gml:polygonMember>
+...
+ 120.99327470700021,24.780576327000048</gml:coordinates>
+                </gml:LinearRing>
+              </gml:innerBoundaryIs>
+            </gml:Polygon>
+          </gml:polygonMember>
+        </gml:MultiPolygon>
+      </涵蓋範圍>
+      <行政區域代碼>10004100</行政區域代碼>
+      <比例尺分母>5000</比例尺分母>
+      <行政區域設置時間 />
+    </PUB_行政區域>
+  </gml:featureMember>
+</行政區域界線>
+```
 ## Reference
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.
 - Tyler Erickson, **pyKML v0.1.0 documentation**,[pythonhosted](https://pythonhosted.org/pykml/), 2011

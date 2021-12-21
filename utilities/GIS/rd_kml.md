@@ -46,9 +46,10 @@ last_modified_date:   2021-12-17 14:44:41
   * 此外因為距離台灣很遠，d1範圍的解析度也有限(81K)，如果超過10區，每區網格數會太少。
   * 以美國而言，有所謂**climate region**，臺灣地區也有所謂空品區的概念。 建議還是以大陸官方空氣質量管理之分區方式為宜。
 
-## 檔案來源
+## 檔案來源與解壓縮
 - chn_admbnda_adm1_ocha.kmz
   - [CSISS GeoBrain Cloud, George Mason University](https://cloud.csiss.gmu.edu/uddi/th/dataset/china-administrative-boundaries)
+  - [The Humanitarian Data Exchange](https://data.humdata.org/dataset/china-administrative-boundaries)
   - [github](https://github.com/edwenger/2019-nCoV/find/master)
 - `kmz`是個`zip`檔，`unzip`後可以得到其`kml`檔案(將其更名為`doc.kml`以利程式讀取)
 - `doc.kml`部分內容(`Placemark=ID_00000`安徽省)
@@ -68,6 +69,7 @@ last_modified_date:   2021-12-17 14:44:41
                116.918619955,34.09428245300003,0                
 ...               
 ```
+
 ## [rd_kml.py](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/rd_kml.py)
 
 ### 程式分段說明

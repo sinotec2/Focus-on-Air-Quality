@@ -128,10 +128,12 @@ last_modified_date:   2021-12-21 14:46:36
 ```
 
 ### 多個多邊形within之判別
-此處以鄉鎮區為主要的迴圈，針對網格點進行篩選，符合邊界範圍條件網格才進行within判別
-3層迴圈順序、由外而內分別為：鄉鎮區->多邊形->網格點
-因前述plgs將所有多邊形lump在一起，within判別會出錯，必須重新讀取shape檔、依序判別同一鄉鎮區的多個多邊形。
-同樣進行層次的確認（78~81）、與經緯度的轉置(83~85)
+- 此處以鄉鎮區為主要的迴圈，針對網格點進行篩選，符合邊界範圍條件網格才進行within判別
+  - 3層迴圈順序、由外而內分別為：鄉鎮區->多邊形->網格點
+  - 因前述plgs將所有多邊形lump在一起，within判別會出錯，必須重新讀取shape檔、依序判別同一鄉鎮區的多個多邊形。
+  - 同樣進行層次的確認（78~81行）、與經緯度的轉置(83~85行)
+
+```python  
     74  for n in multi:
     75    idx=np.where((Plat-mnLat[n])*(Plat-mxLat[n])<=0)
     76    idx2=np.where((Plon[idx[0][:],idx[1][:]]-mnLon[n])*(Plon[idx[0][:],idx[1][:]]-mxLon[n])<=0)
@@ -151,12 +153,15 @@ last_modified_date:   2021-12-21 14:46:36
     90        poly = Polygon(crd)
     91        if p1.within(poly):  #boolean to check whether the p1 coordinates is inside the polygon or not
     92          DIS[j,i]=float(n)
-模版製作並輸出檔案
-由於nc檔案只能變動unlimited dimension，因此必須先將rec_dmn設成ROW及COL，
-第一次要在各維度依序展開(107~110)
-以後只要維度相同，可以一次倒入數據但是bound要設好(112)
-只要一個變數及TFLAGS，其餘變數不必留存
-將變數rename成NUM_TOWN
+```
+
+### 模版製作並輸出檔案
+- 由於nc檔案只能變動unlimited dimension，因此必須先將rec_dmn設成ROW及COL，
+- 第一次要在各維度依序展開(107~110)
+  - 以後只要維度相同，可以一次倒入數據，但是bound要設好(112)
+  - 只要一個變數及TFLAGS，其餘變數不必留存
+  - 將變數rename成NUM_TOWN
+```python  
     94  #ncks -O --mk_rec_dmn ROW template_d4_1x1.nc a.nc
     95  #ncks -O --mk_rec_dmn COL b.nc c.nc
     96  #ncks -O -v NO,TFLAG -d TSTEP,0 c.nc template_d4_1x1.nc
@@ -177,19 +182,20 @@ last_modified_date:   2021-12-21 14:46:36
   111  else:
   112    nc.variables['NUM_TOWN'][0,0,:nrow,:ncol]=DIS[:,:]
   113  nc.close()
-ToDo
-空間模版改變時注意事項
-中心點位置：(YCENT及XCENT)程式（line 9）與nc檔案都會有，應以後者為主，須調整line 9與line 13讀取的順序
-此處以模版範圍為主，沒有其他定義
-網格數：由程式自行計算，也無需另外定義。
-解析度：@line 20~23, 105~106
-shape檔結構、格式的Try and Err
-同一序號，多個多邊形。不見得其他的shape檔也是此一結構。
-多個多邊形、不同序列層次套疊。
+```
+
+## ToDo
+- 空間模版改變時注意事項
+  - 中心點位置：(YCENT及XCENT)程式（line 9）與nc檔案都會有，應以後者為主，須調整line 9與line 13讀取的順序
+  - 此處以模版範圍為主，沒有其他定義
+  - 網格數：由程式自行計算，也無需另外定義。
+  - 解析度：@line 20~23, 105~106
+- shape檔結構、格式的Try and Err
+  - 同一序號，多個多邊形。不見得其他的shape檔也是此一結構。
+  - 多個多邊形、不同序列層次套疊。
 
 ## codes
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/withinD5.py)
-
 
 ## Resource
 ### links
@@ -200,5 +206,6 @@ shape檔結構、格式的Try and Err
 https://automating-gis-processes.github.io/CSC18/lessons/L4/point-in-polygon.html
 - shapely pypi site https://pypi.org/project/Shapely/
 - The Shapely User Manual https://shapely.readthedocs.io/en/stable/manual.html
+
 ### notes
 - [python解析KML(GML)檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)

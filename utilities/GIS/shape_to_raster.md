@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  shape files cnvert to rasters
+title:  shape_to_raster
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date:   2021-12-21 14:46:36
 ---
-# shape files cnvert to rasters
+# shape files convert to rasters
 {: .no_toc }
 
 <details open markdown="block">
@@ -24,16 +24,17 @@ last_modified_date:   2021-12-21 14:46:36
 
 ### 方案考量
 - `shape file`的讀取方式有很多種(詳參[GIS Stack Exchange](https://gis.stackexchange.com/questions/113799/how-to-read-a-shapefile-in-python))，大多藉由[gdal程式庫](https://ithelp.ithome.com.tw/articles/10215163)。
-  - 然而因gdal套用其他軟體相依性太高，太過複雜，裝設不易，且有記憶體容量之限制。
+  - 然而因`gdal`套用其他軟體相依性太高，太過複雜，裝設不易，且有記憶體容量之限制。
   - 一般寫出方法以`tiff`為主，目前尚沒有`nc`的現成套件。
 - 此處選擇直讀式的[PyShp](https://pypi.org/project/pyshp/)，其裝置、使用範例可以參考[PyPi官網](https://pypi.org/project/pyshp/)。
   - [PyShp](https://pypi.org/project/pyshp/)的弱點在沒有現成的寫出方法可以套用，必須另外自行撰寫。
   - 然因作業所要求格式對GIS領域而言過於冷僻，因此勢必無法規避自行撰寫。
-- **vector to raster**的核心是網格點是否在多邊形之內的判定(`within`)，可以調用[shapely](https://shapely.readthedocs.io/en/stable/manual.html)的程式庫，詳官網說明及及[python解析KML(GML)檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)範例。
+  - **vector to raster**的核心是網格點是否在多邊形之內的判定(`within`)，可以調用[shapely](https://shapely.readthedocs.io/en/stable/manual.html)的程式庫，詳官網說明及及[python解析KML(GML)檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)範例。
+- `kml`也可以轉成`raster`，一般`shp`向量檔也有`kml`形式儲存備用的。然而`kml`的轉檔需執行[rd_kml](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)及[withinD1]()等檔案讀取與寫出2個步驟，似過於繁瑣。此處予以整併。
 
-### 檔案說明
+### 檔案IO及格式說明
 - `shape` 檔：（輸入）`TOWN_MOI_1090727.shp` 來自[MOI官網](https://data.moi.gov.tw/MoiOD/Data/DataContent.aspx?oid=CD02C824-45C5-48C8-B631-98B205A2E35A)
-- `nc`檔：（輸入及輸出）`template_d5_1x1.nc`
+- `nc`檔：（輸入及輸出）模版`template_d5_1x1.nc`及最終結果(同名)
 - `csv`檔：（輸出）鄉鎮區屬性內容
 
 ## [withinD5.py](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/withinD5.py)程式設計重點

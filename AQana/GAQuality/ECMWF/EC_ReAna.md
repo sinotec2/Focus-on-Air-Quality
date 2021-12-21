@@ -8,7 +8,7 @@ date: 2021-12-16 14:07:27
 last_modified_date:   2021-12-16 14:07:31
 ---
 
-# 歐洲中期天氣預報中心再分析數據之下載(撰寫中)
+# 歐洲中期天氣預報中心再分析數據之下載
 {: .no_toc }
 
 <details open markdown="block">
@@ -38,7 +38,7 @@ key: 2556:e6b523da-4703-4dc7-bcfd-94cb2d8ed395
 
 ## 下載、準備、編譯
 
-### 空品數據之下載
+### 空品數據之下載(get_d2.py)
 
 ```python
 import cdsapi
@@ -91,6 +91,5 @@ for sp in SPECs:
     },
      fname)  
 ```
-
 
 ## Reference

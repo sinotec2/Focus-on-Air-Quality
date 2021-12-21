@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  python解析KML(GML)檔
+title:  python解析KML檔
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date:   2021-12-17 14:44:41
 ---
-# python解析KML(GML)檔
+# python解析KML檔
 {: .no_toc }
 
 <details open markdown="block">
@@ -29,7 +29,6 @@ last_modified_date:   2021-12-17 14:44:41
   - 造成這種網路現象主要的理由，是因為raster檔案有其解析度的限制，提供者不知該提供到什麼樣的解析度才恰當，畢竟使用者定義的範圍解析度樣態真的太多樣了。
 - 本作業聚焦在省界shape(或KML)檔，轉成模式解析度(d1)的raster檔案。
   * [KML](https://zh.wikipedia.org/wiki/KML)(Keyhole markup language)是Google發展的地理資訊語言檔案格式，經常使用在google地圖、open street 地圖平台上。
-  * GML(Geography Markup Language)是臺灣地區的鄉鎮區界檔案格式，目標raster解析度範圍為d4，雖然跟KML有很大的差別，但處理程序有很高的相似性，因此也放在一起討論。
 
 ### 目標
 - 建立範圍解析度(d1) raster的值(整數分區代碼)
@@ -46,7 +45,6 @@ last_modified_date:   2021-12-17 14:44:41
   * 如果分區越細，軌跡機率就越少、排放量分配也較少。
   * 此外因為距離台灣很遠，d1範圍的解析度也有限(81K)，如果超過10區，每區網格數會太少。
   * 以美國而言，有所謂**climate region**，臺灣地區也有所謂空品區的概念。 建議還是以大陸官方空氣質量管理之分區方式為宜。
-- `python`並沒有針對`GML`發展特殊的**parser**，如果用**eTree**來解讀，還算方便。但因為多邊形多達1036筆(群島)，再加上d4高解析度(由1公里加總成3公里)，因此須解決迴圈太多的問題。
 
 ## 檔案來源
 - chn_admbnda_adm1_ocha.kmz
@@ -154,72 +152,6 @@ last_modified_date:   2021-12-17 14:44:41
 ## 程式下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/rd_kml.py)
 
-## GML檔案之讀取
-- `GML`是open GIS的共通語言，但相關軟體和討論似乎並不是很普遍。
-- 樣式範例([鄉鎮市區界線(TWD97經緯度)](https://data.gov.tw/dataset/7442))
-
-```html
-<行政區域界線 xmlns="http://standards.moi.gov.tw/schema/pub" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ngis_primitive="http://standards.moi.gov.tw/schema/ngis_primitive" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:utility="http://standards.moi.gov.tw/schema/utility" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.moi.gov.tw/schema/pub pub.xsd">
-  <gml:metaDataProperty>
-    <ngis_primitive:NGIS_Primitive>
-      <ngis_primitive:資料描述>鄉鎮市區界線(TWD97經緯度)</ngis_primitive:資料描述>
-      <ngis_primitive:坐標參考系統識別碼>
-        <gmd:RS_Identifier>
-          <gmd:code>
-            <gco:CharacterString>EPSG:3824</gco:CharacterString>
-          </gmd:code>
-        </gmd:RS_Identifier>
-      </ngis_primitive:坐標參考系統識別碼>
-      <ngis_primitive:坐標參考系統定義 xlink:herf="http://standards.moi.gov.tw/schema/epsg/3824.xml" />
-      <ngis_primitive:資料內容對應時間>
-        <gml:TimeInstant>
-          <gml:timePosition indeterminatePosition="after">109-07-21</gml:timePosition>
-        </gml:TimeInstant>
-      </ngis_primitive:資料內容對應時間>
-    </ngis_primitive:NGIS_Primitive>
-  </gml:metaDataProperty>
-  <gml:featureMember>
-    <PUB_行政區域>
-      <名稱>臺東縣成功鎮</名稱>
-      <涵蓋範圍>
-        <gml:MultiPolygon>
-          <gml:polygonMember>
-            <gml:Polygon>
-              <gml:outerBoundaryIs>
-                <gml:LinearRing>
-                  <gml:coordinates>121.40981573700003,23.213692785000092 121.40984267700003,23.213661019000085 ...</gml:coordinates>
-                </gml:LinearRing>
-              </gml:outerBoundaryIs>
-            </gml:Polygon>
-          </gml:polygonMember>
-        </gml:MultiPolygon>
-      </涵蓋範圍>
-      <行政區域代碼>10014020</行政區域代碼>
-      <比例尺分母>5000</比例尺分母>
-      <行政區域設置時間 />
-    </PUB_行政區域>
-  </gml:featureMember>
-  <gml:featureMember>
-    <PUB_行政區域>
-      <名稱>屏東縣佳冬鄉</名稱>
-      <涵蓋範圍>
-        <gml:MultiPolygon>
-          <gml:polygonMember>
-...
- 120.99327470700021,24.780576327000048</gml:coordinates>
-                </gml:LinearRing>
-              </gml:innerBoundaryIs>
-            </gml:Polygon>
-          </gml:polygonMember>
-        </gml:MultiPolygon>
-      </涵蓋範圍>
-      <行政區域代碼>10004100</行政區域代碼>
-      <比例尺分母>5000</比例尺分母>
-      <行政區域設置時間 />
-    </PUB_行政區域>
-  </gml:featureMember>
-</行政區域界線>
-```
 ## Reference
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.
 - Tyler Erickson, **pyKML v0.1.0 documentation**,[pythonhosted](https://pythonhosted.org/pykml/), 2011

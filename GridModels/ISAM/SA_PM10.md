@@ -92,8 +92,8 @@ end
   - 加總結果檔名：`PM10${z}_2018040${d}.nc`  
 - 合併(照日期附加)
   - 使用[ncrcat]()程式
-  - 可以用[VERDI]檢視之
-
+  - 可以用[VERDI]()檢視之
+  
 ```bash
 #isam job for 20180404~8, 6 AirQualityForecastZone(AQFS), only GR1~4 and PTA are taken into account
 #sum up aerosol results using python program, to be PM10, see SA_PM10.py
@@ -167,7 +167,7 @@ for g in grp:
     nco['TFLAG'][t,0,:]=nc['TFLAG'][t,0,:]
 ```
 - 累加`PM10`
-  - 因**ISAM**未處理氯離子，矩陣無內容，因此須研判是否為`nan`，以避免被`netCDF4`[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
+  - 因**ISAM**未處理氯離子等很多項目，矩陣無內容，因此須研判是否為`nan`，以避免被`netCDF4`[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
 
 ```python
   var=np.zeros(shape=(nt,nlay,nrow,ncol))
@@ -182,6 +182,12 @@ for g in grp:
 ## 程式下載
 - 主程式[SA_PM10.py](https://github.com/sinotec2/cmaq_relatives/blob/master/isam/SA_PM10.py)
 - 執行腳本[proc.cs](https://github.com/sinotec2/cmaq_relatives/blob/master/isam/proc.cs)
+
+## 成果檢視
+- [Fen_Wei Plains and ShanXi(FWS) Source Contributions](https://youtu.be/8EbU2FIIOTU)
+- [Northwestern China(NWC) Source Contributions](https://youtu.be/lh7Eq-um-Ng)
+- [Northern China(JJZ) Source Contributions](https://youtu.be/L2EwOOjxJC4)
+- [Eastern China(YZD) Source Contributions](https://youtu.be/A9wQUbw_8yc)
 
 ## Reference
 - 中華人民共和國生態環境部, **空氣品質預報**, [生態環境部官網](http://big5.mee.gov.cn/gate/big5/www.mee.gov.cn/hjzl/dqhj/kqzlyb/)

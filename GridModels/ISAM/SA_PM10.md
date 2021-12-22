@@ -53,11 +53,15 @@ last_modified_date:   2021-12-20 15:56:47
 kuang@DEVP /home/cmaqruns/2018base
 $ cat do_isam.csh
 foreach BSN ('JJZ' 'SCH' 'YZD' 'FWS' 'NEC' 'NWC')
-  source run_isamMM_RR_DM.csh2 04 6 d01 $BSN
+  source run_isamMM_RR_DM.csh 04 6 d01 $BSN
 end
 ```
+
 #### 執行腳本
 - [run_isamMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/isam/run_isamMM_RR_DM.csh)
+
+#### 腳本說明
+- [執行CMAQ-ISAM](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/run_isamMM_RR_DM/)
 
 ### 程式名稱
 - [SA_PM10.py](https://github.com/sinotec2/cmaq_relatives/blob/master/isam/SA_PM10.py)

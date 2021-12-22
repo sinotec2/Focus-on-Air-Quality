@@ -169,7 +169,7 @@ ENDLIST eof
 
 ## 初始化與批次連接之設定
 - 官方教學或示範都是以個案方式，實務上有批次間相連的困難。此處以官網最[新腳本範例](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/scripts/run_cctm_Bench_2016_12SE1.csh)(`v533`)比較說明
-- **ISAM**也有其初始狀態(`$ISAM_NEW_START`)。此處以每月第1批次(`run5`)為初始。其他批次、或同一批次其他天則為接序執行。
+- **ISAM**也有其初始狀態(`$ISAM_NEW_START`)。此處以每月第1批次(`run5`)為初始。其他批次、或同一批次其他天則為接續執行。
 
 ```bash
 (base)
@@ -184,13 +184,14 @@ $ diff run_isamMM_RR_DM.csh2 ../2016base/old_scripts/run_cctm_Bench_2016_12SE1.c
 >           setenv ISAM_NEW_START Y
 >           setenv ISAM_PREVDAY
 ```
-  - 此段專為特定月份、特定批次編號執行**ISAM**之方便門
+- 此段專為特定月份、特定批次編號執行**ISAM**之方便門
+  - 範例為執行4月第6批次(4/4~9)之**CCTM_ISAM**
 
 ```python
 530,561c461,462
 <          echo 'kuang' #in case of another run or another days
 <          setenv ISAM_NEW_START N
-<          if ( $MO == '04' && $RUN == 5 && $TODAYJ == $START_DAY ) then
+<          if ( $MO == '04' && $RUN == 6 && $TODAYJ == $START_DAY ) then
 <            setenv ISAM_NEW_START Y
 <            setenv ISAM_PREVDAY
 <          endif
@@ -211,7 +212,7 @@ $ diff run_isamMM_RR_DM.csh2 ../2016base/old_scripts/run_cctm_Bench_2016_12SE1.c
 <          endif
 ```
 - 測試是否存在`ISAM_PREVDAY`檔案，如果不存在，表示是跨批次執行，要把前1批次最末小時結果連結到本批次目錄。
-  - 如果真的也沒有分地區之執行結果，至少把全區結果連過來。如果連全區也沒有，腳本就會中斷，必須先產生一個`CCTM_SA_CGRID`檔案出來。
+  - 如果真的也沒有分地區之執行結果，至少把全區結果連過來。如果連全區也沒有，腳本就會中斷，必須先產生一個`CCTM_SA_CGRID`檔案出來。(符合[變數命名規則](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/SA_PM10/#%E8%83%8C%E6%99%AF)即可)
 
 ```python
 <          if (! (-e $ISAM_PREVDAY )) then

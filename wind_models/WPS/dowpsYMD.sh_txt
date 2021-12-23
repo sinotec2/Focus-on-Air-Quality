@@ -1,0 +1,35 @@
+3#usage: dowps.cs y m d
+PATH1=$PWD 
+PATH2=/Users/WRF4.1/NCEP
+
+#cp -f $PATH1/namelist.wps.loop namelist.wps
+#./geogrid.exe
+
+YYYY=$1
+MM=$2
+DD=$3
+
+i=$1
+  ym=$(date       -j -f "%Y-%m-%d" "${YYYY}-${MM}-${DD}" +%Y%m)
+  YY=$(date       -j -f "%Y-%m-%d" "${YYYY}-${MM}-${DD}" +%y)
+  YN=$(date -v+1d -j -f "%Y-%m-%d" "${YYYY}-${MM}-${DD}" +%y)
+  MN=$(date -v+1d -j -f "%Y-%m-%d" "${YYYY}-${MM}-${DD}" +%m)
+  DN=$(date -v+1d -j -f "%Y-%m-%d" "${YYYY}-${MM}-${DD}" +%d)
+  cp -f $PATH1/namelist.wps.loopYMD namelist.wps
+  for cmd in "s/YN/"$YN/g  "s/YP/"$YY/g  "s/MN/"$MN/g  "s/MP/"$MM/g "s/DN/"$DN/g  "s/DP/"$DD/g ;do sed -ie $cmd namelist.wps;done
+  sed -ie "s/PREWD/FILE/g" namelist.wps
+  rm -f GRIB*
+  $PATH1/link_grib.csh $PATH2/FNL/$YYYY/fnl_$YYYY$MM${DD}* $PATH2/FNL/$YYYY/fnl_20$YN$MN${DN}* 
+  ln -sf $PATH1/ungrib/Variable_Tables/Vtable.GFS Vtable
+  $PATH1/ungrib.exe
+  
+  $PATH2/SST/transNC2inter.py $YYYY $MM $DD
+  $PATH2/SST/transNC2inter.py 20$YN $MN $DN
+
+  ./metgrid.exe
+
+  mkdir -p $PATH1/$ym/met
+  mkdir -p $PATH1/$ym/SST_FILE
+
+  mv met_em*nc $PATH1/$ym/met
+  mv FILE:20* SST:20* $PATH1/$ym/SST_FILE

@@ -28,7 +28,7 @@ last_modified_date:   2021-11-25 16:21:24
 - 網路公開之[手冊](https://ruc.noaa.gov/wrf/wrf-chem/Users_guide.pdf)目前只到3.9版，4版仍在撰寫中。NOAA認為版本間差異不大，[鼓勵]((https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?t=9507))使用者先參閱[Release Note](https://github.com/wrf-model/WRF/releases)。
 
 ## chem之設定
-- 共有39項參數，揚沙只需打開下列14項，與[tutorial]()有差異者討論如下
+- 共有39項參數，揚沙只需打開下列15項，與[tutorial]()有差異者討論如下
   - `chem_opt`：範例採`emiss_opt = 3,`會讀取radm2/MADE/SORGAM人為排放量，應無法執行。改為`emiss_opt = 0,`
   - `conv_tr_wetscav`範例採0，沒有次網格洗滌，這應該會造成高估，也非內設作法，是偵錯過程。此值改為內設值1。
   - `aer_ra_feedback`範例也採0。等於粒狀物不影響輻射、溫度、乃至於風場，為偵錯用途。改為內設值1。
@@ -36,6 +36,7 @@ last_modified_date:   2021-11-25 16:21:24
 |Option|Description|Value|Meaning|
 | ---- | ---- | ---- | ---- |
 | kemit |number of vertical levels in the emissions input data file. | 1 | windblown dust from surface |
+| emiss_opt |emission scheme| 0 |no external emission|
 | chem_opt |chemical mechanism | 401 |Dust concentration only, Simple ash treatment with 10 ash size bins|
 | chemdt |time step used by chemistry in minutes| 10 |small enough relative to model dt 180 min|
 | aer_drydep_opt | dry depos. of part.| 1 |action|

@@ -150,11 +150,15 @@ FCBASEOPTS      =       $(FCBASEOPTS_NO_G) $(FCDEBUG)  -fallow-argument-mismatch
   1. 解壓縮、進入全新的程式碼目錄
   1. 進入`csh`環境
   1. 設定路徑及環境變數(見前)
-  1. 執行`./configure`，選定編譯方式。([dmp](http://support.moldex3d.com/r15/zh-TW/systemsetup_installationandlicensing_installation_install-and-perform-smp-or-dmp-in-moldex3d.html)方式以便後續執行時能指定恰當的核心數量)
+  1. 執行`./configure`，選定編譯方式。(選擇[dmp](https://www.researchgate.net/figure/Comparison-of-SMP-and-DMP-Architecture_fig1_265002373)方式以便後續執行時能指定恰當的核心數量、單機或跨機)
   1. 確認`configure`的結果，如發現任何支援軟體不能使用，系統會報錯，需確實準備好再開始編譯。
   1. 如有需要修改`configure.wrf`內容，可以在此階段進行(macOS)
-  1. 如無錯誤，繼續執行`compile em_real >& em_real.log &`、確認`./main`目錄下會產業`real.exe`等執行檔
-  1. 如無錯誤，繼續執行`compile wrf >& wrf.log &`、確認`./main`目錄下會產業`wrf.exe`等執行檔
-  
+  1. 如無錯誤，繼續執行`compile em_real >& em_real.log &`、確認`./main`目錄下會產生`real.exe`等執行檔
+  1. 如無錯誤，繼續執行`compile wrf >& wrf.log &`、確認`./main`目錄下會產生`wrf.exe`執行檔
+
+## WRF-chem的測試
+- 在沒有啟動化學(`&chem`) 設定情況下，WRF-chem的表現理論上是與傳統編譯的WRF完全一樣，因此可以使用一既有個案，以WRF-chem程式來執行，看結果是否相同。
+- 以最簡單的揚塵個案進行模擬
+ 
 ## Reference
 - GCC team, **Options controlling Fortran dialect**, [gnu.org](https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html)

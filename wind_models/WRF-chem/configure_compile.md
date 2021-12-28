@@ -41,9 +41,6 @@ setenv WRF_CHEM 1
 ## centos上的裝置
 - 目前centos上的gfortran雖然編譯成功，但wrf.exe無法執行，原因未明、還待偵錯。(版本為gcc (GCC) 4.8.5 20150623)
 - ifort可以成功編譯、執行，路徑及環境變數設定如下(csh)
-  - 多工使用mpich-3.4.2
-  - netCDF使用netcdf-c-4.7.1  netcdf-fortran-4.5.2
-  - HDF5使用hdf5-1.10.5
 
 ```bash
 source /opt/intel/bin/compilervars.csh intel64
@@ -58,11 +55,16 @@ setenv WRF_DIR /nas1/WRF4.0/WRF_chem
 setenv EM_CORE 1
 setenv WRF_CHEM 1
 
-set LD_LIBRARY_PATH=/nas1/WRF4.0/WRF_chem/WPS/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin
+set LD_LIBRARY_PATH=/opt/netcdf/netcdf4_intel/lib:/opt/hdf/hdf5_intel/lib:/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin
 ```
+- 支援軟體的版本
+  - 多工使用mpich-3.4.2
+  - netCDF使用netcdf-c-4.7.1  netcdf-fortran-4.5.2
+  - HDF5使用hdf5-1.10.5
+  - 執行時必須設定**LD_LIBRARY_PATH**
 
 ### HDF5編譯
-- 因netCDF會用到HDF5的程式庫，因此要先編譯HDF5
+- 因[netCDF]()會用到[HDF5]()的程式庫，因此要先編譯[HDF5]()
   - 要記得開啟`--enable-fortran`
 
 ```bash
@@ -73,7 +75,8 @@ FC=ifort ./configure --enable-fortran --with-zlib=/usr/lib64 --prefix=/opt/hdf/h
 ```
 
 ### netCDF編譯
-- netcdf-c環境設定如下
+- [WRF]()程式會需要`libnetcdf.a`及`libnetcdff.a`2個檔案
+- [netcdf-c]()環境設定如下
 
 ```bash
 cat ~/MyPrograms/netCDF/netcdf-c-4.7.1/build_intel/cfg.kng
@@ -82,7 +85,7 @@ source /opt/intel_f/bin/compilervars.sh intel64
 
 CC=icc CPPFLAGS=-I/opt/hdf/hdf5_intel/include LDFLAGS=-L/opt/hdf/hdf5_intel/lib ../configure --prefix=/opt/netcdf/netcdf4_intel  --disable-dap --with-zlib=/usr/lib64 --enable-netcdf4
 ```    
-- netcdf-f環境設定如下
+- [netcdf-f]()環境設定如下
 
 ```bash
 kuang@DEVP ~/MyPrograms/netCDF/netcdf-fortran-4.5.2/build_intel
@@ -94,7 +97,52 @@ export NFDIR=/opt/netcdf/netcdf4_intel
 FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -auto -warn notruncated_source -Bstatic -static-intel -O3 -unroll -stack_temps -safe_cray_ptr -convert big_endian -assume byterecl -traceback -xHost -qopenmp' ../configure --prefix=${NFDIR} --enable-netcdf4
 ```
 
-
 ## macOS上的裝置
-- 
+- 因為**macOS**上可以接受[brew]()建置的[netcdf4]()及[hdf5]()程式庫，不必重新編譯，相對單純些。
+- 但因**macOS**上的[gcc]()版本更新很快，須留意版本的一致性。
+
+### 支援軟體版本管理
+- 因為[brew]()建置的軟體都會放在`/usr/local/Cellar/`下按照名稱及版本存放，因此引用較為方便
+- 路徑是呼叫到編譯程式的關鍵，要控制編譯程式的版本就要先行設定好程式路徑。
+
+```bash
+setenv NETCDF /usr/local/Cellar/netcdf/4.8.1
+setenv HDF5 /usr/local/Cellar/hdf5/1.12.1
+setenv JASPERLIB /usr/local/Cellar/jasper/2.0.33/lib
+setenv JASPERINC /usr/local/Cellar/jasper/2.0.33/include
+setenv WRF_DIR /Users/WRF4.3/WRF-CHEM
+
+setenv PATH /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/opt/coreutils/libexec/gnubin:.:/Users/kuang/bin:/opt/local/bin:/opt/local/sbin:/opt/grads-2.2.1/bin
+setenv EM_CORE 1
+setenv WRF_CHEM 1
+```
+
+### 編譯軟體的版本管理
+- 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。
+  - 如不一致將出現錯誤：`implicit declaration of function 'sym_forget' [-werror,-wimplicit-function-declaration] sym_forget()`
+  - 即使增加**CCFLAG**如`-std=c89`、`-std=gnu99`等，皆無法過關。
+- 10版以上的[gfortran](https://matsci.org/t/macos-install-gfortran-issues/4990)對副程式呼叫的引數個數、形態等檢查較為嚴格，因此編譯時要增加[選項](https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html)：
+```bash
+kuang@MiniWei /Users/WRF4.3/WRF-chem
+$ grep allow configure.wrf
+FCBASEOPTS      =       $(FCBASEOPTS_NO_G) $(FCDEBUG)  -fallow-argument-mismatch -fallow-invalid-boz
+```
+- 注意：
+  - 錯誤訊息為`Error: Rank mismatch between actual argument at (1) and ...`
+  - 要注意加在`configure.wrf`檔案內。此檔案會在`./configure`動作後被覆蓋。
+
+## 程式編譯
+- 目前沒有centos平台上[WRF]()或[WRF-chem]()的執行檔可供下載。
+- macOS上雖然有較早先的[WRF4.1](https://github.com/WRF-CMake/wrf)版執行檔，但因為搭配的[gcc]()較舊，新的OS上已經無法順利進行[brew]()，必須自行編譯。
+- 編譯步驟
+  1. 解壓縮、進入全新的程式碼目錄
+  1. 進入`csh`環境
+  1. 設定路徑及環境變數(見前)
+  1. 執行`./configure`，選定編譯方式。([dmp](http://support.moldex3d.com/r15/zh-TW/systemsetup_installationandlicensing_installation_install-and-perform-smp-or-dmp-in-moldex3d.html)方式以便後續執行時能指定恰當的核心數量)
+  1. 確認`configure`的結果，如發現任何支援軟體不能使用，系統會報錯，需確實準備好再開始編譯。
+  1. 如有需要修改`configure.wrf`內容，可以在此階段進行(macOS)
+  1. 如無錯誤，繼續執行`compile em_real >& em_real.log &`、確認`./main`目錄下會產業`real.exe`等執行檔
+  1. 如無錯誤，繼續執行`compile wrf >& wrf.log &`、確認`./main`目錄下會產業`wrf.exe`等執行檔
+  
 ## Reference
+- GCC team, **Options controlling Fortran dialect**, [gnu.org](https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html)

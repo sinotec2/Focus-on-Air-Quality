@@ -117,6 +117,7 @@ setenv EM_CORE 1
 setenv WRF_CHEM 1
 ```
 - 編譯與執行軟體版本
+
 ```bash
 /usr/local/bin/mpirun --version
 mpirun (Open MPI) 4.1.2
@@ -127,7 +128,6 @@ gcc (Homebrew GCC 11.2.0_3) 11.2.0
 $ /usr/local/bin/gfortran --version
 GNU Fortran (Homebrew GCC 11.2.0_3) 11.2.0
 ```
-
 
 ### 編譯軟體的版本管理
 - 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。

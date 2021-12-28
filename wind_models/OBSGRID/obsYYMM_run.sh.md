@@ -31,7 +31,7 @@ last_modified_date: 2021-12-15 21:02:40
 ## OBSGRID 之全月執行方案
 
 ### `final`之預備
-- `obsgrid`彙整所有[little_R](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式的觀測數據。由於`little_r`是個[ASCII](https://zh.wikipedia.org/wiki/ASCII)檔案，可以用[cat](https://weikaiwei.com/linux/cat-command/)指令將其整併
+- `obsgrid`彙整所有[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式的觀測數據。由於`little_r`是個[ASCII](https://zh.wikipedia.org/wiki/ASCII)檔案，可以用[cat](https://weikaiwei.com/linux/cat-command/)指令將其整併
 - 如果不存在檔案，`cat`指令仍然繼續執行。
 
 ```bash

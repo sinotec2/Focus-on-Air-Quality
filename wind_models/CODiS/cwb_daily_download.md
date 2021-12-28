@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CODiS日報表下載整併"
-parent: "CODiS"
+parent: CWB Observation Data Inquire System
 grand_parent: "wind models"
 nav_order: 1
 date: 2021-11-28 22:04:32               

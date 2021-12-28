@@ -65,6 +65,7 @@ last_modified_date:   2021-12-28 10:20:38
 - 北臺灣測點時間序列之讀取
   - `IX,IY`為[VERDI]()圖面上讀取結果，因此換到python上時須減1。
   - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成字元(`decode`)，串成字串(`join`)，再讀成`datetime`，轉成所要的格式。
+
 ```python
 strT=[''.join([i.decode('utf-8') for i in nc.variables['Times'][t,:]]) for t in range(nt)]
 Times=[datetime.datetime.strptime(a,'%Y-%m-%d_%H:00:00') for a in strT]
@@ -72,6 +73,7 @@ tflag=[i.strftime('%Y%m%d%H') for i in Times]
 ```
 
 ### rd_dust.py listing
+
 ```python
 import netCDF4
 import numpy as np

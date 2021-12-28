@@ -58,7 +58,7 @@ def dt2jul(dt):
 ```
 - `SPECs`及`PARTs`是再分析模式的空氣品質項目名稱，常用名稱如下
   - 名稱的來源除了在[eac4勾選](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=form)網址之外，也可以在[CAMS: Reanalysis data documentation](https://confluence.ecmwf.int/display/CKB/CAMS%3A+Reanalysis+data+documentation)內找到全部列表與說明。
-  - 這些名稱與**CMAQ-cb6r3_ae7_aq**之對照詳[grb2D1m3RHO.py]()
+  - 這些名稱與**CMAQ-cb6r3_ae7_aq**之對照詳[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
 
 ```python
 SPECs =['carbon_monoxide', 'ethane', 'formaldehyde', 'isoprene', 'nitrogen_dioxide', 'nitrogen_monoxide', 'propane', 'sulphur_dioxide' ]

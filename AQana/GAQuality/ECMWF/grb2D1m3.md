@@ -67,8 +67,8 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
   - *YYMM*D1.m3.nc
 
 ### 分段說明
-- 使用scipy的griddata進行水平的內插
-- 將dt2jul、jul2dt寫成副程式`dtconvertor`，簡化程式版面
+- 使用scipy的[griddata](http://liao.cpython.org/scipytutorial11.html)進行水平的內插
+- 將dt2jul、jul2dt寫成副程式[dtconvertor](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times)，簡化程式版面
 - 對照表也寫成`json`檔案
 
 ```python
@@ -284,3 +284,4 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
 ## Reference
 - ECMWF, **EAC4 (ECMWF Atmospheric Composition Reanalysis 4)**, [copernicus](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview),record updated 2021-12-07 16:10:05 UTC
 - 純淨天空, **python numpy flip用法及代碼示例**, [vimsky](https://vimsky.com/zh-tw/examples/usage/python-numpy.flip.html)
+-Python学习园, **Scipy Tutorial-多维插值griddata**, [cpython](http://liao.cpython.org/scipytutorial11.html)

@@ -1,14 +1,14 @@
 ---
 layout: default
-title: "CODiS數據轉成little_R格式"
-parent: "CODiS"
+title: "CODiS數據轉成little_r格式"
+parent: CWB Observation Data Inquire System
 grand_parent: "wind models"
 nav_order: 2
 date:               
 last_modified_date:   2021-11-28 22:04:16
 ---
 
-# CODiS數據轉成little_R格式
+# CODiS數據轉成little_r格式
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,8 +23,8 @@ last_modified_date:   2021-11-28 22:04:16
 
 ## 背景
 
-### little_R格式
-多年以來[little_R](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式是NOAA/NCEP儲存全球地面與高空觀測數據所使用的格式，是一個很長的[ASCII](https://zh.wikipedia.org/wiki/ASCII)檔案，如下列範例：
+### little_r格式
+多年以來[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式是NOAA/NCEP儲存全球地面與高空觀測數據所使用的格式，是一個很長的[ASCII](https://zh.wikipedia.org/wiki/ASCII)檔案，如下列範例：
 ```bash
 kuang@master /home/backup/data/NOAA/NCEP
 $ head SRF_ds461.0/2021/SURFACE_OBS:2021111918

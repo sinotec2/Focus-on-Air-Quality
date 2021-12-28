@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "計算距離反比加權值"
-parent: "CODiS"
+parent: CWB Observation Data Inquire System
 grand_parent: "wind models"
 nav_order: 3
 date:               

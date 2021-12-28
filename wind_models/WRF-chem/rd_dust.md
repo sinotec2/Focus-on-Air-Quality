@@ -111,6 +111,6 @@ nc.close()
 ```
 ## 結果檢核
 - 比較EC再分析、這次WRF-chem模擬以及萬里實測PM10數據
-![]()
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404ISAM-wanli.PNG)
 
 ## Reference

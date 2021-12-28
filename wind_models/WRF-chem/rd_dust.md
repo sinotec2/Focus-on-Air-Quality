@@ -111,7 +111,8 @@ nc.close()
 ```
 ## 結果檢核
 - 2018/4/5~4/7東亞沙塵暴傳播之模擬結果
-  - [Youtube][https://youtu.be/kvF1gLMlE0Q]
+  - [Youtube](https://youtu.be/kvF1gLMlE0Q)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018040616.PNG)
 - 比較EC再分析、WRF-chem模擬以及萬里實測PM10數據
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
 

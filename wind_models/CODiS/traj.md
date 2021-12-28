@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "由CWB數據計算軌跡"
-parent: CWB Observation Data Inquire System
+parent: CWB Obs. Data Inquire Sys.
 grand_parent: "wind models"
 nav_order: 4
 date:               

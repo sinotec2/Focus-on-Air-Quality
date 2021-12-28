@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CODiS數據轉成little_r格式"
-parent: CWB Observation Data Inquire System
+parent: CWB Obs. Data Inquire Sys.
 grand_parent: "wind models"
 nav_order: 2
 date:               

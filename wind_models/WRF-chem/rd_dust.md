@@ -11,7 +11,7 @@ last_modified_date:   2021-12-28 10:20:38
 # WRF-chem的後處理
 
 ## 背景
-- 沙塵暴(Wind-Blown Dust))**WRF-chem(WBD)**的模擬結果基本上還是個`wrfout`，與**WRF4.3**的`wrfout`檔案比較，只有下列29項變數的差異。其中
+- **WRF-chem**的模擬結果基本上還是個`wrfout`，此次沙塵暴模擬結果與**WRF4.3**的`wrfout`檔案比較，只有下列29項變數的差異。其中
   - PM10及PM2_5_DRY目前因沒有執行化學反應，此項為0
   - DUST_1~5為粒徑0.5~8 &mu;m之分量，此處以其總合做為PM<sub>10</sub>之比較 
   - 單位&mu;g/Kg與&mu;g/M<sup>3</sup>之間差了空氣密度之倍數，此處取常壓室溫1.1839 Kg/M<sup>3</sup>

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CWB Observation Data Inquire System
+title: CWB Obs. Data Inquire Sys.
 parent: "wind models"
 nav_order: 1
 has_children: true

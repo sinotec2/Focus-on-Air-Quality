@@ -55,7 +55,7 @@ last_modified_date:   2021-12-28 10:20:38
 ### 程式I/O檔案
 - `dust*YYMM*.mc`：
   - 為個別`wrfout`取出第1層、Times,DUST_1\~5變數之結果。詳程式#說明，使用[ncks]()及[ncrcat]()。
-  - 由於模擬結果檔案很大，無法直接進入[VERDI]，必須加以裁切。
+  - 由於模擬結果檔案很大，無法直接進入[VERDI]()，必須加以裁切。
 - `dust.nc`：整個模擬期間之合併檔模版。令`DUST_1`為加總之結果。
 
 ### 程式說明
@@ -111,6 +111,6 @@ nc.close()
 ```
 ## 結果檢核
 - 比較EC再分析、這次WRF-chem模擬以及萬里實測PM10數據
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404ISAM-wanli.PNG)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
 
 ## Reference

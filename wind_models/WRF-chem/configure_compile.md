@@ -39,8 +39,8 @@ setenv WRF_CHEM 1
   - 雖然[WRF-chem]()包含有[WRF]()，但畢竟為不同領域的專家同時發展，因此有可能發生版本上先後的差異，建議**不要**在原來的[WRF]()目錄下發展，以避免混淆，即使很多工具是一樣、是可以互通的。
 
 ## centos上的裝置
-- 目前centos上的gfortran雖然編譯成功，但wrf.exe無法執行，原因未明、還待偵錯。(版本為gcc (GCC) 4.8.5 20150623)
-- ifort可以成功編譯、執行，路徑及環境變數設定如下(csh)
+- 目前centos上的[gfortran]()雖然編譯成功，但wrf.exe無法執行，原因未明、還待偵錯。(版本為gcc (GCC) 4.8.5 20150623)
+- [ifort]()可以成功編譯、執行，路徑及環境變數設定如下(csh)
 
 ```bash
 source /opt/intel/bin/compilervars.csh intel64
@@ -116,6 +116,18 @@ setenv PATH /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local
 setenv EM_CORE 1
 setenv WRF_CHEM 1
 ```
+- 編譯與執行軟體版本
+```bash
+/usr/local/bin/mpirun --version
+mpirun (Open MPI) 4.1.2
+
+$ /usr/local/bin/gcc --version
+gcc (Homebrew GCC 11.2.0_3) 11.2.0
+
+$ /usr/local/bin/gfortran --version
+GNU Fortran (Homebrew GCC 11.2.0_3) 11.2.0
+```
+
 
 ### 編譯軟體的版本管理
 - 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。

@@ -452,15 +452,16 @@ https://blog.niclin.tw/2018/04/08/mac-os-%E5%9F%B7%E8%A1%8C-crontab-%E4%BE%8B%E8
 - Mac執行定時任務之launchctl
   - https://www.itread01.com/p/353876.html
 
-https://earthscience.stackexchange.com/questions/12699/how-to-install-wrf-on-a-mac
-anaconda
-https://docs.anaconda.com/anaconda/install/mac-os/
-https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh
-LC_ALL="C" conda install python=3.7
-(locale missing)
-x window (for NCL etc)
-https://www.xquartz.org/
-MiniWei notes(12/14):
+# anaconda
+- https://docs.anaconda.com/anaconda/install/mac-os/
+- https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh
+- LC_ALL="C" conda install python=3.7 (locale missing)
+- x window (for NCL etc)
+  - https://www.xquartz.org/
+
+# MiniWei notes(12/14):
+
+```bash
 Installation of Firefox,
 substitute of Safari,  which is not sustainable development
 FireFOX is ready and more convenient for python crawler programs.
@@ -517,9 +518,11 @@ Homebrew Formulae
 brew install nco
 https://formulae.brew.sh/formula/nco
 version 4.9.6
+```
 # 在 macOS 安裝 Apache HTTP Server
-http://mt116.blogspot.com/2019/12/macos-apache-http-server.html
-macOSX 開啟內建 Apache 網站伺服器與PHP環境設定
+- http://mt116.blogspot.com/2019/12/macos-apache-http-server.html
+- macOSX 開啟內建 Apache 網站伺服器與PHP環境設定
+
 ```bash
 sudo apachectl start
 sudo apachectl restart
@@ -647,6 +650,7 @@ sudo mkdir  /Volumes/HansNTFS
 sudo mount -o rw,auto,nobrowse -t ntfs /dev/disk2s1 /Volumes/HansNTFS
 ```
 - Disk編號可以由下列指令而得（如果mount df 或Finder都找不到）
+
 ```bash
 $ diskutil list
 ob-working-directory: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory

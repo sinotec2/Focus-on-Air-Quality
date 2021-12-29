@@ -116,7 +116,10 @@ nc.close()
   - [Youtube](https://youtu.be/kvF1gLMlE0Q)
   - [GIF](http://114.32.164.198/soong/20180405WRFchem.gif)
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018040616.PNG)
-- 比較EC再分析、WRF-chem模擬以及萬里實測PM10數據
+- 比較EC再分析、WRF-chem模擬以及萬里實測PM10數據(時間軸為UTC)
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
+- 其他再分析與觀測
+  - [nullschool](https://earth.nullschool.net/#2018/04/05/0000Z/particulates/surface/level/overlay=pm10/orthographic=-238.92,24.73,2072/loc=117.900,32.438)
+  - 環保署官方[說明](https://drive.google.com/file/d/1cTQhDlfEl8w8ikw2SwdmPKJngayCZKy5/view)
 
 ## Reference

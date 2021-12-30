@@ -7,6 +7,7 @@ include: footer_custom
 last_modified_date:   2021-11-25 16:21:12
 ---
 
+# 海溫的讀取
 {: .no_toc }
 
 <details open markdown="block">
@@ -18,8 +19,6 @@ last_modified_date:   2021-11-25 16:21:12
 {:toc}
 </details>
 ---
-
-# 海溫的讀取
 
 ## 背景
 海面溫度雖然變化緩慢，但牽動全球的大氣環流，因此在氣象模擬過程中是一項非常重要的地面強制邊界。

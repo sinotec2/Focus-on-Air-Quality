@@ -23,7 +23,7 @@ grand_parent: Utilities
 - WHY
   - 用來開啟、分割、切換、管理終端機的畫面、工作目錄、作業環境等等，同一個終端機程式(如[putty](https://zh.wikipedia.org/wiki/PuTTY)、[mobaXTerm](https://ithelp.ithome.com.tw/articles/10220846))即可遊走各環境，減省本地電腦記憶體負荷)。
   - 在終端機上進行的程式、tmux會負責其持續進行，不會讓程式在使用者離開終端機後就結束，因此完全取代傳統[nohup](https://zh.wikipedia.org/wiki/Nohup)的類似功能。
-  - 使用`tmux`後再也不必使用`nohup`、`disown`、也不必擔心終端機會time-out被主機切斷連線。
+  - 使用`tmux`後再也不必使用`nohup`、`disown`、再也不必擔心終端機會因為time-out被主機切斷連線。
 - WHERE/WHICH
   - 檔案在/usr/local/bin/tmux，每個使用者都可以使用
 - WHEN
@@ -43,9 +43,10 @@ grand_parent: Utilities
 $ tmux ls
 0: 1 windows (created Wed Dec 29 21:59:00 2021)
 ```
-- session 狀態依序按下Control-b,d 2個動作：離開、回到原來的OS畫面
+- session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面
 - `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
 - `tmux a -t wrf`：再次回到多工分支**wrf**
+- `exit`：正常關閉一個分支畫面
 
 ## Reference
 - wiki, **tmux**, [wikipedia](https://zh.wikipedia.org/wiki/Tmux), 最后修订于2021年6月10日

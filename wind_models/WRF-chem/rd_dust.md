@@ -11,10 +11,10 @@ last_modified_date:   2021-12-28 10:20:38
 # WRF-chem的後處理
 
 ## 背景
-- **WRF-chem**的模擬結果基本上還是個`wrfout`，此次沙塵暴模擬結果與**WRF4.3**的`wrfout`檔案比較，只有下列29項變數的差異。其中
-  - PM10及PM2_5_DRY目前因沒有執行化學反應，此項為0
+- **WRF-chem**的模擬結果基本上還是個`wrfout`，此次沙塵暴模擬結果與**WRF4.3**的`wrfout`檔案比較，只有下列29項變數的差異(如下表)。其中
+  - PM10及PM2_5_DRY目前因沙塵個案沒有執行化學反應，此項為0，如有需要必須自行計算(加總即可)。
   - DUST_1~5為粒徑0.5~8 &mu;m之分量，此處以其總合做為PM<sub>10</sub>之比較 
-  - 單位&mu;g/Kg與&mu;g/M<sup>3</sup>之間差了空氣密度之倍數，此處取常壓室溫1.1839 Kg/M<sup>3</sup>
+  - 單位&mu;g/Kg與&mu;g/M<sup>3</sup>之間差了空氣密度之倍數，此處參考[wiki](https://en.wikipedia.org/wiki/Density_of_air)取常壓室溫1.1839 Kg/M<sup>3</sup>
 
 
 | Variable Name|Description|Units|
@@ -53,18 +53,21 @@ last_modified_date:   2021-12-28 10:20:38
 ## 程式說明
 
 ### 程式I/O檔案
-- `dust*YYMM*.mc`：
-  - 為個別`wrfout`取出第1層、Times,DUST_1\~5變數之結果。詳程式#說明，使用[ncks]()及[ncrcat]()。
+- dust*YYMM*.mc
+  - 從逐日個別`wrfout`檔案中切出第1層、取出Times,DUST_1\~5等變數之結果檔。過程詳程式#說明，使用[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)及[ncrcat]()。
   - 由於模擬結果檔案很大，無法直接進入[VERDI]()，必須加以裁切。
-- `dust.nc`：整個模擬期間之合併檔模版。令`DUST_1`為加總之結果。
+- dust.nc
+  - 整個模擬期間所有日期的合併檔，為一模版，其值會被覆蓋。
+  - `DUST_1`將為程式加總之結果。
 
 ### 程式說明
 - 每個逐日檔案進行迴圈，將結果回存到整合所有日的模版`dust.nc`
   - 每個檔案的時間都是24小時，但最後檔只有1小時，因此還是以`nt`為長度，才不會出錯。
   - 加總後可以用[VERDI]()開啟、繪圖。
 - 北臺灣測點時間序列之讀取
-  - `IX,IY`為[VERDI]()圖面上讀取結果，因此換到python上時須減1。
-  - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成字元(`decode`)，串成字串(`join`)，再讀成`datetime`，轉成所要的格式。
+  - `IX,IY`為[VERDI]()圖面上讀取結果，因此換到python上時須**減1**。
+  - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成(`decode`)字元，串成(`join`)字串，再讀成`datetime`，轉成所要的格式。詳情見[WRF的時間標籤](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)之說明
+  - `csv`檔案可以用Excel等軟體繪製[時間序列圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
 
 ```python
 strT=[''.join([i.decode('utf-8') for i in nc.variables['Times'][t,:]]) for t in range(nt)]
@@ -72,7 +75,7 @@ Times=[datetime.datetime.strptime(a,'%Y-%m-%d_%H:00:00') for a in strT]
 tflag=[i.strftime('%Y%m%d%H') for i in Times]
 ```
 
-### rd_dust.py listing
+### rd_dust.py code listing
 
 ```python
 import netCDF4

@@ -17,7 +17,7 @@ grand_parent: Utilities
 
 ## 背景
 - WHAT：
-  -`tmux`是幾乎每個unix家族OS系統都會有的指令。
+  - `tmux`是幾乎每個unix家族OS系統都會有的指令。
   - 全名是terminal([終端機](https://zh.wikipedia.org/wiki/%E7%B5%82%E7%AB%AF)) multiplex([多工](https://en.wikipedia.org/wiki/Multiplex))
   - 此處的「工」不是指特定的某一個程式，分給不同CPU、不同電腦來執行的「工」，而是終端機界面上的**互動作業**，如檔案查詢整理、程式編輯測試執行、等等目的，環境包括工作目錄、作業環境變數與系統等等，在`tmux`來看，為一「分支」，類似研討會有大會、有各個領域主題的分支會議**session**的概念。`tmux`則是各個分支會議**session**的總管理者。
 - WHY
@@ -46,3 +46,7 @@ $ tmux ls
 - session 狀態依序按下Control-b,d 2個動作：離開、回到原來的OS畫面
 - `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
 - `tmux a -t wrf`：再次回到多工分支**wrf**
+
+## Reference
+- wiki, **tmux**, [wikipedia](https://zh.wikipedia.org/wiki/Tmux), 最后修订于2021年6月10日
+- pityonline, **tmux-Productive-Mouse-Free-Development_zh**, [gitbooks](https://aquaregia.gitbooks.io/tmux-productive-mouse-free-development_zh/content/index.html)

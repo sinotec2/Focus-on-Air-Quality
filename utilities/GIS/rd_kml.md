@@ -24,7 +24,7 @@ last_modified_date:   2021-12-17 14:44:41
 ### 緣起
 - 網格模式在進行污染來源分析時，經常需要排放區域的分區定義，一個網格化的[點陣圖(raster)](https://zh.wikipedia.org/wiki/%E4%BD%8D%E5%9B%BE)：
   * 不論是**CAMx-OSAT**、**CAMx-PSAT**或者是
-  * [CMAQ-ISAM模組]()，都需要這樣的raster檔案。
+  * [CMAQ-ISAM模組](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/withinD1/)，都需要這樣的raster檔案。
   * 具體問題：因為缺乏大陸方面的地理分區定義資料，在反軌跡計算時無法歸因於省份、排放區域等定性標籤。
 - 然而一般網路公開的GIS檔案多是向量圖檔，是省界的polygon檔案，不正好是raster檔案。
   - 造成這種網路現象主要的理由，是因為raster檔案有其解析度的限制，提供者不知該提供到什麼樣的解析度才恰當，畢竟使用者定義的範圍解析度樣態真的太多樣了。

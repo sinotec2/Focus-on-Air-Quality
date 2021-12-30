@@ -88,7 +88,7 @@ $ cat -n run_bconMM_RR_DM.csh
     40	 set VRSN     = v53                     #> Code Version
     41	 set APPL       = ${APYM}_run${RUN}
 ```
-- 水平網格的設定：詳[mcip]()的設定
+- 水平網格的設定：詳[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#%E5%88%86%E6%AE%B5%E5%B7%AE%E7%95%B0%E8%AA%AA%E6%98%8E)的設定
 
 ```python
     42	#> Horizontal grid definition

@@ -157,7 +157,7 @@ done
 ```
 
 ### 污染項目的對照
-- [eac4]()`grib2`檔案使用代碼而非污染項目之名稱，因此需要建立對照表。
+- [eac4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview)`grib2`檔案使用代碼而非污染項目之名稱，因此需要建立對照表。
 
 ```bash
 for nc in $(ls *_1901.nc);do 
@@ -166,7 +166,7 @@ for nc in $(ls *_1901.nc);do
   echo \"${var}\":\"${spec}\",
 done
 ```
-- 結果如下，將會用在[grb2D1m3RHO.py]()
+- 結果如下，將會用在[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
 
 ```json
 {

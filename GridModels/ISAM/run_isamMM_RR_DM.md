@@ -102,7 +102,7 @@ last_modified_date:   2021-12-22 11:09:22
   * `TAG CLASSES`：欲追蹤的空品項目。選項有**9項**。不是所有的物質都納入**CMAQ_ISAM**計算。(**PM25_IONS**似乎就不在其列)
   * `TAG NAME`：排放標籤，在`CCTM_SA_*`檔案中的變數名稱中會出現，詳[ISAM結果檔案之讀取(PM25_IONS)](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/SA_PM25_IONS)背景說明。
   * `REGION(S)`：可以是一**地區**(前述`Region Label`的值)、地區的**序列**(以`,`隔開)、或**所有**地區(`EVERYWHERE`，詳前述`RGN_NML`最末行)
-  * `EMIS STREAM(S)`：即為[run_cctm.csh]()檔案中的`GR_EMIS_LAB_001`、`STK_EMIS_LAB_001`等等
+  * `EMIS STREAM(S)`：即為[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)檔案中的`GR_EMIS_LAB_001`、`STK_EMIS_LAB_001`等等
   * `ENDLIST eof`： **E**nd **O**f **F**ile
 
 ```bash

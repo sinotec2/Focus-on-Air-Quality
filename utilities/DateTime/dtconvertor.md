@@ -5,6 +5,7 @@ parent: Dates and Times
 grand_parent: Utilities
 last_modified_date:   2021-12-28 21:21:21
 ---
+
 # dtconvertor
 {: .no_toc }
 
@@ -18,12 +19,12 @@ last_modified_date:   2021-12-28 21:21:21
 </details>
 
 ---
-## Datetime轉Jilian date
+## Datetime轉Julian date
 - Julian date(*YYYYJJJ*)是地球科學上常用的日期表示方式，因為是連續的數字，經常用在時間間距的計算。
 - Juian date就是距離當年元旦的日數+1，比較容易計算。
 - 小時的計算就有一點複雜，此處以距離元旦0時的總秒數，扣掉日數差異造成的秒數，就是餘下的秒數，除以3600即為小時數。
 
-## Jilian date轉Datetime
+## Julian date轉Datetime
 - datetime 模組有豐富的函數可供計算使用，因此將整數的日期轉成datetime形式，有其便利之處。
 - 直接用datetime.timedelta來計算元旦後的日數即可
 

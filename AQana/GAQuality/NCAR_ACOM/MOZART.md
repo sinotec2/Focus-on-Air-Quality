@@ -62,16 +62,18 @@ last_modified_date:   2021-12-12 16:29:36
   - 全選系統寄來信件之內容、貼在工作站系統成為一文字檔(如`EMAIL.TXT`)
   - 使用GREP指令：g`rep http EMAIL.TXT >http.txt`
   - `wget`指令。範例如下：
-  ```bash
+
+```bash
   for i in $(cat http.txt);do 
   wget -q $i
   done
-  ```
+```
   - 由於[下載網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)提供的檔名數字，是隨機產生，不建議一一複製貼上、同步下載時將容易錯漏。
 
 ### nc檔案更名
 1. 其檔案為netCDF格式，東亞範圍1天(6小時解析度)檔案大小約**57M**(2017年後更新模擬項目增加為**65M**)。
 1. 資料內容的確認方式： 
+
 ```bash
 $ ncdump mozart4geos5-20160217200203502764.nc|more
 netcdf mozart4geos5-20160217200203502764 
@@ -88,20 +90,23 @@ netcdf mozart4geos5-20160217200203502764
 - 注意：檔案的**維度**必須完全一樣，才能進行檔案的合併`ncrcat`
 1. 由於檔名為下載檔案的時間序列資訊，並沒有檔案內容時間資訊，這些資訊會寫在檔頭(**history**)裏，可以用下列指令將其讀出並以起始時間命名之： 
   - 按照`history`內容更名方式
+
 ```bash
 for i in $(ls moz*.nc);do 
 nc=`ncdump $i|head -n 500|grep history|awkk 9|cut -d'-' -f3`
 mv $i $nc
 done
 ```
-  - 按照`date`內容更名方式
+- 按照`date`內容更名方式
+
 ```bash
 for i in $(ls *3?.nc);do 
 nc=`ncdump -v date $i|tail|grep date|awkk 7|cut -c-8`
 mv $i $nc.nc
 done
 ```
-  - 按照`ncks`指令內容更名方式
+- 按照`ncks`指令內容更名方式
+
 ```bash
 for nc in $(ls *nc);do 
 i=$(ncdump -h $nc|grep ncks|cut -d'/' -f10|cut -d '.' -f11|cut -c -10)

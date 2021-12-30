@@ -9,7 +9,6 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 # 相同網格系統之grb2轉檔
-
 {: .no_toc }
 
 <details open markdown="block">

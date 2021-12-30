@@ -34,7 +34,11 @@ last_modified_date:   2021-12-12 16:29:14
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cam-chem_download.png)
 - CAM-chem有段時間提供全年、全球範圍的模擬結果檔案下載。
   - 網址為：https://www.acom.ucar.edu/cam-chem/DATA/${Y}/fmerra.2.1003.FCSD.f09.qfedcmip.56L.001.cam.h1.${YMD}-${tail}.nc 
-  - ```tail='00000';test $Y -eq '2017' && tail='21600'```
+
+```bash
+tail='00000'
+test $Y -eq '2017' && tail='21600'
+```
   - 2021年後因管理政策改變，鼓勵使用者直接上機檢視模擬結果，甚至鼓勵在本地工作站自行模擬，因此再沒有提供全年、全球檔案下載。
 
 

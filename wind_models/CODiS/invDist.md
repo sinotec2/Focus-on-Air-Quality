@@ -9,7 +9,6 @@ last_modified_date:   2021-11-28 22:04:40
 ---
 
 # 計算距離反比加權值
-
 {: .no_toc }
 
 <details open markdown="block">

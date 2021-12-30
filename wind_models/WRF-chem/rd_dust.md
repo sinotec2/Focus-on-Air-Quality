@@ -86,7 +86,7 @@ import datetime
 #ncrcat -O dust0*.nc a
 #ncks -O -v Times,DUST_1 a dust.nc
 
-fnames='dust03-30.nc dust03-31.nc dust04-01.nc dust04-02.nc dust04-03.nc dust04-04.nc dust04-05.nc dust04-06.nc dust04-07.nc dust04-08.nc dust04-09.nc'.split()
+fnames=subprocess.check_output('ls dust??-??.nc',shell=True).decode('utf8').strip('\n').split('\n')
 nc = netCDF4.Dataset('dust.nc', 'r+')
 it=0
 for fname in fnames:

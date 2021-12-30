@@ -35,7 +35,7 @@ grand_parent: Utilities
   - `tmux`的`session`間是不能互相呼叫，必須回到OS，再切換到另一`session`。`tmux`不能再呼叫`tmux attach`指令，只能接受`tmux ls`。
   - `tmux`間的`history`不能互用，如果使用者倚賴`history`，會受到很大限制。
 
-## 基本的6個tmux指令
+## 6個基本的tmux指令
 1. `tmux`：開啟一個「新的」多工分支界面，畫面底下會反白、顯示現在界面的名稱（或編號）
 2. `tmux ls` ：檢查目前開了那些多工分支，名稱（或編號），範例結果類似
 

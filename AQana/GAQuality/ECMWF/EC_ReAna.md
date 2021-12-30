@@ -135,6 +135,7 @@ for g in $(ls *grib);do
   /opt/miniconda3/envs/ncl_stable/bin/ncl_convert2nc $g
 done
 ```  
+
 ### 橫向合併
 - 這項作業是將同一月份的27個分項檔案，按照相同的時間、空間軸整併成一個檔案。
 - 做法：先用[ncks -v](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E8%AE%8A%E6%95%B8variable)取出空品濃度的矩陣，再使用[ncks -A](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7global-attribute)逐一附加即可。

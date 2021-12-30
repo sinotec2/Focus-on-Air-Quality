@@ -39,10 +39,10 @@ grand_parent: Utilities
 1. `tmux`：開啟一個「新的」多工分支界面，畫面底下會反白、顯示現在界面的名稱（或編號）
 2. `tmux ls` ：檢查目前開了那些多工分支，名稱（或編號），範例結果類似
 
-```bash
-$ tmux ls
-0: 1 windows (created Wed Dec 29 21:59:00 2021)
-```
+  ```bash
+  $ tmux ls
+  0: 1 windows (created Wed Dec 29 21:59:00 2021)
+  ```
 3. `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
 4. `tmux a -t wrf`：再次回到多工分支**wrf**
 5. session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面

@@ -35,18 +35,19 @@ grand_parent: Utilities
   - `tmux`的`session`間是不能互相呼叫，必須回到OS，再切換到另一`session`。`tmux`不能再呼叫`tmux attach`指令，只能接受`tmux ls`。
   - `tmux`間的`history`不能互用，如果使用者倚賴`history`，會受到很大限制。
 
-## 基本指令
-- `tmux`：開啟一個「新的」多工分支界面，畫面底下會反白、顯示現在界面的名稱（或編號）
-- `tmux ls` ：檢查目前開了那些多工分支，名稱（或編號），範例結果類似
+## 基本的6個tmux指令
+1. `tmux`：開啟一個「新的」多工分支界面，畫面底下會反白、顯示現在界面的名稱（或編號）
+2. `tmux ls` ：檢查目前開了那些多工分支，名稱（或編號），範例結果類似
 
 ```bash
 $ tmux ls
 0: 1 windows (created Wed Dec 29 21:59:00 2021)
 ```
-- session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面
-- `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
-- `tmux a -t wrf`：再次回到多工分支**wrf**
-- `exit`：正常關閉一個分支畫面
+3. `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
+4. `tmux a -t wrf`：再次回到多工分支**wrf**
+5. session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面
+6. session 狀態下鍵入`exit`：正常關閉一個分支畫面
+
 
 ## Reference
 - wiki, **tmux**, [wikipedia](https://zh.wikipedia.org/wiki/Tmux), 最后修订于2021年6月10日

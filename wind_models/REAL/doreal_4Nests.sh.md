@@ -125,6 +125,7 @@ $ ps
 98383 ttys001    0:00.05 -bash
  2488 ttys002    0:00.17 ./real.exe
 ```
+- 簡單的`tmux`6個基本指令亦可參考[FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/tmux/#%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4)
 
 ## 下載`doreal_4Nests.sh`
 點選[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/REAL/doreal_4Nests.sh_txt)

@@ -61,7 +61,7 @@ variables:
 
 #### 輸出檔
 - 每個時間D1範圍**CMAQ**之濃度檔
-- 檔案命名規則：`ICON_20YYJJJHH.d1`，`YY`：年代、`JJJ`：Julian Date、`HH`：小時
+- 檔案命名規則：`ICON_20YYJJJHH.d1`，`YY`：年代、`JJJ`：Julian day、`HH`：小時
 
 ### 分段說明
 - 引用模組及讀取引數

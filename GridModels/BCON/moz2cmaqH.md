@@ -9,7 +9,6 @@ last_modified_date:   2021-12-16 10:59:04
 ---
 
 # MOZARD/WACCM模式輸出轉成CMAQ初始條件_水平內插與污染項目對照
-
 {: .no_toc }
 
 <details open markdown="block">
@@ -39,7 +38,7 @@ last_modified_date:   2021-12-16 10:59:04
 - (eg.)執行2018年4月1日0時之內插：`python moz2cmaqHd1J.py 1809100`
 
 #### 引數
-- `年代`+`Julian date`+`小時`共7碼
+- `年代`+`Julian day`+`小時`共7碼
 
 #### I/O檔案
 - `mozart`等全球模式輸出結果(經[垂直內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)處理)
@@ -49,7 +48,7 @@ last_modified_date:   2021-12-16 10:59:04
 
 #### 同步執行
 - 範例同時執行程式由2018/4/1~4/30日(Juian date=091\~120)之濃度內插
-  - 使用`Julian date$j`和`小時$h`雙層迴圈
+  - 使用`Julian day$j`和`小時$h`雙層迴圈
   - **sub**=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
 
 ```bash

@@ -111,9 +111,10 @@ for sp in SPECs+PARTs:
       '18:00', '21:00',
         ],
 ```
-- 範圍：如果沒有界定範圍，檔案會很大。四圍經緯度邊界之順序為北、西、南、東逆時針方向給定。
-  - d01範圍：北緯15~32、東經111~131。`'area': [47, 80, -2, 160,],`
-  - d02範圍：北緯15~32、東經111~131。`'area': [32, 111, 15, 131, ],`
+- 範圍：如果沒有界定範圍，檔案會很大。四圍經緯度邊界之順序為北、西、南、東，逆時針方向給定。
+  - d00範圍：北緯-10\~50、東經60~180。`'area': [50, 60, -10, 180,],`
+  - d01範圍：北緯-2\~47、東經80~160。`'area': [47, 80, -2, 160,],`
+  - d02範圍：北緯15\~32、東經111~131。`'area': [32, 111, 15, 131, ],`
 
 ```python
     'area': [
@@ -134,6 +135,7 @@ for g in $(ls *grib);do
   /opt/miniconda3/envs/ncl_stable/bin/ncl_convert2nc $g
 done
 ```  
+
 ### 橫向合併
 - 這項作業是將同一月份的27個分項檔案，按照相同的時間、空間軸整併成一個檔案。
 - 做法：先用[ncks -v](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E8%AE%8A%E6%95%B8variable)取出空品濃度的矩陣，再使用[ncks -A](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7global-attribute)逐一附加即可。
@@ -155,7 +157,7 @@ done
 ```
 
 ### 污染項目的對照
-- [eac4]()`grib2`檔案使用代碼而非污染項目之名稱，因此需要建立對照表。
+- [eac4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview)`grib2`檔案使用代碼而非污染項目之名稱，因此需要建立對照表。
 
 ```bash
 for nc in $(ls *_1901.nc);do 
@@ -164,7 +166,7 @@ for nc in $(ls *_1901.nc);do
   echo \"${var}\":\"${spec}\",
 done
 ```
-- 結果如下，將會用在[grb2D1m3RHO.py]()
+- 結果如下，將會用在[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
 
 ```json
 {

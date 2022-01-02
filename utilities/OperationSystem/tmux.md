@@ -59,8 +59,8 @@ grand_parent: Utilities
 ```bash
 nohup <command> & disown
 ```
-- [stackoverflow](https://stackoverflow.com/questions/19302913/exit-zsh-but-leave-running-jobs-open)
-- [maketecheasier](https://www.maketecheasier.com/run-bash-commands-background-linux/)
+- **Exit zsh, but leave running jobs open?**, [stackoverflow](https://stackoverflow.com/questions/19302913/exit-zsh-but-leave-running-jobs-open)
+- John Perkins, **How to Run Bash Commands in the Background in Linux**, [maketecheasier](https://www.maketecheasier.com/run-bash-commands-background-linux/),Jan 15, 2021
 
 
 ## Reference

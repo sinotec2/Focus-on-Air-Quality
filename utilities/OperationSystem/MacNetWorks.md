@@ -72,7 +72,7 @@ sudo launchctl list | grep ssh
 - 在一些情况下，如果你访问某台sshd服务出现了错误，那么当你下次访问时还是报错，很可能就是这个文件导致的。所以出现类似问题时，你要记得清一下这个文件中的内容。
 - 作者：[音视频直播技术专家](https://www.jianshu.com/p/d548f8af9f6c)
 
-## ssh keygen 免輸入密碼
+### ssh keygen 免輸入密碼
 - client -> server
 
 ```bash
@@ -86,5 +86,36 @@ cat .ssh/id_rsa.pub_client >> .ssh/authorized_keys 即可
 - [longwin](https://blog.longwin.com.tw/2005/12/ssh_keygen_no_passwd/)
 - [ssh-keygen](https://docs.joyent.com/public-cloud/getting-started/ssh-keys/generating-an-ssh-key-manually/manually-generating-your-ssh-key-in-mac-os-x)
 
-## ssh white list
+### ssh white list
 - https://blog.wu-boy.com/2016/12/create-account-and-ssh-permission-on-mac/
+
+## 在 macOS 安裝 Apache HTTP Server
+- http://mt116.blogspot.com/2019/12/macos-apache-http-server.html
+- macOSX 開啟內建 Apache 網站伺服器與PHP環境設定
+
+```bash
+sudo apachectl start
+sudo apachectl restart
+sudo apachectl stop
+```
+- https://www.minwt.com/mac/21769.html
+
+## mapserver
+```bash
+brew install mapserver
+```
+- https://formulae.brew.sh/formula/mapserver
+  - (fail); try make, need proj4, C# compiler(https://www.mono-project.com/docs/about-mono/supported-platforms/macos/)
+- https://www.infoworld.com/article/2939526/automating-osx-server-with-the-serverctl-command.html
+
+# How can I disable Server.app's Webserver?
+```bash
+edit: /Library/Server/Web/Config/Proxy/apache_serviceproxy.conf
+Comment or change these to alternate ports
+listen 80
+listen 443
+sudo killall httpd
+```
+- [apple.discussion](https://discussions.apple.com/thread/8273226)
+- [SXEl Capitan 10.11.2 & OS X Server 5.0.15 - Turn Off Unused Services](https://gist.github.com/minhoryang/4c7b56324c5f2e5a8694)
+

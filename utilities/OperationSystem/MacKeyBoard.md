@@ -214,7 +214,7 @@ grand_parent: Utilities
 |Control-T|將插入點後方的字元與插入點之前的字元互換|
 |Command-左花括號（{）|靠左對齊|
 |Command-右花括號（}）|靠右對齊|
-|Shift-Command-垂直線（|）|中央對齊|
+|Shift-Command-垂直線（\|）|中央對齊|
 |Option-Command-F|前往搜尋欄位|
 |Option-Command-T|顯示或隱藏 app 中的工具列|
 |Option-Command-C|拷貝樣式：將所選項目的格式設定拷貝到「剪貼板」|

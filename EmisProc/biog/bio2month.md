@@ -103,7 +103,8 @@ $ cat -n bio2month-teds11.f
 ```
 
 ## DataFrame整合
-- 將逐月檔整合成一個大的DataFrame(`biogrid2019.csv`)、另存備有
+- 將逐月檔整合成一個大的DataFrame(`biogrid2019.csv`)、另存備用。
+
 ```python
 kuang@node03 /nas1/TEDS/teds11/biog
 $ cat wrt_csv.py

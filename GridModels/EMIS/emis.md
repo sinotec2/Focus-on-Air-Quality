@@ -12,14 +12,14 @@ last_modified_date:   2021-12-02 11:08:53
 # 地面排放檔案之準備
 {: .no_toc }
 
-{: .fs-6 .fw-300 }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
 {:toc}
-
+</details>
 ---
 ## 背景
 - CMAQ模式的地面排放量為一逐日拆解的檔案（每檔案需25個小時）。其開始時間為UTC 0時（LST -8）。
@@ -50,10 +50,10 @@ last_modified_date:   2021-12-02 11:08:53
 
 ### 重要轉換
 - 時間
-  - CAMx模式為LST、CMAQ為UTC，需要減8
-  - Datetime to/from Julian day[dtconvertor](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/dtconvertor/)
+  - CAMx模式為LST、CMAQ為UTC：需要減8
+  - Datetime to/from Julian day：[dtconvertor](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/dtconvertor/)
 - 排放量
-  - CAMx為g/hour、CMAQ為g/s
+  - CAMx為g/hour、CMAQ為g/s：需要除3600
 - 污染項目
   - 在`$EMISSCTRL_NML`檔案中定義。此處不作轉換
 

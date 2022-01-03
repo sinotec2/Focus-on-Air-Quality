@@ -109,7 +109,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     51	
     52	
 ```
-- 對照網格編號及名稱(詳[]())
+- 對照網格編號及名稱(詳[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義))
 
 ```python
     53	#> Set working, input and output directories
@@ -125,7 +125,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     63	endif
     64	
 ```
--
+- 輸入/輸出檔案及路徑
 
 ```python
     65	# setenv GRID_NAME TWN_3X3                 #> check GRIDDESC file for GRID_NAME options
@@ -143,7 +143,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     77	# =====================================================================
     78	
 ```
--
+- 日期、日數之計算
 
 ```python
     79	#> Set Start and End Days for looping
@@ -157,7 +157,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     87	 set END_DATE = `date -ud "${START_DATE} +32days" +%Y-%m-%d`
     88	 
 ```
--
+- 物質名稱之定義
+  - VOC、PM2.5、PM10之開啟與其詳細計算公式
+  - 「輸出檔的層數」也在此檔案內修改
+  - 濃度與沉降量2大類
 
 ```python
     89	#> Set location of species definition files for concentration and deposition species.
@@ -175,21 +178,34 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    101	#> Set the species definition file for concentration species.
    102	 setenv SPECIES_DEF $SPEC_CONC
    103	 
+```
+- 層數之定義
+  - !之後為註解沒作用，將回復到內設值。
+  - #之後為變數名稱，此範例將只會進行第1層(地面層)的整併。
+
+```
+[kuang@DEVP 2018base]$ echo $SPEC_CONC
+../CMAQ_Project/POST/combine/scripts/spec_def_files/SpecDef_cb6r3_ae7_aq.txt
+[kuang@DEVP 2018base]$ head $SPEC_CONC
+!#start   YYYYJJJ  000000
+!#end     YYYYJJJ  230000
+#layer    1
+```
+
+- 日數之迴圈
+
+```python
    104	#> Loop through all days between START_DAY and END_DAY
    105	 set TODAYG = ${START_DATE}
    106	 set TODAYJ = `date -ud "${START_DATE}" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
    107	 set STOP_DAY = `date -ud "${END_DATE}" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
-```
--
-
-```python
    108	 set I = 0
    109	 while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
    110	   @ R = 6 # $I / 4 + 5
    111	   echo 'kuang' $I run$R
    112	   if ( $R > 12 ) exit 0
 ```
--
+- 詳細I/O檔名之定義
 
 ```python
    113	  #> Retrieve Calendar day Information
@@ -220,6 +236,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    138	   setenv INFILE3 $CCTMOUTDIR/CCTM_APMDIAG_${CTM_APPL}.nc
    139	   setenv INFILE4 $METDIR/METCRO2D_${APPL}_run${R}.nc
    140	
+```
+- 程式之執行
+
+```python
    141	  #> Executable call:
    142	 if ( $RUN == $R) then
    143	   ${BINDIR}/${EXEC}
@@ -233,7 +253,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    151	
    152	
 ```
--
+- 沉降量計算部分
 
 ```python
    153	# =====================================================================
@@ -258,7 +278,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    172	   set MM = `date -ud "${TODAYG}" +%m`
    173	   set DD = `date -ud "${TODAYG}" +%d`
 ```
--
+- 詳細I/O檔名之定義
 
 ```python
    174	   if ( "${STKCASEE}" != "" ) then
@@ -286,7 +306,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    196	   setenv INFILE4
    197	
 ```
--
+- 程式之執行
 
 ```python
    198	  #> Executable call:

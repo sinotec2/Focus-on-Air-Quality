@@ -48,6 +48,20 @@ grand_parent: Utilities
 5. session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面
 6. session 狀態下鍵入`exit`：正常關閉一個分支畫面
 
+## nohup and disown
+- 開啟NO_HUP
+
+```bash
+% setopt NO_HUP
+```
+- 背景執行命令，並放棄控制
+
+```bash
+nohup <command> & disown
+```
+- **Exit zsh, but leave running jobs open?**, [stackoverflow](https://stackoverflow.com/questions/19302913/exit-zsh-but-leave-running-jobs-open)
+- John Perkins, **How to Run Bash Commands in the Background in Linux**, [maketecheasier](https://www.maketecheasier.com/run-bash-commands-background-linux/),Jan 15, 2021
+
 
 ## Reference
 - wiki, **tmux**, [wikipedia](https://zh.wikipedia.org/wiki/Tmux), 最后修订于2021年6月10日

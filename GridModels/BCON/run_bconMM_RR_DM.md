@@ -5,7 +5,7 @@ parent: Boundary Condition
 grand_parent: CMAQ Models
 nav_order: 4
 date: 2021-12-18 19:47:28
-last_modified_date:   2021-12-18 19:47:32
+last_modified_date: 2022-01-03 20:27:23
 ---
 
 # **CMAQ**邊界條件輸入檔案之產生
@@ -22,11 +22,33 @@ last_modified_date:   2021-12-18 19:47:32
 ---
 
 ## 背景
+- 邊界條件由最外圍的全球模擬結果、一直到`d04`的外圍，為一多階、連續的作業過程。
+- `bcon`會從上層`cctm`模擬結果的濃度檔案中切割出網格系統外圍的邊界條件
+- 除了`d00`的濃度檔為全球模擬結果，其餘皆為CCMS的模擬結果
 
 ## 腳本程式說明
 ### 程式名稱
 - [run_bconMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/run_bconMM_RR_DM.csh)
 - 修改自[USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_bcon.csh](https://github.com/USEPA/CMAQ/blob/main/PREP/bcon/scripts/run_bcon.csh)
+
+### 作業方式
+- 四層迴圈：domain、job、month、run_id
+
+```python
+set SCR=/home/cmaqruns/2016base
+setenv CMAQ_HOME $PWD
+foreach DM ('d01' 'd02' 'd04')
+   foreach JOB ('bcon' 'cctm')
+      foreach mm (`seq 1 12`)
+         set mon=`printf '%02d' $mm`
+         foreach RUN (`seq 5 12`)
+            cd $SCR
+            source $SCR/run_${JOB}MM_RR_DM.csh $mon $RUN $DM >& ${JOB}_$mon$RUN$DM
+         end
+      end
+   end
+end
+```
 
 ### 基本環境與時間之設定
 

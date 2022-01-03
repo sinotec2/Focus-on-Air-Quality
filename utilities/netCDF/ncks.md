@@ -33,7 +33,7 @@ last_modified_date:   2021-12-10 11:31:33
 
 ```bash
  ncks -x -v NO2,O3 base.grd02.1909.nc a.nc
- ```
+```
  
 - 增加變數：用以形成新的nc檔案模版。
 - `ncks -v NO,TFLAG,ETFLAG base.grd02.1909.nc NO.nc`提出特定之變數、形成新檔，程式會自帶相依座標，但不會有時間標籤。如不要座標，要多加`-C`。
@@ -45,6 +45,7 @@ last_modified_date:   2021-12-10 11:31:33
   - 所謂「可增加」，在[ncdump -h]()結果會看到該維度有一長度，且是`UNLIMITED`。(範例如下，維度TSTEP的長度是UNLIMITED，目前是121，其餘維度長度則為固定的數字)
   - 須先將檔案的維度定義成可增加，才能進行[ncrcat](https://boostnote.io/shared/9bd4d899-ecd2-4891-8d50-dc0856d1c191)或使用python增加該維度之長度。
   - eg. [expand_xy.csh:擴展nc檔案的水平格點數](https://boostnote.io/shared/4450b3a4-673b-4c7f-98c7-a24368abfe67)
+
 ```bash
 $ ncdump -h $nc|head
 netcdf BCON_v53_1912_run9_regrid_20191217_TWN_3X3 {
@@ -60,8 +61,15 @@ variables:
 ```
 
 - `--fix_rec_dmn TSTEP` 定義不可增加筆數之維度(**f**ix **rec**ord **d**i**m**e**n**sion)
-
 - ncks只能增減變數，如要更改變數名稱，則必須要使用[ncrename]()，如 `ncrename -O -v PM25_TOT,DIS_INCI stroke.nc stroke1.nc`
+- ncks只能將維度減到最少，但不能使維度從檔案中消失。要刪除檔案中特定的維度須使用[ncwa](http://stackoverflow.com/questions/20215529/delete-a-dimension-in-a-netcdf-file)指令。
+  - 如以下geo_em.nc檔案中的風蝕係數，其維度為[`Time`, `dust_erosion_dimension`, `south_north`, `west_east`]，其中`dust_erosion_dimension`是[VERDI]()無法辨識的，因此必須將其刪除才能檢視。
+
+```bash
+ncwa -O -a dust_erosion_dimension erod.nc a
+mv a erod.nc
+```
+
 ### 變數+維度複合變更
 m3.nc檔案中的變數本身也是一個維度(`VAR`)，其長度為全域屬性`nc.NVARS`，變數的項目也是全域屬性`nc.VAR-LIST`的內容。雖然變更變數項目只涉及到時間標籤(`TFLAG[TSTEP,VAR,DATE-TIME]`)的長度，然CMAQ對其檢驗非常仔細，必須修剪到完全正確。如下列模版的製作過程：
 1. 先以`ncks -d`由CMAQ模式結果檔案取出時間、高度、與變數，縮減檔案大小：

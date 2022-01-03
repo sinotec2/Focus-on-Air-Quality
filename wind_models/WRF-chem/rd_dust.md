@@ -124,6 +124,10 @@ nc.close()
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
 - 其他再分析與觀測
   - [nullschool](https://earth.nullschool.net/#2018/04/05/0000Z/particulates/surface/level/overlay=pm10/orthographic=-238.92,24.73,2072/loc=117.900,32.438)
-  - 環保署官方[說明](https://drive.google.com/file/d/1cTQhDlfEl8w8ikw2SwdmPKJngayCZKy5/view)
+  - 環保署官方[說明](https://drive.google.com/file/d/1cTQhDlfEl8w8ikw2SwdmPKJngayCZKy5/view)(https://airtw.epa.gov.tw/CHT/Forecast/Sand.aspx)
 
+- 2019/10/24~11/3東亞沙塵暴傳播之模擬結果  
+  - [GIF](http://114.32.164.198/soong/20191029D1PM10.gif)
+  - 環保署官方[說明](https://drive.google.com/file/d/1Vy7Ca4Pz_P5zc3e6-206UDjvxYEneFBx/view)
+  
 ## Reference

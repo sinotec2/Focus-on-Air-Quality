@@ -29,6 +29,9 @@ last_modified_date:   2021-12-19 14:12:15
 - 修改自[USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_combine.csh](https://github.com/USEPA/CMAQ/blob/main/POST/combine/scripts/run_combine.csh)
 
 ### 執行方式
+- 讀取引數：2碼月份、批次序(5\~12)、範圍序(`d01`/`d02`/`d04`、無`d03`，詳[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
+  - `CAS`設定為**TEDS**編號，與年代有關，2019附近使用TEDS**11**
+
 
 ### 分段說明
 - 原腳本說明段
@@ -68,7 +71,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     24	 setenv CMAQ_DATA  /nas1/cmaqruns/2018base/data
     25	
 ```
-- 讀取引數(月、[批次序](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#批次的定義)、[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/網格系統詳細定義))
+- 讀取引數(月、[批次序](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#批次的定義)、[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
 
 ```python
     26	set MO         = $argv[1]

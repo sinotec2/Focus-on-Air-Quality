@@ -3,7 +3,7 @@ layout: default
 title: "dowps.sh"
 parent: "WPS"
 grand_parent: "WRF"
-nav_order: 2
+nav_order: 3
 date:               
 last_modified_date:   2021-11-25 16:21:24
 ---
@@ -94,7 +94,7 @@ done
     26    done
 ```
 - 因同步運作，必須避免不同月份間檔案發生衝突。
-- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
+- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
 ```bash
     27    ii=$(printf "%02d" $(( $i + 1 )) )
     28    echo "ii:"$ii
@@ -163,6 +163,3 @@ done
 ## Reference
 - University of Waterloo, [WRF Tutorial](https://wiki.math.uwaterloo.ca/fluidswiki/index.php?title=WRF_Tutorial),  27 June 2019, at 14:53.
 - Andre R. Erler, WRF-Tools/Python/wrfrun/[pyWPS.py](https://github.com/aerler/WRF-Tools/blob/master/Python/wrfrun/pyWPS.py), Commits on Nov 23, 2021.
-- [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
-- [pywinter](https://pywinter.readthedocs.io/en/latest)
-- [Here](https://sinotec2.github.io/jdt/doc/SST.md),2021-11-27 10:19:29

@@ -51,6 +51,7 @@ end
    - 為了讓同一個腳本應用在不同月份、不同**批序**(批次序號)、不同模擬範圍，讓腳本可以更換執行的條件。
    - `APPL`個案應用標籤：加上**批序**會更方便與[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)對照。
    - 此處沒有`d03`的選項，因為`d02`已經足夠產生`d04`的邊界條件。
+   - 網格系統名稱、編號與細節見[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)
 
 ```python
 kuang@114-32-164-198 /Users/cmaqruns/2016base/old_scripts

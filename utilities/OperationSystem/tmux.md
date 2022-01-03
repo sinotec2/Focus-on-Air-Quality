@@ -37,16 +37,21 @@ grand_parent: Utilities
 
 ## 6個基本的tmux指令
 1. `tmux`：開啟一個「新的」多工分支界面，畫面底下會反白、顯示現在界面的名稱（或編號）
-2. `tmux ls` ：檢查目前開了那些多工分支，名稱（或編號），範例結果類似
-
+1. `tmux ls` ：檢查目前開了那些多工分支，名稱（或編號），範例結果類似
   ```bash
   $ tmux ls
-  0: 1 windows (created Wed Dec 29 21:59:00 2021)
+  bcon: 1 windows (created Wed Oct 20 08:20:43 2021) [158x44]
+  cctm: 1 windows (created Sun Oct 10 15:17:16 2021) [158x44]
+  compile: 1 windows (created Tue Oct 19 10:43:49 2021) [158x44]
+  enkf3D: 1 windows (created Tue Oct 19 11:08:54 2021) [158x44]
+  find_run.csh: 1 windows (created Wed Oct 20 13:03:28 2021) [158x44]
+  post: 1 windows (created Wed Oct 20 17:15:48 2021) [158x44]
+  wrf: 1 windows (created Sat Dec 25 16:30:28 2021) [158x44]
   ```
-3. `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
-4. `tmux a -t wrf`：再次回到多工分支**wrf**
-5. session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面
-6. session 狀態下鍵入`exit`：正常關閉一個分支畫面
+1. `tmux rename-session -t 0 wrf`：將session 0命名為**wrf**
+1. `tmux a -t wrf`：再次回到多工分支**wrf**
+1. session 狀態依序按下Control-b,d 2個動作：「暫時」離開、回到原來的OS畫面
+1. session 狀態下鍵入`exit`：正常關閉一個分支畫面
 
 ## nohup and disown
 - 開啟NO_HUP

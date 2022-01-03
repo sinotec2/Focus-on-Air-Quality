@@ -41,9 +41,20 @@ last_modified_date: 2022-01-03 09:13:39
 ## 模擬範圍
 - 整體而言氣象及空品模式模擬的範圍，都以天氣系統的移動速度及關切現象的天數而定，亦即污染軌跡在一定時間內所能延伸至之範圍。
 - 以同樣是東亞範圍(d01)，圖1為中央氣象局WRF15公里解析度模擬範圍，其東西向範圍9,000公里、南北向6,000公里，約可掌握3~6天之天氣現象。
+  - 模擬範圍可以完整包括青康藏高原、蒙古高原的主要部分，對地形效應有較完整的掌握。
+  - 海上則自換日線為界，在資料整合上也能保持便利性。
+
+| ![geo_emWRF_15Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_15Km.PNG) |
+|:--:|
+| <b>圖1 中央氣象局WRF15公里解析度模擬範圍之地形高程。東西向範圍9,000公里、南北向6,000公里</b>|
+  
 - 圖2為CMAQ 東亞模擬範圍，自台灣起算亦有至少3天反軌跡範圍，東西南北皆為4,860公里。
-- ![圖1 中央氣象局WRF15公里解析度模擬範圍之地形高程。東西向範圍9,000公里、南北向6,000公里](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_15Km.PNG)
-- ![圖2 CMAQ 東亞範圍之地形高程，東西南北皆為4,860公里](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_81Km.PNG)
+  - 包括了中國大陸東半壁，韓、日、中南半島與東南亞等主要境外污染來源。
+
+| ![geo_emWRF_81Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_81Km.PNG) |
+|:--:|
+| <b>圖2 CMAQ 東亞範圍之地形高程，東西南北皆為4,860公里</b>|
+
 
 ## Reference
 

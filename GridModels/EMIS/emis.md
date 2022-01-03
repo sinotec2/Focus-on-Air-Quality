@@ -24,7 +24,7 @@ last_modified_date:   2021-12-02 11:08:53
 ## 背景
 - CMAQ模式的地面排放量為一逐日拆解的檔案（每檔案需25個小時）。其開始時間為UTC 0時（LST -8）。
 - 可以按照排放類別拆分或合併。
-- 空間網格系統之定義乃按照[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#%E5%88%86%E6%AE%B5%E5%B7%AE%E7%95%B0%E8%AA%AA%E6%98%8E)之定義方式。
+- 空間網格系統之定義乃按照[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義)之定義方式。
 - 由CAMx模式排放量檔案而來，其產生過程詳如下表：
 
 |範圍|格式|類別|
@@ -57,7 +57,7 @@ last_modified_date:   2021-12-02 11:08:53
 - 污染項目
   - 在`$EMISSCTRL_NML`檔案中定義。此處不作轉換
 
-### 程式碼
+### [camx2cmaq.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/camx2cmaq.py)程式碼
 ```python
 kuang@master /nas1/cmaqruns/2019base/data/emis/TEDS
 $ cat camx2cmaq.py
@@ -112,5 +112,6 @@ for yy in 18;do
   done
 done
 ```
+
 ## Reference
 - 

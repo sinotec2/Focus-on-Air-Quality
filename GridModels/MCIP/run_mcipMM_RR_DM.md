@@ -167,6 +167,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ---
 > set BTRIM = 0
 ```
+
 ### 網格系統詳細定義
 - 各層網格系統的起始位置、網格數
    - 為WRF各[子網格系統](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/))內縮之結果
@@ -218,8 +219,6 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ```
 
 ### 警訊及執行
-
-```python
 - 這段是為避免執行過程的警訊，不影響結果。
 
 ```python
@@ -244,7 +243,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ```
 
 ### ***Mac***版本日期設定與計算方式之差異 
-- ***Mac*** (<)與一般的UNIX(>)有很大的[差異](https://www.cnblogs.com/qwj-sysu/p/5396372.html)，輸入格式`-f`在引數之前設定，日期的加減也是在引數之前。一般(如***centos***)是在引數之後。
+- ***Mac*** 與一般的UNIX有很大的[差異](https://www.cnblogs.com/qwj-sysu/p/5396372.html)，輸入格式`-f`在引數之前設定，日期的加減也是在引數之前。一般(如***centos***)是在引數之後。
 - run**批序**之起始日：前月15日
 
 ```bash

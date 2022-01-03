@@ -22,16 +22,64 @@ last_modified_date:   2021-12-19 14:12:15
 ---
 
 ## 背景
+- 由於CCTM是按照
 
 ## 腳本程式說明
 ### 程式名稱
 - [run_combMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/combine/run_combMM_R_DM.csh)
 - 修改自[USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_combine.csh](https://github.com/USEPA/CMAQ/blob/main/POST/combine/scripts/run_combine.csh)
 
+### I/O檔案
+- CCTM執行結果
+  - CCTM_ACONC檔案：逐日小時平均濃度、共有226項空氣品質，含4項大氣要素
+  - CCTM_APMDIAG檔案：網格點上各粒徑比例之小時平均紀錄
+- 氣象數據
+  - METCRO3D
+  - METCRO2D
+- 空品/沉降量定義檔：$SPECIES_DEF
+- 結果檔案OUTFILE 
+  - 小時平均濃度：${POSTDIR}/COMBINE_ACONC_${CTM_APPD}，共有135項(在$SPECIES_DEF中定義)。
+  - 小時沉降量：${POSTDIR}/COMBINE_DEP_${CTM_APPD}
+
+
 ### 執行方式
 - 讀取引數：2碼月份、批次序(5\~12)、範圍序(`d01`/`d02`/`d04`、無`d03`，詳[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
   - `CAS`設定為**TEDS**編號，與年代有關，2019附近使用TEDS**11**
 
+### SPECIES_DEF檔案之設定
+- 參考[github.USEPA樣板](https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)
+- `!`之後為註解沒作用，將回復到內設值。
+- `#`之後為變數名稱。
+- 層數之定義
+  - 此範例將只會進行第1層(地面層)的整併。
+  - 如加上`!`之後，程式將會按照CCTM_ACONC的層數進行合併
+
+```
+[kuang@DEVP 2018base]$ echo $SPEC_CONC
+../CMAQ_Project/POST/combine/scripts/spec_def_files/SpecDef_cb6r3_ae7_aq.txt
+[kuang@DEVP 2018base]$ head $SPEC_CONC
+!#start   YYYYJJJ  000000
+!#end     YYYYJJJ  230000
+#layer    1
+```
+- VOC之定義
+
+```fortran
+VOC             ,ppbC      ,1000.0* (PAR[1] +2.0*ETHA[1] +3.0*PRPA[1] +MEOH[1]\
+                            +2.0*ETH[1] +2.0*ETOH[1] +2.0*OLE[1] +3.0*ACET[1] \
+                            +7.0*TOL[1] +8.0*XYLMN[1] +6.0*BENZENE[1] \
+                            +FORM[1] +3.0*GLY[1] +4.0*KET[1] +2.0*ETHY[1] \
+                           +2.0*ALD2[1] + 2.0*ETHA[1] + 4.0*IOLE[1] + 2.0*ALDX[1]  \
+                           +5.0*ISOP[1] + 10.0*TERP[1]+ 10.0*NAPH[1] +10.*APIN[1])
+```
+
+- PM2.5的定義
+  - PM25AT[3]、PM25AC[3]、PM25CO[3]三個值即為CCTM_APMDIAG檔案內之[Aitken](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) 、[accumulation](https://glossary.ametsoc.org/wiki/Accumulation_mode)及 [coarse](https://ec.europa.eu/health/scientific_committees/opinions_layman/en/indoor-air-pollution/glossary/abc/coarse-particles.htm) mode。
+  - ATOTI[0]、ATOTJ[0]、ATOTK[0]為CCTM_APMDIAG檔案內之3個mode之粒狀物濃度加總結果。
+
+```fortran
+PM25_TOT        ,ug m-3     ,ATOTI[0]*PM25AT[3]+ATOTJ[0]*PM25AC[3]+ATOTK[0]*PM25CO[3]
+```
 
 ### 分段說明
 - 原腳本說明段
@@ -182,19 +230,6 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    102	 setenv SPECIES_DEF $SPEC_CONC
    103	 
 ```
-- 層數之定義
-  - !之後為註解沒作用，將回復到內設值。
-  - #之後為變數名稱，此範例將只會進行第1層(地面層)的整併。
-
-```
-[kuang@DEVP 2018base]$ echo $SPEC_CONC
-../CMAQ_Project/POST/combine/scripts/spec_def_files/SpecDef_cb6r3_ae7_aq.txt
-[kuang@DEVP 2018base]$ head $SPEC_CONC
-!#start   YYYYJJJ  000000
-!#end     YYYYJJJ  230000
-#layer    1
-```
-
 - 日數之迴圈
 
 ```python
@@ -326,3 +361,6 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    209	 
    210	 exit()
 ```
+
+## Reference
+- Aitken Nuclei - an overview | ScienceDirect Topics (n.d.). Available at [sciencedirect](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) (Accessed 3 January 2022).

@@ -68,7 +68,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     24	 setenv CMAQ_DATA  /nas1/cmaqruns/2018base/data
     25	
 ```
-- 讀取引數(月、[批次序](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)、[模擬範圍](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#地形網格設定))
+- 讀取引數(月、[批次序](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#批次的定義)、[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/網格系統詳細定義))
 
 ```python
     26	set MO         = $argv[1]
@@ -77,7 +77,8 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     29	
     30	       
 ```
-- 
+- 一般定義
+  - 年代、TEDS版本須手動修改
 
 ```python
     31	#> Set General Parameters for Configuring the Simulation
@@ -88,7 +89,8 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     36	 set STKCASEE  = 11   
     37	                                                      
  ```
--
+- 執行程式位置
+  - 此環境變數不易修改，如欲切換執行其他工作批次檔，「應」跳出此次csh另外定義(使用[tmux](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/tmux/))。
 
 ```python
    38	#> Define RUNID as any combination of parameters above or others. By default,
@@ -107,7 +109,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     51	
     52	
 ```
--
+- 對照網格編號及名稱(詳[]())
 
 ```python
     53	#> Set working, input and output directories

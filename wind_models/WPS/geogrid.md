@@ -111,7 +111,7 @@ last_modified_date: 2022-01-03 09:13:39
 
 ## WRF/chem之geogrid.exe設定
 ### 整體流程
-- 作業流程詳[geo_em檔案之準備](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#geo_em檔案之準備)
+- 作業流程詳WRF-chem/[geo_em檔案之準備](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#geo_em檔案之準備)
 
 ### 揚沙所需特定檔案
 - 下載風蝕、沙及泥的比例參數計算所需[Thompson全球數據](https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_thompson28_chem.tar.gz)
@@ -142,6 +142,7 @@ total 6.1M
 ```
 
 ### 揚沙參數之執行結果
+- EROD風蝕係數之維度須先以[ncwa](https://linux.die.net/man/1/ncwa)予以[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度)方能以[VERDI]()檢視。
 
 | ![erod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/erod.PNG) |
 |:--:|
@@ -149,9 +150,9 @@ total 6.1M
 | ![crayfrac.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/crayfrac.PNG) |
 |:--:|
 | <b>圖8 d01範圍的黏土比例係數(CRAYFRAC)</b>|
-| ![sandfrac.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/sandfrac.PNG) |
+| ![SANDFRAC.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SANDFRAC.PNG) |
 |:--:|
-| <b>圖8 d01範圍的沙土比例係數(SANDFRAC)</b>|
+| <b>圖9 d01範圍的沙土比例係數(SANDFRAC)</b>|
 
 ## Reference
 

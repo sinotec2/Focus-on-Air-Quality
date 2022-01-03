@@ -33,7 +33,7 @@ last_modified_date: 2022-01-03 09:13:39
 |----|----|----|----|
 |範圍|視天氣系統移動速度及預報天數而定。陸上及海上天氣現象同樣重要|會以同時納入排放源與受體、同時納入其間所有的大氣擴散傳輸現象為考量|以3天軌跡範圍、中國東半部排放量較大範圍為主|
 |解析度|視地面強迫機制複雜度而異|視污染排放空間解析度而異|採81/27/9/3巢狀網格解析度|
-|格點數|因無化學反應之計算，計算資源需求較低，可以允許較多的網格點||58~148|
+|格點數|因無化學反應之計算，計算資源需求較低，可以允許較多的網格點|視反應機制的複雜度(計算資源需求較高)、子網格所需邊界條件解析度等而定|58~148|
 |中心點|以關注標的為中心，東、西向對稱，以囊括到最多的天氣系統活動|不見得以關注標的之地理中心為中心，而是以污染傳播軌跡為中心|以台灣為中心|
 |套疊關係|雙向與否視解析度而異|雙向與否與主要污染源有關|WRF採雙向、CMAQ採單向|
 
@@ -50,11 +50,32 @@ last_modified_date: 2022-01-03 09:13:39
   
 - 圖2為CMAQ 東亞模擬範圍，自台灣起算亦有至少3天反軌跡範圍，東西南北皆為4,860公里。
   - 包括了中國大陸東半壁，韓、日、中南半島與東南亞等主要境外污染來源。
+  - 因大陸西部及海上無顯著污染源，縮減範圍也可減省計算資源。
 
 | ![geo_emWRF_81Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_81Km.PNG) |
 |:--:|
 | <b>圖2 CMAQ 東亞範圍之地形高程，東西南北皆為4,860公里</b>|
 
+## 子網格系統套疊關係
+- 圖3為中央氣象局WRF3公里解析度模擬範圍，東西向範圍3,500公里、南北向2,050公里。
+  - 其解析度足供鄉鎮區之天氣預報及分析
+  - 由於沒有化學反應之計算，其網格數多達1168 X 683
+  - 因d01的解析度也很高，足以反映局部重要特性，因此並不需要雙向套疊關係，d01即能呈現足夠的預報度。
 
+| ![geo_emWRF_3Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_3Km.PNG) |
+|:--:|
+| <b>圖3 中央氣象局WRF3公里解析度模擬範圍之地形高程。東西向範圍3,500公里、南北向2,050公里</b>|
+  
+- 圖4~6為CMAQ 東南沿海、臺澎金馬與臺灣本島等3層子網格之模擬範圍。
+  
+| ![geo_emWRF_27Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_27Km.PNG) |
+|:--:|
+| <b>圖4 CMAQ 東南沿海範圍之地形高程，東西南北皆為1,890公里</b>|
+| ![geo_emWRF_9Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_9Km.PNG) |
+|:--:|
+| <b>圖5 CMAQ 臺澎金馬範圍之地形高程，東西向範圍552公里、南北向684公里</b>|
+| ![geo_emCMAQ_3Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emCMAQ_3Km.PNG) |
+|:--:|
+| <b>圖6 CMAQ 臺灣本島範圍之地形高程，東西向範圍282公里、南北向444公里</b>|
 ## Reference
 

@@ -28,6 +28,8 @@ last_modified_date:   2021-12-19 14:12:15
 - [run_combMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/combine/run_combMM_R_DM.csh)
 - 修改自[USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_combine.csh](https://github.com/USEPA/CMAQ/blob/main/POST/combine/scripts/run_combine.csh)
 
+### 執行方式
+
 ### 分段說明
 - 原腳本說明段
 
@@ -49,6 +51,13 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     14	
     15	#> Choose compiler and set up CMAQ environment with correct
     16	#> libraries using config.cmaq. Options: intel | gcc | pgi
+```
+- 基本環境變數設定
+  - 編譯器版本`gcc`
+  - 程式碼位置
+  - 程式I/O檔案目錄
+
+```python
     17	 setenv compiler gcc
     18	
     19	#> Set location of CMAQ repo.  This will be used to point to the correct species definition files.
@@ -58,11 +67,19 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     23	 setenv CMAQ_HOME $PWD
     24	 setenv CMAQ_DATA  /nas1/cmaqruns/2018base/data
     25	
+```
+- 讀取引數(月、[批次序](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)、[模擬範圍](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#地形網格設定))
+
+```python
     26	set MO         = $argv[1]
     27	set RUN        = $argv[2]
     28	set DM         = $argv[3]
     29	
     30	       
+```
+-
+
+```python
     31	#> Set General Parameters for Configuring the Simulation
     32	 set VRSN      = v53               #> Code Version
     33	 set PROC      = mpi               #> serial or mpi
@@ -70,7 +87,11 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     35	 set APPL      = 18${MO}              #> Application Name (e.g. Gridname)
     36	 set STKCASEE  = 11   
     37	                                                      
-    38	#> Define RUNID as any combination of parameters above or others. By default,
+ ```
+-
+
+```python
+   38	#> Define RUNID as any combination of parameters above or others. By default,
     39	#> this information will be collected into this one string, $RUNID, for easy
     40	#> referencing in output binaries and log files as well as in other scripts.
     41	 setenv RUNID  ${VRSN}_${compilerString}_${APPL}
@@ -85,6 +106,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     50	 setenv EXEC combine_${VRSN}.exe
     51	
     52	
+```
+-
+
+```python
     53	#> Set working, input and output directories
     54	if ( $DM == 'd01' ) then
     55	  setenv GRID_NAME  EAsia_81K        
@@ -97,6 +122,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     62	  exit 1
     63	endif
     64	
+```
+-
+
+```python
     65	# setenv GRID_NAME TWN_3X3                 #> check GRIDDESC file for GRID_NAME options
     66	 setenv CCTMOUTDIR ${CMAQ_DATA}/output_CCTM_${RUNID}      #> CCTM Output Directory
     67	 setenv POSTDIR    ${CCTMOUTDIR}/POST                     #> Location where combine file will be written
@@ -111,6 +140,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     76	#> COMBINE Configuration Options
     77	# =====================================================================
     78	
+```
+-
+
+```python
     79	#> Set Start and End Days for looping
     80	 set BEG_DATE = `date -ud "2018-${MO}-15 -1 month" +%Y-%m-%d `
     81	 set END_DATE = `date -ud "2018-${MO}-01 +1 month" +%Y-%m-%d `
@@ -121,6 +154,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     86	 set START_DATE = `date -ud "${BEG_DATE} +${NDYS}days" +%Y-%m-%d `
     87	 set END_DATE = `date -ud "${START_DATE} +32days" +%Y-%m-%d`
     88	 
+```
+-
+
+```python
     89	#> Set location of species definition files for concentration and deposition species.
     90	 setenv SPEC_CONC $REPO_HOME/POST/combine/scripts/spec_def_files/SpecDef_${MECH}.txt
     91	 setenv SPEC_DEP  $REPO_HOME/POST/combine/scripts/spec_def_files/SpecDef_Dep_${MECH}.txt
@@ -140,11 +177,19 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    105	 set TODAYG = ${START_DATE}
    106	 set TODAYJ = `date -ud "${START_DATE}" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
    107	 set STOP_DAY = `date -ud "${END_DATE}" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
+```
+-
+
+```python
    108	 set I = 0
    109	 while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
    110	   @ R = 6 # $I / 4 + 5
    111	   echo 'kuang' $I run$R
    112	   if ( $R > 12 ) exit 0
+```
+-
+
+```python
    113	  #> Retrieve Calendar day Information
    114	   set YYYY = `date -ud "${TODAYG}" +%Y`
    115	   set YY = `date -ud "${TODAYG}" +%y`
@@ -185,6 +230,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    150	 end #Loop to the next Simulation Day
    151	
    152	
+```
+-
+
+```python
    153	# =====================================================================
    154	#> Begin Loop Through Simulation Days to Create DEP File
    155	# =====================================================================
@@ -206,6 +255,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    171	   set YY = `date -ud "${TODAYG}" +%y`
    172	   set MM = `date -ud "${TODAYG}" +%m`
    173	   set DD = `date -ud "${TODAYG}" +%d`
+```
+-
+
+```python
    174	   if ( "${STKCASEE}" != "" ) then
    175	     setenv CTM_APPL ${RUNID}_run${R}_$YYYY$MM${DD}_${GRID_NAME}_${STKCASEE}
    176	     setenv CTM_APPD ${RUNID}_run${R}_$YYYY${MM}_${GRID_NAME}_${STKCASEE}
@@ -230,6 +283,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    195	   setenv INFILE3 $METDIR/METCRO2D_${APPL}_run${R}.nc
    196	   setenv INFILE4
    197	
+```
+-
+
+```python
    198	  #> Executable call:
    199	 if ( $RUN == $R) then
    200	   mpirun -np 10 ${BINDIR}/${EXEC}

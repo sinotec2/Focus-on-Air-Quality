@@ -28,7 +28,7 @@ last_modified_date:   2021-12-18 19:47:32
 - [run_bconMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/run_bconMM_RR_DM.csh)
 - 修改自[USEAP_CMAQ](https://github.com/USEPA/CMAQ)之[run_bcon.csh](https://github.com/USEPA/CMAQ/blob/main/PREP/bcon/scripts/run_bcon.csh)
 
-### 分段說明
+### 基本環境與時間之設定
 
 ```bash
 kuang@114-32-164-198 ~/GitHub/cmaq_relatives/bcon
@@ -214,18 +214,25 @@ $ cat -n run_bconMM_RR_DM.csh
 ```python
    129	 if ( $BCON_TYPE == regrid ) then 
    130	    setenv MET_CRO_3D_CRS $CMAQ_DATA/mcip/$APPL/${GRID_NAM0}/METCRO3D_$APPL.nc
+```
+
+### REGRID情況上層網格濃度檔案之準備
+#### `d01`情況
+- `d01`的上層網格即為`d00`，直接使用全球模式模擬結果，詳見[moz2cmaqH](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)。
+
+```python
    131	    if ( $DM == 'd01' ) then
-```
-- `d01`情況：直接使用全球模式模擬結果(見[moz2cmaqH](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/))
-
-```python
    132	      setenv CTM_CONC_1 $CMAQ_DATA/bcon/ICON_d1_20${APYM}_run${RUN}.nc
-   133	    else #if( $DM == 'd02'|| $DM == 'd04' ) then
 ```
-- 其他層級的模擬範圍：使用上層`CCTM_ACONC`模擬結果
-  - 但因為`CCTM_ACONC`是逐日儲存的，需要先整合成一個檔案
 
+#### 其他層級的模擬範圍
+- 使用上層`CCTM_ACONC`模擬結果
+   - `d02`的邊界條件為`d01`模擬的CCTM_ACONC結果
+   - `d04`的邊界條件為`d02`的模擬結果
+  - 但因為`CCTM_ACONC`是逐日儲存的，需要先整合成一個檔案
+ 
 ```python
+   133	    else #if( $DM == 'd02'|| $DM == 'd04' ) then
    134	      setenv CTM_CONC_1 $CMAQ_DATA/bcon/ACONC_d2_20${APYM}.nc  
    135	#link last run/last day as previous day
    136	#     if ( ( $RUN == 5 ) ||  ( ! -e ${CTM_CONC_1} )) then
@@ -234,6 +241,7 @@ $ cat -n run_bconMM_RR_DM.csh
 ```
 - 會需要比正常天數多一個小時，所以天數要多一天。
   - 可以用[pr_tflag.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)`確認`nc`檔案的`TFLAG`內容。
+   - 先將檔案重新以較單純的檔名命名
 
 ```python
    139	        foreach it ( `seq 0 ${NDAYS}` )
@@ -252,7 +260,7 @@ $ cat -n run_bconMM_RR_DM.csh
    152	        end 
    153	      #if ( ! -e ${CTM_CONC_1} ) then
 ```
-- 用`ncrcat`將上層濃度檔序列，整合(append along time axis)成一個大檔案
+- 用`ncrcat`將上層濃度檔序列，整合(append along time axis)成一個大檔案備用
 
 ```python
    154	        /usr/bin/ncrcat -O $out_ym/20??????.tmp ${CTM_CONC_1} #this will take large of time
@@ -260,7 +268,8 @@ $ cat -n run_bconMM_RR_DM.csh
    156	#     endif
    157	    endif
 ```
-- `mcip`邊界檔案結果的檔名與路徑
+
+- 程式會需要`mcip`邊界檔案，定義其檔名與路徑
 
 ```python
    158	    setenv MET_BDY_3D_FIN $CMAQ_DATA/mcip/$APPL/$GRID_NAME/METBDY3D_$APPL.nc
@@ -273,6 +282,8 @@ $ cat -n run_bconMM_RR_DM.csh
    161	    setenv MET_BDY_3D_FIN $CMAQ_DATA/mcip/$APPL/$GRID_NAME/METBDY3D_$APPL.nc
    162	 endif
 ```
+
+### 輸出檔案與執行
 - `bcon`結果檔名的設定
 
 ```python

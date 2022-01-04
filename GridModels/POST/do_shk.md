@@ -22,10 +22,6 @@ last_modified_date: 2022-01-03 20:27:09
 ---
 
 ## 背景
-<<<<<<< HEAD
-- 經過`combine`之後，檔案仍有
-
-=======
 - 經[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之後的檔案，仍有多達135項之污染物，仍須進一步進行篩選。
 - CMAQ之排放、土地利用、濃度結果皆以逐日方式儲存，需進一步整併。以環保署要求之規格，濃度須以月為單位進行比對、分析。
 
@@ -36,7 +32,6 @@ last_modified_date: 2022-01-03 20:27:09
   - 因日期是檔名的一部分，以底線(`_`)為區格，如路徑中也有含底線，將會造成錯位，須詳細確認。
   - shk.cs執行速度還算快，沒有平行運作的必要。
   
->>>>>>> 606bc6fd5ea4e382f1dfb6cf5860ea0f6b92c337
 ```bash
 #note the ncks or ncrcat can not run in parallel, will conflick in memory
 ls -r /nas1/cmaqruns/2016base/data/out*/POST/COMBINE_ACONC*_sCh*10.nc > fnames.txt

@@ -31,7 +31,7 @@ last_modified_date:   2021-12-22 11:09:22
 相關研究發表不少，詳見下列參考文獻。使用範例、手冊等請參考[官網](https://www.epa.gov/cmaq/integrated-source-apportionment-method-cmaq-isam)。
 
 - 執行**CMAQ-ISAM**的腳本與執行`CCTM`是同一個。然實際全年、全月的模擬還有許多設定需要修改。
-- **CMAQ-ISAM**不必特別處理排放量，EPA設計讓所有的排放開關控制對照，都寫在`EmissCtrl`檔案內，藉該檔案來控制特定地區污染排放的開啟或關閉。詳[EmissCtrl_cb6r3_ae7_aq.nml範例](https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/cb6r3_ae7_aq/EmissCtrl_cb6r3_ae7_aq.nml)。
+- **CMAQ-ISAM**不必特別處理排放量，EPA設計讓所有的排放開關控制對照，都寫在`EmissCtrl`檔案內，藉該檔案來控制特定地區污染排放的開啟或關閉。詳EmissCtrl_cb6r3_ae7_aq.nml[範例](https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/cb6r3_ae7_aq/EmissCtrl_cb6r3_ae7_aq.nml)。
 
 
 ## `EmissCtrl`檔案之地區控制(`RegionsRegistry`)

@@ -38,7 +38,7 @@ last_modified_date:   2021-12-10 11:31:33
 - 增加變數：用以形成新的nc檔案模版。
 - `ncks -v NO,TFLAG,ETFLAG base.grd02.1909.nc NO.nc`提出特定之變數、形成新檔，程式會自帶相依座標，但不會有時間標籤。如不要座標，要多加`-C`。
 
-### 維度
+### 維度剪裁
 類似的，如果要增加、延續維度的長度是用[ncrcat]()，如果要剪裁，則為ncks的強項。尤有進者[ncrcat]()只能針對UNLIMITED維度進行延長，如果要增加其他維度，則先要更改維度的定義，也是靠ncks才能更動。
 - `-d TSTEP,0,23,3` 切割特定維度的一部分。由0開始，到底(23不像python加1)、間距(3)。(eg. [brk_day2.cs:按照日期切割m3.nc](https://boostnote.io/shared/7fd2257f-ba2b-4bd1-9e80-54be96a3bfee))
 - `--mk_rec_dmn ROW` 定義「可增加」資料筆數之維度(**m**a**k**ing **rec**ord **d**i**m**e**n**sion，**記錄軸**)
@@ -59,9 +59,60 @@ variables:
         int TFLAG(TSTEP, VAR, DATE-TIME) ;
                 TFLAG:units = "<YYYYDDD,HHMMSS>" ;
 ```
-
 - `--fix_rec_dmn TSTEP` 定義不可增加筆數之維度(**f**ix **rec**ord **d**i**m**e**n**sion)
 - ncks只能增減變數，如要更改變數名稱，則必須要使用[ncrename]()，如 `ncrename -O -v PM25_TOT,DIS_INCI stroke.nc stroke1.nc`
+
+### LIMITED維度加長
+- 先使用ncpdq暫時改變維度的排列順序，將第一順位設成是UNLIMITED維度(ROW)，其後的順序不影響結果、並且令其為筆數維度(rec_dmn)：
+```bash
+ncpdq -O -a ROW,TSTEP,LAY,COL $nc a
+ncks -O --mk_rec_dmn ROW a $nc
+```
+
+#### 使用ncrcat
+- 重複執行ncrcat，讓UNLIMITED維度倍數成長，直到成長到超過所需長度
+- 再用ncks進行修減到所需長度
+
+#### 使用python
+- 先針對ROW維度進行加長(至395、d0之南北網格數)
+
+```python
+import netCDF4
+fname='templateD0.nc'
+nc = netCDF4.Dataset(fname, 'r+')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+nrow,nt,nlay,ncol=nc.variables[V[3][0]].shape
+for j in range(nrow,395):
+  for v in V[3]:
+    nc[v][j,:,:,:]=0
+nc.close()
+```
+- 重複此動作，改針對COL維度
+
+```bash
+ncpdq -O -a COL,TSTEP,LAY,ROW $nc a
+ncks -O --mk_rec_dmn COL a $nc
+```
+- python(略)
+- 回復正常順序、重新定義筆數維度
+
+```bash
+ncpdq -O -a TSTEP,LAY,ROW,COL $nc a
+ncks -O --mk_rec_dmn TSEP --fix_rec_dmn COL --fix_rec_dmn ROW a $nc
+$ ncdump -h $nc|head
+netcdf templateD0 {
+dimensions:
+        TSTEP = UNLIMITED ; // (1 currently)
+        LAY = 1 ;
+        ROW = 395 ;
+        COL = 671 ;
+        VAR = 35 ;
+        DATE-TIME = 2 ;
+variables:
+        float ALD2(TSTEP, LAY, ROW, COL) ;
+```
+
+### 維度刪除
 - ncks只能將維度減到最少，但不能使維度從檔案中消失。要刪除檔案中特定的維度須使用[ncwa](http://stackoverflow.com/questions/20215529/delete-a-dimension-in-a-netcdf-file)指令。
   - 如以下geo_em.nc檔案中的風蝕係數，其維度為[`Time`, `dust_erosion_dimension`, `south_north`, `west_east`]，其中`dust_erosion_dimension`是[VERDI]()無法辨識的，因此必須將其刪除才能檢視。
 

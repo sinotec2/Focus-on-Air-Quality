@@ -5,7 +5,7 @@ parent: Post Processing
 grand_parent: CMAQ Models
 nav_order: 2
 date: 2021-12-16 11:34:01
-last_modified_date:   2021-12-19 14:12:15
+last_modified_date: 2022-01-03 20:27:09
 ---
 
 # COMBINE_ACONC檔案之跨日整併
@@ -22,7 +22,7 @@ last_modified_date:   2021-12-19 14:12:15
 ---
 
 ## 背景
-
+- 經過`combine`之後，檔案仍有
 
 ```bash
 #note the ncks or ncrcat can not run in parallel, will conflick in memory

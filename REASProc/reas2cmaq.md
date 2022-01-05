@@ -57,7 +57,7 @@ from scipy.interpolate import griddata
 Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40, lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
 ```
-- 因壓縮檔內的目錄結構參差不齊，使用findc來確定檔案位置，將結果存成fnames.txt備用
+- 因壓縮檔內的目錄結構參差不齊，使用[findc](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#尋找檔案)來確定檔案位置，將結果存成fnames.txt備用
   - 讀取檔案。有`/mon`該行，行前有污染物質名稱，將其與檔名一起輸出，形成dict的內容
 
 ```python
@@ -128,7 +128,7 @@ ncat=len(cate)
 catn={cate[i]:i for i in range(ncat)}
 ```
 - 將所有REAS文字檔內容讀成矩陣備用
-  - REAS文字檔每行有經、緯度、及12月的排放量(噸數)，共有14個值。先將其整個序列轉成array再重整(reshape)。因每個檔案長度不一(`lenl`)，不能定型化來讀取。
+  - REAS文字檔每行有經、緯度、及12個月的排放量(噸數)，共有14個值。先將其整個序列轉成array再重整(reshape)。因每個檔案長度不一(`lenl`)，不能定型化來讀取。
   - 此處使用dict(`latn`,`lonn`)而不是執行序列的index函數來標定經緯度，會比較快速。
   
 ```python
@@ -152,7 +152,8 @@ for fname in fnames:
 ```
 - REAS2CMAQ對照表
   - 參考cb6r3_ae7_aq之物質[名稱](https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/mechanism_information/cb6r3_ae7_aq/cb6r3_ae7_aq_species_table.md)定義
-  - 部分分成PAR、ETH、OLE等碳鍵(`c_dup`)，會有重復(`r_dup`)，須乘上乘數(``)並且累加。
+  - 部分分成PAR、ETH、OLE等碳鍵(`c_dup`)，會有重復(`r_dup`)，須乘上乘數(`r_mole`)並且累加。
+  - 對照表REAS2CMAQ.csv詳[github](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/REAS2CMAQ.csv)
 
 ```python
 # spec name dict
@@ -173,8 +174,8 @@ fname=cate[icat]+'_'+tail
 os.system('cp template'+tail+' '+fname)
 nc = netCDF4.Dataset(fname, 'r+')
 ```
-- 延長檔案並將排放量全填0(準備累加、並避免被[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改)
-  - REAS為逐月檔案。此階段先將內容存成12個小時的frame。接續再按不同類別進行時間的劃分(月排放量轉成逐時排放)。
+- 延長檔案並將排放量全填0(準備累加、並避免被[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改))
+  - REAS為逐月檔案。此階段先將內容存成12個小時的frame。後續再按不同類別進行時間的劃分(月排放量轉成逐時排放)。
 
 ```python
 # elongate the new ncf

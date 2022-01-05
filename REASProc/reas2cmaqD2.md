@@ -40,7 +40,7 @@ ROAD_TRANSPORT OTHER_TRANSPORT POWER_PLANTS_NON-POINT MANURE_MANAGEMENT;do
 sub python reas2cmaqD2.py D0 $cat
 done
 ```
-- sub=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
+- [sub]()=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
 
 ### 分段說明
 - 調用模組

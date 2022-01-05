@@ -17,6 +17,7 @@ grand_parent: Utilities
 
 ## 檔案查詢
 ### ls查詢
+
 |alias|usage|full command|arguments|
 |----|----|----|----|
 |lst|list and sort by **time**察看最新檔案|`ls $1 --show-control-chars -hF --color=tty -lrt\|tail`|目錄、檔案群組(需double quotes)|

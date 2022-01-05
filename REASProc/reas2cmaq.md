@@ -273,6 +273,9 @@ nc.close()
 
 | ![REAS_roadTransBenz.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_roadTransBenz.PNG) |
 |:--:|
-| <b>圖 d01範圍REAS 2015年1月道路交通BENZ排放量之分布</b>|
+| <b>圖 d00範圍REAS 2015年1月道路交通BENZ排放量之分布</b>|
+| ![REAS_FertNH3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_FertNH3.PNG) |
+|:--:|
+| <b>圖 d01範圍REAS 2015年1月肥料NH3排放量之分布</b>|
 
 ## Reference

@@ -62,19 +62,24 @@ variables:
 - `--fix_rec_dmn TSTEP` 定義不可增加筆數之維度(**f**ix **rec**ord **d**i**m**e**n**sion)
 - ncks只能增減變數，如要更改變數名稱，則必須要使用[ncrename]()，如 `ncrename -O -v PM25_TOT,DIS_INCI stroke.nc stroke1.nc`
 
-### LIMITED維度加長
-- 先使用ncpdq暫時改變維度的排列順序，將第一順位設成是UNLIMITED維度(ROW)，其後的順序不影響結果、並且令其為筆數維度(rec_dmn)：
+### 加長一個LIMITED維度
+- 一般nc檔案在空間的維度是保持LIMITED的，讓檔案不會被輕易更動而亂套。
+- 在準備不同網格系統模版的過程，會遇到情況需要較長的空間維度，除了可以重新用python來產生(nc.createDimension)之外，亦可以由既有較小的模版來延伸，但要先解除該維度LIMITED狀態。
+- 先使用ncpdq暫時改變維度的排列順序，將第一順位設成是欲加長的維度(ROW)(其後的順序不影響結果)、並且令其為筆數維度(rec_dmn)，ROW就會變成UNLIMITED：
+
 ```bash
 ncpdq -O -a ROW,TSTEP,LAY,COL $nc a
 ncks -O --mk_rec_dmn ROW a $nc
 ```
+- 再使用ncrcat或者是python程式來加長ROW的長度
+- ncpdq指令的使用可以參考[百度文庫](https://wenku.baidu.com/view/c6b2686cf56527d3240c844769eae009581ba229.html?re=view)。
 
 #### 使用ncrcat
-- 重複執行ncrcat，讓UNLIMITED維度倍數成長，直到成長到超過所需長度
-- 再用ncks進行修減到所需長度
+- 重複執行ncrcat，讓UNLIMITED維度**倍數**成長，直到成長到超過所需長度
+- 再用ncks -d仔細修減到所需長度
 
 #### 使用python
-- 先針對ROW維度進行加長(至395、d0之南北網格數)
+- 先針對ROW維度進行加長(至395、CWB WRF_15Km d0之南北向網格數)
 
 ```python
 import netCDF4
@@ -87,7 +92,7 @@ for j in range(nrow,395):
     nc[v][j,:,:,:]=0
 nc.close()
 ```
-- 重複此動作，改針對COL維度
+- 重複此動作，改針對COL維度(至671、CWB WRF_15Km d0之東西向網格數)
 
 ```bash
 ncpdq -O -a COL,TSTEP,LAY,ROW $nc a
@@ -112,14 +117,15 @@ variables:
         float ALD2(TSTEP, LAY, ROW, COL) ;
 ```
 
-### 維度刪除
-- ncks只能將維度減到最少，但不能使維度從檔案中消失。要刪除檔案中特定的維度須使用[ncwa](http://stackoverflow.com/questions/20215529/delete-a-dimension-in-a-netcdf-file)指令。
+### 維度刪除(ncwa)
+- ncks只能將維度減到最少，但不能使維度從檔案中消失。要刪除檔案中特定的維度(delete dimension)須使用ncwa([範例](http://stackoverflow.com/questions/20215529/delete-a-dimension-in-a-netcdf-file))指令。
   - 如以下geo_em.nc檔案中的風蝕係數，其維度為[`Time`, `dust_erosion_dimension`, `south_north`, `west_east`]，其中`dust_erosion_dimension`是[VERDI]()無法辨識的，因此必須將其刪除才能檢視。
 
 ```bash
 ncwa -O -a dust_erosion_dimension erod.nc a
 mv a erod.nc
 ```
+- ncwa的全名是netCDF Weighted Averager，因為針對維度進行平均，會消除該維度的變化。如果該維度長度為1，則直接將其刪除。參[Charlie Zender and Brian Mays](https://linux.die.net/man/1/ncwa)。
 
 ### 變數+維度複合變更
 m3.nc檔案中的變數本身也是一個維度(`VAR`)，其長度為全域屬性`nc.NVARS`，變數的項目也是全域屬性`nc.VAR-LIST`的內容。雖然變更變數項目只涉及到時間標籤(`TFLAG[TSTEP,VAR,DATE-TIME]`)的長度，然CMAQ對其檢驗非常仔細，必須修剪到完全正確。如下列模版的製作過程：

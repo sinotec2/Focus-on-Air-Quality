@@ -13,11 +13,12 @@ last_modified_date: 2021-12-06 12:09:32
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[What's New](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/rd_dust/#%E7%B5%90%E6%9E%9C%E6%AA%A2%E6%A0%B8){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Leave messages on GitHub](https://github.com/sinotec2/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[What's New](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/reas2cmaq/#reas%E6%96%87%E5%AD%97%E7%9B%B4%E6%8E%A5%E8%BD%89cmaq%E5%9C%B0%E9%9D%A2%E6%8E%92%E6%94%BE%E6%AA%94){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Leave messages on GitHub](https://github.com/sinotec2/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
+- 2022-01-05 日本國立環境研究所[REAS](https://www.nies.go.jp/REAS/)排放量有簡單的處理方式了。解析度15~27公里採內插、81公里採加總，結果如[圖](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/reas2cmaq/#結果檢視)。
 - 2021-12-28 繼沙塵暴的[CMAQ-ISAM](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/)分析之後，同一個案也作為[ECMWF](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview)再分析數據[下載](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/)、[重製](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/)過程的[範例](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#%E7%B5%90%E6%9E%9C%E6%AA%A2%E8%A6%96)。這些再分析、反衍、模擬還是得正本清源找到揚沙的機制，這正是[WRF-chem](https://ruc.noaa.gov/wrf/wrf-chem/)的強項之一，因此又完成了[WRF-chem](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/)的安裝與東亞範圍的[模擬](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/rd_dust/#%E7%B5%90%E6%9E%9C%E6%AA%A2%E6%A0%B8)，這也符合規劃方向，陸續擴大[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF/)的網格範圍、增加水平的解析度，以與中央氣象局的作法一致，希望可以避免除可能的錯誤和不必要的爭議。
 - 2021-12-22 2018年4月5日大陸沙塵暴在臺灣造成高達200 &mu; g/M<sup>3</sup>的高值，**CMAQ-ISAM**分析結果如[圖](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/SA_PM25_IONS/#%E6%88%90%E6%9E%9C%E6%AA%A2%E8%A6%96)，此次也整理了[CMAQ/bcon/mcip/isam](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/)相關的程式、輸入檔的準備過程、腳本等。應用了[Youtube](https://www.youtube.com/watch?v=8EbU2FIIOTU)來播放濃度結果動畫，同時也可以縮減貼圖檔案體積造成的壓力。
 - 2021-12-10 [船舶排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)依據的是面源資料庫中的一個(`NSC`)類別，但因港區排放太過集中，當成面源會低估其影響，因此要區分一部分排放成為點源。這是其複雜之處。因為TEDS11的船舶排放比TEDS10少很多，此處還是以2016年的數據為準。從面源到船舶，TEDS的處理算是完成了。

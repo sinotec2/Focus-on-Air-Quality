@@ -33,14 +33,14 @@ last_modified_date: 2022-01-05 09:30:08
 ## [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
 
 ### 程式執行
-- 需要引數：domain_name(`D0`、`D2`)、category_name
+- 需要引數：domain_name(`D0`、`D2`)、category_number(0~10)
 ```bash
 for cat in DOMESTIC EXTRACTION FERTILIZER INDUSTRY MISC SOLVENTS WASTE \
 ROAD_TRANSPORT OTHER_TRANSPORT POWER_PLANTS_NON-POINT MANURE_MANAGEMENT;do
 sub python reas2cmaqD2.py D0 $cat
 done
 ```
-- [sub]()=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
+- [sub](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#執行程式)=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
 
 ### 分段說明
 - 調用模組
@@ -57,7 +57,8 @@ from scipy.interpolate import griddata
 Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40, lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
 ```
--
+- 因壓縮檔內的目錄結構參差不齊，使用findc來確定檔案位置，將結果存成fnames.txt備用
+  - 讀取檔案。有`/mon`該行，行前有污染物質名稱，將其與檔名一起輸出，形成dict的內容
 
 ```python
 os.system('~/bin/findc "REASv*" >fnames.txt')
@@ -73,7 +74,8 @@ fnames=list(fname_spec)
 nmv=set([fname_spec[f] for f in fnames if 'NMV' in f]) 
 specNonV=set([fname_spec[f] for f in fnames if 'NMV' not in f]) #共9種CNPS，part(BC,OC,PM2.5,PM10),CO2,ACNS
 ```
--
+- 讀取REAS之網格座標。因每檔案長度不一，須全讀過一遍，找到經緯度的極值，確認後再行產生網格系統。
+  - 將其轉成直角座標系統(`x,y`)備用
 
 ```python
 #read the coordinates
@@ -94,7 +96,7 @@ for ll in ['lon','lat']:
 lonm, latm = np.meshgrid(lonM, latM)
 x,y=pnyc(lonm,latm, inverse=False)
 ```
--
+- 讀取模版，建立新(CMAQ)、舊(REAS)座標系統的對照關係，以便進行griddata內插
 
 ```python
 #interpolation indexing from template  # get the argument
@@ -112,9 +114,10 @@ boo=(abs(x) <= (maxx - minx) /2+nc.XCELL*10) & (abs(y) <= (maxy - miny) /2+nc.YC
 idx = np.where(boo)
 mp=len(idx[0])
 xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
-
 ```
--
+- 類別之定義
+  - 早期REAS有多達22種，然只有少數11類進行更新。
+  - 此處將類別迴圈在程式外部進行，以減省執行時間
 
 ```python
 # category of REAS emission files
@@ -123,10 +126,11 @@ cate=['DOMESTIC', 'EXTRACTION', 'FERTILIZER', 'INDUSTRY', 'MISC', 'SOLVENTS', 'W
 cate.sort()
 ncat=len(cate)
 catn={cate[i]:i for i in range(ncat)}
-
 ```
--
-
+- 將所有REAS文字檔內容讀成矩陣備用
+  - REAS文字檔每行有經、緯度、及12月的排放量(噸數)，共有14個值。先將其整個序列轉成array再重整(reshape)。因每個檔案長度不一(`lenl`)，不能定型化來讀取。
+  - 此處使用dict(`latn`,`lonn`)而不是執行序列的index函數來標定經緯度，會比較快速。
+  
 ```python
 # read the monthly REAS emissions and store in var matrix
 var=np.zeros(shape=(ncat,nspec,12,nlat,nlon))
@@ -145,9 +149,10 @@ for fname in fnames:
   for i in range(lenl):
     var[icat,ispec,:,latn[arr[i,1]],lonn[arr[i,0]]]=arr[i,2:]
   print(fname)
-
 ```
--
+- REAS2CMAQ對照表
+  - 參考cb6r3_ae7_aq之物質[名稱](https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/mechanism_information/cb6r3_ae7_aq/cb6r3_ae7_aq_species_table.md)定義
+  - 部分分成PAR、ETH、OLE等碳鍵(`c_dup`)，會有重復(`r_dup`)，須乘上乘數(``)並且累加。
 
 ```python
 # spec name dict
@@ -155,9 +160,11 @@ df=read_csv('REAS2CMAQ.csv')
 c_dup=[i for i in set(df.CMAQ) if list(df.CMAQ).count(i)>1]
 REAS2CMAQ={i:j for i,j in zip(df.REAS,df.CMAQ) if i in spec}
 r_dup=[i for i in REAS2CMAQ if REAS2CMAQ[i] in c_dup and i in spec]
-
+r_mole={i:j for i,j in zip(df.REAS,df.mole)}
 ```
--
+- 此處將類別迴圈在程式外部進行，以減省執行時間。
+  - 讀取第2引數：`icat`
+  - 將模版複製成預期結果檔案
 
 ```python
 icat=int(sys.argv[2])
@@ -165,9 +172,9 @@ icat=int(sys.argv[2])
 fname=cate[icat]+'_'+tail
 os.system('cp template'+tail+' '+fname)
 nc = netCDF4.Dataset(fname, 'r+')
-
 ```
--
+- 延長檔案並將排放量全填0(準備累加、並避免被[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改)
+  - REAS為逐月檔案。此階段先將內容存成12個小時的frame。接續再按不同類別進行時間的劃分(月排放量轉成逐時排放)。
 
 ```python
 # elongate the new ncf
@@ -177,9 +184,8 @@ nc['TFLAG'][:,:,0]=nc.SDATE
 # fill the new nc file
 for v in V[3]:
   nc[v][:]=0.
-
 ```
--
+- 物質對照及排除機制
 
 ```python
 #interpolation scheme, for D0/D2 resolution(15Km/27Km)
@@ -190,7 +196,8 @@ for v in spec:
   vc=REAS2CMAQ[v]
   if vc not in V[3]:continue
 ```
--
+- 逐月進行空間內插
+  - 對超過REAS範圍的新網格位置，griddata無法進行外插，因此會變成nan，須將其設成0，否則會被[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改)。
 
 ```python
   zz=np.zeros(shape=(12,nrow,ncol))
@@ -199,19 +206,22 @@ for v in spec:
     zz[t,:,: ] = griddata(xyc, c[:], (x1, y1), method='linear')
   zz=np.where(np.isnan(zz),0,zz)
 ```
--
+- r_dup結果須累加。
+  - 單位為10<sub>6</sup>mole/month
 
 ```python
   if v in r_dup:
-    nc[vc][:,0,:,:]+=zz[:,:,:]
+    nc[vc][:,0,:,:]+=zz[:,:,:]*r_mole[v]/mw[v]
 ```
--
+- 非r_dup結果不需累加
+  - 單位為10<sub>6</sup>mole/month
 
 ```python
   else:
-    nc[vc][:,0,:,:] =zz[:,:,:]
+    nc[vc][:,0,:,:] =zz[:,:,:]*r_mole[v]/mw[v]
 nc.close()
 ```
+
 ### 程式下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)
 

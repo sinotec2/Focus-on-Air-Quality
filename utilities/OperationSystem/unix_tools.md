@@ -38,11 +38,13 @@ grand_parent: Utilities
 
 ### cut
 - 此處介紹cut的範例
-- 倒數之工具rev
 ```bash
 loc=$(echo $PWD|cut -d'/' -f2)
 bdate=`echo $(ls -rt COMBINE_ACONC*${GRID}_${CASE}.nc|head -n1)|cut -d'_' -f7`
 /usr/bin/sensors |grep Core |awk '{print $3}'|cut -c 2-5
+```
+- cut配合倒數之工具rev
+```bash
 echo 'maps.google.com' | rev | cut -d'.' -f 1 | rev #result=com
 ```
 - cshell

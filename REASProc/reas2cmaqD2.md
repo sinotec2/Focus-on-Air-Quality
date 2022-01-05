@@ -18,7 +18,8 @@ last_modified_date: 2022-01-05 09:30:08
   {: .text-delta }
 - TOC
 {:toc}
-</details>＿
+</details>
+
 ---
 
 ## 背景
@@ -207,14 +208,14 @@ for v in spec:
   zz=np.where(np.isnan(zz),0,zz)
 ```
 - r_dup結果須累加。
-  - 單位為10<sub>6</sup>mole/month
+  - 單位為10<sup>6</sup>mole/month
 
 ```python
   if v in r_dup:
     nc[vc][:,0,:,:]+=zz[:,:,:]*r_mole[v]/mw[v]
 ```
 - 非r_dup結果不需累加
-  - 單位為10<sub>6</sup>mole/month
+  - 單位為10<sup>6</sup>mole/month
 
 ```python
   else:
@@ -227,6 +228,7 @@ nc.close()
 
 ## 結果檢視
 - m3.nc檔案可以用[VERDI]()檢視，如以下：
+
 | ![erod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_roadTransBenz.PNG) |
 |:--:|
 | <b>圖 d01範圍REAS 2015年1月道路交通BENZ排放量之分布</b>|

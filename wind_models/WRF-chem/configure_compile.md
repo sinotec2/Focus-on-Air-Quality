@@ -129,6 +129,13 @@ $ /usr/local/bin/gfortran --version
 GNU Fortran (Homebrew GCC 11.2.0_3) 11.2.0
 ```
 
+## 輸出變數項目之管理
+- 除了輸出濃度之外，WRF-chem亦能輸出逐時之揚沙量。修改設定如下：
+  1. 在Registry/registry.chem檔案內，將EDUST1~5的IO形式增加h(history)，其單位為&mu;gm<sup>-2</sup>s<sup>-2</sup>、存檔，
+  1. clean -a、configure、compile
+  1. 結果wrfout檔案中就會增加EDUST1~5之排放量，
+
+
 ### 編譯軟體的版本管理
 - 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。
   - 如不一致將出現錯誤：`implicit declaration of function 'sym_forget' [-werror,-wimplicit-function-declaration] sym_forget()`

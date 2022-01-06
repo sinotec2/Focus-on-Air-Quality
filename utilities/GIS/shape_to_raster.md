@@ -160,7 +160,7 @@ last_modified_date:   2021-12-21 14:46:36
 - 第一次要在各維度依序展開(107~110行)
   - 以後只要維度相同，可以一次倒入數據，但是bound要設好(112行)
   - 只要一個變數及`TFLAGS`，其餘變數不必留存
-  - 使用`ncrename`程式將變數`rename`成`NUM_TOWN`
+  - 使用`ncrename`程式將變數`NO`成`NUM_TOWN`
 
 ```python  
     94  #ncks -O --mk_rec_dmn ROW template_d5_1x1.nc a.nc

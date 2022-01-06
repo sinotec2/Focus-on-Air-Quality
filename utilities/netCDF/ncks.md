@@ -127,6 +127,14 @@ mv a erod.nc
 ```
 - ncwa的全名是netCDF Weighted Averager，因為針對維度進行平均，會消除該維度的變化。如果該維度長度為1，則直接將其刪除。參[Charlie Zender and Brian Mays](https://linux.die.net/man/1/ncwa)。
 
+### 維度更名(ncrename)
+- WRF-chem排放量檔案的垂直軸(emissions_zdim)並非真的垂直軸(bottom_top)，致使[VERDI]()無法解析，需要更名
+
+```bash
+ncrename -d emissions_zdim,bottom_top $nc
+```
+- Charlie Zender and Brian Mays, **ncrename(1) - Linux man page**, [linux.die.net](https://linux.die.net/man/1/ncrename), 1995
+
 ### 變數+維度複合變更
 m3.nc檔案中的變數本身也是一個維度(`VAR`)，其長度為全域屬性`nc.NVARS`，變數的項目也是全域屬性`nc.VAR-LIST`的內容。雖然變更變數項目只涉及到時間標籤(`TFLAG[TSTEP,VAR,DATE-TIME]`)的長度，然CMAQ對其檢驗非常仔細，必須修剪到完全正確。如下列模版的製作過程：
 1. 先以`ncks -d`由CMAQ模式結果檔案取出時間、高度、與變數，縮減檔案大小：

@@ -131,6 +131,21 @@ gcc (Homebrew GCC 11.2.0_3) 11.2.0
 $ /usr/local/bin/gfortran --version
 GNU Fortran (Homebrew GCC 11.2.0_3) 11.2.0
 ```
+### 編譯軟體的版本管理
+- 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。
+  - 如不一致將出現錯誤：`implicit declaration of function 'sym_forget' [-werror,-wimplicit-function-declaration] sym_forget()`
+  - 即使增加**CCFLAG**如`-std=c89`、`-std=gnu99`等，皆無法過關。
+- 10版以上的[gfortran](https://matsci.org/t/macos-install-gfortran-issues/4990)對副程式呼叫的引數個數、形態等檢查較為嚴格，因此編譯時要增加[選項](https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html)：
+
+```bash
+kuang@MiniWei /Users/WRF4.3/WRF-chem
+$ grep allow configure.wrf
+FCBASEOPTS      =       $(FCBASEOPTS_NO_G) $(FCDEBUG)  -fallow-argument-mismatch -fallow-invalid-boz
+```
+- 注意：
+  - 錯誤訊息為`Error: Rank mismatch between actual argument at (1) and ...`
+  - 要注意加在`configure.wrf`檔案內適當位置，並確認會對FC產生作用。
+  - `configure.wrf`檔案會在`./configure`動作後被覆蓋。
 
 ## 輸出變數項目之管理
 ### Modification of Registry/registry.chem file
@@ -158,22 +173,6 @@ $ ncdump -h $nc|grep float|grep DUST
 - 注意
   - DUST_FLUX無數值、全為0
   - 第1軸`klevs_for_dust`不為[VERDI]()所解析，需使用[ncrename](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名ncrename)將其更名為`bottom_top`
-
-### 編譯軟體的版本管理
-- 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。
-  - 如不一致將出現錯誤：`implicit declaration of function 'sym_forget' [-werror,-wimplicit-function-declaration] sym_forget()`
-  - 即使增加**CCFLAG**如`-std=c89`、`-std=gnu99`等，皆無法過關。
-- 10版以上的[gfortran](https://matsci.org/t/macos-install-gfortran-issues/4990)對副程式呼叫的引數個數、形態等檢查較為嚴格，因此編譯時要增加[選項](https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html)：
-
-```bash
-kuang@MiniWei /Users/WRF4.3/WRF-chem
-$ grep allow configure.wrf
-FCBASEOPTS      =       $(FCBASEOPTS_NO_G) $(FCDEBUG)  -fallow-argument-mismatch -fallow-invalid-boz
-```
-- 注意：
-  - 錯誤訊息為`Error: Rank mismatch between actual argument at (1) and ...`
-  - 要注意加在`configure.wrf`檔案內適當位置，並確認會對FC產生作用。
-  - `configure.wrf`檔案會在`./configure`動作後被覆蓋。
 
 ## 程式編譯
 - 目前沒有centos平台上[WRF]()或[WRF-chem]()的執行檔可供下載。

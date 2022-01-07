@@ -52,7 +52,7 @@ last_modified_date: 2021-12-28 14:33:40
 ## 結果檢視
 - `EROD`變數的第1軸不是一般的垂直維度(`z-dimension0003`)，因此[VERDI]()無法順利讀取。
 - `SANDFRAC`與`CLAYFRAC`為互相消長的變數。以下為`SANDFRAC`
-![]((https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SANDFRAC.PNG))
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SANDFRAC.PNG)
 
 ## Reference
 - 

@@ -24,7 +24,11 @@ last_modified_date:   2021-12-28 10:20:38
 ## 背景
 - **WRF-chem**的模擬結果基本上還是個`wrfout`，此次沙塵暴模擬結果與**WRF4.3**的`wrfout`檔案比較，只有下列29項變數的差異(如下表)。其中
   - PM10及PM2_5_DRY目前因沙塵個案沒有執行化學反應，此項為0，如有需要必須自行計算(加總即可)。
-  - DUST_1~5為粒徑0.5~8 &mu;m之分量，此處以其總合做為PM<sub>10</sub>之比較 
+  - DUST_1~5為粒徑0.5~8 &mu;m之分量，此處以其[線性總合](https://ruc.noaa.gov/wrf/wrf-chem/wrf_tutorial_2017/WRF_CHEM_dust.pdf)做為PM<sub>10</sub>之比較
+  ```python
+  PM2.5=bin1+0.3125*bin2
+  PM10=bin1+bin2+bin3+0.87*bin4
+  ``` 
   - 單位&mu;g/Kg與&mu;g/M<sup>3</sup>之間差了空氣密度之倍數，此處參考[wiki](https://en.wikipedia.org/wiki/Density_of_air)取常壓室溫1.1839 Kg/M<sup>3</sup>
 
 
@@ -99,13 +103,14 @@ import datetime
 
 fnames=subprocess.check_output('ls dust??-??.nc',shell=True).decode('utf8').strip('\n').split('\n')
 nc = netCDF4.Dataset('dust.nc', 'r+')
+binf={i:1 for i in range(1,4)};binf.update({4:0.87,5:0})
 it=0
 for fname in fnames:
   nc_in = netCDF4.Dataset(fname, 'r')
   nt,nz,ny,nx=nc_in['DUST_1'].shape
   dust=np.zeros(shape=(nt,nz,ny,nx))
   for i in range(1,6):
-    dust+=nc_in['DUST_'+str(i)][:]
+    dust+=nc_in['DUST_'+str(i)][:]*binf[i]
   nc['DUST_1'][it:it+nt,:,:,:]=dust[:,:,:,:]
   it+=nt
 
@@ -142,3 +147,4 @@ nc.close()
   - 環保署官方[說明](https://drive.google.com/file/d/1Vy7Ca4Pz_P5zc3e6-206UDjvxYEneFBx/view)
   
 ## Reference
+- Li Zhang, **Dust Options in WRF-Chem**, [WRF-Chem Tutorial](https://ruc.noaa.gov/wrf/wrf-chem/wrf_tutorial_2017/WRF_CHEM_dust.pdf), Feb. 6, 2017

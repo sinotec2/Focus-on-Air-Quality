@@ -133,11 +133,31 @@ GNU Fortran (Homebrew GCC 11.2.0_3) 11.2.0
 ```
 
 ## 輸出變數項目之管理
+### Modification of Registry/registry.chem file
 - 除了輸出濃度之外，WRF-chem亦能輸出逐時之揚沙量。修改設定如下：
-  1. 在Registry/registry.chem檔案內，將EDUST1~5的IO形式增加h(history)，其單位為&mu;gm<sup>-2</sup>s<sup>-2</sup>、存檔，
-  1. clean -a、configure、compile
-  1. 結果wrfout檔案中就會增加EDUST1~5之排放量，
+  1. clean -a、configure
+  1. 在Registry/registry.chem檔案內，將EDUST1~5的IO形式增加`h` (means: history file output)，其單位為&mu;gm<sup>-2</sup>s<sup>-1</sup>、存檔(`./chem/module_uoc_dust.F:243: emis_dust(i,1,j,p_edust5)=bems(5)*converi      ![kg/m2/s] -> [ug/m2/s]`)、
+  1. compile >& compile.log
+  1. 結果wrfout檔案中就會增加EDUST1~5之排放量
 
+### Reusults
+```python
+$ ncdump -h $nc|grep float|grep DUST
+        float EDUST1(Time, klevs_for_dust, south_north, west_east) ;
+        float EDUST2(Time, klevs_for_dust, south_north, west_east) ;
+        float EDUST3(Time, klevs_for_dust, south_north, west_east) ;
+        float EDUST4(Time, klevs_for_dust, south_north, west_east) ;
+        float EDUST5(Time, klevs_for_dust, south_north, west_east) ;
+        float DUST_FLUX(Time, south_north, west_east) ;
+        float DUST_1(Time, bottom_top, south_north, west_east) ;
+        float DUST_2(Time, bottom_top, south_north, west_east) ;
+        float DUST_3(Time, bottom_top, south_north, west_east) ;
+        float DUST_4(Time, bottom_top, south_north, west_east) ;
+        float DUST_5(Time, bottom_top, south_north, west_east) ;
+```
+- 注意
+  - DUST_FLUX無數值、全為0
+  - 第1軸`klevs_for_dust`不為[VERDI]()所解析，需使用[ncrename](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名ncrename)將其更名為`bottom_top`
 
 ### 編譯軟體的版本管理
 - 因為macOS上的[gcc]()升級很快，要特別注意[gcc]()、[gfortran]()與[mpicc]()、[mpif90]()等程式其間版本的一致性。

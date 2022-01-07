@@ -35,12 +35,14 @@ last_modified_date: 2022-01-07 09:49:12
 ### 編譯
 - WRF/chem模式內設是不輸出揚沙排放量的，須由Registry/registry.chem中打開設定，重新編譯，詳見[輸出變數項目之管理](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/configure_compile/#輸出變數項目之管理)及[namelist.input](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/namelist.input/#wrfout輸出變數項目之增減)
 
-### namelist.inpu設定及執行
+### namelist.input設定及執行
 - (無需特別指定)
 
 ### 後處理
 - 此處不需累計所有的揚沙粒徑，只需從wrfout檔案中抽出另存。
-- 如欲以[VERDI]()處理需先去除或更名其垂直軸名稱。[VERDI]()不能解析。
+- 如欲以[VERDI]()處理
+  - 因有時間及空間的維度，要記得加上`Times,XLAT,XLONG`等變數讓[VERDI]()知道時間與位置
+  - EDUST的垂直維度不是傳統`bottom_top`，而是`klevs_for_dust`，雖其長度為1，還是需先[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)或[更名](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名(ncrename))其垂直軸名稱，否則[VERDI]()不能解析。
 
 ```bash
 for d in 03-3{0..1} 04-0{1..9};do nc=wrfout_d01_2018-${d}_00:00:00;ncks -O -v EDUST1,EDUST2,EDUST3,EDUST4,EDUST5,Times,XLAT,XLONG $nc EDUST_$d.nc;done
@@ -52,9 +54,9 @@ for d in 03-3{0..1} 04-0{1..9};do nc=EDUST_$d.nc;ncrename -O -d klevs_for_dust,b
 
 | ![edust1_xy.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/edust1_xy.PNG) |
 |:--:|
-| <b>圖 模擬期間最大揚沙排放量之分布</b>|
+| <b>圖1 模擬期間最大揚沙排放量之分布，單位為&mu;gm<sup>-2</sup>s<sup>-1</sup></b>|
 | ![edust1_t.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/edust1_t.PNG) |
 |:--:|
-| <b>圖 模擬期間地區排放量之時序變化</b>|
+| <b>圖2 模擬期間地區排放量之時序變化，單位為&mu;gm<sup>-2</sup>s<sup>-1</sup></b>|
   
 ## Reference

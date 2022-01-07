@@ -62,6 +62,9 @@ set LD_LIBRARY_PATH=/opt/netcdf/netcdf4_intel/lib:/opt/hdf/hdf5_intel/lib:/nas1/
   - netCDF使用netcdf-c-4.7.1  netcdf-fortran-4.5.2
   - HDF5使用hdf5-1.10.5
   - 執行時必須設定**LD_LIBRARY_PATH**
+  ```bash
+  LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin /opt/mpich/mpich-3.4.2-icc/bin/mpirun -np 90 wrf.exe
+  ```
 
 ### HDF5編譯
 - 因[netCDF]()會用到[HDF5]()的程式庫，因此要先編譯[HDF5]()

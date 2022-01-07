@@ -37,8 +37,8 @@ last_modified_date: 2022-01-07 09:49:12
 - 詳見[輸出變數項目之管理](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/configure_compile/#輸出變數項目之管理)及[namelist.input](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/namelist.input/#wrfout輸出變數項目之增減)
 
 ### emis_dust單位的版本差異
-- v4.0為**DUST emissions bin1**，單位為&mu;**g m<sup>-2</sup>s<sup>-1</sup>**
-- V4.3.2 為**Accumulated DUST emissions**，單位為**kg m<sup>-2</sup>**
+- v4.0為**DUST emissions bin1~5**，單位為&mu;**g m<sup>-2</sup>s<sup>-1</sup>**
+- V4.3.2 為**Accumulated DUST emissions bin1~5**，單位為**kg m<sup>-2</sup>**
 
 ### namelist.input設定及執行
 - (無需特別指定)

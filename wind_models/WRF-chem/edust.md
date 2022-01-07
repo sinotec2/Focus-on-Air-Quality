@@ -27,6 +27,7 @@ last_modified_date: 2022-01-07 09:49:12
   - 個案方式：以WRF/chem模式進行推估：全月、全年作業須耗費計算資源
   - 總量推估：以年度或其他時間期程衛星照片的差異推估：應用在個案時仍需另建排放模式
 - 推估之不確定性與困難
+  - global dust emissions between 514 and 4313 Tg yr−1 and dust loads ranging from 6.8 to 29.5 Tg(Textor et al., 2006; Huneeus et al., 2011).
   - 現場確認：較單純但數據少
   - 下游長程輸送結果確認：數據多，但其間影響源更多
   - 初步驗證還可接受

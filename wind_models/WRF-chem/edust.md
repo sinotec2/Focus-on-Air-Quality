@@ -33,7 +33,12 @@ last_modified_date: 2022-01-07 09:49:12
 
 ## 程式說明
 ### 編譯
-- WRF/chem模式內設是不輸出揚沙排放量的，須由Registry/registry.chem中打開設定，重新編譯，詳見[輸出變數項目之管理](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/configure_compile/#輸出變數項目之管理)及[namelist.input](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/namelist.input/#wrfout輸出變數項目之增減)
+- WRF/chem模式內設是不輸出揚沙排放量的，須由Registry/registry.chem中打開設定，重新編譯。
+- 詳見[輸出變數項目之管理](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/configure_compile/#輸出變數項目之管理)及[namelist.input](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/namelist.input/#wrfout輸出變數項目之增減)
+
+### emis_dust單位的版本差異
+- v4.0為**DUST emissions bin1**，單位為&mu;**g m<sup>-2</sup>s<sup>-1</sup>**
+- V4.3.2 為**Accumulated DUST emissions**，單位為**kg m<sup>-2</sup>**
 
 ### namelist.input設定及執行
 - (無需特別指定)
@@ -54,9 +59,9 @@ for d in 03-3{0..1} 04-0{1..9};do nc=EDUST_$d.nc;ncrename -O -d klevs_for_dust,b
 
 | ![edust1_xy.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/edust1_xy.PNG) |
 |:--:|
-| <b>圖1 模擬期間最大揚沙排放量之分布，單位為&mu;gm<sup>-2</sup>s<sup>-1</sup></b>|
+| <b>圖1 模擬期間最大揚沙排放量之分布，單位為&mu;g m<sup>-2</sup>s<sup>-1</sup></b>|
 | ![edust1_t.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/edust1_t.PNG) |
 |:--:|
-| <b>圖2 模擬期間地區排放量之時序變化，單位為&mu;gm<sup>-2</sup>s<sup>-1</sup></b>|
+| <b>圖2 模擬期間地區排放量之時序變化，單位為&mu;g m<sup>-2</sup>s<sup>-1</sup></b>|
   
 ## Reference

@@ -151,7 +151,8 @@ FCBASEOPTS      =       $(FCBASEOPTS_NO_G) $(FCDEBUG)  -fallow-argument-mismatch
 ### Modification of Registry/registry.chem file
 - 除了輸出濃度之外，WRF-chem亦能輸出逐時之揚沙量。修改設定如下：
   1. clean -a、configure
-  1. 在Registry/registry.chem檔案內，將EDUST1~5的IO形式增加`h` (means: history file output)，其單位為&mu;gm<sup>-2</sup>s<sup>-1</sup>、存檔(`./chem/module_uoc_dust.F:243: emis_dust(i,1,j,p_edust5)=bems(5)*converi      ![kg/m2/s] -> [ug/m2/s]`)、
+  1. 在Registry/registry.chem檔案內，將EDUST1~5的IO形式增加`h` (means: history file output)、存檔
+  1. 其單位WRFV4.0為&mu;gm<sup>-2</sup>s<sup>-1</sup>(`./chem/module_uoc_dust.F:243: emis_dust(i,1,j,p_edust5)=bems(5)*converi      ![kg/m2/s] -> [ug/m2/s]`)、WRFV4.3.2為kg/m2。
   1. compile >& compile.log
   1. 結果wrfout檔案中就會增加EDUST1~5之排放量
 

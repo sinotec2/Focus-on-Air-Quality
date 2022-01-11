@@ -50,6 +50,7 @@ cp beld4.EAsia_81K.ncf $nc
 ncpdq -O -a ROW,TSTEP,LAY,COL $nc a;ncks -O --mk_rec_dmn ROW a $nc
 ```
 - 進入ipython
+
 ```python
 fname='beld4.CWBWRF_15k.ncf'
 nc = netCDF4.Dataset(fname, 'r+')
@@ -68,6 +69,7 @@ nc.close()
 ncpdq -O -a COL,TSTEP,LAY,ROW $nc a;ncks -O --mk_rec_dmn COL a $nc
 ```
 - 進入ipython
+
 ```python
 nc = netCDF4.Dataset(fname, 'r+')
 for j in range(ncol,389):
@@ -78,7 +80,6 @@ nc.NCOLS=665
 # 注意：VG*、NLAYS等垂直設定不能抄襲、NVARS也不能覆蓋、刪除舊的HISTORY會使檔案看起來較為清爽
 fname='../mcip/1804_run5/CWBWRF_15k/LUFRAC_CRO_1804_run5.nc'
 nc0 = netCDF4.Dataset(fname, 'r')
-
 atts=['CDATE',  'CTIME', 'EXEC_ID', 'FILEDESC', 'FTYPE', 'GDNAM', 'GDTYP', 'HISTORY', 'IOAPI_VERSION', 'NCO', 'NCOLS',  'NROWS',
      'NTHIK', 'P_ALP', 'P_BET', 'P_GAM', 'UPNAM', 'WDATE',
      'WTIME', 'XCELL', 'XCENT', 'XORIG', 'YCELL', 'YCENT', 'YORIG']
@@ -87,6 +88,7 @@ for i in atts:
   exec('nc.'+i+'=nc0.'+i)
 nc.close()
 ```
+
 #### 恢復順序
 ```bash
 ncpdq -O -a TSTEP,LAY,ROW,COL $nc a;ncks -O --mk_rec_dmn TSTEP a $nc

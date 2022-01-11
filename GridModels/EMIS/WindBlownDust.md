@@ -5,8 +5,8 @@ parent: CMAQ Models
 nav_order: 6
 has_children: true
 permalink: /GridModels/EMIS/
-date: (under construction)
-last_modified_date:  
+date: 
+last_modified_date: 2022-01-11 19:52:24  
 ---
 
 # 地面排放檔案之準備

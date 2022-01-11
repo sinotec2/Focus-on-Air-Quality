@@ -181,7 +181,6 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 - MODIS_Res1:var_desc = "18. MODIS: Reserved (e.g. Unclassified)                                         " ;
 - MODIS_Res2:var_desc = "19. MODIS: Reserved (e.g. Fill Value)                                           " ;
 - MODIS_Res3:var_desc = "20. MODIS: Reserved                                                             " ;
-
 - NLCD_11:var_desc = "21. NLCD: 11 Open Water                                                         " ;
 - NLCD_12:var_desc = "22. NLCD: 12 Perennial Ice/Snow                                                 " ;
 - NLCD_21:var_desc = "23. NLCD: 21 Developed Open Space                                               " ;

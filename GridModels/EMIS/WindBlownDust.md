@@ -233,3 +233,47 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 |19 Mixed Tundra |22 Mixed Tundra|
 |23 Bare Ground Tundra|-|
 |20 Barren Tundra |20 Herbaceous Tundra|
+
+### 2018_EAsia_81K_time20180315_bench.nc variables
+- CPHT:var_desc = Crop Height
+- DN:var_desc = N-NO3 Denitrification
+- DN2:var_desc = N-N2O from NO3 Denitrification
+- FBARE:var_desc = Bare Land Fraction for Wind Erosion
+- FPL:var_desc = Labile P Fertilizer
+- FPO:var_desc = Organic P Fertilizer
+- GMN:var_desc = N Mineralized                                                                   
+- HMN:var_desc = OC Change by Soil Respiration
+- L1_ANH3:var_desc = Layer1 N-NH3 AppRate                                                            
+- L1_ANO3:var_desc = Layer1 N-NO3 AppRate                                                            
+- L1_AON:var_desc = Layer1 N-ON AppRate                               
+- L1_BD:var_desc = Layer1 Bulk Density                                                          
+- L1_C:var_desc = Layer1 Carbon
+- L1_DEP:var_desc = Layer1 Depth                                                                
+- L1_NH3:var_desc = Layer1 N - Ammonia                                                          
+- L1_NITR:var_desc = Layer1 N - Nitrified NH3                                                   
+- L1_NO3:var_desc = Layer1 N - Nitrate                                                          
+- L1_ON:var_desc = Layer1 N - Organic N                                                         
+- L1_SW:var_desc = Layer1 Soil Water
+- L2_ANH3:var_desc = Layer2 N-NH3 AppRate                                                       
+- L2_ANO3:var_desc = Layer2 N-NO3 AppRate                                                       
+- L2_AON:var_desc = Layer2 N-ON AppRate                                                         
+- L2_BD:var_desc = Layer2 Bulk Density                                                          
+- L2_C:var_desc = Layer2 Carbon
+- L2_DEP:var_desc = Layer2 Depth                                                                
+- L2_NH3:var_desc = Layer2 N- Ammonia                                                           
+- L2_NITR:var_desc = Layer2 N - Nitrified NH3                                                   
+- L2_NO3:var_desc = Layer2 N - Nitrate                                                          
+- L2_ON:var_desc = Layer2 N - Organic N                                                         
+- L2_SW:var_desc = Layer2 Soil Water
+- LAI:var_desc = Leaf Area Index                                                                
+- MNP:var_desc =  P Mineralized                                                                 
+- NFIX:var_desc = N Fixation
+- T1_BD:var_desc = TotalSoilnoLayer1 Bulk Density                                                  
+- T1_C:var_desc = TotalSoilnoLayer1 Carbon
+- T1_DEP:var_desc = TotalSoilnoLayer1 Depth                                                        
+- T1_NH3:var_desc = TotalSoilnoLayer1 N - Ammonia                                                  
+- T1_NITR:var_desc = TotalSoilnoLayer1 N - Nitrified NH3                                           
+- T1_NO3:var_desc = TotalSoilnoLayer1 N - Nitrate                                                  
+- T1_ON:var_desc = TotalSoilnoLayer1 N - Organic N                                                 
+- TFLAG:var_desc = Timestep-valid flags:  (1) YYYYDDD or (2) HHMMSS                                
+- YW:var_desc = Wind Erosion

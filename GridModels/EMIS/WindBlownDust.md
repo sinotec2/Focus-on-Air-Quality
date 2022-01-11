@@ -2,7 +2,7 @@
 layout: default
 title: Wind-Blown Dust
 parent: CMAQ Models
-nav_order: 1
+nav_order: 6
 has_children: true
 permalink: /GridModels/EMIS/
 date: 
@@ -20,9 +20,7 @@ last_modified_date: 2022-01-11 19:52:24
 - TOC
 {:toc}
 </details>
----
-
-## 
+--- 
 
 ## Reference
 

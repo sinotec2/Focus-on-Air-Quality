@@ -1,6 +1,6 @@
 ---
 layout: default
-title: REAS文字檔轉CMAQ高空排放
+title: 電廠排放之處理
 parent: REAS Python
 grand_parent: CMAQ Models
 nav_order: 2
@@ -8,7 +8,7 @@ date: 2022-01-10 09:04:56
 last_modified_date: 2022-01-10 09:05:00
 ---
 
-# REAS文字檔轉CMAQ高空排放
+# 高空排放檔之轉換(CMAQ)
 {: .no_toc }
 
 <details open markdown="block">

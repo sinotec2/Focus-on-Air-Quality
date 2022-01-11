@@ -23,7 +23,22 @@ last_modified_date: 2022-01-11 16:06:52
 ---
 
 ## 背景
+- CCTM執行過程會需要E2C_LU([Fractional crop distributions](https://github.com/USEPA/CMAQ/blob/main/DOCS/Users_Guide/CMAQ_UG_ch04_model_inputs.md#e2c_lu))檔案，以供雙向氨氣通量之計算。在美國本土USEPA提供了[軟體界面](https://www.cmascenter.org/fest-c/)，其他地區則需自行產生。
+  - 依據範例，E2C_LU的內容可以參考tarball之${LUpath}/beld4_12kmCONUS_2006nlcd.ncf、${INPDIR}/surface/beld4_camq12km_2011_4CMAQioapi.ncf等檔案
+  - 範例檔案共有21種穀物栽植(加上灌溉_irr共42種)、以及194林相分布的資料庫，除此之外，還有40種NLCD/MODIS土地覆蓋類別。
+  - 21 種穀物與FEST-C系統編號對照表
 
+|BELD4|BELD3|Crop Name|BELD4|BELD3|Crop Name|BELD4|BELD3|Crop Name|
+|-|-|-|-|-|-|-|-|-|
+|1|22|Hay|15|36|Cotton|29|50|SorghumSilage| 
+|3|24|Alfalfa|17|38|Oats|31|52|Soybeans|
+|5|26|Other_Grass|19|40|Peanuts|33|54|Wheat_Spring|
+|7|28|Barley|21|42|Potatoes|35|56|Wheat_Winter|
+|9|30|BeansEdible|23|44|Rice|37|58|Other_Crop|
+|11|32|CornGrain|25|46|Rye|39|60|Canola|
+|13|34|CornSilage|27|48|SorghumGrain|41|62|Beans|
+
+- 此處土地使用設定主要來依據WRF系統的LUFRAC檔案。
 
 ## 模版處理過程
 ### NCO及ipython交互處理
@@ -133,3 +148,4 @@ np.max(sumv)
 | <b>圖 CWBWRF_15k範圍土地使用(MODIS_16)之分布</b>|
 
 ## Reference
+- USEAP, **Fertilizer Emission Scenario Tool for CMAQ (FEST-C v1.4)**, [cmascenter](https://www.cmascenter.org/fest-c/),09/20/2018

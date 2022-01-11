@@ -2,7 +2,7 @@
 layout: default
 title: Wind-Blown Dust
 parent: CMAQ Models
-nav_order: 6
+nav_order: 1
 has_children: true
 permalink: /GridModels/EMIS/
 date: 

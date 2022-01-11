@@ -149,18 +149,20 @@ ncpdq -O -a VAR,TSTEP,DATE-TIME $nc a;ncks -O --mk_rec_dmn VAR a $nc
 ```
 1. 取出其中的特定的某一項(名稱定義在全域變數VAR-LIST)`ncks -O -d VAR,0,0 $nc a`，如為VAR49即為`ncks -O -d VAR,0,48 $nc a`
 1. 使用ncrename來更改變數的名稱。如果2個變數名稱相同，仍然可以合併(後者會增加註釋)，然後續處理將更加複雜。
-1. 進行ncrcat進行擴充(如有必要)
+1. 如有擴充的必要，要先進行ncrcat(`file1 file2 file3`)，先將結果檔file3變數的個數增加。再進行實質的Append(`ncks -A file2 file3`)
 1. 改回原來的維度順序。如果不改回來後續程式就讀不到TFLAG了。同時也要打開TSTEP成為筆數維度(rec_dmn)，讓TSTEP可以增加、延長。(倒不必特別做`--fix_rec_dmn`指令，因為不能同時有2個rec_dmn)：
 ```bash
 ncpdq -O -a TSTEP,VAR,DATE-TIME a $nc
 ncks -O --mk_rec_dmn TSTEP $nc a
 mv a $nc
 ```
-1. 修改全域屬性。因為`VAR-LIST`變數的`-`在python是保留的符號，不能成為變數的一部分，所以直接用bash指令是比較方便的作法。
+1. 修改全域屬性：因為`VAR-LIST`變數的`-`在python是保留的符號，不能成為變數的一部分，所以直接用bash指令是比較方便的作法。因變數個數改了，NVARS也需修改。
 ```bash
 ncatted -a VAR-LIST,global,o,c,"AALJ            ACAJ            ACLI            ACLJ            ACLK            ACORS           AECI            AECJ            AFEJ            AISO3J          AKJ             AMGJ            AMNJ            ANAI            ANAJ            ANH4I           ANH4J           ANH4K           ANO3I           ANO3J           ANO3K           AOLGAJ          AOLGBJ          AORGCJ          AOTHRJ          APNCOMI         APOCI           APOCJ           ASEACAT         ASIJ            ASO4I           ASO4J           ASO4K           ASOIL           ASQTJ           CO              ETH             FORM            HNO3            ISOP            NO              NO2             O3              OLE             PAN             PAR             PRPA            SO2             XPAR            " $nc
 ncatted -a NVARS,global,o,i,49 $nc
 ```
+1. 因TFLAG第1個維度是變數(`[TSTEP,VAR,DATE-TIME]`)，而VAR的維度增加了，因此也需要填入日期及時間。
+
 - tip
 NVARS及VAR-LIST是CCMS必讀屬性，一定要修到正確。NVARS為整數、VAR-LIST為A16序列(順序倒無所謂)
   - 產生VAR-LIST的程式碼:

@@ -29,7 +29,7 @@ last_modified_date: 2022-01-11 16:06:52
   - 21 種穀物與FEST-C系統編號對照表
 
 |BELD4|BELD3|Crop Name|BELD4|BELD3|Crop Name|BELD4|BELD3|Crop Name|
-|-|-|-|-|-|-|-|-|-|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |1|22|Hay|15|36|Cotton|29|50|SorghumSilage| 
 |3|24|Alfalfa|17|38|Oats|31|52|Soybeans|
 |5|26|Other_Grass|19|40|Peanuts|33|54|Wheat_Spring|

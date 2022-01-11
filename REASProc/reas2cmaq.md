@@ -1,6 +1,6 @@
 ---
 layout: default
-title: REAS文字直接轉CMAQ地面排放檔
+title: 地面排放檔之讀取及轉換
 parent: REAS Python
 grand_parent: CMAQ Models
 nav_order: 1
@@ -8,7 +8,7 @@ date: 2022-01-05 09:30:02
 last_modified_date: 2022-01-05 09:30:08
 ---
 
-# REAS文字直接轉CMAQ地面排放檔
+# 地面排放檔之轉換(CMAQ)
 {: .no_toc }
 
 <details open markdown="block">

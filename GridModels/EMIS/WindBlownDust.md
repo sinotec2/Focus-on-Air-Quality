@@ -293,17 +293,17 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 
 - Tejas Shah, Yuge Shi, Ross Beardsley and Greg Yarwood, **Speciation Tool User’s Guide Version 5.0**, Ramboll US Corporation,[cmascenter](https://www.cmascenter.org/speciation_tool/documentation/5.0/Ramboll_sptool_users_guide_V5.pdf), June 2020
   - 𝑀𝑂<sub>𝑢𝑛𝑎𝑑𝑗𝑢𝑠𝑡𝑒𝑑</sub> = ∑𝑂𝑥<sub>𝐸𝑙</sub> × 𝐸<sub>𝐸𝑙</sub>
-  - where OxEl is the oxygen-to-metal ratio for metal El as shown Table E-2, and EEl is the emission of metal El, except for Na, Ca, Mg and K. For these 4 metals, the EEl should reflect the difference between the atom form of the metal and the ion form. If, for Na, Ca, Mg, and K, the profile has only one form (atom or ion but not both) then the EEl should be set to 0. Also, if the difference is negative, it should be set to 0. Note that for metal oxides with multiple forms an average oxygen to metal ratio across all forms is used.
+  - where Ox<sub>𝐸𝑙</sub> is the oxygen-to-metal ratio for metal El as shown Table E-2, and 𝐸<sub>𝐸𝑙</sub> is the emission of metal El, except for Na, Ca, Mg and K. For these 4 metals, the 𝐸<sub>𝐸𝑙</sub> should reflect the difference between the atom form of the metal and the ion form. If, for Na, Ca, Mg, and K, the profile has only one form (atom or ion but not both) then the 𝐸<sub>𝐸𝑙</sub> should be set to 0. Also, if the difference is negative, it should be set to 0. Note that for metal oxides with multiple forms an average oxygen to metal ratio across all forms is used.
 
 |Species|MW of metal<sup>1</sup>|Oxide Form 1|Oxide Form 2|Oxide Form 3|oxygen/metal ratio|
 |-|-|-|-|-|-|
 |Mg|24.31|MgO|||0.658|
-|Al|26.98|Al2O3|||0.889|
-|Si|28.09|SiO2|||1.139|
-|K|39.10|K2O|||0.205|
+|Al|26.98|Al<sub>2</sub>O<sub>3</sub>|||0.889|
+|Si|28.09|SiO<sub>2</sub>|||1.139|
+|K|39.10|K<sub>2</sub>O|||0.205|
 |Ca|40.08|CaO|||0.399|
-|Ti|47.87|TiO2|||0.669|
-|Mn|54.94|MnO|MnO2|Mn2O7|0.631|
-|Fe|55.85|FeO|Fe2O3||0.358|
+|Ti|47.87|TiO<sub>2</sub>|||0.669|
+|Mn|54.94|MnO|MnO<sub>2</sub>|Mn<sub>2</sub>O<sub>7</sub>|0.631|
+|Fe|55.85|FeO|Fe<sub>2</sub>O<sub>3</sub>||0.358|
 
   

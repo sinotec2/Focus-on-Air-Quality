@@ -134,7 +134,14 @@ for sp in SPECs+PARTs:
 for g in $(ls *grib);do 
   /opt/miniconda3/envs/ncl_stable/bin/ncl_convert2nc $g
 done
-```  
+``` 
+- warning
+  - NclGRIB2: codetable file "/opt/miniconda3/envs/ncl_stable/lib/ncarg/grib2_codetables/ecmwf/4/4.2.192.210.table" not a valid GRIB2 code table.
+  - Entry (192) not found in code table file /opt/miniconda3/envs/ncl_stable/lib/ncarg/grib2_codetables/ecmwf/0/0.0.table
+  - Entry (192) not found in code table file /opt/miniconda3/envs/ncl_stable/lib/ncarg/grib2_codetables/ecmwf/4/4.2.table
+  - Classic model NetCDF does not support string types, converting initial_time0 to a character array
+  - Dimension 'ncl_strlen_0' will be added
+ 
 
 ### 橫向合併
 - 這項作業是將同一月份的27個分項檔案，按照相同的時間、空間軸整併成一個檔案。

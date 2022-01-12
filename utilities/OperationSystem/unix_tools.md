@@ -43,7 +43,7 @@ loc=$(echo $PWD|cut -d'/' -f2)
 bdate=`echo $(ls -rt COMBINE_ACONC*${GRID}_${CASE}.nc|head -n1)|cut -d'_' -f7`
 /usr/bin/sensors |grep Core |awk '{print $3}'|cut -c 2-5
 ```
-- cut配合倒數之工具rev
+- cut配合倒數之工具rev。有關reverse的應用可以參考[Shell中實現字串反轉](https://codertw.com/前端開發/393303/)
 ```bash
 echo 'maps.google.com' | rev | cut -d'.' -f 1 | rev #result=com
 ```
@@ -52,12 +52,20 @@ echo 'maps.google.com' | rev | cut -d'.' -f 1 | rev #result=com
 mm5_to_grads.csh:set date = `READV3 $1 |head -n1|cut -c '3-4 6-7 9-10' `
 ```
 - 裁減特定長度，由程式自行計算長度
-
+  - 任何變數
 ```bash
 myvar="some string";echo ${#myvar}  #->11
 i=asdfa.nc
 l=$(echo ${#i}); m=$(( $l - 3 ));j=$(echo $i|cut -c 1-$m);echo $j;#->asdfa
 ```
+- 計算字串的長度，再決定要裁剪那裡。一行指令搞定：
+```bash
+kuang@node03 /nas1/ecmwf/reanalysis/gribs18
+y=$(n=$(( ${#PWD} - 1 ));echo $PWD|cut -c${n}-)
+#echo $y
+#18
+```
+
 
 ### awkk
 - std output如有欄數，可以用awk來篩選切割，然其指令太過繁雜，awkk即為其簡化版本

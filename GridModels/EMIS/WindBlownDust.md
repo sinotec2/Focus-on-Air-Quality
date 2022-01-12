@@ -279,3 +279,31 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 | ![CMAQ_WBDinc.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDinc.PNG) |
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間d01範圍PM10最大增量之分布</b>|
+
+## Composition of Wind Blown Dust
+- Tegen, I. & Kohfeld, K.E.: **Atmospheric Transport of Silicon, in: The silica cycle, human perturbations and impacts on aquatic systems**, edited by Ittekot V. et al. anthropic, Scope 66, 2006. [Simon Fraser University](http://rem-main.rem.sfu.ca/papers/kohfeld/TegenKohfeld_Scope_ch_7pp81_92.pdf)
+- Claquin, T., M. Schulz, and Y. Balkanski. 1999. **Modelling the mineralogy of atmospheric dust sources.** Journal of Geophysical Research 104:22,243–22,256.[agupubs](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/1999JD900416)
+- Leinen, M., Prospero, J.M., Arnold, E., and Blank, M. (1994). **Mineralogy of aeolian dust reaching the North Pacific Ocean: 1. Sampling and analysis.** Journal of Geophysical Research: Atmospheres 99 (D10):21017–21023. doi:10.1029/94JD01735.[agupubs](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01735)
+- Merrill, J., E. Arnold, M. Leinen, and C. Weaver, **Mineralogy of aeolian dust reaching the north Pacific Ocean, 2, Relationship of mineral assemblages to atmospheric transport patterns**, J. Geophys. Res., 99, 21,025-21,032, 1994.[agupubs](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01734)
+- wiki, **蒙古高原沙塵暴**, [wiki](https://zh.wikipedia.org/wiki/蒙古高原沙尘暴)
+  - 2001年中國進行的分析資料顯示，亞洲沙塵當中含有高濃度的矽（24-32%）、鋁（5.9-7.4%）、鈣（6.2-12%）及鐵。
+  - 另外也有一些毒物，其中以較重的物質為多（如有毒的水銀與鎘，多由燃煤釋出），這定出亞洲沙塵的淵源。
+- Zhang, X. Y., S. L. Gong, Z. X. Shen, F. M. Mei, X. X. Xi, L. C. Liu, Z. J. Zhou, D. Wang, Y. Q. Wang, and Y. Cheng, Characterization of soil dust aerosol in China and its transport and distribution during 2001 ACE-Asia: Network observations, J. Geophys. Res., 108, doi:10.1029/2002JD002632, in press, 2003, [agupubs](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2002JD002632)
+- Gong, S.L., Zhang, X.Y., Zhao, T.L., McKendry, I.G., Jaffe, D.A., and Lu, N.M. (2003). Characterization of soil dust aerosol in China and its transport and distribution during 2001 ACE‐Asia: 2. Model simulation and validation. Journal of Geophysical Research: Atmospheres 108 IssueD9. doi:10.1029/2002JD002632.[agupubs](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2002JD002633)
+
+- Tejas Shah, Yuge Shi, Ross Beardsley and Greg Yarwood, **Speciation Tool User’s Guide Version 5.0**, Ramboll US Corporation,[cmascenter](https://www.cmascenter.org/speciation_tool/documentation/5.0/Ramboll_sptool_users_guide_V5.pdf), June 2020
+  - 𝑀𝑂<sub>𝑢𝑛𝑎𝑑𝑗𝑢𝑠𝑡𝑒𝑑</sub> = ∑𝑂𝑥<sub>𝐸𝑙</sub> × 𝐸<sub>𝐸𝑙</sub>
+  - where OxEl is the oxygen-to-metal ratio for metal El as shown Table E-2, and EEl is the emission of metal El, except for Na, Ca, Mg and K. For these 4 metals, the EEl should reflect the difference between the atom form of the metal and the ion form. If, for Na, Ca, Mg, and K, the profile has only one form (atom or ion but not both) then the EEl should be set to 0. Also, if the difference is negative, it should be set to 0. Note that for metal oxides with multiple forms an average oxygen to metal ratio across all forms is used.
+
+|Species|MW of metal<sup>1</sup>|Oxide Form 1|Oxide Form 2|Oxide Form 3|oxygen/metal ratio|
+|-|-|-|-|-|-|
+|Mg|24.31|MgO|||0.658|
+|Al|26.98|Al2O3|||0.889|
+|Si|28.09|SiO2|||1.139|
+|K|39.10|K2O|||0.205|
+|Ca|40.08|CaO|||0.399|
+|Ti|47.87|TiO2|||0.669|
+|Mn|54.94|MnO|MnO2|Mn2O7|0.631|
+|Fe|55.85|FeO|Fe2O3||0.358|
+
+  

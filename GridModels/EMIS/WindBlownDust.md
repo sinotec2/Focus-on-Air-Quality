@@ -274,6 +274,7 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 - TFLAG:var_desc = Timestep-valid flags:  (1) YYYYDDD or (2) HHMMSS                                
 - YW:var_desc = Wind Erosion
 
+## CMAQ Wind-Blown Dust Incremental Results
 
 | ![CMAQ_WBDinc.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDinc.PNG) |
 |:--:|

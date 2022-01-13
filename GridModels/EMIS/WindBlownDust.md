@@ -291,6 +291,66 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 - Zhang, X. Y., S. L. Gong, Z. X. Shen, F. M. Mei, X. X. Xi, L. C. Liu, Z. J. Zhou, D. Wang, Y. Q. Wang, and Y. Cheng, Characterization of soil dust aerosol in China and its transport and distribution during 2001 ACE-Asia: Network observations, J. Geophys. Res., 108, doi:10.1029/2002JD002632, in press, 2003, [agupubs](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2002JD002632)
 - Gong, S.L., Zhang, X.Y., Zhao, T.L., McKendry, I.G., Jaffe, D.A., and Lu, N.M. (2003). Characterization of soil dust aerosol in China and its transport and distribution during 2001 ACE‐Asia: 2. Model simulation and validation. Journal of Geophysical Research: Atmospheres 108 IssueD9. doi:10.1029/2002JD002632.[agupubs](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2002JD002633)
 
+- Table 3. Source Profiles, Weight Percent, of Dust Elements in Asian Dust Aerosol Mass
+
+|Asian Dust Sources|Al|Ca|Fe|K|Mg|Mn|Si|Ti|sum|
+|-|-|-|-|-|-|-|-|-|-|
+|Western High-Dust Sourcea|7|12|6|3|3|0.1|24|0.5|55.6|
+|Northern High-Dust Sourceb|7|7|4|2|2|0.1|30|0.5|52.6|
+|Loess area|7|8|4|3|1|0.1|29|0.5|52.6|
+|Molecular wt.|26.98|40.078|55.845|39.0983|24.305|54.938044|28.0855|47.867||
+|total oxides/metal|
+
+```python
+sp='Al|Ca|Fe|K|Mg|Mn|Si|Ti'.split('|')
+oxn=[3/2,1,3/2,0.5,1,7/2,2,2]
+mw=[float(i) for i in '26.98|40.078|55.845|39.0983|24.305|54.938044|28.0855|47.867'.split('|')]
+s='7^I12^I6^I3^I3^I0.1^I24^I0.5';WesternHDS=[float(i) for i in s.split()]
+s='7^I7^I4^I2^I2^I0.1^I30^I0.5';NorthernHDS=[float(i) for i in s.split()]
+s='7	8	4	3	1	0.1	29	0.5';LoessArea=[float(i) for i in s.split()]
+In [45]: L=[i+i/m*o*16 for i ,m, o in zip(LoessArea,mw,oxn)]
+In [46]: L
+Out[46]:
+[13.226834692364715,
+ 11.19377214431858,
+ 5.71904378189632,
+ 3.6138374302719045,
+ 1.6583007611602552,
+ 0.20193300657009194,
+ 62.041961154332306,
+ 0.8342595107276412]
+In [47]: sum(L)
+Out[47]: 98.48994248164182
+In [48]: N=[i+i/m*o*16 for i ,m, o in zip(NorthernHDS,mw,oxn)]
+In [49]: sum(N)
+Out[49]: 99.68378721884399
+In [50]: W=[i+i/m*o*16 for i ,m, o in zip(WesternHDS,mw,oxn)]
+In [51]: sum(W)
+Out[51]: 99.56606211287455
+```
+- ACONC檔案中的地殼元素名稱，均為J(accumulation mode):
+
+```python
+In [59]: nc = netCDF4.Dataset(fname, 'r')
+
+In [60]: V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+
+In [63]: sp=[i.upper() for i in sp]
+
+In [65]: for m in sp:
+    ...:     print([i for i in V[3] if 'A'+m in i])
+    ...:
+['AALJ', 'SOAALK']
+['ACAJ', 'ASEACAT']
+['AFEJ']
+['AKJ']
+['AMGJ']
+['AMNJ']
+['ASIJ']
+['ATIJ']
+```
+
+
 - Tejas Shah, Yuge Shi, Ross Beardsley and Greg Yarwood, **Speciation Tool User’s Guide Version 5.0**, Ramboll US Corporation,[cmascenter](https://www.cmascenter.org/speciation_tool/documentation/5.0/Ramboll_sptool_users_guide_V5.pdf), June 2020
   - 𝑀𝑂<sub>𝑢𝑛𝑎𝑑𝑗𝑢𝑠𝑡𝑒𝑑</sub> = ∑𝑂𝑥<sub>𝐸𝑙</sub> × 𝐸<sub>𝐸𝑙</sub>
   - where 𝑀𝑂<sub>𝑢𝑛𝑎𝑑𝑗𝑢𝑠𝑡𝑒𝑑</sub> is the unadjusted MO, Ox<sub>𝐸𝑙</sub> is the **oxygen-to-metal ratio** for metal El as shown Table E-2, and 𝐸<sub>𝐸𝑙</sub> is the **emission** of metal El, except for Na, Ca, Mg and K. For these 4 metals, the 𝐸<sub>𝐸𝑙</sub> should reflect the difference between the atom form of the metal and the ion form. If, for Na, Ca, Mg, and K, the profile has only one form (atom or ion but not both) then the 𝐸<sub>𝐸𝑙</sub> should be set to 0. Also, if the difference is negative, it should be set to 0. Note that for metal oxides with multiple forms an average oxygen to metal ratio across all forms is used.
@@ -306,4 +366,56 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 |Mn|54.94|MnO|MnO<sub>2</sub>|Mn<sub>2</sub>O<sub>7</sub>|0.631|
 |Fe|55.85|FeO|Fe<sub>2</sub>O<sub>3</sub>||0.358|
 
+### submicron asian dust composition
+- Vlasenko, A., Sjögren, S., Weingartner, E., Gäggeler, H.W., and Ammann, M. (2005). **Generation of Submicron Arizona Test Dust Aerosol: Chemical and Hygroscopic Properties**. [Aerosol Science and Technology](https://www.tandfonline.com/doi/pdf/10.1080/027868290959870) 39 (5):452–460. doi:10.1080/027868290959870.
+  - Elemental composition of mineral dust expressed in **%** of atom
+
+|Species|ATD powder ICP-OES|Particle bulk ICP-OES|Particle surface  XPS|
+|-|-|-|-|
+|Na|2.3 ± 0.2|2.9 ± 0.2|2|
+|Mg|2.1 ± 0.2|4.7 ± 0.2|∗|
+|Al|8.2 ± 0.3|15.9 ± 0.3|24|
+|Si|79.1 ± 1|63 ± 1|63|
+|K|1.7 ± 0.2|3.1 ± 0.2|3|
+|Fe|2.2 ± 0.1|4.9 ± 0.2|3|
+|Ca|4 ± 0.2|4.8 ± 0.2|5|
+
+∗XPS data on Mg is not available because Mg anticathode was used as X-ray source.
+
+Mass concentration (in µg·m−3) of identified compounds in water-soluble fraction of mineral dust aerosol generated from ATD
+
+|Compound Concentration|
+|-|-|
+|Fluoride |0.1 ± 0.05|
+|Acetate |<0.3|
+|Formate |<0.5|
+|Chloride |0.7 ± 0.1|
+|Nitrate |0.2 ± 0.1|
+|Sulphate |41 ± 0.5|
+|Phosphate |3 ± 0.3|
+
+- YANG, T., SUN, Y.-L., ZHANG, W., WANG, Z.-F., and WANG, X.-Q. (2016). **Chemical characterization of submicron particles during typical air pollution episodes in spring over Beijing**. [Atmospheric and Oceanic Science Letters](https://www.tandfonline.com/doi/full/10.1080/16742834.2016.1173509) 9 (4):255–262. doi:10.1080/16742834.2016.1173509.
+  - The two-factor solution, including a hydrocarbon-like OA (HOA) and an oxygenated OA (OOA) with fpeak = 0, was chosen in this study.
+  
+  |spec|Haze Episode|Clean|Dust Episode|
+  |-|-|-|-|
+  |org|31|79|64|
+  |Chl|2|2|3|
+  |NH4|19|9|12|
+  |NO3|32|2|10|
+  |SO4|15|7|12|
+  
+  |spec|Haze Episode|Clean|Dust Episode|
+  |-|-|-|-|
+  |HOA|21|59|47|
+  |OOA|79|41|53|
+  
+### CAMS / EAC4 DUST meaning
+- Aerosol model updates
+  - The CAMS aerosol model component of the IFS was previously described in Morcrette et al. (2009). It is a hybrid bulk–bin scheme with 12 prognostic tracers, consisting of three bins for sea salt depending on size (0.03–0.5, 0.5–5 and 5–20 &mu;m), three bins for dust (0.030–0.55, 0.55–0.9 and 0.9–20 &mu;m), hydrophilic and hydrophobic organic matter (OM), and black carbon (BC), plus sulfate aerosol and a gas-phase sulfur dioxide (SO2) precursor. 
+  - The different aerosol types are treated as externally mixed, i.e. separate particles. Transport by advection, convection and diffusion is handled by the meteorological model component of the IFS. 
+  - The aerosol scheme includes prescribed and online emissions (as described in Sect. 2.2), dry and wet deposition, production of sulfate from SO2, and ageing of hydrophobic OM and BC to hydrophilic OM and BC. 
+  - Nitrate aerosols are not yet included in the aerosol scheme. The missing nitrate aerosol is likely to cause an underestimation of total aerosol in the forecast model in regions where nitrate would be a significant component. 
+  - The total aerosol will be corrected by the assimilation of total AOD observations.
+- Inness, A., Ades, M., Agustí-Panareda, A., Barré, J., Benedictow, A., Blechschmidt, A.-M., Dominguez, J.J., Engelen, R., Eskes, H., Flemming, J., Huijnen, V., Jones, L., Kipling, Z., Massart, S., Parrington, M., Peuch, V.-H., Razinger, M., Remy, S., Schulz, M., and Suttie, M. (2019). **The CAMS reanalysis of atmospheric composition**. [Atmospheric Chemistry and Physics](https://acp.copernicus.org/articles/19/3515/2019/) 19 (6):3515–3556. doi:10.5194/acp-19-3515-2019.
   

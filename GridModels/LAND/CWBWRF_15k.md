@@ -87,7 +87,7 @@ ncpdq -O -a COL,TSTEP,LAY,ROW $nc a;ncks -O --mk_rec_dmn COL a $nc
 
 ```python
 nc = netCDF4.Dataset(fname, 'r+')
-for j in range(ncol,389):
+for j in range(ncol,665):
   for v in V[3]:
     nc[v][j,0,0,:]=0.
 nc.NCOLS=665

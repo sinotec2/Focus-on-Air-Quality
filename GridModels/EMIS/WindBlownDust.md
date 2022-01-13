@@ -396,7 +396,7 @@ Mass concentration (in µg·m−3) of identified compounds in water-soluble frac
 
 - YANG, T., SUN, Y.-L., ZHANG, W., WANG, Z.-F., and WANG, X.-Q. (2016). **Chemical characterization of submicron particles during typical air pollution episodes in spring over Beijing**. [Atmospheric and Oceanic Science Letters](https://www.tandfonline.com/doi/full/10.1080/16742834.2016.1173509) 9 (4):255–262. doi:10.1080/16742834.2016.1173509.
   - The two-factor solution, including a hydrocarbon-like OA (HOA) and an oxygenated OA (OOA) with fpeak = 0, was chosen in this study.
-  
+
   |spec|Haze Episode|Clean|Dust Episode|
   |-|-|-|-|
   |org|31|79|64|
@@ -418,4 +418,8 @@ Mass concentration (in µg·m−3) of identified compounds in water-soluble frac
   - Nitrate aerosols are not yet included in the aerosol scheme. The missing nitrate aerosol is likely to cause an underestimation of total aerosol in the forecast model in regions where nitrate would be a significant component. 
   - The total aerosol will be corrected by the assimilation of total AOD observations.
 - Inness, A., Ades, M., Agustí-Panareda, A., Barré, J., Benedictow, A., Blechschmidt, A.-M., Dominguez, J.J., Engelen, R., Eskes, H., Flemming, J., Huijnen, V., Jones, L., Kipling, Z., Massart, S., Parrington, M., Peuch, V.-H., Razinger, M., Remy, S., Schulz, M., and Suttie, M. (2019). **The CAMS reanalysis of atmospheric composition**. [Atmospheric Chemistry and Physics](https://acp.copernicus.org/articles/19/3515/2019/) 19 (6):3515–3556. doi:10.5194/acp-19-3515-2019.
+
+- New nitrate and ammonium aerosol species,
+  - Richard Engelen,**Implementation of IFS cycle 46r1**, [confluence.ecmwf](https://confluence.ecmwf.int/display/COPSRV/Implementation+of+IFS+cycle+46r1)July 05, 2019
+
   

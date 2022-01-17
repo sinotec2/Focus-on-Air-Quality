@@ -149,3 +149,5 @@ np.max(sumv)
 
 ## Reference
 - USEAP, **Fertilizer Emission Scenario Tool for CMAQ (FEST-C v1.4)**, [cmascenter](https://www.cmascenter.org/fest-c/),09/20/2018
+- 必全,**中國農業地圖 | 全國植物區域分布圖**, [kknews.cc](https://kknews.cc/agriculture/ljrnzxe.html), 2019-10-31.
+- Mishra, B., Busetto, L., Boschetti, M., Laborte, A., Nelson, A. (2021). **RICA: A rice crop calendar for Asia based on MODIS multi year data**. International Journal of Applied Earth Observation and Geoinformation 103, 102471.[doi](https://doi.org/10.1016/j.jag.2021.102471)

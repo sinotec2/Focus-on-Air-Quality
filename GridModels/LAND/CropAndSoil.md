@@ -48,11 +48,12 @@ last_modified_date: 2022-01-17 09:02:10
 ### 檔案結構
 - layer有42個，為各作[物種類數](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)(e2c_cats)。
   - 因網格內同時有多種作物，因此土壤有種植該作物時對應之性質。
+  - 會對應到土地使用檔中的穀物面積分率
 
 ```bash
 $ nc=/home/cmaqruns/2018base/data/land/1804/2018_EAsia_81K_soil_bench1804.nc
 $ ncdump -h $nc|H
-netcdf \2018_EAsia_81K_soil_bench1804 {
+netcdf 2018_EAsia_81K_soil_bench1804 {
 dimensions:
         COL = 53 ;
         TSTEP = 1 ;
@@ -71,7 +72,7 @@ dimensions:
 |-|-|-|-|-|-|
 |SoilNum|Soil Number|-|1\~8005|(not found)||
 |Bulk_D|Bulk Density|t/m**3|0.85\~1.67||[bdod](https://files.isric.org/soilgrids/latest/data/bdod/)|
-|Cation|Cation Ex|cmol/kg|1.03\~48.82|cec1\~2(ncols, nrows, e2c_cats) in module depv_data_module|[cec](https://files.isric.org/soilgrids/latest/data/cec/)|
+|Cation|Cation Ex|cmol/kg|1.03\~48.82|cec1\~2(ncols, nrows, e2c_cats) in depv_data_module|[cec](https://files.isric.org/soilgrids/latest/data/cec/)|
 |Field_C|Field Capacity, [Water holding capacity](https://gmd.copernicus.org/preprints/gmd-2016-165/gmd-2016-165.pdf), water retention capacity|m/m|0.07~0.48|(not found)|LSM_MOD.F:!-- WFC is soil field capacity (Rawls et al 1982)[available water capacity (-33 to -1500 kPa)](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/dc7b283a-8f19-45e1-aaed-e9bd515119bc)|
 |PH|potential of H ions|-|5.36\~ 7.47|pHs1\~2|[phh2o]()|
 |Porosity|Porosity|%|0.2~0.55|por1,por2 in module depv_data_module|[total porosity](https://files.isric.org/public/wise/wise_30min_v3.zip)|
@@ -90,41 +91,46 @@ dimensions:
 ! depv_data_module.F:32:
             integer, parameter :: e2c_cats = 42   ! number of crop catigories
 ```
+
 ### lookup tab of LSM_MOD.F 
 ```python
- 90 C-------------------------------------------------------------------------------
- 91 C Soil Characteristics by Type for WRFV38
- 92 C
- 93 C   #  SOIL TYPE  WSAT  WFC  WWLT  BSLP  CGSAT   JP   AS   C2R  C1SAT  WRES
- 94 C   _  _________  ____  ___  ____  ____  _____   ___  ___  ___  _____  ____
- 95 C   1  SAND       .395 .135  .068  4.05  3.222    4  .387  3.9  .082   .020
- 96 C   2  LOAMY SAND .410 .150  .075  4.38  3.057    4  .404  3.7  .098   .035
- 97 C   3  SANDY LOAM .435 .195  .114  4.90  3.560    4  .219  1.8  .132   .041
- 98 C   4  SILT LOAM  .485 .255  .179  5.30  4.418    6  .105  0.8  .153   .015
- 99 C   5  LOAM       .451 .240  .155  5.39  4.111    6  .148  0.8  .191   .027
-100 C   6  SND CLY LM .420 .255  .175  7.12  3.670    6  .135  0.8  .213   .068
-101 C   7  SLT CLY LM .477 .322  .218  7.75  3.593    8  .127  0.4  .385   .040
-102 C   8  CLAY LOAM  .476 .325  .250  8.52  3.995   10  .084  0.6  .227   .075
-103 C   9  SANDY CLAY .426 .310  .219 10.40  3.058    8  .139  0.3  .421   .109
-104 C  10  SILTY CLAY .482 .370  .283 10.40  3.729   10  .075  0.3  .375   .056
-105 C  11  CLAY       .482 .367  .286 11.40  3.600   12  .083  0.3  .342   .090
-106 C
-107 C-------------------------------------------------------------------------------
+C-------------------------------------------------------------------------------
+C Soil Characteristics by Type for WRF4+
+C
+C   #  SOIL TYPE  WSAT  WFC  WWLT  BSLP  CGSAT   JP   AS   C2R  C1SAT  WRES
+C   _  _________  ____  ___  ____  ____  _____   ___  ___  ___  _____  ____
+C   1  SAND       .395 .135  .068  4.05  3.222    4  .387  3.9  .082   .020
+C   2  LOAMY SAND .410 .150  .075  4.38  3.057    4  .404  3.7  .098   .035
+C   3  SANDY LOAM .435 .195  .114  4.90  3.560    4  .219  1.8  .132   .041
+C   4  SILT LOAM  .485 .255  .179  5.30  4.418    6  .105  0.8  .153   .015
+C   5  SILT       .480 .260  .150  5.30  4.418    6  .105  0.8  .153   .020
+C   6  LOAM       .451 .240  .155  5.39  4.111    6  .148  0.8  .191   .027
+C   7  SND CLY LM .420 .255  .175  7.12  3.670    6  .135  0.8  .213   .068
+C   8  SLT CLY LM .477 .322  .218  7.75  3.593    8  .127  0.4  .385   .040
+C   9  CLAY LOAM  .476 .325  .250  8.52  3.995   10  .084  0.6  .227   .075
+C  10  SANDY CLAY .426 .310  .219 10.40  3.058    8  .139  0.3  .421   .109
+C  11  SILTY CLAY .482 .370  .283 10.40  3.729   10  .075  0.3  .375   .056
+C  12  CLAY       .482 .367  .286 11.40  3.600   12  .083  0.3  .342   .090
+C  13  ORGANICMAT .451 .240  .155  5.39  4.111    6  .148  0.8  .191   .027
+C  14  WATER      .482 .367  .286 11.40  3.600   12  .083  0.3  .342   .090
+C  15  BEDROCK    .482 .367  .286 11.40  3.600   12  .083  0.3  .342   .090
+C  16  OTHER      .420 .255  .175  7.12  3.670    6  .135  0.8  .213   .068
+C-------------------------------------------------------------------------------
 ```
 
 ## Crop names Dict
-- CCTM系統中的種穀物詳[亞洲土地使用檔案.背景](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)
-- 175種穀物為解開[earthstat壓縮檔](http://www.earthstat.org/harvested-area-yield-175-crops/)之結果
+- CCTM系統中的種穀物詳[亞洲土地使用檔案>背景](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)
+- 175種穀物為解開[earthstat>壓縮檔](http://www.earthstat.org/harvested-area-yield-175-crops/)之結果
 - 可食豆：包括175種穀物中所有含有bean之種類
 - earthstat沒有乾草(straw)或其他畜牧用草等名稱，只有mixedgrass比較接近。
 - grain/silage之分，前者為穀粒、人類食物或種子，後者為畜用。
 - other_crop，經查wiki，21種穀物中漏了雜穀，將其列為other_crop
 - 春麥/冬麥在earthstat無法區分，只能依照長城所在緯度(略以40度)為界區別之。
 
-|spec in CCTM sys 21 kinds|spec in database|中文名稱|
+|spec in CCTM sys 21 kinds|spec in earthstat database|中文名稱|
 |-|-|-|
 |beans|bean|豆|
-|beansedible|['broadbean', 'greenbean', 'greenbroadbean', 'stringbean']|可食豆|
+|beansedible|broadbean,greenbean,greenbroadbean,stringbean]|可食豆|
 |canola|rapeseed|油菜|
 |corngrain|popcorn|玉米粒|
 |cornsilage|greencorn|玉米青貯飼料|
@@ -133,7 +139,7 @@ dimensions:
 |other_grass|grassnes|未標示草|
 |peanuts|groundnut|落花生|
 |potatoes|potato|馬鈴薯|
-|sorghumgrain|[sorghum|高粱粒|
+|sorghumgrain|sorghum|高粱粒|
 |sorghumsilage|sorghumfor|高粱粒粉貯飼料|
 |soybeans|soybean|大豆|
 |wheat_spring|wheat(lat>40)|春麥|

@@ -101,8 +101,8 @@ The gridded land cover/land use (LCLU) file is an I/O API GRDDED3 file of BELD3 
 
 -   USGS_urban
 -   USGS_drycrop
--   USGS_irrcrop
--   USGS_cropgrass
+-   **USGS_irrcrop**
+-   **USGS_cropgrass**
 -   USGS_cropwdlnd
 -   USGS_grassland
 -   USGS_shrubland
@@ -209,9 +209,9 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 |3 Deciduous Needleleaf Forest |12 Deciduous Needleleaf Forest|
 |4 Deciduous Broadleaf Forest |11 Deciduous Broadleaf Forest|
 |5 Mixed Forests |15 Mixed Forest|
-|6 Closed Shrublands |9 Mixed Shrubland/Grassland|
-|7 Open Shrublands |8 Shrubland|
-|8 Woody Savannas|-|
+|6 Closed Shrublands |8 Shrubland|
+|7 Open Shrublands |9 Mixed Shrubland/Grassland|
+|8 Woody Savannas|10 Savanna|
 |9 Savannas |10 Savanna|
 |10 Grasslands 7 Grassland|
 |11 Permanent Wetlands |17 Herbaceous Wetland|
@@ -229,6 +229,9 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 |19 Mixed Tundra |22 Mixed Tundra|
 |23 Bare Ground Tundra|-|
 |20 Barren Tundra |20 Herbaceous Tundra|
+- Park, R., Hong, S., Kwon, H., Kim, S., Guenther, A., Woo, J., and Loughner, C. (2013). **An evaluation of O3 dry deposition simulations in East Asia**. [ATMOSPHERIC CHEMISTRY AND PHYSICS](https://www.researchgate.net/figure/Land-use-mapping-using-the-20-category-IGBP-Modified-MODIS-and-24-category-USGS-schemes_tbl2_262952739) 14. doi:10.5194/acpd-14-919-2014.
+
+
 
 ### 2018_EAsia_81K_time20180315_bench.nc variables
 - CPHT:var_desc = Crop Height

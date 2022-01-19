@@ -40,6 +40,39 @@ last_modified_date: 2022-01-18 13:51:41
 - Global irrigation areas (2001 to 2015)[GEE-COMMUN-DATASET](https://samapriya.github.io/awesome-gee-community-datasets/projects/global_irrigation/)  
   - Deepak Nagaraj, Eleanor Proust, Alberto Todeschini, Maria Cristina Rulli, Paolo D'Odorico, **A new dataset of global irrigation areas from 2001 to 2015, Advances in Water Resources**, Volume 152,2021,103910,ISSN 0309-1708,https://doi.org/10.1016/j.advwatres.2021.103910.
 - Iternationl Water Management Institute, [Global Irrigated Area Mapping](http://waterdata.iwmi.org/applications/giam2000/), Aprial 25, 2014
+  - 28 種灌溉狀態，詳[AVHRR NDVI (1999)](http://www.iwmi.cgiar.org/Publications/IWMI_Research_Reports/PDF/pub105/RR105.pdf)
+
+|number|Irr|source|#crops|crop cat.|Single Crop|Double Crop|continuous crop|
+|-|-|-|-|-|-|-|-|
+|01 |Irrigated, |surface water,|single crop, |wheat-corn-cotton |Mar-Nov|||
+|02 |Irrigated, |surface water, |single crop, |cotton-rice-wheat |Apr-Oct|||
+|03 |Irrigated, |surface water, |single crop, |mixed-crops |Mar-Oct|||
+|04 |Irrigated, |surface water, |double crop, |rice-wheat-cotton ||Mar-Jun Jul-Oct||
+|05 |Irrigated, |surface water, |double crop, |rice-wheat-cotton-corn ||Jun-Oct Dec-Mar||
+|06 |Irrigated, |surface water, |double crop, |rice-wheat-plantations ||Jul-Nov Dec-Mar||
+|07 |Irrigated, |surface water, |double crop, |sugarcane ||Jun-Nov Dec-Feb||
+|08 |Irrigated, |surface water, |double crop, |mixed-crops ||Jul-Nov Dec-Apr||
+|09 |Irrigated, |surface water, |continuous crop, |sugarcane |||Jul-May|
+|10 |Irrigated, |surface water, |continuous crop, |plantations |||Jan-Dec|
+|11 |Irrigated, |ground water, |single crop, |rice-sugarcane |Jul-Dec|||
+|12 |Irrigated, |ground water, |single crop, |corn-soybean |Mar-Oct|||
+|13 |Irrigated, |ground water, |single crop, |rice and other crops |Mar-Nov|||
+|14 |Irrigated, |ground water, |single crop, |mixed-crops |Jul-Dec|||
+|15 |Irrigated, |ground water, |double crop, |rice and other crops ||Jul-Nov Dec-Mar||
+|16 |Irrigated, |conjunctive use, |single crop, |wheat-corn-soybean-rice |Mar-Nov|||
+|17 |Irrigated, |conjunctive use, |single crop, |wheat-corn-orchards-rice |Mar-Nov|||
+|18 |Irrigated, |conjunctive use, |single crop, |corn-soybeans-other crops |Mar-Oct|||
+|19 |Irrigated, |conjunctive use, |single crop, |pastures |Mar-Dec|||
+|20 |Irrigated, |conjunctive use, |single crop, |pasture, wheat, sugarcane |Jul-Feb|||
+|21 |Irrigated, |conjunctive use, |single crop, |mixed-crops ||Mar-Nov|||
+|22 |Irrigated, |conjunctive use, |double crop, |rice-wheat-sugar cane ||Jun-Nov Dec-Mar||
+|23 |Irrigated, |conjunctive use, |double crop, |sugarcane-other crops ||Apr-Jul Aug-Feb||
+|24 |Irrigated, |conjunctive use, |double crop, |mixed-crops ||Jul-Nov Dec-Feb||
+|25 |Irrigated, |conjunctive use, |continuous crop, |rice-wheat |||Mar-Feb|
+|26 |Irrigated, |conjunctive use, |continuous crop, |rice-wheat-corn |||Jun-May|
+|27 |Irrigated, |conjunctive use, |continuous crop, |sugarcane-orchards-rice |||Jun-May|
+|28 |Irrigated, |conjunctive use, |continuous crop, |mixed-crops |||Jun-May|
+
 
 ```python
 import rasterio
@@ -48,8 +81,26 @@ import numpy as np
 fname='giam_28_classes_global.tif'
 img = rasterio.open(fname)
 nx,ny,nz=img.width,img.height,img.count
-lon_1d=[-180+(360./(nx-1))*i for i in range(nx)]
-lat_1d=[90-(180./(ny-1))*i for i in range(ny)]
+dx,dy=360./(nx-1),180./(ny-1)
+lon_1d=[-180+dx*i for i in range(nx)]
+lat_1d=[90-dy*i for i in range(ny)]
+data=img.read()
+lonm, latm = np.meshgrid(lon_1d, lat_1d)
+idx=np.where(data>0)
+DD={'lon':lonm[idx[1],idx[2]],'lat':latm[idx[1],idx[2]],'irr':data[0,idx[1],idx[2]]}
+df=DataFrame(DD)
+df.set_index('lon').to_csv('irr.csv')
+boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)
+df1=df.loc[boo].reset_index(drop=True)
+df1['lonn']=df.lon-dx/2
+df1['lonx']=df.lon+dx/2
+df1['latx']=df.lat+dy/2
+df1['latn']=df.lat-dy/2
+xn,yn=pnyc(list(df1.lonn),list(df1.latn), inverse=False)
+xx,yn=pnyc(list(df1.lonx),list(df1.latn), inverse=False)
+xn,yx=pnyc(list(df1.lonn),list(df1.latx), inverse=False)
+xx,yx=pnyc(list(df1.lonx),list(df1.latx), inverse=False)
+
 #d00範圍：北緯-10~50、東經60~180。'area': [50, 60, -10, 180,],
 lon_1d=lon_1d[26952:]
 lat_1d=lat_1d[4479+1:11199+1]

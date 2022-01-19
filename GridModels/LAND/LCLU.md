@@ -118,7 +118,7 @@ df2=df1.loc[(df1.ix>=0)&(df1.ix<ncol)&(df1.iy>=0)&(df1.iy<nrow)].reset_index(dro
 df2['ixy']=[str(i)+'_'+str(j) for i,j in zip(df2.ix,df2.iy)]
 df2['ixyr']=[i+'_'+str(j) for i,j in zip(df2.ixy,df2.irr)]
 pv=pivot_table(df2,index='ixyr',values='irr',aggfunc='count').reset_index()
-var=np.zeros(shape=(29,nrow,ncol))
+var=np.zeros(shape=(nlay,nrow,ncol))
 for n in range(len(pv)):
   ixy=pv.loc[n,'ixyr']
   ix,iy,ir=(int(i) for i in ixy.split('_'))
@@ -136,4 +136,27 @@ nc.close()
 
 | ![irr04.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/irr04.PNG) |
 |:--:|
-| <b>圖 d01範圍第4類灌溉面積的佔比(EROD)</b>|  
+| <b>圖 d01範圍第4類灌溉面積的佔比(%)</b>|  
+
+## land use/land cover map
+
+### Definition
+1. Irrigated, surface water
+1. Irrigated, Groundwater/Conjuctive Use
+1. Rainfed Croplands
+1. Rainfed Croplands and Grasslands/Shrublands
+1. Natural Vegitation with Rainfed Fragments
+1. Forest(Mixed)
+1. Savvana, Grasslands, Shrublands
+1. Barren Lands, Deserts or Sparse Vegetation
+1. Snow, Ice, Tundra
+1. Water Body
+
+### Python
+- same as irrigation map, but nlay=11
+
+### Results
+
+| ![lulc-1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/lulc-1.PNG) |
+|:--:|
+| <b>圖 d01範圍第1類土地使用/植被(地面水灌溉)面積的佔比(%)</b>|  

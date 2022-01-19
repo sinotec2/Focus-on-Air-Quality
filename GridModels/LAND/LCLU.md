@@ -73,6 +73,7 @@ last_modified_date: 2022-01-18 13:51:41
 |27 |Irrigated, |conjunctive use, |continuous crop, |sugarcane-orchards-rice |||Jun-May|
 |28 |Irrigated, |conjunctive use, |continuous crop, |mixed-crops |||Jun-May|
 
+- transform the tiff file into csv(only save value>0)
 
 ```python
 import rasterio
@@ -90,27 +91,8 @@ idx=np.where(data>0)
 DD={'lon':lonm[idx[1],idx[2]],'lat':latm[idx[1],idx[2]],'irr':data[0,idx[1],idx[2]]}
 df=DataFrame(DD)
 df.set_index('lon').to_csv('irr.csv')
-boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)
-df1=df.loc[boo].reset_index(drop=True)
-df1['lonn']=df.lon-dx/2
-df1['lonx']=df.lon+dx/2
-df1['latx']=df.lat+dy/2
-df1['latn']=df.lat-dy/2
-xn,yn=pnyc(list(df1.lonn),list(df1.latn), inverse=False)
-xx,yn=pnyc(list(df1.lonx),list(df1.latn), inverse=False)
-xn,yx=pnyc(list(df1.lonn),list(df1.latx), inverse=False)
-xx,yx=pnyc(list(df1.lonx),list(df1.latx), inverse=False)
-
-#d00範圍：北緯-10~50、東經60~180。'area': [50, 60, -10, 180,],
-lon_1d=lon_1d[26952:]
-lat_1d=lat_1d[4479+1:11199+1]
-
-lonm, latm = np.meshgrid(lon_1d, lat_1d)
-x,y=pnyc(lonm,latm, inverse=False)
-
-dd=img.read()
-data=dd[0,4479+1:11199+1,26952:]
 ```
+- transform the coordinates
 
 ```python
 import numpy as np
@@ -124,16 +106,34 @@ fname='temp.nc'
 nc = netCDF4.Dataset(fname, 'r+')
 V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
 nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+
+#d00範圍：北緯-10~50、東經60~180。'area': [50, 60, -10, 180,],
+boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)
+df1=df.loc[boo].reset_index(drop=True)
+x,y=pnyc(list(df1.lon),list(df1.lat), inverse=False)
+x,y=np.array(x),np.array(y)
+df1['ix']=np.array((x-nc.XORIG)/nc.XCELL,dtype=int)
+df1['iy']=np.array((y-nc.YORIG)/nc.YCELL,dtype=int)
+df2=df1.loc[(df1.ix>=0)&(df1.ix<ncol)&(df1.iy>=0)&(df1.iy<nrow)].reset_index(drop=True)
+df2['ixy']=[str(i)+'_'+str(j) for i,j in zip(df2.ix,df2.iy)]
+df2['ixyr']=[i+'_'+str(j) for i,j in zip(df2.ixy,df2.irr)]
+pv=pivot_table(df2,index='ixyr',values='irr',aggfunc='count').reset_index()
 var=np.zeros(shape=(29,nrow,ncol))
-x1d=[nc.XORIG+nc1.XCELL*i for i in range(ncol)]
-y1d=[nc.YORIG+nc1.YCELL*i for i in range(nrow)]
-x1,y1=np.meshgrid(x1d, y1d)
-maxx,maxy=x1[-1,-1],y1[-1,-1]
-minx,miny=x1[0,0],y1[0,0]
-boo=(abs(x) <= (maxx - minx) /2+nc1.XCELL*10) & (abs(y) <= (maxy - miny) /2+nc1.YCELL*10)
-idx = np.where(boo)
-mp=len(idx[0])
-xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
-c=data[idx[0][:], idx[1][:]]
-z = griddata(xyc, c, (x1, y1), method='linear')
+for n in range(len(pv)):
+  ixy=pv.loc[n,'ixyr']
+  ix,iy,ir=(int(i) for i in ixy.split('_'))
+  var[ir,iy,ix]=pv.loc[n,'irr']
+svar=np.sum(var,axis=0)
+a=np.where(svar<255,svar,255) #255=15*15
+nc[V[3]][0,:,:,:]=var[:,:,:]/a[None,:,:]
+nc.close()
 ```
+- notes
+  - griddata interpolation will take very long time, spare the zero values and aggregate, not interpolate.
+  - do loop along the df2 axis is also taken time, use pivot_table instead
+
+### results
+
+| ![irr04.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/irr04.PNG) |
+|:--:|
+| <b>圖 d01範圍第4類灌溉面積的佔比(EROD)</b>|  

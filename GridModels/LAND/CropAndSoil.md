@@ -118,16 +118,17 @@ C  16  OTHER      .420 .255  .175  7.12  3.670    6  .135  0.8  .213   .068
 C-------------------------------------------------------------------------------
 ```
 
-## Crop names Dict
+## Reading the earthstat tiff's
+### Crop names Dict
 - CCTM系統中的種穀物詳[亞洲土地使用檔案>背景](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)
 - 175種穀物為解開[earthstat>壓縮檔](http://www.earthstat.org/harvested-area-yield-175-crops/)之結果
 - 可食豆：包括175種穀物中所有含有bean之種類
 - earthstat沒有乾草(straw)或其他畜牧用草等名稱，只有mixedgrass比較接近。
 - grain/silage之分，前者為穀粒、人類食物或種子，後者為畜用。
-- other_crop，經查wiki，21種穀物中漏了雜穀，將其列為other_crop
-- 春麥/冬麥在earthstat無法區分，只能依照長城所在緯度(略以40度)為界區別之。
+- other_crop，經查[wiki](https://zh.wikipedia.org/wiki/谷物)，21種穀物中漏了**雜穀**，將其列為other_crop
+- [春麥/冬麥](https://read01.com/zh-tw/mmPJxE.html#.YeiuDdXP2po)在earthstat無法區分，只能依照**長城**所在緯度(略以40度)為界區別之，再按區分結果群聚之現象詳細界定(IY=320)。
 
-|spec in CCTM sys 21 kinds|spec in earthstat database|中文名稱|
+|spec in CCTM sys 21 kinds|175 spec in earthstat database|中文名稱|
 |-|-|-|
 |beans|bean|豆|
 |beansedible|broadbean,greenbean,greenbroadbean,stringbean]|可食豆|
@@ -142,11 +143,17 @@ C-------------------------------------------------------------------------------
 |sorghumgrain|sorghum|高粱粒|
 |sorghumsilage|sorghumfor|高粱粒粉貯飼料|
 |soybeans|soybean|大豆|
-|wheat_spring|wheat(lat>40)|春麥|
+|wheat_spring|wheat(lat>40)|春麥、長城以北|
 |wheat_winter|wheat(lat<=40)|冬麥|
 
 
 ### tif2nc
+- 這支副程式需要3個引數：tiff檔名、nc檔名、以及lev層數
+  - tiff檔：全球為範圍，解析度1~10Km，高於nc檔案，採取aggregation整併到nc網格系統
+  - nc檔：東亞範圍(CWBWRF_15Km網格系統)
+- lev層數：0~20共21層
+  - lev=3時，nc檔將會累加tiff檔的內容，因此要記得先在主程式將nc檔清空。(lev其他值會在副程式內清空)
+  - lev=19或20時(c='wheat')，只會將tiff檔內容的一部分轉移到nc檔內，以iy=320為界
 
 ```python
 def tif2nc(tif_name,nc_name,lev):
@@ -167,12 +174,10 @@ def tif2nc(tif_name,nc_name,lev):
   DD={'lon':lonm.flatten(),'lat':latm.flatten(),'val':data.flatten()}
   df=DataFrame(DD)
   boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)
-  df1=df.loc[boo].reset_index(drop=True)
-  df=df1
-
-  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
-  pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
+  df=df.loc[boo].reset_index(drop=True)
+  
   nc = netCDF4.Dataset(nc_name, 'r+')
+  pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
   V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
   nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
 
@@ -181,15 +186,13 @@ def tif2nc(tif_name,nc_name,lev):
   x,y=np.array(x),np.array(y)
   df['ix']=np.array((x-nc.XORIG)/nc.XCELL,dtype=int)
   df['iy']=np.array((y-nc.YORIG)/nc.YCELL,dtype=int)
-  df1=df.loc[(df.ix>=0)&(df.ix<ncol)&(df.iy>=0)&(df.iy<nrow)].reset_index(drop=True)
-  df=df1
+  df=df.loc[(df.ix>=0)&(df.ix<ncol)&(df.iy>=0)&(df.iy<nrow)].reset_index(drop=True)
   df['ixy']=[str(i)+'_'+str(j) for i,j in zip(df.ix,df.iy)]
   pv=pivot_table(df,index='ixy',values='val',aggfunc=np.sum).reset_index()
+  pv['ix']=[int(i.split('_')[0]) for i in pv.ixy]
+  pv['iy']=[int(i.split('_')[1]) for i in pv.ixy]
   var=np.zeros(shape=(nrow,ncol))
-  for n in range(len(pv)):
-    ixy=pv.loc[n,'ixy']
-    ix,iy=(int(i) for i in ixy.split('_'))
-    var[iy,ix]=pv.loc[n,'val']
+  var[pv.iy,pv.ix]=pv.val
   if lev==3: #beansedible
     nc[V[3][0]][0,lev,:,:]+=var[:,:]
   else:
@@ -203,27 +206,64 @@ def tif2nc(tif_name,nc_name,lev):
   nc.close()
   return 0
 ```
+### 主程式
+- 轉錄各種穀物在網格範圍內的總種植面積(hectare)，存到0~20層
 
 ```python
+nc_name='temp.nc'
 fnameO='d21_175.json'
 with open(fnameO,'r') as jsonfile:
   d21_175=json.load(jsonfile)
-s=set()
-for i in crop21:
-  c175=d21_175[i]
-  if type(c175)==list or c175=='wheat':continue
-  s|=set([c175])
-d175_21={d21_175[i]:crop21.index(i) for i in crop21 if i not in ['wheat_spring','wheat_winter','beansedible']}
+crop21=list(d21_175)
+crop21.sort()
+#18項1對1
+s=set([d21_175[i] for i in crop21 if i not in ['wheat_spring','wheat_winter','beansedible']]) 
+d175_21={d21_175[i]:crop21.index(i) for i in s}
+fn1,fn2,fn3='HarvestedAreaYield175Crops_Geotiff/','_HarvAreaYield_Geotiff/','_HarvestedAreaHectares.tif'
 for c in s:
-  tif_name='HarvestedAreaYield175Crops_Geotiff/'+c+'_HarvAreaYield_Geotiff/'+c+'_HarvestedAreaHectares.tif'
+  tif_name=fn1+c+fn2+c+fn3
   i=tif2nc(tif_name,nc_name,d175_21[c])
-  print(c,i)
-#crop21.index('beansedible')=3
+#crop21.index('beansedible')=3，多對1
 for c in ['broadbean', 'greenbean', 'greenbroadbean', 'stringbean']:
-  tif_name='HarvestedAreaYield175Crops_Geotiff/'+c+'_HarvAreaYield_Geotiff/'+c+'_HarvestedAreaHectares.tif'
+  tif_name=fn1+c+fn2+c+fn3
   i=tif2nc(tif_name,nc_name,3)
+#1對多
+c='wheat' 
+tif_name=fn1+c+fn2+c+fn3
+for lev in [19,20]:
+  i=tif2nc(tif_name,nc_name,lev)
 ```
+- 區分灌溉與旱作(rainfed)
 
+```python
+fname='irr28.nc'
+nc = netCDF4.Dataset(fname, 'r')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+irr=nc[V[3][0]][0,0,:,:] #28種灌溉形式之總合(area fraction)
+
+fname='temp.nc'
+nc = netCDF4.Dataset(fname, 'r+')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+v=V[3][0]
+nt,nlay,nrow,ncol=(nc.variables[v].shape[i] for i in range(4))
+km2=nc[v][0,:21,:,:]*0.01
+for lev in range(21,42):
+  nc[v][0,lev,:,:]=irr[:,:]*km2[lev-21,:,:]
+for lev in range(21):
+  nc[v][0,lev,:,:]=(1-irr[:,:])*km2[lev,:,:]
+svar=np.sum(nc[v][0,:,:,:],axis=0)
+a=np.where(svar<255,255,svar)
+nc[v][0,:,:,:]=nc[v][0,:,:,:]/a[None,:,:]
+nc.close()
+```
+### Results
+
+| ![Rice.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Rice.PNG) |
+|:--:|
+| <b>圖 d01範圍大米種植面積的網格佔比(%)</b>|  
+| ![Rice_irr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Rice_irr.PNG) |
+|:--:|
+| <b>圖 d01範圍大米(灌溉)種植面積的網格佔比(%)</b>|  
 
 ## Reference
 - W. J. Rawls, D. L. Brakensiek, K. E. Saxtonn (1982). **Estimation of Soil Water Properties**. Transactions of the ASAE. 25, 1316–1320. https://doi.org/10.13031/2013.33720

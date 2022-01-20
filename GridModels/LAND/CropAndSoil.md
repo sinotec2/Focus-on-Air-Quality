@@ -75,7 +75,7 @@ dimensions:
 |Cation|Cation Ex|cmol/kg|1.03\~48.82|cec1\~2(ncols, nrows, e2c_cats) in depv_data_module|[cec](https://files.isric.org/soilgrids/latest/data/cec/)|
 |Field_C|Field Capacity, [Water holding capacity](https://gmd.copernicus.org/preprints/gmd-2016-165/gmd-2016-165.pdf), water retention capacity|m/m|0.07~0.48|(not found)|LSM_MOD.F:!-- WFC is soil field capacity (Rawls et al 1982)[available water capacity (-33 to -1500 kPa)](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/dc7b283a-8f19-45e1-aaed-e9bd515119bc)|
 |PH|potential of H ions|-|5.36\~ 7.47|pHs1\~2|[phh2o]()|
-|Porosity|Porosity|%|0.2~0.55|por1,por2 in module depv_data_module|[total porosity](https://files.isric.org/public/wise/wise_30min_v3.zip)|
+|Porosity|Porosity|%|0.2~0.55|por1,por2 in module depv_data_module||[total porosity](https://files.isric.org/public/wise/wise_30min_v3.zip)|
 |Wilt_P|Wilting Point|m/m|0.03~0.32|wp1\~2|[soil water capacity (volumetric fraction) until wilting point](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c)|
 
 
@@ -116,6 +116,110 @@ C  14  WATER      .482 .367  .286 11.40  3.600   12  .083  0.3  .342   .090
 C  15  BEDROCK    .482 .367  .286 11.40  3.600   12  .083  0.3  .342   .090
 C  16  OTHER      .420 .255  .175  7.12  3.670    6  .135  0.8  .213   .068
 C-------------------------------------------------------------------------------
+```
+
+## Reading the isric tiff's
+### file name rules
+- filename sample:https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean/tileSG-028-080/tileSG-028-080_1-1.tif
+  - url=https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean
+  - rot=tileSG-${iy}-${ix}
+  - tif=${rot}_${j}-${i}.tif
+- second num:
+  - seq. of latitude, from 90 to -90, every ~4 degree
+  - 000~032 total 33 items
+- third num:
+  - seq. of longitude, from -180 to 180, every ~4 degree
+  - 000~088 total 88 items (without '037')
+- total 1131 tiles
+  - 每個tile目錄下最多4X4=16個檔案
+  - 每個tif最多為450X450個網格，解析度250M，可能會有重疊，需個別校準。
+- img.lnglat()
+  - 為tif中心點之經緯度
+- img.bounds每圖四圍邊界座標
+  - Out[1282]: BoundingBox(left=7975000.0, bottom=3088250.0, right=8087500.0, top=3200750.0)
+- img.xy(0,0)每格中心點座標
+  - Out[1302]: (7975125.0, 3200625.0)    
+- wget scripts
+  - 如沒有該tile，程式會跳開不去搜尋
+  - 如果已經有了tiff檔案，程式也會跳開不重複下載
+
+### Downloading Scripts
+
+```bash
+url=https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean
+for iy in 0{10..25};do
+for ix in 0{60..80};do
+rot=tileSG-${iy}-${ix}
+n=$(grep $rot fnames.txt |wc|awkk 1)
+if [ $n == 0 ];then continue;fi
+dir=${url}/${rot}
+for j in {1..4};do
+for i in {1..4};do
+tif=${rot}_${j}-${i}.tif
+if [ -e $tif ];then continue;fi
+fil=${dir}/$tif
+wget -q $fil
+done
+done
+done
+done
+```  
+
+### tiff2df
+```python
+def tif2df(tif_name,nc_name):
+  import numpy as np
+  import netCDF4
+  from pyproj import Proj
+  import rasterio
+  import numpy as np
+
+  img = rasterio.open(tif_name)
+  nx,ny,nz=img.width,img.height,img.count
+  data=img.read()
+  dx,dy=250.,250.
+  if nz!=1:return -1
+
+  nc = netCDF4.Dataset(nc_name, 'r')
+  pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
+  x0,y0=pnyc(img.lnglat()[0],img.lnglat()[1], inverse=False)
+  x0,y0=x0-dx*(nx//2),y0-dy*(ny//2)
+  x_1d=[x0+dx*i for i in range(nx)]
+  y_1d=[y0+dy*i for i in range(ny)] 
+  xm, ym = np.meshgrid(x_1d, y_1d)
+  x,y=xm.flatten(),ym.flatten()
+  lon, lat = pnyc(x, y, inverse=True)
+  DD={'lon':lon,'lat':lat,'X':x,'Y':y,'val':data.flatten()}
+  df=DataFrame(DD)
+  boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)&(df.val!=-32768)
+  df=df.loc[boo].reset_index(drop=True)
+  if len(df)==0:
+    df.to_csv(tif_name.replace('.tif','.csv'),header=None)
+    return 1
+  df['ix'],df['iy']=df.X//1000,df.X//1000
+  df['ixy']=[str(i)+'_'+str(j) for i,j in zip(df.ix,df.iy)]
+  df['ixy2']=df.ixy
+  pv1=pivot_table(df,index='ixy',values='val',aggfunc=np.mean).reset_index()
+  pv2=pivot_table(df,index='ixy',values='ixy2',aggfunc='count').reset_index()
+  pv1['N']=pv2.ixy2
+  pv1['X']=[float(i.split('_')[0])*1000 for i in pv1.ixy]
+  pv1['Y']=[float(i.split('_')[1])*1000 for i in pv1.ixy]
+  col=['X','Y','N','val']
+  pv1[col].set_index('X').to_csv(tif_name.replace('.tif','.csv'),header=None)
+  return 0
+```
+### 主程式
+```python
+import os
+from pandas import *
+with open('fnames.txt','r') as f:
+  fnames=[i.strip('\n') for i in f]
+nc_name='a0.nc'  
+for tif_name in fnames:
+  csv=tif_name.replace('.tif','.csv')
+  if os.path.exists(csv):continue
+  os.system('touch '+csv)
+  print(tif_name,tif2df(tif_name,nc_name))
 ```
 
 ## Reading the earthstat tiff's

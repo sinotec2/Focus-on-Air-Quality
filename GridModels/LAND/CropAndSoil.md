@@ -146,6 +146,83 @@ C-------------------------------------------------------------------------------
 |wheat_winter|wheat(lat<=40)|冬麥|
 
 
+### tif2nc
+
+```python
+def tif2nc(tif_name,nc_name,lev):
+  import numpy as np
+  import netCDF4
+  from pyproj import Proj
+  import rasterio
+  import numpy as np
+
+  img = rasterio.open(tif_name)
+  nx,ny,nz=img.width,img.height,img.count
+  if nz!=1:return -1
+  dx,dy=360./(nx-1),180./(ny-1)
+  lon_1d=[-180+dx*i for i in range(nx)]
+  lat_1d=[90-dy*i for i in range(ny)]
+  data=img.read()
+  lonm, latm = np.meshgrid(lon_1d, lat_1d)
+  DD={'lon':lonm.flatten(),'lat':latm.flatten(),'val':data.flatten()}
+  df=DataFrame(DD)
+  boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)
+  df1=df.loc[boo].reset_index(drop=True)
+  df=df1
+
+  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+  pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
+  nc = netCDF4.Dataset(nc_name, 'r+')
+  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+  nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+
+  #d00範圍：北緯-10~50、東經60~180。'area': [50, 60, -10, 180,],
+  x,y=pnyc(list(df.lon),list(df.lat), inverse=False)
+  x,y=np.array(x),np.array(y)
+  df['ix']=np.array((x-nc.XORIG)/nc.XCELL,dtype=int)
+  df['iy']=np.array((y-nc.YORIG)/nc.YCELL,dtype=int)
+  df1=df.loc[(df.ix>=0)&(df.ix<ncol)&(df.iy>=0)&(df.iy<nrow)].reset_index(drop=True)
+  df=df1
+  df['ixy']=[str(i)+'_'+str(j) for i,j in zip(df.ix,df.iy)]
+  pv=pivot_table(df,index='ixy',values='val',aggfunc=np.sum).reset_index()
+  var=np.zeros(shape=(nrow,ncol))
+  for n in range(len(pv)):
+    ixy=pv.loc[n,'ixy']
+    ix,iy=(int(i) for i in ixy.split('_'))
+    var[iy,ix]=pv.loc[n,'val']
+  if lev==3: #beansedible
+    nc[V[3][0]][0,lev,:,:]+=var[:,:]
+  else:
+    nc[V[3][0]][0,lev,:,:]=0.
+    if lev==19: #wheat_spring
+      nc[V[3][0]][0,lev,320:,:]=var[320:,:]
+    elif lev==20: #wheat_winter
+      nc[V[3][0]][0,lev,:320,:]=var[:320,:]
+    else:
+      nc[V[3][0]][0,lev,:,:]+=var[:,:]
+  nc.close()
+  return 0
+```
+
+```python
+fnameO='d21_175.json'
+with open(fnameO,'r') as jsonfile:
+  d21_175=json.load(jsonfile)
+s=set()
+for i in crop21:
+  c175=d21_175[i]
+  if type(c175)==list or c175=='wheat':continue
+  s|=set([c175])
+d175_21={d21_175[i]:crop21.index(i) for i in crop21 if i not in ['wheat_spring','wheat_winter','beansedible']}
+for c in s:
+  tif_name='HarvestedAreaYield175Crops_Geotiff/'+c+'_HarvAreaYield_Geotiff/'+c+'_HarvestedAreaHectares.tif'
+  i=tif2nc(tif_name,nc_name,d175_21[c])
+  print(c,i)
+#crop21.index('beansedible')=3
+for c in ['broadbean', 'greenbean', 'greenbroadbean', 'stringbean']:
+  tif_name='HarvestedAreaYield175Crops_Geotiff/'+c+'_HarvAreaYield_Geotiff/'+c+'_HarvestedAreaHectares.tif'
+  i=tif2nc(tif_name,nc_name,3)
+```
 
 
 ## Reference

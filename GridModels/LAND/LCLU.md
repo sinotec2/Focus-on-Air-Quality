@@ -139,6 +139,9 @@ nc.close()
 | ![irr04.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/irr04.PNG) |
 |:--:|
 | <b>圖 d01範圍第4類灌溉面積的佔比(%)</b>|  
+| ![irr_all.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/irr_all.PNG) |
+|:--:|
+| <b>圖 d01範圍所有種類灌溉面積的佔比(%)</b>|  
 
 ## land use/land cover map
 

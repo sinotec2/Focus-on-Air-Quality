@@ -125,9 +125,11 @@ for n in range(len(pv)):
   var[ir,iy,ix]=pv.loc[n,'irr']
 svar=np.sum(var,axis=0)
 a=np.where(svar<255,svar,255) #255=15*15
-nc[V[3]][0,:,:,:]=var[:,:,:]/a[None,:,:]
+nc[V[3][0]][0,:,:,:]=var[:,:,:]/a[None,:,:]
+nc[V[3][0]][0,0,:,:]=a[:,:]
 nc.close()
 ```
+
 - notes
   - griddata interpolation will take very long time, spare the zero values and aggregate, not interpolate.
   - do loop along the df2 axis is also taken time, use pivot_table instead

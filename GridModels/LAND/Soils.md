@@ -382,7 +382,7 @@ def tif2nc(tif_name,nc_name,lev):
 
 ### Results
 
-| ![CEC_globe.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC_globe.PNG) |
+| ![CEC_glob.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC_glob.PNG) |
 |:--:|
 | <b>圖 d01範圍表土0cm之CEC(cmolc/Kg)</b>|  
 

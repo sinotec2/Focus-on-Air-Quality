@@ -119,6 +119,12 @@ C-------------------------------------------------------------------------------
 ```
 
 ## Reading the isric tiff's
+### 解題策略
+- 由於isric採用多階層GIS形式對外提供數據，並非全球一個大檔案，而是約12.5公里見方一個tif檔案，因此需要解決檔案管理的問題、拼接的問題與效率的問題。
+- 最高解析度為250M，因此用單一矩陣來承接每個檔案為不可行，必須將其線性化，並去掉無效值(水域)，以減少體積。
+- 即使單一tif檔存成一個df，此df總集後將會有上億行，也不合理。須先將其整併(平均)成公里網格。
+- 處理完tif成為df後，以cat指令一次拼接，成為範圍內公里解析度之大檔，再轉成CWBWRF_15Km網格系統
+
 ### file name rules
 - filename sample:https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean/tileSG-028-080/tileSG-028-080_1-1.tif
   - url=https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean
@@ -127,18 +133,14 @@ C-------------------------------------------------------------------------------
 - second num:
   - seq. of latitude, from 90 to -90, every ~4 degree
   - 000~032 total 33 items
+  - first try 010 to 025, from lat_deg 50~-10
 - third num:
   - seq. of longitude, from -180 to 180, every ~4 degree
   - 000~088 total 88 items (without '037')
+  - first try 060 to 088, from lon_deg 60 to 180
 - total 1131 tiles
   - 每個tile目錄下最多4X4=16個檔案
   - 每個tif最多為450X450個網格，解析度250M，可能會有重疊，需個別校準。
-- img.lnglat()
-  - 為tif中心點之經緯度
-- img.bounds每圖四圍邊界座標
-  - Out[1282]: BoundingBox(left=7975000.0, bottom=3088250.0, right=8087500.0, top=3200750.0)
-- img.xy(0,0)每格中心點座標
-  - Out[1302]: (7975125.0, 3200625.0)    
 - wget scripts
   - 如沒有該tile，程式會跳開不去搜尋
   - 如果已經有了tiff檔案，程式也會跳開不重複下載
@@ -149,23 +151,64 @@ C-------------------------------------------------------------------------------
 url=https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean
 for iy in 0{10..25};do
 for ix in 0{60..80};do
-rot=tileSG-${iy}-${ix}
-n=$(grep $rot fnames.txt |wc|awkk 1)
-if [ $n == 0 ];then continue;fi
+  rot=tileSG-${iy}-${ix}
+  n=$(grep $rot fnames.txt |wc|awkk 1)
+  if [ $n == 0 ];then continue;fi
+  dir=${url}/${rot}
+  for j in {1..4};do
+  for i in {1..4};do
+    tif=${rot}_${j}-${i}.tif
+    if [ -e $tif ];then continue;fi
+    fil=${dir}/$tif
+    wget -q $fil
+  done
+  done
+done
+done
+```  
+- 經試誤發現在北方與東方尚有不足之坵塊，應是直角座標系統與地球系統造成之問題。再多向外補充。
+- 最後有用到的tif檔僅有2736個。檔名存成tiffs.txt。
+- 使用2迴圈同時下載其他深度之tif檔
+
+```bash
+for d in '5-15' '15-30' '30-60' '60-100';do sub gg2.cs $d;done
+```
+- gg2.cs
+
+```bash
+#for d in '0-5' '5-15' '15-30' '30-60' '60-100';do
+d=$1
+cec=cec_${d}cm_mean
+mkdir -p $cec
+cd $cec
+
+url=https://files.isric.org/soilgrids/latest/data/cec/$cec
+
+for tif in $(cat  ../tiffs.txt);do
+rot=$(echo $tif|cut -d'_' -f1) #tileSG-${iy}-${ix}
 dir=${url}/${rot}
-for j in {1..4};do
-for i in {1..4};do
-tif=${rot}_${j}-${i}.tif
 if [ -e $tif ];then continue;fi
 fil=${dir}/$tif
 wget -q $fil
 done
-done
-done
-done
-```  
+cd ..
+#done
+```
+
+### rasterio functions
+- img.width,img.height,img.count：東西、南北、高度之網格數
+- img.read()將數據讀成矩陣
+- img.lnglat()
+  - 為tif[中心點](https://rasterio.readthedocs.io/en/latest/api/rasterio.rio.options.html)之經緯度
+- img.bounds每圖四圍邊界座標
+  - BoundingBox(left=7975000.0, bottom=3088250.0, right=8087500.0, top=3200750.0)
+  - 以函數方式呼叫：minx=img.bounds.left
+- img.xy(0,0)每格中心點座標
+  - Out[1302]: (7975125.0, 3200625.0)    
 
 ### tiff2df
+- 使用[rasterio]()讀取tif內容
+
 ```python
 def tif2df(tif_name,nc_name):
   import numpy as np
@@ -177,19 +220,18 @@ def tif2df(tif_name,nc_name):
   img = rasterio.open(tif_name)
   nx,ny,nz=img.width,img.height,img.count
   data=img.read()
-  dx,dy=250.,250.
-  if nz!=1:return -1
-
+  dx,dy=(img.bounds.right-img.bounds.left)/img.width,(img.bounds.top-img.bounds.bottom)/img.height
+  
   nc = netCDF4.Dataset(nc_name, 'r')
   pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
   x0,y0=pnyc(img.lnglat()[0],img.lnglat()[1], inverse=False)
-  x0,y0=x0-dx*(nx//2),y0-dy*(ny//2)
+  x0,y0=x0-dx*(nx/2.),y0-dy*(ny/2.)
   x_1d=[x0+dx*i for i in range(nx)]
   y_1d=[y0+dy*i for i in range(ny)] 
   xm, ym = np.meshgrid(x_1d, y_1d)
   x,y=xm.flatten(),ym.flatten()
   lon, lat = pnyc(x, y, inverse=True)
-  DD={'lon':lon,'lat':lat,'X':x,'Y':y,'val':data.flatten()}
+  DD={'lon':lon,'lat':lat,'X':x,'Y':y,'val':data[0,:,:].flatten()}
   df=DataFrame(DD)
   boo=(df.lon>=60)&(df.lon<=180)&(df.lat>=-10)&(df.lat<=50)&(df.val!=-32768)
   df=df.loc[boo].reset_index(drop=True)
@@ -209,6 +251,10 @@ def tif2df(tif_name,nc_name):
   return 0
 ```
 ### 主程式
+- 由於tif檔案甚多，必須採多工同步處理，所以此段必須獨立進行。
+- 多工進行時會同時佔領同一檔，須以touch指令先行產生空白檔，讓其他程序跳開。
+- 執行結果再以cat指令將其接續成一個大檔，另行讀取。
+
 ```python
 import os
 from pandas import *
@@ -221,6 +267,48 @@ for tif_name in fnames:
   os.system('touch '+csv)
   print(tif_name,tif2df(tif_name,nc_name))
 ```
+- 多工指令
+  - 因pandas的pivot_table會自動啟動多核心運作，因此不必太多工，工作站會超頻運作。
+  - 為避免touch時間太近，造成誤判，需減少多工線程數量，再行檢查。
+
+```bash
+for i in {1..20};do sub python ../tif2df.py ;done
+```
+
+### 後處理
+- 將所有df檔案予以整併、轉成CWBWRF_15Km系統，輸出成nc檔案繪圖
+  - `cat ../header.txt *.csv > all.txt`
+
+```python
+fname='a1.nc'
+nc = netCDF4.Dataset(fname, 'r+')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+v=V[3][0]
+nc[v][:]=0
+
+df=read_csv('all.txt')
+x,y=df.X,df.Y
+df['ix']=np.array((x-nc.XORIG)/nc.XCELL,dtype=int)
+df['iy']=np.array((y-nc.YORIG)/nc.YCELL,dtype=int)
+df=df.loc[(df.ix>=0)&(df.ix<ncol)&(df.iy>=0)&(df.iy<nrow)].reset_index(drop=True)
+df['ixy']=[str(i)+'_'+str(j) for i,j in zip(df.ix,df.iy)]
+df['vn']=df.val*df.N
+pv=pivot_table(df,index='ixy',values=['N','vn'],aggfunc=np.sum).reset_index()
+pv['ix']=[int(i.split('_')[0]) for i in pv.ixy]
+pv['iy']=[int(i.split('_')[1]) for i in pv.ixy]
+pv['cec']=pv.vn/pv.N
+nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+var=np.zeros(shape=(nrow,ncol))
+var[pv.iy,pv.ix]=pv.cec
+nc[v][0,0,:,:]=var[:,:]
+nc.close()
+```
+
+### Results
+
+| ![CEC.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC.PNG) |
+|:--:|
+| <b>圖 d01範圍表土CEC(cmolc/Kg)</b>|  
 
 ## Reading the earthstat tiff's
 ### Crop names Dict

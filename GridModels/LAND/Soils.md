@@ -25,8 +25,9 @@ last_modified_date: 2022-01-21 10:49:11
 ## 背景
 - [soilgrids](https://soilgrids.org/)是位於荷蘭世界土壤資訊機構[isric.org](https://isric.org/about/isric-org)轄下[SoilGrids]()及[WoSIS]()專案成果展示之互動地圖，該網站亦提供了[全球土壤GIS資料庫](https://isric.org/explore/soil-geographic-databases)，最高解析度達到250M，時間範圍自1997至2020。
   - 以方磚方式儲存，[如](https://files.isric.org/soilgrids/latest/data/ocd/ocd_0-5cm_mean/tileSG-017-045/tileSG-017-045_1-1.tif)
-  - 項目有：bdod, cec, cfvo, clay, landmask, nitrogen, ocd, ocs, phh2o, sand, silt, soc(Soil Organic Carbon), wrb
+  - 項目有：bdod, **cec**, cfvo, clay, landmask, nitrogen, ocd, ocs, **phh2o**, sand, silt, soc(Soil Organic Carbon), wrb
   - [30秒數據](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/dc7b283a-8f19-45e1-aaed-e9bd515119bc)
+  - 2015年全球[GeoTiff](https://data.isric.org/geonetwork/srv/api/records/5333b1af-7620-407f-8bca-2303fc5c7288)
 
 - [Our World in Data](https://ourworldindata.org/land-use)全球長期的土地使用、農業、肥料與作物土地面積等數據。解析度為國家。
 - Ramankutty, N., Evan, A.T., Monfreda, C., and Foley, J.A. (2008). **Farming the planet: 1. Geographic distribution of global agricultural lands in the year 2000**. [Global Biogeochemical Cycles](https://onlinelibrary.wiley.com/doi/abs/10.1029/2007GB002952) 22 (1). doi:10.1029/2007GB002952.
@@ -34,8 +35,6 @@ last_modified_date: 2022-01-21 10:49:11
   - 數據為2000年基準，單位為農地面積比例，解析度為5分~10Km。資料格式為geoTiff、ESRI gridfile。
   - Data presented as five-arc-minute, 4320 x 2160 cell grid, Spatial Reference: GCS_WGS_1984, Datum: D_WGS_1984, Cell size: 0.083333 degrees, Layer extent: Top : 90, Left: -180, Right: 180, Bottom: -90 [earthstat.org](http://www.earthstat.org/cropland-pasture-area-2000/)
   - Harvested Area and Yield for 175 Crops, [earthstat.org](http://www.earthstat.org/harvested-area-yield-175-crops/)
-
-- Smith, W.K., Zhao, M., and Running, S.W. (2012). **Global Bioenergy Capacity as Constrained by Observed Biospheric Productivity Rates**. [BioScience](https://academic.oup.com/bioscience/article/62/10/911/238201) 62 (10):911–922. doi:10.1525/bio.2012.62.10.11.
 
 ## CCTM 所需土壤數據
 ### 控制選項
@@ -71,11 +70,11 @@ dimensions:
 |-|-|-|-|-|-|
 |SoilNum|Soil Number|-|1\~8005|(not found)||
 |Bulk_D|Bulk Density|t/m**3|0.85\~1.67||[bdod](https://files.isric.org/soilgrids/latest/data/bdod/)|
-|Cation|Cation Ex|cmol/kg|1.03\~48.82|cec1\~2(ncols, nrows, e2c_cats) in depv_data_module|[cec](https://files.isric.org/soilgrids/latest/data/cec/)|
+|**Cation**|Cation Ex|cmol/kg|1.03\~48.82|cec1\~2(ncols, nrows, e2c_cats) in depv_data_module|[cec](https://files.isric.org/soilgrids/latest/data/cec/)|
 |Field_C|Field Capacity, [Water holding capacity](https://gmd.copernicus.org/preprints/gmd-2016-165/gmd-2016-165.pdf), water retention capacity|m/m|0.07~0.48|(not found)|LSM_MOD.F:!-- WFC is soil field capacity (Rawls et al 1982)[available water capacity (-33 to -1500 kPa)](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/dc7b283a-8f19-45e1-aaed-e9bd515119bc)|
-|PH|potential of H ions|-|5.36\~ 7.47|pHs1\~2|[phh2o]()|
-|Porosity|Porosity|%|0.2~0.55|por1,por2 in module depv_data_module||[total porosity](https://files.isric.org/public/wise/wise_30min_v3.zip)|
-|Wilt_P|Wilting Point|m/m|0.03~0.32|wp1\~2|[soil water capacity (volumetric fraction) until wilting point](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c)|
+|**PH**|potential of H ions|-|5.36\~ 7.47|pHs1\~2|[phh2o]()|
+|**Porosity**|Porosity|%|0.2~0.55|por1,por2 in module depv_data_module||[total porosity](https://files.isric.org/public/wise/wise_30min_v3.zip)|
+|**Wilt_P**|Wilting Point|m/m|0.03~0.32|wp1\~2|[soil water capacity (volumetric fraction) until wilting point](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c)|
 
 
 ### number of soil type in LSM_MOD.F
@@ -117,7 +116,7 @@ C  16  OTHER      .420 .255  .175  7.12  3.670    6  .135  0.8  .213   .068
 C-------------------------------------------------------------------------------
 ```
 
-## Reading the isric tiff's
+## Reading the isric tiff's (CEC and PH)
 ### 解題策略
 - 由於isric採用多階層GIS形式對外提供數據，並非全球一個大檔案，而是約12.5公里見方一個tif檔案，因此需要解決檔案管理的問題、拼接的問題與效率的問題。
 - 最高解析度為250M，因此用單一矩陣來承接每個檔案為不可行，必須將其線性化，並去掉無效值(水域)，以減少體積。
@@ -144,7 +143,7 @@ C-------------------------------------------------------------------------------
   - 如沒有該tile，程式會跳開不去搜尋
   - 如果已經有了tiff檔案，程式也會跳開不重複下載
 
-### Downloading Scripts
+### Downloading Scripts (CEC and PH)
 
 ```bash
 url=https://files.isric.org/soilgrids/latest/data/cec/cec_0-5cm_mean
@@ -309,6 +308,25 @@ nc.close()
 |:--:|
 | <b>圖 d01範圍表土CEC(cmolc/Kg)</b>|  
 
+## Reading 2015 Global GeoTiff's
+- 由前述解析結果顯示，在濱海邊界上並不是對得很整齊，陸地內部數據正確性也堪慮。
+- 另由isric網站找到[全球GeoTiff檔](https://data.isric.org/geonetwork/srv/api/records/5333b1af-7620-407f-8bca-2303fc5c7288)，即使經壓縮，每檔仍有2.6G，數據有些多，但圖面看來顯然較佳。
+
+### Downloading Scripts
+```bash
+for s in CECSOL PHIHOX;do
+for d in {1..6};do 
+tif=${s}_M_sl${d}_250m_ll.tif
+if [ -e $tif ];then continue;fi
+pth=https://files.isric.org/soilgrids/former/2017-03-10/data/$tif
+wget -q $pth
+done
+done
+```
+## Porosity
+- 有關孔隙率isric網站只有提供0.5度解析度之[WISE derived soil properties](https://data.isric.org/geonetwork/srv/chi/catalog.search#/metadata/d9eca770-29a4-4d95-bf93-f32e1ab419c3)，是個資料庫查詢系統，資料以.dbf形式儲存。
+- 檔案共有10種土壤(SOIL1\~10)、10種面積(AREA1\~10)、20種總孔隙率TPOR_?T、TPOR_?S(?1\~10)、再加SNUM共41欄。
+  - SNUM為1\~45948的整數，為WISE系統內部專用碼
 ## Reference
 - W. J. Rawls, D. L. Brakensiek, K. E. Saxtonn (1982). **Estimation of Soil Water Properties**. Transactions of the ASAE. 25, 1316–1320. https://doi.org/10.13031/2013.33720
   - [lookup table](https://www.researchgate.net/figure/The-RA-soil-hydraulic-property-look-up-table-Rawls-et-al-1982_tbl3_254240905)

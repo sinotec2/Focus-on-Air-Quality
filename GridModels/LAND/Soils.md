@@ -306,11 +306,13 @@ nc.close()
 
 | ![CEC.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC.PNG) |
 |:--:|
-| <b>圖 d01範圍表土CEC(cmolc/Kg)</b>|  
+| <b>圖 d01範圍表土0~5cm之CEC(cmolc/Kg)</b>|  
 
 ## Reading 2015 Global GeoTiff's
 - 由前述解析結果顯示，在濱海邊界上並不是對得很整齊，陸地內部數據正確性也堪慮。
 - 另由isric網站找到[全球GeoTiff檔](https://data.isric.org/geonetwork/srv/api/records/5333b1af-7620-407f-8bca-2303fc5c7288)，即使經壓縮，每檔仍有2.6G，數據有些多，但圖面看來顯然較佳。
+- 同時納入所有資料，除了pivot_table之外，其餘處理似無法啟動多工模式，整體處理效率會較低。
+- 單一程式即使用到近1/3的記憶體，即使OS層級的多工也受到限制。
 
 ### Downloading Scripts
 ```bash
@@ -323,10 +325,70 @@ wget -q $pth
 done
 done
 ```
+
+### tiff2nc
+```python
+def tif2nc(tif_name,nc_name,lev):
+  from pandas import *
+  import numpy as np
+  import netCDF4
+  from pyproj import Proj
+  import rasterio
+  import numpy as np
+
+  img = rasterio.open(tif_name)
+  nx,ny,nz,nodata=img.width,img.height,img.count,img.profile['nodata']
+  if nz!=1:return -1
+  dx,x0,dy,y0=[img.profile['transform'][i] for i in [0,2,4,5]]
+  lon_1d=np.array([x0+dx*i for i in range(nx)])
+  lat_1d=np.array([y0+dy*i for i in range(ny)])
+  idx0,idx1=np.where((lat_1d>=10)&(lat_1d<=50))[0],np.where((lon_1d>=60)&(lon_1d<=180))[0]
+  data=img.read()[0,:,:]
+  img=0 #clean_up the memory
+  lonm, latm = np.meshgrid(lon_1d[idx1[:]], lat_1d[idx0[:]])
+  i1,i0=np.meshgrid(idx1[:], idx0[:])
+  DD={'lon':lonm.flatten(),'lat':latm.flatten(),'val':data[i0.flatten(),i1.flatten()]}
+  img,lonm,latm,data=0,0,0,0 #clean_up the memory
+  df=DataFrame(DD)
+  df=df.loc[f.val != nodata].reset_index(drop=True)
+  
+  nc = netCDF4.Dataset(nc_name, 'r+')
+  pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
+  V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+  nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+
+  #d00範圍：北緯-10~50、東經60~180。'area': [50, 60, -10, 180,],
+  x,y=pnyc(list(df.lon),list(df.lat), inverse=False) #taking time, can not parallelize
+  x,y=np.array(x),np.array(y)
+  df['ix']=np.array((x-nc.XORIG)/nc.XCELL,dtype=int)
+  df['iy']=np.array((y-nc.YORIG)/nc.YCELL,dtype=int)
+  x,y=0,0 #clean_up the memory
+  df=df.loc[(df.ix>=0)&(df.ix<ncol)&(df.iy>=0)&(df.iy<nrow)].reset_index(drop=True)
+  df['ixy']=[str(i)+'_'+str(j) for i,j in zip(df.ix,df.iy)]
+  pv=pivot_table(df,index='ixy',values='val',aggfunc=np.mean).reset_index()
+  df=0 #clean_up the memory
+  pv['ix']=[int(i.split('_')[0]) for i in pv.ixy]
+  pv['iy']=[int(i.split('_')[1]) for i in pv.ixy]
+  var=np.zeros(shape=(nrow,ncol))
+  var[pv.iy,pv.ix]=pv.val
+  nc[V[3][0]][0,lev,:,:]=var[:,:]
+  nc.close()
+  return 0
+```
+
+### Results
+
+| ![CEC2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC2.PNG) |
+|:--:|
+| <b>圖 d01範圍表土0cm之CEC(cmolc/Kg)</b>|  
+
 ## Porosity
 - 有關孔隙率isric網站只有提供0.5度解析度之[WISE derived soil properties](https://data.isric.org/geonetwork/srv/chi/catalog.search#/metadata/d9eca770-29a4-4d95-bf93-f32e1ab419c3)，是個資料庫查詢系統，資料以.dbf形式儲存。
 - 檔案共有10種土壤(SOIL1\~10)、10種面積(AREA1\~10)、20種總孔隙率TPOR_?T、TPOR_?S(?1\~10)、再加SNUM共41欄。
-  - SNUM為1\~45948的整數，為WISE系統內部專用碼
+  - SNUM為1\~45948的整數，為WISE系統內部專用碼(空間對照)
+  - AREA為對應該土壤的面積比例(%)
+  - TPOR_T：top soil(0~30cm)/TPOR_S:sub soil(30~100cm)
+
 ## Reference
 - W. J. Rawls, D. L. Brakensiek, K. E. Saxtonn (1982). **Estimation of Soil Water Properties**. Transactions of the ASAE. 25, 1316–1320. https://doi.org/10.13031/2013.33720
   - [lookup table](https://www.researchgate.net/figure/The-RA-soil-hydraulic-property-look-up-table-Rawls-et-al-1982_tbl3_254240905)

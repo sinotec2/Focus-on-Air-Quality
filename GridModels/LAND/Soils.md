@@ -327,9 +327,13 @@ done
 ```
 
 ### tiff2nc
+- 為節省記憶體的使用，在1d階段就進行座標點的篩選，再行擴張np.mesh
+- 數據轉移後將之前的容器清空
+- 此處直接對網格內之值進行平均，不需再記錄筆數。
+
 ```python
 def tif2nc(tif_name,nc_name,lev):
-  from pandas import *
+  from pandas import DataFrame, pivot_table
   import numpy as np
   import netCDF4
   from pyproj import Proj
@@ -375,7 +379,7 @@ def tif2nc(tif_name,nc_name,lev):
   nc.close()
   return 0
 ```
-
+- 
 ### Results
 
 | ![CEC2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC2.PNG) |

@@ -379,10 +379,10 @@ def tif2nc(tif_name,nc_name,lev):
   nc.close()
   return 0
 ```
-- 
+
 ### Results
 
-| ![CEC2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC2.PNG) |
+| ![CEC_globe.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC_globe.PNG) |
 |:--:|
 | <b>圖 d01範圍表土0cm之CEC(cmolc/Kg)</b>|  
 
@@ -391,7 +391,7 @@ def tif2nc(tif_name,nc_name,lev):
 - 檔案共有10種土壤(SOIL1\~10)、10種面積(AREA1\~10)、20種總孔隙率TPOR_?T、TPOR_?S(?1\~10)、再加SNUM共41欄。
   - SNUM為1\~45948的整數，為WISE系統內部專用碼(空間對照)
   - AREA為對應該土壤的面積比例(%)
-  - TPOR_T：top soil(0~30cm)/TPOR_S:sub soil(30~100cm)
+  - TPOR_T：top soil(0\~30cm)/TPOR_S:sub soil(30\~100cm)
 
 ## Reference
 - W. J. Rawls, D. L. Brakensiek, K. E. Saxtonn (1982). **Estimation of Soil Water Properties**. Transactions of the ASAE. 25, 1316–1320. https://doi.org/10.13031/2013.33720

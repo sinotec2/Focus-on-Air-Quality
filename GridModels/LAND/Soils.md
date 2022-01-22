@@ -439,7 +439,7 @@ nc.close()
 ```
 ### Results
 
-| ![por].PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/por.PNG) |
+| ![por.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/por.PNG) |
 |:--:|
 | <b>圖 d01範圍表土0cm之Porosity(Vv/Vs_Fraction)</b>|  
 

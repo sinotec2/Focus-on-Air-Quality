@@ -306,7 +306,7 @@ nc.close()
 
 | ![CEC.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC.PNG) |
 |:--:|
-| <b>圖 d01範圍表土0~5cm之CEC(cmolc/Kg)</b>|  
+| <b>圖 d01範圍表土0~5cm之CEC(mmolc/Kg)</b>|  
 
 ## Reading 2015 Global GeoTiff's
 - 由前述解析結果顯示，在濱海邊界上並不是對得很整齊，陸地內部數據正確性也堪慮。
@@ -338,7 +338,6 @@ def tif2nc(tif_name,nc_name,lev):
   import netCDF4
   from pyproj import Proj
   import rasterio
-  import numpy as np
 
   img = rasterio.open(tif_name)
   nx,ny,nz,nodata=img.width,img.height,img.count,img.profile['nodata']
@@ -346,7 +345,7 @@ def tif2nc(tif_name,nc_name,lev):
   dx,x0,dy,y0=[img.profile['transform'][i] for i in [0,2,4,5]]
   lon_1d=np.array([x0+dx*i for i in range(nx)])
   lat_1d=np.array([y0+dy*i for i in range(ny)])
-  idx0,idx1=np.where((lat_1d>=10)&(lat_1d<=50))[0],np.where((lon_1d>=60)&(lon_1d<=180))[0]
+  idx0,idx1=np.where((lat_1d>=-10)&(lat_1d<=50))[0],np.where((lon_1d>=60)&(lon_1d<=180))[0]
   data=img.read()[0,:,:]
   img=0 #clean_up the memory
   lonm, latm = np.meshgrid(lon_1d[idx1[:]], lat_1d[idx0[:]])
@@ -354,7 +353,7 @@ def tif2nc(tif_name,nc_name,lev):
   DD={'lon':lonm.flatten(),'lat':latm.flatten(),'val':data[i0.flatten(),i1.flatten()]}
   img,lonm,latm,data=0,0,0,0 #clean_up the memory
   df=DataFrame(DD)
-  df=df.loc[f.val != nodata].reset_index(drop=True)
+  df=df.loc[df.val != nodata].reset_index(drop=True)
   
   nc = netCDF4.Dataset(nc_name, 'r+')
   pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
@@ -387,12 +386,57 @@ def tif2nc(tif_name,nc_name,lev):
 | <b>圖 d01範圍表土0cm之CEC(cmolc/Kg)</b>|  
 
 ## Porosity
+### isric porosity
 - 有關孔隙率isric網站只有提供0.5度解析度之[WISE derived soil properties](https://data.isric.org/geonetwork/srv/chi/catalog.search#/metadata/d9eca770-29a4-4d95-bf93-f32e1ab419c3)，是個資料庫查詢系統，資料以.dbf形式儲存。
 - 檔案共有10種土壤(SOIL1\~10)、10種面積(AREA1\~10)、20種總孔隙率TPOR_?T、TPOR_?S(?1\~10)、再加SNUM共41欄。
   - SNUM為1\~45948的整數，為WISE系統內部專用碼(空間對照)
   - AREA為對應該土壤的面積比例(%)
   - TPOR_T：top soil(0\~30cm)/TPOR_S:sub soil(30\~100cm)
+- 結論：ArcGIS檔案(.lyr、.adf)無法由外部破解，無法讀取SNUM的對照位置
 
+### NASA GLDAS
+- [說明](https://ldas.gsfc.nasa.gov/gldas/soils)、[檔案位置](https://ldas.gsfc.nasa.gov/sites/default/files/ldas/gldas/SOILS/GLDASp5_porosity_025d.nc4)
+
+```python
+from pandas import DataFrame, pivot_table
+import numpy as np
+import netCDF4
+from pyproj import Proj
+from scipy.interpolate import griddata
+
+fname='GLDASp5_porosity_025d.nc4'
+nc = netCDF4.Dataset(fname, 'r')
+v='GLDAS_porosity'
+data=nc[v][0,:,:]
+lon_1d=nc['lon'][:]
+lat_1d=nc['lat'][:]
+idx0,idx1=np.where((lat_1d>=-10)&(lat_1d<=50))[0],np.where((lon_1d>=60)&(lon_1d<=180))[0]
+lonm, latm = np.meshgrid(lon_1d[idx1[:]], lat_1d[idx0[:]])
+i1,i0=np.meshgrid(idx1[:], idx0[:])
+DD={'lon':lonm.flatten(),'lat':latm.flatten(),'val':data[i0.flatten(),i1.flatten()]}
+img,lonm,latm,data=0,0,0,0 #clean_up the memory
+df=DataFrame(DD)
+df=df.loc[df.val >0 ].reset_index(drop=True)
+
+fname='a1.nc'
+nc = netCDF4.Dataset(fname, 'r+')
+pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+x1d=[nc.XORIG+nc.XCELL*i for i in range(ncol)]
+y1d=[nc.YORIG+nc.YCELL*i for i in range(nrow)]
+x1,y1=np.meshgrid(x1d,y1d)
+
+x,y=pnyc(list(df.lon),list(df.lat), inverse=False) #taking time, can not parallelize
+xyc= [(x[i],y[i]) for i in range(len(df))]
+var=np.zeros(shape=(nrow,ncol))
+c = np.array(df.val)
+var[:,: ] = griddata(xyc, c[:], (x1, y1), method='linear')
+
+nc[V[3][0]][0,lev,:,:]=var[:,:]
+nc.close()
+
+```
 ## Reference
 - W. J. Rawls, D. L. Brakensiek, K. E. Saxtonn (1982). **Estimation of Soil Water Properties**. Transactions of the ASAE. 25, 1316–1320. https://doi.org/10.13031/2013.33720
   - [lookup table](https://www.researchgate.net/figure/The-RA-soil-hydraulic-property-look-up-table-Rawls-et-al-1982_tbl3_254240905)

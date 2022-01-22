@@ -308,15 +308,16 @@ nc.close()
 |:--:|
 | <b>圖 d01範圍表土0~5cm之CEC(mmolc/Kg)</b>|  
 
-## Reading 2015 Global GeoTiff's
+## Reading 2015 250m resolution Global GeoTiff's
 - 由前述解析結果顯示，在濱海邊界上並不是對得很整齊，陸地內部數據正確性也堪慮。
 - 另由isric網站找到[全球GeoTiff檔](https://data.isric.org/geonetwork/srv/api/records/5333b1af-7620-407f-8bca-2303fc5c7288)，即使經壓縮，每檔仍有2.6G，數據有些多，但圖面看來顯然較佳。
 - 同時納入所有資料，除了pivot_table之外，其餘處理似無法啟動多工模式，整體處理效率會較低。
 - 單一程式即使用到近1/3的記憶體，即使OS層級的多工也受到限制。
+- 使用python的multiprocessing也無法提高效率
 
 ### Downloading Scripts
 ```bash
-for s in CECSOL PHIHOX;do
+for s in CECSOL PHIHOX WWP;do
 for d in {1..6};do 
 tif=${s}_M_sl${d}_250m_ll.tif
 if [ -e $tif ];then continue;fi
@@ -396,6 +397,7 @@ def tif2nc(tif_name,nc_name,lev):
 
 ### NASA GLDAS
 - [說明](https://ldas.gsfc.nasa.gov/gldas/soils)、[檔案位置](https://ldas.gsfc.nasa.gov/sites/default/files/ldas/gldas/SOILS/GLDASp5_porosity_025d.nc4)
+- 因解析度只有0.25度，小於15Km，因此必須用內插方式(scipy.interpolate.griddata)轉換座標。
 
 ```python
 from pandas import DataFrame, pivot_table
@@ -408,17 +410,13 @@ fname='GLDASp5_porosity_025d.nc4'
 nc = netCDF4.Dataset(fname, 'r')
 v='GLDAS_porosity'
 data=nc[v][0,:,:]
+data=np.where(data>0,data,0)
 lon_1d=nc['lon'][:]
 lat_1d=nc['lat'][:]
-idx0,idx1=np.where((lat_1d>=-10)&(lat_1d<=50))[0],np.where((lon_1d>=60)&(lon_1d<=180))[0]
-lonm, latm = np.meshgrid(lon_1d[idx1[:]], lat_1d[idx0[:]])
-i1,i0=np.meshgrid(idx1[:], idx0[:])
-DD={'lon':lonm.flatten(),'lat':latm.flatten(),'val':data[i0.flatten(),i1.flatten()]}
-img,lonm,latm,data=0,0,0,0 #clean_up the memory
-df=DataFrame(DD)
-df=df.loc[df.val >0 ].reset_index(drop=True)
+lonm, latm = np.meshgrid(lon_1d, lat_1d)
+x,y=pnyc(lonm,latm, inverse=False)
 
-fname='a1.nc'
+fname='GLDASp5_porosityCWBWRF_15Km.nc'
 nc = netCDF4.Dataset(fname, 'r+')
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
 V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
@@ -426,17 +424,25 @@ nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
 x1d=[nc.XORIG+nc.XCELL*i for i in range(ncol)]
 y1d=[nc.YORIG+nc.YCELL*i for i in range(nrow)]
 x1,y1=np.meshgrid(x1d,y1d)
+maxx,maxy=x1[-1,-1],y1[-1,-1]
+minx,miny=x1[0,0],y1[0,0]
+boo=(abs(x) <= (maxx - minx) /2+nc.XCELL*10) & (abs(y) <= (maxy - miny) /2+nc.YCELL*10)
+idx = np.where(boo)
+mp=len(idx[0])
+xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
 
-x,y=pnyc(list(df.lon),list(df.lat), inverse=False) #taking time, can not parallelize
-xyc= [(x[i],y[i]) for i in range(len(df))]
 var=np.zeros(shape=(nrow,ncol))
-c = np.array(df.val)
+c = data[idx[0][:],idx[1][:]]
 var[:,: ] = griddata(xyc, c[:], (x1, y1), method='linear')
-
 nc[V[3][0]][0,lev,:,:]=var[:,:]
 nc.close()
-
 ```
+### Results
+
+| ![por].PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/por.PNG) |
+|:--:|
+| <b>圖 d01範圍表土0cm之Porosity(Vv/Vs_Fraction)</b>|  
+
 ## Reference
 - W. J. Rawls, D. L. Brakensiek, K. E. Saxtonn (1982). **Estimation of Soil Water Properties**. Transactions of the ASAE. 25, 1316–1320. https://doi.org/10.13031/2013.33720
   - [lookup table](https://www.researchgate.net/figure/The-RA-soil-hydraulic-property-look-up-table-Rawls-et-al-1982_tbl3_254240905)

@@ -380,6 +380,37 @@ def tif2nc(tif_name,nc_name,lev):
   return 0
 ```
 
+### pH Averaging
+- pH的定義是水中氫離子濃度的冪方負值，因此在平均、內插時不能直接進行，須轉成原本定義，用氫離子濃度進行計算後，再轉成pH值。
+- 轉換過程中因避開無值部分，需先線性化，又因記憶體太大，須多步驟進行：
+  1. ISRIC提供的數據是0.1pH，因此要先除10
+  1. 取冪次方只能針對array，df.series太大了直接取次方會有問題。
+  1. 以氫離子濃度進行pivot_table(取網格內所有值之平均值)
+  1. array=df.series，可以進行轉換。還是要轉成array才能進行log計算。
+  1. 再次針對有數值的部分進行線性化，否則0值取-log10會得到NaN。
+
+```python
+  a=np.array(df.val)/10.
+  df.val=10**(-a)
+  pv=pivot_table(df,index='ixy',values='val',aggfunc=np.mean).reset_index()
+  a,df=0 #clean_up the memory
+  pv['ix']=[int(i.split('_')[0]) for i in pv.ixy]
+  pv['iy']=[int(i.split('_')[1]) for i in pv.ixy]
+  var=np.zeros(shape=(nrow,ncol))
+  var[pv.iy,pv.ix]=pv.val
+  idx=np.where(var>0)
+  a=-np.log10(var[idx[0][:],idx[1][:]])
+  var[idx[0][:],idx[1][:]]=a[:]
+```
+
+### Units
+
+|NAME|Units|Content|Range|
+|-|-|-|-|
+|CECSOL|cmolc/kg|Cation exchange capacity of soil|\~50|
+|PHIHOX|0.1PH|30\~100|
+|WWP|v%|Derived available soil water capacity (volumetric fraction) until wilting point|6\~55|
+
 ### Results
 
 | ![CEC_glob.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC_glob.PNG) |

@@ -59,6 +59,8 @@ nc.NVARS=50
 
 ## 空氣密度的引用
 - 空氣密度是mcip的結果，因此其網格系統定義是與ACON檔案一致的。鑒於BCON範圍是在ACON的外圍一圈，所以理論上是沒有空氣密度值的。
+
+### 空氣密度之邊界位置
 - 此處以網格最外圍值做為邊界上的密度，其位置與前述D0座標向內縮1格，頂點則重複以符合BCON檔案的定義：
 
 ```python
@@ -68,7 +70,23 @@ idxb=[(j0,i) for i in range(ncol1)] +[(j0,i1)] +   [(j,i1) for j in range(nrow1)
     [(j1,i) for i in range(i1,i0-1,-1)] +[(j1,i0)] + [(j,i0) for j in range(j1,j0-1,-1)]+[(j0,i0)]
 idxb=np.array(idxb,dtype=int).flatten().reshape(nbnd1,2).T
 ```
+
+### 矩陣之降階
 - 在引用時是將5階的矩陣予以降成4階
+- 使用指標系統，並利用定型矩陣的None功能，來指定重複的指標
+
+```python
+N=[np.zeros(shape=(ntA,nlay1, nbnd1),dtype=int) for i in range(4)]
+N[0][:,:,:]=np.array([t for t in range(ntA)])[:,None,None]
+N[1][:,:,:]=np.array([k for k in range(nlay1)])[None,:,None]
+N[2][:,:,:]=idxb[0][None,None,:]
+N[3][:,:,:]=idxb[1][None,None,:]
+for n in range(4):
+  N[n]=N[n].flatten()
+dens2=np.zeros(shape=(ntA,nlay1, nbnd1))
+if nlay1==40:
+  dens2[:,:,:]=dens[N[0],N[1],N[2],N[3]].reshape(ntA,nlay1, nbnd1)
+```
 
 ## 程式下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)

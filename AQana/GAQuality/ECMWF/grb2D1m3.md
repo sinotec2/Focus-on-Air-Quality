@@ -8,7 +8,7 @@ date: 2021-12-23 14:04:02
 last_modified_date:   2021-12-23 14:03:54
 ---
 
-# EAC4檔案轉成m3.nc格式
+# EAC4檔案轉成5階m3.nc
 {: .no_toc }
 
 <details open markdown="block">

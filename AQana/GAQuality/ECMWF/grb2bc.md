@@ -53,9 +53,12 @@ atts=['CDATE',  'CTIME', 'EXEC_ID', 'FILEDESC', 'FTYPE', 'GDNAM', 'GDTYP', 'HIST
      'WTIME', 'XCELL', 'XCENT', 'XORIG', 'YCELL', 'YCENT', 'YORIG']
 for i in atts:
   if i not in dir(nc0):continue
+  if i in ['EXEC_ID','FILEDESC','UPNAM','GDNAM','FTYPE']:continue
   exec('nc.'+i+'=nc0.'+i)
 nc.NVARS=50  
 ```
+- 其中**FTYPE**有關鍵影響，一般檔案此值為1，BCON檔案此值為**2**。
+
 
 ## 空氣密度的引用
 - 空氣密度是mcip的結果，因此其網格系統定義是與ACON檔案一致的。鑒於BCON範圍是在ACON的外圍一圈，所以理論上是沒有空氣密度值的。
@@ -71,9 +74,12 @@ idxb=[(j0,i) for i in range(ncol1)] +[(j0,i1)] +   [(j,i1) for j in range(nrow1)
 idxb=np.array(idxb,dtype=int).flatten().reshape(nbnd1,2).T
 ```
 
-### 矩陣之降階
-- 在引用時是將5階的矩陣予以降成4階
-- 使用指標系統，並利用定型矩陣的None功能，來指定重複的指標
+### 矩陣之降階(selection)
+- 在引用時是將4階的矩陣予以降成3階，將X, Y 2維消除成為1維的邊界線
+- 使用指標系統，並利用定型矩陣的None功能，來指定重複的指標，從XY空間中挑出邊界上的位置。
+- 將3階的N矩陣壓平成為1階，這樣就可以做為dens的指標。多階矩陣整數，無法成為另一矩陣的指標，而能發揮迴圈效果的。
+- 最後將dens矩陣reshape將其恢復成3階形狀
+- 除了選取邊界上的密度、此一手法也用在D0 2維網格系統的線性化、也用在最近距離點的選取。
 
 ```python
 N=[np.zeros(shape=(ntA,nlay1, nbnd1),dtype=int) for i in range(4)]
@@ -87,6 +93,11 @@ dens2=np.zeros(shape=(ntA,nlay1, nbnd1))
 if nlay1==40:
   dens2[:,:,:]=dens[N[0],N[1],N[2],N[3]].reshape(ntA,nlay1, nbnd1)
 ```
+
+## EAC4網格點之取值
+- 因邊界線已經非常靠近EAC4下載範圍的外圍，甚或不在範圍內。因此使用griddata進行內插會造成無值的結果(nan)。
+- 同時以龐大的2維矩陣內插出少數點，似乎在效率上也不對等。
+- 
 
 ## 程式下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)

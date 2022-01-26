@@ -41,6 +41,11 @@ sub python reas2cmaqD2.py D0 $icat
 done
 ```
 - [sub](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#執行程式)=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
+- 各排放類別處理完後，可就欲研究的主題進行合併，可以使用addNC工具將同樣規格的nc檔案予以相加，如下例即將11類之nc檔合併成為2015_D0.nc：
+
+```python
+addNC FERTILIZER_D0.nc MISC_D0.nc ROAD_TRANSPORT_D0.nc DOMESTIC_D0.nc INDUSTRY_D0.nc OTHER_TRANSPORT_D0.nc SOLVENTS_D0.nc WASTE_D0.nc EXTRACTION_D0.nc MANURE_MANAGEMENT_D0.nc POWER_PLANTS_NON-POINT_D0.nc 2015_D0.nc
+```
 
 ### 分段說明
 - 調用模組
@@ -53,9 +58,6 @@ import sys, os
 from pandas import *
 from pyproj import Proj
 from scipy.interpolate import griddata
-
-Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
-pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40, lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
 ```
 - 因壓縮檔內的目錄結構參差不齊，使用[findc](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#尋找檔案)來確定檔案位置，將結果存成fnames.txt備用
   - 讀取檔案。有`/mon`該行，行前有污染物質名稱，將其與檔名一起輸出，形成dict的內容
@@ -94,9 +96,9 @@ for ll in ['lon','lat']:
   exec(ll+'M=['+ll+'[0]+0.25*i for i in range(nn)]')
   exec(ll+'n={l:'+ll+'M.index(l) for l in '+ll+'M}')
 lonm, latm = np.meshgrid(lonM, latM)
-x,y=pnyc(lonm,latm, inverse=False)
 ```
 - 讀取模版，建立新(CMAQ)、舊(REAS)座標系統的對照關係，以便進行griddata內插
+  - 座標轉換(pnyc)須讀取模版的中心點位置(`lat_0=nc.YCENT, lon_0=nc.XCENT`)，如此才能得到正確的相對位置。
 
 ```python
 #interpolation indexing from template  # get the argument
@@ -110,6 +112,10 @@ y1d=[nc.YORIG+nc.YCELL*i for i in range(nrow)]
 x1,y1=np.meshgrid(x1d,y1d)
 maxx,maxy=x1[-1,-1],y1[-1,-1]
 minx,miny=x1[0,0],y1[0,0]
+
+pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40, lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
+x,y=pnyc(lonm,latm, inverse=False)
+
 boo=(abs(x) <= (maxx - minx) /2+nc.XCELL*10) & (abs(y) <= (maxy - miny) /2+nc.YCELL*10)
 idx = np.where(boo)
 mp=len(idx[0])

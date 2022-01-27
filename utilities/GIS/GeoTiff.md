@@ -3,7 +3,7 @@ layout: default
 title:  GeoTiff檔之讀取
 parent: GIS Relatives
 grand_parent: Utilities
-last_modified_date: 2022-01-18 15:40:57
+last_modified_date: 2022-01-27 11:57:06
 ---
 
 # python解析KML檔

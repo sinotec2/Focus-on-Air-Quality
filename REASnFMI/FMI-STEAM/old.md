@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 電廠排放之處理
+title: 船隻排放之處理_CAMx
 parent: REAS Python
 grand_parent: CMAQ Models
 nav_order: 4
@@ -8,7 +8,7 @@ date: 2022-02-05 10:26:07
 last_modified_date: 2022-02-05 10:26:11
 ---
 
-# 全球船隻排放量之處理_for CAMx
+# 全球船隻排放量之處理_CAMx
 {: .no_toc }
 
 <details open markdown="block">

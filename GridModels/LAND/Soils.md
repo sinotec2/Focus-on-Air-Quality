@@ -386,6 +386,17 @@ def tif2nc(tif_name,nc_name,lev):
 |:--:|
 | <b>圖 d01範圍表土0cm之CEC(cmolc/Kg)</b>|  
 
+### pH averaging scheme
+
+### Wilting Point
+- The physical definition of the wilting point, symbolically expressed as θpwp or θwp, is said by convention as the water content at −1,500 kPa (−15 bar) of suction pressure. [wiki](https://en.wikipedia.org/wiki/Permanent_wilting_point)
+
+### Field Capacity 
+- **Field Capacity** is the amount of soil moisture or water content held in the soil after excess water has drained away and the rate of downward movement has decreased. This usually takes place 2–3 days after rain or irrigation in pervious soils of uniform structure and texture. The physical definition of **field capacity** (expressed symbolically as θfc) is the bulk water content retained in soil at −33 kPa (or −0.33 bar) of hydraulic head or suction pressure. The term originated from Israelsen and West[1] and Frank Veihmeyer and Arthur Hendrickson.[2]
+- Veihmeyer and Hendrickson[3] realized the limitation in this measurement and commented that it is affected by so many factors that, precisely, it is not a constant (for a particular soil), yet it does serve as a practical measure of soil water-holding capacity. **Field capacity** improves on the concept of moisture equivalent by Lyman Briggs. Veihmeyer & Hendrickson proposed this concept as an attempt to improve water-use efficiency for farmers in California during 1949.[4]
+- **Field capacity** is characterized by measuring water content after wetting a soil profile, covering it (to prevent evaporation) and monitoring the change soil moisture in the profile. Water content when the rate of change is relatively small is indicative of when drainage ceases and is called **Field Capacity**, it is also termed drained upper limit (DUL).
+- Lorenzo A. Richards and Weaver[5] found that water content held by soil at a potential of −33 kPa (or −0.33 bar) correlate closely with **field capacity** (−10 kPa for sandy soils). 
+
 ## Porosity
 ### isric porosity
 - 有關孔隙率isric網站只有提供0.5度解析度之[WISE derived soil properties](https://data.isric.org/geonetwork/srv/chi/catalog.search#/metadata/d9eca770-29a4-4d95-bf93-f32e1ab419c3)，是個資料庫查詢系統，資料以.dbf形式儲存。

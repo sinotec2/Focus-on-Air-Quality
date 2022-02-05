@@ -71,10 +71,10 @@ dimensions:
 |SoilNum|Soil Number|-|1\~8005|(not found)||
 |Bulk_D|Bulk Density|t/m**3|0.85\~1.67||[bdod](https://files.isric.org/soilgrids/latest/data/bdod/)|
 |**Cation**|Cation Ex|cmol/kg|1.03\~48.82|cec1\~2(ncols, nrows, e2c_cats) in depv_data_module|[cec](https://files.isric.org/soilgrids/latest/data/cec/)|
-|Field_C|Field Capacity, [Water holding capacity](https://gmd.copernicus.org/preprints/gmd-2016-165/gmd-2016-165.pdf), water retention capacity|m/m|0.07~0.48|(not found)|LSM_MOD.F:!-- WFC is soil field capacity (Rawls et al 1982)[available water capacity (-33 to -1500 kPa)](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/dc7b283a-8f19-45e1-aaed-e9bd515119bc)|
+|Field_C|Field Capacity, [Water holding capacity](https://gmd.copernicus.org/preprints/gmd-2016-165/gmd-2016-165.pdf), water retention capacity|**m/m**|0.07~0.48|(not found)|LSM_MOD.F:!-- WFC is soil field capacity (Rawls et al 1982)[available water capacity (-33 to -1500 kPa)](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/dc7b283a-8f19-45e1-aaed-e9bd515119bc)|
 |**PH**|potential of H ions|-|5.36\~ 7.47|pHs1\~2|[phh2o]()|
 |**Porosity**|Porosity|%|0.2~0.55|por1,por2 in module depv_data_module||[total porosity](https://files.isric.org/public/wise/wise_30min_v3.zip)|
-|**Wilt_P**|Wilting Point|m/m|0.03~0.32|wp1\~2|[soil water capacity (volumetric fraction) until wilting point](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c)|
+|**Wilt_P**|Wilting Point|**m/m**|0.03~0.32|wp1\~2|[soil water capacity (volumetric fraction) until wilting point](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c)|
 
 
 ### number of soil type in LSM_MOD.F
@@ -420,7 +420,9 @@ def tif2nc(tif_name,nc_name,lev):
 ### pH averaging scheme
 
 ### Wilting Point
-- The physical definition of the wilting point, symbolically expressed as θpwp or θwp, is said by convention as the water content at −1,500 kPa (−15 bar) of suction pressure. [wiki](https://en.wikipedia.org/wiki/Permanent_wilting_point)
+- The physical definition of the wilting point, symbolically expressed as θpwp or θwp, is said by convention as the **water content at −1,500 kPa** (−15 bar) of suction pressure. [wiki](https://en.wikipedia.org/wiki/Permanent_wilting_point)
+- SoilGrids250m 2017-03 - Derived available soil water capacity (volumetric fraction) until wilting point
+Derived available soil water capacity (volumetric fraction) until wilting point at 7 standard depths predicted using the global compilation of soil ground observations. Accuracy assessement of the maps is availble in Hengl et at. (2017) DOI: 10.1371/journal.pone.0169748. Data provided as GeoTIFFs with internal compression (co='COMPRESS=DEFLATE'). Measurement units: **v%**. [ISRIC](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c)
 
 ### Field Capacity 
 - **Field Capacity** is the amount of soil moisture or water content held in the soil after excess water has drained away and the rate of downward movement has decreased. This usually takes place 2–3 days after rain or irrigation in pervious soils of uniform structure and texture. The physical definition of **field capacity** (expressed symbolically as θfc) is the bulk water content retained in soil at −33 kPa (or −0.33 bar) of hydraulic head or suction pressure. The term originated from Israelsen and West[1] and Frank Veihmeyer and Arthur Hendrickson.[2]

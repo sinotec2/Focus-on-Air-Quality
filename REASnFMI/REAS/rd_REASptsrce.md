@@ -3,7 +3,7 @@ layout: default
 title: 電廠排放之處理
 parent: REAS Python
 grand_parent: CMAQ Models
-nav_order: 2
+nav_order: 3
 date: 2022-01-10 09:04:56
 last_modified_date: 2022-01-10 09:05:00
 ---
@@ -30,8 +30,7 @@ last_modified_date: 2022-01-10 09:05:00
 
 ## 
 ## 程式下載
-- [reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD1.py)
-- [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)
+- 
 
 ## 結果檢視
 - m3.nc檔案可以用[VERDI]()檢視，如以下：

@@ -144,6 +144,8 @@ nc.close()
 | <b>圖 d01範圍所有種類灌溉面積的佔比(%)</b>|  
 
 ## land use/land cover map
+- 此處直接解讀[GISGeography](https://gisgeography.com/free-global-land-cover-land-use-data/)的全球LCLU數據[tiff.rar](http://waterdata.iwmi.org/Applications/GIAM2000/archives/gmlulca_10classes_global.rar)。
+- NXNY=(40457,20188)，解析度約1Km，採合併方式轉換座標系統。
 
 ### Definition
 1. Irrigated, surface water
@@ -165,3 +167,10 @@ nc.close()
 | ![lulc-1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/lulc-1.PNG) |
 |:--:|
 | <b>圖 d01範圍第1類土地使用/植被(地面水灌溉)面積的佔比(%)</b>|  
+| ![barren].PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/barren.PNG) |
+|:--:|
+| <b>圖 d01範圍第8類土地使用/空曠、沙漠或植被稀疏地的面積佔比(%)</b>|  
+
+- see also 
+  - [geo_em檔案之準備.結果檢視](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#結果檢視)
+  - [揚沙參數之執行結果](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/#揚沙參數之執行結果)

@@ -58,9 +58,19 @@ PH=PHB[:,:,:,:]-PHBm[None,:,:,:]
     arr[:,:,:]=var[None,:,:]*rat*unit_SHIP[s]
 ```
 - [矩陣之降階](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/#矩陣之降階selection)(selection)
+  - source code:[github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)
 
 ```python
-
+def trans4_3(tt,ll,mm,ii):
+#4-d transform to 3-d
+  N=[np.zeros(shape=(tt,ll,mm),dtype=int) for i in range(4)]
+  N[0][:,:,:]=np.array([t for t in range(tt)])[:,None,None]
+  N[1][:,:,:]=np.array([k for k in range(ll)])[None,:,None]
+  N[2][:,:,:]=ii[0][None,None,:]
+  N[3][:,:,:]=ii[1][None,None,:]
+  for n in range(4):
+    N[n]=N[n].flatten()
+  return N
 ```
 
 ## Further Reading

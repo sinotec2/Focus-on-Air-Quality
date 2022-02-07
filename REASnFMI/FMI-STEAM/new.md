@@ -23,21 +23,24 @@ last_modified_date: 2022-02-05 16:09:11
 ---
 
 ## 背景
-- 主要依據[CAMx] (https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/FMI-STEAM/old/)的處理與[內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils)經驗。
-- 由於FMI全球船隻排放的解析度較低，因此採用griddata內插方式轉換座標系統。
+- 主要依據[CAMx] (https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/FMI-STEAM/old/)的處理與griddata的[內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#nasa-gldas)經驗。
+  - 由於FMI-STEAM全球船隻排放的解析度較低，因此採用griddata內插方式轉換座標系統。
+  - 污染項目直接使用REAS2CMAQ.csv。
+  - 不再轉成Mozart模式檔案格式或CAMx排放檔案，直接產生CMAQ地面排放檔案
+
 
 ## 程式說明
 - 網格面積的計算方式：採取array批次計算，較迴圈計算更快，且因只有緯度方向有變異，採用arry[None,:,None]方式即可搭配應用在3維變數中。
 - 直接轉換到CMAQ模式，參考[reas2cmaq](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/reas2cmaq/)的對照方式
-- 因FMI檔案為全年逐日，此處縮減為選取當月，以減省記憶體容量。空間上則無篩選，直接使用griddata內插
+- 因FMI-STEAM檔案為全年逐日，此處縮減為選取當月，以減省記憶體容量。空間上則無篩選，直接使用griddata內插
 
 ### 單位轉換
-- FMI 排放量的單位為kg/day/grid_cell。其grid_cell是非等間距之經緯度網格，因此需先計算原系統之網格面積，轉換為單位面積排放量，才能進行內插。
+- FMI-STEAM 排放量的單位為kg/day/grid_cell。其grid_cell是非等間距之經緯度網格，因此需先計算原系統之網格面積，轉換為單位面積排放量，才能進行內插。
 - area為南北1維之面積，約為5x5~27x5 平方公里
 - lat並非由-90~+90，因此要特別處理之。
 - 東西方向的寬度並非等間具，以梯形方式計算。
 - NOx(3階矩陣)與面積(1階矩陣)之相除，在沒有維度的方向補上[空值None](https://www.796t.com/post/ZWNndnc=.html)
-  - 有關矩陣形狀不同情況下進行逐項計算，請參考[空值None筆記]()。
+  - 有關矩陣形狀不同情況下進行逐項計算，請參考[筆記:矩陣階層numpy.newaxis(None)的用法](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/MatrixRankNone/)。
 
 ```python
 pi=3.14159265359
@@ -91,11 +94,11 @@ xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
   var[:,:] = griddata(xyc, c[:], (x1, y1), method='linear')
 ```
 
-
-
 ### 程式碼
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/ship2cmaq.py)
 
+### 後處理
+- [按日拆分m3.nc檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/#brk_day2cs腳本程式)
 
 ## Results
 

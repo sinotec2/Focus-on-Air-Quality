@@ -22,7 +22,9 @@ last_modified_date:   2021-12-19 14:12:15
 ---
 
 ## 背景
-- 由於CCTM是按照
+- 由於CCTM是按照日期進行檔案的輸出，污染項目也是按照226項細項輸出，因此如需複合之空品項目如PM、VOCs等，則需進行後處理combine.exe。
+  - 如只是需要特定污染項目，直接使用[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#變數variable)進行讀取切割較為簡便。注意ACONC檔案之濃度單位為ppm(或&mu;g/M<sup>3</sup>)。
+- 測站定點濃度之讀取，需待combine處理後，另以write_site程式處理。
 
 ## 腳本程式說明
 ### 程式名稱

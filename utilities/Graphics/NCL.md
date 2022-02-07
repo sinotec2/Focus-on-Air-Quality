@@ -33,11 +33,11 @@ last_modified_date: 2022-02-05 09:43:40
 
 ### IO Files
 - Input Files
-  - CMAQ濃度檔案；將combine後之PM10及TFLAG(以[ncks]())切割出來單獨成檔即可。
+  - CMAQ濃度檔案；將[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)後之PM10及TFLAG(以[ncks]())切割出來單獨成檔即可。
   - GRIDCRO2D_1804_run5.nc：只會讀取其中的經緯度(4階)矩陣
   - bou2_4p.shp：[大陸地區之行政區界](https://github.com/GuangchuangYu/chinamap/blob/master/inst/extdata/china/bou2_4p.shp)
 - Output Files
-  - pm10*nnn*.png：nnn=000~215
+  - pm10*nnn*.png：*nnn*=000~215
 
 ### GIF Producing
 - 使用[imageMagick](https://imagemagick.org/script/convert.php)串連

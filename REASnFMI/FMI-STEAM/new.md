@@ -29,8 +29,47 @@ last_modified_date: 2022-02-05 16:09:11
 ## 程式說明
 - 網格面積的計算方式：採取array批次計算，較迴圈計算更快，且因只有緯度方向有變異，採用arry[None,:,None]方式即可搭配應用在3維變數中。
 - 直接轉換到CMAQ模式，參考[reas2cmaq](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/reas2cmaq/)的對照方式
-- 因FMI檔案為全年逐日，此處縮減為選取當月，以減省記憶體容量。
-- 
+- 因FMI檔案為全年逐日，此處縮減為選取當月，以減省記憶體容量。空間上則無篩選，直接使用griddata內插
+
+### 單位轉換
+- FMI 排放量的單位為kg/day/grid_cell。其grid_cell是非等間距之經緯度網格，因此需先計算原系統之網格面積，轉換為單位面積排放量，才能進行內插。
+- area為南北1維之面積，約為5x5~27x5 平方公里
+
+```python
+pi=3.14159265359
+peri_x=40075.02
+peri_y=40008
+r_x=peri_x/2./pi
+r_y=peri_y/2./pi
+dlon=(max(lst['lon'])-min(lst['lon']))/(ncol-1)
+dlat=(max(lst['lat'])-min(lst['lat']))/(nrow-1)
+lat,lon=np.array(lst['lat']),np.array(lst['lon'])
+rad=abs(lat/90.)*pi/2.
+r=(r_x*np.cos(rad)+r_y*np.sin(pi/2.-rad))/2.
+dx=2.*pi*r * dlon/360.
+dx=list(dx)+[dx[-1]]
+dx=np.array([(dx[i]+dx[i+1])/2. for i in range(nrow)])  
+dy=dlat/180.*(peri_x*np.cos(rad)**2+peri_y*np.sin(rad)**2)/2.
+area=dx*dy
+NOx=NOx/area[None,:,None] #kg/day/KM^2
+...
+NOx=NOx[min(js):max(js)+1,:,:]*nc.XCELL/1000*nc.YCELL/1000 #kg/day/GRID-CELL
+```
+- kg/day轉成gmole/s
+
+```python
+facG=1E3/24/3600. # 10^3 for kg/day to gmole/s
+unit_SHIP={i:facG/mw for i,mw in zip(spec,mw)}
+```
+- 乘上物種間的排放比例
+```python
+    rat=list(dfm.loc[dfm.spec==s,'sum_file'])[0]/vNOx
+    if s=='NOx': rat=1.
+    arr=np.zeros(shape=(len(idt),nrow,ncol))
+    arr[:,:,:]=var[None,:,:]*rat*unit_SHIP[s]
+```    
+
+### 程式碼
 
 ```python
 from pandas import *
@@ -83,7 +122,7 @@ dx=list(dx)+[dx[-1]]
 dx=np.array([(dx[i]+dx[i+1])/2. for i in range(nrow)])  
 dy=dlat/180.*(peri_x*np.cos(rad)**2+peri_y*np.sin(rad)**2)/2.
 area=dx*dy
-NOx=NOx/area[None,:,None]
+NOx=NOx/area[None,:,None] #kg/day/KM^2
 
 yrmn=sys.argv[1] #given yr. month
 
@@ -106,7 +145,7 @@ sdate=[bdate+datetime.timedelta(hours=t) for t in range(ntm)]
 js=np.array([int(datetime.datetime.strftime(dt,"%j")) for dt in sdate],dtype=int)
 
 #reducing NOx in day dimension
-NOx=NOx[min(js):max(js)+1,:,:]
+NOx=NOx[min(js):max(js)+1,:,:]*nc.XCELL/1000*nc.YCELL/1000 #kg/day/GRID-CELL
 js=js-min(js)
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
 lonm, latm = np.meshgrid(lst['lon'],lst['lat'])

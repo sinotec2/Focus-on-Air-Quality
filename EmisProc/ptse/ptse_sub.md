@@ -152,6 +152,7 @@ $ cat -n ptse_sub.py
     90
 ```
 ### 確認工廠座標都落在陸地上
+- dict.grd是以SURFER ASCII-GRD格式儲存的地形高程檔案，可以用[load_surfer](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/surferIO/)副程式來讀取
 
 ```python
     91  def check_landsea(df):

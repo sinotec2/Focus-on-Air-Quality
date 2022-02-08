@@ -22,6 +22,15 @@ last_modified_date: 2022-02-08 16:05:00
 ## 背景
 
 
+## rdpng3.py 程式說明
+### 程式IO
+- 引數：png檔案名稱
+- legend.png：NullSchool PM2.5色標
+
+| ![legend.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/legend.png) 
+
+- 結果檔案：dict.grd
+
 ### 程式碼
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/rdpng3.py)
 

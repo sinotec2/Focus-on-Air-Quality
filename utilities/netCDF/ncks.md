@@ -177,5 +177,5 @@ for v in V[3]:
 ### Reference
 - [NCO](https://github.com/nco/nco)
 - [ncks](https://linux.die.net/man/1/ncks)
-- [Here](https://boostnote.io/shared/7566f2e7-f9aa-4a00-ba74-616ea8f72d25)
+- lucasblog, [Software installation in CentOS 7 for scientific computation](https://wolfscie.wordpress.com/2015/04/01/software-installation-in-centos-for-scientific-computation/), April 1, 2015.
 ---

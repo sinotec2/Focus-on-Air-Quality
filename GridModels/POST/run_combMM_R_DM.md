@@ -364,4 +364,4 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
 ```
 
 ## Reference
-- Aitken Nuclei - an overview | ScienceDirect Topics (n.d.). Available at [sciencedirect](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) (Accessed 3 January 2022).
+- Aitken Nuclei - an overview \| ScienceDirect Topics (n.d.). Available at [sciencedirect](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) (Accessed 3 January 2022).

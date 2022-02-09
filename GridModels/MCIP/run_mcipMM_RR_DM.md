@@ -180,7 +180,9 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ||sChina_81ki(連結到EAsia81K)|d01|3格|53,53|相當於WRF之d01|
 ||sChina_27k|d02|2格|65,65|相當於WRF之d02|
 ||TWN_3X3|d04|8格|83, 137|相當於WRF之d04|
-|單獨|CWBWRF_15k|d00|1格|665,389||
+|單獨|CWBWRF_15k|d00|3格|665,389||
+
+-note：CWBWRF_15k網格系統定義之參考，詳見中央氣象局opendata數值預報模式-區域預報模式(WRF-15公里)之[說明](https://opendata.cwb.gov.tw/opendatadoc/MIC/A0061.pdf)。
 
 ```python
 260,280d232

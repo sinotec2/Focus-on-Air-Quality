@@ -107,7 +107,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > set ProgDir    = $CMAQ_HOME/PREP/mcip/src
 ```
 - `wrfout`之連結引用
-   - 此處沒有使用`wrfout`的全名，而是在`bash`腳本中執行連結(see [ln_YYMM.cs])，因為全月的**WRF**模擬主要是以`bash`腳本控制，有較多的範本可以引用。
+   - 此處沒有使用`wrfout`的全名，而是在`bash`腳本中執行連結(see [ln_YYMM.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/ln_YYMM/#ln_yymmcs腳本))，因為全月的**WRF**模擬主要是以`bash`腳本控制，有較多的範本可以引用。
    - 使用連結還有一個好處，可以對日期較為自由(事實上`bcon`會比WRF批次多要求**向後**1個小時、`mcip`則會要求**向前**1個小時。)。
 
 ```python
@@ -171,14 +171,16 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ### 網格系統詳細定義
 - 各層網格系統的起始位置、網格數
    - 為WRF各[子網格系統](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/))內縮之結果
+   - d00選項為產生最外層邊界濃度時所需用，或為單獨網格系統使用。
    - 名稱定義詳對照表
 
-|網格名稱|網格編號|內縮格數|網格數|說明|
-|----|----|----|----|----|
-|sChina_81k|d00|WRFd01之1~57|內縮1格|虛擬系統，為產生d01邊界|
-|sChina_81ki(連結到EAsia81K)|d01|3格|53,53|相當於WRF之d01|
-|sChina_27k|d02|2格|65,65|相當於WRF之d02|
-|TWN_3X3|d04|8格|83, 137|相當於WRF之d04|
+|巢狀/單獨網格|網格名稱|網格編號|內縮格數|網格數|說明|
+|----|----|----|----|----|----|
+|巢狀|sChina_81k|d00|WRFd01之1~57|內縮1格|虛擬系統，為產生d01邊界|
+||sChina_81ki(連結到EAsia81K)|d01|3格|53,53|相當於WRF之d01|
+||sChina_27k|d02|2格|65,65|相當於WRF之d02|
+||TWN_3X3|d04|8格|83, 137|相當於WRF之d04|
+|單獨|CWBWRF_15k|d00|1格|665,389||
 
 ```python
 260,280d232

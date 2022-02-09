@@ -99,6 +99,7 @@ geo_em.d00.nc -> /nas1/WRF4.0/WRF_chem/WPS/geo_em.d01.nc_121.7359
 - CCTM所讀取const.nc檔案內需設定正確的點源位置網格點，因此需改成CWBWRF_15k網格系統。
 
 ## CCTM之執行
+### 腳本修改項目
 - 開啟`CTM_WB_DUST`
 - 關閉`CTM_ABFLUX`
 - 模擬期間為啟始後9天結束
@@ -111,6 +112,14 @@ setenv CTM_ABFLUX N
 ...
   @ A = $RUN - 1; @ DD = $A * 4  ; @ ED = $A * 4 + 9    
 ```
+### 計算核心之安排
+- 因模擬範圍東西較寬，南北較窄，比例約為1.7:1，為使計算負荷及記憶體分配較為平均，此處設定接近2:1。
+
+```bash
+@ NPCOL  = 14 ; @ NPROW = 7
+```
+
+- 共使用14*7=98個核心。
 
 ## 後處理
 ### COMBINE

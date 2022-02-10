@@ -24,7 +24,7 @@ last_modified_date: 2022-02-10 10:18:31
   - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純。且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加AERMAP篩選的時間。
   - 使用者自行轉檔方案(此筆記)：將`gdal_translate`指令包裹在python程式中，只需轉換所需的範圍，較為經濟有效。缺點是使用者還是必須下載[正確版本](https://www.gisinternals.com/release.php)的`gdal_translate`程式，並且更改其執行路徑。
 - 執行步驟
-  1. 由GeoTiff檔案中切割指定範圍之地形數據，再以GeoTiff格式寫出數據。
+  1. 由GeoTiff檔案中切割指定範圍之地形數據，內插、再以GeoTiff格式寫出數據。
   1. 呼叫`gdal_translate`程式進行轉檔
   1. 準備其他aermap.inp所需參數
   1. 呼叫AERMAP程式完成作業

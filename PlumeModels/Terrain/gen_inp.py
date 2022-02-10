@@ -34,19 +34,17 @@ else:
 distr = 'ALL'
 xmin,nx,dx,ymin,ny,dy=(float(args[i]) for i in range(1,7))
 nx,ny=int(nx),int(ny)
-xmax=xmin+(nx-0)*dx
-ymax=ymin+(ny-0)*dy
+xmax=xmin+(nx-1)*dx
+ymax=ymin+(ny-1)*dy
 Xcent=(xmin+xmax)/2
 Ycent=(ymin+ymax)/2
 Latitude_Pole, Longitude_Pole=twd97.towgs84(Xcent, Ycent)
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,
         lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
 
-M=4
+M=5
 x_mesh = np.linspace(xmin-dx*M, xmax+dx*M, nx+2*M)
 y_mesh = np.linspace(ymin-dy*M, ymax+dy*M, ny+2*M)
-#x_mesh = np.linspace(xmin, xmax, nx)
-#y_mesh = np.linspace(ymin, ymax, ny)
 # 2-d mesh coordinates, both in TWD97 and WGS84
 x_g, y_g = np.meshgrid(x_mesh, y_mesh)
 xgl=x_g-Xcent
@@ -71,8 +69,8 @@ grid_z2 = griddata(points, c, (x_g, y_g), method='linear')
 #save tiff file
 TIF,DEM,NUL=fname+'.tiff',last+'.dem',' >>'+dir+'geninp.out'
 os.system('cp template.tiff '+TIF)
-resx,resy=(np.max(lon)-np.min(lon))/(nx+2*M-0),(np.max(lat)-np.min(lat))/(ny+2*M-0),
-transform = Affine.translation(np.min(lon) - resx / 2, np.max(lat) + resy / 2) * Affine.scale(resx, -resy)
+resx,resy=(np.max(lon)-np.min(lon))/(nx+2*M-1),(np.max(lat)-np.min(lat))/(ny+2*M-1),
+transform = Affine.translation(np.min(lon), np.max(lat)) * Affine.scale(resx, -resy)
 new_dataset = rasterio.open(TIF,'w',driver='GTiff',height=grid_z2.shape[0],width=grid_z2.shape[1],count=1,
   dtype=grid_z2.dtype,crs='+proj=latlong',transform=transform,)
 data=np.flip(grid_z2,[0])
@@ -80,12 +78,8 @@ new_dataset.write(data, 1)
 new_dataset.close()
 
 # convert the tiff to dem
-img = rasterio.open(TIF)
-l,b,r,t=img.bounds[:]
-llSE=str(lon[0,-1])+' '+str(lat[0,-1])
-llNW=str(lon[-1,0])+' '+str(lat[-1,0])+' '+llSE
-llSE=str(r)+' '+str(b)
-llNW=str(l)+' '+str(t)+' '+llSE
+llSE=str(lon[1,-2])+' '+str(lat[1,-2])
+llNW=str(lon[-2,1])+' '+str(lat[-2,1])+' '+llSE
 pth1='/opt/anaconda3/bin/'
 pth2='/opt/anaconda3/envs/ncl_stable/bin/'
 gd_data=';export PATH='+pth1+':'+pth2+':$PATH;GDAL_DATA=/opt/anaconda3/envs/py37/share/gdal '
@@ -96,15 +90,11 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 
 #generate aermap.inp,
-#domain of rectangular region, dx*3 is due to the resolution of DEM file may not sufficient
-llmin=pnyc(xmin-Xcent, ymin-Ycent, inverse=True) #long/lati
-llmax=pnyc(xmax-Xcent, ymax-Ycent, inverse=True)
-uxmn1,uymn1=utm.from_latlon(llmin[1],llmin[0])[0:2]
-uxmn2,uymx1=utm.from_latlon(llmax[1],llmin[0])[0:2]
-uxmx1,uymn2=utm.from_latlon(llmin[1],llmax[0])[0:2]
-uxmx2,uymx2=utm.from_latlon(llmax[1],llmax[0])[0:2]
+xy=utm.from_latlon(lat,lon)
+uxmn,uxmx=int(np.min(xy[0][M:-M,M])),int(np.max(xy[0][M:-M,-M]))
+uymn,uymx=int(np.min(xy[1][M,M:-M])),int(np.max(xy[1][-M,M:-M]))
 co,an,z='   DOMAINXY  ','   ANCHORXY  ',' 51 '
-UTMrange=co+str(int(max(uxmn1,uxmn2)))+' '+str(int(max(uymn1,uymn2)))+z+str(int(min(uxmx1,uxmx2)))+' '+str(int(min(uymx1,uymx2)))+z
+UTMrange=co+str(uxmn)+' '+str(uymn)+z+str(uxmx)+' '+str(uymx)+z
 xmid,ymid=(xmin+xmax)/2., (ymin+ymax)/2.
 llanc=pnyc(xmid-Xcent, ymid-Ycent, inverse=True)
 uxanc,uyanc=utm.from_latlon(llanc[1],llanc[0])[0:2]
@@ -142,6 +132,7 @@ for l in range(iend,len(d)):
     text_file.write( "%s" % d[l])
 text_file.close()
 
+# execute the aermap
 aermap_path='./'
 os.system(aermap_path+'aermap >& isc.out')
 
@@ -156,8 +147,8 @@ rr, gg, bb = ([i[j:j + 2] for i in col] for j in [0, 2, 4])
 col = [aa + b + g + r for b, g, r in zip(bb, gg, rr)]
 
 # round the values of levels to 1 significant number at least, -2 at least 2 digits
-M = int(np.log10(levels[1])) - 1
-levels = [round(lev, -M) for lev in levels]
+i = int(np.log10(levels[1])) - 1
+levels = [round(lev, -i) for lev in levels]
 
 #the Cntr method is valid only in previous version of matplotlib
 c = cntr.Cntr(lon, lat, grid_z2)
@@ -212,6 +203,10 @@ for level in levels[:]:
 line.append('</Document></kml>')
 with open(fname + '.kml', 'w') as f:
   [f.write(i) for i in line]
+
+# generate the ISC files
+if M>0:
+  grid_z2=grid_z2[M:-M,M:-M]
 
 xy = np.array([[(i, j) for i, j in zip(x_g[k], y_g[k])] for k in range(ny)])
 with open(fname + '_re.dat','w') as f:

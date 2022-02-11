@@ -2,7 +2,7 @@
 layout: default
 title: "初始濃度檔案序列之產生"
 parent: "Boundary Condition"
-grand_parent: "CMAQ Models"
+grand_parent: "CMAQ Model System"
 nav_order: 2
 date: 2021-12-16 11:34:01
 last_modified_date:   2021-12-16 11:34:05

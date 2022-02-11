@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Elev. Point Sources
-parent: CMAQ Models
+parent: CMAQ Model System
 nav_order: 6
 has_children: true
 permalink: /GridModels/PTSE/

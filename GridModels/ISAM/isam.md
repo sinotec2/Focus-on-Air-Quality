@@ -1,7 +1,7 @@
 ---
 layout: default
 title: ISAM Analysis
-parent: CMAQ Models
+parent: CMAQ Model System
 nav_order: 8
 has_children: true
 permalink: /GridModels/ISAM/

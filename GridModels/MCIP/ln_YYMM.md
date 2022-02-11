@@ -2,7 +2,7 @@
 layout: default
 title: wrfout檔案之連結
 parent: Met. Chem. Interface Proc.
-grand_parent: CMAQ Models
+grand_parent: CMAQ Model System
 nav_order: 1
 date: 2021-12-19 21:21:37
 last_modified_date:   2021-12-19 21:21:33

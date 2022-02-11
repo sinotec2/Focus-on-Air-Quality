@@ -2,7 +2,7 @@
 layout: default
 title: d01地理分區檔案之準備
 parent: ISAM Analysis
-grand_parent: CMAQ Models
+grand_parent: CMAQ Model System
 nav_order: 3
 date: 2021-12-22 17:10:55
 last_modified_date: 2021-12-22 17:10:45

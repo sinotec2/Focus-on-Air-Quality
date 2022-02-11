@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CWBWRF_15k System
-parent: CMAQ Models
+parent: CMAQ Model System
 nav_order: 9
 permalink: /GridModels/
 last_modified_date:   2022-02-09 09:03:45

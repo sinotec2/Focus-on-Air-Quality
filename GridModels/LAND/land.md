@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Geography and Land Data
-parent: CMAQ Models
+parent: CMAQ Model System
 nav_order: 4
 has_children: true
 permalink: /GridModels/LAND/

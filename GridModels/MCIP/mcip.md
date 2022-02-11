@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Met. Chem. Interface Proc.
-parent: CMAQ Models
+parent: CMAQ Model System
 nav_order: 1
 has_children: true
 permalink: /GridModels/MCIP/

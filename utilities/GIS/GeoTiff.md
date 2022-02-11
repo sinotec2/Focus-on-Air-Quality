@@ -74,6 +74,33 @@ new_dataset.close() #關閉檔案
 - 應用在全球250M解析度之tiff檔[解讀](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)，採**平均**方式合併，然因記憶體需求較大，須先進行範圍切割。
 - 解析度較低(1~10Km)之[應用](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)，採**加總**方式進行合併。
 
+### [tif2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/tif2kml.py)
+- 顧名思義，此程式將tiff檔轉成kml檔案，便於檢視等值圖。
+- 呼叫[cntr_kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/cntr_kml.py)，詳見[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
+- 引數：tiff檔的名稱(TIF)
+- 結果：TIF.kml
+- 如果邊界的平均值正好是中心點的經緯度，判定座標系統是經緯度系統，否則設定是twd系統
+
+```python
+img = rasterio.open(fname)
+l,b,r,t=img.bounds[:]
+LL=False
+if (l+r)/2==img.lnglat()[0]:LL=True
+...
+if LL:
+  lon, lat = np.meshgrid(x, y)
+else:
+  x_g, y_g = np.meshgrid(x, y)
+  Xcent=(x[0]+x[-1])/2
+  Ycent=(y[0]+y[-1])/2
+  Latitude_Pole, Longitude_Pole=twd97.towgs84(Xcent, Ycent)
+  pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,
+        lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
+  xgl,ygl=x_g-Xcent,  y_g-Ycent
+  lon,lat=pnyc(xgl, ygl, inverse=True)
+result=cntr_kml(data, lon, lat, fname)
+```
+
 ## Reference
 - Mohit Kaushik, **Reading and Visualizing GeoTiff \| Satellite Images with Python**, [towardsdatascience](https://towardsdatascience.com/reading-and-visualizing-geotiff-images-with-python-8dcca7a74510),Aug 2, 2020
 - Mapbox Revision, **Rasterio: access to geospatial raster data**, [readthedocs](https://rasterio.readthedocs.io/en/latest/), 2018

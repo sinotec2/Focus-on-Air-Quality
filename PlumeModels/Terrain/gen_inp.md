@@ -84,7 +84,7 @@ os.system(cmd)
 ### 輸入檔案
 - taiwan2020.tiff([2020全臺20M_DTM](https://data.gov.tw/dataset/138563))
 - 模版
-  - aermap.inp
+  - [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/aermap.inp)
   - template.tiff
 ### 輸出檔案
 - 輸入aermap.inp

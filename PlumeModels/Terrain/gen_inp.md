@@ -45,7 +45,7 @@ last_modified_date: 2022-02-11 10:57:05
 ### EIO
 - [EIO(elevation)](https://pypi.org/project/elevation/)為pypi上的公開程式，會連結到NASA及NGA所維護的地形數據庫(SRTM 30m Global 1 arc second V003 )以及CGIAR-CSI所維護的 SRTM 90m Digital Elevation Database v4.1。
 - 由於為全球性質，因此包括所有離島與境外其他國家範圍。
-  - 索取範圍(--bounds)，為西南到東北角之經緯度，範例如下(向外擴張20倍間距)
+  - 索取範圍(`--bounds`)，為西南到東北角之經緯度，範例如下(向外擴張20倍間距)
 
 ```python
 llmin=pnyc(xmin-2000.*dx/100-Xcent, ymin-2000*dx/100.-Ycent, inverse=True) #long/lati
@@ -54,7 +54,7 @@ smax=str(llmax[0])+' '+str(llmax[1])                #long/lati
 smin=str(llmin[0])+' '+str(llmin[1])+' '+smax
 ```
 - 雖然是動態連結下載，程式可以將原始數據(cache檔)儲存至指定目錄，如下次有下載需求時，就不會重複下載檔案。
-  - 如下例將cache儲存在(--cache_dir)/tmp/gdal目錄
+  - 如下例將cache儲存在(`--cache_dir`)/tmp/gdal目錄
   - 須指定環境變數GDAL_DATA之位置
   - 下載結果檔案為一GeoTiff檔案。由於已經指定範圍，下載後就不必另行切割
 
@@ -315,5 +315,13 @@ with open(fname + '_TG.txt','w') as f:
       st+=' '+ele[i]
     f.write(st+'\n')
 ```      
+## 結果比較
+- 林口電廠周邊地形檔輸入aermod模擬結果範例
+  - mmif氣象1/21\~31
+  - 有建築物
+
+| ![noterr.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/noterr.png) |![withterr.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/withterr.png)|
+|:--:|:--:|
+| <b>無地形，煙流偏西南方，為東北季風影響</b>|有地形，煙流方向偏南，擴散範圍受到限制，集中在河谷低地。受限於80\~100M等高線範圍。最大值較高51\~754&mu;/M<sup>3</sup>|
 
 ## Reference

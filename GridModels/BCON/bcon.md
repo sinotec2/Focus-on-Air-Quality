@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Boundary Condition
-parent: CMAQ Models
+parent: CMAQ Model System
 nav_order: 2
 has_children: true
 permalink: /GridModels/BCON/

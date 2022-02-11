@@ -70,4 +70,45 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```
 
-## 
+## [gen_inp.py](gen_inp.py)
+### 引數
+- GDNAME  Xinit Xnum Xdelta Yinit Ynum Ydelta
+  - GDNAME:網格系統名稱(自行命名，將用做產生檔案之filename ROOT)
+  - Xinit及Yinit為西南角落之TWD97座標(m)
+  - Xnum及Ynum為x/y方向的點數(整數)，全部共Xnum*Ynum點
+  - Xdelta及Ydelta為x/y方向的間距(m)，以正值為宜，但不限定。
+  - 自由格式，不須逗號，不接受全形或中文碼
+  - 範例 gd3 277500. 50 100. 2776500. 50 100.
+
+### 輸入檔案
+- taiwan.tiff([2020全臺20M_DTM](https://data.gov.tw/dataset/138563))
+- 模版
+  - aermap.inp
+  - template.tiff
+### 輸出檔案
+- 輸入aermap.inp
+- 檔名為gd3(範例)為首之6個檔案
+	- gd3.kml→模擬範圍的等高線，彙入google map-my map作圖
+	- gd3_re.dat→文字檔。以DISCCART方式標示每一格點的地形高程，併入iscst3的控制檔(.INP)內，取代原有XYINC設定
+	- gd3_TG.txt→文字檔。iscst3所需要的地形網格外部檔案，須在控制檔(.INP)內設定TG INPUTFIL gd3_TG.txt，以進行連結。
+		- 第1行：Xnum Ynum Xinit Yinit Xend Yend Xdelta Ydelta (Xend/Yend為東北角座標)
+		- 第2行→第1個Y值，自西到東X方向所有點之高程，
+		- 第3行→第2個Y值，自西到東X方向所有點之高程，
+		- ...
+	- gd3.tiff→作DEM檔案時使用。
+		- 可以用QGIS檔GIS程式檢視。
+		- 或以tif2kml.py檢視
+		  - tif2kml.py -f  gd3.tiff
+			- 結果檔為gd3.tiff.kml
+	- gd3.dem→文字檔。aermap所需數值地形之外部檔案。aermap輸入檔案格式中較容易處理者(格式詳[DEM](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem))。
+- aermap執行結果
+  - aermap.out：回饋輸入數據及錯誤訊息
+  - MAPDETAIL.OUT：地圖的細節
+  - MAPPARAMS.OUT：確認DEM的正確性
+  - DOMDETAIL.OUT：如四角未落在DEM檔內，檢查範圍的設定  
+  - gd3.REC：此檔將輸入AERMOD模式中，設定地形及特徵山高
+
+### gen_inp.py程式下載
+- [FAQ]()  
+
+## Reference

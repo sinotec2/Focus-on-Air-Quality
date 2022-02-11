@@ -124,7 +124,7 @@ os.system(cmd)
 ### 調用模組
 - 因計算等濃度線，調用了`cntr`模組。在python3為第3方提供的軟體，並不屬`matplotlib`內容，需另行自[githup](https://github.com/matplotlib/legacycontour.git)安裝，詳附註。
 - AERMAP使用的是UTM系統，因此需用到[utm](https://pypi.org/project/utm/)模組，在台灣地區不適用，需另安裝。台灣地區使用[twd97](https://pypi.org/project/twd97/)。絕對座標轉換使用utm及twd97，相對座標批次轉換，還是使用pyproj的Proj比較方便快速。
-- tiff的讀寫，使用rasterio，基本指令及應用詳見[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)說明。
+- tiff的讀寫，使用[rasterio](https://rasterio.readthedocs.io/en/latest/)，基本指令及應用詳見[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)說明。
 
 ```python
 import numpy as np

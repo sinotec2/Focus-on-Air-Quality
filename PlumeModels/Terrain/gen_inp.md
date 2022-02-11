@@ -24,10 +24,10 @@ last_modified_date: 2022-02-11 10:57:05
   - 直接按照AERMAP結果格式將地形高程與山丘高度(特徵高)，寫出檔案，完全取代AERMAP。
   - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純。且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加AERMAP篩選的時間。
   - 事先將台灣地區數值地形切割並處理成較小範圍的DEM檔案，因為AERMAP可以同時讀取數個DEM檔案。從其中整併出所需要的範圍進行內插。(not tried)
-  - 使用者自行轉檔方案(this note)：將`gdal_translate`指令包裹在python程式中，只需轉換所需的範圍，較為經濟有效。缺點是使用者還是必須下載[正確版本](https://www.gisinternals.com/release.php)的`gdal_translate`程式，並且將其執行路徑貼在程式內。
+  - 使用者自行轉檔方案(this note)：將[gdal_translate](https://gdal.org/programs/gdal_translate.html)指令包裹在python程式中，只需轉換所需的範圍，較為經濟有效。缺點是使用者還是必須下載[正確版本](https://www.gisinternals.com/release.php)的[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式，並且將其執行路徑貼在程式內。
 - 執行步驟
   1. 由GeoTiff檔案中切割指定範圍之地形數據，內插、再以GeoTiff格式寫出數據。
-  1. 呼叫`gdal_translate`程式進行轉檔
+  1. 呼叫[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式進行轉檔
   1. 準備其他aermap.inp所需參數
   1. 呼叫AERMAP程式完成作業
   1. 將數據寫成isc格式之地形檔案備用
@@ -37,7 +37,7 @@ last_modified_date: 2022-02-11 10:57:05
 ## 下載數值地形資料
 ### 內政部
 - 內政部地政司定期公開其調查結果在**政府資料開放平台**，如"[2020年版全臺灣及部分離島20公尺網格數值地形模型DTM資料](https://data.gov.tw/dataset/138563)"。
-  - 下載、解壓縮後可以得到一GeoTiff檔案，將其更名為taiwan.tiff備用。
+  - 下載、解壓縮後可以得到一GeoTiff檔案，將其更名為taiwan2020.tiff備用。
   - 不分幅檔案可能較大，但處理還算順暢。
 - 內政部亦有5M解析度地形數據，需另行向主管單位申請，並未在**政府資料開放平台**提供。
 - 目前尚未有金門縣與連江縣數據，需另由其他來源取得。
@@ -82,7 +82,7 @@ os.system(cmd)
   - 範例 gd3 277500. 50 100. 2776500. 50 100.
 
 ### 輸入檔案
-- taiwan.tiff([2020全臺20M_DTM](https://data.gov.tw/dataset/138563))
+- taiwan2020.tiff([2020全臺20M_DTM](https://data.gov.tw/dataset/138563))
 - 模版
   - aermap.inp
   - template.tiff
@@ -113,7 +113,7 @@ os.system(cmd)
 - [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/gen_inp.py)  
 
 ### 修改呼叫程式之路徑
-- gdal_translate
+- [gdal_translate](https://gdal.org/programs/gdal_translate.html)
   - 內設為/opt/anaconda3/envs/ncl_stable/bin/
 - 環境變數GDAL_DATA
   - 內設為GDAL_DATA=/opt/anaconda3/envs/py37/share/gdal
@@ -140,5 +140,142 @@ from pyproj import Proj
 import rasterio
 from rasterio.transform import Affine
 ```
+
+### 內政部dtm檔案之讀取、切割、內插與轉存
+- 讀取：
+  - 使用[rasterio](https://rasterio.readthedocs.io/en/latest/intro.html)，因南北向y軸是由北向南、`(x0,y0)`為左上方座標，需進行轉置
+  - 矩陣用`np.flip`、序列用`.sort()`
+
+```python
+#read the 20M DTM data TIFF from https://dtm.moi.gov.tw/2020dtm20m/台灣本島及4離島\(龜山島_綠島_蘭嶼_小琉球\).7z
+fname='taiwan2020.tif'
+img = rasterio.open(fname)
+data=np.flip(img.read()[0,:,:],[0])
+x0,y0=img.xy(0,0)
+mn=img.shape
+dxm,dym=(img.bounds.right-img.bounds.left)/img.width,-(img.bounds.top-img.bounds.bottom)/img.height
+x1d = np.array([x0+dxm*i for i in range(mn[1])])
+y1d = np.array([y0+dym*i for i in range(mn[0])])
+y1d.sort()
+```
+- 切割
+  - 用[bisect](https://docs.python.org/zh-tw/3/library/bisect.html)定位所需座標範圍
+  - 向外再擴張2格40M
+  - 將高程矩陣、座標值x及y線性化，準備進行內插
+
+```python
+I1=bisect.bisect_left(x1d,x_mesh[0])-2;I2=bisect.bisect_left(x1d,x_mesh[-1])+2
+J1=bisect.bisect_left(y1d,y_mesh[0])-2;J2=bisect.bisect_left(y1d,y_mesh[-1])+2
+c=data[J1:J2,I1:I2].flatten()
+c=np.where(c<0,0,c)
+x=np.array([x1d[I1:I2] for j in range(J2-J1)]).flatten()
+y=np.array([[j for i in range(I2-I1)] for j in y1d[J1:J2]]).flatten()
+```
+- 內插
+  - AERMAP應有內插功能，此處內插是為ISC模式與結果展示所需。如解析度一樣，在AERMOD內也可提高計算速度。
+  - 因一般20M的解析度較需求為高，採用線性內插即可
+
+```python
+#interpolation from points to the receptor grid (x_g, y_g)
+points=[(i,j) for i,j in zip(x,y)]
+grid_z2 = griddata(points, c, (x_g, y_g), method='linear')
+```
+
+- 轉寫
+  - for [gdal_translate](https://gdal.org/programs/gdal_translate.html)
+  - 需以經緯度座標輸出
+  - 南北向轉置
+
+```python
+#save tiff file
+TIF,DEM,NUL=fname+'.tiff',last+'.dem',' >>'+dir+'geninp.out'
+os.system('cp template.tiff '+TIF)
+resx,resy=(np.max(lon)-np.min(lon))/(nx+2*M-1),(np.max(lat)-np.min(lat))/(ny+2*M-1),
+transform = Affine.translation(np.min(lon), np.max(lat)) * Affine.scale(resx, -resy)
+new_dataset = rasterio.open(TIF,'w',driver='GTiff',height=grid_z2.shape[0],width=grid_z2.shape[1],count=1,
+  dtype=grid_z2.dtype,crs='+proj=latlong',transform=transform,)
+data=np.flip(grid_z2,[0])
+new_dataset.write(data, 1)
+new_dataset.close()
+```
+
+### 呼叫[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式進行轉檔
+- 因目前還沒有發展讀寫DEM格式的獨立模組。因此還是以[gdal_translate](https://gdal.org/programs/gdal_translate.html)的使用為主。
+- [gdal_translate](https://gdal.org/programs/gdal_translate.html)對範圍(`-projwin`)的界定方式是西北角與東南角經緯度。呼叫方式如下：
+  - 此處讀取前述GeoTiff範圍將內縮一格，為避免邊界上剪裁太過密合。
+  - 順序為先經度、再緯度
+- [gdal_translate](https://gdal.org/programs/gdal_translate.html)程式與數據的路徑
+  - 內設為`/opt/anaconda3/envs/ncl_stable/bin/`及`/opt/anaconda3/envs/py37/share/gdal`
+  - 如有不同應予修改
+
+```python
+TIF,DEM,NUL=fname+'.tiff',last+'.dem',' >>'+dir+'geninp.out'
+# convert the tiff to dem
+llSE=str(lon[1,-2])+' '+str(lat[1,-2])
+llNW=str(lon[-2,1])+' '+str(lat[-2,1])+' '+llSE
+pth1='/opt/anaconda3/bin/'
+pth2='/opt/anaconda3/envs/ncl_stable/bin/'
+gd_data=';export PATH='+pth1+':'+pth2+':$PATH;GDAL_DATA=/opt/anaconda3/envs/py37/share/gdal'
+os.system('echo "before gdal"'+NUL)
+gd='gdal_translate'
+cmd='cd '+dir+gd_data+gd+' -of USGSDEM -ot Float32 -projwin '+llNW+' '+TIF+' '+DEM+NUL
+os.system('echo "'+cmd+'"'+NUL)
+os.system(cmd)
+```    
+
+### aermap.inp之改寫
+- aermap.inp為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
+  - DATAFILE：aermap的結果檔，輸出給aermod使用(.REC)
+  - DOMAINXY：接受點的UTM範圍，確認邊界角落都在DEM檔案範圍內
+  - ANCHORXY：接受點自訂座標值(台灣地區建議直接使用twd97座標系統)與UTM間錨定點的對照關係。
+- xy：UTM之`(x,y)`值，2維矩陣。因旋轉後可能有些歪斜，因此需取最大範圍
+- uxanc,uyanc：錨定點(此處取模擬範圍的中心點，以避免誤差累計)的UTM值
+
+```python
+#generate aermap.inp,
+xy=utm.from_latlon(lat,lon)
+uxmn,uxmx=int(np.min(xy[0][M:-M,M])),int(np.max(xy[0][M:-M,-M]))
+uymn,uymx=int(np.min(xy[1][M,M:-M])),int(np.max(xy[1][-M,M:-M]))
+co,an,z='   DOMAINXY  ','   ANCHORXY  ',' 51 '
+UTMrange=co+str(uxmn)+' '+str(uymn)+z+str(uxmx)+' '+str(uymx)+z
+xmid,ymid=(xmin+xmax)/2., (ymin+ymax)/2.
+llanc=pnyc(xmid-Xcent, ymid-Ycent, inverse=True)
+uxanc,uyanc=utm.from_latlon(llanc[1],llanc[0])[0:2]
+UTMancha=an+str(int(xmid))+' '+str(int(ymid))+' '+str(int(uxanc))+' '+str(int(uyanc))+z+'0'
+
+#change the contain of aermap
+text_file = open("aermap.inp", "r+")
+d=[line for line in text_file]
+keywd=[i[3:11] for i in d]
+ifile=keywd.index('DATAFILE')
+idmxy=keywd.index('DOMAINXY')
+ianxy=keywd.index('ANCHORXY')
+ihead=keywd.index('ELEVUNIT')
+iend=d.index('RE FINISHED\n')
+
+text_file = open("aermap.inp", "w")
+
+x0,y0=xmin,ymin
+sta='RE GRIDCART '+last+' STA\n'
+args[0]=last
+STR='RE GRIDCART {:s} XYINC {:s} {:s} {:s} {:s} {:s} {:s}\n'.format(*args)
+s=[sta,STR,sta.replace('STA','END')]
+for l in range(ihead+1):
+#  if l == ifile:
+#    text_file.write( "%s" % '   DATAFILE  '+DEM+'\n')
+  if l == idmxy:
+    text_file.write( "%s" % UTMrange+'\n')
+  elif l == ianxy:
+    text_file.write( "%s" % UTMancha+'\n')
+  else:
+    text_file.write( "%s" % d[l])
+for l in range(len(s)):
+    text_file.write( "%s" % s[l])
+for l in range(iend,len(d)):
+    text_file.write( "%s" % d[l])
+text_file.close()
+```
+
+### 
 
 ## Reference

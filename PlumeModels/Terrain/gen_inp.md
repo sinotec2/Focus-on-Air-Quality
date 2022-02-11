@@ -20,16 +20,16 @@ last_modified_date: 2022-02-11 10:57:05
 ---
 
 ## 背景
-- AERMAP是AERMOD地形檔案的前處理程式，執行複雜地形中的煙流模擬必經的程序。最大的障礙在於必須要以美國地理調查局的[DEM格式](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem)讀取數值地形資料，過去的作法包括：
-  - 直接按照AERMAP結果格式將地形高程與山丘高度(特徵高)，寫出檔案，完全取代AERMAP。
-  - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純。且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加AERMAP篩選的時間。
-  - 事先將台灣地區數值地形切割並處理成較小範圍的DEM檔案，因為AERMAP可以同時讀取數個DEM檔案。從其中整併出所需要的範圍進行內插。(not tried)
+- [AERMAP](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#aermap)是[AERMOD](https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#aermod)地形檔案的前處理程式，執行複雜地形中的煙流模擬必經的程序。最大的障礙在於必須要以美國地理調查局的[DEM格式](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem)讀取數值地形資料，過去的作法包括：
+  - 直接按照[AERMAP]()結果格式將地形高程與山丘高度(特徵高)，寫出檔案，完全取代[AERMAP]()。
+  - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純。且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加[AERMAP]()篩選的時間。
+  - 事先將台灣地區數值地形切割並處理成較小範圍的DEM檔案，因為[AERMAP]()可以同時讀取數個DEM檔案。從其中整併出所需要的範圍進行內插。(not tried)
   - 使用者自行轉檔方案(this note)：將[gdal_translate](https://gdal.org/programs/gdal_translate.html)指令包裹在python程式中，只需轉換所需的範圍，較為經濟有效。缺點是使用者還是必須下載[正確版本](https://www.gisinternals.com/release.php)的[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式，並且將其執行路徑貼在程式內。
 - 執行步驟
   1. 由GeoTiff檔案中切割指定範圍之地形數據，內插、再以GeoTiff格式寫出數據。
   1. 呼叫[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式進行轉檔
-  1. 準備其他aermap.inp所需參數
-  1. 呼叫AERMAP程式完成作業
+  1. 準備其他[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/aermap.inp)所需參數
+  1. 呼叫[AERMAP]()程式完成作業
   1. 將數據寫成isc格式之地形檔案備用
   1. 將數據寫成kml格式以備檢查
 - 有關GeoTiff格式的讀取、寫出等等，可以參考[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)及[df範例](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)、[nc範例](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)
@@ -87,7 +87,7 @@ os.system(cmd)
   - [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/aermap.inp)
   - template.tiff
 ### 輸出檔案
-- 輸入aermap.inp
+- 輸入[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/aermap.inp)
 - 檔名為gd3(範例)為首之6個檔案
 	- gd3.kml→模擬範圍的等高線，彙入google map-my map作圖
 	- gd3_re.dat→文字檔。以DISCCART方式標示每一格點的地形高程，併入iscst3的控制檔(.INP)內，取代原有XYINC設定
@@ -107,7 +107,7 @@ os.system(cmd)
   - MAPDETAIL.OUT：地圖的細節
   - MAPPARAMS.OUT：確認DEM的正確性
   - DOMDETAIL.OUT：如四角未落在DEM檔內，檢查範圍的設定  
-  - gd3.REC：此檔將輸入AERMOD模式中，設定地形及特徵山高
+  - gd3.REC：此檔將輸入[AERMOD]()模式中，設定地形及特徵山高
 
 ### gen_inp.py程式下載
 - [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/gen_inp.py)  
@@ -117,13 +117,13 @@ os.system(cmd)
   - 內設為/opt/anaconda3/envs/ncl_stable/bin/
 - 環境變數GDAL_DATA
   - 內設為GDAL_DATA=/opt/anaconda3/envs/py37/share/gdal
-- AERMAP執行檔  
+- [AERMAP]()執行檔  
   - 內設為./
 
 ## gen_inp.py程式分段說明  
 ### 調用模組
 - 因計算等濃度線，調用了`cntr`模組。在python3為第3方提供的軟體，並不屬`matplotlib`內容，需另行自[githup](https://github.com/matplotlib/legacycontour.git)安裝，詳附註。
-- AERMAP使用的是UTM系統，因此需用到[utm](https://pypi.org/project/utm/)模組，在台灣地區不適用，需另安裝。台灣地區使用[twd97](https://pypi.org/project/twd97/)。絕對座標轉換使用utm及twd97，相對座標批次轉換，還是使用pyproj的Proj比較方便快速。
+- [AERMAP]()使用的是UTM系統，因此需用到[utm](https://pypi.org/project/utm/)模組，在台灣地區不適用，需另安裝。台灣地區使用[twd97](https://pypi.org/project/twd97/)。絕對座標轉換使用utm及twd97，相對座標批次轉換，還是使用pyproj的Proj比較方便快速。
 - tiff的讀寫，使用[rasterio](https://rasterio.readthedocs.io/en/latest/)，基本指令及應用詳見[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)說明。
 
 ```python
@@ -172,7 +172,7 @@ x=np.array([x1d[I1:I2] for j in range(J2-J1)]).flatten()
 y=np.array([[j for i in range(I2-I1)] for j in y1d[J1:J2]]).flatten()
 ```
 - 內插
-  - AERMAP應有內插功能，此處內插是為ISC模式與結果展示所需。如解析度一樣，在AERMOD內也可提高計算速度。
+  - [AERMAP]()應有內插功能，此處內插是為ISC模式與結果展示所需。DEM與接受點的網格系統都一樣，在[AERMAP]()內也可提高計算速度。
   - 因一般20M的解析度較需求為高，採用線性內插即可
 
 ```python
@@ -223,8 +223,8 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```    
 
-### aermap.inp之改寫與執行
-- aermap.inp為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
+### [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/aermap.inp)之改寫與執行
+- [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/aermap.inp)為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
   - DATAFILE：aermap的結果檔，輸出給aermod使用(.REC)
   - DOMAINXY：接受點的UTM範圍，確認邊界角落都在DEM檔案範圍內
   - ANCHORXY：接受點自訂座標值(台灣地區建議直接使用twd97座標系統)與UTM間錨定點的對照關係。
@@ -275,7 +275,7 @@ for l in range(iend,len(d)):
     text_file.write( "%s" % d[l])
 text_file.close()
 ```
-- AERMAP之執行
+- [AERMAP]()之執行
 
 ```python
 # execute the aermap

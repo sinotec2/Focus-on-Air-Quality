@@ -21,7 +21,7 @@ last_modified_date: 2022-02-10 10:18:31
 ## 背景
 - AERMAP是AERMOD地形檔案的前處理程式，執行複雜地形中的煙流模擬必經的程序。最大的障礙在於必須要以美國地理調查局的[DEM格式](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem)讀取數值地形資料，過去的作法包括：
   - 直接按照AERMAP結果格式將地形高程與山丘高度(特徵高)，寫出檔案，完全取代AERMAP。
-  - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純，且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加AERMAP篩選的時間。
+  - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純。且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加AERMAP篩選的時間。
   - 事先將台灣地區數值地形切割並處理成較小範圍的DEM檔案，因為AERMAP可以同時讀取數個DEM檔案。從其中整併出所需要的範圍進行內插。(not tried)
   - 使用者自行轉檔方案(this note)：將`gdal_translate`指令包裹在python程式中，只需轉換所需的範圍，較為經濟有效。缺點是使用者還是必須下載[正確版本](https://www.gisinternals.com/release.php)的`gdal_translate`程式，並且將其執行路徑貼在程式內。
 - 執行步驟

@@ -223,7 +223,7 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```    
 
-### aermap.inp之改寫
+### aermap.inp之改寫與執行
 - aermap.inp為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
   - DATAFILE：aermap的結果檔，輸出給aermod使用(.REC)
   - DOMAINXY：接受點的UTM範圍，確認邊界角落都在DEM檔案範圍內
@@ -275,9 +275,19 @@ for l in range(iend,len(d)):
     text_file.write( "%s" % d[l])
 text_file.close()
 ```
+- AERMAP之執行
 
+```python
+# execute the aermap
+aermap_path='./'
+os.system(aermap_path+'aermap >& isc.out')
+```
 
-## 複雜地形ISC模式所需輸入檔
+## 其他處理
+### KML檔案之輸出
+- 參考[python撰寫等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
+
+### 複雜地形ISC模式所需輸入檔
 - 因GeoTiff檔案提供了較大的範圍，實際輸出時回歸正確範圍
 - re.dat：接受點位置及高程
 - TG.txt：高程網格數據檔

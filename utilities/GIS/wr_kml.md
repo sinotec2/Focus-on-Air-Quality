@@ -22,7 +22,8 @@ last_modified_date: 2022-02-11 13:39:55
 ## 背景
 - [KML](https://zh.wikipedia.org/wiki/KML)檔案格式可以參考[範例](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/#檔案來源與解壓縮)及google[官網](https://developers.google.com/kml/documentation/kml_tut)。
 - 等值線的座標，可以經由`cntr`套件計算。
-  - python3版需使用第3方軟件`legacycontour`。
+  - python2包裹在`matplotlib`之內
+  - python3版需使用第3方軟件[legacycontour](https://github.com/matplotlib/legacycontour)。
   - 安裝：`python3 -m pip install --index-url https://github.com/matplotlib/legacycontour.git legacycontour`
 
 ## 程式碼
@@ -102,6 +103,54 @@ line.append('</Document></kml>')
 with open(fname + '.kml', 'w') as f:
   [f.write(i) for i in line]
 ```
+
+## 結果範例
+### KML檔案
+- level0~9的樣式
+- 各層的多邊形頂點座標
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document><name><![CDATA[Hsinzhu]]></name>
+<Style id="level0"><LineStyle><color>280AFF00</color><width>1</width></LineStyle>
+  <PolyStyle><color>280AFF00</color></PolyStyle></Style>
+<Style id="level1"><LineStyle><color>280AFF3F</color><width>1</width></LineStyle>
+  <PolyStyle><color>280AFF3F</color></PolyStyle></Style>
+<Style id="level2"><LineStyle><color>280AFF7F</color><width>1</width></LineStyle>
+  <PolyStyle><color>280AFF7F</color></PolyStyle></Style>
+...
+<Style id="level9"><LineStyle><color>280A00FA</color><width>1</width></LineStyle>
+  <PolyStyle><color>280A00FA</color></PolyStyle></Style>
+<Placemark><name>level:4.2</name><styleUrl>#level3</styleUrl>
+  <Polygon><outerBoundaryIs><LinearRing><tessellate>1</tessellate>
+    <coordinates>
+      120.96411757783031,24.837148398246857,0 
+      120.96411517775208,24.83714862491851,0 
+      120.96411757779468,24.837149157475046,0 
+...      
+      120.97579154085555,24.839629777483797,0 
+    </coordinates>
+  </LinearRing></outerBoundaryIs></Polygon>
+</Placemark>
+</Document>
+</kml>
+```
+### Google Map 貼圖結果
+
+| ![kml_demo.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/kml_demo.png) |
+|:--:|
+| <b>圖 林口電廠周邊地形KML檔案輸出結果範例</b>|  
+
+- 檢查項目([藍色]()是重點項目)：
+1. [範圍]()：是否以污染源排放為中心、是否符合設定範圍(海面範圍可視情況減少)
+2. [高值]()部分：是否符合地圖（鄉鎮區界線、稜線道路、山峰位置等）
+	- 煙流大致會在2倍煙囪高度之等高線，產生高值。
+	- 有群峰之地形範圍，煙流會在第一個碰觸點產生高值。
+3. [解析度]()：太低→地形特徵會消失。煙流本身會模糊化，解析度太高會增加執行時間，沒有必要。
+4. 等高線：一般公路設計會平行於等高線，可藉地圖中公路的走向，檢視地形數據結果的正確性
+5. 低值位置：一般地圖上是河流、住家村落、陂塘、農地等。
+6. 海岸線：等高線是否與地圖之海岸線平行
 
 ## Reference
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.

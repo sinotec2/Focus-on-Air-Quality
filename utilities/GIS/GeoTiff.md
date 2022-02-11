@@ -70,7 +70,7 @@ new_dataset.close() #關閉檔案
 - 此一應用的情況是因為檔案切割成約10.5公里見方的250m高解析度tiff檔，須同步進行轉換方符合效益。
 - 轉成(無檔頭)csv檔之後，以cat合併成完整檔案進行解讀與轉換。
 
-### [tif2nc]()
+### [tif2nc](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)
 - 應用在全球250M解析度之tiff檔[解讀](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)，採**平均**方式合併，然因記憶體需求較大，須先進行範圍切割。
 - 解析度較低(1~10Km)之[應用](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)，採**加總**方式進行合併。
 

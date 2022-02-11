@@ -136,13 +136,15 @@ with open(fname + '.kml', 'w') as f:
 </Document>
 </kml>
 ```
+
 ### Google Map 貼圖結果
 #### 林口電廠範例
+
 | ![kml_demo.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/kml_demo.png) |
 |:--:|
 | <b>圖 林口電廠周邊地形KML檔案輸出結果範例</b>|  
 
-#### 檢查項目：
+#### 檢查項目
 - [範圍]()：是否以污染源排放為中心、是否符合設定範圍(海面範圍可視情況減少)
 - [高值]()部分：是否符合地圖（鄉鎮區界線、稜線道路、山峰位置等）
   - 煙流大致會在2倍煙囪高度之等高線，產生高值。

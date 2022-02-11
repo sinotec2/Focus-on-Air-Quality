@@ -290,8 +290,12 @@ os.system(aermap_path+'aermap >& isc.out')
 
 ## 其他處理
 ### KML檔案之輸出
-- 參考[python撰寫等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
 - 呼叫[cntr_kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)
+- 參考[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
+
+```python
+result=cntr_kml(grid_z2, lon, lat, fname)
+```
 
 ### 複雜地形ISC模式所需輸入檔
 - 因GeoTiff檔案提供了較大的範圍，實際輸出時回歸正確範圍

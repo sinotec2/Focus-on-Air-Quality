@@ -58,18 +58,22 @@ col = [aa + b + g + r for b, g, r in zip(bb, gg, rr)]
 ```
 
 ### 計算等值線
+- cntr.Cntr將2維矩陣分布在經緯度座標系統，形成3維立體模型
+- c.trace則按照指定值(level)找到符合高度的座標位置，形成多邊形序列nlist。
+- 取其中間位置為segs，準備輸出
+
 ```python
-  c = cntr.Cntr(lon, lat, grid_z2)
+e, w, s, n = np.max(lon), np.min(lon), np.min(lat), np.max(lat)
+c = cntr.Cntr(lon, lat, grid_z2)
+for level in levels[:]:
+  nlist = c.trace(level, level, 0)
+  segs = nlist[:len(nlist) // 2]  
 ```
-      
-### 各層多邊形頂點之輸出
+
+### 各層多邊形之輸出
 
 ```python
 # repeat for the level lines
-e, w, s, n = np.max(lon), np.min(lon), np.min(lat), np.max(lat)
-for level in levels[:]:
-  nlist = c.trace(level, level, 0)
-  segs = nlist[:len(nlist) // 2]
   i = levels.index(level)
   for seg in segs:
     line.append('<Placemark><name>level:' + str(level) + '</name><styleUrl>#level' + str(i) + head2)
@@ -79,6 +83,11 @@ for level in levels[:]:
       if j > 0:
         leng = max(leng, np.sqrt((seg[j, 0] - seg[j - 1, 0]) ** 2 + (seg[j, 1] - seg[j - 1, 1]) ** 2))
     leng0 = np.sqrt((seg[j, 0] - seg[0, 0]) ** 2 + (seg[j, 1] - seg[0, 1]) ** 2)
+```
+### 邊界線之閉合
+- 多邊形碰到東西南北其中1邊、碰到2個邊、等等情況，逐一處理
+
+```python
     ewsn = np.zeros(shape=(4, 2))
     j = -1
     # end points not closed, add coner point(s) to close the polygons.
@@ -100,7 +109,7 @@ for level in levels[:]:
 ```
 
 ## 結果範例
-### KML檔案
+### KML檔案格式確認
 - level0~9的樣式
 - 各層的多邊形頂點座標
 

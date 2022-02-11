@@ -4,7 +4,7 @@ title: Prepare and Exec. of AERMAP
 parent: Terrain Processing
 grand_parent: Plume Models
 nav_order: 1
-last_modified_date: 2022-02-10 10:18:31
+last_modified_date: 2022-02-11 10:57:05
 ---
 # AERMAP之準備與執行
 {: .no_toc }
@@ -111,5 +111,34 @@ os.system(cmd)
 
 ### gen_inp.py程式下載
 - [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/gen_inp.py)  
+
+### 修改呼叫程式之路徑
+- gdal_translate
+  - 內設為/opt/anaconda3/envs/ncl_stable/bin/
+- 環境變數GDAL_DATA
+  - 內設為GDAL_DATA=/opt/anaconda3/envs/py37/share/gdal
+- AERMAP執行檔  
+  - 內設為./
+
+## gen_inp.py程式分段說明  
+### 調用模組
+- 因計算等濃度線，調用了`cntr`模組。在python3為第3方提供的軟體，並不屬`matplotlib`內容，需另行自[githup](https://github.com/matplotlib/legacycontour.git)安裝，詳附註。
+- AERMAP使用的是UTM系統，因此需用到[utm](https://pypi.org/project/utm/)模組，在台灣地區不適用，需另安裝。台灣地區使用[twd97](https://pypi.org/project/twd97/)。絕對座標轉換使用utm及twd97，相對座標批次轉換，還是使用pyproj的Proj比較方便快速。
+- tiff的讀寫，使用rasterio，基本指令及應用詳見[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)說明。
+
+```python
+import numpy as np
+from pandas import *
+import twd97, utm
+from scipy.interpolate import griddata
+#python3 -m pip install --index-url https://github.com/matplotlib/legacycontour.git legacycontour
+import legacycontour._cntr as cntr
+import bisect
+import sys,os
+import tempfile as tf
+from pyproj import Proj
+import rasterio
+from rasterio.transform import Affine
+```
 
 ## Reference

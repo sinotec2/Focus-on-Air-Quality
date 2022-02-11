@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Generation AERMAP.inp
+title: Prepare and Exec. of AERMAP
 parent: Terrain Processing
 grand_parent: Plume Models
 nav_order: 1
@@ -71,7 +71,7 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```
 
-## [gen_inp.py](gen_inp.py)
+## [gen_inp.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/gen_inp.py)
 ### 引數
 - GDNAME  Xinit Xnum Xdelta Yinit Ynum Ydelta
   - GDNAME:網格系統名稱(自行命名，將用做產生檔案之filename ROOT)
@@ -110,6 +110,6 @@ os.system(cmd)
   - gd3.REC：此檔將輸入AERMOD模式中，設定地形及特徵山高
 
 ### gen_inp.py程式下載
-- [FAQ]()  
+- [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/Terrain/gen_inp.py)  
 
 ## Reference

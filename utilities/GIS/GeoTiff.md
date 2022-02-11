@@ -6,7 +6,7 @@ grand_parent: Utilities
 last_modified_date: 2022-01-27 11:57:06
 ---
 
-# python解析KML檔
+# python解析GeoTiff檔
 {: .no_toc }
 
 <details open markdown="block">

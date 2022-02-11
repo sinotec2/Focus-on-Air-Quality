@@ -156,6 +156,7 @@ last_modified_date:   2021-12-17 14:44:41
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/rd_kml.py)
 
 ## Reference
+- google,**KML Tutoria**,[developers.google.com](https://developers.google.com/kml/documentation/kml_tut), Last updated 2021-09-07 UTC.
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.
 - Tyler Erickson, **pyKML v0.1.0 documentation**,[pythonhosted](https://pythonhosted.org/pykml/), 2011
 - 純淨天空, **pykml.parser.fromstring函數**,[vimsky](https://vimsky.com/zh-tw/examples/detail/python-ex-pykml.parser---fromstring-function.html)

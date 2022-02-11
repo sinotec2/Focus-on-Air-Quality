@@ -2,7 +2,7 @@
 layout: default
 title: CMAQ邊界檔案之產生
 parent: Boundary Condition
-grand_parent: CMAQ Models
+grand_parent: CMAQ Model System
 nav_order: 4
 date: 2021-12-18 19:47:28
 last_modified_date: 2022-01-03 20:27:23

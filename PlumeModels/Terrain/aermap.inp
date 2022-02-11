@@ -1,0 +1,23 @@
+CO STARTING
+   TITLEONE  XYZ sample run
+   DATATYPE  DEM1
+   DATAFILE  Hsinzhu.dem
+   DOMAINXY  294324 2748497 51 295395 2749568 51 
+   ANCHORXY  246953 2748320 294849 2749022 51 0
+**  lowr left easting  Northing Zn  easting  northing Zn of upper right
+** Since longitude increases from east to west over North America, the 
+** domain is defined by the southeast and northwest corners when DOMAINLL is used.
+**           X-point Y-point(TWD) (UTM) easting North'g Zn of X, Y point
+   RUNORNOT  run
+CO FINISHED
+
+RE STARTING
+   ELEVUNIT METERS
+RE GRIDCART Hsinzhu STA
+RE GRIDCART Hsinzhu XYINC 246453. 51 20. 2747820. 51 20.
+RE GRIDCART Hsinzhu END
+RE FINISHED
+
+OU STARTING
+   RECEPTOR Hsinzhu.REC
+OU FINISHED

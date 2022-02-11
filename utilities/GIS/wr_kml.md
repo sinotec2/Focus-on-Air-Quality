@@ -26,18 +26,26 @@ last_modified_date: 2022-02-11 13:39:55
   - python3版需使用第3方軟件[legacycontour](https://github.com/matplotlib/legacycontour)。
   - 安裝：`python3 -m pip install --index-url https://github.com/matplotlib/legacycontour.git legacycontour`
 
-## 程式碼
+## 程式說明
 - grid_z2：2維實數矩陣
 - 輸出檔名：fname+'.kml'
 - 等值線層數：N = 10
-- 下載[cntr_kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/cntr_kml.py)
+- 程式碼下載[cntr_kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/cntr_kml.py)
 
 ### 引數說明
-- 
-```python
-import numpy as np
-import legacycontour._cntr as cntr
+- grid_z2, lon, lat, fname
+  - grid_z2：2維實數矩陣
+  - lon, lat：2維實數矩陣
+  - fname：結果檔名
 
+### 色階與透明度之定義與調查
+- 色階固定為10層，太多(>10)會無法辨識，太少(<5>)則沒有特性。
+- 設定自綠色漸變至紅色，參考[Zonum Solutions色階表](http://www.zonums.com/online/color_ramp/)
+- 透明度'28'約為40%，'4d'約為75%
+  - 越透明就越看不到等值圖的特性
+  - 越不透明就越看不到底圖內容
+
+```python
 # levels size,>10 too thick, <5 too thin
 N = 10
 mxgrd=max([10.,np.max(grid_z2)])
@@ -47,29 +55,16 @@ if len(col) != N: print ('color scale not right, please redo from http://www.zon
 aa = '28'  # ''28'~ 40%, '4d' about 75%
 rr, gg, bb = ([i[j:j + 2] for i in col] for j in [0, 2, 4])
 col = [aa + b + g + r for b, g, r in zip(bb, gg, rr)]
+```
 
-# round the values of levels to 1 significant number at least, -2 at least 2 digits
-i = int(np.log10(levels[1])) - 1
-levels = [round(lev, -i) for lev in levels]
+### 計算等值線
+```python
+  c = cntr.Cntr(lon, lat, grid_z2)
+```
+      
+### 各層多邊形頂點之輸出
 
-#the Cntr method is valid only in previous version of matplotlib
-c = cntr.Cntr(lon, lat, grid_z2)
-# the tolerance to determine points are connected to the boundaries
-tol = 1E-3
-col0 = '4d6ecdcf'
-col_line0 = 'cc2d3939'
-
-
-#writing the KML, see the KML official website
-head1 = '<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://earth.google.com/kml/2.2"><Document><name><![CDATA[' + last + ']]></name>'
-st_head = ''
-st_med = '</color><width>1</width></LineStyle><PolyStyle><color>'
-st_tail = '</color></PolyStyle></Style>'
-for i in range(N):
-  st_head += '<Style id="level' + str(i) + '"><LineStyle><color>' + col[i] + st_med + col[i] + st_tail
-head2 = '</styleUrl><Polygon><outerBoundaryIs><LinearRing><tessellate>1</tessellate><coordinates>'
-tail2 = '</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>'
-line = [head1 + st_head]
+```python
 # repeat for the level lines
 e, w, s, n = np.max(lon), np.min(lon), np.min(lat), np.max(lat)
 for level in levels[:]:
@@ -102,9 +97,6 @@ for level in levels[:]:
       if sum(ewsn[0, :] + ewsn[2, :]) == 2: line.append(str(np.max(lon)) + ',' + str(np.min(lat)) + ',0 ')
     # TODO: when contour pass half of the domain,must add two edge points.
     line.append(tail2)
-line.append('</Document></kml>')
-with open(fname + '.kml', 'w') as f:
-  [f.write(i) for i in line]
 ```
 
 ## 結果範例

@@ -276,6 +276,34 @@ for l in range(iend,len(d)):
 text_file.close()
 ```
 
-### 
+
+## 複雜地形ISC模式所需輸入檔
+- 因GeoTiff檔案提供了較大的範圍，實際輸出時回歸正確範圍
+- re.dat：接受點位置及高程
+- TG.txt：高程網格數據檔
+
+```python
+# generate the ISC files
+if M>0:
+  grid_z2=grid_z2[M:-M,M:-M]
+  x_g, y_g = x_g[M:-M,M:-M], y_g[M:-M,M:-M] 
+
+xy = np.array([[(i, j) for i, j in zip(x_g[k], y_g[k])] for k in range(ny)])
+with open(fname + '_re.dat','w') as f:
+  f.write('RE ELEVUNIT METERS\n')
+  for j in range(ny):
+    for i in range(nx):
+      f.write('RE DISCCART '+str(xy[j,i,0])+' '+str(xy[j,i,1])+' '+str(grid_z2[j,i])+'\n')
+
+#terrain grid file
+with open(fname + '_TG.txt','w') as f:
+  f.write(str(nx)+' '+str(ny)+' '+str(xmin)+' '+str(xmax)+' '+str(ymin)+' '+str(ymax)+' '+str(dx)+' '+str(dy)+'\n')
+  for j in range(ny):
+    ele=[str(int(grid_z2[j,i])) for i in range(nx)]
+    st=ele[0]
+    for i in range(1,nx):
+      st+=' '+ele[i]
+    f.write(st+'\n')
+```      
 
 ## Reference

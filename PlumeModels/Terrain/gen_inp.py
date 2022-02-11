@@ -6,7 +6,6 @@ from scipy.interpolate import griddata
 import legacycontour._cntr as cntr
 import bisect
 import sys,os
-import tempfile as tf
 from pyproj import Proj
 import rasterio
 from rasterio.transform import Affine

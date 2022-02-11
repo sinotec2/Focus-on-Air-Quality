@@ -206,6 +206,7 @@ with open(fname + '.kml', 'w') as f:
 # generate the ISC files
 if M>0:
   grid_z2=grid_z2[M:-M,M:-M]
+  x_g, y_g = x_g[M:-M,M:-M], y_g[M:-M,M:-M] 
 
 xy = np.array([[(i, j) for i, j in zip(x_g[k], y_g[k])] for k in range(ny)])
 with open(fname + '_re.dat','w') as f:

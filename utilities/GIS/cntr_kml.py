@@ -5,7 +5,7 @@ def cntr_kml(grid_z2, lon, lat, fname):
   if '/' in fname:last=fname.split('/')[-1]
   # levels size,>10 too thick, <5 too thin
   N = 10
-  mxgrd=max([10.,np.max(grid_z2)])
+  mxgrd=np.max(grid_z2)
   levels = np.linspace(0, mxgrd, N)
   col = '#00FF0A #3FFF0A #7FFF0A #BFFF0A #FFFF0A #FECC0A #FD990A #FC660A #FB330A #FA000A'.replace('#', '').split()
   if len(col) != N: print ('color scale not right, please redo from http://www.zonums.com/online/color_ramp/')
@@ -70,3 +70,4 @@ def cntr_kml(grid_z2, lon, lat, fname):
   line.append('</Document></kml>')
   with open(fname + '.kml', 'w') as f:
     [f.write(i) for i in line]
+  return 0

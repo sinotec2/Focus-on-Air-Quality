@@ -1,12 +1,12 @@
 ---
 layout: default
-title:  撰寫等值線之KML檔
+title:  等值圖KML檔之撰寫
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-02-11 13:39:55
 ---
 
-# python撰寫等值線之KML檔
+# 等值圖KML檔之撰寫
 {: .no_toc }
 
 <details open markdown="block">
@@ -20,11 +20,29 @@ last_modified_date: 2022-02-11 13:39:55
 
 ---
 ## 背景
-- [KML](https://zh.wikipedia.org/wiki/KML)檔案格式可以參考[範例](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/#檔案來源與解壓縮)及google[官網](https://developers.google.com/kml/documentation/kml_tut)。
-- 等值線的座標，可以經由`cntr`套件計算。
+- 製作簡易的等值圖是模式模擬後處理必須的程序，讓使用者可以快速檢視模擬結果、容易調整範圍，最好是輕量化、容易、方便的套件。
+  - [SURFER](https://www.goldensoftware.com/products/surfer)：雖然可以做到報告品質，但目前只在ms win平台，linux/macOS無法作動。底圖須另取得，且4點georeferencing太麻煩(適用大範圍非直角座標系統之底圖)。
+  - [QGIS](https://zh.wikipedia.org/wiki/QGIS)：是相當完整、輕量化、公眾領域的GIS程式，雖然可以有完整解析度的地圖作為底圖，但同樣沒有regrid內插，只有色塊(tile)形式。
+  - [VERDI](https://www.evernote.com/shard/s125/sh/e57ae550-4ee0-4417-b56b-b340f50bc43e/21f7f90a91e5ede50f228b557de1f347)：篩檢品質。沒有regrid內插。只有向量底圖(行政區界)，對小範圍缺少資訊。只能輸入nc、uamiv格式檔案。
+  - [MeteoInfo](https://www.evernote.com/shard/s125/sh/1f1f4de7-a9b7-fb91-78df-1b03b06dc16b/5c16006937c386e7085358e70155c455)：可以接受ASCII GRD檔案。但也是只有向量底圖。
+  - 商業套裝軟體(如[BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod)、[AERMOD View™](https://www.weblakes.com/products/aermod/index.html)、[AERMOD Cloud<sup>R</sup>](https://www.envitrans.com/software-aermod-cloud.php)、[BEEST Suite](https://www.providenceoris.com/product/beest-suite/))：無法接受TWD97座標系統。沒有中文街道底圖。
+- [KML](https://zh.wikipedia.org/wiki/KML)檔案現已經被很多網路地圖所接受成為圖層，包括[Google Map]()、OpenStreet Map([OSM](https://www.openstreetmap.org/#map=8/23.611/120.768))等等網路地圖界面。
+  - 格式可以參考[範例](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/#檔案來源與解壓縮)及google[官網](https://developers.google.com/kml/documentation/kml_tut)。
+- 等值圖即為等值線多邊形之重疊。等值線多邊形的座標，則可以經由`cntr`套件計算。
   - python2包裹在`matplotlib`之內
   - python3版需使用第3方軟件[legacycontour](https://github.com/matplotlib/legacycontour)。
-  - 安裝：`python3 -m pip install --index-url https://github.com/matplotlib/legacycontour.git legacycontour`
+  - 安裝：動態連結到[github](https://github.com/matplotlib/legacycontour.git)
+
+```bash
+  python3 -m pip install --index-url https://github.com/matplotlib/legacycontour.git legacycontour`
+```
+- or 下載完整原始碼(參考[github討論](https://github.com/badlands-model/pyBadlands_serial/issues/1))
+
+```bash
+git clone https://github.com/matplotlib/legacycontour.git
+cd legacycontour
+python setup.py install
+```
 
 ## 程式說明
 - grid_z2：2維實數矩陣
@@ -108,6 +126,15 @@ for level in levels[:]:
     line.append(tail2)
 ```
 
+## 各種點陣圖數據檔之應用
+### [dat2kml](http://114.32.164.198/dat2kml.html)
+- Convert ISC/AERMOD PLOTFILE result to KML file and regrid to SURFER grd file ASCII TXT, csv (X,Y,C). 
+
+### [tif2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/#tif2kmlpy)
+- GeoTiff是GIS常用的數據格式，如以KML與OSM檢視會比任何GIS程式更輕便。
+
+
+
 ## 結果範例
 ### KML檔案格式確認
 - level0~9的樣式
@@ -141,22 +168,11 @@ for level in levels[:]:
 </kml>
 ```
 
-### Google Map 貼圖結果
-#### 林口電廠範例
+### Google Map 貼圖結果(林口電廠範例)
 
 | ![kml_demo.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/kml_demo.png) |
 |:--:|
 | <b>圖 林口電廠周邊地形KML檔案輸出結果範例</b>|  
-
-#### 檢查項目
-- [範圍]()：是否以污染源排放為中心、是否符合設定範圍(海面範圍可視情況減少)
-- [高值]()部分：是否符合地圖（鄉鎮區界線、稜線道路、山峰位置等）
-  - 煙流大致會在2倍煙囪高度之等高線，產生高值。
-  - 有群峰之地形範圍，煙流會在第一個碰觸點產生高值。
-- [解析度]()：太低→地形特徵會消失。煙流本身會模糊化，解析度太高會增加執行時間，沒有必要。
-- 等高線：一般公路設計會平行於等高線，可藉地圖中公路的走向，檢視地形數據結果的正確性
-- 低值位置：一般地圖上是河流、住家村落、陂塘、農地等。
-- 海岸線：等高線是否與地圖之海岸線平行
 
 ## Reference
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.

@@ -161,7 +161,7 @@ In [159]: run bc_PMmean.py
 0.9742166666666666
 ```
 ## bc_PMmean.py程式下載
-[github](https://github.com/sinotec2/cmaq_relatives/blob/master/combine/bc_PMmean.py)
+[github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bc_PMmean.py)
 Coding
 Links
 here:bc_PMmean.py

@@ -119,3 +119,13 @@ sudo killall httpd
 - [apple.discussion](https://discussions.apple.com/thread/8273226)
 - [SXEl Capitan 10.11.2 & OS X Server 5.0.15 - Turn Off Unused Services](https://gist.github.com/minhoryang/4c7b56324c5f2e5a8694)
 
+# Monterey Pbms
+- [Using the bundled PHP prior to macOS Monterey](https://www.php.net/manual/zh/install.macosx.bundled.php)
+  - CLI（或者旧版本中的 CGI）一般文件名为 php ，其路径可能是 /usr/bin/php。打开一个终端，参考 PHP 手册中的 PHP 的命令行模式一章，然后执行 php -v 可以检查当前运行的 PHP 的版本。调用 phpinfo() 也会显示相关的信息。
+- [Setting Up Your Local Web Server on macOS Big Sur 11.0.1 (2020)\| MAMP Setup on mac \| macOS, Apache, MySQL, PHP](https://tech-cookbook.com/2020/11/14/setting-up-your-local-web-server-on-macos-big-sur-11-0-1-2020-mamp-macos-apache-mysql-php/)
+- [Setting up a local web server on macOS 12 “Monterey”](https://discussions.apple.com/docs/DOC-250004361)  
+- 重裝httpd，不要用自帶httpd([如何在 macOS 12 Monterey 上設定 MAMP本地伺服器](https://www.796t.com/article.php?id=453663))
+  - `sudo vi /usr/local/etc/httpd/httpd.conf`
+  - `Listen 114.32.164.198:80`
+  - `brew services restart httpd`無法連上，還是需要`sudo apachectl start`
+  - `sudo chmod +a "_www allow execute" /Library/WebServer/CGI-Executables` also `/Library/WebServer/Documents`

@@ -50,7 +50,7 @@ convert pm10*.png pm10.gif
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)
 
 ## Results
-- [GIF](http://114.32.164.198/soong/pm10.gif)
+- [CCTM模擬d01範圍PM10之時間變化 GIF](http://114.32.164.198/soong/pm10.gif)
 
 | ![pm10_ncl.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pm10_ncl.PNG) |
 |:--:|

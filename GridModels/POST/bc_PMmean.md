@@ -160,6 +160,13 @@ In [159]: run bc_PMmean.py
 0.778432
 0.9742166666666666
 ```
+
+### 臭氧8小時值的分析
+
+
+| ![BC_InlandRatio.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/BC_InlandRatio.PNG) |
+|:--:|
+| <b>2016年臭氧8小時值超過X值之日數(綠色線右側)))</b>|
 ## bc_PMmean.py程式下載
 [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bc_PMmean.py)
 Coding

@@ -26,7 +26,7 @@ last_modified_date: 2022-02-13 21:05:14
   - 16{:02d}d4.2dD：日均U10V10值，用以判斷邊界濃度是否為流入
   - 16{:02d}baseEF3.S.grd01D：日最大8小時值
   
-## 計算要項：
+## 計算要項
 ### 流入邊界之定義
 - 以邊界上日均值U10/V10為依據，西南邊界上之正值、東北邊界上之負值情況為流入邊界。
 - 當日有任何點是流入邊界才進行(空間)平均值之計算，否則為0(無流入)
@@ -40,7 +40,7 @@ last_modified_date: 2022-02-13 21:05:14
 ### 境外比例之計算
 - 取4邊界之平均最大8小時值做為邊界平均值，除以當日島內最大8小時值平均值，即為當日之境外貢獻比例
 
-## [bnd-in.py]()
+## [bnd-in.py](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bnd-in.py)
 ### 完整程式碼下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bnd-in.py)
 

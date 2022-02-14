@@ -74,7 +74,7 @@ $ cat -n bc_PMmean.py
 ### 讀取台灣本島位置index
 
 - 主要以CNTY_TWN_3X3.nc的縣市fraction為對象，除去53海上點
-- 進行縣市加總，只留下1.0的點(共3268點)，其餘不足1.0會造成平均值的誤差(稀釋)
+- 進行縣市加總，只留下陸上且總合為1.0的點(共3268點)，其餘不足1.0會造成平均值的誤差(稀釋)
 - 組index以dict形式儲存(idx)，方便後續呼叫
 
 ```python
@@ -92,7 +92,7 @@ $ cat -n bc_PMmean.py
 ```
 ### 建立檔案名稱系統
 
-    因2組巢狀網格模擬結果共有24個檔案，檔案名稱需要簡潔的設計，在此以序列的dict來簡化及方便呼叫
+- 因2組巢狀網格模擬結果共有24個檔案，檔案名稱需要簡潔的設計，在此以序列的dict來簡化及方便呼叫
 
 ```python
     44  root={2:'baseT.S.grd02',4:'baseEF3.S.grd01'}
@@ -149,6 +149,12 @@ Out[161]:
 10  13.138980  12.544965      1.047351
 11  14.819545  13.698520      1.081836
 ```
+bc_PMmean.PNG
+
+| ![bc_PMmean.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/bc_PMmean.PNG) |
+|:--:|
+| <b>2016年邊界及臺灣陸地PM<sub>2.5</sub>月平均濃度值與比例</b>|
+
 ### 整體結果
 
 - 全年0.88。夏季較低0.78、冬季較高0.97。
@@ -162,9 +168,5 @@ In [159]: run bc_PMmean.py
 ```
 
 ## bc_PMmean.py程式下載
-[github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bc_PMmean.py)
-Coding
-Links
-here:bc_PMmean.py
-parent:Dr. Kuang's Evernotes_Grid Models
+- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bc_PMmean.py)
 

@@ -189,8 +189,15 @@ for g in grp:
   - [Northwestern China(NWC) Source Contributions](https://youtu.be/lh7Eq-um-Ng)
   - [Northern China(JJZ) Source Contributions](https://youtu.be/L2EwOOjxJC4)
   - [Eastern China(YZD) Source Contributions](https://youtu.be/A9wQUbw_8yc)
-- 萬里觀測與各分區貢獻濃度之時間序列
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404ISAM-wanli.PNG)
+- 萬里觀測與各分區**人為污染**貢獻濃度之時間序列
+
+| ![20180404ISAM-wanli.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404ISAM-wanli.PNG) |
+|:--:|
+| <b>2018/03/31-04/07沙塵暴期間萬里測站PM10各分區**人為污染**貢獻濃度之比較</b>|
+| ![CMAQ_WBDcomp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDcomp.PNG) |
+|:--:|
+| <b>2018/03/31-04/07沙塵暴期間萬里測站PM10**風吹揚砂**濃度之比較</b>|
+
 - 時間序列以下列簡易程式進行解讀，轉成`csv`檔案，以`excell`進行繪圖。
 
 ```python

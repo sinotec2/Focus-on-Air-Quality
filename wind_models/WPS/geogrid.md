@@ -61,30 +61,35 @@ last_modified_date: 2022-01-03 09:13:39
 
 ```bash
 &geogrid
- parent_id         =   1,   1,
- parent_grid_ratio =   1,   5,
- i_parent_start    =   1,  199,
- j_parent_start    =   1,  131,
- e_we              = 671,  1168,
- e_sn              = 395,  683,
+ parent_id         =   1,    1,
+ parent_grid_ratio =   1,    5,
+ i_parent_start    =   1,  213,
+ j_parent_start    =   1,  133,
+ e_we              = 671, 1166,
+ e_sn              = 395,  681,
  geog_data_res = 'default','default','default','default'
  dx = 15000,
  dy = 15000,
  map_proj = 'lambert',
- ref_lat   =23.61000
- ref_lon   =120.9900
+ ref_lat   =23.08689
+ ref_lon   =121.7359
  truelat1  =  10.0,
  truelat2  =  40.0,
- stand_lon = 120.9900
+ stand_lon = 121.7359
  geog_data_path = '/nas1/WRF4.0/WPS_GEOG/WPS_GEOG',
 /
 ```
 
 ## 子網格系統套疊關係
+### 格數與母網格起點
+- 母網格起點的決定與次網格的格數有關
+- 新版[geogrid.exe]()對次網格的格數要求較嚴格，減1後必須是`parent_grid_ratio`的倍數。
+- 母網格起點=母網格及子網格總長一半的差異/母網格之格距
+
 ### 中央氣象局WRF3公里解析度模擬範圍
 - 圖3為中央氣象局WRF3公里解析度模擬範圍，東西向範圍3,500公里、南北向2,050公里。
   - 其解析度足供鄉鎮區之天氣預報及分析
-  - 由於沒有化學反應之計算，其網格數多達1168 X 683
+  - 由於沒有化學反應之計算，其網格數多達1166 X 681
   - 因d01的解析度也很高，足以反映局部重要特性，因此並不需要雙向套疊關係，d01即能呈現足夠的預報度。
 
 | ![geo_emWRF_3Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_3Km.PNG) |

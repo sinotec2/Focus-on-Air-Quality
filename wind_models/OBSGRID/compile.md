@@ -25,7 +25,8 @@ last_modified_date:   2021-11-27 22:48:34
 ## 背景
 基本上`obsgrid`程式也是個內插程式，是需要給定搜索半徑等條件的。程式執行會因為解析度的變化而異，會需要修改編譯。
 
-## 程式下載、律定、編譯
+## 程式下載、率定、編譯
+### 下載、設定
 - `git clone https://github.com/wrf-model/OBSGRID.git`，會在工作目錄下產生`OBSGRID`的新目錄，並將`github`上的原始碼下載到本機。
 - `csh`進入c shell 環境
 - 設定環境變數
@@ -37,6 +38,40 @@ last_modified_date:   2021-11-27 22:48:34
 - 執行`configure`選擇恰當的編譯方式
 - 執行`compile`進行編譯
 - 詳見[README](https://github.com/wrf-model/OBSGRID/blob/master/README)
+
+### gfortran與ifort選項的差異
+```bash
+$ diff configure.oa_GNU configure.oa_ifort
+26a27,28
+> NETCDF          =       /opt/netcdf/netcdf4_intel
+>
+36c38
+< # Settings for Darwin - with g95 compiler
+---
+> # Settings for PC Linux i486 i586 i686 x86_64, Intel compiler
+38,48c40,48
+< FC            =       gfortran
+< FFLAGS                =       -O3 -ffree-form -fconvert=big-endian #-fallow-argument-mismatch
+< F77FLAGS      =       -O3 -ffixed-form -fconvert=big-endian #-fallow-argument-mismatch
+< FNGFLAGS      =       $(FFLAGS)
+< LDFLAGS               =       -Wl,-stack_size,20000000,-stack_addr,0xc0000000
+< CC            =       clang
+< CFLAGS                =
+< CPP           =       /usr/bin/cpp
+< CPPFLAGS      =       -C -P -traditional
+< RANLIB                =
+< LOCAL_LIBS    =       -L/usr/X11R6/lib -lX11
+---
+> FC            =       ifort
+> FFLAGS                =       -FR -convert big_endian
+> F77FLAGS      =       -convert big_endian
+> FNGFLAGS      =       $(FFLAGS)
+> LDFLAGS               =
+> CC            =       gcc
+> CFLAGS                =       -w
+> CPP           =       /opt/intel_f/compilers_and_libraries_2020.0.166/linux/bin/intel64/fpp #/lib/cpp
+> CPPFLAGS      =       -I. -C -P -DDEC -traditional
+```
 
 ## 修改`src/qc0_module.F90`
 

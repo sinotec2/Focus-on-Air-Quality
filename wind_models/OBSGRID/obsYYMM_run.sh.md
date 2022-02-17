@@ -5,7 +5,7 @@ parent: "OBSGRID"
 grand_parent: "WRF"
 nav_order: 3
 date: 2021-11-28 20:33:12 
-last_modified_date: 2021-12-15 21:02:40
+last_modified_date: 2022-02-16 11:59:10
 ---
 
 # obsYYMM_run.sh
@@ -78,8 +78,8 @@ done
 |run12|20190128|20190202|
 
 ### `obsYYMM_run.sh`的執行
-- 開啟12個月份的專屬目錄（OBS01~OBS12），其下再開啟12個批次run1~run12,共144個批次同時進行。
-- 每批次工作目錄執行：`obsYYMM_run.sh` YYMM RR，YYMM為年月(4碼)、RR批次編號(1~12)
+- 開啟12個月份的專屬目錄（OBS01\~OBS12），其下再開啟12個批次run1\~run12,共144個批次同時進行。
+- 每批次工作目錄執行：`obsYYMM_run.sh` YYMM RR，YYMM為年月(4碼)、RR批次編號(1\~12)
 
 ```bash
 y=19
@@ -97,7 +97,7 @@ done
 ## `obsYYMM_run.sh`分段說明
 - 讀進引數與連結`met_em`檔案
   - 第一引數：年月(4碼)
-  - 第二引數：批次編號(1~12)
+  - 第二引數：批次編號(1\~12)
 
 ```bash
      1	#usage: obsYYMM_run.sh 1304 5
@@ -139,7 +139,7 @@ done
 - 依序執行`obsgrid`, [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh), `filter_p`
   - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/程式修改及編譯/)
   - [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh)為WRF系統提供的批次腳本，旨在將OBS_DOMAIN檔案合併，以備obs納進使用。
-  - [filter_p]((http://200.200.31.47/nas1/WRF4.0/WRFv3.9/OBSGRID/filter_p.f))濾掉OBS_DOMAIN檔案中測站數據完全無效者。
+  - [filter_p](/nas1/WRF4.0/FILTER/filter_p.f))濾掉OBS_DOMAIN檔案中測站數據完全無效者。
 
 ```bash
     21	#execution the programs
@@ -159,6 +159,36 @@ done
     30	
 ```
 
+## 按日執行OBSGRID
+- 在個別目錄下分開執行逐日內插
+
+```bash
+for i in {01..12};do 
+  mkdir -p OBS$i
+  cd OBS$i
+  ln -sf /nas1/WRF4.0/WRF_chem/WPS/met_em.d02.* .
+  if [ -e namelist.oa ];then rm namelist.oa;fi
+  cp ../namelist.oa.loop namelist.oa
+  j=$(( 10#$i + 1 ))
+  for cmd in "s/SYEA/2018/g"  "s/EYEA/2018/g"  "s/SMON/04/g" \
+    "s/EMON/04/g"  "s/SDAY/"$i"/g"  "s/EDAY/"$j"/g" "s/GID/2/g" ;do
+    sed -i $cmd namelist.oa
+  done
+  sub ../src_ifort/obsgrid4.exe >&a
+  cd ..
+done
+```
+- 再予以整合
+
+```bash
+for i in {01..12};do cd OBS$i;../run_cat_obs_files.csh 2;cd ..;done
+for i in {01..12};do cd OBS$i;/nas1/WRF4.0/FILTER/filter_p2.exe;cd ..;done
+cd 201804/run56
+nc=wrfsfdda_d02
+ncrcat -O ../../OBS12/$nc ../../OBS11/$nc ../../OBS0?/$nc $nc
+o=OBS_DOMAIN201p
+cat ../../OBS12/$o ../../OBS11/$o ../../OBS0?/$o > OBS_DOMAIN201
+```
 ## 執行成果檢核
 - 正常執行結果，`wrfsfdda`檔案長度將會有`24*天數`個小時，可以用`ncdump -h $nc`指令來檢查。
 - `wrfsfdda`檔案可以使用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)、[METINFO](http://meteothink.org/)或其他軟體開啟。如[下圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)即以`wrfsfdda`中的`(U10_NDG_NEW,V10_NDG_NEW)`，使用[METINFO](http://meteothink.org/)繪製的向量與流線圖：

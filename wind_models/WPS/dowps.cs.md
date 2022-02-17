@@ -5,7 +5,7 @@ parent: "WPS"
 grand_parent: "WRF"
 nav_order: 3
 date:               
-last_modified_date:   2021-11-25 16:21:24
+last_modified_date:   2022-02-16 11:39:08
 ---
 
 # dowps.sh 
@@ -30,6 +30,7 @@ last_modified_date:   2021-11-25 16:21:24
   - [海溫數據](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)等等。
   - 其結果可以成為OBSGRID、及(或)real的輸入檔案，為每一WRF作業必須的步驟。
   - 詳細編譯、安裝、namelist.wps設定、VTable的設定等等，可由[官網](https://github.com/wrf-model/WPS)找到相關資源。此處著眼在批次操作、作業瓶頸、以及結果檢核等注意事項。
+- WPS相關程式有版本之對應關係。WRF4只會讀取WPS4產生檔案，會進行版本檢核。  
 
 ## WPS之全月執行方案
 
@@ -129,9 +130,7 @@ done
     36    ./ungrib.exe
     37
 ```
-- 同樣方式讀取SST檔案。
-  - 如SST檔案非`grib`格式，則不需要執行此段，
-  - 而需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。參[海溫的讀取](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
+- 同樣方式讀取`grib`格式之SST檔案。
 ```bash
     38    cp -f $PATH1/namelist.wps.loop namelist.wps
     39    for cmd in "s/YN/"$YN/g  "s/YP/"$YP/g  "s/MN/"$MN/g  "s/MP/"$MP/g  ;do sed -i $cmd namelist.wps;done
@@ -140,13 +139,19 @@ done
     42    ln -sf $PATH1/ungrib/Variable_Tables/Vtable.SST Vtable
     43    ./ungrib.exe
 ```
+- 如SST檔案非`grib`格式，則不需要執行此段，
+  - 需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。
+  - 參[海溫的讀取](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
+
 - 執行`metgrid`
+
 ```bash
     44
     45    ./metgrid.exe
     46
 ```
 - 將`WPS??(??=01~12)`下的成果彙整到$PATH1/年月目錄下，以備`REAL`或`OBSGRID`使用。
+
 ```bash
     47    mkdir -p $PATH1/$ym/met
     48    mkdir -p $PATH1/$ym/SST_FILE

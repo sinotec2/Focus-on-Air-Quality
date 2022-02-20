@@ -46,7 +46,7 @@ last_modified_date: 2022-02-19 17:56:21
 
 ### [real.exe](/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)同時run了超過2層
 - [ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)一次只能執行一層，只能將上層移轉第下層，namelist.input只能接受d01及d02，不能接受d03、d04...
-- 因此原本的namelist.input必須修改只留存2層，如果要[ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)第三層到第四層，必須將第三層命名為「第一層」，第四層即為「第二層」
+- 因此原本的namelist.input必須修改只留存2層，如果要[ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)第三層到第四層，必須將第三層命名為**d01**，第四層即為**d02**
 - 注意除了網格起始點位置、網格點數之外，也要修改網格間距、time_step等。
 
 ## 執行

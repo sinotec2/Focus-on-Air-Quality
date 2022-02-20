@@ -14,8 +14,8 @@ last_modified_date: 2022-02-20 15:50:54
 
 # REAL & WRF
 - 此處統合[OBSGRID](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/)結果，準備WRF所需的初始、邊界、四階同化檔。
-- [real.exe](/doreal_4Nests.sh)與[wrf.exe](/dowrf)使用同一個名單([namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html))，依序執行。
-- 除了雙向巢狀網格的作業方式之外，由上到下依序執行單一網格的單向巢狀網格作法，也是替代[real.exe]/doreal_4Nests.sh/)的合理方式，特別在網格數較多、雙向巢狀作法太耗費記憶體時。此時會需要[ndown.exe](/ndown)
+- [real.exe](/Focus-on-Air-Quality/wind_models/REAL//doreal_4Nests.sh)與[wrf.exe](/Focus-on-Air-Quality/wind_models/REAL/dowrf/)使用同一個名單([namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html))，依序執行。
+- 除了雙向巢狀網格的作業方式之外，由上到下依序執行單一網格的單向巢狀網格作法，也是替代[real.exe](/Focus-on-Air-Quality/wind_models/doreal_4Nests.sh/)的合理方式，特別在網格數較多、雙向巢狀作法太耗費記憶體時。此時會需要[ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)
 {: .no_toc }
 
 ## What's Learned 

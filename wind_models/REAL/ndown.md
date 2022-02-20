@@ -31,18 +31,18 @@ last_modified_date: 2022-02-19 17:56:21
 	- 需要時間間距較密的wrfbdy檔案
 - 中文筆記可以參考[博客園](https://www.cnblogs.com/jiangleads/articles/12825970.html)
 - 注意事項
-1. coarse-to-fine grid ratio is only restricted to be an integer. An integer less than or equal to 5 is recommended
-2. 一次只能讀一個wrfout，產生下一層domain所需的IC/BC
+	1. coarse-to-fine grid ratio is only restricted to be an integer. An integer less than or equal to 5 is recommended
+	1. 一次只能讀一個wrfout，產生下一層domain所需的IC/BC
 
 ## namelist.input 修改重點
 - 執行雙向巢狀網格的[real.exe](/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)、上層單層的[wrf.exe](/Focus-on-Air-Quality/wind_models/REAL/dowrf/)之後。將namelist.input進行備份、修改。
-- \&time_control下
-1.interval_seconds = 21600 → 3600。這個值是邊界檔的時間間距，原來最外層的邊界檔只有每6小時1筆(配合GFS)，現在則是按照wrfout的結果：每小時1筆。
-1.新增io_form_auxinput2 = 2
-- \&domains
-- max_dom=1 → 2。執行2層網格，上層為剛剛結束[wrf.exe](/Focus-on-Air-Quality/wind_models/REAL/dowrf/)的母網格、下層為需要wrfbdy的子網格
-- e_we、e_sn、dx、dy、(不動)保持母、子網格的設定與執行[real.exe](/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)時一樣
-- time_step = 240  → 80 。時間步階適度調整，以方便子網格之執行。
+- &time_control下
+	1. interval_seconds = 21600 → 3600。這個值是邊界檔的時間間距，原來最外層的邊界檔只有每6小時1筆(配合GFS)，現在則是按照wrfout的結果：每小時1筆。
+	1. 新增io_form_auxinput2 = 2
+- &domains
+	- max_dom=1 → 2。執行2層網格，上層為剛剛結束[wrf.exe](/Focus-on-Air-Quality/wind_models/REAL/dowrf/)的母網格、下層為需要wrfbdy的子網格
+	- e_we、e_sn、dx、dy、(不動)保持母、子網格的設定與執行[real.exe](/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)時一樣
+	- time_step = 240  → 80 。時間步階適度調整，以方便子網格之執行。
 
 ### [real.exe](/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)同時run了超過2層
 - [ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)一次只能執行一層，只能將上層移轉第下層，namelist.input只能接受d01及d02，不能接受d03、d04...

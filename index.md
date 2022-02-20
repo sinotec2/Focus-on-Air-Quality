@@ -18,7 +18,7 @@ last_modified_date: 2021-12-06 12:09:32
 ---
 
 ## What's New
-- 2022-02-20 公司新購了工作站，意味著更大範圍、更多網格數的模擬變得更可能實現。不過初步嘗試，同時執行CWBWRF_15及3k雙向巢狀網格的[wrf.exe](/Focus-on-Air-Quality/wind_models/REAL/dowrf/)作業並沒有成功，只得以[ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)及單向套疊進行，看起來是OK的。這表示對臺灣佔有80%貢獻的華東\～華南地區，以後會跟臺灣本島同框進行空品模擬，這好像比較符合比例原則。
+- 2022-02-20 公司新購了工作站，意味著更大範圍、更多網格數的模擬變得更可能實現。不過初步嘗試，同時執行CWBWRF_15及3k雙向巢狀網格的[wrf.exe](/Focus-on-Air-Quality/wind_models/REAL/dowrf/)作業並沒有成功，只得以[ndown.exe](/Focus-on-Air-Quality/wind_models/REAL/ndown/)及單向套疊進行，看起來是OK的。這表示對臺灣佔有80%貢獻的華東～華南地區，以後會跟臺灣本島同框進行空品模擬，這好像比較符合比例原則。
 - 2022-02-11 自從過年期間iMac更新到Monterey之後，遠端執行的[CGI系統無法運作](https://discussions.apple.com/thread/253579026)，AERMAP的前處理程式[gen_inp](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/)只得重新發布成讀取2020內政部[20M_dtm](https://data.gov.tw/dataset/138563)版本，不再以[EIO](https://pypi.org/project/elevation/)讀取30M_dtm，但還是維持本地執行[gdal_translate](https://gdal.org/programs/gdal_translate.html)的方案。(後續：參考[程式人生](https://www.796t.com/article.php?id=453663)建議重裝Apache/2.4.52，[遠端執行系統教學網站](http://114.32.164.198/aermods.html)終究還是修好了，不過也表示還欠很多相關遠端執行的筆記還沒有寫。重裝的筆記詳[monterey-pbms](/Focus-on-Air-Quality/utilities/OperationSystem/MacNetWorks/#monterey-pbms))
 - 2022-01-30 東亞範圍15Km解析度的CMAQ模擬一直是個挑戰，除了資料的準備外，工作站是不是負荷得了也是關鍵。初步成果看來還好，因為是用手機操作，先貼上[結果](http://114.32.164.198/soong/pm10.gif)，過程與細節再慢慢補上囉。(2022-02-11已補上[東亞地區解析度15Km之CMAQ模擬分析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/CWBWRF_15k))
 - 2022-01-05 日本國立環境研究所[REAS](https://www.nies.go.jp/REAS/)排放量有簡單的處理方式了。解析度15~27公里採內插、81公里採加總，結果如[圖](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/reas2cmaq/#結果檢視)。

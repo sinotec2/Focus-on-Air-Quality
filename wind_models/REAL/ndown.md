@@ -66,8 +66,8 @@ last_modified_date: 2022-02-19 17:56:21
 - avrgvsobss-k結果
 	- ndown 62.4%,OBSdomain73.0% 
 	- 主要因為風速高估比較嚴重。可能原因: 
-1. 缺乏domain外作用力的牽制，sfdda比fdda更差，OBS_DOMAIN又較sfdda更差，d4only又更差，
-1. 調整機制是否有錯!可否直接用EPAst之obs_domain
+		1. 缺乏domain外作用力的牽制，sfdda比fdda更差，OBS_DOMAIN又較sfdda更差，d4only又更差，
+		1. 調整機制是否有錯!可否直接用EPAst之obs_domain
 - Attainment Comparison
  
 ｜｜OB_TMP｜GE_TMP ｜ OB_WS ｜  GE_WS  ｜ OB_WD ｜  GE_WD｜

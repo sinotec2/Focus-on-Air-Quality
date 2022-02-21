@@ -122,7 +122,49 @@ sudo killall httpd
 # Monterey Pbms
 - [Setting up a local web server on macOS 12 “Monterey”](https://discussions.apple.com/docs/DOC-250004361)  
 - 重裝httpd，不要用自帶httpd([如何在 macOS 12 Monterey 上設定 MAMP本地伺服器](https://www.796t.com/article.php?id=453663))
-  - `sudo vi /usr/local/etc/httpd/httpd.conf`
-  - `Listen 114.32.164.198:80`
-  - `brew services restart httpd`無法連上，還是需要`sudo apachectl start`
-  - `sudo chmod +a "_www allow execute" /Library/WebServer/CGI-Executables` also `/Library/WebServer/Documents`
+## httpd.conf設定
+- `sudo vi /usr/local/etc/httpd/httpd.conf`
+- LoadModule：按照[前述](https://www.796t.com/article.php?id=453663)建議
+- 更改CGI目錄
+  - alias_module
+
+```bash
+<IfModule alias_module>
+...
+  ScriptAliasMatch ^/cgi-bin/((?!(?i:webobjects)).*$) "/Library/WebServer/CGI-Executables/$1"`
+</IfModule>
+```
+  - Directory
+
+```bash
+#
+# "/usr/local/var/www/cgi-bin" should be changed to whatever your ScriptAliased
+# CGI directory exists, if you have that configured.
+#
+<Directory "/Library/WebServer/CGI-Executables">
+    AllowOverride All 
+    Options +ExecCGI
+    Require all granted
+</Directory>
+```
+- 新增CGI程式附加檔名
+
+```bash
+<IfModule mime_module>
+...
+    #
+    # AddHandler allows you to map certain file extensions to "handlers":
+    # actions unrelated to filetype. These can be either built into the server
+    # or added with the Action directive (see below)
+    #
+    # To use CGI scripts outside of ScriptAliased directories:
+    # (You will also need to add "ExecCGI" to the "Options" directive.)
+    #
+    AddHandler cgi-script .cgi .pl .py
+...
+</IfModule>
+```
+- `Listen 114.32.164.198:80`
+## 啟動方式
+- [前述](https://www.796t.com/article.php?id=453663)建議用`brew services restart httpd`無法連上，還是需要`sudo apachectl start`
+- `sudo chmod +a "_www allow execute" /Library/WebServer/CGI-Executables` also `/Library/WebServer/Documents`

@@ -23,7 +23,7 @@ last_modified_date:   2021-11-29 16:48:48
 ---
 
 ## 背景
-- WRF主程式(`wrf.exe`)的執行和REAL是在同一個工作目錄下進行(run)，因所有的初始化(`wrfinput_d01`~`wrfinput_d04`)、邊界條件(`wrfbdy_d01`)、底層條件(`wrflow_d01`~`wrflow_d04`)、FDDA相關檔案都已經產生或連結好，因此可以直接在run目錄執行`wrf.exe`。
+- WRF主程式(`wrf.exe`)的執行和REAL是在同一個工作目錄下進行(run)，因所有的初始化(`wrfinput_d01`\~`wrfinput_d04`)、邊界條件(`wrfbdy_d01`)、底層條件(`wrflow_d01`\~`wrflow_d04`)、FDDA相關檔案都已經產生或連結好，因此可以直接在run目錄執行`wrf.exe`。
 - `wrf.exe`是整個過程最耗時的程序，因此其平行化需仔細安排。
 
 ## dowrf
@@ -65,7 +65,7 @@ done
 ## Reference
 - Mesoscale and Microscale Meteorology Laboratory, NCAR, **Weather Research & Forecasting Model ARW Version 4 Modeling System User’s Guide**, [pdfcoffee](https://pdfcoffee.com/version-4-modeling-system-users-guide-january-2019-pdf-free.html), 2019,1.
 - 黃光遠、劉聖宗, **赴美研習WRF數值天氣預報模式報告書**, [交通部民用航空局飛航服務總台](https://report.nat.gov.tw/ReportFront/PageSystem/reportFileDownload/C09502689/001), 2006,10,13
-[ESRL](https://esrl.noaa.gov/), **WRF NAMELIST.INPUT FILE DESCRIPTION**, [namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html), 
+- [ESRL](https://esrl.noaa.gov/), **WRF NAMELIST.INPUT FILE DESCRIPTION**, [namelist.input](https://esrl.noaa.gov/gsd/wrfportal/namelist_input_options.html), 
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
 - Terry Lin, **Linux 指令SED 用法教學、取代範例、詳解**, [terryl.in](https://terryl.in/zh/linux-sed-command/),	2021-02-11 
 - weikaiwei, **Linux教學：cat指令**, [weikaiwei.com](https://weikaiwei.com/linux/cat-command/), 2021

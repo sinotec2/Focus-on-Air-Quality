@@ -298,9 +298,10 @@ result=cntr_kml(grid_z2, lon, lat, fname)
 ```
 
 ### 複雜地形ISC模式所需輸入檔
-- 因GeoTiff檔案提供了較大的範圍，實際輸出時回歸正確範圍
-- re.dat：接受點位置及高程
-- TG.txt：高程網格數據檔
+- 因GeoTiff檔案提供了較大的範圍，實際輸出時回歸正確範圍`[M:-M,M:-M]`
+- 使用簡單的with open及write指令，將高程寫進檔案中
+  - re.dat：接受點位置及高程
+  - TG.txt：高程網格數據檔
 
 ```python
 # generate the ISC files
@@ -324,7 +325,8 @@ with open(fname + '_TG.txt','w') as f:
     for i in range(1,nx):
       st+=' '+ele[i]
     f.write(st+'\n')
-```      
+```
+    
 ## 結果比較
 ### 林口電廠範例貼圖結果
 

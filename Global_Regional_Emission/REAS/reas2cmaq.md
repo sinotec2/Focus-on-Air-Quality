@@ -1,8 +1,7 @@
 ---
 layout: default
 title: 地面排放檔之讀取及轉換
-parent: REAS Python
-grand_parent: CMAQ Model System
+parent: Global/Regional Emission
 nav_order: 2
 date: 2022-01-05 09:30:02
 last_modified_date: 2022-01-05 09:30:08

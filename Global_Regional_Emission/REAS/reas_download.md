@@ -1,8 +1,7 @@
 ---
 layout: default
 title: REAS數據之下載
-parent: REAS Python
-grand_parent: CMAQ Model System
+parent: Global/Regional Emission
 nav_order: 1
 date: 2022-02-05 10:12:03
 last_modified_date: 2022-02-05 10:12:08

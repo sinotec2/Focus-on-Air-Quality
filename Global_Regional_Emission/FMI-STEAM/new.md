@@ -1,8 +1,7 @@
 ---
 layout: default
 title: 船隻排放之處理_CMAQ
-parent: REAS Python
-grand_parent: CMAQ Model System
+parent: Global/Regional Emission
 nav_order: 5
 date: 2022-02-05 16:09:08
 last_modified_date: 2022-02-05 16:09:11
@@ -104,7 +103,7 @@ xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
 
 | ![ship_co.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ship_co.PNG) |
 |:--:|
-| <b>圖 d01範圍船舶CO排放之分部(log gmole/s)</b>|  
+| <b>圖 d01範圍船舶CO排放之分布(log gmole/s)</b>|  
 
 
 

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: REAS Python
+title: Global/Regional Emission
 nav_order: 5
 has_children: true
-permalink: /REASnFMI/
+permalink: /Global_Regional_Emission/
 
 last_modified_date:   2021-12-11 21:38:25
 ---

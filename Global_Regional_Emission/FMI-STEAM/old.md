@@ -1,8 +1,7 @@
 ---
 layout: default
 title: 船隻排放之處理_CAMx
-parent: REAS Python
-grand_parent: CMAQ Model System
+parent: Global/Regional Emission
 nav_order: 4
 date: 2022-02-05 10:26:07
 last_modified_date: 2022-02-05 10:26:11

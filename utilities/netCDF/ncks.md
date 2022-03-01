@@ -62,6 +62,24 @@ variables:
 - `--fix_rec_dmn TSTEP` 定義不可增加筆數之維度(**f**ix **rec**ord **d**i**m**e**n**sion)
 - ncks只能增減變數，如要更改變數名稱，則必須要使用[ncrename]()，如 `ncrename -O -v PM25_TOT,DIS_INCI stroke.nc stroke1.nc`
 
+### 序列之規則
+- 維度或座標軸後接了3個數字，分別是起、迄、與間隔，以逗點隔開，如果不指定則跳過。
+- 維度的索引必須是整數，座標軸的值必須是實數
+- 如未指定(更改為Fortran習慣)，序號採0開始之C語言習慣。且含最後值，與python不同。
+- ncks手冊作者[Zender and Mays](https://linux.die.net/man/1/ncks)提供了範例:
+```bash
+# Create netCDF out.nc containing all variables from file in.nc. Restrict the dimensions of these variables to a hyperslab. 
+#Print (with -H) the hyperslabs to the screen for good measure. 
+#The specified hyperslab is: 
+#the sixth value in dimension time; 
+#the half-open range lat <= 0.0 in coordinate lat; 
+#the half-open range lon >= 330.0 in coordinate lon; 
+#the closed interval 0.3 <= band <= 0.5 in coordinate band; 
+#and cross-section closest to 1000.0 in coordinate lev. 
+#Note that limits applied to coordinate values are specified with a decimal point, and limits applied to dimension indices do not have a decimal point.
+ncks -H -d time,5 -d lat,,0. -d lon,330., -d band,.3,.5 -d lev,1000. in.nc out.nc
+```
+
 ### 加長一個LIMITED維度
 - 一般nc檔案在空間的維度是保持LIMITED的，讓檔案不會被輕易更動而亂套。
 - 在準備不同網格系統模版的過程，會遇到情況需要較長的空間維度，除了可以重新用python來產生(nc.createDimension)之外，亦可以由既有較小的模版來延伸，但要先解除該維度LIMITED狀態。

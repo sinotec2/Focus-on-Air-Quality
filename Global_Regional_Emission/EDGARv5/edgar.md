@@ -32,12 +32,11 @@ last_modified_date: 2022-02-25 15:04:52
 - 直接到[EDGAR](https://edgar.jrc.ec.europa.eu/)官網點選下載nc連結，製做批次檔如下。
 
 ```bash
-
 for i in BC CO NH3 NMVOC NOx OC PM10 PM2.5 SO2;do
   https=https://cidportal.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/${i}/TOTALS
   filez=v50_${i}_2015.0.1x0.1.zip
   zz=${https}/${filez}
-  wget -q --no-check-certificate zz
+  wget -q --no-check-certificate $zz
   unzip ${filez}
 done  
 ```
@@ -45,14 +44,11 @@ done
   - 經度：0.05 (3600點)
   - 緯度：-89.5 (1800點)
 
-
-
 ## Results
 
-| ![NOx_EastAsia.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NOx_EastAsia.PNG) |
+| ![NO2_D6.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NO2_D6.PNG) |
 |:--:|
-| <b>圖 CWBWRF_3k範圍NOx排放之分布(log gmole/s)</b>|  
-
+| <b>圖 HUADON_3k範圍EDGARv5 NO2排放之分布(log gmole/s)</b>|  
 
 ## Reference
 - Ding, J., Miyazaki, K., van der A, R.J., Mijling, B., Kurokawa, J., Cho, S., Janssens-Maenhout, G., Zhang, Q., Liu, F., and Levelt, P.F. (2017). **Intercomparison of NOx emission inventories over East Asia.** Atmos. Chem. Phys. 17 (16):10125–10141. [doi:10.5194/acp-17-10125-2017](https://acp.copernicus.org/articles/17/10125/2017/acp-17-10125-2017.pdf).

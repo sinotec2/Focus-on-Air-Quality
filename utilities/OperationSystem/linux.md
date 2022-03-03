@@ -126,3 +126,7 @@ Conclusion
 
 You have learned how to create a swap file and activate and configure swap space on your CentOS 7 system.
 
+## CentOS8之映象移動
+[CentOS8提前EOL，阿里雲源停止維護後的更新配置方法 2022-2-17](https://www.796t.com/article.php?id=468029)
+
+[How To Install the Apache Web Server on CentOS 8](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-8)

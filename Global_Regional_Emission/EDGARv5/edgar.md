@@ -48,13 +48,13 @@ for cat in TOTALS ENE REF_TRF IND \
     fi
     zz=${https}/${filez}
     wget -q --no-check-certificate $zz
-    unzip -q -o ${filez}
+    if [ -e ${filez} ];then unzip -q -o ${filez};fi
   done
 done
 ```
 ### 類別資訊
 - EDGAR參照IPCC之分類方式進行排放推估，共28種類別。
-- 因排放類別可對照時間變化、成分訊息等，具有發展之潛能
+- 因排放類別可對照時間變化、成分特性等訊息，具有發展成排放模式之潛能
 
 |Abb.| Category|
 |-|-|
@@ -93,9 +93,9 @@ done
   - 緯度：-89.5 (1800點)
 
 ## 內插程式說明
-### [EDGAR2cmaqD2.py](/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)
-- 採用與[reas2cmaqD2.py](/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)類似的方式進行內插。
-- 由於EDGARD已經是網格化的nc檔案了，因此讀取較為單純。
+### [EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)
+- 採用與[reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)類似的方式進行內插。
+- 由於EDGAR已經是網格化的nc檔案了，因此讀取較為單純。
 ### 調用模組
 - EDGAR資料解析度為0.1度，在台灣地區約為10公里，對3公里之網格系統仍需內插。此處採griddata線性內插。
 
@@ -135,8 +135,8 @@ latM=[-89.95+i*0.1 for i in range(ny)]
 lonm, latm = np.meshgrid(lonM, latM)
 ```
 ### 讀取排放量檔案之模版
-- 將EDGARD之網格經緯度座標值轉到模版檔案的網格系統
-- 找到在模版範圍內的EDGARD座標點(idx)，準備進行griddata內插
+- 將EDGAR之網格經緯度座標值轉到模版檔案的網格系統
+- 找到在模版範圍內的EDGAR座標點(idx)，準備進行griddata內插
 
 ```python
 DD=sys.argv[1]
@@ -235,7 +235,7 @@ for v in VOCs:
 nc.close()
 ```
 ### 程式下載
-- [EDGAR2cmaqD2.py](/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)
+- [EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)
 
 ## Results
 

@@ -173,6 +173,7 @@ last_modified_date: 2022-03-07 13:29:39
     1. OLM後處理
     1. 壓縮所有結果
     1. 寄信
+  - see [TODO's](/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#known-bugs-and-todos)
 
 ```bash
 kuang@114-32-164-198 ~/Downloads
@@ -238,7 +239,7 @@ done
 - 充分使用既有開放源碼之數位板(Digitizer)與地圖功能、方便偵錯、
 - 直接以經緯度系統輸入，可以避免地圖投影方式可能的錯誤
 
-### Known Bugs and TODOs
+### Known Bugs and TODO's
 - 同時需要花時間執行之程式可能包括mmif、aermap、aermod等等，如果超過工作站之核心數將會接近無限期等候，應設定停損點。
 - 以蒐詢程式結果似容易出錯，建議改為針對pid進行定期ps檢視，不論程式是否出錯均能有效控制其結束時間。
 

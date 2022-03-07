@@ -78,25 +78,25 @@ last_modified_date:   2021-12-17 14:44:41
   - 此處使用到[pykml](https://pythonhosted.org/pykml/)的`parser`
 
 ```python
-     1	from pykml import parser
-     2	from os import path
-     3	from pandas import *
-     4	
+1	from pykml import parser
+2	from os import path
+3	from pandas import *
+4	
 ```
 - 讀取`doc.kml`：來源見前述。
 
 ```python
-     5	kml_file = path.join('doc.kml')
-     6	with open(kml_file) as f:
-     7	  doc = parser.parse(f).getroot()
+5	kml_file = path.join('doc.kml')
+6	with open(kml_file) as f:
+7	  doc = parser.parse(f).getroot()
 ```
 - 讀取所有的位置標籤(`Placemark`)，及其名稱(`names`)
   - 名稱`names`(會出現在`KML`檔案的`Placemark`(`plms`)的名稱標籤)，此名稱與網站提供的`xls`資料表名稱一致。共57筆，有重複。(line 8~9)
 
 ```python
-     8	plms=doc.findall('.//{http://www.opengis.net/kml/2.2}Placemark')
-     9	names=[i.name for i in plms]
-    10	
+8	plms=doc.findall('.//{http://www.opengis.net/kml/2.2}Placemark')
+9	names=[i.name for i in plms]
+10	
 ```
 - `pykml`並未內設一制式的從屬關係層次，而是用`getparent` 方法找出來物件之間的親子關係。
   - 在本案例中`MultiGeometry`與`Polygon`之間是有關係的，而`MultiGeometry`與`Placemark`的順序相同，可以引用相同的名稱，因此就可以由下向上，串連找到每一個`Polygon`的名稱。
@@ -105,56 +105,58 @@ last_modified_date:   2021-12-17 14:44:41
 - 讀取幾何形狀(`mtgs`)與其標籤(`mtg_tag`)
 
 ```python
-    11	mtgs=doc.findall('.//{http://www.opengis.net/kml/2.2}MultiGeometry')
-    12	mtg_tag=[str(i.xpath).split()[-1][:-2] for i in mtgs]
-    13	
+11	mtgs=doc.findall('.//{http://www.opengis.net/kml/2.2}MultiGeometry')
+12	mtg_tag=[str(i.xpath).split()[-1][:-2] for i in mtgs]
+13	
 ```
 - 讀取多邊形(`plgs`)與其來源(`plg_prt`)
 
 ```python
-    14	plgs=doc.findall('.//{http://www.opengis.net/kml/2.2}Polygon')
-    15	plg_prt=[str(i.getparent().values).split()[-1][:-2] for i in plgs]
-    16	
+14	plgs=doc.findall('.//{http://www.opengis.net/kml/2.2}Polygon')
+15	plg_prt=[str(i.getparent().values).split()[-1][:-2] for i in plgs]
+16	
 ```
 - 使用`pyval`指令收集多邊形頂點的座標值
   - 參考[pykml.parser.fromstring函數](https://vimsky.com/zh-tw/examples/detail/python-ex-pykml.parser---fromstring-function.html)及[Python fromstring Examples](https://python.hotexamples.com/examples/pykml.parser/-/fromstring/python-fromstring-function-examples.html)
   - 因為MultiGeometry的順序和Placemark是一樣的，因此只要知道tag在MultiGeometry 序列中的序號，就可以知道它的名稱。(line 21~22)  
 
 ```python
-    17	lon,lat,num,nam=[],[],[],[]
-    18	n=0
-    19	for plg in plgs:
-    20	  iplg=plgs.index(plg)
-    21	  imtg=mtg_tag.index(plg_prt[iplg])
-    22	  name=names[imtg]
-    23	  coord=plg.findall('.//{http://www.opengis.net/kml/2.2}coordinates')
-    24	  c=coord[0].pyval.split()
-    25	  for ln in c:
-    26	    if n%3==0:
-    27	      lon.append(ln.split(',')[0])
-    28	      lat.append(ln.split(',')[1])
-    29	      num.append('n='+str(n))
-    30	      nam.append(name)
-    31	    n+=1
+17	lon,lat,num,nam=[],[],[],[]
+18	n=0
+19	for plg in plgs:
+20	  iplg=plgs.index(plg)
+21	  imtg=mtg_tag.index(plg_prt[iplg])
+22	  name=names[imtg]
+23	  coord=plg.findall('.//{http://www.opengis.net/kml/2.2}coordinates')
+24	  c=coord[0].pyval.split()
+25	  for ln in c:
+26	    if n%3==0:
+27	      lon.append(ln.split(',')[0])
+28	      lat.append(ln.split(',')[1])
+29	      num.append('n='+str(n))
+30	      nam.append(name)
+31	    n+=1
 ```
 - 將結果寫進`csv`檔案(`txt.write`版本)
 
 ```python
-    32	#with open('doc.csv','w') as f:
-    33	#  for i in range(len(num)):
-    34	#    f.write(str(lon[i])+','+str(lat[i])+','+str(num[i])+','+nam[i]+'\n')
-    35	#   if n%100==0:print(n)
+32	#with open('doc.csv','w') as f:
+33	#  for i in range(len(num)):
+34	#    f.write(str(lon[i])+','+str(lat[i])+','+str(num[i])+','+nam[i]+'\n')
+35	#   if n%100==0:print(n)
 ```
 - `DataFrame.to_csv`版本
   - 功能主要在將每一個座標點輸出成`csv`檔，而將其名稱寫在**點位**的說明欄，可以應用[csv2kml.py]()程式再次轉成`kml`檔案，檢視其**多邊形**及**名稱**解析是否正確。
 
 ```python
-    36	df=DataFrame({'lon':lon,'lat':lat,'num':num,'nam':nam})
-    37	df.set_index('lon').to_csv('doc.csv')
+36	df=DataFrame({'lon':lon,'lat':lat,'num':num,'nam':nam})
+37	df.set_index('lon').to_csv('doc.csv')
 ```
 ## 程式下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/rd_kml.py)
 
+## 應用
+- 除了此處
 ## Reference
 - google,**KML Tutoria**,[developers.google.com](https://developers.google.com/kml/documentation/kml_tut), Last updated 2021-09-07 UTC.
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.

@@ -65,7 +65,8 @@ last_modified_date: 2022-03-07 13:29:39
   - 須建立程序管控程式，管理幕前、幕後工作之分配與同步化。
 
 ## Compute as a Service (CaaS)
-- 服務窗口網頁位置：http://114.32.164.198/aermods.html
+- 服務窗口網頁位置：[http://114.32.164.198/aermods.html](http://114.32.164.198/aermods.html)
+- Web site working hours:07:00\~19:00, Mon\~Fri
 
 ### 輸入範例：
 - kml檔案，如下範例：
@@ -141,9 +142,14 @@ last_modified_date: 2022-03-07 13:29:39
 
 ## HTML
 ### 設計
-- 以表格方式整理模擬過程、各程序之程式版本、內容、IO及範例、檢核方式以及筆記
-### coding
+- 以表格方式整理模擬過程、各程序之程式版本、內容、IO及範例、檢核方式以及筆記。
+- 提交CGI_python物件
+  - `year`：氣象數據之年代
+  - `emailadd`：電郵信箱
 
+
+### coding
+- [download html](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/aermods.html)
 ## CGI_PYTHON
 ### 設計
 依序執行：
@@ -232,3 +238,4 @@ done
 - 直接以經緯度系統輸入，可以避免地圖投影方式可能的錯誤
 
 ## Reference
+

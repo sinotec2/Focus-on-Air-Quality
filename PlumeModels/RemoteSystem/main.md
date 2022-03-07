@@ -32,4 +32,23 @@ last_modified_date: 2022-03-07 15:17:07
 - 提交CGI_python物件
   - 4個檔案：依序為run stream、氣象檔(AERMOD會需要獨立的高空數據檔)、以及複雜地型時需要的地形檔。
   - `model`：模式之選項，ISCST或AERMOD二擇一
-- 
+
+### Coding
+- [AERMOD.html](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/AERMOD.html)
+
+## CGI_PYTHON
+### [AERMOD.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/AERMOD.py)之程式設計
+- 執行緒之讀取
+  - 應用subprocess模組進行讀取。bash指令運用了ps、grep、以及wc
+  - 因工作站有可能同時運作了iscst及aermod程式，因此分別讀取緒數予以相加。
+  - 工作站為 6 核心，限制總緒數在5以下以提高服務效能(see [TODO's]())
+
+```python
+npid1=subprocess.check_output('ps -ef|grep aermod|grep -v grep|wc -l',shell=True).decode('utf8').strip('\n')
+npid2=subprocess.check_output('ps -ef|grep iscst3|grep -v grep|wc -l',shell=True).decode('utf8').strip('\n')
+npid=int(npid1)+int(npid2)
+if npid>=5:
+  print 'total '+str(npid)+' iscst or aermod processes are running, please wait. </br>'
+  print '</body></html>'
+  sys.exit()
+```

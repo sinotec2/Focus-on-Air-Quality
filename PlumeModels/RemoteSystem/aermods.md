@@ -143,16 +143,17 @@ last_modified_date: 2022-03-07 13:29:39
 ## HTML
 ### 設計
 - 以表格方式整理模擬過程、各程序之程式版本、內容、IO及範例、檢核方式以及筆記。
-- 提交CGI_python物件
+- 提交CGI_python([rd_kmlFull.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/rd_kmlFull.py))之物件
+  - `filename`：kml檔名
   - `year`：氣象數據之年代
-  - `emailadd`：電郵信箱
-
+  - `emailadd`：電郵信箱(optional)
 
 ### coding
 - [download html](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/aermods.html)
+
 ## CGI_PYTHON
-### 設計
-依序執行：
+### [rd_kmlFull.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/rd_kmlFull.py)之程式設計
+此程式讀取html提供之kml檔案，進行解析後將依序執行：
 - Rotate KML
 - [BPIPPRIM]()
 - [GENINP](/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/) and AERMAP
@@ -230,12 +231,16 @@ for inp in $(ls *_[CNPS]*.inp);do
   $AERMOD $inp $out >> isc.out &
 done
 ```
-
+## Discussion
 ### 以kml檔案做為輸入座標介面的理由
 - [kml](https://zh.wikipedia.org/wiki/KML)為Google所發展、運維之語言，具有其穩定性。此處應用到其多邊形(Polygon, 標註廠房平面圖)、以及點(Point,標註煙囪中心位置)之記錄方式。
 - 為許多繪圖軟體所接受，容易輸出。
 - 充分使用既有開放源碼之數位板(Digitizer)與地圖功能、方便偵錯、
 - 直接以經緯度系統輸入，可以避免地圖投影方式可能的錯誤
+
+### Known Bugs and TODOs
+- 同時需要花時間執行之程式可能包括mmif、aermap、aermod等等，如果超過工作站之核心數將會接近無限期等候，應設定停損點。
+- 以蒐詢程式結果似容易出錯，建議改為針對pid進行定期ps檢視，不論程式是否出錯均能有效控制其結束時間。
 
 ## Reference
 

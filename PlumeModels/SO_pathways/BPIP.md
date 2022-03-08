@@ -44,9 +44,9 @@ last_modified_date: 2022-03-08 10:16:34
 1. 建築物與煙囪頂端的**離地高度H**，單位為公尺，可以用陰影長度的比例關係粗略推估。一般工廠辦公室為2層樓建築高度為6公尺。
 1. 按照範例之模板輸入D, (X,Y), E, H等數據，存檔、上傳工作站。
 1. 執行[BPIP]()批次檔run_bpip.sh A1P.INP A1P.OUT A1P.SUM
-1. 將OUT檔案中的SO 參數，貼在AERMOD的執行控制檔內
+1. 將OUT檔案中的SO路徑及參數，貼在AERMOD的執行控制檔內
 
-| ![BPIP1.png](/Focus-on-Air-Quality/raw/main/assets/images/BPIP1.png)|
+| ![BPIP1.png](/Focus-on-Air-Quality/blob/main/assets/images/BPIP1.png)|
 |:--:|
 | <b>從衛星圖中找到廠區座標軸、夾角、與廠房頂點XY值</b>|
 

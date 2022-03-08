@@ -54,14 +54,32 @@ last_modified_date: 2022-03-08 10:16:34
   - 「逆時針」輸入、回到第一點單擊後才算完成
   - 在對話窗輸入名稱（含建築物高度，如b1 30m、Plant1/30）
   - 不接受中文字、全形
+  
+| ![digitizer1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer1.png)|
+|:--:|
+| <b>啟動多邊形的點選、逆時針輸入回到第1點</b>|
+| ![digitizer2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer2.png)|
+| <b>對話窗輸入名稱、高度</b>|
+
 - 按下氣球點選污染源位置
-  - 在對話窗輸入名稱（可以含建築物高度，如hs1 250m、stk1;30）
+  - 在對話窗輸入名稱（可以含污染源的高度，如hs1 250m、stk1;30）
   - 不接受中文字、全形
+
+| ![digitizer3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer3.png)|
+|:--:|
+| <b>啟動氣球的點選、輸入污染源名稱(高度)</b>|
+
 - 按下磁碟片儲存檔案
   - 不必打附加檔名（.kml）
   - 不接受中文字、全形
   - 正常會存到Downloads目錄
 - 按下右側檔案夾、檢視檔案數位化過程是否正確
+
+| ![digitizer4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer4.png)|
+|:--:|
+| <b>儲存結果</b>|
+| ![digitizer5.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer5.png)|
+| <b>重新開啟檔案檢視結果</b>|
 
 ## JS程式修改
 - Digitizer由js/、libs/（含Images）、testData/等目錄所組成，
@@ -141,9 +159,3 @@ $ cat -n js/main.js
 ## Reference
 - Nishanta Khanal(banmedo),[LeafletDigitizer](https://github.com/banmedo/LeafletDigitizer)
 - b_b brunob, Calvin Metcalf calvinmetcalf, and Michael Lawrence Evans mlevans, [leaflet-extras](https://leaflet-extras.github.io/leaflet-providers/preview/)
-
-
-| ![BPIP1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP1.png)|
-|:--:|
-| <b>從衛星圖中定義廠區座標軸系統、量測夾角、與廠房頂點XY值</b>|
-

@@ -90,20 +90,22 @@ last_modified_date: 2022-03-08 10:16:34
 |:--:|
 | <b>L形建築物之BPIP輸出結果</b>|
 
-## BPIPPRIME之遠端計算服務
-- 由於[BPIPPRIME]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
+## BPIPPRIME之遠端計算服務範例
+- 由於[BPIPPRIME]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。比較繁雜的程序是座標、夾角的量測、旋轉平移的計算。
+  - 然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
 - CaaS的作業方式：
-  1. 先在地圖[數位板]()上點選煙囪及建築物頂點位置、存成kml檔案
-  1. 利用[rotate_kml]()程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]的輸入檔
-  1. 執行[BPIPPRIME]計算
+  1. 先在地圖[數位板]()上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
+  1. 利用[rotate_kml]()程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
+  1. 執行[BPIPPRIME]()計算(步驟8)
 - 細部操作方式與CaaS程式設計詳見[BPIP_CaaS](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_CaaS)之說明。
 
 | ![BPIP3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP3.png)|
 |:--:|
-| <b>實例廠區數位化結果，雖然點選結果有些歪斜，[rotate_kml]()程式會將其均化修正</b>|
+| <b>圖1實例廠區數位化結果，雖然點選結果有些歪斜，[rotate_kml]()程式會將其均化修正</b>|
 | ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
-|:--:|
-| <b>實例廠區[rotate_kml]旋轉後之輸入檔，經[ISCPARSER]()解讀結果</b>|
+| <b>圖2實例廠區[rotate_kml]旋轉後之輸入檔，經[ISCPARSER]()解讀結果</b>|
+
+- [BPIPPRIME]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
 
 ## Reference and Resource
 - 有關煙流下洗的現象、原因、以及如何避免，可以參考下列網址

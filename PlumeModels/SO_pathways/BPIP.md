@@ -48,7 +48,7 @@ last_modified_date: 2022-03-08 10:16:34
 1. 重複上一動作，量測所有建築物頂點座標及煙囪基地座標值，(X,Y)單位為公尺
 1. 開啟Google地圖的地形圖，量測建築物及**煙囪基地高程E**，單位為公尺
 1. 建築物與煙囪頂端的**離地高度H**，單位為公尺，可以用陰影長度的比例關係粗略推估。一般工廠辦公室為2層樓建築高度為6公尺。
-1. 按照範例之模板輸入D, (X,Y), E, H等數據，存檔、上傳工作站。
+1. 按照範例之模板輸入D, (X,Y), E, H等數據，存檔、(上傳工作站或[CaaS](http://114.32.164.198/BPIPPRIM.html))。
 1. 執行[BPIP]()批次檔[run_bpip.sh]() A1P.INP A1P.OUT A1P.SUM
 1. 將OUT檔案中的SO路徑及參數，貼在[ISCST]()或[AERMOD]()的執行控制檔內
   - ISCST不接受[BPIPPRIME]()結果之`BUILDLEN`、`XBADJ`、`YBADJ`等參數
@@ -62,7 +62,7 @@ last_modified_date: 2022-03-08 10:16:34
 - A1P.INP為一L形建築物的範例，另有4座煙囪stk100~3
 - 所有的字串輸入需有引號。其餘為自由格式
 - 1~4行為整體設定
-  1. 個案之文字說明[(原點座標)]將用在後續遠端計算
+  1. 個案之文字說明，(原點座標應用在後續[遠端計算]())
   1. 'P'：啟動PRIM機制，如為ISCST，則設定為'ST'
   1. 'METERS' 1.00：單位及(轉換為公尺之)比例
   1. 'UTMN', 210：地圖座標系統(沒有作用)與廠區系統局部座標軸之旋轉角度(地圖正北到正Y方向之順時針夾角)
@@ -79,11 +79,26 @@ last_modified_date: 2022-03-08 10:16:34
 - 第4個段落是有關煙囪的設定
   1.	4：煙囪個數
   1. 'Stk100'  11.00  25.00     -10.00    -20.00 :煙囪名稱、地表高程、煙囪高度及相對廠區系統的座標值(不是UTM或TWD絕對值)
-  1. (依序設定)
+  1. (每座煙囪逐一設定)
 
 | ![A1PINP.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/A1PINP.png)|
 |:--:|
 | <b>L形建築物輸入檔</b>|
+
+### BPIP之執行
+- [BPIPPRIME]()需要3個檔名：
+  - 第1個檔約定為fort.10，為前述準備好的輸入檔。
+  - 第2個檔為輸出檔，約定為fort.12。SO路徑之建築物參數將會出現在此檔內。
+  - 第3個檔為摘要檔，約定為fort.14。會將輸入檔之座標旋轉成真北系統，以供檢查。
+
+```bash
+kuang@114-32-164-198 /Users/cybee/bin
+$ cat run_bpip.sh
+ln -sf $1 fort.10
+ln -sf $2 fort.12
+ln -sf $3 fort.14
+bpipprm
+```
 
 ### BPIP結果範例
 - 每根煙囪都要輸入附近的建築物尺寸，包括360度每10度方向的建築物高度（BUILDHGT）和建築物橫向的寬度（BUILDWID）
@@ -99,7 +114,7 @@ last_modified_date: 2022-03-08 10:16:34
   - 然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
 - CaaS的作業方式：
   1. 先在地圖[數位板](/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
-  1. 利用[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
+  1. 利用[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]()的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
   1. 執行[BPIPPRIME]()計算(步驟8)
 - 細部操作方式與CaaS程式設計詳見[BPIP_CaaS](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_CaaS)之說明。
 
@@ -107,9 +122,9 @@ last_modified_date: 2022-03-08 10:16:34
 |:--:|
 | <b>圖1實例廠區數位化結果，雖然點選結果有些歪斜，[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式會將其均化修正</b>|
 | ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
-| <b>圖2實例廠區[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之輸入檔，經[ISCPARSER]()解讀結果</b>|
+| <b>圖2實例廠區[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，經[ISCPARSER](/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀結果</b>|
 
-- [BPIPPRIME]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
+- [BPIPPRIME]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式輸入檔的[範例](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
 
 ## Reference and Resource
 - 有關煙流下洗的現象、原因、以及如何避免，可以參考下列網址

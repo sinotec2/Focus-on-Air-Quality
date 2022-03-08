@@ -24,6 +24,10 @@ last_modified_date: 2022-03-08 10:16:34
 - 目的：計算煙囪附近建築物的長、寬、高等尺寸，以便ISCST3/AERMOD等模式可以引用。
   - 參數之定義為每座煙囪為中心、360度每10度方向所遇到的建築物高度、寬度及長度。可以由污染源廠區平面配置逐一量測而得。
   - 廠房建築物如果過於複雜，需要有前處理程式協助產生這些輸入參數
+- 建築物下洗的啟動與必須性
+  - 在SO路徑段落中提供建築物參數，煙流模式會自行**視需要**啟動下洗之計算
+  - 當煙囪高度在所有建築物高的2.5倍以上時，模式就不會計算下洗，即使提供了建築物參數。
+  - **保守**起見，個案輸入建築物參數，讓程式自行決定，是比較完整的作法。
 - [BPIP]()全名為Building Profile Input Program。[BPIPPRIME]()則是專為ISC-PRIME模組及AERMOD之預備。
 - USEPA官網之說明
 	- [BPIP]()是一個PC/Linux 上的應用程式，旨在納入煙囪設計之「良好工程實務(GEP)」精神內涵（詳技術支援文檔《確定良好工程實務準則之煙囪高度（PDF）》101 pp，1985年，建築物下沖計算指南以及其他相關參考）。
@@ -52,7 +56,7 @@ last_modified_date: 2022-03-08 10:16:34
 
 | ![BPIP1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP1.png)|
 |:--:|
-| <b>從衛星圖中定義實例廠區座標軸系統、量測夾角、與廠房頂點XY值</b>|
+| <b>從航照圖中定義實例廠區座標軸系統、量測夾角、與廠房頂點XY值</b>|
 
 ### L形建築物輸入檔內容說明
 - A1P.INP為一L形建築物的範例，另有4座煙囪stk100~3
@@ -94,16 +98,16 @@ last_modified_date: 2022-03-08 10:16:34
 - 由於[BPIPPRIME]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。比較繁雜的程序是座標、夾角的量測、旋轉平移的計算。
   - 然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
 - CaaS的作業方式：
-  1. 先在地圖[數位板]()上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
-  1. 利用[rotate_kml]()程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
+  1. 先在地圖[數位板](/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
+  1. 利用[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
   1. 執行[BPIPPRIME]()計算(步驟8)
 - 細部操作方式與CaaS程式設計詳見[BPIP_CaaS](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_CaaS)之說明。
 
 | ![BPIP3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP3.png)|
 |:--:|
-| <b>圖1實例廠區數位化結果，雖然點選結果有些歪斜，[rotate_kml]()程式會將其均化修正</b>|
+| <b>圖1實例廠區數位化結果，雖然點選結果有些歪斜，[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式會將其均化修正</b>|
 | ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
-| <b>圖2實例廠區[rotate_kml]旋轉後之輸入檔，經[ISCPARSER]()解讀結果</b>|
+| <b>圖2實例廠區[rotate_kml](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之輸入檔，經[ISCPARSER]()解讀結果</b>|
 
 - [BPIPPRIME]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
 

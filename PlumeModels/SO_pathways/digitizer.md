@@ -20,20 +20,27 @@ last_modified_date: 2022-03-08 10:16:34
 ---
 
 ## 背景
-- 空品模式建構過程中，有個好用的數位板（digitizer）是有幫助且必要的。
-- Google Map雖然可以點取經緯度值，但需個別儲存，無法批次作業，不甚理想。
+- 空品模式建構過程中，有個好用的數位板（digitizer）是有幫助且必要的。相對於傳統圖紙上量測的作業方式，地圖數位板的優勢在於：
+  - 精確計算與修正，消除估計值的誤差
+  - 減省輸入的工作，降低大規模作業的困難度
+  - 便於檢視、偵錯
+- Google Map雖然可以也可以點取經緯度值，但需個別儲存，無法批次作業，不甚理想。其餘進一步比較如下。
 
 ### 數位板的用處：
 - 沒有DTM情況下描繪等高線圖以取得高程數據。
 - 點取污染源位置
 - 沒有工程平面圖情況下讀取廠房、計畫範圍、海岸線等
 
-### 執行方案
+### 執行方案比較
 - 人工紙本方案：影印目標地圖（平面圖）委請CAD人員應用數位板，將所要的點、線予以數位化。再由工程師進行座標平移、旋轉計算。
-- Google Map數位方案：
+- Google Map數位方案
   - 在Google map上進行少數座標點的讀取。
   - Google可以更換背景（街道、地形圖、衛星航照圖）、對點選過程提供不少參考。
   - 單點運作、沒有輸出檔案不能配合批次作業。
+- SURFER digitizer
+  - SURFER亦有數位板工具，將平面圖照像、輸入軟體成為底圖，再開啟數位板工具，點選座標軸後，依然可以逐一點選需要的位置，經後處理計算座標值。
+  - 應用於不存在背景地圖的新建築物、計畫設施等情況
+  - 其結果為直角座標的文字檔，需自行撰寫程式進行旋轉平移。還需設定參考點、同時有該點的經緯度與直角座標值，方能與既有地圖系統重疊。
 - Leaflet數位方案：[單點點選](https://github.com/stefanocudini/leaflet-locationpicker)、[多邊形](https://github.com/banmedo/LeafletDigitizer)範例
   - 可以搭配open streetmap、open topomap等，版權較無問題。
   - 直接輸出成KML檔案，方便檢核、讀取、以及後續之計算。
@@ -51,13 +58,13 @@ last_modified_date: 2022-03-08 10:16:34
   - Google Image 衛星航照圖、沒有文字
   - Open topomap街道+等高線地形圖、中文顯示、不同等級縮放比例顏色會有差異。
 - 按下五邊形進行多邊形的點選：
-  - 「逆時針」輸入、回到第一點單擊後才算完成
+  - 以一定方向輸入、回到第一點單擊後才算完成
   - 在對話窗輸入名稱（含建築物高度，如b1 30m、Plant1/30）
   - 不接受中文字、全形
   
 | ![digitizer1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer1.png)|
 |:--:|
-| <b>啟動多邊形的點選、逆時針輸入回到第1點</b>|
+| <b>啟動多邊形的點選、以一定方向逐一輸入回到第1點</b>|
 | ![digitizer2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer2.png)|
 | <b>對話窗輸入名稱、高度</b>|
 

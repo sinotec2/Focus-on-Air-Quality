@@ -44,7 +44,7 @@ last_modified_date: 2022-03-08 10:16:34
   - 只有開啟Polygon、還需要開啟Marks功能，以利選取個別點位座標。
 
 ## 成果應用說明
-- CaaS成果位置：http://114.32.164.198/LeafletDigitizer/
+- CaaS成果位置：[http://114.32.164.198/LeafletDigitizer/](http://114.32.164.198/LeafletDigitizer/)
 - 圖層：
   - 為加速網頁的服務速度，並未內設圖層。使用者必須在左側面版中自選圖層
   - openstreet 街道圖、中文顯示
@@ -77,9 +77,9 @@ last_modified_date: 2022-03-08 10:16:34
 
 | ![digitizer4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer4.png)|
 |:--:|
-| <b>儲存結果</b>|
+| <b>儲存結果在使用者電腦的Downloads目錄</b>|
 | ![digitizer5.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/digitizer5.png)|
-| <b>重新開啟檔案檢視結果</b>|
+| <b>重新開啟檢視剛儲存的檔案</b>|
 
 ## JS程式修改
 - Digitizer由js/、libs/（含Images）、testData/等目錄所組成，

@@ -196,8 +196,8 @@ last_modified_date: 2022-03-08 10:16:34
   184      ii=i+nplgs
   185      f.write(("'"+names[ii]+"' "+'{:6.1f} {:6.1f} {:6.1f} {:6.1f} \n').format(base[ii],hgts[ii],Pp[i,0],Pp[i,1]))
 ```  
-### [rotate_kml.py]()下載
-
+### CGI_Python下載
+- [rotate_kml.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/rotate_kml.py)
 
 ## RESULTS
 ### CaaS
@@ -211,7 +211,7 @@ last_modified_date: 2022-03-08 10:16:34
 
 | ![rotate_KML.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/rotate_KML.png)|
 |:--:|
-| <b>數位化、且經修正後的廠房位置圖</b>|
+| <b>數位化、且經旋轉、歪斜修正後的廠房位置圖</b>|
 
 
 ## Reference

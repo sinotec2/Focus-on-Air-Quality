@@ -24,7 +24,7 @@ last_modified_date: 2022-03-08 17:46:18
 - 一般煙流模式(ISCST/aermod等)使用直角座標系統，台灣地區以twd97為主，需要先行整理一底圖(bmp+座標定位或DWG/geoTIFF/SHP檔)、特別進入surfer軟體，貼上背景圖、才能確認其座標系統。在嘗試錯誤作業過程中並不方便。
 - 此作業乃針對污染源設定文字(檔案)進行解析，並轉換成經緯度之KML檔案，進行google map或open streat map貼圖，可做為階段性之成果。
 ### 本項作業之需求：
-- 解析煙流模式污染源空間設定
+- 解析煙流模式污染源空間設定、也包括建築物位置的設定
 - 更動污染源設定時，有最快的反應速度。如：
   - 切割面源、
   - 將面源改換成體源(或相反)
@@ -108,6 +108,8 @@ RE DISCCART 294911 2762966
 ```python
 os.system('/usr/kbin/csv2kml.py -n P -g TWD97 -f '+fname+'>> /tmp/isc.out')
 ```
+
+
 ### 結果之輸出
 - 最後在cgi html當中調用data-auto-download，將結果下載到客戶硬碟。
 
@@ -187,13 +189,19 @@ $ cat -n $(which csv2kml.py)
    136    with open(fname+'.kml','w') as f:
    137      [f.write(l+'\n') for l in line]
 ```   
+## 建築物之設定
+- 由於建築物設定為直角座標之工廠地圖系統，與背景地圖之間需要有夾角及原點座標值。
+- **夾角D**在fort.10檔案中已經登錄，因此設計[rotate_KML](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML/)在產生fort.10時，順便將KML檔中的第1個點設為原點，並將其座標寫在[檔頭](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，以利[iscParser]()讀取應用。
+- 因前述污染源對象已經太過複雜了，因此另將解析寫在程式[isc_parserBP.py]()中
+
+
 ## 結果
 
-| ![iscParser1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/iscParser1.png)|
+| ![iscParser1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/iscparser1.png)|
 |:--:|
 | <b>面源及體源空間位置之解析結果</b>|
-| ![iscParser2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/iscParser2.png)|
-| <b>接受點及污染源相對位置</b>|
+| ![iscParser2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/iscparser2.png)|
+| <b>敏感接受點及污染源相對位置</b>|
 
 ## Reference
 

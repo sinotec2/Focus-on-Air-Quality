@@ -40,16 +40,18 @@ csv是常見的資料表格式，[KML](https://zh.wikipedia.org/wiki/KML)則是g
 ### KML格式及內涵
 - KML的內容可以參考其[教學網站](https://developers.google.com/kml/documentation/kml_tut)。如果只需要輸出單一分開的功能，可以考慮[simplekml](http://fredgibbs.net/tutorials/create-kml-file-python.html)模組。
 範例圖檔(紅色部分)為如下共276行之kml檔案，kml並不需要跳行，純粹是為了閱讀解釋方便才加上跳行指令('\n')，其內容說明如下：
-起始
+#### 起始
 在此說明整個檔案會用到的宣告，包括
 1. 開啟kml 及Document之宣告
 2. 名稱name(會出現在google map的圖名標籤)(line 1)
 3. 敘述說明descri(line 1)
-4. 可能會用到的圖像定義Icon(line2~6)，是用style id 來定義並呼叫，範例呼叫了紅點reddotPlacemark。icon選擇的考量：
-   大小：icon當點數增加的時候，icon會重疊在一起，點數太少或icon太小，icon會太分散不明顯。顏色：具有鑑別能力意義：讓人一目瞭然其代表的意思
-點位段落
-這一段(line7~184)繪圖範例圖檔中的「點」(Point)。由於每一個點呼叫的style id可以不一樣，因此設計成每筆呼叫。
-
+4. 可能會用到的圖像定義Icon(line2~6)，是用style id 來定義並呼叫，範例呼叫了紅點reddotPlacemark。
+- icon選擇的考量：
+  - 大小：icon當點數增加的時候，icon會重疊在一起，點數太少或icon太小，icon會太分散不明顯。
+  - 顏色：具有鑑別能力意義：讓人一目瞭然其代表的意思
+#### 點位段落
+  - 這一段(line7~184)繪圖範例圖檔中的「點」(Point)。
+  - 由於每一個點呼叫的style id可以不一樣，因此設計成每筆呼叫。
 1. 每個點有獨立的座標coordinates，先給經度、再給緯度、高度(範例為0)
 2. 各點的順序沒有特別的意義
 3. 各點上可以有名稱(name)及敘述(desc)，範例為距離原點的小時數(hour=0 )、以及當時的年月日時標籤(ymd=2019062315 )
@@ -87,46 +89,13 @@ $ cat -n trjguanshan2019062315.csv.kml
    275  </coordinates></LineString></Placemark>
    276  </Document></kml>
 ```
-### 直線段落
+#### 直線段落
 第3段(line185~275)為範例圖檔中的「線」(LineString)。「線」指令會將給定座標的第1點開始，按照順序連接所有的座標點，直到最後1點。
 1. 座標coordinates，先給經度、再給緯度、高度(範例為0)
 2. 各線段座標之間沒有分隔符號，空格或'\n'皆可，此處為'\n'
 3. 線段不能加註名稱或敘述
-結尾
+#### 結尾
 完成Document及kml之宣告。
-
-## 輸入部分
-
-### argparse之應用
-在命令列鍵入引數， python常用的讀取方式有2種，一者為簡易的sys.argv指令，另外最常使用的則是其內設的引數解析argparse模組。前者沒有help、不會解析引數的型態，一律為字串。相對而言，後者的功能就較為完整、足供應用了。
-本程式所需的引數有3個，分別為：
-- -f(csv檔案名稱)、
-- -n(點線型態的選擇、有N白色地點、H紅色地點、D細線圓點、R紅色圓點、B黑色暈點，再加L繪線 )
-- -g座標系統有TWD97及LL 等2個選項：LL為經緯度，TWD97為台灣地區2度分帶97年基準座標
-程式語法以add_argument()來接收命令列訊息。
-- 必要的選項有2，選項代碼(短名)、選項長名、
-- 其他補充的選項包括是否必須(required)、引數的類型、以及說明內容。
-
-```python
-     6  def getarg():
-     7      """ read the setting of plot from argument(std input)"""
-     8      import argparse
-     9      ap = argparse.ArgumentParser()
-    10      ap.add_argument("-f", "--fname", required = True, type=str,help = "csv xy data")
-    11      ap.add_argument("-n", "--NorH", required = True, type=str,help = "Normal/Highlight/Dot/Reddot/Blackdot w/o Line")
-    12      ap.add_argument("-g", "--GEOG", required = True, type=str,help = "LL or TWD9")
-    13      args = vars(ap.parse_args())
-    14      return args['fname'],args['NorH'],args['GEOG'] 
-```
-- 在呼叫時以3個元素的tuple來承接(line 16)，其順序即為檔名、點線特性、以及座標系統種類。
-
-### pandas之應用
-- python讀取ASCII資料一般也有2種方式，一者開啟檔案後直接讀取(with open(fname,'r') as file:;data=[l for l in file])，讀出來的內容一律是字串(含跳行指令'\n')，還必須另外分段、解析、給予型態定義。
-- 另一方式則以pandas來讀取。在解析上方便太多。以一般具有表頭(header)、逗點分隔(delimitor)的csv檔而言，讀取指令最簡單如line 33所示。如果不是，也可以在一行內解決設定。
-- python 3必須指定coding，python 2 則不需要
-- pandas的資料結構(dataframe)具有陣列處理的功能，具有平行計算的能力，然本範例中仍然當成序列循續處理，也有淺顯易懂的好處。
-- df.columns：讀取表頭成為一序列
-- df.loc[i,j]：讀取資料表中i列(i為數字), j欄的內容(前述表頭欄位名稱之一)。
 
 ```python
     33  df=read_csv(fname)#,encoding='big5')
@@ -151,7 +120,20 @@ $ cat -n trjguanshan2019062315.csv.kml
 - [github.com/sinotec2](https://github.com/sinotec2/rd_cwbDay/blob/master/csv2kml.py)
 
 ### 調用模組與引數之讀取
-- 使用argparser讓引數的種類可以多元化
+
+在命令列鍵入引數， python常用的讀取方式有2種，一者為簡易的sys.argv指令，另外最常使用的則是其內設的引數解析argparse模組。前者沒有help、不會解析引數的型態，一律為字串。相對而言，後者的功能就較為完整、足供應用了。使用argparser讓引數的種類可以多元化
+
+本程式所需的引數有3個，分別為：
+- -f(csv檔案名稱)、
+- -n(點線型態的選擇、有N白色地點、H紅色地點、D細線圓點、R紅色圓點、B黑色暈點，再加L繪線 )
+- -g座標系統有TWD97及LL 等2個選項
+  - LL為經緯度
+  - TWD97為台灣地區2度分帶97年基準座標
+
+程式語法以add_argument()來接收命令列訊息。
+- 必要的選項有2，選項代碼(短名)、選項長名、
+- 其他補充的選項包括是否必須(required)、引數的類型、以及說明內容。
+- 在呼叫時以3個元素的tuple來承接(line 16)，其順序即為檔名、點線特性、以及座標系統種類。
 
 ```python
 $ cat -n ~/bin/csv2kml.py
@@ -197,6 +179,18 @@ $ cat -n ~/bin/csv2kml.py
     30  #csv with 4 columns,
     31  #xp,yp,Hour,ymdh
     32  #266567.0,2549275.0,hour=0,ymd=2019062315
+```
+
+### pandas之應用
+- python讀取ASCII資料一般也有2種方式，一者開啟檔案後直接讀取(with open(fname,'r') as file:;data=[l for l in file])，讀出來的內容一律是字串(含跳行指令'\n')，還必須另外分段、解析、給予型態定義。
+- 另一方式則以pandas來讀取。在解析上方便太多。以一般具有表頭(header)、逗點分隔(delimitor)的csv檔而言，讀取指令最簡單如line 33所示。如果不是，也可以在一行內解決設定。
+- python 3必須指定coding，python 2 則不需要
+- pandas的資料結構(dataframe)具有陣列處理的功能，具有平行計算的能力，然本範例中仍然當成序列循續處理，也有淺顯易懂的好處。
+- df.columns：讀取表頭成為一序列
+- df.loc[i,j]：讀取資料表中i列(i為數字), j欄的內容(前述表頭欄位名稱之一)。
+
+
+```python
     33  df=read_csv(fname)#,encoding='big5')
     34  TITLE=fname
 ```    
@@ -266,18 +260,18 @@ $ cat -n ~/bin/csv2kml.py
   - KML(Keyhole Markup Language Keyhole公司標記語言),[wiki](https://zh.wikipedia.org/wiki/KML)
   - TWD97, 大地座標系統漫談, [sunriver.com](http://www.sunriver.com.tw/grid_tm2.htm)
 2. argparse
-  - Argparse 教學  https://docs.python.org/zh-tw/3/howto/argparse.html
-  - 命令行选项、参数和子命令解析器, https://docs.python.org/zh-cn/3/library/argparse.html
+  - Argparse 教學，[官網](https://docs.python.org/zh-tw/3/howto/argparse.html)
+  - 命令行选项、参数和子命令解析器,[python官網](https://docs.python.org/zh-cn/3/library/argparse.html)
 3. pandas
   - [Pandas 基礎教學](https://oranwind.org/python-pandas-ji-chu-jiao-xue/)
   - [10 minutes to pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html)
   - 資料科學家的 pandas 實戰手冊：[掌握 40 個實用數據技巧](https://leemeng.tw/practical-pandas-tutorial-for-aspiring-data-scientists.html)
 4. KML and icons
-  - KML Samples - Google Developers, https://developers.google.com/kml/documentation/KML_Samples.kml
-  - KML Tutorial,  https://developers.google.com/kml/documentation/kml_tut
+  - KML Samples - [Google Developers](https://developers.google.com/kml/documentation/KML_Samples.kml)
+  - [KML Tutorial](https://developers.google.com/kml/documentation/kml_tut)
   - [Google+Map讀取KML檔](https://blog.xuite.net/lwkntu/blog/51204497-%28GM-5%29Google+Map讀取KML檔)
-  - 在 Google 地球中匯入 KML 地圖資料 https://support.google.com/earth/answer/7365595?co=GENIE.Platform%3DDesktop&hl=zh-Hant
-  - simplekml  https://pypi.org/project/simplekml/ ;  https://simplekml.readthedocs.io/en/latest/index.html
+  - 在 Google 地球中匯入 KML 地圖資料 [google support](https://support.google.com/earth/answer/7365595?co=GENIE.Platform%3DDesktop&hl=zh-Hant)
+  - simplekml, [pypi](https://pypi.org/project/simplekml/) ;[readthedoc](https://simplekml.readthedocs.io/en/latest/index.html)
   - google提供的[icons](http://tancro.e-central.tv/grandmaster/markers/google-icons/index.html)
 5. twd97
   - [pypi](https://pypi.org/project/twd97/) ; [github](https://github.com/yychen/twd97)

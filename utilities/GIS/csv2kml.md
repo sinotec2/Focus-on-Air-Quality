@@ -26,7 +26,7 @@ last_modified_date: 2022-03-11 16:18:58
 
 ### 前言
 
-csv是常見的資料表格式，[KML](https://zh.wikipedia.org/wiki/KML)則是google提供的語言介面，好讓使用者也可以在google map上貼圖，現已成為開放式地理空間協會地理資訊的編碼標準。
+csv是常見的資料表格式，[KML](https://zh.wikipedia.org/wiki/KML)則是google提供的語言介面，好讓使用者也可以在google map上貼圖，現已成為開放式地理空間協會地理資訊的[編碼標準](https://www.ogc.org/standards/kml/)。
 因此csv2kml顧名思義就是嘗試把一個存有座標的csv檔案，寫成kml檔案，最終能貼在google map、openstreet map等網路地圖上，完成這項工作的python小程式。(成果如附圖)
 
 | ![csv2kml.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/csv2kml.png)|
@@ -38,7 +38,7 @@ csv是常見的資料表格式，[KML](https://zh.wikipedia.org/wiki/KML)則是g
 - 處理計算部分google map用的是經緯度系統，台灣地區常用的是TWD97系統，如果使用後者，需要進行座標轉換。此處使用twd97模組。
 
 ### KML格式及內涵
-- KML的內容可以參考其[教學網站]()。如果只需要輸出單一分開的功能，可以考慮simplekml模組。
+- KML的內容可以參考其[教學網站](https://developers.google.com/kml/documentation/kml_tut)。如果只需要輸出單一分開的功能，可以考慮[simplekml](http://fredgibbs.net/tutorials/create-kml-file-python.html)模組。
 範例圖檔(紅色部分)為如下共276行之kml檔案，kml並不需要跳行，純粹是為了閱讀解釋方便才加上跳行指令('\n')，其內容說明如下：
 起始
 在此說明整個檔案會用到的宣告，包括
@@ -263,20 +263,21 @@ $ cat -n ~/bin/csv2kml.py
 ## Reference
 1. 名詞解釋
   - ASCII(American Standard Code for Information Interchange，美国信息交换标准代码)  https://zh.wikipedia.org/wiki/ASCII
-  - KML(Keyhole Markup Language Keyhole公司標記語言)  https://zh.wikipedia.org/wiki/KML
-  - TWD97, 大地座標系統漫談 http://www.sunriver.com.tw/grid_tm2.htm
+  - KML(Keyhole Markup Language Keyhole公司標記語言),[wiki](https://zh.wikipedia.org/wiki/KML)
+  - TWD97, 大地座標系統漫談, [sunriver.com](http://www.sunriver.com.tw/grid_tm2.htm)
 2. argparse
   - Argparse 教學  https://docs.python.org/zh-tw/3/howto/argparse.html
   - 命令行选项、参数和子命令解析器, https://docs.python.org/zh-cn/3/library/argparse.html
 3. pandas
-  - Pandas 基礎教學  https://oranwind.org/python-pandas-ji-chu-jiao-xue/
-  - 10 minutes to pandas, https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html
-  - 資料科學家的 pandas 實戰手冊：掌握 40 個實用數據技巧  https://leemeng.tw/practical-pandas-tutorial-for-aspiring-data-scientists.html
+  - [Pandas 基礎教學](https://oranwind.org/python-pandas-ji-chu-jiao-xue/)
+  - [10 minutes to pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html)
+  - 資料科學家的 pandas 實戰手冊：[掌握 40 個實用數據技巧](https://leemeng.tw/practical-pandas-tutorial-for-aspiring-data-scientists.html)
 4. KML and icons
   - KML Samples - Google Developers, https://developers.google.com/kml/documentation/KML_Samples.kml
-  - KML Tutorial,  https://developers.google.com/kml/documentation/kml_tuthttps://blog.xuite.net/lwkntu/blog/51204497-%28GM-5%29Google+Map讀取KML檔
+  - KML Tutorial,  https://developers.google.com/kml/documentation/kml_tut
+  - [Google+Map讀取KML檔](https://blog.xuite.net/lwkntu/blog/51204497-%28GM-5%29Google+Map讀取KML檔)
   - 在 Google 地球中匯入 KML 地圖資料 https://support.google.com/earth/answer/7365595?co=GENIE.Platform%3DDesktop&hl=zh-Hant
   - simplekml  https://pypi.org/project/simplekml/ ;  https://simplekml.readthedocs.io/en/latest/index.html
-  - google提供的icons http://tancro.e-central.tv/grandmaster/markers/google-icons/index.html
+  - google提供的[icons](http://tancro.e-central.tv/grandmaster/markers/google-icons/index.html)
 5. twd97
-  - pypi  https://pypi.org/project/twd97/ ;  https://github.com/yychen/twd97
+  - [pypi](https://pypi.org/project/twd97/) ; [github](https://github.com/yychen/twd97)

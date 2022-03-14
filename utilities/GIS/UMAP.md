@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  點狀資訊之地圖展現
+title:  鏈結資訊之地圖展現
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-03-11 15:46:30

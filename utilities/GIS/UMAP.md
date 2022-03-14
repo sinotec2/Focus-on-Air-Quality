@@ -69,7 +69,7 @@ last_modified_date: 2022-03-11 15:46:30
 - 除KML之外，uMap也可以接受GeoJSON、csv、gpx、osm、georss、umap(即umap的輸出檔、除POI內容外還包括圖層的設定)
 	- csv適用在點狀資料，KML有點、線、多邊形較為彈性。
 	- 由於5年5000多點數據還是需要有格式比較容易偵錯，此處以csv為優選。
-	- csv2kml(*)為已經開發的小工具，因此kml也可以考慮。
+	- [csv2kml](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/)為已經開發的小工具，因此kml也可以考慮。
 	- 本次作業網格分布之位置如以點狀似嫌呆板，以網格邊界4方形較符合實際，然數據量也將擴增5倍，過去google map對上千點的kml速度降低很多、且有拒絕服務的限制，不知uMap是否也會(經證實不會)，因此以kml點狀先行測試，最終仍以4邊形來展示POI內容為目標。
 
 ### 資料之準備
@@ -196,9 +196,38 @@ $ cat -n point_ijP.py
 ```
 - 說明：多邊形與點狀資料進入csv2kml.py需要給定重要識別引數，即-n選項。多邊形為-n P。
 
+## uMap的設定
+- 為鼓勵應用，uMap貼圖並不需要登記/登入會員，只要擁有編輯頁面網址的人，都可以進行編輯。
+- 目前還找不到中文的操作說明
 
-uMap位置：[https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557](https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557)
+### 設定步驟
+* 在[uMap家網頁](https://umap.openstreetmap.fr/zh-tw/)上勾選創建地圖
+* 點選右側**Manage Layers**圖層(圓餅疊)，按下增加圖層、建入名稱、描述、圖層類型(選擇**clustered**，圖面會歲縮放比例合併點狀資訊筆數)
+* 點選右側導入數據(向上箭頭)，選擇KML檔案、確認導入到前述圖層，按下導入。
+* 點選右側**Manage Layers**圖層(圓餅疊)，選取圖層來編輯(白筆)，
+  * 由**Shape Propertise**進行頁面展示方式的選項
+    * 顏色：內設為深藍，如要其他顏色需在此設定
+    * 不透明度：向右則完全不透明
+    * 多邊形Placemark的填滿。內設是不填滿，只有線條
+    * 填滿顏色：內設為深藍，
+    * 明度透： 向右為完全透明
+  * 由**Interaction action**分頁中進行使用者介面(滑鼠動作)的選項
+    * **popup shape**：sidepanel(右側會出現POI內、詳圖示)
+    * **popup content**：確認有name及descriptions(連結是在descriptions)
+* 儲存→保存→不可編輯→點選任一格點來測試看看，是否右側會出現連結
+* 點選鑰匙符號，會出現編輯網址token，複製儲存，以備下次編修。
+* 點選連結：
+    * 瀏覽器會另開分頁展示檔案內容。
+    * 成果如圖示
 
 
+## uMap成果範例
+- [mmif成果鏈結](https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557)
+- TEDS 點源位置及煙囪條件
+  - [teds10](https://umap.openstreetmap.fr/zh/map/teds10-point-data-pm25_594438#7/24.062/120.822)
+  - [teds11](https://umap.openstreetmap.fr/zh/map/teds11-point-data-pm25_728979#8/24.172/120.086)
+- AERMAP執行成果
+  - [teds10 1X1解析度位置，煙囪高假設100m](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
+  - [teds11個別廠位置、各廠最高煙囪高度](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
 
 ## Reference

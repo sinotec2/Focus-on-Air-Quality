@@ -1,12 +1,12 @@
 ---
 layout: default
-title:  點狀資源KML檔之撰寫
+title:  點狀資訊KML檔之撰寫
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-03-11 16:18:58
 ---
 
-# 點狀資源KML檔之撰寫(csv2kml.py)
+# 點狀資訊KML檔之撰寫(csv2kml.py)
 {: .no_toc }
 
 <details open markdown="block">
@@ -20,8 +20,8 @@ last_modified_date: 2022-03-11 16:18:58
 
 ---
 ## 背景
-- 點狀資訊在KML架構中是最單純的。KML提供了點狀性質(feature)的設定方式，因此使得單調的點變得豐富。
-- [csv2kml.py]的應用有很多，繪製軌跡圖、將點狀(與鏈結)資訊輸出到uMAP展現、ISC/AERMOD地理資訊的解讀展示等等。
+- 點狀資訊在KML架構中是最單純的。KML提供了點狀性質(feature)的設定方式，因此使得單調的點，因著背景地圖的參考而變得豐富。
+- [csv2kml.py]的應用有很多，繪製軌跡圖、將點狀(與鏈結)資訊輸出到[uMAP](/Focus-on-Air-Quality/PlumeModels/TG_pathways/twnTERR/)展現、[ISC/AERMOD](/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/#csv2kmlpy修正)地理資訊的解讀展示等等。
 - 如果要建立更複雜的KML，由熟悉點狀資訊的輸出，會是一個好的開始。
 
 ### 前言
@@ -37,7 +37,7 @@ csv是常見的資料表格式，[KML](https://zh.wikipedia.org/wiki/KML)則是g
 - 輸出部分是本程式的重點。主要參考KML官網的介紹，將要繪製的內容、點、線等元素，依據KML的順序寫出，以符合google map程式的規則。KML(Keyhole Markup Language)及其zip後的檔案格式KMZ，是google map/google earth平台上特有的檔案格式，詳細介紹可以參考官網及網友的說明。大致上KML語法和html相同，除了一般性的格式之外，在地圖上標示的元件以<Placemark>…</Placemark>做為起迄標示。而在本作業中乃是以LineString、Point 為繪圖形式，此外KML也有Path、Polygon(shaded色塊) 等形態。
 - 處理計算部分google map用的是經緯度系統，台灣地區常用的是TWD97系統，如果使用後者，需要進行座標轉換。此處使用twd97模組。
 
-### KML格式及內涵
+## KML格式及內涵
 - KML的內容可以參考其[教學網站](https://developers.google.com/kml/documentation/kml_tut)。如果只需要輸出單一分開的功能，可以考慮[simplekml](http://fredgibbs.net/tutorials/create-kml-file-python.html)模組。
 範例圖檔(紅色部分)為如下共276行之kml檔案，kml並不需要跳行，純粹是為了閱讀解釋方便才加上跳行指令('\n')，其內容說明如下：
 #### 起始
@@ -114,7 +114,45 @@ $ cat -n trjguanshan2019062315.csv.kml
 - [twd97](https://github.com/yychen/twd97)
   - 網友公開的twd97模組，其計算結果與學術單位網站服務所差小於1M
   - 在119~121範圍內有效，其外結果則不保證。
-  
+
+## 多邊形的應用
+### 基本
+- 同樣2點以上的數據，可以用點(Point)或線(Line)形式來繪製KML的地標(Placemark)
+- 4點以上，如果最後點與第一點重疊，則可以選擇以多邊形來展現地標，多邊形的特性就是除了線條之外，也可以針對填滿的顏色、透明度等進行設定。
+- [等值圖KML檔之撰寫](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)就是以具有順序的多邊形、來層疊出等值圖的特性。
+
+### 多邊形的特殊約定
+- 由於多邊形物件不限定點數，因此必須（至少）約定物件的開始點。
+- 此處在df.desc內容中約定含有'p0'字串者，為該物件的第一筆，如此就可以正確切割csv檔案成為所要的多邊形群組，同時保有原來csv檔的單純性。
+
+```python
+...
+else: #Polygon case
+  headP = '</styleUrl><Polygon><outerBoundaryIs><LinearRing><tessellate>1</tessellate><coordinates>'
+  tailP = '</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>'
+  ps=[i[-2:] for i in list(df[col[3]])]
+  npoly,i0,i1=1,[0],[len(df)]
+  if 'p0' in ps:
+    npoly=ps.count('p0')
+    if npoly>1:
+      i1=[]
+      for i in range(npoly-1):
+        i0.append(i0[-1]+1+ps[i0[-1]+1:].index('p0'))
+        i1.append(i0[-1])
+      i1.append(len(df))
+  for ip in range(npoly):
+#   level=int(np.random.rand()*10)
+    level=5
+    nam=df.loc[i0[ip],col[2]].replace('p0','')
+    desc=df.loc[i0[ip],col[3]].replace('p0','')
+    line.append('<Placemark><name>' + nam + '</name><description>'+desc+'</description><styleUrl>#level' + str(level) + headP)
+    print (i0[ip],i1[ip])
+    for i in range(i0[ip],i1[ip]):
+      line.append(lonlat[i])
+    line.append(tailP)
+...
+```
+
 ## 程式說明
 ### csv2kml.py 程式碼 
 - [github.com/sinotec2](https://github.com/sinotec2/rd_cwbDay/blob/master/csv2kml.py)
@@ -125,7 +163,7 @@ $ cat -n trjguanshan2019062315.csv.kml
 
 本程式所需的引數有3個，分別為：
 - -f(csv檔案名稱)、
-- -n(點線型態的選擇、有N白色地點、H紅色地點、D細線圓點、R紅色圓點、B黑色暈點，再加L繪線 )
+- -n(點線型態的選擇、有N白色地點、H紅色地點、D細線圓點、R紅色圓點、B黑色暈點，再加L繪線、G則告訴程式csv的內容為多邊形 )
 - -g座標系統有TWD97及LL 等2個選項
   - LL為經緯度
   - TWD97為台灣地區2度分帶97年基準座標
@@ -212,7 +250,8 @@ $ cat -n ~/bin/csv2kml.py
     46
 ```    
 ### 計算經緯度
-- 使用argparser讓引數的種類可以多元化
+- 使用twd97模組
+- 輸出時經緯度及高度間以逗點隔開
 
 ```python
     47  col=df.columns

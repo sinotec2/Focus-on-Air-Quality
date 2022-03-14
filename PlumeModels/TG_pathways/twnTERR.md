@@ -94,5 +94,98 @@ pathIJ,centIJ,dx,dy,inp,nx,ny,path,x0,y0
   - x0,y0：西南角TWD97座標值
 - 等候所有aermap作業全部完成，另行產生kml檔，以將鏈結位置上載到uMap以供查詢下載。
 
+## KML之輸出
+- 為利結果之空間檢索，需將aermap作業之輸入、輸出與後處理成果（**作業包下載點鏈結網址**），賦予經緯度座標，貼在地圖上。
+- 此處先將前述結果寫成csv檔案，再使用[csv2kml.py](/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy)將其寫成kml檔案。
+- 除了點狀資訊外，為使aermap模擬範圍可以呈現在圖面上，另外產生以點源為中心、模擬範圍的多邊形KML檔，貼在uMap圖層，方便快速掌握資料檔案的範圍。
+
+### mk_kml.py
+#### 按照模擬範圍邊長反向排序的用意：
+- 面積大的作業先出現在uMap圖面，會形成底圖，較容易點選其後（範圍較小）的其他作業。
+- 如果面積大的作業在uMap圖面的上層，則會遮蔽較小的結果，致無法點選。
+
+#### terrTWN_1X1.csv之產生與後處理
+- 讓df.desc的內容就是該點aermap作業結果的網址鏈結，這樣在uMap上點選有興趣的點，則會出現該點源周邊aermap**作業包**的下載點。
+- 產出後隨即呼叫[csv2kml.py](/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy)
+  - 檔案選項-f後輸入csv檔名
+  - 點狀選項-n，不論選N/H/R/B/D都會一樣，因為這些差異只在Google Map上有作用。uMap上的形狀顏色是另外設定的，不跟著KML內容走。
+
+#### 陪襯4邊形的產生與輸出
+- 以模擬範圍（RE XYINC格式順序）的西南角座標開始，畫出模擬範圍的四邊形，輸出格點座標成為csv檔案
+- 多邊形在uMap中可以選擇顏色、填滿與否、線條粗細、透明度等等。
+
+| ![twnTERR.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/twnTERR.png)|
+|:--:|
+| <b>uMap結果範例</b>|
+
+#### 程式碼
+
+```python
+kuang@114-32-164-198 /Users/1.PlumeModels/AERMOD/aermap/TWN_1X1
+$ cat mk_kml.py
+from pyproj import Proj
+from pandas import *
+import twd97
+import os
+Latitude_Pole, Longitude_Pole = 23.61000, 120.990
+pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,
+        lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
+Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
+twn=read_csv('TWN_1X1REC.csv')
+twn['nx_dx']=[i*j for i,j in zip(list(twn.nx),list(twn.dx))]
+twn=twn.sort_values('nx_dx',ascending=False).reset_index(drop=True)
+pts=read_csv('point_ij.csv')
+url='http://114.32.164.198/terr_results/'
+ext=['.tiff','.dem','.kml','_aermap.inp','_aermap.out','.REC','_re.dat','_TG.txt']
+col=['lon','lat','name','desc']
+
+lat,lon,name,desc=([] for i in range(4))
+for i in range(len(twn)):
+    for s in 'dx,dy,inp,nx,ny,path,x0,y0'.split(','):
+        exec(s+'=twn.'+s+'['+str(i)+']')
+    if path not in set(pts.CP_NO):continue
+    for s in ['lon','lat']:
+        exec(s+'.append(list(pts.loc[pts.CP_NO=="'+path+'","'+s+'"])[0])')
+    urls=''
+    for e in ext:
+        urls+=url+inp+'/'+path+e+' '
+    name.append(path)
+    desc.append(urls)
+DD={}
+for s in ['lon','lat','name','desc']:
+    exec('DD.update({"'+s+'":'+s+'})')
+df=DataFrame(DD)
+df[col].set_index('lon').to_csv('terrTWN_1X1.csv')
+os.system('/opt/local/bin/csv2kml.py -f terrTWN_1X1.csv -n N -g LL')
+
+lat,lon,name,desc=([] for i in range(4))
+for i in range(len(twn)):
+    for s in 'dx,dy,inp,nx,ny,path,x0,y0'.split(','):
+        exec(s+'=twn.'+s+'['+str(i)+']')
+    if path not in set(pts.CP_NO):continue
+    ij=0
+    for jj in range(2):
+        y=y0+ny*dy*jj-Ycent
+        for ii in range(2):
+            x=x0+nx*dx*ii-Xcent
+            if jj==1:x=x0+nx*dx*(1-ii)-Xcent
+            loni, lati = pnyc(x, y, inverse=True)
+            for s in ['lon','lat']:
+                exec(s+'.append('+s+'i)')
+            urls=''
+            for e in ext:
+                urls+=url+inp+'/'+path+e+' '
+            p='p'+str(ij)
+            name.append(path+p)
+            desc.append(urls+p)
+            ij+=1
+DD={}
+for s in ['lon','lat','name','desc']:
+    exec('DD.update({"'+s+'":'+s+'})')
+dfp=DataFrame(DD)
+dfp[col].set_index('lon').to_csv('terrTWN_1X1P.csv')
+os.system('/opt/local/bin/csv2kml.py -f terrTWN_1X1P.csv -n P -g LL')
+```
 
 ## Reference

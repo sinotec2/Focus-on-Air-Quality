@@ -105,3 +105,7 @@ sino3:4
 
 ### nohup/disown/tmux
 - 詳見[FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/tmux/)說明
+
+### psg
+- `ps -ef|grep $1`：引數可以是執行檔、使用者、pid號碼等等
+

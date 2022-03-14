@@ -183,7 +183,7 @@ $ cat -n point_ijP.py
  19             ii=i
  20             if j==1:ii=1-i
  21             xgl,ygl=xg+3000*ii,yg+3000*j
-22             lon,lat=pnyc(xgl, ygl, inverse=True)
+ 22             lon,lat=pnyc(xgl, ygl, inverse=True)
  23             lon2.append(lon)
  24             lat2.append(lat)
  25             nam2.append(df.loc[ind,'IJ']+'p'+str(s))
@@ -194,7 +194,10 @@ $ cat -n point_ijP.py
  30 os.system('/opt/local/bin/csv2kml.py -f mmifTWN_3X3P.csv -n P -g LL')
 ...
 ```
-umap位置：https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557
+- 說明：多邊形與點狀資料進入csv2kml.py需要給定重要識別引數，即-n選項。多邊形為-n P。
+
+
+uMap位置：[https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557](https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557)
 
 
 

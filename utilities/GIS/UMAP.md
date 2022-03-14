@@ -228,6 +228,6 @@ $ cat -n point_ijP.py
   - [teds11](https://umap.openstreetmap.fr/zh/map/teds11-point-data-pm25_728979#8/24.172/120.086)
 - AERMAP執行成果
   - [teds10 1X1解析度位置，煙囪高假設100m](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
-  - [teds11個別廠位置、各廠最高煙囪高度](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
+  - [teds11個別廠位置、各廠最高煙囪高度](https://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)
 
 ## Reference

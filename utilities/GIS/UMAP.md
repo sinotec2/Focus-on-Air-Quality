@@ -1,12 +1,12 @@
 ---
 layout: default
-title:  鏈結資訊之地圖展現
+title:  鏈結資訊之地圖展現(uMap)
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-03-11 15:46:30
 ---
 
-# 鏈結資訊之地圖展現
+# 鏈結資訊之地圖展現(uMap)
 {: .no_toc }
 
 <details open markdown="block">

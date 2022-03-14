@@ -121,7 +121,7 @@ pathIJ,centIJ,dx,dy,inp,nx,ny,path,x0,y0
 | <b>uMap結果範例</b>|
 
 ### 程式碼
-- [github/sinotec2]()
+- [github/sinotec2](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/mk_kml.py)
 
 
 ## Reference

@@ -52,12 +52,7 @@ last_modified_date: 2022-03-11 15:46:30
 		- 最大的差別uMap有縮放的叢集（解散）能力，在圖示上較FacilMap清爽，對點數多的情況會有較佳的效果。
 		- django伺服器方案有較快的速度
 		- 有較完整說明、逐步教學、容易上手。
-
-## 成果實例
-1. mmif 3X3 grids results 
-	- [https://umap.openstreetmap.fr/zh-tw/map/mmif-resultstwn_3x3_grids_588696](https://umap.openstreetmap.fr/zh-tw/map/mmif-resultstwn_3x3_grids_588696)
-2. AERMAP 1X1 grids results
-	- [http://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832](http://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832)
+    - uMap完全是[opensource](https://github.com/umap-project/umap)，可以在自己的網站上重製修改
 
 ## 資料之準備與上載
 

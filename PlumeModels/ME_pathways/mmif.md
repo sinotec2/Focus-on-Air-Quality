@@ -6,7 +6,7 @@ grand_parent: Plume Models
 nav_order: 1
 last_modified_date: 2022-02-12 19:52:38
 ---
-# PLOTFILE to KML
+# MMIF
 {: .no_toc }
 
 <details open markdown="block">
@@ -74,15 +74,78 @@ mmif將會生成aermod執行所需要的氣象檔案，包括地面氣象要素�
   - 解決：增加-fallow-argument-mismatch選項
   - 參考[gentoo -fallow-argument-mismatch for gfortran v10](https://github.com/gentoo/gentoo/pull/16093)
 
-## 模式設定
+## mmif.inp之設定
 
 mmif程式的輸入檔，除了WRF或MM5檔案本身之外，其餘設定總集在[mmif.inp]()文字檔之內，使用者需要確認及修正的項目說明如下。
 ### 時間及空間範圍
 - start/stop 起迄時間、當地時間
 - TimeZone 時區，台灣為+8
 - grid模式網格範圍，-5表示內設值(去掉邊界5格)
+
+|變數名稱|設定值|說明|
+|-|:-:|-|
+|start|      2020 06 18 08 | start time in LST, hour-ending format|
+|stop|       2020 07 20 08 | end   time in LST, hour-ending format|
+|grid |      IJ -5,-5 -5,-5   | default|
+
 ### 高度、穩定度、及風速等設定
 - 各層高度：按照EPA建議
 - 穩定度等級分類方式：GOLDER（內設）
 - PBL重算：否（內設）
 - 最小風速、混合層高度、莫寧尺度：0.5m/s、1m、1m
+
+|變數名稱|設定值|說明|
+|-|:-:|-|
+|layers |top 20 40 80 160 320 640 1200 2000 3000 4000   | default|
+|stability | GOLDER   | default|
+|PBL_recalc| FALSE  | default|
+|aer_min_speed| 0.5  | default|
+aer_min_mixht| 1.0  | default|
+aer_min_obuk|  1.0  | default|
+
+### 最低4層結果之輸出
+- 4類輸出檔案(shell script、onsite、upair、aersfc)
+
+|變數名稱|設定值|說明|
+|-|:-:|-|
+|POINT  LL |25.1208  121.2983|代表位置點的經緯度座標：緯度、經度|
+|AER_layers|        1        4  | write 2m, 10m, and the 4 lowest WRF layers。|
+|Output aermet    useful|  run_aermet_linko.csh | use .csh on Linux|
+|Output aermet    onsite|  link.dat||
+|Output aermet    upperair| link.fsl||
+|Output aermet    aersfc|  link.aersfc.dat||
+
+### 逐6小時高空氣象數據檔
+
+|變數名稱|設定值|說明|
+|-|:-:|-|
+|FSL_INTERVAL|      6        | output every 6 hours, not 12 (the default)高空檔時間間隔：6小時|
+|POINT  latlon|    25.1208  121.2983      8|高空氣象代表位置點座標：緯度、經度、時差|
+|Output aermet   | FSL 'Upper air at link.FSL'|高空氣象檔名、內容標記|
+
+### aermod直接可讀檔案
+- 3類輸出檔案(shell script、sfc、upair)
+
+|變數名稱|設定值|說明|
+|-|:-:|-|
+|POINT  latlon|     25.156327 121.740297     8 ||
+|AER_layers|        0        0            | write only 2m and 10m data|
+|Output aermod     useful|   xiehe.info.txt||
+|Output aermod    sfc|      xiehe.sfc||
+|Output aermod     PFL|      xiehe.pfl||
+
+### wrf或mm5檔案及目錄
+- 檔案必須包括所有起迄時間
+
+|變數名稱|設定值|說明|
+|-|:-:|-|
+|INPUT| /Users/Data/cwb/WRF_3Km/2020/20200101/wrfout_d04||
+
+- WRF檔名之準備
+
+```bash
+for i in $(ls /Users/WRF4.1/WRFv3/201909/run1[01]/wrfout_d04*);do
+  echo INPUT $i
+done >fnames.wrf
+cat fnames.wrf >> mmif.inp
+```

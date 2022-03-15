@@ -214,13 +214,14 @@ $ cat -n point_ijP.py
 * 點選連結：
     * 瀏覽器會另開分頁展示檔案內容。
     * 成果如圖示
-
+### 中文
+- uMap介面可以接受中文輸入與顯示，但無法批次上載具有中文字形的檔案(包括kml或csv檔案)，原因不明。
 
 ## uMap成果範例
 - [mmif成果鏈結](https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557)
 - TEDS 點源位置及煙囪條件
   - [teds10](https://umap.openstreetmap.fr/zh/map/teds10-point-data-pm25_594438#7/24.062/120.822)
-  - [teds11](https://umap.openstreetmap.fr/zh/map/teds11-point-data-pm25_728979#8/24.172/120.086)
+  - [teds11(含aermap package)](https://umap.openstreetmap.fr/zh/map/teds11-point-data-pm25_728979#8/24.172/120.086)
 - AERMAP執行成果
   - [teds10 1X1解析度位置，煙囪高假設100m](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
   - [teds11個別廠位置、各廠最高煙囪高度](https://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)

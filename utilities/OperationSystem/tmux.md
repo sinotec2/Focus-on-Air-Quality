@@ -3,6 +3,7 @@ layout: default
 title: TMUX 終端機多工器
 parent:   Operation System
 grand_parent: Utilities
+last_modified_date: 2022-03-11 15:46:30
 ---
 
 {: .no_toc }

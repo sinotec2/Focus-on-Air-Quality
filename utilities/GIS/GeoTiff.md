@@ -73,7 +73,7 @@ new_dataset.close() #關閉檔案
 ### [tif2nc](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)
 - 應用在全球250M解析度之土壤參數tiff檔[解讀](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)，採**平均**方式合併，然因記憶體需求較大，須先進行範圍切割。
 - 高解析度作物檔案轉到解析度較低(1~10Km)之[應用](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)，採**加總**方式進行合併。
-- 高解析度(500m)船隻密度tiff檔案為基底，作為[重新分配排放量](/Focus-on-Air-Quality/Global_Regional_Emission/EDGARv5/ShipDensity/)的依據。
+- 高解析度(500m)船隻密度tiff檔案為基底，作為[重新分配排放量](https://github.com/sinotec2/Focus-on-Air-Quality/Global_Regional_Emission/EDGARv5/ShipDensity/)的依據。
 
 ### [tif2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/tif2kml.py)
 - 顧名思義，此程式將tiff檔轉成kml檔案，便於檢視等值圖。

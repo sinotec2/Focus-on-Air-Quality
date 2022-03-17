@@ -28,7 +28,7 @@ last_modified_date:   2021-11-26 19:47:53
 - 幸好檔案是ASCII格式，可以達到很高的壓縮率。
 
 ## 批次執行與自動執行
-詳見[樓上](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/)。
+詳見[樓上](/Focus-on-Air-Quality/wind_models/NCEP/)。
 
 ## 程式差異說明
 因程式與ff.py很相像，此處介紹其差異之處

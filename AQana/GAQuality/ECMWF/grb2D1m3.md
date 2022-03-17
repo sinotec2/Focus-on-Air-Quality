@@ -24,12 +24,12 @@ last_modified_date:   2021-12-23 14:03:54
 
 ## 背景
 - 歐洲中期天氣預報中心(ECMWF)之EAC4 ([ECMWF Atmospheric Composition Reanalysis 4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview))數據下載整併後，此處將其轉成`m3.nc`檔案，以供[VERDI]()等顯示軟體、以及後續光化模式所需。
-- 由於EAC4粒狀物單位(重量混合比)轉換過程需要大氣的密度，不單是高度的函數，也隨著天氣系統而有時空的變化。可以由[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/)計算結果（`METCRO3D`）中讀取，需在執行轉換前預備好。
+- 由於EAC4粒狀物單位(重量混合比)轉換過程需要大氣的密度，不單是高度的函數，也隨著天氣系統而有時空的變化。可以由[mcip](/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/)計算結果（`METCRO3D`）中讀取，需在執行轉換前預備好。
 
 ## 逐日密度檔案之準備
-- 由於此處EAC4檔案的時間範圍為全月，而mcip結果是彼此會有重疊的批次作業，因此需以[brk_day.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/)拆解、讓程式可以逐日讀取，以降低複雜度。程序如下：
+- 由於此處EAC4檔案的時間範圍為全月，而mcip結果是彼此會有重疊的批次作業，因此需以[brk_day.cs](/Focus-on-Air-Quality/utilities/netCDF/brk_day/)拆解、讓程式可以逐日讀取，以降低複雜度。程序如下：
   - 先以`ncks`讀取`METCRO3D`檔案中的密度(`DENS`)及時間標籤
-  - 再以[brk_day.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/)拆解成逐日檔案備用
+  - 再以[brk_day.cs](/Focus-on-Air-Quality/utilities/netCDF/brk_day/)拆解成逐日檔案備用
   - 密度單位kg/M<sup>3</sup>，此處未更動，在主程式中進行轉換。
 
 ```bash
@@ -43,14 +43,14 @@ RHO.20180331.nc  RHO.20180405.nc  RHO.20180410.nc  RHO.20180415.nc  RHO.20180420
 ...
 RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424.nc  RHO.20180429.nc  RHO.20211221.nc
 ```
-- Note:[brk_day2.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/)的引數必須以*YYMM*做為主檔名的最後標籤(如範例中的RHO.*1804*.nc)。
+- Note:[brk_day2.cs](/Focus-on-Air-Quality/utilities/netCDF/brk_day/)的引數必須以*YYMM*做為主檔名的最後標籤(如範例中的RHO.*1804*.nc)。
 
 
 ## [grb2D1m3.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)程式說明
 
 ### 引數
 - [grb2D1m3.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py) *YYMM*.nc
-  - 為EAC4[下載](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/)、[轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E8%BD%89%E6%AA%94)、[合併之結果](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E6%A9%AB%E5%90%91%E5%90%88%E4%BD%B5)
+  - 為EAC4[下載](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/)、[轉檔](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E8%BD%89%E6%AA%94)、[合併之結果](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E6%A9%AB%E5%90%91%E5%90%88%E4%BD%B5)
 
 ### I/O檔案
 - Inputs
@@ -68,7 +68,7 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
 
 ### 分段說明
 - 使用scipy的[griddata](http://liao.cpython.org/scipytutorial11.html)進行水平的內插
-- 將dt2jul、jul2dt寫成副程式[dtconvertor](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times)，簡化程式版面
+- 將dt2jul、jul2dt寫成副程式[dtconvertor](/Focus-on-Air-Quality/utilities/DateTime/WRF_Times)，簡化程式版面
 - 對照表也寫成`json`檔案
 
 ```python
@@ -122,7 +122,7 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
     38	  rate.update({v:[1.]})
     39	
 ```
-- 讀取[合併](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E6%A9%AB%E5%90%91%E5%90%88%E4%BD%B5)後之EAC4檔案
+- 讀取[合併](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E6%A9%AB%E5%90%91%E5%90%88%E4%BD%B5)後之EAC4檔案
 
 ```python
     40	#read the merged grib files (ncl_convert2nc)

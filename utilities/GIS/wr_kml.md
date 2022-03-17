@@ -27,7 +27,7 @@ last_modified_date: 2022-02-11 13:39:55
   - [MeteoInfo](https://www.evernote.com/shard/s125/sh/1f1f4de7-a9b7-fb91-78df-1b03b06dc16b/5c16006937c386e7085358e70155c455)：可以接受ASCII GRD檔案。但也是只有向量底圖。
   - 商業套裝軟體(如[BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod)、[AERMOD View™](https://www.weblakes.com/products/aermod/index.html)、[AERMOD Cloud<sup>R</sup>](https://www.envitrans.com/software-aermod-cloud.php)、[BEEST Suite](https://www.providenceoris.com/product/beest-suite/))：無法接受TWD97座標系統。沒有中文街道底圖。
 - [KML](https://zh.wikipedia.org/wiki/KML)檔案現已經被很多網路地圖所接受成為圖層，包括[Google Map]()、OpenStreet Map([OSM](https://www.openstreetmap.org/#map=8/23.611/120.768))等等網路地圖界面。
-  - 格式可以參考[範例](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/#檔案來源與解壓縮)及google[官網](https://developers.google.com/kml/documentation/kml_tut)。
+  - 格式可以參考[範例](/Focus-on-Air-Quality/utilities/GIS/rd_kml/#檔案來源與解壓縮)及google[官網](https://developers.google.com/kml/documentation/kml_tut)。
 - 等值圖即為等值線多邊形之重疊。等值線多邊形的座標，則可以經由`cntr`套件計算。
   - python2包裹在`matplotlib`之內
   - python3版需使用第3方軟件[legacycontour](https://github.com/matplotlib/legacycontour)。
@@ -131,7 +131,7 @@ for level in levels[:]:
 - [PLT2kml.py](/Focus-on-Air-Quality/PlumeModels/OU_pathways/PLT2kml/):讀取煙流模式之輸出檔，進行REGRID並寫成kml檔案
 - Convert ISC/AERMOD PLOTFILE result to KML file and regrid to SURFER grd file ASCII TXT, csv (X,Y,C). 
 
-### [tif2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/#tif2kmlpy)
+### [tif2kml.py](/Focus-on-Air-Quality/utilities/GIS/GeoTiff/#tif2kmlpy)
 - GeoTiff是GIS常用的數據格式，如以KML與OSM檢視會比任何GIS程式更輕便。
 
 ## 結果範例

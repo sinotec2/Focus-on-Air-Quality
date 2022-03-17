@@ -20,7 +20,7 @@ last_modified_date:   2021-12-21 16:51:07
 ---
 ## 背景
 - **GML**([Geography Markup Language](https://zh.wikipedia.org/wiki/地理标记语言)是臺灣地區的鄉鎮區界檔案格式，也是[Open GIS社群](https://zh.wikipedia.org/wiki/开放地理空间协会)通用的格式。
-- 此處目標設定將GML檔案轉寫成raster檔。raster檔案在空品模擬系統之功用詳見[python解析KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)之背景說明。
+- 此處目標設定將GML檔案轉寫成raster檔。raster檔案在空品模擬系統之功用詳見[python解析KML檔](/Focus-on-Air-Quality/utilities/GIS/rd_kml/)之背景說明。
 - 目標raster解析度範圍為`d4`，`GML`雖然跟`KML`有很大的差別，但處理程序有很高的相似性。
 
 ### 目標

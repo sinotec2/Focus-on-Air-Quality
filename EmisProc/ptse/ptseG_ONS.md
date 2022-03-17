@@ -25,7 +25,7 @@ last_modified_date:   2021-12-06 12:09:47
 - 與高空點源的**時變係數**類似，地面點源也是依據CEMS數據，然而同一工廠無數據、鄰近工業區其他廠無數據者，亦會參考CEMS設定其**時變係數**。重要差異：
   - 因第一層的點源不可能正好有CEMS數據，其時變係數全為0/1之整數，有別於高空點源。
   - 因此分開處理將會大幅降低檔案的大小。
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[點源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式
+- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[點源之處理](/Focus-on-Air-Quality/EmisProc/ptse/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。程式也會呼叫到[ptse_sub](/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式
 
 ## 程式說明
 

@@ -22,7 +22,7 @@ last_modified_date: 2022-01-03 20:27:09
 ---
 
 ## 背景
-- 經[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之後的檔案，仍有多達135項之污染物，仍須進一步進行篩選。
+- 經[combine](/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之後的檔案，仍有多達135項之污染物，仍須進一步進行篩選。
 - CMAQ之排放、土地利用、濃度結果皆以逐日方式儲存，需進一步整併。以環保署要求之規格，濃度須以月為單位進行比對、分析。
 
 ## 作業範例

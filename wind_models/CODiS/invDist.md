@@ -128,7 +128,7 @@ $ cat -n twn_cwbInverDist.py
 
 ## next steps
 - 加權值是風場內插計算時需使用到的基本數據。內插風場時計算軌跡的重要依據。
-- 軌跡程式碼可以由[githup](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/traj2kml.py)下載，詳見[分段說明](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)。
+- 軌跡程式碼可以由[githup](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/traj2kml.py)下載，詳見[分段說明](/Focus-on-Air-Quality/wind_models/CODiS/traj/)。
 
 
 ## Reference

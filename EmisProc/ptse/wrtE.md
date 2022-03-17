@@ -36,7 +36,7 @@ $ cat -n wrtE.py
      1  '''
      2  Purpose: Generate CAMx Elev. PtSe. NC file from dfMM.fth (MM=01~12)
      3  Usage: python wrtE.py YYMM
-     4  see descriptions at https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/
+     4  see descriptions at /Focus-on-Air-Quality/EmisProc/ptse/wrtE/
      5  '''
      6  #! crding = utf8
      7  from pandas import *
@@ -80,7 +80,7 @@ $ cat -n wrtE.py
     36  edate=bdate+datetime.timedelta(days=ntm/24)#monthrange(yr,mo)[1]+3)
 ```
 - 讀取模版並進行時間軸的延長
-  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮罩遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
+  - 一般nc檔案的矩陣會自動以`masked array`[numpy.ma.array](https://numpy.org/doc/stable/reference/generated/numpy.ma.array.html)型式儲存，模版內容如果被遮罩遮蔽了，延長放大之後會是個災難。有關模版的mask array的檢查與修正見[另文](/Focus-on-Air-Quality/utilities/netCDF/masked/)
 
 ```python
     37  #prepare the uamiv template
@@ -147,7 +147,7 @@ $ cat -n wrtE.py
     85
     86  dimn={6:'NSTK',7:'COL'}
 ```
-- 為延長煙道數(`COL`軸)，須先將模版的`COL`軸設為可增加之[記錄軸](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E7%B6%AD%E5%BA%A6)(`--mk_rec_dmn`)
+- 為延長煙道數(`COL`軸)，須先將模版的`COL`軸設為可增加之[記錄軸](/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E7%B6%AD%E5%BA%A6)(`--mk_rec_dmn`)
 
 ```python
     87  print(dimn[ver]+' expanding and reopening')
@@ -176,7 +176,7 @@ $ cat -n wrtE.py
    104
 ```
 - 再次開啟模版。關閉再開的理由是節省不必要的暫存記憶體。
-  - `set_auto_mask(False)`或`set_always_mask(False)`的原因，是因為模版中有被遮蔽的矩陣內容。須先在模版階段[解決](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)。
+  - `set_auto_mask(False)`或`set_always_mask(False)`的原因，是因為模版中有被遮蔽的矩陣內容。須先在模版階段[解決](/Focus-on-Air-Quality/utilities/netCDF/masked/)。
 
 ```python
    105  nc = netCDF4.Dataset(NCfname, 'r+')

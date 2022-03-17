@@ -115,11 +115,11 @@ last_modified_date: 2022-01-03 09:13:39
 | <b>圖6 CMAQ 臺灣本島範圍之地形高程，東西向範圍282公里、南北向444公里</b>|
 
 ### 各層網格詳細設定
-- namelist.wps內容詳[地形網格設定](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#地形網格設定) 
+- namelist.wps內容詳[地形網格設定](/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#地形網格設定) 
 
 ## WRF/chem之geogrid.exe設定
 ### 整體流程
-- 作業流程詳WRF-chem/[geo_em檔案之準備](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#geo_em檔案之準備)
+- 作業流程詳WRF-chem/[geo_em檔案之準備](/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#geo_em檔案之準備)
 
 ### 揚沙所需特定檔案
 - 下載風蝕、沙及泥的比例參數計算所需[Thompson全球數據](https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_thompson28_chem.tar.gz)
@@ -150,7 +150,7 @@ total 6.1M
 ```
 
 ### 揚沙參數之執行結果
-- EROD風蝕係數之維度須先以[ncwa](https://linux.die.net/man/1/ncwa)予以[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)方能以[VERDI]()檢視。
+- EROD風蝕係數之維度須先以[ncwa](https://linux.die.net/man/1/ncwa)予以[去除](/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)方能以[VERDI]()檢視。
   - EROD的維度名稱為：` EROD(Time, dust_erosion_dimension, south_north, west_east) `，其中`dust_erosion_dimension`VERDI無法辨識
 
 | ![erod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/erod.PNG) |

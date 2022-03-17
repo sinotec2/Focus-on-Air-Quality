@@ -23,7 +23,7 @@ last_modified_date:   2021-12-02 11:08:53
 
 ## 背景
 - 環保署全年排放量乘上月變化係數
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[植物源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[植物源之處理](/Focus-on-Air-Quality/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
 ## 程式分段說明
 - 說明與宣告

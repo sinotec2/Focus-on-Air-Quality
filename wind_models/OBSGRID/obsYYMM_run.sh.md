@@ -54,7 +54,7 @@ done
 ### `namelist.oa`模版
 - 因為每批次、每層網格的`namelist.oa`都有所不同，必須按照規則進行修改，此處以複製模版、局部置換的方式辦理。
 - 置換的方式採用linux [sed](https://terryl.in/zh/linux-sed-command/)指令
-- 模版詳見[namelist.oa](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/namelist.oa/)說明
+- 模版詳見[namelist.oa](/Focus-on-Air-Quality/wind_models/OBSGRID/namelist.oa/)說明
 
 ### 批次的定義
 - 由於WRF是一個時間積分的數值模式，需要有個時間的起始與終結，必須以批次方式進行模式模擬。
@@ -137,7 +137,7 @@ done
 ```
 
 - 依序執行`obsgrid`, [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh), `filter_p`
-  - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/程式修改及編譯/)
+  - 按照grid_size編譯`obsgrid`，參考[程式修改及編譯](/Focus-on-Air-Quality/wind_models/OBSGRID/程式修改及編譯/)
   - [run_cat_obs_files.csh](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/run_cat_obs_files.csh)為WRF系統提供的批次腳本，旨在將OBS_DOMAIN檔案合併，以備obs納進使用。
   - [filter_p](/nas1/WRF4.0/FILTER/filter_p.f))濾掉OBS_DOMAIN檔案中測站數據完全無效者。
 

@@ -21,7 +21,7 @@ last_modified_date: 2022-03-14 16:04:28
 
 ## 背景
 - 為快速累積複雜地形中煙流模式的執行經驗，建立相應之執行規範，此處針對TEDS中所有點源進行AERMAP之模式模擬。
-- 使用之程式即為前述[AERMAP之遠端執行](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/Terrain/aermap_caas/)之python程式，應用SuperMicron工作站，以bash腳本控制同步計算。計算結果以uMap提供[鏈結](http://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)下載。
+- 使用之程式即為前述[AERMAP之遠端執行](/Focus-on-Air-Quality/PlumeModels/Terrain/aermap_caas/)之python程式，應用SuperMicron工作站，以bash腳本控制同步計算。計算結果以uMap提供[鏈結](http://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)下載。
 
 ## 整體執行與同步控制
 - 此次作業的特性為多個aermap同時進行，雖然aermap程式並沒有多工性質，然而經由bash腳本可以控制同時運作的aermap作業數，在工作站總核心數上限之下。範例如下

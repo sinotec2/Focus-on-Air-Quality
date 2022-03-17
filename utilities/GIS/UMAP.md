@@ -64,7 +64,7 @@ last_modified_date: 2022-03-11 15:46:30
 - 除KML之外，uMap也可以接受GeoJSON、csv、gpx、osm、georss、umap(即umap的輸出檔、除POI內容外還包括圖層的設定)
 	- csv適用在點狀資料，KML有點、線、多邊形較為彈性。
 	- 由於5年5000多點數據還是需要有格式比較容易偵錯，此處以csv為優選。
-	- [csv2kml](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/)為已經開發的小工具，因此kml也可以考慮。
+	- [csv2kml](/Focus-on-Air-Quality/utilities/GIS/csv2kml/)為已經開發的小工具，因此kml也可以考慮。
 	- 本次作業網格分布之位置如以點狀似嫌呆板，以網格邊界4方形較符合實際，然數據量也將擴增5倍，過去google map對上千點的kml速度降低很多、且有拒絕服務的限制，不知uMap是否也會(經證實不會)，因此以kml點狀先行測試，最終仍以4邊形來展示POI內容為目標。
 
 ### 資料之準備

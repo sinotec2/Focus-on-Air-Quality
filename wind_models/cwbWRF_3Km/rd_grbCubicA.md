@@ -23,8 +23,8 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 ## 背景
-- 續[樓上](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)、以及[下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064/)程序之說明，此處詳述轉檔歷程。
-- 由`grb2`轉到`wrfout_d04`的空間內插問題，詳見[WRF_3Km空間內插](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/gen_D4bin/)說明。
+- 續[樓上](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)、以及[下載](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064/)程序之說明，此處詳述轉檔歷程。
+- 由`grb2`轉到`wrfout_d04`的空間內插問題，詳見[WRF_3Km空間內插](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/gen_D4bin/)說明。
 - 雖然`grb2`格式也有其解讀、應用的軟體，然而在空氣污染領域還並不多。因此還是需要轉成`wrfout`的`nc`格式。
 - 此處應用[pygrib](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085)模組進行`grb2`檔案的解析
 
@@ -189,7 +189,7 @@ $ cat -n rd_grbCubicA.py
 
 ### 空間內插
 - 空間內插，並儲存在全時間變數陣列中
-  - 因2個檔案的解析度一樣，簡單的線性內插即可，然因原點與投影略有差異，還是有內插模式，詳見[WRF_3Km空間內插](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/gen_D4bin/)說明。
+  - 因2個檔案的解析度一樣，簡單的線性內插即可，然因原點與投影略有差異，還是有內插模式，詳見[WRF_3Km空間內插](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/gen_D4bin/)說明。
   - 2度空間變數與3度空間變數分開處理，後者逐層處理
 ```python
    105    for a in atbs:

@@ -24,14 +24,14 @@ last_modified_date:   2021-12-16 10:59:04
 ## 背景
 - 全球模式模擬結果要使用在地區的空品模擬，需要經過空間、時間的內插、以及空品項目的對照等作業。此處進行水平內插與污染物的對照。
 - 前置作業包括
-  - [數據下載](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality)、
-  - 使用nc轉換成m3格式[ncf2ioapi](https://www.camx.com/download/support-software/)、[垂直層數切割](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)、以及
-  - 逐6小時空白濃度[模版檔案之準備](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/gen_templateD1/)等。  
-- 由於CMAQ濃度檔案可以使用[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/run_combMM_R_DM/)予以整併，(或直接)就可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或進行檢視。
+  - [數據下載](/Focus-on-Air-Quality/AQana/GAQuality)、
+  - 使用nc轉換成m3格式[ncf2ioapi](https://www.camx.com/download/support-software/)、[垂直層數切割](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)、以及
+  - 逐6小時空白濃度[模版檔案之準備](/Focus-on-Air-Quality/GridModels/BCON/gen_templateD1/)等。  
+- 由於CMAQ濃度檔案可以使用[combine](/Focus-on-Air-Quality/GridModels/run_combMM_R_DM/)予以整併，(或直接)就可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或進行檢視。
 - 後續作業
-  - 邊界濃度的製作，包括時間的內插、邊界框濃度的解析等，將在[bcon](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/)程式內進行。
+  - 邊界濃度的製作，包括時間的內插、邊界框濃度的解析等，將在[bcon](/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/)程式內進行。
   - 直接以初始濃度引用：在`run_cctm.csh`內指定即可
-- 有鑒於全球空品模擬結果越來越多，且Mozart模式不再維護，有更多直接轉換之程式與作業方式(如ecmwf之[EAC4](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/))，可以簡化程序。
+- 有鑒於全球空品模擬結果越來越多，且Mozart模式不再維護，有更多直接轉換之程式與作業方式(如ecmwf之[EAC4](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/))，可以簡化程序。
 
 ## [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)說明
 
@@ -42,7 +42,7 @@ last_modified_date:   2021-12-16 10:59:04
 - `年代`+`Julian day`+`小時`共7碼
 
 #### I/O檔案
-- `mozart`等全球模式輸出結果(經[垂直內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)處理)
+- `mozart`等全球模式輸出結果(經[垂直內插](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)處理)
 - `'ICON_20'+yrjulhh+'.d1'`模版：空白CMAQ濃度檔
 - `cb6`對照表[cb6_new.json](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/cb6_new.json)、[cb6_newNum.json](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/cb6_newNum.json)
 - 垂直網格對照表[lay2VGLEVLS.json](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/lay2VGLEVLS.json)
@@ -201,7 +201,7 @@ for ix in range(len(v4M)):
 ncM.close()
 ```
 - 清空模版的濃度值
-  - 避免`netCDF4`自動[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
+  - 避免`netCDF4`自動[遮蔽](/Focus-on-Air-Quality/utilities/netCDF/masked/)
   - 因為模版只有單一時間點，沒有時間的維度
 
 ```python
@@ -235,4 +235,4 @@ nc.close()
 
 ## Reference
 - lizadams, **Visualization Environment for Rich Data Interpretation (VERDI): User’s Manual**, [github](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md), August 03, 2021
-- sinotec2, **NC矩陣遮罩之檢查與修改**, [FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/),Dec 10 2021
+- sinotec2, **NC矩陣遮罩之檢查與修改**, [FAQ](/Focus-on-Air-Quality/utilities/netCDF/masked/),Dec 10 2021

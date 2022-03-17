@@ -28,7 +28,7 @@ last_modified_date: 2022-01-05 09:30:08
   - 如新網格網格間為相當或小於0.25度(如CWB WRF_15Km 或d2 27Km)，則採REAS網格之內插，可能總量會略有差異。
 - 過去曾經作法
   - MM5時代使用網格經緯度為格線，切割REAS排放量，累積各網格排放量。  
-  - CAMx系統有bandex程式，可以切割Mozart等間距經緯度之濃度檔，成為直角座標系統。因此先將REAS 文字檔轉成mozart檔案，再循[程序](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之uamiv檔案。
+  - CAMx系統有bandex程式，可以切割Mozart等間距經緯度之濃度檔，成為直角座標系統。因此先將REAS 文字檔轉成mozart檔案，再循[程序](/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之uamiv檔案。
 
 ## [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
 
@@ -39,7 +39,7 @@ for icat in {0..10};do
 sub python reas2cmaqD2.py D0 $icat
 done
 ```
-- [sub](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#執行程式)=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
+- [sub](/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#執行程式)=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
 - 各排放類別處理完後，可就欲研究的主題進行合併，可以使用addNC工具將同樣規格的nc檔案予以相加，如下例即將11類之nc檔合併成為2015_D0.nc：
 
 ```python
@@ -58,7 +58,7 @@ from pandas import *
 from pyproj import Proj
 from scipy.interpolate import griddata
 ```
-- 因壓縮檔內的目錄結構參差不齊，使用[findc](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#尋找檔案)來確定檔案位置，將結果存成fnames.txt備用
+- 因壓縮檔內的目錄結構參差不齊，使用[findc](/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#尋找檔案)來確定檔案位置，將結果存成fnames.txt備用
   - 讀取檔案。有`/mon`該行，行前有污染物質名稱，將其與檔名一起輸出，形成dict的內容
 
 ```python
@@ -179,7 +179,7 @@ fname=cate[icat]+'_'+tail
 os.system('cp template'+tail+' '+fname)
 nc = netCDF4.Dataset(fname, 'r+')
 ```
-- 延長檔案並將排放量全填0(準備累加、並避免被[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改))
+- 延長檔案並將排放量全填0(準備累加、並避免被[遮蔽](/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改))
   - REAS為逐月檔案。此階段先將內容存成12個小時的frame。後續再按不同類別進行時間的劃分(月排放量轉成逐時排放)。
 
 ```python
@@ -203,7 +203,7 @@ for v in spec:
   if vc not in V[3]:continue
 ```
 - 逐月進行空間內插
-  - 對超過REAS範圍的新網格位置，griddata無法進行外插，因此會變成nan，須將其設成0，否則會被[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改)。
+  - 對超過REAS範圍的新網格位置，griddata無法進行外插，因此會變成nan，須將其設成0，否則會被[遮蔽](/Focus-on-Air-Quality/utilities/netCDF/masked/#nc矩陣遮罩之檢查與修改)。
 
 ```python
   zz=np.zeros(shape=(12,nrow,ncol))
@@ -230,7 +230,7 @@ nc.close()
 
 
 ## [reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
-- 如[前](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/reas2cmaqD2/#背景)所述，D1網格間距81Km，將會有3~4格REAS排放量，如用內插作法將會嚴重失真，此處乃以加總之策略進行座標系統轉換。
+- 如[前](/Focus-on-Air-Quality/REASProc/reas2cmaqD2/#背景)所述，D1網格間距81Km，將會有3~4格REAS排放量，如用內插作法將會嚴重失真，此處乃以加總之策略進行座標系統轉換。
 
 ### 執行
 - reas2cmaqD1.py沒有引數、所有類別都在程式內部執行
@@ -239,7 +239,7 @@ nc.close()
 - 使用np.searchsorted找到新網格座標在REAS座標系統的位置(`lat_ss`,`lon_ss`)
   - 因CMAQ最後一格還在REAS範圍內，需要在CMAQ的東、北方多加一圈，假設括進格數與倒數一格相同。
   - searchsorted詳[純淨天空](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)
-  - 同樣作法見[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/#程式分段說明)
+  - 同樣作法見[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/#程式分段說明)
 
 ```python
     lon_ss, lat_ss= np.zeros(shape=(nrow+1,ncol+1), dtype=int)-1, np.zeros(shape=(nrow+1,ncol+1), dtype=int)-1

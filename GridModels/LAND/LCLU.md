@@ -172,5 +172,5 @@ nc.close()
 | <b>圖 d01範圍第8類土地使用/空曠、沙漠或植被稀疏地的面積佔比(%)</b>|  
 
 - see also 
-  - [geo_em檔案之準備.結果檢視](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#結果檢視)
-  - [揚沙參數之執行結果](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/#揚沙參數之執行結果)
+  - [geo_em檔案之準備.結果檢視](/Focus-on-Air-Quality/wind_models/WRF-chem/WPS-OBSGRID/#結果檢視)
+  - [揚沙參數之執行結果](/Focus-on-Air-Quality/wind_models/WPS/geogrid/#揚沙參數之執行結果)

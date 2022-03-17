@@ -27,7 +27,7 @@ last_modified_date:   2022-02-16 11:39:08
 - WPS要處理的數據包括
   - 地理地形等[靜態數據](https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html)、
   - 再分析數據(如FNL)、
-  - [海溫數據](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)等等。
+  - [海溫數據](/Focus-on-Air-Quality/wind_models/SST/)等等。
   - 其結果可以成為OBSGRID、及(或)real的輸入檔案，為每一WRF作業必須的步驟。
   - 詳細編譯、安裝、namelist.wps設定、VTable的設定等等，可由[官網](https://github.com/wrf-model/WPS)找到相關資源。此處著眼在批次操作、作業瓶頸、以及結果檢核等注意事項。
 - WPS相關程式有版本之對應關係。WRF4只會讀取WPS4產生檔案，會進行版本檢核。  
@@ -95,7 +95,7 @@ done
     26    done
 ```
 - 因同步運作，必須避免不同月份間檔案發生衝突。
-- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
+- 創建`WPS??(??=01~12)`目錄並移動到該目錄，以避免平行計算時覆蓋到其他作業的控制檔([Vtable](/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#檔案解讀的工作核心：建立對照關係)及namelist.wps)。
 ```bash
     27    ii=$(printf "%02d" $(( $i + 1 )) )
     28    echo "ii:"$ii
@@ -141,7 +141,7 @@ done
 ```
 - 如SST檔案非`grib`格式，則不需要執行此段，
   - 需另行準備SST:YYYY-MM-DD-HH_00(WPS暫存檔)。
-  - 參[海溫的讀取](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
+  - 參[海溫的讀取](/Focus-on-Air-Quality/wind_models/SST/#nc檔案轉WPS暫存檔格式(intermediate format))。
 
 - 執行`metgrid`
 

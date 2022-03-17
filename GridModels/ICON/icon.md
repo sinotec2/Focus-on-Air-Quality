@@ -11,7 +11,7 @@ permalink: /GridModels/ICON/
 {: .no_toc }
 
 **CMAQ**模式的初始條件有3種給定方式：
-1. 由[全球模式模擬結果](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)檔案解讀(`REGRID`)
+1. 由[全球模式模擬結果](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)檔案解讀(`REGRID`)
 1. 由前一批次**CMAQ**執行成果解讀(`REGRID`)
 1. 以一組觀測值或符合化學平衡的模擬結果設定(`PROFILE`)
 {: .fs-6 .fw-300 }

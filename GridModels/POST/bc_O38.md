@@ -68,7 +68,7 @@ lenBC=sum([len(i) for i in [S,N,W,E]])
 seq='SNWE'
 ```
 ### 日最大8小時值之處理、讀取及分析
-- 先以[NC8](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/NC8)逐時進行處理、取最大日值，讀入為`conc`
+- 先以[NC8](/Focus-on-Air-Quality/utilities/netCDF/NC8)逐時進行處理、取最大日值，讀入為`conc`
 - 讀取3維氣象檔日均值(fmet)中的`uv10`，做為判定進、出模擬範圍的依據。
   - 其中入流邊界的位置index以np.where進行篩選(Si\~Ei)
 - 記錄發生入流時的空間範圍`idxs`，以進行邊界上該等位置的平均值(`bc[4,nt]`)。如皆為出流邊界，則記錄0。

@@ -23,7 +23,7 @@ last_modified_date: 2021-12-22 17:10:45
 ---
 
 ## 背景
-- 本項作業由`kml`格式之[向量檔案讀成格柵檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/)，再利用`shapely.with`[判斷分區](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/shape_to_raster/#%E5%96%AE%E4%B8%80%E5%A4%9A%E9%82%8A%E5%BD%A2within%E4%B9%8B%E5%88%A4%E5%88%A5)
+- 本項作業由`kml`格式之[向量檔案讀成格柵檔](/Focus-on-Air-Quality/utilities/GIS/rd_kml/)，再利用`shapely.with`[判斷分區](/Focus-on-Air-Quality/utilities/GIS/shape_to_raster/#%E5%96%AE%E4%B8%80%E5%A4%9A%E9%82%8A%E5%BD%A2within%E4%B9%8B%E5%88%A4%E5%88%A5)
 - 目標產生東亞(主要是中國大陸)地理分區的**網格遮罩**(gridmask)檔案，其內容要求與範例詳見[ISAM手冊](https://github.com/USEPA/CMAQ/blob/main/DOCS/Users_Guide/CMAQ_UG_ch11_ISAM.md)。
 
 ## [withinD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/withinD1.py)程式說明
@@ -54,7 +54,7 @@ last_modified_date: 2021-12-22 17:10:45
      8	from shapely.geometry import Point, Polygon
      9	
 ```
-- 與[rd_kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/#rd_kmlpy)相同之內容
+- 與[rd_kml.py](/Focus-on-Air-Quality/utilities/GIS/rd_kml/#rd_kmlpy)相同之內容
   - 記錄多邊形(`Dplg`)與名稱(`Nplg`)等序列備用
 
 ```python

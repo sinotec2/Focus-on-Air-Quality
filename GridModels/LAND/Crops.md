@@ -35,7 +35,7 @@ last_modified_date: 2022-01-17 09:02:10
 
 ## Reading the earthstat tiff's
 ### Crop names Dict
-- CCTM系統中的種穀物詳[亞洲土地使用檔案>背景](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)
+- CCTM系統中的種穀物詳[亞洲土地使用檔案>背景](/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)
 - 175種穀物為解開[earthstat>壓縮檔](http://www.earthstat.org/harvested-area-yield-175-crops/)之結果
 - 可食豆：包括175種穀物中所有含有bean之種類
 - earthstat沒有乾草(straw)或其他畜牧用草等名稱，只有mixedgrass比較接近。

@@ -23,7 +23,7 @@ last_modified_date:   2021-12-19 14:12:15
 
 ## 背景
 - 由於CCTM是按照日期進行檔案的輸出，污染項目也是按照226項細項輸出，因此如需複合之空品項目如PM、VOCs等，則需進行後處理combine.exe。
-  - 如只是需要特定污染項目，直接使用[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#變數variable)進行讀取切割較為簡便。注意ACONC檔案之濃度單位為ppm(或&mu;g/M<sup>3</sup>)。
+  - 如只是需要特定污染項目，直接使用[ncks](/Focus-on-Air-Quality/utilities/netCDF/ncks/#變數variable)進行讀取切割較為簡便。注意ACONC檔案之濃度單位為ppm(或&mu;g/M<sup>3</sup>)。
 - 測站定點濃度之讀取，需待combine處理後，另以write_site程式處理。
 
 ## 腳本程式說明
@@ -38,13 +38,13 @@ last_modified_date:   2021-12-19 14:12:15
 - 氣象數據
   - METCRO3D
   - METCRO2D
-- 空品/沉降量定義檔：$[SPECIES_DEF](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/#species_def檔案之設定)
+- 空品/沉降量定義檔：$[SPECIES_DEF](/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/#species_def檔案之設定)
 - 結果檔案OUTFILE 
   - 小時平均濃度：${POSTDIR}/COMBINE_ACONC_${CTM_APPD}，共有135項(在$SPECIES_DEF中定義)。
   - 小時沉降量：${POSTDIR}/COMBINE_DEP_${CTM_APPD}
 
 ### 執行方式
-- 讀取引數：2碼月份、批次序(5\~12)、[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義)(`d01`/`d02`/`d04`、無`d03`)
+- 讀取引數：2碼月份、批次序(5\~12)、[網格編號](/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義)(`d01`/`d02`/`d04`、無`d03`)
   - `CAS`設定為**TEDS**編號，與年代有關，2019附近使用TEDS**11**
 
 ### SPECIES_DEF檔案之設定
@@ -120,7 +120,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     24	 setenv CMAQ_DATA  /nas1/cmaqruns/2018base/data
     25	
 ```
-- 讀取引數(月、[批次序](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#批次的定義)、[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
+- 讀取引數(月、[批次序](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#批次的定義)、[網格編號](/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
 
 ```python
     26	set MO         = $argv[1]
@@ -142,7 +142,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     37	                                                      
  ```
 - 執行程式位置
-  - 此環境變數不易修改，如欲切換執行其他工作批次檔，「應」跳出此次csh另外定義(使用[tmux](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/tmux/))。
+  - 此環境變數不易修改，如欲切換執行其他工作批次檔，「應」跳出此次csh另外定義(使用[tmux](/Focus-on-Air-Quality/utilities/OperationSystem/tmux/))。
 
 ```python
    38	#> Define RUNID as any combination of parameters above or others. By default,
@@ -161,7 +161,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     51	
     52	
 ```
-- 對照網格編號及名稱(詳[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義))
+- 對照網格編號及名稱(詳[網格系統詳細定義](/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義))
 
 ```python
     53	#> Set working, input and output directories

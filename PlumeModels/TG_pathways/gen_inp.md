@@ -32,7 +32,7 @@ last_modified_date: 2022-02-11 10:57:05
   1. 呼叫[AERMAP]()程式完成作業
   1. 將數據寫成isc格式之地形檔案備用
   1. 將數據寫成kml格式以備檢查
-- 有關GeoTiff格式的讀取、寫出等等，可以參考[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)及[df範例](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)、[nc範例](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)
+- 有關GeoTiff格式的讀取、寫出等等，可以參考[筆記](/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)及[df範例](/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)、[nc範例](/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)
 
 ## 下載數值地形資料
 ### 內政部
@@ -125,10 +125,10 @@ os.system(cmd)
 - 因計算等濃度線，調用了`cntr`模組。
   - 在python2為matplotlib的內容
   - 在python3為第3方提供的軟體，並不屬`matplotlib`內容，需另行自[githup](https://github.com/matplotlib/legacycontour.git)安裝，詳附註。
-  - 此模組主要用在副程式[cntr_kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)，見[wr_kml筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)。
+  - 此模組主要用在副程式[cntr_kml.py](/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)，見[wr_kml筆記](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)。
 
 - [AERMAP]()使用的是UTM系統，因此需用到[utm](https://pypi.org/project/utm/)模組，在台灣地區不適用，需另安裝。台灣地區使用[twd97](https://pypi.org/project/twd97/)。絕對座標轉換使用utm及twd97，相對座標批次轉換，還是使用pyproj的Proj比較方便快速。
-- tiff的讀寫，使用[rasterio](https://rasterio.readthedocs.io/en/latest/)，基本指令及應用詳見[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)說明。
+- tiff的讀寫，使用[rasterio](https://rasterio.readthedocs.io/en/latest/)，基本指令及應用詳見[筆記](/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)說明。
 
 ```python
 import numpy as np
@@ -290,8 +290,8 @@ os.system(aermap_path+'aermap >& isc.out')
 
 ## 其他處理
 ### KML檔案之輸出
-- 呼叫[cntr_kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)
-- 參考[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
+- 呼叫[cntr_kml.py](/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)
+- 參考[等值線之KML檔](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
 
 ```python
 result=cntr_kml(grid_z2, lon, lat, fname)

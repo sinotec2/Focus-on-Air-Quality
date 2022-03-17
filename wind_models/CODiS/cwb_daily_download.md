@@ -277,7 +277,7 @@ grep cwb /etc/crontab
 ```
 
 ## Further Application
-- [cwbsrf to littleR](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/add_srfFF/)
+- [cwbsrf to littleR](/Focus-on-Air-Quality/wind_models/CODiS/add_srfFF/)
 - [反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤
 - [traj2_CAAS](http://114.32.164.198/traj2.html)
 
@@ -288,7 +288,7 @@ grep cwb /etc/crontab
 - G. T. Wang, **Linux 設定 crontab 例行性工作排程教學與範例**,[gtwang.org](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/), 2019/06/28
 - G. T. Wang, **Linux 使用wget 指令自動下載網頁檔案教學與範例**, [gtwang.org](https://blog.gtwang.org/linux/linux-wget-command-download-web-pages-and-files-tutorial-examples/), 2017/08/25
 - KD Chang, **Linux Curl Command 指令與基本操作入門教學**, [techbridge](https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/), 2019-02-01 
-- [Here](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/cwb_daily_download/), 2021-11-26
+- [Here](/Focus-on-Air-Quality/wind_models/CODiS/cwb_daily_download/), 2021-11-26
 - Allen Chou, **CWB-Observation-Crawler**, [github](https://github.com/s3131212/CWB-Observation-Crawler), 18 Dec 2018
 - TienYang, **crawler-central-weather**, [github](https://github.com/wy36101299/crawler-central-weather/blob/master/climate_crawler.py),12 Jan 2015
 - 臨床統計農莊, **python網路爬蟲輕鬆取得氣候資料(1)~(2)**, [blogspot](http://muse6485.blogspot.com/2019/08/python1.html), 8月 29, 2019

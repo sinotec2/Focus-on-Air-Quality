@@ -44,7 +44,7 @@ last_modified_date: 2022-01-21 10:49:11
   - Used by: CCTM – bidirectional NH3 flux version only  
 
 ### 檔案結構
-- layer有42個，為各作[物種類數](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)(e2c_cats)。
+- layer有42個，為各作[物種類數](/Focus-on-Air-Quality/GridModels/LAND/CWBWRF_15k/#背景)(e2c_cats)。
   - 因網格內同時有多種作物，因此土壤有種植該作物時對應之性質。
   - 會對應到土地使用檔中的穀物面積分率
 

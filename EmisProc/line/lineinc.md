@@ -23,14 +23,14 @@ last_modified_date:   2021-12-02 11:08:53
 
 ## 背景
 - 由環保署移動源檔案讀取資料庫維度，改寫成矩陣形式。
-- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[植物源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[植物源之處理](/Focus-on-Air-Quality/EmisProc/biog/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
 ## 程式分段說明
 
 ### 引用與檔案輸入
 - 引用模組。
   - 此處用到[include2.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/include2.py)的`rd_hwcsv`,`rd_ASnPRnCBM`
-  - 還包括[include3.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/include3.py)的[dt2jul, jul2dt](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/include3/#引用模組及時間標籤轉換dt2jul-jul2dt)
+  - 還包括[include3.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/include3.py)的[dt2jul, jul2dt](/Focus-on-Air-Quality/EmisProc/area/include3/#引用模組及時間標籤轉換dt2jul-jul2dt)
 
 ```python
 kuang@node03 /nas1/TEDS/teds11/line

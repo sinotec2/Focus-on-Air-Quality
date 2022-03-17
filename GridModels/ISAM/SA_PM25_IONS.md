@@ -61,7 +61,7 @@ end
 - [run_isamMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/isam/run_isamMM_RR_DM.csh)
 
 #### 腳本說明
-- [執行CMAQ-ISAM](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/run_isamMM_RR_DM/)
+- [執行CMAQ-ISAM](/Focus-on-Air-Quality/GridModels/ISAM/run_isamMM_RR_DM/)
 
 ### 程式名稱
 - [SA_PM25_IONS.py](https://github.com/sinotec2/cmaq_relatives/blob/master/isam/SA_PM25_IONS.py)
@@ -167,7 +167,7 @@ for g in grp:
     nco['TFLAG'][t,0,:]=nc['TFLAG'][t,0,:]
 ```
 - 累加`PM25_IONS`
-  - 因**ISAM**未處理氯離子等很多項目，矩陣無內容，因此須研判是否為`nan`，以避免被`netCDF4`[遮蔽](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/masked/)
+  - 因**ISAM**未處理氯離子等很多項目，矩陣無內容，因此須研判是否為`nan`，以避免被`netCDF4`[遮蔽](/Focus-on-Air-Quality/utilities/netCDF/masked/)
 
 ```python
   var=np.zeros(shape=(nt,nlay,nrow,ncol))
@@ -195,7 +195,7 @@ for g in grp:
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間萬里測站PM10各分區**人為污染**貢獻濃度之比較</b>|
 
-- CMAQ加上**[風吹揚砂](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL/#results)**之效應
+- CMAQ加上**[風吹揚砂](/Focus-on-Air-Quality/utilities/Graphics/NCL/#results)**之效應
 
 | ![CMAQ_WBDcomp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDcomp.PNG) |
 |:--:|

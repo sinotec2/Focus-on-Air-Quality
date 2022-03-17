@@ -173,7 +173,7 @@ $ ncdump -h $nc|grep float|grep DUST
 ```
 - 注意
   - DUST_FLUX無數值、全為0
-  - 第1軸`klevs_for_dust`不為[VERDI]()所解析，需使用[ncrename](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名ncrename)將其更名為`bottom_top`
+  - 第1軸`klevs_for_dust`不為[VERDI]()所解析，需使用[ncrename](/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名ncrename)將其更名為`bottom_top`
 
 ## 程式編譯
 - 目前沒有centos平台上[WRF]()或[WRF-chem]()的執行檔可供下載。

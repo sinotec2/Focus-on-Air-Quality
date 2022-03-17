@@ -24,21 +24,21 @@ last_modified_date: 2022-01-11 19:52:24
 ## 背景
 - CMAQ模式的地面排放量為一逐日拆解的檔案（每檔案需25個小時）。其開始時間為UTC 0時（LST -8）。
 - 可以按照排放類別拆分或合併。
-- 空間網格系統之定義乃按照[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義)之定義方式。
+- 空間網格系統之定義乃按照[mcip](/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義)之定義方式。
 - 由CAMx模式排放量檔案而來，其產生過程詳如下表：
 
 |範圍|格式|類別|
 |----|----|----|
-|東亞範圍|nc|[面排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)|
-|||[植物源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/)|
-|||[陸上交通排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/)|
-|||[船舶排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)|
-|||[地面點源排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptseG/)|
-|臺灣範圍|nc|[面排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)|
-|||[植物源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/)|
-|||[陸上交通排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/)|
-|||[船舶排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)|
-|||[地面點源排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptseG/)|
+|東亞範圍|nc|[面排放源](/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)|
+|||[植物源](/Focus-on-Air-Quality/EmisProc/biog/bioginc/)|
+|||[陸上交通排放源](/Focus-on-Air-Quality/EmisProc/line/)|
+|||[船舶排放](/Focus-on-Air-Quality/EmisProc/ship/)|
+|||[地面點源排放](/Focus-on-Air-Quality/EmisProc/ptse/ptseG/)|
+|臺灣範圍|nc|[面排放源](/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)|
+|||[植物源](/Focus-on-Air-Quality/EmisProc/biog/bioginc/)|
+|||[陸上交通排放源](/Focus-on-Air-Quality/EmisProc/line/)|
+|||[船舶排放](/Focus-on-Air-Quality/EmisProc/ship/)|
+|||[地面點源排放](/Focus-on-Air-Quality/EmisProc/ptse/ptseG/)|
 
 ## 污染物項目之對照[camx2cmaq.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/camx2cmaq.py)
 ### 執行方式
@@ -51,7 +51,7 @@ last_modified_date: 2022-01-11 19:52:24
 ### 重要轉換
 - 時間
   - CAMx模式為LST、CMAQ為UTC：需要減8
-  - Datetime to/from Julian day：[dtconvertor](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/dtconvertor/)
+  - Datetime to/from Julian day：[dtconvertor](/Focus-on-Air-Quality/utilities/DateTime/dtconvertor/)
 - 排放量
   - CAMx為g/hour、CMAQ為g/s：需要除3600
 - 污染項目
@@ -101,7 +101,7 @@ for p in pth[ipth:ipth+1]:
 ```
 
 ## 按日拆分m3.nc檔案 
-- [brk_day2.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/)
+- [brk_day2.cs](/Focus-on-Air-Quality/utilities/netCDF/brk_day/)
 
 ```bash
 for yy in 18;do 

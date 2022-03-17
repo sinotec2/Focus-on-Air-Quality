@@ -54,7 +54,7 @@ last_modified_date:   2021-11-28 22:04:52
   - 以[WRFDA](https://ral.ucar.edu/solutions/products/wrfda)或其他模式合併觀測及模式  
 
 ## 內插程式說明
-見[計算網格點與CODiS測站間距離反比加權值](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/invDist/)
+見[計算網格點與CODiS測站間距離反比加權值](/Focus-on-Air-Quality/wind_models/CODiS/invDist/)
 
 ## 軌跡程式說明
 - 軌跡程式碼可以由[githup](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/traj2kml.py)下載，此處分段說明如下
@@ -184,7 +184,7 @@ last_modified_date:   2021-11-28 22:04:52
 - 主程式
   - 設定`Proj`座標轉換工具`pnyc`。因本次使用CODiS數據，還是以臺灣本島為主，因此主要還是使用`twd97`系統。
   - 設定網格數及測站數`nx`, `ny`, `ns`
-  - 讀取權重[計算](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/invDist/#內插程式說明)結果
+  - 讀取權重[計算](/Focus-on-Air-Quality/wind_models/CODiS/invDist/#內插程式說明)結果
   - 讀取環保署空品測站站名與編號對照表
   - 讀取並解析引數中的布林(`BACK`)與日期(`DATE`)，並計算起訖時間(`bdate`,`next_date`)。
   - 解析(`nam`)站名

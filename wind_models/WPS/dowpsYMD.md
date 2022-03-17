@@ -25,7 +25,7 @@ last_modified_date: 2021-12-21 22:23:21
 ## 背景
 - 這個版本一次只執行(`ungrib.exe`+`metgrid.exe`)一天，以因應短期模擬的需求。
 - `date`指令修改成`macOS`版本
-- 讀取海溫的[python](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#python)也改成一次讀取一天
+- 讀取海溫的[python](/Focus-on-Air-Quality/wind_models/SST/#python)也改成一次讀取一天
 
 ## WPS之單日執行方案
 
@@ -76,7 +76,7 @@ ln -sf $PATH1/ungrib/Variable_Tables/Vtable.GFS Vtable
 
 $PATH1/ungrib.exe
 ```
-- 讀取起訖日的[海溫](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/#python)
+- 讀取起訖日的[海溫](/Focus-on-Air-Quality/wind_models/SST/#python)
   - 執行`metgrid.exe`
 
 ```bash  
@@ -85,7 +85,7 @@ $PATH2/SST/transNC2inter.py 20$YN $MN $DN
 
 ./metgrid.exe
 ```
-- 儲存結果檔案備用([OBSGRID](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/))
+- 儲存結果檔案備用([OBSGRID](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/))
 
 ```bash
 mkdir -p $PATH1/$ym/met $PATH1/$ym/SST_FILE

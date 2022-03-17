@@ -57,7 +57,7 @@ PH=PHB[:,:,:,:]-PHBm[None,:,:,:]
     arr=np.zeros(shape=(len(idt),nrow,ncol))
     arr[:,:,:]=var[None,:,:]*rat*unit_SHIP[s]
 ```
-- [矩陣之降階](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/#矩陣之降階selection)(selection)
+- [矩陣之降階](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/#矩陣之降階selection)(selection)
   - source code:[github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)
 
 ```python

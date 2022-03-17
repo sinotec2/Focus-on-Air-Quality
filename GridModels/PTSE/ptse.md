@@ -25,7 +25,7 @@ last_modified_date:   2021-12-02 11:08:53
 ## 背景
 - CMAQ高空排放檔案與CAMx最大不同在於不隨時間改變的排放條件(HDTVXY)是另成一檔儲存。可能是為減少檔案的大小，然CMAQ此舉增加很多錯誤的機會。
   - 常數部分：以[pt_const.py](https://github.com/sinotec2/cmaq_relatives/blob/master/ptse/pt_const.py)轉接CAMx格式之REAS與TEDS點源數據
-  - 時間變化部分：以[pt_timvar.py]()，逐月轉換後再以[brk_day2.cs](/Focus-on-Air-Quality/utilities/netCDF/brk_day/)裁剪成逐日檔案
+  - 時間變化部分：以[pt_timvar.py]()，逐月轉換後再以[brk_day2.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/)裁剪成逐日檔案
 
 ## [pt_const.py](https://github.com/sinotec2/cmaq_relatives/blob/master/ptse/pt_const.py)
 
@@ -34,7 +34,7 @@ last_modified_date:   2021-12-02 11:08:53
 - 點源時變部分的模版
   - 參考USEPA提供的[標竿檔案包](https://gaftp.epa.gov/exposure/CMAQ/V5_3_2/Benchmark/CMAQv5.3.2_Benchmark_2Day_Input.tar.gz.list)
   - 其中的inln_mole_ptnonipm_20160701_12US1_cmaq_cb6_2016ff_16j.nc檔案做模版
-  - 由於每月運轉中的點源個數不同，因此每次須執行[ncks -d](/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度剪裁)指令，裁剪出正確長度的模版。
+  - 由於每月運轉中的點源個數不同，因此每次須執行[ncks -d](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度剪裁)指令，裁剪出正確長度的模版。
   - 下載須指定`--no-check-certificate `：
   ```bash
   wget--no-check-certificate  https://gaftp.epa.gov/exposure/CMAQ/V5_3_2/Benchmark/CMAQv5.3.2_Benchmark_2Day_Input.tar.gz

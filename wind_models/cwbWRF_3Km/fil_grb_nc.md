@@ -22,8 +22,8 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 ## 背景
-- [grb2wrfout_d04轉檔](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)針對台灣本島`d04`範圍進行空間內插。既然`grb2`檔案涵蓋範圍夠大，甚至比[geo_grid](/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#地形網格設定)所定義`d03`範圍還大，是否可以準備一樣大小、解析度、網格數的網格系統（`wrfout_d03_3Km`或`wrfout_d01_15Km`），來直接承接`grb2`的內容，而不需任何的內插？似為一較為合理的作法。
-- 如此的python程式，應為[rd_grbCubicA.py](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)的簡單版。
+- [grb2wrfout_d04轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)針對台灣本島`d04`範圍進行空間內插。既然`grb2`檔案涵蓋範圍夠大，甚至比[geo_grid](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/namelist.wps/#地形網格設定)所定義`d03`範圍還大，是否可以準備一樣大小、解析度、網格數的網格系統（`wrfout_d03_3Km`或`wrfout_d01_15Km`），來直接承接`grb2`的內容，而不需任何的內插？似為一較為合理的作法。
+- 如此的python程式，應為[rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)的簡單版。
 
 ## 自動轉檔排程
 - 在[get_M-A0064.cs](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/get_M-A0064.cs_txt)之中，有關轉檔的指令
@@ -41,7 +41,7 @@ last_modified_date:   2021-11-30 10:43:16
     28	
 ```
 
-## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)與[rd_grbCubicA.py](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)差異說明
+## [fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)與[rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/rd_grbCubicA/)差異說明
 
 ### 模版名稱的差異
 - 開啟模版

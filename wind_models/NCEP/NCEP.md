@@ -65,4 +65,4 @@ crontab -l|grep fus
 - PengboGai, **Mac OS X 执行osascript命令**, [jianshu](https://www.jianshu.com/p/d42dff738d70), 2018.07.18
 - akuox, **linux date 指令用法@ 老人最愛碎碎念:: 隨意窩Xuite日誌**, [Xuite](https://blog.xuite.net/akuox/linux/23200246-linux+date+%E6%8C%87%E4%BB%A4+%E7%94%A8%E6%B3%95), 2009-04-06
 - m157q, **Python 中讓 urllib 使用 cookie 的方法**, [blog.m157q](https://blog.m157q.tw/posts/2018/01/06/use-cookie-with-urllib-in-python/),07 January 2018
-- [Here](/jdt/doc/wind_models/NCEP/),2021-11-27 10:20:07
+- [Here](https://sinotec2.github.io/jdt/doc/wind_models/NCEP/),2021-11-27 10:20:07

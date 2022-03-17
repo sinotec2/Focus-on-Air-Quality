@@ -91,7 +91,7 @@ $ cat -n run_bconMM_RR_DM.csh
     30	 echo " "; echo " Input data path, CMAQ_DATA set to $CMAQ_DATA"; echo " "
     31	
 ```
-- 讀取引數：2碼月份、批次序(5\~12)、範圍編號(`d01`/`d02`/`d04`、無`d03`，詳[網格編號](/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
+- 讀取引數：2碼月份、批次序(5\~12)、範圍編號(`d01`/`d02`/`d04`、無`d03`，詳[網格編號](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))
   - `CAS`設定為**TEDS**編號，與年代有關，2019附近使用TEDS**11**
   - 
 
@@ -111,7 +111,7 @@ $ cat -n run_bconMM_RR_DM.csh
     40	 set VRSN     = v53                     #> Code Version
     41	 set APPL       = ${APYM}_run${RUN}
 ```
-- 水平網格的設定：網格編號、名稱及細節詳[網格系統詳細定義](/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)的設定
+- 水平網格的設定：網格編號、名稱及細節詳[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)的設定
 
 ```python
     42	#> Horizontal grid definition
@@ -240,7 +240,7 @@ $ cat -n run_bconMM_RR_DM.csh
 
 ### REGRID情況上層網格濃度檔案之準備
 #### `d01`情況
-- `d01`的上層網格即為`d00`，直接使用全球模式模擬結果，詳見[moz2cmaqH](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)。
+- `d01`的上層網格即為`d00`，直接使用全球模式模擬結果，詳見[moz2cmaqH](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)。
 
 ```python
    131	    if ( $DM == 'd01' ) then
@@ -262,7 +262,7 @@ $ cat -n run_bconMM_RR_DM.csh
    138	
 ```
 - 會需要比正常天數多一個小時，所以天數要多一天。
-  - 可以用[pr_tflag.py](/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)`確認`nc`檔案的`TFLAG`內容。
+  - 可以用[pr_tflag.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)`確認`nc`檔案的`TFLAG`內容。
    - 先將檔案重新以較單純的檔名命名
 
 ```python

@@ -49,9 +49,9 @@ end
 ### 基本定義
 - 引數、網格系統、資料與家目錄
    - 為了讓同一個腳本應用在不同月份、不同**批序**(批次序號)、不同模擬範圍，讓腳本可以更換執行的條件。
-   - `APPL`個案應用標籤：加上**批序**會更方便與[WRF](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)對照。
+   - `APPL`個案應用標籤：加上**批序**會更方便與[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)對照。
    - 此處沒有`d03`的選項，因為`d02`已經足夠產生`d04`的邊界條件。
-   - 網格系統名稱、編號與細節見[網格系統詳細定義](/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)
+   - 網格系統名稱、編號與細節見[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)
 
 ```python
 kuang@114-32-164-198 /Users/cmaqruns/2016base/old_scripts
@@ -107,7 +107,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > set ProgDir    = $CMAQ_HOME/PREP/mcip/src
 ```
 - `wrfout`之連結引用
-   - 此處沒有使用`wrfout`的全名，而是在`bash`腳本中執行連結(see [ln_YYMM.cs](/Focus-on-Air-Quality/GridModels/MCIP/ln_YYMM/#ln_yymmcs腳本))，因為全月的**WRF**模擬主要是以`bash`腳本控制，有較多的範本可以引用。
+   - 此處沒有使用`wrfout`的全名，而是在`bash`腳本中執行連結(see [ln_YYMM.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/ln_YYMM/#ln_yymmcs腳本))，因為全月的**WRF**模擬主要是以`bash`腳本控制，有較多的範本可以引用。
    - 使用連結還有一個好處，可以對日期較為自由(事實上`bcon`會比WRF批次多要求**向後**1個小時、`mcip`則會要求**向前**1個小時。)。
 
 ```python
@@ -170,7 +170,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 
 ### 網格系統詳細定義
 - 各層網格系統的起始位置、網格數
-   - 為WRF各[子網格系統](/Focus-on-Air-Quality/wind_models/WPS/geogrid/))內縮之結果
+   - 為WRF各[子網格系統](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/))內縮之結果
    - d00選項為產生最外層邊界濃度時所需用，或為單獨網格系統使用。
    - 名稱定義詳對照表
 
@@ -271,7 +271,7 @@ $ diff mac_mcipMM_RR_DM.csh run_mcipMM_RR_DM.csh
 
 ### mcip轉檔結果的確認
 - `mcip`的結果都是`m3.nc`格式檔案，可以用[VERDI](ttps://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或[MeteoInfo]((http://meteothink.org/))開啟
-- 使用[pr_tflag.py](/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)亦能快速檢查結果檔案的時間標籤
+- 使用[pr_tflag.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)亦能快速檢查結果檔案的時間標籤
 
 ## 腳本下載
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/mcip/run_mcipMM_RR_DM.csh)

@@ -69,7 +69,7 @@ last_modified_date:   2021-12-28 10:20:38
 
 ### 程式I/O檔案
 - dust*YYMM*.mc
-  - 從逐日個別`wrfout`檔案中切出第1層、取出Times,DUST_1\~5等變數之結果檔。過程詳程式#說明，使用[ncks](/Focus-on-Air-Quality/utilities/netCDF/ncks/)及[ncrcat]()。
+  - 從逐日個別`wrfout`檔案中切出第1層、取出Times,DUST_1\~5等變數之結果檔。過程詳程式#說明，使用[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)及[ncrcat]()。
   - 由於模擬結果檔案很大，無法直接進入[VERDI]()，必須加以裁切。
 - dust.nc
   - 整個模擬期間所有日期的合併檔，為一模版，其值會被覆蓋。
@@ -81,7 +81,7 @@ last_modified_date:   2021-12-28 10:20:38
   - 加總後可以用[VERDI]()開啟、繪圖。
 - 北臺灣測點時間序列之讀取
   - `IX,IY`為[VERDI]()圖面上讀取結果，因此換到python上時須**減1**。
-  - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成(`decode`)字元，串成(`join`)字串，再讀成`datetime`，轉成所要的格式。詳情見[WRF的時間標籤](/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)之說明
+  - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成(`decode`)字元，串成(`join`)字串，再讀成`datetime`，轉成所要的格式。詳情見[WRF的時間標籤](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)之說明
   - `csv`檔案可以用Excel等軟體繪製[時間序列圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
 
 ```python

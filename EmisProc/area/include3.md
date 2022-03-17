@@ -26,7 +26,7 @@ last_modified_date:   2021-12-01 14:16:46
   - 時間變異係數(`csv`)檔案前處理
   - `csv`檔案之產生
   - 將`csv`檔案應用到面源排放量資料庫，並展開至全年逐時之序列，存成`nc_fac.json`。
-- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](/jFocus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)與[重新計算網格座標](/Focus-on-Air-Quality/EmisProc/area/prep_areagridLL/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](https://sinotec2.github.io/jFocus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)與[重新計算網格座標](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/prep_areagridLL/)，為此處之前處理。  
 
 ## 程式說明
 

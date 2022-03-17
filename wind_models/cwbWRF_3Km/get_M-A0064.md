@@ -23,7 +23,7 @@ last_modified_date:   2021-11-30 10:43:16
 ---
 
 ## 背景
-- 續[樓上](/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)的討論，此處進一步說明下載細節。
+- 續[樓上](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)的討論，此處進一步說明下載細節。
 - 目前為止CWB是要求會員登錄的，登入後方能瀏覽檔案網址，經網址定位與確認後，實際自動下載時(如用`wget`)反而不必帳密。
   - 其會員帳號為電子郵件、密碼須包括大小寫、數字、特殊字元（`shift 1～0`）
 - 檔案網址的資訊，寫在`xml`檔案內容內，範例如下：

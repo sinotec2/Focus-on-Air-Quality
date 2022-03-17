@@ -30,15 +30,15 @@ last_modified_date:   2021-11-28 20:30:22
 ## REAL 之全月執行方案
 
 ### 各月份12個批次`met_em`之預備
-- 詳見[WPS](/Focus-on-Air-Quality/wind_models/WPS/)之運作。
+- 詳見[WPS](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/)之運作。
 
 ### 各月份12個批次`wrfsfdda`, `OBS_DOMAIN`, `wrfsfdda`之預備
-- 詳見[OBSGRID](/Focus-on-Air-Quality/wind_models/OBSGRID/)之運作。
+- 詳見[OBSGRID](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/)之運作。
 
 ### `namelist.input`模版
 - 因為每批次、每層網格的`namelist.oa`都有所不同，必須按照規則進行修改，此處以複製模版、局部置換的方式辦理。
 - 置換的方式採用linux [sed](https://terryl.in/zh/linux-sed-command/)指令
-- 模版詳見[namelist.input](/Focus-on-Air-Quality/wind_models/REAL/namelist.input/)說明
+- 模版詳見[namelist.input](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/namelist.input/)說明
 
 ### `doreal_4Nests.sh`的執行
 - 開啟12個月份的專屬目錄（YYYY01~YYYY12），其下再開啟12個批次run1~run12,共144個批次同時進行。
@@ -73,7 +73,7 @@ done
     - 每批次執行**5天**(1天重疊)
   - 創建批次工作目錄
   - 連結執行`real.exe`, `wrf.exe`等所需的執行檔、參數條件檔案（`$PATH1/run/*`）
-  - 下到批次目錄、連結[OBSGRID](/Focus-on-Air-Quality/wind_models/OBSGRID/)對應結果
+  - 下到批次目錄、連結[OBSGRID](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/)對應結果
 ```bash
      7	for j in {1..12};do
      8	  dd=`echo "4*($j-1)"|bc -l`
@@ -125,7 +125,7 @@ $ ps
 98383 ttys001    0:00.05 -bash
  2488 ttys002    0:00.17 ./real.exe
 ```
-- 簡單的`tmux`6個基本指令亦可參考[FAQ](/Focus-on-Air-Quality/utilities/OperationSystem/tmux/#%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4)
+- 簡單的`tmux`6個基本指令亦可參考[FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/tmux/#%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4)
 
 ## 下載`doreal_4Nests.sh`
 點選[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/REAL/doreal_4Nests.sh_txt)

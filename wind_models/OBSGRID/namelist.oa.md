@@ -46,7 +46,7 @@ last_modified_date:   2021-11-27 22:32:45
     12
 ```
 - 執行之網格編號、第幾層網格`GID`=1~4
-- little_r檔案的目錄，final檔的準備詳見[bsYYMM_run.sh](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#final之預備)。
+- little_r檔案的目錄，final檔的準備詳見[bsYYMM_run.sh](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#final之預備)。
 ```bash    	
     13	&record2
     14	 grid_id                     = GID

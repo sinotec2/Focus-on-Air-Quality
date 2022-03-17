@@ -22,9 +22,9 @@ last_modified_date:   2021-12-16 11:34:05
 ---
 
 ## 背景
-- [全球模式模擬結果](/Focus-on-Air-Quality/AQana/GAQuality)是以逐6小時儲存，不但檔案很大，難以管理，也不能同步處理，耗費處理的時間。
+- [全球模式模擬結果](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality)是以逐6小時儲存，不但檔案很大，難以管理，也不能同步處理，耗費處理的時間。
 - 因此需要有一個程式按其時間進行拆解，拆解前需要準備好各結果檔案的模版。此為本程式的目的。
-- 拆解後全球模擬結果之[水平的內插](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)、空品項目的對照等程序，便可按個別檔案同時進行，最後再以`ncrcat`、按批次需要的日期予以整併即可。
+- 拆解後全球模擬結果之[水平的內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)、空品項目的對照等程序，便可按個別檔案同時進行，最後再以`ncrcat`、按批次需要的日期予以整併即可。
 
 ## 程式說明
 
@@ -34,7 +34,7 @@ last_modified_date:   2021-12-16 11:34:05
 - 年月(4碼)
 
 #### 輸入檔
-1. 全球模式模擬結果全月檔案(經`ncrcat`及[垂直內插](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)處理)
+1. 全球模式模擬結果全月檔案(經`ncrcat`及[垂直內插](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)處理)
  - 檔名規則：`'moz_41_20'+yrmn+'.nc'`
  - 只讀取時間標籤
 2. D1範圍**CMAQ**濃度檔模版：`ICON_tmp.d1`
@@ -75,7 +75,7 @@ if (len(sys.argv) != 2):
   print ('usage: '+sys.argv[0]+' YYMM(1601)')
 yrmn=sys.argv[1]
 ```
-- 程式會使用到系統的[ncks](/Focus-on-Air-Quality/utilities/netCDF/ncks/)、`ncatted` 2支程式
+- 程式會使用到系統的[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)、`ncatted` 2支程式
 
 ```python
 ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
@@ -112,5 +112,5 @@ for j in range(nt):
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/gen_templateD1.py)
 
 ### Reference
-- sinotec2, **NCKS 在空品模式中的應用**, [FAQ](/Focus-on-Air-Quality/utilities/netCDF/ncks/), Dec 10 2021
-- sinotec2, **MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照**, [FAQ](/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/), Dec 15 2021
+- sinotec2, **NCKS 在空品模式中的應用**, [FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/), Dec 10 2021
+- sinotec2, **MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照**, [FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/), Dec 15 2021

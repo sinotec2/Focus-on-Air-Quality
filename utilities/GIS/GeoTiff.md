@@ -66,17 +66,17 @@ new_dataset.write(data, 1) #寫出數據
 new_dataset.close() #關閉檔案
 ```
 
-### [tif2df](/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)
+### [tif2df](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)
 - 此一應用的情況是因為檔案切割成約10.5公里見方的250m高解析度tiff檔，須同步進行轉換方符合效益。
 - 轉成(無檔頭)csv檔之後，以cat合併成完整檔案進行解讀與轉換。
 
-### [tif2nc](/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)
-- 應用在全球250M解析度之tiff檔[解讀](/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)，採**平均**方式合併，然因記憶體需求較大，須先進行範圍切割。
-- 解析度較低(1~10Km)之[應用](/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)，採**加總**方式進行合併。
+### [tif2nc](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)
+- 應用在全球250M解析度之tiff檔[解讀](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)，採**平均**方式合併，然因記憶體需求較大，須先進行範圍切割。
+- 解析度較低(1~10Km)之[應用](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)，採**加總**方式進行合併。
 
 ### [tif2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/tif2kml.py)
 - 顧名思義，此程式將tiff檔轉成kml檔案，便於檢視等值圖。
-- 呼叫[cntr_kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/cntr_kml.py)，詳見[等值線之KML檔](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
+- 呼叫[cntr_kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/cntr_kml.py)，詳見[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
 - 引數：tiff檔的名稱(TIF)
 - 結果：TIF.kml
 - 如果邊界的平均值正好是中心點的經緯度，判定座標系統是經緯度系統，否則設定是twd系統

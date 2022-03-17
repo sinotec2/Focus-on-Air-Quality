@@ -156,5 +156,5 @@ for d in range(5,9):
 - discussion on **RTG SST Product Discontinued, Replacements[issue #1159](https://github.com/wrf-model/WRF/issues/1159)**, 8 Apr 2020
 - [WPS-ghrsst-to-intermediate](https://github.com/bbrashers/WPS-ghrsst-to-intermediate)
 - [pywinter](https://pywinter.readthedocs.io/en/latest)
-- [Here](/jdt/doc/SST.md)
+- [Here](https://sinotec2.github.io/jdt/doc/SST.md)
 ---

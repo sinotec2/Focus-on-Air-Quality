@@ -10,7 +10,7 @@ last_modified_date:   2021-12-01 11:24:33
 # TEDS排放處理相關程式
 
 除了準備光化模式所需要的排放檔案，此處也介紹排放數據的展示、檢視等等經驗。
-- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。臺灣地區以外的東亞範圍，此處以[REAS](https://www.nies.go.jp/REAS/)資料庫為分析對象，另見[隔壁](/Focus-on-Air-Quality/REASProc/)。
+- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。臺灣地區以外的東亞範圍，此處以[REAS](https://www.nies.go.jp/REAS/)資料庫為分析對象，另見[隔壁](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/)。
 - 程式以2018年以來持續發展之`python`平行處理程式為主。
 
 ## 背景
@@ -18,7 +18,7 @@ last_modified_date:   2021-12-01 11:24:33
 ### 相依性處理策略原則及目標
 由於環保署提供數據僅有年度總量，並非光化模式所需之逐時數據，因此須考慮各細類污染源的時間特性，而該特性也有行政區的空間性質，因此資料庫維度之間有著非常高的相依性，需逐一展開。
 - 考慮因素：電腦記憶體限制。如果資料太長(全年處理)將會使電腦停擺無法計算。
-- 計算效率：應用矩陣將可啟動[平行計算](/Focus-on-Air-Quality/EmsProc/#numpyscipy的平行運作)減少計算時間，資料越長越省事
+- 計算效率：應用矩陣將可啟動[平行計算](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#numpyscipy的平行運作)減少計算時間，資料越長越省事
 - 檔案儲存：減少檔案存取的次數及規模。此處以**一月儲存一檔**為原則(直接適用CAMx模式)。
 
 ### 解決方案比較
@@ -31,8 +31,8 @@ last_modified_date:   2021-12-01 11:24:33
   - `fortran`無法直接讀取`dbf`檔案，只能讀取`sdf`檔案，[TEDS11](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)以後環保署不再提供詳細面源資料庫之`sdf`檔案格式，`sdf`只有網格加總結果。還是需要轉檔。
 
 ## 處理程序總綱
-- 資料庫[轉檔](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，`dbf` to `csv`。
-- 應用[資料表與矩陣的互換](/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#資料表與矩陣的互換)工具，整理全年時間變化係數(**時變係數**)矩陣、存檔備用。
+- 資料庫[轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，`dbf` to `csv`。
+- 應用[資料表與矩陣的互換](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#資料表與矩陣的互換)工具，整理全年時間變化係數(**時變係數**)矩陣、存檔備用。
 - 讀取排放總量檔案、污染項目之彙總、展開形成**總量**`TPY[nSP, nCNTY,nNSC, nYX]`矩陣
 - 時間之展開：**總量**`X`**時間係數**(`numpy.tensordot`)
 - 空間之整併：按照模式的網格系統進行**加總**(`pandas.pivot_table`)

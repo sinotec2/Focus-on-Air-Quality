@@ -38,7 +38,7 @@ last_modified_date: 2021-12-28 14:33:40
 - 在[VERDI]()內打開`geo_em.d01.nc`檔案，進行確認。
 
 ## met_em檔案之準備
-- 與一般`ungrib`、`metgrid`的過程沒有差別，見[dowps.sh的執行](/Focus-on-Air-Quality/wind_models/WPS/dowps.cs/#dowpssh%E7%9A%84%E5%9F%B7%E8%A1%8C)
+- 與一般`ungrib`、`metgrid`的過程沒有差別，見[dowps.sh的執行](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/dowps.cs/#dowpssh%E7%9A%84%E5%9F%B7%E8%A1%8C)
 
 ## fdda相關檔案之準備
 - fdda可以避免程式發散，造成揚沙現象的高估
@@ -47,7 +47,7 @@ last_modified_date: 2021-12-28 14:33:40
   - 手動以[ncatted]()修改
   - WRF4.3的協定是`TITLE = "OUTPUT FROM OBSGRID V4"`
   - WRF-chem4的協定是`TITLE = "OUTPUT FROM OBSGRID V4."`，多了句點。
-- 其餘程序與[傳統作法](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/)一樣。  
+- 其餘程序與[傳統作法](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/)一樣。  
 
 ## 結果檢視
 - `EROD`變數的第1軸不是一般的垂直維度(`z-dimension0003`)，因此[VERDI]()無法順利讀取。

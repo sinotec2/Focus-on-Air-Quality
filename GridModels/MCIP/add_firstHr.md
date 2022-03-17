@@ -34,7 +34,7 @@ last_modified_date:   2021-12-19 21:21:33
 - 對那些沒有時間序列的檔案
   - 直接將起算時間更改為0時(00Z),執行`add_firstHr.py`
 - 具有時間維度的檔案
-  - 先用[ncks](/Focus-on-Air-Quality/utilities/netCDF/ncks/)切割出第一小時(01Z)的片段檔案
+  - 先用[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)切割出第一小時(01Z)的片段檔案
   - 將片段時間更改為0時(00Z)
   - 用`ncrcat`將檔案按照時間連起來，覆蓋原來檔案
 

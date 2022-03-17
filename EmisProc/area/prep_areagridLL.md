@@ -27,7 +27,7 @@ last_modified_date:   2021-12-01 14:16:46
     - 如外島、船舶、重要PM排放源等。
   - 因二度分帶`twd97`系統無法應用在外島，須重新由經緯度計算
   - 資料筆數較多，每次執行主程式須重新計算，太浪費時間。
-- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](/Focus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，亦為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，亦為此處之前處理。  
 
 ### 程式說明
 - 使用[pyproj](https://pyproj4.github.io/pyproj/stable/)進行座標系統的轉換

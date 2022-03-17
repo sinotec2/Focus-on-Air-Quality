@@ -26,12 +26,12 @@ last_modified_date:   2021-12-01 14:16:46
   - 時間變異係數(`csv`)檔案前處理
   - `csv`檔案之產生
   - 將`csv`檔案應用到面源排放量資料庫，並展開至全年逐時之序列，存成`nc_fac.json`。
-- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](/Focus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)與[重新計算網格座標](/Focus-on-Air-Quality/EmisProc/area/prep_areagridLL/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[面源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)與[重新計算網格座標](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/prep_areagridLL/)，為此處之前處理。  
 
 ## 程式說明
 
 ### 引用模組
-- `include2`, `include2`, `mostfreqword`詳見[面源計算用到的副程式](/Focus-on-Air-Quality/EmisProc/area/include3/)
+- `include2`, `include2`, `mostfreqword`詳見[面源計算用到的副程式](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/include3/)
 
 ```python
 kuang@114-32-164-198 /Users/TEDS/teds10_camx/HourlyWeighted/area
@@ -303,7 +303,7 @@ $ cat -n area_YYMMinc.py
    200	fac=fac[:,:,ib:ib+ntm] #clean_up of mem
    201	
 ```
-- 採用[np.tensordot](/Focus-on-Air-Quality/EmisProc/area/#whats-learned)矩陣內積，消除中間的2個維度(`nsc2`, `cnty`)，成為單純的(物種、空間、時間)3維度矩陣
+- 採用[np.tensordot](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/#whats-learned)矩陣內積，消除中間的2個維度(`nsc2`, `cnty`)，成為單純的(物種、空間、時間)3維度矩陣
 
 ```python
    202	#eliminate the nsc2 and CNTY dimensions (multiply-and-sum by tensordot)

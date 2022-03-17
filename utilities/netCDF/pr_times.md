@@ -22,8 +22,8 @@ last_modified_date: 2021-12-30 12:34:29
 - 雖然wrf系統相關檔案也都是nc檔，但與m3.nc有很大的出入，無法套用，須另外撰寫讀取程式。
 - wrf系統執行同樣對檔案的時間標籤非常敏感，這也是wrf系統會把檔案內容的時間寫成檔名的理由。
   - 但畢竟檔名只能記過檔案的起始時間，對間距、最終時間等等內容，還是需要另外讀取。
-  - wrf檔案的時間標籤、轉換的方式，請參考[WRF的時間標籤](/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)。
-- 此處仿照m3.nc的[pr_tflag.py](/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)使用簡單的`python`程式，將wrf相關檔案的`Times`打印至螢幕以供檢查。
+  - wrf檔案的時間標籤、轉換的方式，請參考[WRF的時間標籤](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)。
+- 此處仿照m3.nc的[pr_tflag.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)使用簡單的`python`程式，將wrf相關檔案的`Times`打印至螢幕以供檢查。
 
 ## 程式使用 
 - `python pr_times.py wrf_file_name`

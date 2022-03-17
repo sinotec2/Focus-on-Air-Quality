@@ -24,7 +24,7 @@ last_modified_date: 2022-02-12 19:52:38
 - 除了可以使用SURFER等軟體進行等值圖的繪製之外，此處將PLOTFILE轉成KML檔案，以運用快速便捷的網路地圖貼圖功能。
   - 使用[legacycontour._cntr](https://github.com/matplotlib/legacycontour)模組
   - 安裝：可動態連結github，或下載完整原始碼再`python setup.py install`
-  - KML檔案之寫出，可以參考[等值圖KML檔之撰寫](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
+  - KML檔案之寫出，可以參考[等值圖KML檔之撰寫](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
 
 ## 讀取PLOTFILE
 ### [PLT2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/OU_pathways/PLT2kml.py)之執行
@@ -108,8 +108,8 @@ grid_z2 = griddata(points, c, (x_g, y_g), method='linear')
 ```
 
 ### 等值線圖繪製
-- 呼叫[cntr_kml.py](/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)
-- 參考[等值線之KML檔](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
+- 呼叫[cntr_kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/cntr_kml.py)
+- 參考[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
 
 ## [PLT2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/OU_pathways/PLT2kml.py)下載
 - [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/OU_pathways/PLT2kml.py)  

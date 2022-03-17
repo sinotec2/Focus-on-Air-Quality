@@ -34,8 +34,8 @@ last_modified_date:   2021-12-11 20:06:24
   - 新增點源：`原3公里網格 - 臨近9格平均值`
   - 面源修正為：`臨近9格平均值`
 - 船舶總排放量之CAMx格式檔案：由[area_YYMM_NSC.py](https://github.com/sinotec2/TEDS_ship/blob/main/area_YYMM_NSC.py)產生
-- 船舶面源～點源處理考量的理由：[船舶排放之處理](/Focus-on-Air-Quality/EmisProc/ship)
-- [CAMx高空點源排放檔案之轉寫](/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)及[wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)
+- 船舶面源～點源處理考量的理由：[船舶排放之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship)
+- [CAMx高空點源排放檔案之轉寫](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)及[wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)
 
 
 ## 程式執行
@@ -116,8 +116,8 @@ last_modified_date:   2021-12-11 20:06:24
 ## Reference
 - 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1
 - 信德海事, **世界上最大的那 8 艘超級貨櫃船！**, [每日頭條](https://kknews.cc/news/boq3xeo.html), 2017-05-22
-- [Focus-on-Air-Quality](/Focus-on-Air-Quality/)
-  - [船舶排放之處理](/Focus-on-Air-Quality/EmisProc/ship)
-  - [特定面源類別之CAMx排放檔](/Focus-on-Air-Quality/EmisProc/ship/area_YYMM_NSC/)
-  - [CAMx高空點源排放檔案之轉寫](/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)
+- [Focus-on-Air-Quality](https://sinotec2.github.io/Focus-on-Air-Quality/)
+  - [船舶排放之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship)
+  - [特定面源類別之CAMx排放檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/area_YYMM_NSC/)
+  - [CAMx高空點源排放檔案之轉寫](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)
   - [wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)

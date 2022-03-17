@@ -28,7 +28,7 @@ last_modified_date:   2021-11-26 19:47:53
 - 不過FNL沒有提供自動切割的界面，如果要下載全球0.25度的數據，檔案會非常大，要注意頻寬與磁碟空間。
 
 ## 批次執行與自動執行
-詳見[樓上](/Focus-on-Air-Quality/wind_models/NCEP/)。
+詳見[樓上](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/)。
 
 ## 程式分段說明
 - 使用py27、有較高的穩定性、避免更新可能造成的錯誤。

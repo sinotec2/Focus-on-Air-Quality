@@ -23,7 +23,7 @@ last_modified_date:   2021-12-02 11:08:53
 
 ## 背景
 - 由環保署移動源檔案讀取資料庫**索引維度**，排放量則改寫成矩陣形式。
-- 排放量整體處理原則參見[處理程序總綱](/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[交通源之處理](/Focus-on-Air-Quality/EmisProc/line/)及[龐大`.dbf`檔案之讀取](/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
+- 排放量整體處理原則參見[處理程序總綱](https://sinotec2.github.io/Focus-on-Air-Quality/EmsProc/#處理程序總綱)、針對[交通源之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/)及[龐大`.dbf`檔案之讀取](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/)，為此處之前處理。  
 
 ## 程式分段說明
 

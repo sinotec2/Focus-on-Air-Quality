@@ -58,7 +58,7 @@ def dt2jul(dt):
 ```
 - `SPECs`及`PARTs`是再分析模式的空氣品質項目名稱，常用名稱如下
   - 名稱的來源除了在[eac4勾選](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=form)網址之外，也可以在[CAMS: Reanalysis data documentation](https://confluence.ecmwf.int/display/CKB/CAMS%3A+Reanalysis+data+documentation)內找到全部列表與說明。
-  - 這些名稱與**CMAQ-cb6r3_ae7_aq**之對照詳[grb2D1m3RHO.py](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
+  - 這些名稱與**CMAQ-cb6r3_ae7_aq**之對照詳[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
 
 ```python
 SPECs =['carbon_monoxide', 'ethane', 'formaldehyde', 'isoprene', 'nitrogen_dioxide', 'nitrogen_monoxide', 'propane', 'sulphur_dioxide' ]
@@ -73,8 +73,8 @@ PARTs =[
 ```
 - 按照空品項目、年代、月份「依序」下載
   - 「不建議」同時、多線下載。系統可能會視為機器人攻擊。
-  - 以前月15日後的16日([run5](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9))0時起算，到[run12](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)最末日21時結束
-  - 符合[WRF批次定義](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)的考量是因為CMAQ的BCON檔案會跟隨此一定義批次的起迄時間，而此處下載空品數據正是為形成或補充該BCON檔案的內容。
+  - 以前月15日後的16日([run5](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9))0時起算，到[run12](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)最末日21時結束
+  - 符合[WRF批次定義](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)的考量是因為CMAQ的BCON檔案會跟隨此一定義批次的起迄時間，而此處下載空品數據正是為形成或補充該BCON檔案的內容。
 
 ```python
 iyr=2019
@@ -145,7 +145,7 @@ done
 
 ### 橫向合併
 - 這項作業是將同一月份的27個分項檔案，按照相同的時間、空間軸整併成一個檔案。
-- 做法：先用[ncks -v](/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E8%AE%8A%E6%95%B8variable)取出空品濃度的矩陣，再使用[ncks -A](/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7global-attribute)逐一附加即可。
+- 做法：先用[ncks -v](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E8%AE%8A%E6%95%B8variable)取出空品濃度的矩陣，再使用[ncks -A](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7global-attribute)逐一附加即可。
 
 ```bash
 y=$(n=$(( ${#PWD} - 1 ));echo $PWD|cut -c${n}-)
@@ -173,7 +173,7 @@ for nc in $(ls *_1901.nc);do
   echo \"${var}\":\"${spec}\",
 done
 ```
-- 結果如下，將會用在[grb2D1m3RHO.py](/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
+- 結果如下，將會用在[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
 
 ```json
 {

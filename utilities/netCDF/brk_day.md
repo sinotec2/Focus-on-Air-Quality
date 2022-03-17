@@ -42,7 +42,7 @@ last_modified_date: 2021-12-18 20:50:01
 - 腳本會在數據所在位置下開設yymm的目錄。
 
 ### 日期的計算
-* 按照**WRF**執行[批次的約定](/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)，前月15日為起始日，run5為當月CCTM執行開始日
+* 按照**WRF**執行[批次的約定](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)，前月15日為起始日，run5為當月CCTM執行開始日
 * 將檔案內容所有時間都予以拆分，總小時數由`ncdump`得知
 * 每一天筆數`HRPD` ：24小時與`TSTEP`的商數，`TSTEP`由`ncdump`得知
 * 還要修正逐日檔的`SDATE`屬性(`yrj`)，CCTM會檢查

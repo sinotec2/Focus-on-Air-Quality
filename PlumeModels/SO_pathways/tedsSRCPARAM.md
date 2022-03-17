@@ -21,15 +21,15 @@ last_modified_date: 2022-03-15 10:46:51
 
 ## 背景
 - 雖然ISC/AERMOD的設計是為新污染源的審核程序(New Source Review、我國的許可制度)，然而污染排放條件的設定，如果有背景其他既有污染源的參照，會減少很多嘗試錯誤的機會。
-  - 例如在網格模式點源排放前處理過程中的[品管程式](/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#確認資料庫的正確性)
+  - 例如在網格模式點源排放前處理過程中的[品管程式](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/#確認資料庫的正確性)
 - 除了數據品質的考量之外，背景污染源會不會造成環境的污染，也是值得公眾關切、測試、檢討的環保課題。
-- 此處針對行政院環保署對外提供的TEDS(Taiwan Emission Data Set)數據庫，將其煙道數據予以轉檔、貼在[uMap](/Focus-on-Air-Quality/utilities/GIS/UMAP/)上，除方便查詢、也可做為煙流模式模擬的準備。
+- 此處針對行政院環保署對外提供的TEDS(Taiwan Emission Data Set)數據庫，將其煙道數據予以轉檔、貼在[uMap](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/UMAP/)上，除方便查詢、也可做為煙流模式模擬的準備。
 - 煙流模式所需煙道數據項目(*傾斜字體*表示使用者給定數據，其餘為KEYWORDS)：
   - SO LOCATION *CP_NO* POINT *TWD97-X* *TWD97-Y* *elevation*  
   - SO SRCPARAM *CP_NO* POINT *EM* *HGT* *TMP* *DIA* *VEL*
 - 由於TEDS資料庫中絕大多數工廠只有一筆座標數據，但可能有許多座煙囪(`CP_NO=C_NO+NO_S`)，此處即以工廠(C_NO)為單位進行貼圖，彙整所有煙道數據在同一表單中。
 
-## [uMap](/Focus-on-Air-Quality/utilities/GIS/UMAP/)成果
+## [uMap](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/UMAP/)成果
 - TEDS 點源位置及煙囪條件
   - [teds10](https://umap.openstreetmap.fr/zh/map/teds10-point-data-pm25_594438#7/24.062/120.822)
   - [teds11](https://umap.openstreetmap.fr/zh/map/teds11-point-data-pm25_728979#8/24.172/120.086)

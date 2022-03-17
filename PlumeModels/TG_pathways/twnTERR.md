@@ -46,7 +46,7 @@ while read STR; do
   done
 done < a.txt
 ```
-- 詳見[sub](/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#sub)及[psg](/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#psg)OS之小工具內容
+- 詳見[sub](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#sub)及[psg](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#psg)OS之小工具內容
 
 ### 逐行提供引數的方式
 - 由於bash腳本內的環境變數，以命令列伺入python程式時無法正確傳遞其內容(含空格)，必須尋求其他方式。
@@ -96,7 +96,7 @@ pathIJ,centIJ,dx,dy,inp,nx,ny,path,x0,y0
 
 ## KML之輸出
 - 為利結果之空間檢索，需將aermap作業之輸入、輸出與後處理成果（**作業包下載點鏈結網址**），賦予經緯度座標，貼在地圖上。
-- 此處先將前述結果寫成csv檔案，再使用[csv2kml.py](/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy)將其寫成kml檔案。
+- 此處先將前述結果寫成csv檔案，再使用[csv2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy)將其寫成kml檔案。
 - 除了點狀資訊外，為使aermap模擬範圍可以呈現在圖面上，另外產生以點源為中心、模擬範圍的多邊形KML檔，貼在uMap圖層，方便快速掌握資料檔案的範圍。
 
 ### mk_kml.py
@@ -106,14 +106,14 @@ pathIJ,centIJ,dx,dy,inp,nx,ny,path,x0,y0
 
 #### terrTWN_1X1.csv之產生與後處理
 - 讓df.desc的內容就是該點aermap作業結果的網址鏈結，這樣在uMap上點選有興趣的點，則會出現該點源周邊aermap**作業包**的下載點。
-- 產出後隨即呼叫[csv2kml.py](/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy)
+- 產出後隨即呼叫[csv2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy)
   - 檔案選項-f後輸入csv檔名
   - 點狀選項-n，不論選N/H/R/B/D都會一樣，因為這些差異只在Google Map上有作用。uMap上的形狀顏色是另外設定的，不跟著KML內容走。
 
 #### 陪襯4邊形的產生與輸出
 - 以模擬範圍（RE XYINC格式順序）的西南角座標開始，畫出模擬範圍的四邊形，輸出格點座標成為csv檔案
 - 多邊形在uMap中可以選擇顏色、填滿與否、線條粗細、透明度等等。
-- 呼叫[csv2kml.py](/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy):
+- 呼叫[csv2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy):
   -n 選項選擇**P**，輸出多邊形之KML。
 
 | ![twnTERR.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/twnTERR.png)|

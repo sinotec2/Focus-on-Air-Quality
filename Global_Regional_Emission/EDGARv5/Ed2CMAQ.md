@@ -23,9 +23,9 @@ last_modified_date: 2022-02-25 15:04:52
 ---
 
 ## 背景
-- 當3公里解析度模擬範圍擴大到境外，就會需要較高解析度的境外排放數據。[REAS](/Focus-on-Air-Quality/REASnFMI/REAS/reas_download/)與其他全球排放數據傳統上大多以0.25度為合理的解析度，然在臺灣附近，約為25~27Km，與3Km差異頗大的。
-- [Ding et al(2017)](https://acp.copernicus.org/articles/17/10125/2017/acp-17-10125-2017.html)比較了9種排放清冊，從其中可以發現由bottom-up方式的推估成果並不多，除了[REAS](/Focus-on-Air-Quality/REASnFMI/REAS/reas_download/)之外以[EDGAR (Emissions Database for Global Atmospheric Research)](https://edgar.jrc.ec.europa.eu/)較為活躍，其餘如[MEIC (Multi-resolution Emission Inventory for China)](http://meicmodel.org/)受到該國的管制並不公開提供。
-- [EDGAR](https://edgar.jrc.ec.europa.eu/)污染項目雖然不多(9樣，詳批次檔)，也沒有點源詳細數據，然而其0.1度解析度確實較[REAS](/Focus-on-Air-Quality/REASnFMI/REAS/reas_download/)更加符合需要。
+- 當3公里解析度模擬範圍擴大到境外，就會需要較高解析度的境外排放數據。[REAS](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/reas_download/)與其他全球排放數據傳統上大多以0.25度為合理的解析度，然在臺灣附近，約為25~27Km，與3Km差異頗大的。
+- [Ding et al(2017)](https://acp.copernicus.org/articles/17/10125/2017/acp-17-10125-2017.html)比較了9種排放清冊，從其中可以發現由bottom-up方式的推估成果並不多，除了[REAS](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/reas_download/)之外以[EDGAR (Emissions Database for Global Atmospheric Research)](https://edgar.jrc.ec.europa.eu/)較為活躍，其餘如[MEIC (Multi-resolution Emission Inventory for China)](http://meicmodel.org/)受到該國的管制並不公開提供。
+- [EDGAR](https://edgar.jrc.ec.europa.eu/)污染項目雖然不多(9樣，詳批次檔)，也沒有點源詳細數據，然而其0.1度解析度確實較[REAS](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/reas_download/)更加符合需要。
 
 
 ## 下載方式及格式

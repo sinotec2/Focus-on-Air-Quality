@@ -20,14 +20,14 @@ last_modified_date: 2022-03-08 10:16:34
 ---
 
 ## 背景
-- [地圖數位板](/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)作業的結果是經緯度座標、而作為煙流模式前處理[BPIP](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP)的輸入檔，必須是沒有歪斜的XY直角座標系統，需要進一步轉換。
+- [地圖數位板](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)作業的結果是經緯度座標、而作為煙流模式前處理[BPIP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP)的輸入檔，必須是沒有歪斜的XY直角座標系統，需要進一步轉換。
 - 尤有進者，實際個案的工廠北或多或少都會與背景地圖的真北有所偏差(**夾角D**)，因此都必須進行平移及旋轉，才能適用該前處理程式，並且不會發生疊圖誤差。
 - 煙流模式對於風向是非常敏感的，風向的0度是真北，因此**夾角D**對煙流地面濃度的走向、建築物的影響等等，都有絕對的影響。經由數位板與此處的計算，可以降低量測與計算造成誤差的可能性。
-- 除此之外，程式還提供由背景資料中找到個案所在地的**煙囪基地高程E**([步驟5](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定步驟與內容))、煙囪頂的**離地高度H**([步驟6](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定步驟與內容))等功能，以便進行計算。
+- 除此之外，程式還提供由背景資料中找到個案所在地的**煙囪基地高程E**([步驟5](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定步驟與內容))、煙囪頂的**離地高度H**([步驟6](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定步驟與內容))等功能，以便進行計算。
 
 ## 輸入檔
 - 此處設定為[KML格式](https://zh.wikipedia.org/wiki/KML)檔案，範例如[example.kml](http://114.32.164.198/isc_results/example.kml)
-- 使用KML格式的理由詳見[討論](/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#以kml檔案做為輸入座標介面的理由)
+- 使用KML格式的理由詳見[討論](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#以kml檔案做為輸入座標介面的理由)
 
 ### 輸入檔說明
 - 必須資訊
@@ -40,10 +40,10 @@ last_modified_date: 2022-03-08 10:16:34
   - 建築物頂點位置(多邊形)：方向不拘
   - 建築物名稱(含高度、名稱高度間可以空格、逗號、分號、斜槓等區格)
   - 煙囪如有高度跟在名稱之後，將會優先使用，否則會從TEDS資料庫中選取位置最接近的煙囪。
-- 可以使用數位板點取座標值（詳見[地圖數位板](/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer/)、另存成KML檔案）。
+- 可以使用數位板點取座標值（詳見[地圖數位板](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer/)、另存成KML檔案）。
 - 檢核：
   - rotate_kml→旋轉角度，輸出成bpip輸入檔格式
-  - [iscParser](/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)→解讀bpip輸入檔，輸出成kml格式(反解)
+  - [iscParser](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)→解讀bpip輸入檔，輸出成kml格式(反解)
 - KML內之順序：(不限)
 - 高度附掛單位（m or M)不影響計算，一律設定是m
 
@@ -178,7 +178,7 @@ last_modified_date: 2022-03-08 10:16:34
   164  TEMP=[i+273 for i in TEMP]
 ```  
 ### 輸出到bpip.inp檔案
-- 命名為**fort.10**，以符合[BPIP](/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP)程式的約定。以隨機產生的目錄名稱做為使用者個案間的辨識。
+- 命名為**fort.10**，以符合[BPIP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP)程式的約定。以隨機產生的目錄名稱做為使用者個案間的辨識。
 
 ```python
   172  with open(pth+'fort.10','w') as f:
@@ -204,7 +204,7 @@ last_modified_date: 2022-03-08 10:16:34
 - [Rotate a KML file](http://114.32.164.198/rotate_kml.html)
 
 ### 結果檢視
-- 檢討由KML產生bpip.inp，再由[iscParser](/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)檢查，結果如下([TSMC.kml](http://114.32.164.198/isc_results/TSMC/TSMC.kml))
+- 檢討由KML產生bpip.inp，再由[iscParser](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)檢查，結果如下([TSMC.kml](http://114.32.164.198/isc_results/TSMC/TSMC.kml))
   - 並無系統性之錯誤
   - 仍然存在描圖的不準度，然誤差已在可接受範圍。
   - 建築物輪廓線尚可保持方向之一致性

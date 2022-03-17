@@ -39,7 +39,7 @@ last_modified_date: 2022-03-17 18:42:34
   - 數據時間自2015/1\～2021/2。時間變化上較為不足。
   - 單位為AIS顯示在網格內出現的總次數，包括移動中與固定。
 - 下載方式：該網站以java程式提供使用者點選，透過瀏覽器自動將zip檔案複製到使用者的Downloads目錄。再行解壓縮。
-- 檔案格式：[GeoTiff](/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)
+- 檔案格式：[GeoTiff](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)
 
 ## 程式說明
 ### 程式下載

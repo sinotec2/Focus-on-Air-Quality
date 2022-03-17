@@ -122,7 +122,7 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
     38	  rate.update({v:[1.]})
     39	
 ```
-- 讀取[合併](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#%E6%A9%AB%E5%90%91%E5%90%88%E4%BD%B5)後之EAC4檔案
+- 讀取[合併](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/EC_ReAna/#橫向合併)後之EAC4檔案
 
 ```python
     40	#read the merged grib files (ncl_convert2nc)

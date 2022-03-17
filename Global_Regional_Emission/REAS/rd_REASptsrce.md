@@ -1,7 +1,8 @@
 ---
 layout: default
 title: 電廠排放之處理
-parent: Global/Regional Emission
+parent: REAS Emission Processing
+grand_parent: Global/Regional Emission
 nav_order: 3
 date: 2022-01-10 09:04:56
 last_modified_date: 2022-01-10 09:05:00

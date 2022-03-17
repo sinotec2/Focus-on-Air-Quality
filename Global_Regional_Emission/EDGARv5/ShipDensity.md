@@ -27,7 +27,8 @@ last_modified_date: 2022-03-17 18:42:34
 - 造成此一結果的主要原因是EDGAR在同一路線上的排放量本身就具有很大的差異性，當程式進行內插時就很難避免加深此一差異而造成路線上的不連續結果。
 - 解決方式
   - 以照片處理技巧拉大路線及非路線排放量的差距([Noise Removal of a Raster Data](/Focus-on-Air-Quality/utilities/GIS/noise_removal/))。
-  - []()
+  - [Extracting Road Vector Data from Raster Maps](https://www.researchgate.net/publication/227067853_Extracting_Road_Vector_Data_from_Raster_Maps)
+  - 重新以高解析度數據進行排放量的空間分配。
 
 
 ## 

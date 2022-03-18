@@ -93,30 +93,15 @@ XCENT=120.99
 YCENT= 23.61
 ```
 
-- UTM投影設定(範例)
-  - LAMBERT投影設定
-  - camxproj.txt內容
+|項目|UTM投影設定(範例)|LAMBERT投影設定(camxproj.txt內容)|
+|-|-|-|
+|!內設為LAMBERT|GDTYP=2|GDTYP=2|
+|T1 lat|P_ALP=30.0|P_ALP=10.0|
+|T2 lat|P_BET=40.0|P_BET=40.0|
+|deg, origin for offset (136km)|P_GAM=118.586|P_GAM=120.99|
+|meridian deg, same as P_GAM|XCENT=118.586|XCENT=120.99|
+|meridian deg, origin for offset (2414km)|YCENT=1.823|YCENT= 23.61|
 
-```bash
-!內設為LAMBERT
-GDTYP=2
-GDTYP=2
-T1 lat
-P_ALP=30.0
-P_ALP=10.0
-T2 lat
-P_BET=40.0
-P_BET=40.0
-deg, origin for offset (136km)
-P_GAM=118.586
-P_GAM=120.99
-meridian deg, same as P_GAM
-XCENT=118.586
-XCENT=120.99
-meridian deg, origin for offset (2414km)
-YCENT=1.823
-YCENT= 23.61
-```
 	- #數字後面不可以有空格，必須馬上接carriage return
 	- 經緯度轉換為LCC(如MM5系統)的誤差有限。UTM(twd97)及LCC之間的轉換則會發生誤差。先以台灣地區中心點(120.99, 23.61)的UTM值為準，各點UTM與中心點UTM差值，東西向要乘scaleX=66/69 (!east-west grid number correction factor)，南北向要乘scaleY = 123 /128，否則會向東、西、南、北各方向伸張超過土地範圍 (詳參master:/home/backup/sino4/kuang/mm5camx6/merge_lulai)。
 	- 可以利用土地分類檔、或者點源位置檔，以及底圖的相對差異，進行微調修正。
@@ -129,7 +114,6 @@ YCENT= 23.61
 ```bash
 kuang@master /cluster/VERDI_1.5.0/shape2bin/bin/Linux.x86_64
 $ shape2bin
-
 
 shape2bin - Convert Shapefile *.shp to map_*.bin file.
 usage:   shape2bin file.shp > map_file.bin
@@ -271,17 +255,20 @@ SET TMS=C:\Users\4139\MyPrograms\VERDI_1.4.1\toms.cfg
 CD ..\..\
 ```
 ### 程式內之批次檔(script editor、%BATCHFILE%)
-前述命令列的設定一次只能產生一張圖，然而若資料檔案很大，每次啟動VERDI程式只畫一個圖就離開，似乎效益太低了一些，此時就必須使用程式內的批次檔。
-程式內批次檔的格式有其基本架構，<Global> </Global>只出現在檔頭，其範圍的內容是「預設值」，與前述命令列控制類似，而無關每次的讀寫動作。而<Task></Task>可能重復很多次，但不接受變數及迴圈。
-沒有一個指令是繪圖的動作，只要在script中給定圖形的檔名(imageFile=…)，程式即會寫出檔案。
+- 前述命令列的設定一次只能產生一張圖，然而若資料檔案很大，每次啟動VERDI程式只畫一個圖就離開，似乎效益太低了一些，此時就必須使用程式內的批次檔。
+- 程式內批次檔的格式有其基本架構，
+  - <Global> </Global>只出現在檔頭，其範圍的內容是「預設值」，與前述命令列控制類似，而無關每次的讀寫動作。
+  - 而<Task></Task>可能重復很多次，但不接受變數及迴圈。
+- 沒有一個指令是繪圖的動作，只要在script中給定圖形的檔名(imageFile=…)，程式即會寫出檔案。
+
 ### 注意事項
--mapName：必須指向.bin檔，不接受其餘shape檔、tif檔。
--g與-gtype作用相同
--saveImage若不指定圖檔的目錄，將會存在啟動JAVA程式的最後目錄
-Script指令s=???:ttt的用法不能作用，但ts=ttt可以作用
-Editor內=之後的內容可以不必引號。imageFile不必再加延伸檔名，系統會自行加上。
-從命令列啟動editor script file: run.bat –b [dir][script file]。不必指定-quit，執行完會自己跳出JAVA程式。
-命令列設定和editor script二者無法同時作用。
+- -mapName：必須指向.bin檔，不接受其餘shape檔、tif檔。
+- -g與-gtype作用相同
+- -saveImage若不指定圖檔的目錄，將會存在啟動JAVA程式的最後目錄
+- Script指令s=???:ttt的用法不能作用，但ts=ttt可以作用
+- Editor內=之後的內容可以不必引號。imageFile不必再加延伸檔名，系統會自行加上。
+- 從命令列啟動editor script file: run.bat –b [dir][script file]。不必指定-quit，執行完會自己跳出JAVA程式。
+- 命令列設定和editor script二者無法同時作用。
 
 ## 參考網頁
 - Rhyne, T.-M., Bolstad, M., Rheingans, P., Petterson, L., and Shackelford, W. (1993). Visualizing environmental data at the EPA. Computer Graphics and Applications, IEEE 13:34–38. doi:10.1109/38.204964.

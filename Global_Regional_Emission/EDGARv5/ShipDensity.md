@@ -23,7 +23,7 @@ last_modified_date: 2022-03-17 18:42:34
 ---
 
 ## 背景
-- 雖然EDGAR解析度0.1度與HUADON_3k的解析度已經相差不大，然而原生污染物如SO2、NO2等的模擬結果卻顯示出海上具有濃度分布的奇異點。
+- 雖然EDGAR解析度0.1度與HUADON_3k的解析度已經相差不大，然而原生污染物如SO<sub>2</sub>、NO<sub>2</sub>等的模擬結果卻顯示出海上具有濃度分布的奇異點。
   - 2018/3/31~4/4 東亞模擬結果([動畫檔](https://youtu.be/keO9LgCcAmo))
 
 | ![20180404_SO2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404_SO2.PNG)|  

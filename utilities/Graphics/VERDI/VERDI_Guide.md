@@ -267,7 +267,9 @@ Content-type: application/octet-stream; charset=iso-8859-1
 
 除命令列的操作之外，VERDI程式內也提供了script editor可以在程式內執行批次。此二者命令相同，然而前者具有完整的script功能(變數設定、迴圈及判斷)，缺點是重複執行JAVA程式，浪費作業時間，而後者雖然在程式內執行批次作業減省JAVA的進出時間，然而該script的設計不接受變數迴圈或判斷。使用者可以視需求自行選用二者之一。
 
-各項批次檔命令(script command)可以詳參手冊。注意在命令列上，各command之前要加負號，之後是以空格隔開，command之間沒有順序，但是-configFile要先給定，-quit必須在最後。
+各項批次檔命令(script command)可以詳參手冊。
+
+注意在命令列上，各command之前要加負號，之後是以空格隔開，command之間沒有順序，但是-configFile要先給定，-quit必須在最後。
 
 在程式script editor之內，各command之前沒有負號，之後是以=(等號)隔開，command之間也沒有順序，
 

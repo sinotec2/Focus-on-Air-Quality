@@ -48,7 +48,7 @@ last_modified_date: 2022-03-17 18:42:34
   - [TNR2WBDens.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/TNR2WBDens.py)讀取前述nc檔與EDGAR TNR_Ship逐月船舶排放推估結果進行0.005度解析度重新分配，同樣為CF-1.0格式檔案，用[meteoInfo]()檢視。
   - [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)將0.005度重新分配結果以合併方式納入HUADON_3k網格系統，轉成IOAPI格式以供CMAQ讀取。
 
-### [dens2nc.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/dens2nc.py)程式說明
+### [dens2nc.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/dens2nc.py)
 - 此程式可能是[GeoTiff](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)系列程式中最單純的一支。
 - 調用[rasterio](https://rasterio.readthedocs.io/en/latest/)將tiff檔案讀取後，隨即取出符合D6範圍之經緯度數據，將其寫入預先準備好的模版即可。
 - D6範圍：lon=100\~134，lat=15\~42，取最外圈之整數。
@@ -95,7 +95,7 @@ variables:
     lon:comment = "center_of_cell" ;
 ```
 
-### [TNR2WBDens.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/TNR2WBDens.py)程式說明
+### [TNR2WBDens.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/TNR2WBDens.py)
 - 此程式進行範圍內排放量的重新分配。
 - 排放量單位之處理
   - EDGAR排放量單位為Kg/s/m<sup>2</sup>
@@ -109,7 +109,7 @@ variables:
   nc[v1][:,:]=EmsGlb*RatDens[:,:]
   nc.close()
 ```
-### [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)程式說明
+### [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)
 - 此一程式與[EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)很接近，但使用合併方式將0.005度小網格內之排放量予以平均，存到目標網格系統(HUADON_3k)網格內
 - 與[reas2cmaqD1.py](/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)一樣使用使用[np.searchsorted](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)找到新網格點在EDGAR座標系統的位置起迄點lat_ss及lon_ss。
 - 使用np.mean而不是np.sum，是因為EDGAR排放量是intensive quantity.

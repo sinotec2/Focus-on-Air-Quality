@@ -124,9 +124,11 @@ variables:
 ```
 ## Results
 ### 比較內插與合併方式之成果
-| ![EDG_Intp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Intp.PNG)| ![EDG_Aggr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Aggr.PNG) |
-|:--:|:--:|
-| <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量，含陸地部分（log<sub>10</sub> gmole/s/cell）</b>| <b>重新分配後HUADON_3k範圍船舶的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| 
+| ![EDG_Intp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Intp.PNG)|
+|:--:|
+| <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量，含陸地部分（log<sub>10</sub> gmole/s/cell）</b>|
+| ![EDG_Aggr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Aggr.PNG) |
+| <b>重新分配後HUADON_3k範圍船舶的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| 
 
 ### 討論
 - scipy.griddata內插應用在船舶路線這種高空間突兀性的數據，確實有其限制，原本0.1度的解析度已經不足，內插結果更出現不連續的分布奇異點。在高解析度的空品模擬時會發生嚴重的高、低估情形。

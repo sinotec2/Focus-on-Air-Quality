@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 地面排放檔之讀取及轉換
-parent: REAS Emission Processing
+parent: Regional Emission inventory in ASia
 grand_parent: Global/Regional Emission
 nav_order: 2
 date: 2022-01-05 09:30:02

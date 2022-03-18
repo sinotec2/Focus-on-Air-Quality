@@ -1,6 +1,6 @@
 ---
 layout: default
-title: REAS Emission Processing
+title: Regional Emission inventory in ASia
 nav_order: 2
 has_children: true
 parent: Global/Regional Emission

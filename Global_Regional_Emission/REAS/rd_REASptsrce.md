@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 電廠排放之處理
-parent: REAS Emission Processing
+parent: Regional Emission inventory in ASia
 grand_parent: Global/Regional Emission
 nav_order: 3
 date: 2022-01-10 09:04:56

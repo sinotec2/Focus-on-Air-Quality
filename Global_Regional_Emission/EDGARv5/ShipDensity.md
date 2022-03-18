@@ -23,7 +23,8 @@ last_modified_date: 2022-03-17 18:42:34
 ---
 
 ## 背景
-- 雖然EDGAR解析度0.1度與HUADON_3k的解析度已經相差無幾，然而模擬結果仍然顯示出濃度分布的奇異點，當風向與船隻路線有顯著交角是，突高的面源產生類似點源的效應，圖面上呈現出平行的煙流，而不是均勻的片狀線源貢獻之濃度分布。
+- 雖然EDGAR解析度0.1度與HUADON_3k的解析度已經相差不大，然而原生污染物如SO2、NO2等的模擬結果卻顯示出海上具有濃度分布的奇異點。
+- 當風向與船隻路線有顯著交角是，突高的面源產生類似點源的效應，圖面上呈現出平行的煙流，而不是均勻的片狀線源貢獻之濃度分布。
 - 造成此一結果的主要原因是EDGAR在同一路線上的排放量本身就具有很大的差異性，當程式進行內插時就很難避免加深此一差異而造成路線上的不連續結果。
 - 解決方式
   - 以照片處理技巧拉大路線及非路線排放量的差距([Noise Removal of a Raster Data](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/noise_removal/))。可以消除公海部分的零星排放量，但不能增加路線上的排放量。
@@ -127,14 +128,14 @@ variables:
 
 | ![EDG_Intp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Intp.PNG)|
 |:--:|
-| <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量，含陸地部分（log<sub>10</sub> gmole/s/cell）</b>|
+| <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>|
 | ![EDG_Aggr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Aggr.PNG) |
 | <b>重新分配後HUADON_3k範圍船舶的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| 
 
 ### 討論
 - scipy.griddata內插應用在船舶路線這種高空間突兀性的數據，確實有其限制，原本0.1度的解析度已經不足，內插結果更出現不連續的分布奇異點。在高解析度的空品模擬時會發生嚴重的高、低估情形。
 - 重新分配、以合併方式進行座標系統轉換，仍然可以維持線形的特性，即使有差異，也是段落間的差異，不會出現網格點的奇異值。
-- 數量級可以保持一致、EDGAR原始數據在黃海、東海與日韓間海峽分布有嚴重低估、香港向南方向與巴士海峽則有高估的情形，可能引用到較舊的AIS數據。
+- 數量級可以保持一致、EDGAR原始數據在內陸水域、黃海、東海與日韓間海峽分布有嚴重低估、香港向南方向與巴士海峽則有高估的情形，可能引用到較舊的AIS數據。
 
 ## Reference
 - Diego A. Cerdeiro, Andras Komaromi, Yang Liu, and Mamoon Saeed, **World Seaborne Trade in Real Time: A Proof of Concept for Building AIS-based Nowcasts from Scratch**, [IMF paper](https://www.imf.org/en/Publications/WP/Issues/2020/05/14/World-Seaborne-Trade-in-Real-Time-A-Proof-of-Concept-for-Building-AIS-based-Nowcasts-from-49393), May 14, 2020 

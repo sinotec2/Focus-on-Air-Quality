@@ -136,6 +136,9 @@ Content-type: application/octet-stream; charset=iso-8859-1
 - 1.4版可自由選擇要疊加的底圖，並無問題困難。
 - 雖然CMAS網站提供了1.5版，主要是為了java版本的更新，然而更新後對非美國以外地區，不再提供向量底圖檔案的選項，需要使用者自行裝置底圖、以現有圖名替代。world(內設，如左圖)USA Counties→大陸地區的省份、直轄市自治區界(右圖)HUC→台灣地區縣市分區圖(右圖)Roads→台灣地區鄉鎮區分區圖
 
+| ![VERDI1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI1.PNG)|![VERDI2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI2.PNG)|
+|:--:|:--:|
+| <b>D2模擬結果。VERDI內設海岸線| <b>加上大陸省份及臺灣縣份行政區底圖</b>|
 
 ### 軟體使用說明
 1.    開啟檔案(Datasets/Formula/Area)：

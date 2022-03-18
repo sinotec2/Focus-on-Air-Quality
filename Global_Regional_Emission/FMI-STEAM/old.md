@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 船隻排放之處理_CAMx
-parent: STEAM Emission Processing
+parent:  Ship Traffic Emission Assessment Model
 grand_parent: Global/Regional Emission
 nav_order: 1
 date: 2022-02-05 10:26:07

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 船隻排放之處理_CMAQ
-parent: STEAM Emission Processing
+parent:  Ship Traffic Emission Assessment Model
 grand_parent: Global/Regional Emission
 nav_order: 2
 date: 2022-02-05 16:09:08

@@ -34,7 +34,7 @@ last_modified_date: 2022-03-17 18:42:34
     - 以歐洲範圍數據為1公里解析度、時間範圍則為逐月，似乎可行。
 
 ## 全球水路交通密度數據
-- 經查世界銀行在其網站公開IMF分析歷年0.005度解析度（赤道處約為500m）之[船隻總密度數據](https://datacatalog.worldbank.org/search/dataset/0037580)，具有足夠的範圍與解析度
+- 經查世界銀行(World Bank WB))在其網站公開IMF分析歷年0.005度解析度（赤道處約為500m）之[船隻總密度數據](https://datacatalog.worldbank.org/search/dataset/0037580)，具有足夠的範圍與解析度
   - 船隻種類：共有商業、油氣、娛樂、漁船、客輪、以及總和等6個檔案。其中以商業佔絕大多數。
   - 數據時間自2015/1～2021/2。時間變化上較為不足。
   - 單位為AIS顯示在網格內出現的總次數，包括移動中與固定。
@@ -67,7 +67,7 @@ mxx,mxy=max([134,np.max(lon1)]),max([42,np.max(lat1)])
   except:
     print('fail filling '+k)
 ```  
-- 模板使用[ncpdq與ncks](/Focus-on-Air-Quality/utilities/netCDF/ncks/#加長一個limited維度)反複交替來逐步擴大，其內容如下
+- 模板使用[ncpdq與ncks](/Focus-on-Air-Quality/utilities/netCDF/ncks/#加長一個limited維度)反複交替來逐步擴大，其內容如下：
 
 ```python
 netcdf DensGlobD6 {
@@ -95,15 +95,38 @@ variables:
 ```
 
 ### [TNR2WBDens.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/TNR2WBDens.py)程式說明
+- 此程式進行範圍內排放量的重新分配。
+- 排放量單位之處理
+  - EDGAR排放量單位為Kg/s/m<sup>2</sup>
+  - 由於加總範圍內的排放量過程將會使其失去intensive的特性，需考量EDGAR與WB檔案網格間距的差異，前者1個網格中可容納後者400個網格(=(0.1/0.005)<sup>2</sup>)。
+  - 重新考量船隻網格密度權重後，排放量單位仍然可以保持是Kg/s/m<sup>2</sup>
 
-
+```python
+...
+  EmsGlb=np.sum(np.array(nc[v][sJ10[0]:sJ10[-1]+1,sI10[0]:sI10[-1]+1]))*20*20
+...
+  nc[v1][:,:]=EmsGlb*RatDens[:,:]
+  nc.close()
+```
 ### [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)程式說明
+- 此一程式與[EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)很接近，但使用合併方式將0.005度小網格內之排放量予以平均，存到目標網格系統(HUADON_3k)網格內
+- 與[reas2cmaqD1.py](/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)一樣使用使用[np.searchsorted](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)找到新網格點在EDGAR座標系統的位置起迄點lat_ss及lon_ss。
+- 使用np.mean而不是np.sum，是因為EDGAR排放量是intensive quantity.
 
+```python
+...
+  for j in range(nrow):
+    for i in range(ncol):
+#Since the unit is in intensive mode, must take mean not sum
+      zz=np.mean(var[ispec,lat_ss[j,i]:lat_ss[j+1,i+1],lon_ss[j,i]:lon_ss[j+1,i+1]],axis=(0,1))
+      nc[vc][0,0,j,i]=zz/mw[v]*1000.*nc.XCELL*nc.YCELL
+...      
+```
 ## Results
 ### 比較內插與合併方式之成果
 | ![EDG_Intp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Intp.PNG)| ![EDG_Aggr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Aggr.PNG) |
 |:--:|:--:|
-| <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| <b>重新分配後HUADON_3k範圍的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| 
+| <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量，含陸地部分（log<sub>10</sub> gmole/s/cell）</b>| <b>重新分配後HUADON_3k範圍船舶的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| 
 
 ### 討論
 - scipy.griddata內插應用在船舶路線這種高空間突兀性的數據，確實有其限制，原本0.1度的解析度已經不足，內插結果更出現不連續的分布奇異點。在高解析度的空品模擬時會發生嚴重的高、低估情形。

@@ -39,13 +39,19 @@ PAVE功能也較當時述軟體為多，且為空氣品質模式專門設計，�
 ## VERDI
 ### VERDI簡述及快速起動：
 由於PAVE只能在Linux上執行，同時也不再持續維護，因此美國環保署委請Argonne國家實驗室及UNC發展java based之VERDI (Visualization Environment for Rich Data Interpretation ) ，做為社群共用的顯示軟體。
-雖然PAVE的功能已經被美國模式社群所廣泛接受，然而其linux的專屬特性，以及X-window介面軟體的限制，讓許多使用者卻步，因此美國環保署發展java的版本，可以直接掛在MS window、MAC OS上或linux等不同平台上，具有最大的相容性，並增加讀取CAMx、IOAPI、wrf.nc等檔案的格式。
+
+雖然PAVE的功能已經被美國模式社群所廣泛接受，然而其linux的專屬特性，以及X-window介面軟體的限制，讓許多使用者卻步，因此美國環保署發展java的版本，可以直接掛在MS window、MAC OS上或linux等不同平台上，具有最大的相容性，並增加讀取CAMx、CMAQ、IOAPI、wrf.nc等檔案的格式。
 1.    下載安裝：
 - 裝置之執行檔可以由美國環保署CMAS網站註冊會員後下載 。( https://www.cmascenter.org/verdi/)
 - 程式不需要安裝，放在OS路徑可以抓到執行檔的地方即可。
 2.    執行：
 - linux的指令為verdi.sh、PC為verdi.bat
-- linux系統需要有DISPLAY環境變數的設定，這不會在披次檔案內設定(因為使用者很多)， 使用者每次開啟新的OS界面後，須按照自己本機的IP位置自行在OS設定，範例如下：finger可以知道現在有誰在線上活動，如範例中kuang的主機(本機)是pc556，pc556是公司對每個pc的稱謂代碼，到底IP是多少呢？可以用ping(測試連線狀態)來檢查本機的IP，如範例中ping pc556的結果，OS就會引導去連200.200.31.182，這便是pc556的IP了，將IP代入xxx.xxx.xxx.xxx位置即可設定VERDI在這個OS作業要求下，要顯示在哪一台機器的螢幕上。
+- linux系統需要有DISPLAY環境變數的設定
+  - 這不會在披次檔案內設定(因為使用者很多)
+  - 使用者每次開啟新的OS界面後，須按照自己本機的IP位置自行在OS設定，範例如下：
+  1. finger可以知道現在有誰在線上活動，如範例中kuang的主機(本機)是pc556，pc556是公司對每個pc的稱謂代碼，
+  1. 到底IP是多少呢？可以用ping(測試連線狀態)來檢查本機的IP，如範例中ping pc556的結果，OS就會引導去連200.200.31.182，這便是pc556的IP了，
+  1. 將IP代入xxx.xxx.xxx.xxx位置即可設定VERDI在這個OS作業要求下，要顯示在哪一台機器的螢幕上。
 
 ```bash
 kuang@node03 ~
@@ -65,17 +71,21 @@ kuang@node03 ~
 $ export DISPLAY=xxx.xxx.xxx.xxx:0.0
 $ verdi.sh&
 ```
-
 - 隨即在本機的X window軟體便可以發現VERDI的歡迎畫面。
 - 如果要離開，按下File → Exit 即可   
 3.     線上求助：
-- 官網： https://www.airqualitymodeling.org/index.php/VERDI_1.5_User_Manual
-### VERDI注意事項：
-1.    記憶體：
+- [官網](https://www.airqualitymodeling.org/index.php/VERDI_1.5_User_Manual)
+
+### VERDI注意事項
+
+1.    記憶體
+
 - 由於java程式佔用記憶體非常可觀，未讀入資料即耗用近500MB記憶體，1.5版甚至需1G的記憶體，因此PC必須有足夠的硬體方能順利運作。如果程式出現「沒有回應」只是還在讀檔計算，不是真的死當，等一下即可。
 - 在讀取CALMET2netCDF結果檔案，製作4階向量圖時，系統會出現錯誤：OutOfMemoryError_verdi可能是因為時間太長，檔案太大所致，減少檔案的長度之後，即可應用verdi來開該等nc檔案。
 - 不論PC或工作站，VERDI無法開啟3G以上的大型檔案，必須先減少時間、變數或維度。>700MB的檔案不能同時呈現兩個變數的tile圖。即使關閉變數或檔案並不會恢復(java heap space)，必須關閉程式與視窗，重新開始。
+
 2.    座標轉換
+
 - VERDI可以接受多種座標系統，包括常用的WGS系統經緯度、Lambert投影系統、UTM座標等。
 - 如果是nc檔、IOAPI或WRF檔，VERDI會抓檔案內的設定值。因此如要修正，要從nc檔案的內容著手，在VERDI本身或其他外部檔案都沒有可以調整的。
 - nc.XCENT、nc.YCENT、nc.ALP、nc.BET、nc.GAM、nc.XORIG、nc.YORIG、nc.XCELL、nc.YCELL 等等由於模式內設為美國本土地區，CAMx模式輸出檔中的座標系統若使用UTM/Lambert，將無法順利貼上其內設的底圖。
@@ -102,8 +112,14 @@ YCENT= 23.61
 |meridian deg, same as P_GAM|XCENT=118.586|XCENT=120.99|
 |meridian deg, origin for offset (2414km)|YCENT=1.823|YCENT= 23.61|
 
-	- #數字後面不可以有空格，必須馬上接carriage return
-	- 經緯度轉換為LCC(如MM5系統)的誤差有限。UTM(twd97)及LCC之間的轉換則會發生誤差。先以台灣地區中心點(120.99, 23.61)的UTM值為準，各點UTM與中心點UTM差值，東西向要乘scaleX=66/69 (!east-west grid number correction factor)，南北向要乘scaleY = 123 /128，否則會向東、西、南、北各方向伸張超過土地範圍 (詳參master:/home/backup/sino4/kuang/mm5camx6/merge_lulai)。
+- #數字後面不可以有空格，必須馬上接carriage return
+- 座標系統的誤差
+  - 經緯度轉換為LCC(如MM5系統)的誤差有限。
+  - UTM(twd97)及LCC之間的轉換則會發生誤差。
+  - 先以台灣地區中心點(120.99, 23.61)的UTM值為準，各點UTM與中心點UTM差值，
+    - 東西向要乘scaleX=66/69 (!east-west grid number correction factor)，
+    - 南北向要乘scaleY = 123 /128，
+    - 否則會向東、西、南、北各方向伸張超過土地範圍 (詳參master:/home/backup/sino4/kuang/mm5camx6/merge_lulai)。
 	- 可以利用土地分類檔、或者點源位置檔，以及底圖的相對差異，進行微調修正。
 - TODO：
 	- 可能係T1、T2設定的問題，如果domain範圍較小，可以適度減少T1、T2範圍，以增加圖面之線性，如T1=21.61、T2=25.61
@@ -134,9 +150,13 @@ Content-type: application/octet-stream; charset=iso-8859-1
 - 1.5版以後：須以「現有圖檔名稱」取代
 5.   底圖與版本選擇
 - 1.4版可自由選擇要疊加的底圖，並無問題困難。
-- 雖然CMAS網站提供了1.5版，主要是為了java版本的更新，然而更新後對非美國以外地區，不再提供向量底圖檔案的選項，需要使用者自行裝置底圖、以現有圖名替代。world(內設，如左圖)USA Counties→大陸地區的省份、直轄市自治區界(右圖)HUC→台灣地區縣市分區圖(右圖)Roads→台灣地區鄉鎮區分區圖
+- 雖然CMAS網站提供了1.5版，主要是為了java版本的更新，然而更新後對非美國以外地區，不再提供向量底圖檔案的選項，需要使用者自行裝置底圖、以現有圖名替代。
+  - world(內設，如左圖)
+  - USA Counties→大陸地區的省份、直轄市自治區界(右圖)
+  - HUC→台灣地區縣市分區圖(右圖)
+  - Roads→台灣地區鄉鎮區分區圖
 
-| ![VERDI1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI1.PNG)|![VERDI2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI2.PNG)|
+| ![VERDI1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI1.png)|![VERDI2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI2.png)|
 |:--:|:--:|
 | <b>D2模擬結果。VERDI內設海岸線| <b>加上大陸省份及臺灣縣份行政區底圖</b>|
 
@@ -211,32 +231,57 @@ Content-type: application/octet-stream; charset=iso-8859-1
 
 ### Linux上執行VERDI
 由於程式在Linux上執行，因此後處理與繪圖(至少品質確認工作)在Linux上執行，避免大型檔案在網路上傳送，是最合理的方式。
+
 1.    由CMAS網站下載VERDI for linux(注意32或64位元)約380mb，下載完後在linux上解開壓縮檔(目前在master:/cluster/VERDI_1.5.0目錄)執行時亦須下到該目錄執行。
+
 2.    準備視窗環境
-在遠端PC啟動X window環境(如mi/x Xwindow、mobaXterm等)
-在工作站執行：
+- 在遠端PC啟動X window環境(如mi/x Xwindow、mobaXterm等)
+- 在工作站執行：
+
+```bash
 - export DISPLAY='xxx.xxx.xxx.xxx:0.0'(顯示器位置，ip可以由finger/who或X win的banner找到，後者可能不太準)
 - export LC_ALL="en_US.UTF-8"(關閉中文顯示，開啟英文顯示,或en_US要看/usr/share/locale目錄下提供哪些字型。
 - xclock&(測試並啟動必要的X11程式)
+```
 3.    準備台灣地區的地圖檔(詳上述，所有GIS的檔名都要同樣大小寫)
+
 4.     如果要開啟CAMx檔案，要記得
+
 - 先準備好的原點(中心點)設定，camxproj.txt必須要和濃度檔同一目錄。
-- 如果忘了先準備好camxproj.txt→先關閉CAMx檔案，因為系統會先寫一個內設的camxproj.txt，並且讀進記憶體不必關閉VERDI跳回到OS，在檔案所在的目錄，準備好camxproj.txt(用對的檔案、覆蓋掉VERDI產生的內設camxproj.txt)回到VERDI、重新開啟CAMx檔案即可。
+- 如果忘了先準備好camxproj.txt→
+  - 先關閉CAMx檔案，因為系統會先寫一個內設的camxproj.txt，並且讀進記憶體不必關閉VERDI跳回到OS，
+  - 在檔案所在的目錄，準備好camxproj.txt
+    - (用對的檔案、覆蓋掉VERDI產生的內設camxproj.txt)
+  - 回到VERDI、重新開啟CAMx檔案即可。
+
 5.    確定X win已經可以作用，移動到VERDI目錄下執行verdi.sh&
+
 6.    VERDI執行檔與linux作業系統版本、GNU版本無關，不須重新編譯。但要有java 1.7以上版本。必要時要更新工作站的java程式(sudo yum install java)
 - 其實verdi有自帶的jre/bin/java，每個版本也會分別呼叫自己的java，與系統的java無關，因此也不需另外另建或更新java，
 - 最新版本VERDI搭配的java版本會在CMAS網頁公布。    
+
 7.    VERDI的設定檔與輸出結果內設目錄，是在登入機器的$HOME目錄下。產生圖檔後，可用filezilla至該處下載。
 
 ## VERDI的批次作業
 由於JAVA在執行時可以接受命令列所輸入的引數，因此不論是linux或者是PC上，都是以批次檔方式開啟程式。運用此一特性，可以用批次檔的方式執行重複性的繪圖與計算作業，可以大幅節省工作時間。
+
 除命令列的操作之外，VERDI程式內也提供了script editor可以在程式內執行批次。此二者命令相同，然而前者具有完整的script功能(變數設定、迴圈及判斷)，缺點是重複執行JAVA程式，浪費作業時間，而後者雖然在程式內執行批次作業減省JAVA的進出時間，然而該script的設計不接受變數迴圈或判斷。使用者可以視需求自行選用二者之一。
+
 各項批次檔命令(script command)可以詳參手冊。注意在命令列上，各command之前要加負號，之後是以空格隔開，command之間沒有順序，但是-configFile要先給定，-quit必須在最後。
+
 在程式script editor之內，各command之前沒有負號，之後是以=(等號)隔開，command之間也沒有順序，
-(一)    設定組態檔(-configFile configuration file)
-可以儲存各種圖形介面組態(Configure)的設定內容，包括圖面的主標題、次標題、色階、色階的單位、下標題、各軸的名稱、字型與大小等等圖面設定。VERDI並未約定檔案的字尾，基本上，組態檔是一個文字檔，也可以從外部進行編輯。
+
+### 設定組態檔(-configFile configuration file)
+可以儲存各種圖形介面組態(Configure)的設定內容，包括
+- 圖面的主標題、次標題、
+- 色階、色階的單位、
+- 下標題、各軸的名稱、字型與大小等等圖面設定。
+
+VERDI並未約定檔案的字尾，基本上，組態檔是一個文字檔，也可以從外部進行編輯。
+
 一般VERDI會將變數名稱(-s)列為主標題(titleString)，而將檔案名稱(通常含有地域及時間項-f)列為次標題(-subTitle1, -subTitle2)，而變數的時刻與最大值則會出現在下標題，這些是可以在批次檔中控制，將內容傳給VERDI寫在圖面上，其餘不必改變的，可以按照configuration file的內容。
-(二)    命令列預設控制(範例)
+
+### 命令列預設控制(範例)
 ```bash
 @ECHO OFF
 SET BATCHFILE=%~f2

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EDGAR Emission Processing
+title: Emis. Database for Global Atm. Res.
 nav_order: 3
 has_children: true
 parent: Global/Regional Emission

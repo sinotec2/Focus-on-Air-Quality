@@ -1,7 +1,7 @@
 ---
 layout: default
 title: EDGAR to CMAQ
-parent: EDGAR Emission Processing
+parent: Emis. Database for Global Atm. Res.
 grand_parent: Global/Regional Emission
 nav_order: 1
 date: 2022-02-25 15:04:48

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Redistribution of Ship Emissions
-parent: EDGAR Emission Processing
+parent: Emis. Database for Global Atm. Res.
 grand_parent: Global/Regional Emission
 nav_order: 2
 date: 2022-03-17 18:42:30

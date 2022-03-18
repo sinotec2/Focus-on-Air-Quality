@@ -124,6 +124,7 @@ variables:
 ```
 ## Results
 ### 比較內插與合併方式之成果
+
 | ![EDG_Intp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Intp.PNG)|
 |:--:|
 | <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量，含陸地部分（log<sub>10</sub> gmole/s/cell）</b>|

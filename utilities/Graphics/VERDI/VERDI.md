@@ -8,7 +8,7 @@ last_modified_date: 2022-03-18 13:55:39
 permalink: /utilities/Graphics/VERDI
 ---
 
-# VERDI
+# 網格模式之顯示軟體VERDI
 {: .no_toc }
 
 <details open markdown="block">

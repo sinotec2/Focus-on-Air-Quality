@@ -72,7 +72,7 @@ last_modified_date: 2022-03-07 13:29:39
 - kml檔案，如下範例：
   - 4個污染源廠房頂點之座標，名稱分別為b1~b4，廠房高度皆為40m
   - 3座煙囪中心點位置，名稱分別為hs1~2、c1，高度為250、250、150m。
-- 以[kml](https://zh.wikipedia.org/wiki/KML)檔案做為輸入座標介面的[理由](/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#以kml檔案做為輸入座標介面的理由)。
+- 以[kml](https://zh.wikipedia.org/wiki/KML)檔案做為輸入座標介面的[理由](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#以kml檔案做為輸入座標介面的理由)。
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2">
@@ -156,7 +156,7 @@ last_modified_date: 2022-03-07 13:29:39
 此程式讀取html提供之kml檔案，進行解析後將依序執行：
 - Rotate KML
 - [BPIPPRIM]()
-- [GENINP](/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/) and AERMAP
+- [GENINP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/) and AERMAP
 - [MMIF]()
 - [AERMOD]()
 - WAIT and CHECK
@@ -169,11 +169,11 @@ last_modified_date: 2022-03-07 13:29:39
 - 設計每30秒檢查一次mmif的執行緒數，如果只剩1個執行緒，則
   - 接著執行AERMOD
   - 進行後續後處理
-    1. [Dat2kml](/Focus-on-Air-Quality/utilities/GIS/wr_kml/#dat2kml) 將PLOTFILE轉成等值線圖（KML格式、SURFER  grd格式）
+    1. [Dat2kml](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/#dat2kml) 將PLOTFILE轉成等值線圖（KML格式、SURFER  grd格式）
     1. OLM後處理
     1. 壓縮所有結果
     1. 寄信
-  - see [TODO's](/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#known-bugs-and-todos)
+  - see [TODO's](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#known-bugs-and-todos)
 
 ```bash
 kuang@114-32-164-198 ~/Downloads

@@ -33,9 +33,9 @@ last_modified_date: 2022-02-21 10:25:20
 - 更多討論詳見[網頁計算服務軟體系統的建置](https://www.evernote.com/shard/s125/sh/cbdd416f-d96e-54c0-819e-eb022ebd452d/ea45d6252fe57992d284ac8109f2f035)，此處專注AERMAP之部分。
 
 ### 地形前處理自動執行遭遇的問題
-- 完整之地形前處理，詳見[AERMAP](/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/)。
+- 完整之地形前處理，詳見[AERMAP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/)。
   - 此處因在伺服器執行，因此仍然維持[eio](https://pypi.org/project/elevation/)下載數據、
-  - 此外，[gdal_translate](https://gdal.org/programs/gdal_translate.html)改變格式，準備好aermap.inp執行aermap等程序，與[AERMAP](/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/)一樣。
+  - 此外，[gdal_translate](https://gdal.org/programs/gdal_translate.html)改變格式，準備好aermap.inp執行aermap等程序，與[AERMAP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/)一樣。
 - html及cgi_python的內容，詳見[網頁計算服務軟體系統的建置]七。此處說明因應caas所做的重要更動。
 - 主要的問題：
 1. 發生在網頁使用者的身份，與平常一般用ssh登入的使用者，二者在環境的設定上有著很大的差異，
@@ -49,7 +49,7 @@ last_modified_date: 2022-02-21 10:25:20
 
 - [煙流模式的地形處理](http://114.32.164.198/terrain.html)入口畫面
 
-| ![terrain_caas.png](/Focus-on-Air-Quality/raw/main/assets/images/terrain_caas.png)|
+| ![terrain_caas.png](https://sinotec2.github.io/Focus-on-Air-Quality/raw/main/assets/images/terrain_caas.png)|
 |:--:|
 | <b></b>|
 

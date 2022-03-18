@@ -191,7 +191,7 @@ $ cat -n $(which csv2kml.py)
 ```   
 ## 建築物之設定
 - 由於建築物設定為直角座標之工廠地圖系統，與背景地圖之間需要有夾角及原點座標值。
-- **夾角D**在fort.10檔案中已經登錄，因此設計[rotate_KML](/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML/)在產生fort.10時，順便將KML檔中的第1個點設為原點，並將其座標寫在[檔頭](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，以利[iscParser]()讀取應用。
+- **夾角D**在fort.10檔案中已經登錄，因此設計[rotate_KML](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML/)在產生fort.10時，順便將KML檔中的第1個點設為原點，並將其座標寫在[檔頭](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，以利[iscParser]()讀取應用。
 - 因前述污染源對象已經太過複雜了，因此另將解析寫在程式[isc_parserBP.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/isc_parserBP.py)中。
 
 

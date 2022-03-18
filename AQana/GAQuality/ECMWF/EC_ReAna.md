@@ -173,7 +173,7 @@ for nc in $(ls *_1901.nc);do
   echo \"${var}\":\"${spec}\",
 done
 ```
-- 結果如下，將會用在[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py%E7%A8%8B%E5%BC%8F%E8%AA%AA%E6%98%8E)
+- 結果如下，將會用在[grb2D1m3RHO.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2D1m3/#grb2d1m3py程式說明)
 
 ```json
 {

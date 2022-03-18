@@ -21,7 +21,7 @@ last_modified_date: 2022-03-11 16:18:58
 ---
 ## 背景
 - 點狀資訊在KML架構中是最單純的。KML提供了點狀性質(feature)的設定方式，因此使得單調的點，因著背景地圖的參考而變得豐富。
-- [csv2kml.py]的應用有很多，繪製軌跡圖、將點狀(與鏈結)資訊輸出到[uMAP](/Focus-on-Air-Quality/PlumeModels/TG_pathways/twnTERR/)展現、[ISC/AERMOD](/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/#csv2kmlpy修正)地理資訊的解讀展示等等。
+- [csv2kml.py]的應用有很多，繪製軌跡圖、將點狀(與鏈結)資訊輸出到[uMAP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/TG_pathways/twnTERR/)展現、[ISC/AERMOD](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/#csv2kmlpy修正)地理資訊的解讀展示等等。
 - 如果要建立更複雜的KML，由熟悉點狀資訊的輸出，會是一個好的開始。
 
 ### 前言
@@ -119,7 +119,7 @@ $ cat -n trjguanshan2019062315.csv.kml
 ### 基本
 - 同樣2點以上的數據，可以用點(Point)或線(Line)形式來繪製KML的地標(Placemark)
 - 4點以上，如果最後點與第一點重疊，則可以選擇以多邊形來展現地標，多邊形的特性就是除了線條之外，也可以針對填滿的顏色、透明度等進行設定。
-- [等值圖KML檔之撰寫](/Focus-on-Air-Quality/utilities/GIS/wr_kml/)就是以具有順序的多邊形、來層疊出等值圖的特性。
+- [等值圖KML檔之撰寫](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)就是以具有順序的多邊形、來層疊出等值圖的特性。
 
 ### 多邊形的特殊約定
 - 由於多邊形物件不限定點數，因此必須（至少）約定物件的開始點。

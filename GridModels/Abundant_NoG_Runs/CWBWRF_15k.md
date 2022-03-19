@@ -137,3 +137,6 @@ if ( $DM == 'd01' ) then
 ### [pm10.ncl](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)
 - [ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)將COMBINE中的TFLAG及PM10取出另存，再以`ncrcat`照日期連接成pm10.nc
 - 進行[NCL等值圖繪製](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL/)
+
+## Reference
+- 陳依涵、戴俐卉、賴曉薇、陳怡儒、林伯勳、黃小玲、江琇瑛、江晉孝、陳白榆、洪景山、馮欽賜（2017）[中央氣象局區域模式2017 年更新 (OP41)](https://conf.cwb.gov.tw/media/cwb_past_conferences/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf)，中央氣象局氣象資訊中心

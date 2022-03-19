@@ -23,33 +23,37 @@ last_modified_date: 2022-03-18 14:02:50
 
 ## PAVE(VERDI前身)
 ### PAVE簡述：
-PAVE(Package for Analysis and Visualization of Environmental data)顧名思義為一環境數據的顯示軟體，當時因為主要的平台為工作站以上的機器，沒有適合的軟體，因此USEPA特別委託開發檢視軟體 (Rhyne et al. 1993, Thorpe et al. 1996) 。
-PAVE功能也較當時述軟體為多，且為空氣品質模式專門設計，因此在應用上也較其他軟體普遍，因此USEPA也持續投入發展，以符合當代軟應體的環境需求。當時主要特性包括：
-- 提供基本的圖形展示並可將圖形輸出至高階之商用軟體；
+PAVE(Package for Analysis and Visualization of Environmental data)顧名思義為一環境數據的顯示軟體，當時因為主要的平台為工作站以上的機器，沒有適合的軟體，因此USEPA特別委託檢視軟體 (Rhyne et al. 1993, Thorpe et al. 1996)的開發。PAVE功能也較當時大多數軟體為多，且為空氣品質模式專門設計，因此在應用上也較其他軟體普遍，因此USEPA乃持續投入發展，以符合後續軟硬體及作業環境的持續需求。
+
+當時PAVE的主要特性包括：
+- 提供基本的圖形展示、並將圖形輸出至高階之商用軟體；
 - 具有處理遠端工作站資料的能力；
 - 可支援多重(不同物種、面向等組合)同時之圖形顯示；
 - 可由外部進行程序控制；
 - 計算資源需求非常低；
 - 為一免費軟體。
 
-### PAVE的功能包括：
+### PAVE的功能
 - 繪製tile plot, 3D mesh plot, 時間序列之線條與柱狀圖；
 - 繪製垂直剖面圖、風速向量圖、以及離散點xy圖；
-- 進行資料之計算，包括四則運算、三角、對數、基本統計(極值、總合、平均)、選擇區域、以及條件選擇等；繪製特定較小時間與空間範圍內之資料(放大縮小功能)；
-## VERDI
-### VERDI簡述及快速起動：
-由於PAVE只能在Linux上執行，同時也不再持續維護，因此美國環保署委請Argonne國家實驗室及UNC發展java based之VERDI (Visualization Environment for Rich Data Interpretation ) ，做為社群共用的顯示軟體。
+- 進行資料之計算，包括四則運算、三角、對數、基本統計(極值、總合、平均)、選擇區域、以及條件選擇等；繪製特定較小時間與空間範圍內之資料(放大縮小功能)。
 
-雖然PAVE的功能已經被美國模式社群所廣泛接受，然而其linux的專屬特性，以及X-window介面軟體的限制，讓許多使用者卻步，因此美國環保署發展java的版本，可以直接掛在MS window、MAC OS上或linux等不同平台上，具有最大的相容性，並增加讀取CAMx、CMAQ、IOAPI、wrf.nc等檔案的格式。
-1.    下載安裝：
-- 裝置之執行檔可以由美國環保署CMAS網站註冊會員後下載 。( https://www.cmascenter.org/verdi/)
+## VERDI
+### VERDI簡述及快速起動
+
+由於PAVE只能在Linux上執行，同時開放者也不再持續維護，因此美國環保署委請Argonne國家實驗室及UNC發展java based之VERDI (Visualization Environment for Rich Data Interpretation ) ，做為社群共用的顯示軟體。
+
+雖然PAVE的功能已經被美國模式社群所廣泛接受，然而其linux的專屬特性，以及X-window介面軟體的限制，讓許多使用者卻步，因此美國環保署發展java的版本，可以直接掛在MS window、MAC OS上或linux等等不同平台上，具有最大的相容性，並增加讀取CAMx、CMAQ、IOAPI、wrf.nc等檔案的格式。
+
+1.    下載安裝
+- 裝置之執行檔可以由美國環保署[CMAS網站](https://www.cmascenter.org/verdi/)註冊會員後下載 。
 - 程式不需要安裝，放在OS路徑可以抓到執行檔的地方即可。
-2.    執行：
+2.    執行
 - linux的指令為verdi.sh、PC為verdi.bat
 - linux系統需要有DISPLAY環境變數的設定
   - 這不會在披次檔案內設定(因為使用者很多)
   - 使用者每次開啟新的OS界面後，須按照自己本機的IP位置自行在OS設定，範例如下：
-  1. finger可以知道現在有誰在線上活動，如範例中kuang的主機(本機)是pc556，pc556是公司對每個pc的稱謂代碼，
+  1. finger可以知道現在有誰在線上活動，如範例中kuang的主機(本機)是pc556，pc556是公司對該pc的稱謂代碼，
   1. 到底IP是多少呢？可以用ping(測試連線狀態)來檢查本機的IP，如範例中ping pc556的結果，OS就會引導去連200.200.31.182，這便是pc556的IP了，
   1. 將IP代入xxx.xxx.xxx.xxx位置即可設定VERDI在這個OS作業要求下，要顯示在哪一台機器的螢幕上。
 
@@ -78,13 +82,14 @@ $ verdi.sh&
 
 ### VERDI注意事項
 
-1.    記憶體
+#### 記憶體
 
 - 由於java程式佔用記憶體非常可觀，未讀入資料即耗用近500MB記憶體，1.5版甚至需1G的記憶體，因此PC必須有足夠的硬體方能順利運作。如果程式出現「沒有回應」只是還在讀檔計算，不是真的死當，等一下即可。
 - 在讀取CALMET2netCDF結果檔案，製作4階向量圖時，系統會出現錯誤：OutOfMemoryError_verdi可能是因為時間太長，檔案太大所致，減少檔案的長度之後，即可應用verdi來開該等nc檔案。
-- 不論PC或工作站，VERDI無法開啟3G以上的大型檔案，必須先減少時間、變數或維度。>700MB的檔案不能同時呈現兩個變數的tile圖。即使關閉變數或檔案並不會恢復(java heap space)，必須關閉程式與視窗，重新開始。
+- 不論PC或工作站，VERDI無法開啟3G以上的大型檔案，必須先減少時間、變數或維度。
+- 大於700MB的檔案不能同時呈現兩個變數的tile圖。即使關閉變數或檔案並不會恢復(java heap space)，必須關閉程式與視窗，重新開始。
 
-2.    座標轉換
+#### 座標轉換
 
 - VERDI可以接受多種座標系統，包括常用的WGS系統經緯度、Lambert投影系統、UTM座標等。
 - 如果是nc檔、IOAPI或WRF檔，VERDI會抓檔案內的設定值。因此如要修正，要從nc檔案的內容著手，在VERDI本身或其他外部檔案都沒有可以調整的。
@@ -124,8 +129,12 @@ YCENT= 23.61
 - TODO：
 	- 可能係T1、T2設定的問題，如果domain範圍較小，可以適度減少T1、T2範圍，以增加圖面之線性，如T1=21.61、T2=25.61
 	- 如果domain的原點(中心點)有變更時，才需要更換camxproj.txt，否則不需要變數。
-3.   底圖的選擇與自行增加底圖
-- 台灣地區的縣市界或鄉鎮界GIS檔案，可以由政府官網(如內政部、運研所)下載 ，座標系統請選擇「經緯度」，VERDI看不懂twd97座標系統官網提供的是GIS套件，包括.shp、.dbf、等，但是VERDI要讀的是.bin檔案由VERDI軟體包中的shape2bin(.exe)執行轉換，用法如下：選擇正確的機器版本目錄執行完，以head -4指令確認結果。如twn_county.bin有769個多邊形，有216323 個頂點。
+#### 底圖的選擇與自行增加底圖
+- 台灣地區的縣市界或鄉鎮界GIS檔案，可以由政府官網(如內政部、運研所)下載 ，座標系統請選擇「經緯度」。VERDI看不懂twd97座標系統
+- 官網提供的是GIS套件，包括.shp、.dbf、等，但是VERDI要讀的是.bin檔案。
+- 此檔案由VERDI軟體包中的shape2bin(.exe)執行轉換，用法如下：
+  - 選擇正確的機器版本目錄
+  - 執行完，以head -4指令確認結果。如twn_county.bin有769個多邊形，有216323 個頂點。
 
 ```bash
 kuang@master /cluster/VERDI_1.5.0/shape2bin/bin/Linux.x86_64
@@ -148,7 +157,7 @@ Content-type: application/octet-stream; charset=iso-8859-1
 
 - 1.4版：放在VERDI資料目錄下 ，不必與其他底圖放在一起，可以由browser選擇。
 - 1.5版以後：須以「現有圖檔名稱」取代
-5.   底圖與版本選擇
+#### 底圖與版本選擇
 - 1.4版可自由選擇要疊加的底圖，並無問題困難。
 - 雖然CMAS網站提供了1.5版，主要是為了java版本的更新，然而更新後對非美國以外地區，不再提供向量底圖檔案的選項，需要使用者自行裝置底圖、以現有圖名替代。
   - world(內設，如左圖)

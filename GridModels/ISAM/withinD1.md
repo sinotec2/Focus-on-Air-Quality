@@ -35,7 +35,7 @@ last_modified_date: 2021-12-22 17:10:45
   - `d01`範圍之`nc`檔模版：`PM25_202001-05_d1.nc`
 - 輸出檔
   - 多邊形之頂點座標(檢核用)：`doc.csv`
-  - 原`nc`檔模版：改成地理分區編號(1~7)，[VERDI]()檢核用
+  - 原`nc`檔模版：改成地理分區編號(1~7)，[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢核用
   - 地理分區的**網格遮罩**(gridmask)檔案：`AQFZones_EAsia_81K.nc`
 
 ### 分段說明
@@ -144,7 +144,7 @@ last_modified_date: 2021-12-22 17:10:45
   - 全部網格系統的點位依序進行判斷
   - 判斷結果轉成2維矩陣，並以`np.where`找到布林值為`真`的位置(`idx`)
   - 以批次方式將這些位置之`DIS`矩陣給定1\~7之分區編號
-  - 回存編號值後存檔(進行[VERDI]()檢查，詳下)
+  - 回存編號值後存檔(進行[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢查，詳下)
 
 ```python
     80	#store the index of districts(1~7) for each grids for VERDI cheking

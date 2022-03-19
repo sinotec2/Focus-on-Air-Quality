@@ -127,7 +127,7 @@ for sp in SPECs+PARTs:
 ```
 
 ### 轉檔
-- 因為CMAQ、CAMx等空氣品質模式目前還沒有發展`grib2`格式的IO方式，如果要以[VERDI]()檢視結果，還是要轉成`nc`格式比較方便。
+- 因為CMAQ、CAMx等空氣品質模式目前還沒有發展`grib2`格式的IO方式，如果要以[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視結果，還是要轉成`nc`格式比較方便。
 - 雖然[勾選](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=form)網址有提供`nc`檔案格式的選項，但為嘗試性結果。此處還是以[ncl_stable](https://www.ncl.ucar.edu/Download/conda.shtml)軟件包的`ncl_convert2nc`來進行轉檔。
 
 ```bash

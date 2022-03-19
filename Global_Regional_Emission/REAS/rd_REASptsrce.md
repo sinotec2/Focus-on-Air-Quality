@@ -33,7 +33,7 @@ last_modified_date: 2022-01-10 09:05:00
 - 
 
 ## 結果檢視
-- m3.nc檔案可以用[VERDI]()檢視，如以下：
+- m3.nc檔案可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視，如以下：
 
 | ![REAS_pointXY.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_pointXY.PNG) |
 |:--:|

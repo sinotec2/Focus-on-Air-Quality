@@ -137,7 +137,7 @@ variables:
 
 ### 維度刪除(ncwa)
 - ncks只能將維度減到最少，但不能使維度從檔案中消失。要刪除檔案中特定的維度(delete dimension)須使用ncwa([範例](http://stackoverflow.com/questions/20215529/delete-a-dimension-in-a-netcdf-file))指令。
-  - 如以下geo_em.nc檔案中的風蝕係數，其維度為[`Time`, `dust_erosion_dimension`, `south_north`, `west_east`]，其中`dust_erosion_dimension`是[VERDI]()無法辨識的，因此必須將其刪除才能檢視。
+  - 如以下geo_em.nc檔案中的風蝕係數，其維度為[`Time`, `dust_erosion_dimension`, `south_north`, `west_east`]，其中`dust_erosion_dimension`是[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)無法辨識的，因此必須將其刪除才能檢視。
 
 ```bash
 ncwa -O -a dust_erosion_dimension erod.nc a
@@ -146,7 +146,7 @@ mv a erod.nc
 - ncwa的全名是netCDF Weighted Averager，因為針對維度進行平均，會消除該維度的變化。如果該維度長度為1，則直接將其刪除。參[Charlie Zender and Brian Mays](https://linux.die.net/man/1/ncwa)。
 
 ### 維度更名(ncrename)
-- WRF-chem排放量檔案的垂直軸(emissions_zdim)並非真的垂直軸(bottom_top)，致使[VERDI]()無法解析，需要更名
+- WRF-chem排放量檔案的垂直軸(emissions_zdim)並非真的垂直軸(bottom_top)，致使[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)無法解析，需要更名
 
 ```bash
 ncrename -d emissions_zdim,bottom_top $nc

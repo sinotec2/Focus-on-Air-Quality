@@ -141,7 +141,7 @@ sumv=np.sum(var[:,:,:],axis=0)
 np.max(sumv) 
 #1.0000000596046448  
 ```
-- [VERDI]()繪圖
+- [VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)繪圖
 
 | ![MODIS_16.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/MODIS_16.PNG) |
 |:--:|

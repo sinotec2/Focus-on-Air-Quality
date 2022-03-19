@@ -92,7 +92,7 @@ end
   - 加總結果檔名：`PM25_IONS${z}_2018040${d}.nc`  
 - 合併(照日期附加)
   - 使用[ncrcat]()程式
-  - 可以用[VERDI]()檢視之
+  - 可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視之
   
 ```bash
 #isam job for 20180404~8, 6 AirQualityForecastZone(AQFS), only GR1~4 and PTA are taken into account
@@ -226,7 +226,7 @@ df=DataFrame(DD)
 df.set_index('tflag').to_csv('ntw.csv')
 ```
 - note
-  - IX,IY為[VERDI]()畫面上北台灣的位置座標，是FORTRAN自1開始的標籤習慣，與python之標籤習慣從0開始相差1。
+  - IX,IY為[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)畫面上北台灣的位置座標，是FORTRAN自1開始的標籤習慣，與python之標籤習慣從0開始相差1。
 
 ```    
 ## Reference

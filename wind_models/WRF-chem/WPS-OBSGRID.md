@@ -35,7 +35,7 @@ last_modified_date: 2021-12-28 14:33:40
   - `bz2`的解壓縮： `tar xjf file`
 - 複製`geogrid/GEOGRID.TBL.ARW_CHEM`檔案成為`GEOGRID.TBL`
 - 執行`geogrid.exe`
-- 在[VERDI]()內打開`geo_em.d01.nc`檔案，進行確認。
+- 在[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)內打開`geo_em.d01.nc`檔案，進行確認。
 
 ## met_em檔案之準備
 - 與一般`ungrib`、`metgrid`的過程沒有差別，見[dowps.sh的執行](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/dowps.cs/#dowpssh%E7%9A%84%E5%9F%B7%E8%A1%8C)
@@ -50,7 +50,7 @@ last_modified_date: 2021-12-28 14:33:40
 - 其餘程序與[傳統作法](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/)一樣。  
 
 ## 結果檢視
-- `EROD`變數的第1軸不是一般的垂直維度(`z-dimension0003`)，因此[VERDI]()無法順利讀取。
+- `EROD`變數的第1軸不是一般的垂直維度(`z-dimension0003`)，因此[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)無法順利讀取。
 - `SANDFRAC`與`CLAYFRAC`為互相消長的變數。以下為`SANDFRAC`
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SANDFRAC.PNG)
 

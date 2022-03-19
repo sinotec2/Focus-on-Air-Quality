@@ -49,7 +49,7 @@ last_modified_date: 2022-03-17 18:42:34
 - 共有3支程式依序進行資料之轉檔、拮取及輸出成CMAQ所需格式。程式雖然沒有太多新的元素，轉接時仍然有些微差異，需予以注意。
   - [dens2nc.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/dens2nc.py)這支程式負責解讀[世銀船隻密度檔](https://datacatalog.worldbank.org/search/dataset/0037580)並切出D6範圍之數據另存成nc(CF-1.0格式)檔案，用[meteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)檢視。
   - [TNR2WBDens.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/TNR2WBDens.py)讀取前述nc檔與EDGAR TNR_Ship逐月船舶排放推估結果進行0.005度解析度重新分配，同樣為CF-1.0格式檔案，用[meteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)檢視。
-  - [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)將0.005度重新分配結果以合併方式納入HUADON_3k網格系統，轉成IOAPI格式以供CMAQ讀取，用[VERDI]()檢視。
+  - [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)將0.005度重新分配結果以合併方式納入HUADON_3k網格系統，轉成IOAPI格式以供CMAQ讀取，用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視。
 
 ### [dens2nc.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/dens2nc.py)
 - 此程式可能是[GeoTiff](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)系列程式中最單純的一支。

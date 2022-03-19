@@ -23,7 +23,7 @@ last_modified_date:   2021-12-23 14:03:54
 
 
 ## 背景
-- 歐洲中期天氣預報中心(ECMWF)之EAC4 ([ECMWF Atmospheric Composition Reanalysis 4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview))數據下載整併後，此處將其轉成`m3.nc`檔案，以供[VERDI]()等顯示軟體、以及後續光化模式所需。
+- 歐洲中期天氣預報中心(ECMWF)之EAC4 ([ECMWF Atmospheric Composition Reanalysis 4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview))數據下載整併後，此處將其轉成`m3.nc`檔案，以供[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)等顯示軟體、以及後續光化模式所需。
 - 由於EAC4粒狀物單位(重量混合比)轉換過程需要大氣的密度，不單是高度的函數，也隨著天氣系統而有時空的變化。可以由[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/)計算結果（`METCRO3D`）中讀取，需在執行轉換前預備好。
 
 ## 逐日密度檔案之準備

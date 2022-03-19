@@ -275,7 +275,7 @@ nc.close()
 - [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)
 
 ## 結果檢視
-- m3.nc檔案可以用[VERDI]()檢視，如以下：
+- m3.nc檔案可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視，如以下：
 
 | ![REAS_roadTransBenz.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_roadTransBenz.PNG) |
 |:--:|

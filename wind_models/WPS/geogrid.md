@@ -150,7 +150,7 @@ total 6.1M
 ```
 
 ### 揚沙參數之執行結果
-- EROD風蝕係數之維度須先以[ncwa](https://linux.die.net/man/1/ncwa)予以[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)方能以[VERDI]()檢視。
+- EROD風蝕係數之維度須先以[ncwa](https://linux.die.net/man/1/ncwa)予以[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)方能以[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視。
   - EROD的維度名稱為：` EROD(Time, dust_erosion_dimension, south_north, west_east) `，其中`dust_erosion_dimension`VERDI無法辨識
 
 | ![erod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/erod.PNG) |

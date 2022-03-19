@@ -46,9 +46,9 @@ last_modified_date: 2022-01-07 09:49:12
 
 ### 後處理
 - 此處不需累計所有的揚沙粒徑，只需從wrfout檔案中抽出另存。
-- 如欲以[VERDI]()處理
-  - 因有時間及空間的維度，要記得加上`Times,XLAT,XLONG`等變數讓[VERDI]()知道時間與位置
-  - EDUST的垂直維度不是傳統`bottom_top`，而是`klevs_for_dust`，雖其長度為1，還是需先[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)或[更名](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名(ncrename))其垂直軸名稱，否則[VERDI]()不能解析。
+- 如欲以[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)處理
+  - 因有時間及空間的維度，要記得加上`Times,XLAT,XLONG`等變數讓[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)知道時間與位置
+  - EDUST的垂直維度不是傳統`bottom_top`，而是`klevs_for_dust`，雖其長度為1，還是需先[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)或[更名](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度更名(ncrename))其垂直軸名稱，否則[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)不能解析。
 
 ```bash
 for d in 03-3{0..1} 04-0{1..9};do nc=wrfout_d01_2018-${d}_00:00:00;ncks -O -v EDUST1,EDUST2,EDUST3,EDUST4,EDUST5,Times,XLAT,XLONG $nc EDUST_$d.nc;done

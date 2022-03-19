@@ -28,7 +28,7 @@ last_modified_date: 2022-03-17 18:42:34
 
 | ![20180404_SO2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404_SO2.PNG)|  
 
-- 當風向與船隻路線有顯著交角是，突高的面源產生類似點源的效應，圖面上呈現出平行的煙流，而不是均勻的片狀線源貢獻之濃度分布。
+- 當風向與船隻路線有顯著交角時，突高的面源產生類似點源的效應，圖面上呈現出平行的煙流，而不是均勻的片狀線源貢獻之濃度分布。
 - 造成此一結果的主要原因是EDGAR在同一路線上的排放量本身就具有很大的差異性，當程式進行內插時就很難避免加深此一差異而造成路線上的不連續結果。
 - 解決方式
   - 以照片處理技巧拉大路線及非路線排放量的差距([Noise Removal of a Raster Data](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/noise_removal/))。可以消除公海部分的零星排放量，但不能增加路線上的排放量。

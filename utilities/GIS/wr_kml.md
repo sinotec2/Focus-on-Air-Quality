@@ -24,7 +24,7 @@ last_modified_date: 2022-02-11 13:39:55
   - [SURFER](https://www.goldensoftware.com/products/surfer)：雖然可以做到報告品質，但目前只在ms win平台，linux/macOS無法作動。底圖須另取得，且4點georeferencing太麻煩(適用大範圍非直角座標系統之底圖)。
   - [QGIS](https://zh.wikipedia.org/wiki/QGIS)：是相當完整、輕量化、公眾領域的GIS程式，雖然可以有完整解析度的地圖作為底圖，但同樣沒有regrid內插，只有色塊(tile)形式。
   - [VERDI](https://www.evernote.com/shard/s125/sh/e57ae550-4ee0-4417-b56b-b340f50bc43e/21f7f90a91e5ede50f228b557de1f347)：篩檢品質。沒有regrid內插。只有向量底圖(行政區界)，對小範圍缺少資訊。只能輸入nc、uamiv格式檔案。
-  - [MeteoInfo](https://www.evernote.com/shard/s125/sh/1f1f4de7-a9b7-fb91-78df-1b03b06dc16b/5c16006937c386e7085358e70155c455)：可以接受ASCII GRD檔案。但也是只有向量底圖。
+  - [MeteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)：可以接受ASCII GRD檔案。但也是只有向量底圖。
   - 商業套裝軟體(如[BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod)、[AERMOD View™](https://www.weblakes.com/products/aermod/index.html)、[AERMOD Cloud<sup>R</sup>](https://www.envitrans.com/software-aermod-cloud.php)、[BEEST Suite](https://www.providenceoris.com/product/beest-suite/))：無法接受TWD97座標系統。沒有中文街道底圖。
 - [KML](https://zh.wikipedia.org/wiki/KML)檔案現已經被很多網路地圖所接受成為圖層，包括[Google Map]()、OpenStreet Map([OSM](https://www.openstreetmap.org/#map=8/23.611/120.768))等等網路地圖界面。
   - 格式可以參考[範例](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/rd_kml/#檔案來源與解壓縮)及google[官網](https://developers.google.com/kml/documentation/kml_tut)。

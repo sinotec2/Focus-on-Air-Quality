@@ -398,7 +398,7 @@ $ cat -n rd_grbCubicA.py
 - 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/rd_grbCubicA.py_txt)找到原始碼。
 
 ## 檢核
-- 可以使用[MeteoInfo](http://meteothink.org/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)
+- 可以使用[MeteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)
 
 ## Reference
 - sinotec2, **pygrib的安裝、重要語法**, [evernote](http://www.evernote.com/l/AH12nyLrGkBL2qg3WTonSwDC-0Rtq_S9npA/), 2021年4月1日

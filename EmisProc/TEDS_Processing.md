@@ -10,7 +10,7 @@ last_modified_date:   2021-12-01 11:24:33
 # TEDS排放處理相關程式
 
 除了準備光化模式所需要的排放檔案，此處也介紹排放數據的展示、檢視等等經驗。
-- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。臺灣地區以外的東亞範圍，此處以[REAS](https://www.nies.go.jp/REAS/)資料庫為分析對象，另見[隔壁](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/)。
+- 處理對象以全臺範圍的[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)。臺灣地區以外的東亞範圍，此處以[REAS](https://www.nies.go.jp/REAS/)資料庫為分析對象，另見[隔壁](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS)。
 - 程式以2018年以來持續發展之`python`平行處理程式為主。
 
 ## 背景

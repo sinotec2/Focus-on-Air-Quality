@@ -231,7 +231,7 @@ nc.close()
 
 
 ## [reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
-- 如[前](https://sinotec2.github.io/Focus-on-Air-Quality/REASProc/reas2cmaqD2/#背景)所述，D1網格間距81Km，將會有3~4格REAS排放量，如用內插作法將會嚴重失真，此處乃以加總之策略進行座標系統轉換。
+- 如[前](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaqD2/#背景)所述，D1網格間距81Km，將會有3~4格REAS排放量，如用內插作法將會嚴重失真，此處乃以加總之策略進行座標系統轉換。
 
 ### 執行
 - reas2cmaqD1.py沒有引數、所有類別都在程式內部執行

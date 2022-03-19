@@ -21,8 +21,8 @@ last_modified_date: 2022-03-18 14:02:50
 
 此處簡介VERDI的使用方式
 
-## PAVE(VERDI前身)
-### PAVE簡述：
+## 背景
+### PAVE(VERDI前身)簡述：
 PAVE(Package for Analysis and Visualization of Environmental data)顧名思義為一環境數據的顯示軟體，當時因為主要的平台為工作站以上的機器，沒有適合的軟體，因此USEPA特別委託檢視軟體 (Rhyne et al. 1993, Thorpe et al. 1996)的開發。PAVE功能也較當時大多數軟體為多，且為空氣品質模式專門設計，因此在應用上也較其他軟體普遍，因此USEPA乃持續投入發展，以符合後續軟硬體及作業環境的持續需求。
 
 當時PAVE的主要特性包括：
@@ -45,17 +45,21 @@ PAVE(Package for Analysis and Visualization of Environmental data)顧名思義�
 
 雖然PAVE的功能已經被美國模式社群所廣泛接受，然而其linux的專屬特性，以及X-window介面軟體的限制，讓許多使用者卻步，因此美國環保署發展java的版本，可以直接掛在MS window、MAC OS上或linux等等不同平台上，具有最大的相容性，並增加讀取CAMx、CMAQ、IOAPI、wrf.nc等檔案的格式。
 
-1.    下載安裝
+1.    下載安裝
 - 裝置之執行檔可以由美國環保署[CMAS網站](https://www.cmascenter.org/verdi/)註冊會員後下載 。
 - 程式不需要安裝，放在OS路徑可以抓到執行檔的地方即可。
-2.    執行
-- linux的指令為verdi.sh、PC為verdi.bat
+
+2.    執行
+- linux的指令為`verdi.sh`、PC為`verdi.bat`
 - linux系統需要有DISPLAY環境變數的設定
   - 這不會在披次檔案內設定(因為使用者很多)
   - 使用者每次開啟新的OS界面後，須按照自己本機的IP位置自行在OS設定，範例如下：
-  1. finger可以知道現在有誰在線上活動，如範例中kuang的主機(本機)是pc556，pc556是公司對該pc的稱謂代碼，
-  1. 到底IP是多少呢？可以用ping(測試連線狀態)來檢查本機的IP，如範例中ping pc556的結果，OS就會引導去連200.200.31.182，這便是pc556的IP了，
-  1. 將IP代入xxx.xxx.xxx.xxx位置即可設定VERDI在這個OS作業要求下，要顯示在哪一台機器的螢幕上。
+
+  （1）    finger可以知道現在有誰在線上活動，如範例中kuang的主機(本機)是pc556，pc556是公司對該pc的稱謂代碼，
+
+  （2）    到底IP是多少呢？可以用ping(測試連線狀態)來檢查本機的IP，如範例中ping pc556的結果，OS就會引導去連200.200.31.182，這便是pc556的IP了，
+  
+  （3）    將IP代入xxx.xxx.xxx.xxx位置即可設定VERDI在這個OS作業要求下，要顯示在哪一台機器的螢幕上。
 
 ```bash
 kuang@node03 ~
@@ -76,25 +80,30 @@ $ export DISPLAY=xxx.xxx.xxx.xxx:0.0
 $ verdi.sh&
 ```
 - 隨即在本機的X window軟體便可以發現VERDI的歡迎畫面。
-- 如果要離開，按下File → Exit 即可   
-3.     線上求助：
+- 如果要離開，按下File → Exit 即可
+
+3.    線上求助：
 - [官網](https://www.airqualitymodeling.org/index.php/VERDI_1.5_User_Manual)
 
-### VERDI注意事項
+## VERDI注意事項
 
-#### 記憶體
+### 記憶體
 
 - 由於java程式佔用記憶體非常可觀，未讀入資料即耗用近500MB記憶體，1.5版甚至需1G的記憶體，因此PC必須有足夠的硬體方能順利運作。如果程式出現「沒有回應」只是還在讀檔計算，不是真的死當，等一下即可。
 - 在讀取CALMET2netCDF結果檔案，製作4階向量圖時，系統會出現錯誤：OutOfMemoryError_verdi可能是因為時間太長，檔案太大所致，減少檔案的長度之後，即可應用verdi來開該等nc檔案。
 - 不論PC或工作站，VERDI無法開啟3G以上的大型檔案，必須先減少時間、變數或維度。
 - 大於700MB的檔案不能同時呈現兩個變數的tile圖。即使關閉變數或檔案並不會恢復(java heap space)，必須關閉程式與視窗，重新開始。
 
-#### 座標轉換
+### 座標轉換
 
 - VERDI可以接受多種座標系統，包括常用的WGS系統經緯度、Lambert投影系統、UTM座標等。
-- 如果是nc檔、IOAPI或WRF檔，VERDI會抓檔案內的設定值。因此如要修正，要從nc檔案的內容著手，在VERDI本身或其他外部檔案都沒有可以調整的。
-- nc.XCENT、nc.YCENT、nc.ALP、nc.BET、nc.GAM、nc.XORIG、nc.YORIG、nc.XCELL、nc.YCELL 等等由於模式內設為美國本土地區，CAMx模式輸出檔中的座標系統若使用UTM/Lambert，將無法順利貼上其內設的底圖。
-- 須在「與濃度檔同一目錄下」之camxproj.txt檔內予以指定範例如下，相關設定方式可以詳見CMAS網站說明(https://www.cmascenter.org/ioapi/documentation/3.1/html/BINIO.html) 。
+- 如果是nc檔、IOAPI或WRF檔，VERDI會抓檔案內的設定值。
+  - 因此如要修正，要從nc檔案的內容著手，在VERDI本身或其他外部檔案都沒有可以調整的。
+- UTM系統之設定
+  - nc.XCENT、nc.YCENT、nc.ALP、nc.BET、nc.GAM、nc.XORIG、nc.YORIG、nc.XCELL、nc.YCELL 等等由於模式內設為美國本土地區，模式輸出檔中的座標系統若使用UTM，將無法順利貼上其內設的底圖。
+- CAMx [uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案
+  - 須在「與濃度檔同一目錄下」之camxproj.txt檔內予以指定。範例如下
+  - 相關設定方式可以詳見[CMAS網站](https://www.cmascenter.org/ioapi/documentation/3.1/html/BINIO.html)說明 。
 
 ```bash
 kuang@master /home/camxruns/2019/outputs/con09
@@ -117,7 +126,7 @@ YCENT= 23.61
 |meridian deg, same as P_GAM|XCENT=118.586|XCENT=120.99|
 |meridian deg, origin for offset (2414km)|YCENT=1.823|YCENT= 23.61|
 
-- #數字後面不可以有空格，必須馬上接carriage return
+- 數字後面不可以有空格，必須馬上接carriage return(^M、`'\n'`)
 - 座標系統的誤差
   - 經緯度轉換為LCC(如MM5系統)的誤差有限。
   - UTM(twd97)及LCC之間的轉換則會發生誤差。
@@ -129,12 +138,13 @@ YCENT= 23.61
 - TODO：
 	- 可能係T1、T2設定的問題，如果domain範圍較小，可以適度減少T1、T2範圍，以增加圖面之線性，如T1=21.61、T2=25.61
 	- 如果domain的原點(中心點)有變更時，才需要更換camxproj.txt，否則不需要變數。
-#### 底圖的選擇與自行增加底圖
-- 台灣地區的縣市界或鄉鎮界GIS檔案，可以由政府官網(如內政部、運研所)下載 ，座標系統請選擇「經緯度」。VERDI看不懂twd97座標系統
-- 官網提供的是GIS套件，包括.shp、.dbf、等，但是VERDI要讀的是.bin檔案。
-- 此檔案由VERDI軟體包中的shape2bin(.exe)執行轉換，用法如下：
+
+### 底圖的選擇與自行增加底圖
+- 台灣地區的縣市界或鄉鎮界GIS檔案，可以由政府官網(如[內政部](https://data.gov.tw/dataset/7442))下載 ，座標系統請選擇WGS「經緯度」。VERDI看不懂**TWD97**座標系統
+- 官網提供的是GIS套件，包括.shp、.dbf、等檔案，但是VERDI要讀的是.bin檔案。
+- 此檔案由VERDI軟體包中的`shape2bin(.exe)`執行轉換，用法如下：
   - 選擇正確的機器版本目錄
-  - 執行完，以head -4指令確認結果。如twn_county.bin有769個多邊形，有216323 個頂點。
+  - 執行完，以`head -4`指令確認結果。如twn_county.bin有769個多邊形，有216323 個頂點。
 
 ```bash
 kuang@master /cluster/VERDI_1.5.0/shape2bin/bin/Linux.x86_64
@@ -157,7 +167,8 @@ Content-type: application/octet-stream; charset=iso-8859-1
 
 - 1.4版：放在VERDI資料目錄下 ，不必與其他底圖放在一起，可以由browser選擇。
 - 1.5版以後：須以「現有圖檔名稱」取代
-#### 底圖與版本選擇
+
+### 底圖與版本選擇
 - 1.4版可自由選擇要疊加的底圖，並無問題困難。
 - 雖然CMAS網站提供了1.5版，主要是為了java版本的更新，然而更新後對非美國以外地區，不再提供向量底圖檔案的選項，需要使用者自行裝置底圖、以現有圖名替代。
   - world(內設，如左圖)
@@ -169,7 +180,7 @@ Content-type: application/octet-stream; charset=iso-8859-1
 |:--:|:--:|
 | <b>D2模擬結果。VERDI內設海岸線| <b>加上大陸省份及臺灣縣份行政區底圖</b>|
 
-### 軟體使用說明
+## 軟體使用說明
 1.    開啟檔案(Datasets/Formula/Area)：
 
 
@@ -241,11 +252,12 @@ Content-type: application/octet-stream; charset=iso-8859-1
 ### Linux上執行VERDI
 由於程式在Linux上執行，因此後處理與繪圖(至少品質確認工作)在Linux上執行，避免大型檔案在網路上傳送，是最合理的方式。
 
-1.    由CMAS網站下載VERDI for linux(注意32或64位元)約380mb，下載完後在linux上解開壓縮檔(目前在master:/cluster/VERDI_1.5.0目錄)執行時亦須下到該目錄執行。
+1.    由CMAS網站下載VERDI for linux(注意32或64位元)約380mb，下載完後在linux上解開壓縮檔(目前存放在master:/cluster/VERDI_1.5.0目錄)，執行時亦須鏈結到該目錄的執行檔。
 
 2.    準備視窗環境
-- 在遠端PC啟動X window環境(如mi/x Xwindow、mobaXterm等)
-- 在工作站執行：
+- 在客戶端PC啟動X window環境(如[mi/x Xwindow](https://www.microimages.com/mix/)、[mobaXterm](https://mobaxterm.mobatek.net/)等)
+- 如客戶端為CentOS或MacOS的作業環境(Consonle)，因本身就是 X window，無需執行此一步驟。
+- 設定遠端工作站螢幕輸出的對象。執行：
 
 ```bash
 - export DISPLAY='xxx.xxx.xxx.xxx:0.0'(顯示器位置，ip可以由finger/who或X win的banner找到，後者可能不太準)
@@ -254,7 +266,7 @@ Content-type: application/octet-stream; charset=iso-8859-1
 ```
 3.    準備台灣地區的地圖檔(詳上述，所有GIS的檔名都要同樣大小寫)
 
-4.     如果要開啟CAMx檔案，要記得
+4.    如果要開啟CAMx檔案，要記得
 
 - 先準備好的原點(中心點)設定，camxproj.txt必須要和濃度檔同一目錄。
 - 如果忘了先準備好camxproj.txt→
@@ -271,68 +283,11 @@ Content-type: application/octet-stream; charset=iso-8859-1
 
 7.    VERDI的設定檔與輸出結果內設目錄，是在登入機器的$HOME目錄下。產生圖檔後，可用filezilla至該處下載。
 
-## VERDI的批次作業
-由於JAVA在執行時可以接受命令列所輸入的引數，因此不論是linux或者是PC上，都是以批次檔方式開啟程式。運用此一特性，可以用批次檔的方式執行重複性的繪圖與計算作業，可以大幅節省工作時間。
-
-除命令列的操作之外，VERDI程式內也提供了script editor可以在程式內執行批次。此二者命令相同，然而前者具有完整的script功能(變數設定、迴圈及判斷)，缺點是重複執行JAVA程式，浪費作業時間，而後者雖然在程式內執行批次作業減省JAVA的進出時間，然而該script的設計不接受變數迴圈或判斷。使用者可以視需求自行選用二者之一。
-
-各項批次檔命令(script command)可以詳參手冊。
-
-注意在命令列上，各command之前要加負號，之後是以空格隔開，command之間沒有順序，但是-configFile要先給定，-quit必須在最後。
-
-在程式script editor之內，各command之前沒有負號，之後是以=(等號)隔開，command之間也沒有順序，
-
-### 設定組態檔(-configFile configuration file)
-可以儲存各種圖形介面組態(Configure)的設定內容，包括
-- 圖面的主標題、次標題、
-- 色階、色階的單位、
-- 下標題、各軸的名稱、字型與大小等等圖面設定。
-
-VERDI並未約定檔案的字尾，基本上，組態檔是一個文字檔，也可以從外部進行編輯。
-
-一般VERDI會將變數名稱(-s)列為主標題(titleString)，而將檔案名稱(通常含有地域及時間項-f)列為次標題(-subTitle1, -subTitle2)，而變數的時刻與最大值則會出現在下標題，這些是可以在批次檔中控制，將內容傳給VERDI寫在圖面上，其餘不必改變的，可以按照configuration file的內容。
-
-### 命令列預設控制(範例)
-```bash
-@ECHO OFF
-SET BATCHFILE=%~f2
-CD .\plugins\bootstrap
-SET JAVA=..\..\jre1.6.0\bin\java
-SET JAVACMD=%JAVA% -Xmx512M –classpath "./bootstrap.jar; ./lib/saf.core.runtime.jar; ./lib/commons-logging.jar;./lib/jpf-boot.jar;./lib/jpf.jar;./lib\log4j-1.2.13.jar" saf.core.runtime.Boot
-IF "%1" == "-b" GOTO scripting
-IF "%1" == "-batch" GOTO scripting
-%JAVACMD% %*
-GOTO end
-:scripting
-rem %JAVACMD% %1 %BATCHFILE%
-SET INP=C:\Users\4139\MyPrograms\VERDI_1.4.1\201002181.avrg -s O3[1]
-SET OUT=PNG C:\Users\4139\MyPrograms\VERDI_1.4.1\20100218.png
-SET TWN=C:\Users\4139\MyPrograms\VERDI_1.4.1\plugins\bootstrap\data\TWN_COUNTY.bin
-SET TMS=C:\Users\4139\MyPrograms\VERDI_1.4.1\toms.cfg
-%JAVACMD% -configFile %TMS% -f %INP% -g tile -mapName %TWN% -saveImage %OUT% -quit %BATCHFILE%
-:end
-CD ..\..\
-```
-### 程式內之批次檔(script editor、%BATCHFILE%)
-- 前述命令列的設定一次只能產生一張圖，然而若資料檔案很大，每次啟動VERDI程式只畫一個圖就離開，似乎效益太低了一些，此時就必須使用程式內的批次檔。
-- 程式內批次檔的格式有其基本架構，
-  - <Global> </Global>只出現在檔頭，其範圍的內容是「預設值」，與前述命令列控制類似，而無關每次的讀寫動作。
-  - 而<Task></Task>可能重復很多次，但不接受變數及迴圈。
-- 沒有一個指令是繪圖的動作，只要在script中給定圖形的檔名(imageFile=…)，程式即會寫出檔案。
-
-### 注意事項
-- -mapName：必須指向.bin檔，不接受其餘shape檔、tif檔。
-- -g與-gtype作用相同
-- -saveImage若不指定圖檔的目錄，將會存在啟動JAVA程式的最後目錄
-- Script指令s=???:ttt的用法不能作用，但ts=ttt可以作用
-- Editor內=之後的內容可以不必引號。imageFile不必再加延伸檔名，系統會自行加上。
-- 從命令列啟動editor script file: run.bat –b [dir][script file]。不必指定-quit，執行完會自己跳出JAVA程式。
-- 命令列設定和editor script二者無法同時作用。
-
 ## 參考網頁
-- Rhyne, T.-M., Bolstad, M., Rheingans, P., Petterson, L., and Shackelford, W. (1993). Visualizing environmental data at the EPA. Computer Graphics and Applications, IEEE 13:34–38. doi:10.1109/38.204964.
-- Thorpe, S., Ambrosiano, J., Balay, R., Coats, C., Eyth, A., Fine, S., Hils, D., Smith, T., and Tray, A. (1996). The Package for Analysis and Visualization of Environmental Data. Presented at the CRAY USER GROUP, CUG, Speeding by Design, Charlotte, North Carolina, pp. 46–50. https://cug.org/5-publications/proceedings_attendee_lists/1997CD/F96PROC/46_50.PDF
-- https://www.cmascenter.org/ioapi/documentation/3.1/html/BINIO.html
+- lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019
+- Rhyne, T.-M., Bolstad, M., Rheingans, P., Petterson, L., and Shackelford, W. (1993). **Visualizing environmental data at the EPA. Computer Graphics and Applications**, IEEE 13:34–38. doi:10.1109/38.204964.
+- Thorpe, S., Ambrosiano, J., Balay, R., Coats, C., Eyth, A., Fine, S., Hils, D., Smith, T., and Tray, A. (1996). **The Package for Analysis and Visualization of Environmental Data**. Presented at the [CRAY USER GROUP, CUG, Speeding by Design](https://cug.org/5-publications/proceedings_attendee_lists/1997CD/F96PROC/46_50.PDF), Charlotte, North Carolina, pp. 46–50. 
+- [The EDSS/Models-3 I/O API](https://cmascenter.org/ioapi/documentation/all_versions/html/)
 
 ### Map projection type
 ```bash
@@ -350,6 +305,6 @@ TRMGRD3=8 (transverse secant Mercator)
 - 手冊檔案：https://www.cmascenter.org/verdi/documentation/1.4.1/VerdiUserManual1.4.1.htm
 - 官網： https://www.airqualitymodeling.org/index.php/VERDI_1.5_User_Manual
 - Relatives
-  - VERDI使用說明
-  - VERDI圖面解析度之改善
-  - VERDI的script
+  - [VERDI使用說明]()
+  - [VERDI圖面解析度之改善]()
+  - [VERDI的script]()

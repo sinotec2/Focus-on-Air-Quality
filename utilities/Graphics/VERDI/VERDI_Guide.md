@@ -284,6 +284,12 @@ Content-type: application/octet-stream; charset=iso-8859-1
 7.    VERDI的設定檔與輸出結果內設目錄，是在登入機器的$HOME目錄下。產生圖檔後，可用filezilla至該處下載。
 
 ### MacOS上執行VERDI
+- 系統差異
+  - Mac的視窗本身就是X Window，因此並不特別需要其他如[XQuartz](https://www.xquartz.org/)
+  - VERDI會使用自帶的JAVA系統，因此不會有JAVA版本的衝突。
+  - 對此macOS的病毒管理是很敏感的，如果系統提醒應予以刪除，只需**取消**即可。
+- 界面差異
+  - VERDI的檔案存取是參照OS的程式庫，因此開啟檔案時，是按照macOS的習慣，只有少數預設目錄，其他目錄則必須使用者自行慢慢切換。
 
 ## 參考網頁
 - lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019

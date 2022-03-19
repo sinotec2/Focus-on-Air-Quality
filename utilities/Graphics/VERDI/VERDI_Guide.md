@@ -306,5 +306,5 @@ TRMGRD3=8 (transverse secant Mercator)
 - 官網： https://www.airqualitymodeling.org/index.php/VERDI_1.5_User_Manual
 - Relatives
   - [VERDI使用說明]()
-  - [VERDI圖面解析度之改善]()
-  - [VERDI的script]()
+  - [VERDI圖面解析度之改善](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/D1_9km/)
+  - [VERDI的script](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/)

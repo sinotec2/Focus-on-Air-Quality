@@ -156,7 +156,7 @@ last_modified_date: 2022-03-07 13:29:39
 此程式讀取html提供之kml檔案，進行解析後將依序執行：
 - Rotate KML
 - [BPIPPRIM]()
-- [GENINP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/Terrain/gen_inp/) and AERMAP
+- [GENINP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/TG_pathways/gen_inp/) and AERMAP
 - [MMIF]()
 - [AERMOD]()
 - WAIT and CHECK

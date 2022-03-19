@@ -4,7 +4,7 @@ title: TG Pathways
 parent: Plume Models
 nav_order: 2
 has_children: true
-permalink: /PlumeModels/Terrain/
+permalink: /PlumeModels//
 ---
 
 # 地形檔案之準備

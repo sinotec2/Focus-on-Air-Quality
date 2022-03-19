@@ -283,6 +283,8 @@ Content-type: application/octet-stream; charset=iso-8859-1
 
 7.    VERDI的設定檔與輸出結果內設目錄，是在登入機器的$HOME目錄下。產生圖檔後，可用filezilla至該處下載。
 
+### MacOS上執行VERDI
+
 ## 參考網頁
 - lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019
 - Rhyne, T.-M., Bolstad, M., Rheingans, P., Petterson, L., and Shackelford, W. (1993). **Visualizing environmental data at the EPA. Computer Graphics and Applications**, IEEE 13:34–38. doi:10.1109/38.204964.

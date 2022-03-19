@@ -20,7 +20,7 @@ last_modified_date: 2022-03-19 20:13:11
 ---
 
 ## 背景
-- 由於JAVA在執行時可以接受命令列所輸入的引數，因此不論是linux或者是PC上，原本就是以批次檔方式開啟程式。
+- 由於JAVA在執行時可以接受命令列所輸入的引數，因此不論是linux或者是PC上，原本就是以**批次檔**方式開啟程式。
 - 運用此一特性，可以用批次檔的方式執行重複性的繪圖與計算作業，可以大幅節省工作時間。
 - 除命令列的操作之外，VERDI程式內也提供了script editor可以在**程式內執行批次**。
 - 此二者命令相同，然而
@@ -70,6 +70,7 @@ SET TMS=C:\Users\4139\MyPrograms\VERDI_1.4.1\toms.cfg
 CD ..\..\
 ```
 ### shell 版本
+- 基本批次檔
 
 ```bash
 $ cat /opt/VERDI_2.1.3/verdi.command
@@ -108,6 +109,23 @@ if [ "$BATCHCMD" = "-b" -o "$BATCHCMD" = "-batch" ]; then
 else
   $JAVACMD ${1+"$@"}
 fi
+```
+- 循環操作範例：將前述CAMx逐時臭氧結果分別另存png檔案
+
+```bash
+export VERDI_HOME=/opt/VERDI_2.1.3
+DIR=$VERDI_HOME
+VERDI=/opt/VERDI_2.1.3/verdi.command
+BATCHFILE=$DIR/temp.bat
+for t in {00:23}:
+  INP='/Users/4139/MyPrograms/VERDI_1.4.1/201002181.avrg -s O3[1]:$t'
+  OUT='PNG /Users/4139/MyPrograms/VERDI_1.4.1/20100218$t.png'
+  TWN=/Users/4139/MyPrograms/VERDI_1.4.1/plugins/bootstrap/data/TWN_COUNTY.bin
+  TMS=/Users/4139/MyPrograms/VERDI_1.4.1/toms.cfg
+  echo '-configFile $TMS -f $INP -g tile -mapName $TWN -saveImage $OUT -quit' > $BATCHFILE
+  $VERDI -b $BATCHFILE
+  echo $t
+done
 ```
 
 ## 程式內之批次檔(script editor、%BATCHFILE%)

@@ -28,8 +28,7 @@ last_modified_date: 2022-03-19 20:13:11
   - 後者雖然在程式內執行批次作業減省JAVA的進出時間，然而該script的設計不接受變數迴圈或判斷。
 - 使用者可以視需求自行選用二者之一。
 
-各項批次檔命令(script command)可以詳參手冊。
-
+各項批次檔命令(script command)可以詳參[手冊](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch17.md)。
 
 注意在命令列上，各command之前要加負號，之後是以空格隔開，command之間沒有順序，但是-configFile要先給定，-quit必須在最後。
 
@@ -126,3 +125,6 @@ fi
 - Editor內=之後的內容可以不必引號。imageFile不必再加延伸檔名，系統會自行加上。
 - 從命令列啟動editor script file: `run.bat –b [dir][script file]`。不必指定-quit，執行完會自己跳出JAVA程式。
 - **命令列預設**和**editor script**二者無法同時作用。
+
+## Reference
+- lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019

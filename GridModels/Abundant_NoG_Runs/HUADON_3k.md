@@ -24,7 +24,7 @@ last_modified_date:   2022-03-18 16:39:52
 -
 
 ## WRF之模擬
-- WRF_chem的[ndown]()尚未成功，且由於CMAQ亦有揚塵機制，此處並不使用WRF_chem，使用WRFv4.3進行模擬。
+- WRF_chem的[ndown](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)尚未成功，且由於CMAQ亦有揚塵機制，此處並不使用WRF_chem，使用WRFv4.3進行模擬。
 
 ### 水平網格系統設計
 - 採15Km、3Km等2層網格
@@ -55,9 +55,9 @@ last_modified_date:   2022-03-18 16:39:52
 ### 垂直網格設計
 -
 
-### [ndown]()及整體程序
+### [ndown](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)及整體程序
 - 執行2層的WPS、OBSGRID及REAL
-- 執行CWBWRF_15k(單層)之WRF結束後，隨即進行[ndown]()程序，以產生HUADON_3k逐時邊界場。
+- 執行CWBWRF_15k(單層)之WRF結束後，隨即進行[ndown](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)程序，以產生HUADON_3k逐時邊界場。
 - 最後再執行HUADON_3k(單層)之WRF，將結果連結到mcip作業指定位置。
 
 ## MCIP之執行

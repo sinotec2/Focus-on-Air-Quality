@@ -21,7 +21,7 @@ last_modified_date: 2022-03-21 09:23:54
 
 ## 背景
 ### OLM的由來與定義
-參考[JAPCA 1979]https://www.tandfonline.com/doi/abs/10.1080/00022470.1979.10470866)的文章，OLM最先用在美國新污染源審查過程中NO2模式模擬短期結果的修正，現國內也列於規範中。其公式為
+參考[JAPCA 1979]https://www.tandfonline.com/doi/abs/10.1080/00022470.1979.10470866)的文章，OLM最先用在美國新污染源審查過程中NO<sub>2</sub>模式模擬短期結果的修正，現國內也列於規範中。其公式為
 
   NO<sub>2</sub> = 0.1 NO<sub>x</sub> + min( O<sub>3b</sub>, 0.9 NO<sub>x</sub> ) + NO<sub>2b</sub>
 
@@ -29,8 +29,8 @@ last_modified_date: 2022-03-21 09:23:54
 - O<sub>3b</sub>、NO<sub>2b</sub>為觀測之背景臭氧與二氧化氮濃度
 
 ### OLM的基本假設：
-- NO轉化成NO2是瞬間反應
-- NO2的光解現象是可以忽略的
+- NO轉化成NO<sub>2</sub>是瞬間反應
+- NO<sub>2</sub>的光解現象是可以忽略的
 - 煙流中O<sub>3</sub>的濃度與測站測值(背景值)是一致的
 
 ### 方案討論
@@ -40,7 +40,7 @@ last_modified_date: 2022-03-21 09:23:54
 
 | ![OLM1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/OLM1.png)|
 |:--:|
-| <b>NO2模擬結果多層次分析過程</b>|
+| <b>NO<sub>2</sub>模擬結果多層次分析過程</b>|
 
 - AERMOD
   已將OLM列入NO<sub>2</sub>模擬的設定(CO O3VALUES或CO OZONEFIL)及輸出處理程序之中。
@@ -52,7 +52,7 @@ last_modified_date: 2022-03-21 09:23:54
   - 就保守之角度，似以所有附近測站皆計算一遍取較大值為合理結果。
   - 以AERMOD而言，須做多次、重複的模擬計算
   - 以ISCST3而言，模擬只須一次，後處理須對所有附近測站進行重複計算
-  - 美國PSD並不考慮背景NO2濃度，只計算增量，因此AERMOD OLM並未加上NO2b，而是計算完後再加上背景值，雖然在同一檔案內可以接受SO BACKGRND選項。
+  - 美國PSD並不考慮背景NO<sub>2</sub>濃度，只計算增量，因此AERMOD OLM並未加上NO<sub>2b</sub>，而是計算完後再加上背景值，雖然在同一檔案內可以接受SO BACKGRND選項。
 
 ### 作業目標
 - 背景值：採測站之逐時值
@@ -285,7 +285,7 @@ done
     62      OLMremx.append(olmr)
 ```
 ### 輸出
-- 依序印出各群組與所有污染源造成之最大NO2濃度
+- 依序印出各群組與所有污染源造成之最大NO<sub>2</sub>濃度
 - 全區最大值：[土城、新莊]
 - 3敏感點最大值：[土城、新莊]
 

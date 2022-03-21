@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Prepare and Exec. of AERMAP
-parent: TG Pathways
+parent: RE & TG Pathways
 grand_parent: Plume Models
 nav_order: 1
 last_modified_date: 2022-02-11 10:57:05

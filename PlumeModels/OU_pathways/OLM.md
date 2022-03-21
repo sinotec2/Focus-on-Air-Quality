@@ -35,7 +35,7 @@ last_modified_date: 2022-03-21 09:23:54
 
 ### 方案討論
 - 按照USEPA的篩選邏輯，背景值轉化率及可以使用地區平均值、季節或月平均值等方式，做為各篩選階段計算的參數。
-- 法規評估選項中則要求使用Tier 3 chemistry methods, 包括化學轉化之Ozone Limiting Method(OLM) 與煙流入滲之 Plume Volume Molar Ratio Method(PVMRM)。
+- 法規評估選項中則要求使用下圖中的Tier 3 chemistry methods, 包括化學轉化之Ozone Limiting Method(OLM) 與煙流入滲之 Plume Volume Molar Ratio Method(PVMRM)。
 - 相關作法在2017規範修正。
 
 | ![OLM1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/OLM1.png)|
@@ -78,9 +78,12 @@ last_modified_date: 2022-03-21 09:23:54
   - 暫存檔停留時間為48小時。每天清除2天前的檔案。
 - 畫面：
 
+| ![OLM2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/OLM2.png)|
+|:--:|
+| <b>煙流模式NOx逐時結果之臭氧限制法後處理畫面與程式[界面](http://114.32.164.198/OLM.html)</b>|
 
 ## 環保署測站數據之讀取與準備
-### specHrSliderRect.py
+### [specHrSliderRect.py]()
 此處應用master:/usr/kbin/specHrSliderRect.py讀取。該程式為歷線繪圖程式，然為方便存取，程式設計輸出指定測站、成分、日期之csv檔案到所在目錄備用。
 
 如果--action(-a)選擇，則將進入批次作業方式，如下所示。

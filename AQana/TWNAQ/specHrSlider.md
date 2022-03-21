@@ -65,7 +65,7 @@ last_modified_date: 2022-02-08 13:46:05
     - beg/end點選後程式會重新繪圖，或取消視窗(X)，程式不會中斷，會重新繪圖。
     - mov可以滑動曲線，按取消視窗(X)鍵即重新更新x日期座標軸。
   - Exit：中斷程式，跳出並關閉視窗。
-- 範例
+### 範例
 
 ```bash
 specHrSlider.py -t xiaogang,daliao,chaozhou,pingdong -s SO2 -b 20180101 -e 20180331 -a p

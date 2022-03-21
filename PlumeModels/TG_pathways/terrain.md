@@ -2,7 +2,7 @@
 layout: default
 title: RE & TG Pathways
 parent: Plume Models
-nav_order: 2
+nav_order: 3
 has_children: true
 permalink: /PlumeModels/REnTG_pathways/
 ---

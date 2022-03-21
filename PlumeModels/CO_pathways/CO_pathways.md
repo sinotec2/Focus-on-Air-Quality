@@ -8,7 +8,7 @@ has_children: true
 permalink: /PlumeModels/CO_pathways/
 ---
 
-# SO Pathways
+# CO Pathways and Program Compilations
 {: .no_toc }
 - ISC/AERMOD程式下載、編譯、與執行、作業環境等。
 - 模式主要控制檔案的範例、架構與必要項目

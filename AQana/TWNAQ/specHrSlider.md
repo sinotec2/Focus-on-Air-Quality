@@ -1,7 +1,7 @@
 ---
 layout: default
 title: specHrSlider.py
-parent: Regional AQ Data
+parent: Taiwan AQ Analysis
 grand_parent: AQ Data Analysis
 last_modified_date: 2022-02-08 13:46:05
 ---
@@ -19,23 +19,24 @@ last_modified_date: 2022-02-08 13:46:05
 </details>
 ---
 
-## 大要
+## 背景
+### 大要
 
      本程式用在篩選測站高值，經由matplotlib.widget的滑桿與查核紐，可以縮減重複執行程式的次數，提升查找的效率。
 
-## 說明
+### 說明
 
      由於空品分析非但著眼於最高值，有時濃度時間變化的波形、測站之間的上下游關係，也經常是分析的重點，過去為查找適合的個案，經常要重複執行程式，產生圖表、由其中分析較具有代表性的個案，工作量龐大複雜。
 
      為改善此一工作形態，使用互動式繪圖軟體，建立圖形界面程式(GUI)，都是可行的方式。由於前者所費不貲，在嘗試錯誤階段需要大量資源，並不經濟，後者可藉以小程式套件，即可發揮很大效果。本程式即為成功案例。
 
-## 繪圖軟體
+### 繪圖軟體
 
      基本上是python程式，主要引用pandas與matplotlib程式庫。
 
      由於matplotlib有自己的GUI程式[matplotlib.widget](https://matplotlib.org/api/widgets_api.html?highlight=widget)，功能雖然不多，但是在程式修改、圖面與資料的傳遞等問題，都較其他架構來得容易。
 
-## 程式檔案位置
+### 程式檔案位置
 
      master:/usr/kbin/specHrSlider.py
 
@@ -88,6 +89,7 @@ specHrSlider.py -t xiaogang,daliao,chaozhou,pingdong -s SO2 -b 20180101 -e 20180
 - 圖檔會統一放在工作目錄的pngs下，由於檔案可能很多，可以避免雜亂。
 　     
 ## 程式設計說明
+### 分段說明
 
 1. line89~181 TRY架構：
 	- 讀取CSV暫存檔，若無暫存檔，則由原始檔案讀取並製造一個暫存檔。
@@ -105,8 +107,8 @@ specHrSlider.py -t xiaogang,daliao,chaozhou,pingdong -s SO2 -b 20180101 -e 20180
 	- 程式會輸出其beg與end，做為下次繪圖之輸入數據。
 6. line261~263與函數reset：為button方法段落。用來終止WHILE架構。
 
-## Coding
-- check the [FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/specHrSliderRect.py)
+### Coding
+- check the [FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/specHrSlider.py)
 
 ## links
 

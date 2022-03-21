@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Taiwan AQ Analysis
-parent: "AQ Data Analysis"
+parent: AQ Data Analysis
 has_children: true
 permalink: /AQana/TWNAQ
 nav_order: 3

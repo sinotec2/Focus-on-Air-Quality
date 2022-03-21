@@ -1,12 +1,12 @@
 ---
 layout: default
-title: specHrSlider.py
+title: 歷線篩選與繪圖程式
 parent: Taiwan AQ Analysis
 grand_parent: AQ Data Analysis
 last_modified_date: 2022-02-08 13:46:05
 ---
 
-# specHrSlider.py
+# 歷線篩選與繪圖程式
 {: .no_toc }
 
 <details open markdown="block">
@@ -107,10 +107,10 @@ specHrSlider.py -t xiaogang,daliao,chaozhou,pingdong -s SO2 -b 20180101 -e 20180
 	- 程式會輸出其beg與end，做為下次繪圖之輸入數據。
 6. line261~263與函數reset：為button方法段落。用來終止WHILE架構。
 
+### **Rect** Version
+- 除了以拉吧(Slider)來移動、放大特定時段之外，此版本亦加以滑鼠Zoom-in功能。
+  - 按下滑鼠左鍵拉出時間之起迄矩形，程式即篩選該時段數據並調整放大。
+
 ### Coding
 - check the [FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/specHrSlider.py)
-
-## links
-
-Here：specHrSlider.py(*)
-Parent：Dr. Kuang's Evernotes_trajectories(*)
+- **Rect** version with mouse drawing expansion, check this [point](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/specHrSliderRect.py)

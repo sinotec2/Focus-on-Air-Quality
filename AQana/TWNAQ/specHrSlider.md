@@ -1,12 +1,12 @@
 ---
 layout: default
-title: 大氣污染情報網站圖面之下載
+title: specHrSlider.py
 parent: Regional AQ Data
 grand_parent: AQ Data Analysis
 last_modified_date: 2022-02-08 13:46:05
 ---
 
-# 日本大氣污染情報網站圖面之下載
+# specHrSlider.py
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,43 +23,43 @@ last_modified_date: 2022-02-08 13:46:05
 
      本程式用在篩選測站高值，經由matplotlib.widget的滑桿與查核紐，可以縮減重複執行程式的次數，提升查找的效率。
 
-說明：
+## 說明
 
      由於空品分析非但著眼於最高值，有時濃度時間變化的波形、測站之間的上下游關係，也經常是分析的重點，過去為查找適合的個案，經常要重複執行程式，產生圖表、由其中分析較具有代表性的個案，工作量龐大複雜。
+
      為改善此一工作形態，使用互動式繪圖軟體，建立圖形界面程式(GUI)，都是可行的方式。由於前者所費不貲，在嘗試錯誤階段需要大量資源，並不經濟，後者可藉以小程式套件，即可發揮很大效果。本程式即為成功案例。
 
-繪圖軟體：
+## 繪圖軟體
 
      基本上是python程式，主要引用pandas與matplotlib程式庫。
-     由於matplotlib有自己的GUI程式matplotlib.widget(參考https://matplotlib.org/api/widgets_api.html?highlight=widget)，功能雖然不多，但是在程式修改、圖面與資料的傳遞等問題，都較其他架構來得容易。
 
-程式檔案位置：
+     由於matplotlib有自己的GUI程式[matplotlib.widget](https://matplotlib.org/api/widgets_api.html?highlight=widget)，功能雖然不多，但是在程式修改、圖面與資料的傳遞等問題，都較其他架構來得容易。
+
+## 程式檔案位置
 
      master:/usr/kbin/specHrSlider.py
 
-使用方式
+## 使用方式
 
-命令列指令：
-
-     usage: specHrSlider.py [-h] -t STNAM -s SPNAM -b BEGD -e ENDD -a ACTION
-     STNAM：空品測站名稱，目前還是以拼音英文為限(小寫)，測站數不限，測站間以逗點","區隔，測站名稱也會用在暫時csv檔存取之命名。
-     SPNAM：空氣品質項目(大寫)，本程式只接受一個空品項目。
-     BEGD：起始日曆年月日，共8碼(包含當日)
-     ENDG：結束日曆年月日，共8碼(包含當日)
-     ACTION：plot(在X Window顯示)、save存成png檔案，可使用specHr.py程式以免除GUI按鍵。
-GUI指令：
-
-     在命令列輸入時間與測站的最大範圍之後，微調即靠GUI按鍵來達成。
-     checkbutton：測站之勾選或取消
-     Sliders：
-          beg/end點選後程式會重新繪圖，或取消視窗(X)，程式不會中斷，會重新繪圖。
-          mov可以滑動曲線，按取消視窗(X)鍵即重新更新x日期座標軸。
-     Exit：
-          中斷程式，跳出並關閉視窗。
-
-顯示方式：
-
-     當ACTION以plot方式執行程式時，會抓取DISPLAY之環境變數，須有相對應之x window或jupyter等界面。
+### 命令列指令
+- usage: specHrSlider.py [-h] -t STNAM -s SPNAM -b BEGD -e ENDD -a ACTION
+  - STNAM：空品測站名稱，
+    - 目前還是以拼音英文為限(小寫)，測站數不限
+    - 測站間以逗點","區隔，
+    - 測站名稱也會用在暫時csv檔存取之命名。
+  - SPNAM：空氣品質項目(大寫)，本程式只接受一個空品項目。
+  - BEGD：起始日曆年月日，共8碼(包含當日)
+  - ENDG：結束日曆年月日，共8碼(包含當日)
+  - ACTION：plot(在X Window顯示)、save存成png檔案，可使用specHr.py程式以免除GUI按鍵。
+- GUI指令
+  - 在命令列輸入時間與測站的最大範圍之後，微調即靠GUI按鍵來達成。
+  - checkbutton：測站之勾選或取消
+  - Sliders：
+    - beg/end點選後程式會重新繪圖，或取消視窗(X)，程式不會中斷，會重新繪圖。
+    - mov可以滑動曲線，按取消視窗(X)鍵即重新更新x日期座標軸。
+  - Exit：中斷程式，跳出並關閉視窗。
+- 顯示方式：
+  - 當ACTION以plot方式執行程式時，會抓取DISPLAY之環境變數，須有相對應之x window或jupyter等界面。
 
 - 範例
 
@@ -67,8 +67,9 @@ GUI指令：
 specHrSlider.py -t xiaogang,daliao,chaozhou,pingdong -s SO2 -b 20180101 -e 20180331 -a p
 ```
 
-
-左圖為GUI版本specHrSlider.py，右圖為原來命令列版本specHr.py
+| ![specHrSlider1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/specHrSlider1.png)|![specHrSlider2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/specHrSlider2.png)|
+|:--:|:--:|
+| <b>左圖為GUI版本specHrSlider.py</b>|<b>右圖為原來命令列版本specHr.py</b>|
 
 ## 資料檔案
 

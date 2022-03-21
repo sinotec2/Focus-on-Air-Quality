@@ -43,25 +43,28 @@ last_modified_date: 2022-02-08 13:46:05
 ## 使用方式
 
 ### 命令列指令
-- usage: specHrSlider.py [-h] -t STNAM -s SPNAM -b BEGD -e ENDD -a ACTION
-  - STNAM：空品測站名稱，
-    - 目前還是以拼音英文為限(小寫)，測站數不限
-    - 測站間以逗點","區隔，
-    - 測站名稱也會用在暫時csv檔存取之命名。
-  - SPNAM：空氣品質項目(大寫)，本程式只接受一個空品項目。
-  - BEGD：起始日曆年月日，共8碼(包含當日)
-  - ENDG：結束日曆年月日，共8碼(包含當日)
-  - ACTION：plot(在X Window顯示)、save存成png檔案，可使用specHr.py程式以免除GUI按鍵。
+- usage: 
+
+`specHrSlider.py [-h] -t STNAM -s SPNAM -b BEGD -e ENDD -a ACTION`
+
+- STNAM：空品測站名稱，
+  - 目前還是以拼音英文為限(小寫)，測站數不限
+  - 測站間以逗點","區隔，
+  - 測站名稱也會用在暫時csv檔存取之命名。  
+- SPNAM：空氣品質項目(大寫)，本程式只接受一個空品項目。
+- BEGD：起始日曆年月日，共8碼(包含當日)
+- ENDG：結束日曆年月日，共8碼(包含當日)
+- ACTION：
+  - **p**lot(在X Window顯示)、
+  - **s**ave存成png檔案，可使用specHr.py程式以免除GUI按鍵。
+  - 當ACTION以**p**lot方式執行程式時，會抓取\$DISPLAY之環境變數，須有相對應之x window或jupyter等界面。
 - GUI指令
   - 在命令列輸入時間與測站的最大範圍之後，微調即靠GUI按鍵來達成。
   - checkbutton：測站之勾選或取消
   - Sliders：
     - beg/end點選後程式會重新繪圖，或取消視窗(X)，程式不會中斷，會重新繪圖。
     - mov可以滑動曲線，按取消視窗(X)鍵即重新更新x日期座標軸。
-  - Exit：中斷程式，跳出並關閉視窗。
-- 顯示方式：
-  - 當ACTION以plot方式執行程式時，會抓取DISPLAY之環境變數，須有相對應之x window或jupyter等界面。
-
+  - Exit：中斷程式，跳出並關閉視窗。
 - 範例
 
 ```bash

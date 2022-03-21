@@ -28,7 +28,7 @@ last_modified_date: 2022-02-11 10:57:05
 - 執行步驟
   1. 由GeoTiff檔案中切割指定範圍之地形數據，內插、再以GeoTiff格式寫出數據。
   1. 呼叫[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式進行轉檔
-  1. 準備其他[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/aermap.inp)所需參數
+  1. 準備其他[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)所需參數
   1. 呼叫[AERMAP]()程式完成作業
   1. 將數據寫成isc格式之地形檔案備用
   1. 將數據寫成kml格式以備檢查
@@ -71,7 +71,7 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```
 
-## [gen_inp.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/gen_inp.py)
+## [gen_inp.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/gen_inp.py)
 ### 引數
 - GDNAME  Xinit Xnum Xdelta Yinit Ynum Ydelta
   - GDNAME:網格系統名稱(自行命名，將用做產生檔案之filename ROOT)
@@ -84,10 +84,10 @@ os.system(cmd)
 ### 輸入檔案
 - taiwan2020.tiff([2020全臺20M_DTM](https://data.gov.tw/dataset/138563))
 - 模版
-  - [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/aermap.inp)
+  - [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)
   - template.tiff
 ### 輸出檔案
-- 輸入[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/aermap.inp)
+- 輸入[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)
 - 檔名為gd3(範例)為首之6個檔案
 	- gd3.kml→模擬範圍的等高線，彙入google map-my map作圖
 	- gd3_re.dat→文字檔。以DISCCART方式標示每一格點的地形高程，併入iscst3的控制檔(.INP)內，取代原有XYINC設定
@@ -110,7 +110,7 @@ os.system(cmd)
   - gd3.REC：此檔將輸入[AERMOD]()模式中，設定地形及特徵山高
 
 ### gen_inp.py程式下載
-- [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/gen_inp.py)  
+- [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/gen_inp.py)  
 
 ### 修改呼叫程式之路徑
 - [gdal_translate](https://gdal.org/programs/gdal_translate.html)
@@ -228,8 +228,8 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```    
 
-### [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/aermap.inp)之改寫與執行
-- [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/aermap.inp)為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
+### [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)之改寫與執行
+- [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
   - DATAFILE：aermap的結果檔，輸出給aermod使用(.REC)
   - DOMAINXY：接受點的UTM範圍，確認邊界角落都在DEM檔案範圍內
   - ANCHORXY：接受點自訂座標值(台灣地區建議直接使用twd97座標系統)與UTM間錨定點的對照關係。

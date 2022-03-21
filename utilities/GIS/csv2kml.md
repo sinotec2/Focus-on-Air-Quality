@@ -21,7 +21,7 @@ last_modified_date: 2022-03-11 16:18:58
 ---
 ## 背景
 - 點狀資訊在KML架構中是最單純的。KML提供了點狀性質(feature)的設定方式，因此使得單調的點，因著背景地圖的參考而變得豐富。
-- [csv2kml.py]的應用有很多，繪製軌跡圖、將點狀(與鏈結)資訊輸出到[uMAP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/TG_pathways/twnTERR/)展現、[ISC/AERMOD](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/#csv2kmlpy修正)地理資訊的解讀展示等等。
+- [csv2kml.py]的應用有很多，繪製軌跡圖、將點狀(與鏈結)資訊輸出到[uMAP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathwaysways/twnTERR/)展現、[ISC/AERMOD](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/#csv2kmlpy修正)地理資訊的解讀展示等等。
 - 如果要建立更複雜的KML，由熟悉點狀資訊的輸出，會是一個好的開始。
 
 ### 前言

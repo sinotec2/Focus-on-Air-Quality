@@ -58,35 +58,35 @@ last_modified_date: 2022-03-08 10:16:34
 |:--:|
 | <b>從航照圖中定義實例廠區座標軸系統、量測夾角、與廠房頂點XY值</b>|
 
-### L形建築物輸入檔內容說明
-- A1P.INP為一L形建築物的範例，另有4座煙囪stk100~3
+### L形建築物(USEPA提供範例EG1)輸入檔內容說明
+- [A1P.INP](http://114.32.164.198/isc_results/BPIP_EG1/A1P.INP)為一L形建築物的範例，另有4座煙囪stk100~3(如下圖)
 - 所有的字串輸入需有引號。其餘為自由格式
 - 1~4行為整體設定
   1. 個案之文字說明，(原點座標應用在[iscParser]](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/)之繪圖過程)
   1. 'P'：啟動PRIM機制，如為ISCST，則設定為'ST'
   1. 'METERS' 1.00：單位及(轉換為公尺之)比例
   1. 'UTMN', 210：地圖座標系統(沒有作用)與廠區系統局部座標軸之旋轉角度(地圖正北到正Y方向之順時針夾角)
-- 第3個段落是建築物頂點座標(廠區系統)
+- 第2段落是每個建築物頂點座標(廠區系統)
   1. 1：建築物個數
   1. 'L-Shape' 1 13.0：	建築物名稱、圈數及地表高程(m)。圈數>1為裙樓狀況。
   1. 6 26：	頂點個數及建築高(m)
   1. -10. -20.  建築物6個頂點相對廠區系統的座標值。不特定方向。不回到第1點閉合。
   1. -10.  80.
-  1.  40.  80.
-  1.  40.  30.
-  1.  90.  30.
-  1.  90. -20.	
-- 第4個段落是有關煙囪的設定
+  1. 40.  80.
+  1. 40.  30.
+  1. 90.  30.
+  1. 90. -20.	
+- 第4段落是有關煙囪的設定
   1.	4：煙囪個數
   1. 'Stk100'  11.00  25.00     -10.00    -20.00 :煙囪名稱、地表高程、煙囪高度及相對廠區系統的座標值(不是UTM或TWD絕對值)
   1. (每座煙囪逐一設定)
 
 | ![A1PINP.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/A1PINP.png)|
 |:--:|
-| <b>L形建築物輸入檔</b>|
+| <b>USEPA提供範例(EG1)L形建築物輸入檔</b>|
 
 ### BPIP之執行
-- [BPIPPRIME]()需要3個檔名：
+- [BPIP(PRIME)]()的執行會需要3個檔，以連結方式執行如下列批次檔：
   - 第1個檔約定為fort.10，為前述準備好的輸入檔。
   - 第2個檔為輸出檔，約定為fort.12。SO路徑之建築物參數將會出現在此檔內。
   - 第3個檔為摘要檔，約定為fort.14。會將輸入檔之座標旋轉成真北系統，以供檢查。
@@ -109,8 +109,9 @@ bpipprm
 |:--:|
 | <b>L形建築物之BPIP輸出結果</b>|
 
-## BPIPPRIME之遠端計算服務範例
-- 由於[BPIPPRIME]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。比較繁雜的程序是座標、夾角的量測、旋轉平移的計算。
+## BPIPPRIME之[遠端計算服務](http://114.32.164.198/BPIPPRIM.html)範例
+- 由於[BPIPPRIME]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。
+- 比較繁雜的程序是座標、夾角的量測、旋轉平移的計算。
   - 然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
 - CaaS的作業方式：
   1. 先在地圖[數位板](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
@@ -120,7 +121,7 @@ bpipprm
 
 | ![BPIP3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP3.png)|
 |:--:|
-| <b>圖1實例廠區數位化結果，雖然點選結果有些歪斜，[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式會將其均化修正</b>|
+| <b>圖1實例廠區數位化結果，雖然數位板點選結果有些歪斜，[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式會將其均化修正</b>|
 | ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
 | <b>圖2實例廠區[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，經[ISCPARSER](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀結果</b>|
 

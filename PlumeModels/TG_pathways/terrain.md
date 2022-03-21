@@ -1,10 +1,10 @@
 ---
 layout: default
-title: TG Pathways
+title: RE & TG Pathways
 parent: Plume Models
 nav_order: 2
 has_children: true
-permalink: /PlumeModels//
+permalink: /PlumeModels/REnTG_pathways/
 ---
 
 # 地形檔案之準備

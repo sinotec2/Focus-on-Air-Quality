@@ -2,7 +2,7 @@
 layout: default
 title: SO Pathways
 parent: Plume Models
-nav_order: 1
+nav_order: 2
 last_modified_date: 2022-03-08 10:07:43
 has_children: true
 permalink: /PlumeModels/SO_pathways/

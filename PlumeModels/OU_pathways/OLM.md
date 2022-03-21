@@ -83,7 +83,7 @@ last_modified_date: 2022-03-21 09:23:54
 | <b>煙流模式NOx逐時結果之臭氧限制法後處理畫面與程式[界面](http://114.32.164.198/OLM.html)</b>|
 
 ## 環保署測站數據之讀取與準備
-### [specHrSliderRect.py]()
+### [specHrSliderRect.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/pecHrSlider/)
 此處應用master:/usr/kbin/specHrSliderRect.py讀取。該程式為歷線繪圖程式，然為方便存取，程式設計輸出指定測站、成分、日期之csv檔案到所在目錄備用。
 
 如果--action(-a)選擇，則將進入批次作業方式，如下所示。
@@ -382,4 +382,4 @@ USEPA (2017) **Revisions to the Guideline on Air Quality Models: Enhancements to
   - here:OLM in python*
   - parent:Dr. Kuang's Evernotes_Plume models(*)
   - relatives：
-    - specHrSlider.py*
+    - [specHrSlider.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/pecHrSlider/)

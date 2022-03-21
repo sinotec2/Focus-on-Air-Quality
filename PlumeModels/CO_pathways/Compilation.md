@@ -34,7 +34,7 @@ last_modified_date: 2022-03-21 11:38:50
 - ISC3程式碼較為老舊，編譯無太大困難。AERMOD系統程式應用較多新的Fortran語法，且因新的編譯軟體對Fortran的嚴格程式有加嚴的趨勢，因此造成編譯上的挑戰。
 
 ### wget下載注意事項
-- 需加註選項`--no-check-certificate`
+- 需加註選項`--no-check-certificate`，避免無法通過資格確認
 
 ## Linux Solutions
 ### isc3
@@ -210,7 +210,7 @@ rm *.mod
 - 目前MacOS上只有gfortran經驗。可以參考[mmif的編譯](/Focus-on-Air-Quality/PlumeModels/ME_pathways/mmif/#準備及編譯)
 ### isc3編譯
 - -fbounds-check：會太嚴格，編譯會失敗，予以取消不執行。
-- 無法static link，會找不到crt0.o、libcrt0.a
+- 無法static link，會找不到crt0.o
 - 針對CARRIAGECONTROL問題，需設定-fdec
 - -std=legacy有助呼叫副程式引數的格式確認
 
@@ -228,3 +228,16 @@ done
 gfortran -o iscst3.exe $LINK_FLAGS *.o
 ```
 ### aermod編譯
+- 使用前述ISC3的編譯設定，針對aermod各程式進行編譯
+
+```bash
+COMPILE_FLAGS=' -Wuninitialized -O2 -fdec -std=legacy -Wmaybe-uninitialized'
+LINK_FLAGS=' -O2'
+for f in modules grsm aermod setup coset soset reset meset ouset\
+ inpsum metext iblval siggrid tempgrid windgrid calc1 calc2 prise\
+ prime sigmas pitarea uninam output evset evcalc evoutput rline\
+ bline;do
+    gfortran -c $COMPILE_FLAGS $f.FOR
+done
+gfortran -o iscst3.exe $LINK_FLAGS *.o
+```

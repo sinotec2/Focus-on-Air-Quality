@@ -141,7 +141,8 @@ cat NO2O3xinzhuang201*.csv>xinzhuang.csv
   - 用sed將其去掉，因格式都相同，在python中統一再加回即可。
 sed -i '/YMDH,NO2,nam,O3,YMD,MDH/d' [xt]*csv
 
-## ISCST3/aermod執行（在使用者端先行執行）
+## ISCST3/aermod執行
+### 在使用者端先行執行
 - 煙流模式輸出逐時值
   - 因為檔案很大，過去一般模擬作業會避免輸出逐時值，
   - 如果輸出，也以binary(format=UNFORM)格式來儲存，需以fortran binary格式讀物。
@@ -382,4 +383,4 @@ USEPA (2017) **Revisions to the Guideline on Air Quality Models: Enhancements to
   - here:OLM in python*
   - parent:Dr. Kuang's Evernotes_Plume models(*)
   - relatives：
-    - [specHrSlider.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/pecHrSlider/)
+    - [specHrSlider.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/specHrSlider/)

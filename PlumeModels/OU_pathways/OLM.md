@@ -37,9 +37,15 @@ last_modified_date: 2022-03-21 09:23:54
 - 按照USEPA的篩選邏輯，背景值轉化率及可以使用地區平均值、季節或月平均值等方式，做為各篩選階段計算的參數。
 - 法規評估選項中則要求使用Tier 3 chemistry methods, 包括化學轉化之Ozone Limiting Method(OLM) 與煙流入滲之 Plume Volume Molar Ratio Method(PVMRM)。
 - 相關作法在2017規範修正。
+
+| ![OLM1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/OLM1.png)|
+|:--:|
+| <b>NO2模擬結果多層次分析過程</b>|
+
 - AERMOD
   已將OLM列入NO<sub>2</sub>模擬的設定(CO O3VALUES或CO OZONEFIL)及輸出處理程序之中。
   - 最終仍以地區代表性測站、逐時進行校正為依歸。
+
 - ISCST3
   - 沒有這項功能，現階段只能以後處理方式進行OLM修正
 - 台灣地區都會區有較多的空品測站可以做為背景測站。

@@ -96,22 +96,24 @@ runmodel=true
 |:--:|
 | <b>CWB WRF 模式3KM預報結果風場</b>|
 
-
 - 氣象與空品模式的模擬範圍與解析度之決定
   - WRF 3KM雖然模擬範圍東西有較大的跨距（如圖），但對於空品模式（煙流可能影響範圍）而言，並無必要。
 - 自動下載我國中央氣象局（CWB）數值預報（WRF）結果，並進行解讀。
   - CWB會員登錄、檔案網址之定位與確認
   - CWB要求先成為會員，才允許進行下載。
   - 其會員帳號為電子郵件、秘密為包括大小寫、數字、特殊字元（shift 1～0）
-  - 檔案網址的資訊，寫在xml檔案內容內，範例：
-```bash
-for i in {000.084};do
-  wget https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2
-done
-```  
-- 公開資料內容： https://opendata.cwb.gov.tw/opendatadoc/MIC/A0061.pdf
-	- 
-	- 
+- 檔案網址的資訊，寫在`xml`檔案內容內，範例如下：
+  - 2021/10/12前舊址：
+    - `https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A006${dom}-0$i.grb2`
+  - 新址：
+    - `https://cwbopendata.s3.ap-northeast-1.amazonaws.com/MIC/M-A006${dom}-0$i.grb2`
+    - 舊版`wget`(1.12)會需要加上選項`--no-check-certificate`
+- [公開資料內容項目](https://opendata.cwb.gov.tw/opendatadoc/MIC/A0061.pdf)
+
+| ![unresp4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp4.png)|![unresp5.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp5.png)|
+|:--:|:--:|
+| <b>CWB_WRF 3維變數之高度分布</b>|<b>CWB_WRF數值預報地面項目</b>|	
+
 	  
 - 自動下載與儲存空間之預備
 	- Bash 中使用for 即可，但在間隔的設定上，centos和osx10 有所差異，前者可以接受{00.84..06}後者不能接受。

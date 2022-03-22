@@ -147,7 +147,8 @@ ii. For assessment of the significance of ambient impacts for NAAQS and/or PSD i
 - source [opendata.epa.gov](https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6%91%98%E8%A6%81%E8%B3%87%E6%96%99?page=79)
 
 ---
-## 媒體報導「不可承受之重-深澳燃煤電廠健康衝擊評估」環保署回應說明
+## 媒體剪報
+### 媒體報導「不可承受之重-深澳燃煤電廠健康衝擊評估」環保署回應說明
 提供單位：行政院環境保護署空保處 發布日期：2018.09.11[金門縣政府下載點](https://ws.kinmen.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvMzE3L3JlbGZpbGUvMTAwMTAvNjU5NDA0L2YxODVmOGU0LTQwZjctNGE3Ni04MjFlLWJmZDUyNDAyNTRlYy5wZGY%3D&n=MTA3WTA5LnBkZg%3D%3D&icon=..pdf)
 
 有關 11 日綠色和平組織召開記者會，針對深澳燃煤電 廠所做健康風險評估，環保署回應如下：
@@ -164,7 +165,7 @@ ii. For assessment of the significance of ambient impacts for NAAQS and/or PSD i
 本案距離實際建廠期間還有一段時間，將適用新修定的 空污法，授權主管機關可以依最低可達成排放率控制技術要 求大幅降低排放量，以保障民眾健康。
 
 ---
-## 燃煤就是髒　空汙學者為什麼說的跟賴清德不一樣？
+### 燃煤就是髒　空汙學者為什麼說的跟賴清德不一樣？
 文 呂國禎 天下Web only(2018-03-17)
 
 深澳興建燃煤電廠通過環評引發六縣市政府、學界、民間團體反彈，要求環保署退回深澳電廠環評許可，今天（3月17日）贊成與反對興建深澳電廠的行政院環境保護署副署長詹順貴、台電董事長楊偉甫與台大、成大、中興大學的公衛、環工學者同台，到底深澳電廠蓋了會有什麼空污、健康影響？雙方說法的差異爭點何在？...
@@ -184,12 +185,12 @@ ii. For assessment of the significance of ambient impacts for NAAQS and/or PSD i
 https://www.cw.com.tw/article/5088779
 
 ---
-## 詹順貴臉書發三千字聲明　請辭環保署副署長
+### 詹順貴臉書發三千字聲明　請辭環保署副署長
 
 https://www.cw.com.tw/article/5092428
 
 ---
-## 揭開蔡英文突襲六輕祕辛　為何六輕無法降空污，由燃煤改燒天然氣？
+### 揭開蔡英文突襲六輕祕辛　為何六輕無法降空污，由燃煤改燒天然氣？
 - 文 呂國禎 天下Web only(2020-11-22)
 
 ...計畫卻卡住了。雖然經濟部能源局樂觀其成，但工業局卻陷入了兩難，因為南碼頭...10個碼頭會剩下3個，如果新興、口湖、四湖區有投資者進來，恐怕不敷使用，因此工業局長呂正華回應，南碼頭蓋天然氣接收站，必須要有通盤考量。
@@ -199,7 +200,7 @@ https://www.cw.com.tw/article/5092428
 https://www.cw.com.tw/article/5102853
 
 ---
-## 深澳是台灣最後一座燃煤電廠
+### 深澳是台灣最後一座燃煤電廠
 
 深澳電廠爭議之後，環保、台電為對抗空污達成共識。今日，台電亮出最新版長期電源開發方案，台電與環保署做出重大政策宣示：深澳將是台灣最後一座燃煤電廠。
 

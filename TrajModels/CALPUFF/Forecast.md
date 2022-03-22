@@ -114,12 +114,14 @@ runmodel=true
 |:--:|:--:|
 | <b>CWB_WRF 3維變數之高度分布</b>|<b>CWB_WRF數值預報地面項目</b>|	
 
-	  
+
 - 自動下載與儲存空間之預備
-	- Bash 中使用for 即可，但在間隔的設定上，centos和osx10 有所差異，前者可以接受{00.84..06}後者不能接受。
+	- Bash 中使用for 即可，但在間隔的設定上，centos和MacOS有所差異，前者可以接受{00.84..06}，後者不能接受數字及文字混用。
 	- 解決方式，直接將 15個小時數寫出來：
-                                             for i in 000 006 012 018 024 030 036 042 048 054 060 066 072 078 084 ;do
-                                             wget     https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2;done
+```bash  
+for i in 000 006 012 018 024 030 036 042 048 054 060 066 072 078 084 ;do
+  wget     https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2;done
+```  
 - 美國MAM預報內容與台灣WRF模式預報內容的差異與對照、
 	- GRIB2 格式可以用wgrib2程式進行解讀
 	- 也可以轉成nc檔案，用python來解讀
@@ -127,153 +129,173 @@ runmodel=true
 	- https://bairdlangenbrunner.github.io/python-for-climate-scientists/conda/setting-up-conda-environments.html
 	- 經比較結果，只有格點的經緯度變數名稱不同，前者為lat/lon、後者為gridlat_0/gridlon_0，在Create3DDAT.py之前須先準備好內容。
 - 格點lat/lon之讀取
-  先將GRIB轉成NC格式
-  conda activate ncl_stable
-  convert2nc M-A0064-000.grb2
-  Python nc2db.py，將每一個格點的座標寫成csv檔案。
-  import netCDF4
-  from pandas import *
-  import argparse
-  import numpy as np
-  parser = argparse.ArgumentParser(description="read NetCDF data and transform to DataFrame csvs. ",\
-     epilog="Example of use: pythonb nc2df NC_FILENAME")
-  parser.add_argument("nc_filename", help="nc filebname",type=str)
-  args = parser.parse_args()
-  fname = args.nc_filename
-  nc = netCDF4.Dataset(fname)
-  cols=list(nc.variables)           #note 1
-  d={}
-  for c in ['gridlon_0','gridlat_0']:
-      a=list(np.array(nc.variables[c]).flatten())           #note 3
-      d.update({c: a})
-  df=DataFrame(d)
-  df.to_csv(fname+'.csv')
-  路徑檔名存成：data/M-A0064.nc2.csv
-- 檔案大小
-  一個grb2檔案大小約183~187MB,15個檔案（1天分）約3.1G
-  一天圖檔共約360M。
-Create3DDAT.py的安裝與修改
-- Python環境之設定（內設為3.6版）
-  conda env create -f environment.yml
-  Centos 6執行安裝並無困難，也可順利執行
-  Mac上執行有困難
-  Gcc/gfortran/c++等無法安裝指定的版本
-  將yml檔案內相對應的指標去掉，雖可通過，但執行仍然有誤，swig無法import
-                                 ModuleNotFoundError: No module named '_gribapi_swig'
-- 解決方式：將環境套件整體升級到py37之gribby
-	- conda create -n gribby -c conda-forge python-eccodes
-	- (Grib2 with python 3.7)
-	- https://stackoverflow.com/questions/39787578/importerror-when-using-python-anaconda-package-grib-api            
-- 模擬範圍之選取
-  濃度場的模擬範圍、輸出入檔的目錄位置、高度氣壓座標
-		193,200c197,206
-		< latMinCP = 11.7  # Min lat of CALPUFF grid
-		< latMaxCP = 12.2  # Max lat of CALPUFF grid
-		< lonMinCP = 273.2  # Min lon of CALPUFF grid
-		< lonMaxCP = 274.1  # Max lon of CALPUFF grid
-		< inDir = '../NAM_data/raw/'+date  # Directory containing GRIB files
-		< nfiles = 17 #Number of GRIB files (files are 3 hourly, so 48 hours is 17 files including hours 0 and 48)
-		< outFile = '../NAM_data/processed/met_'+date+'.dat' #Output file path
-		< levsIncl = [1000,950,925,900,850,800,700,600,500,400,300,250,200,150,100,75,50,30,20,10,7,5,2] #pressure levels to include in output
-		---
-		> latMinCP = 21.4    # Min lat of CALPUFF grid
-		> latMaxCP = 25.7   # Max lat of CALPUFF grid
-		> lonMinCP = 119.4   # Min lon of CALPUFF grid
-		> lonMaxCP = 122.4   # Max lon of CALPUFF grid
-		> inDir =  '/home/kuang/MyPrograms/UNRESPForecastingSystem/CWB_data/raw/'+date  # Directory containing GRIB files
-		> nfiles = 15 #Number of GRIB files (files are 6 hourly, so 84 hours is 15 files including hours 0 and 48)
-		> outFile ='/home/kuang/MyPrograms/UNRESPForecastingSystem/CWB_data/processed/met_'+date+'.dat' #Output file path
-		> if os.path.isfile(outFile):
-		>     sys.exit('exist outFile: '+outFile)
-		> levsIncl = [1000,925,850,700,500,400,300,250,200,150,100] #pressure levels to include in output
+  - 先將GRIB轉成NC格式
 
-- 座標系統的調整轉換（經緯度twd97 VS LCP）
-  原程式是以gribapi模組中的grib_get_array來解讀格點經緯度與格點數，解讀的對象是任意的2維變數(如海平面氣壓PRMSL)
-  求取不同經緯度：適用在以經緯度為座標軸的等度數網格系統
-  然在小範圍模擬一般是以等距離、正交之直角座標系統，其座標點的經緯度將會是2個2維陣列
-  由於格點位置及格點數並無會每一次不一樣，由固定的一個檔來提供似乎比較單純合理。(修改程式gribapi似更複雜)
-		< lats = gribapi.grib_get_array(gidPRMSL,'distinctLatitudes')
-		< lons = gribapi.grib_get_array(gidPRMSL,'distinctLongitudes')
-		< Ni = gribapi.grib_get(gidPRMSL,'Ni')
-		< Nj = gribapi.grib_get(gidPRMSL,'Nj')
-		---
-		> ishp=2
-		> CSV='/home/kuang/MyPrograms/UNRESPForecastingSystem/data/M-A0064nc2.csv'
-		> df=read_csv(CSV)
-		> #lats = gribapi.grib_get_array(gidPRMSL,'distinctygrid')#Latitudes')
-		> #lons = gribapi.grib_get_array(gidPRMSL,'distinctLongitudes')
-		> lats = np.array(list(df.gridlat_0))
-		> lons = np.array(list(df.gridlon_0))
-		> Ni = 1158
-		> Nj = 673
-- 濃度場模擬範圍在氣象場中相對位置與切割
-  原來的網格是等間距經緯度系統，因此其取網格是1維線性切割、四角經緯度為其向量中之某一值
-  直角座標4角經緯度，為所有點中，最接近該4點位置的點座標中得知。
-		< for i in range(len(lats)-1):
-		<     if lats[i+1] >= latMinCP:
-		<         iLatMinGRIB=i
-		<         break
-		< for i in range(len(lats)-1):
-		<     if lats[i+1] > latMaxCP:
-		<         iLatMaxGRIB=i+1
-		<         break
-		< for i in range(len(lons)-1):
-		<     if lons[i+1] >= lonMinCP:
-		<         iLonMinGRIB=i
-		<         break
-		< for i in range(len(lons)-1):
-		<     if lons[i+1] > lonMaxCP:
-		<         iLonMaxGRIB=i+1
-		<         break
-		---
-		> XY=np.array([twd97.fromwgs84(i,j) for i,j in zip(lats,lons)],dtype=int)
-		> twd97X,twd97Y=(XY[:,i] for i in [0,1])
-	          > XminCP,YminCP=(int(i) for i in twd97.fromwgs84(latMinCP,lonMinCP))
-		> XmaxCP,YmaxCP=(int(i) for i in twd97.fromwgs84(latMaxCP,lonMaxCP))
-		> DIST =(twd97X-XminCP)**2+(twd97Y-YminCP)**2
-		> minD=min(DIST)
-		> ji=list(DIST).index(minD)
-		> ijLLMinGRIB = ji
-		> iLatMinGRIB = int(ji/Ni)
-		> iLonMinGRIB = ji - Ni * iLatMinGRIB
-		> DIST =(twd97X-XmaxCP)**2+(twd97Y-YmaxCP)**2
-		> minD=min(DIST)
-		> ji=list(DIST).index(minD)
-		> ijLLMaxGRIB = ji
-		> iLatMaxGRIB = int(ji/Ni)
-		> iLonMaxGRIB = ji - Ni * iLatMaxGRIB
-- 格點座標值由1維增加為(實質)2維
-                    78,81c80,83
-		<     RXMIN = lons[iLonMinGRIB]  # W-most E longitude
-		<     RXMAX = lons[iLonMaxGRIB]  # E-most E longitude
-		<     RYMIN = lats[iLatMinGRIB]  # S-most N latitude
-		<     RYMAX = lats[iLatMaxGRIB]  # N-most N latitude
-		---
-		>     RXMIN = lons[ijLLMinGRIB]  # W-most E longitude
-		>     RXMAX = lons[ijLLMaxGRIB]  # E-most E longitude
-		>     RYMIN = lats[ijLLMinGRIB]  # S-most N latitude
-		>     RYMAX = lats[ijLLMaxGRIB]  # N-most N latitude
-		97c99
-		<         XLATDOT = lats[iLatMinGRIB+j]  # N latitude of grid point
-		---
-		>         XLATDOT = lats[ijLLMinGRIB+j*Ni]  # N latitude of grid point
-		100c102
-		<             XLONGDOT = lons[iLonMinGRIB+i]  # E longitude of grid point
-		---
-		>             XLONGDOT = lons[ijLLMinGRIB+i]  # E longitude of grid point
-		
-- 檔案名稱系統
-  舊檔名系統是逐3小時。修改為6小時間隔之˙檔名系統。
-		< filePrefix = 'nam.t00z.afwaca'
-		< fileSuffix = '.tm00.grib2'
-		---
-		> filePrefix = 'M-A0064-0'
-		> fileSuffix = '.grb2'
-		209c215
-		<     filenames.append(filePrefix+'{:02d}'.format(i*3)+fileSuffix)
-		---
-		>     filenames.append(filePrefix+'{:02d}'.format((i)*6)+fileSuffix)
-CALMET模式的偵錯
+```bash
+conda activate ncl_stable
+convert2nc M-A0064-000.grb2
+  Python nc2db.py#將每一個格點的座標寫成csv檔案。
+```
+- nc2db.py內容
+
+```python  
+import netCDF4
+from pandas import *
+import argparse
+import numpy as np
+parser = argparse.ArgumentParser(description="read NetCDF data and transform to DataFrame csvs. ",\
+   epilog="Example of use: pythonb nc2df NC_FILENAME")
+parser.add_argument("nc_filename", help="nc filebname",type=str)
+args = parser.parse_args()
+fname = args.nc_filename
+nc = netCDF4.Dataset(fname)
+cols=list(nc.variables)           #note 1
+d={}
+for c in ['gridlon_0','gridlat_0']:
+    a=list(np.array(nc.variables[c]).flatten())           #note 3
+    d.update({c: a})
+df=DataFrame(d)
+df.to_csv(fname+'.csv')
+```
+- 路徑檔名存成：data/M-A0064.nc2.csv
+- 檔案大小
+  - 一個grb2檔案大小約183~187MB,15個檔案（1天分）約3.1G
+  - 一天圖檔共約360M。
+
+## Create3DDAT.py的安裝與修改
+### Python環境之設定（內設為3.6版）
+  - `conda env create -f environment.yml`
+- Centos 6執行安裝並無困難，也可順利執行
+- Mac上執行有困難
+  - Gcc/gfortran/c++等無法安裝指定的版本
+  - 將yml檔案內相對應的指標去掉，雖可通過，但執行仍然有誤，swig無法
+  `import ModuleNotFoundError: No module named '_gribapi_swig'`
+  - 解決方式：將環境套件整體升級到py37之gribby
+	  - `conda create -n gribby -c conda-forge python-eccodes`
+	  - (Grib2 with python 3.7)
+	  - see [stackoverflow](https://stackoverflow.com/questions/39787578/importerror-when-using-python-anaconda-package-grib-api)            
+### 模擬範圍之選取
+- 濃度場的模擬範圍、輸出入檔的目錄位置、高度氣壓座標
+- 程式差異
+
+```bash  
+193,200c197,206
+< latMinCP = 11.7  # Min lat of CALPUFF grid
+< latMaxCP = 12.2  # Max lat of CALPUFF grid
+< lonMinCP = 273.2  # Min lon of CALPUFF grid
+< lonMaxCP = 274.1  # Max lon of CALPUFF grid
+< inDir = '../NAM_data/raw/'+date  # Directory containing GRIB files
+< nfiles = 17 #Number of GRIB files (files are 3 hourly, so 48 hours is 17 files including hours 0 and 48)
+< outFile = '../NAM_data/processed/met_'+date+'.dat' #Output file path
+< levsIncl = [1000,950,925,900,850,800,700,600,500,400,300,250,200,150,100,75,50,30,20,10,7,5,2] #pressure levels to include in output
+---
+> latMinCP = 21.4    # Min lat of CALPUFF grid
+> latMaxCP = 25.7   # Max lat of CALPUFF grid
+> lonMinCP = 119.4   # Min lon of CALPUFF grid
+> lonMaxCP = 122.4   # Max lon of CALPUFF grid
+> inDir =  '/home/kuang/MyPrograms/UNRESPForecastingSystem/CWB_data/raw/'+date  # Directory containing GRIB files
+> nfiles = 15 #Number of GRIB files (files are 6 hourly, so 84 hours is 15 files including hours 0 and 48)
+> outFile ='/home/kuang/MyPrograms/UNRESPForecastingSystem/CWB_data/processed/met_'+date+'.dat' #Output file path
+> if os.path.isfile(outFile):
+>     sys.exit('exist outFile: '+outFile)
+> levsIncl = [1000,925,850,700,500,400,300,250,200,150,100] #pressure levels to include in output
+```
+### 座標系統的調整轉換（經緯度twd97 VS LCP）
+-  原程式是以gribapi模組中的grib_get_array來解讀格點經緯度與格點數，解讀的對象是任意的2維變數(如海平面氣壓PRMSL)
+- 求取不同經緯度：適用在以經緯度為座標軸的等度數網格系統
+- 然在小範圍模擬一般是以等距離、正交之直角座標系統，其座標點的經緯度將會是2個2維陣列
+-  由於格點位置及格點數並無會每一次不一樣，由固定的一個檔來提供似乎比較單純合理。(修改程式gribapi似更複雜)
+
+```bash
+< lats = gribapi.grib_get_array(gidPRMSL,'distinctLatitudes')
+< lons = gribapi.grib_get_array(gidPRMSL,'distinctLongitudes')
+< Ni = gribapi.grib_get(gidPRMSL,'Ni')
+< Nj = gribapi.grib_get(gidPRMSL,'Nj')
+---
+> ishp=2
+> CSV='/home/kuang/MyPrograms/UNRESPForecastingSystem/data/M-A0064nc2.csv'
+> df=read_csv(CSV)
+> #lats = gribapi.grib_get_array(gidPRMSL,'distinctygrid')#Latitudes')
+> #lons = gribapi.grib_get_array(gidPRMSL,'distinctLongitudes')
+> lats = np.array(list(df.gridlat_0))
+> lons = np.array(list(df.gridlon_0))
+> Ni = 1158
+> Nj = 673
+```
+### 濃度場模擬範圍在氣象場中相對位置與切割
+-  原來的網格是等間距經緯度系統，因此其取網格是1維線性切割、四角經緯度為其向量中之某一值
+-  直角座標4角經緯度，為所有點中，最接近該4點位置的點座標中得知。
+```bash
+< for i in range(len(lats)-1):
+<     if lats[i+1] >= latMinCP:
+<         iLatMinGRIB=i
+<         break
+< for i in range(len(lats)-1):
+<     if lats[i+1] > latMaxCP:
+<         iLatMaxGRIB=i+1
+<         break
+< for i in range(len(lons)-1):
+<     if lons[i+1] >= lonMinCP:
+<         iLonMinGRIB=i
+<         break
+< for i in range(len(lons)-1):
+<     if lons[i+1] > lonMaxCP:
+<         iLonMaxGRIB=i+1
+<         break
+---
+> XY=np.array([twd97.fromwgs84(i,j) for i,j in zip(lats,lons)],dtype=int)
+> twd97X,twd97Y=(XY[:,i] for i in [0,1])
+          > XminCP,YminCP=(int(i) for i in twd97.fromwgs84(latMinCP,lonMinCP))
+> XmaxCP,YmaxCP=(int(i) for i in twd97.fromwgs84(latMaxCP,lonMaxCP))
+> DIST =(twd97X-XminCP)**2+(twd97Y-YminCP)**2
+> minD=min(DIST)
+> ji=list(DIST).index(minD)
+> ijLLMinGRIB = ji
+> iLatMinGRIB = int(ji/Ni)
+> iLonMinGRIB = ji - Ni * iLatMinGRIB
+> DIST =(twd97X-XmaxCP)**2+(twd97Y-YmaxCP)**2
+> minD=min(DIST)
+> ji=list(DIST).index(minD)
+> ijLLMaxGRIB = ji
+> iLatMaxGRIB = int(ji/Ni)
+> iLonMaxGRIB = ji - Ni * iLatMaxGRIB
+```
+### 格點座標值由1維增加為(實質)2維
+
+```bash
+78,81c80,83
+<     RXMIN = lons[iLonMinGRIB]  # W-most E longitude
+<     RXMAX = lons[iLonMaxGRIB]  # E-most E longitude
+<     RYMIN = lats[iLatMinGRIB]  # S-most N latitude
+<     RYMAX = lats[iLatMaxGRIB]  # N-most N latitude
+---
+>     RXMIN = lons[ijLLMinGRIB]  # W-most E longitude
+>     RXMAX = lons[ijLLMaxGRIB]  # E-most E longitude
+>     RYMIN = lats[ijLLMinGRIB]  # S-most N latitude
+>     RYMAX = lats[ijLLMaxGRIB]  # N-most N latitude
+97c99
+<         XLATDOT = lats[iLatMinGRIB+j]  # N latitude of grid point
+---
+>         XLATDOT = lats[ijLLMinGRIB+j*Ni]  # N latitude of grid point
+100c102
+<             XLONGDOT = lons[iLonMinGRIB+i]  # E longitude of grid point
+---
+>             XLONGDOT = lons[ijLLMinGRIB+i]  # E longitude of grid point
+```		
+### 檔案名稱系統
+- 舊檔名系統是逐3小時。修改為6小時間隔之˙檔名系統。
+```bash
+< filePrefix = 'nam.t00z.afwaca'
+< fileSuffix = '.tm00.grib2'
+---
+> filePrefix = 'M-A0064-0'
+> fileSuffix = '.grb2'
+209c215
+<     filenames.append(filePrefix+'{:02d}'.format(i*3)+fileSuffix)
+---
+>     filenames.append(filePrefix+'{:02d}'.format((i)*6)+fileSuffix)
+```
+## CALMET模式的偵錯
 1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）
 	- dec舊式fortran可以接受未定寬度的輸出格式，如(i)、(f)等
 	  read(cfver,'(f)') cfdataset

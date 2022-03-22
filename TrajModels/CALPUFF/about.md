@@ -129,20 +129,21 @@ From April 2003 until January 2017, CALPUFF was the EPA preferred model for long
 ### 4.2cii
 ii. For assessment of the significance of ambient impacts for NAAQS and/or PSD increments, there is not a preferred model or screening approach for distances beyond 50 km. Thus, the appropriate reviewing authority (paragraph 3.0(b)) and the EPA Regional Office shall be consulted in determining the appropriate and agreed upon screening technique to conduct the second level assessment. Typically, a Lagrangian model is most appropriate to use for these second level assessments, but applicants shall reach agreement on the specific model and modeling parameters on a case-by-case basis in consultation with the appropriate reviewing authority (paragraph 3.0(b)) and EPA Regional Office. When Lagrangian models are used in this manner, they shall not include plume-depleting processes, such that model estimates are considered conservative, as is generally appropriate for screening assessments.
 
-- https://www.ecfr.gov/cgi-bin/text-idx?SID=b7d0bd27661737a2693ab6aebd83f911&mc=true&node=pt40.2.51&rgn=div5#ap40.2.51_11319.w
+- source [ecfr.gov](https://www.ecfr.gov/cgi-bin/text-idx?SID=b7d0bd27661737a2693ab6aebd83f911&mc=true&node=pt40.2.51&rgn=div5#ap40.2.51_11319.w)
+
 ---
 ## Using GTx
-https://www.epb.taichung.gov.tw/media/398158/臺中市空氣污染防制計畫書-104-108年版-上.pdf
+-  [臺中市空氣污染防制計畫書-104-108年版-上](https://www.epb.taichung.gov.tw/media/398158/臺中市空氣污染防制計畫書-104-108年版-上.pdf)
 
-https://www.twreporter.org/a/shenao-power-plant-coal-fired-health
+- [twreporter.org](https://www.twreporter.org/a/shenao-power-plant-coal-fired-health)
 
-98年度空氣污染綜合防制計畫 康廷工程顧問企業有限公司執行
+### 98年度空氣污染綜合防制計畫 康廷工程顧問企業有限公司執行
 桃園縣政府環保局為順利推動空氣品質維護或改善工作，並能達到各項管制計畫預期之目標及效益，故委託執行本計畫，
 
 ...期末階段歸納執行所獲成果分項說明如下...二、工作項目成果...(二)評估整體空氣品質改善執行成效...2.完成近年空氣品質不良事件日污染成因分析：
 分析桃園縣臭氧之空氣品質不良指標值及各類空氣污染物濃度變成情形，並執行VOCs、粒狀物污染成分分析(金屬元素及陰、陽離子)，並利用空氣污染模式(軌跡模式GTx)模擬近四年空品不良事件日發生之傳輸軌跡。
 
-https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6%91%98%E8%A6%81%E8%B3%87%E6%96%99?page=79
+- source [opendata.epa.gov](https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6%91%98%E8%A6%81%E8%B3%87%E6%96%99?page=79)
 
 ---
 ## 媒體報導「不可承受之重-深澳燃煤電廠健康衝擊評估」環保署回應說明
@@ -182,14 +183,7 @@ https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6
 https://www.cw.com.tw/article/5088779
 
 ---
-## 媒體報導「不可承受之重-深澳燃煤電廠健康衝擊評估」環保署回應說明
-提供單位：行政院環境保護署空保處
-
-發布日期：2018.09.11
-
-
-
-詹順貴臉書發三千字聲明　請辭環保署副署長
+## 詹順貴臉書發三千字聲明　請辭環保署副署長
 
 https://www.cw.com.tw/article/5092428
 

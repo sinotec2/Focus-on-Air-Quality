@@ -77,28 +77,38 @@ runmodel=true
 - https://homepages.see.leeds.ac.uk/~earunres/
 - http://114.32.164.198:8000/UNRESP_VIZ/index.html?v=1
 
-| ![specHrSlider1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/specHrSlider1.png)|![specHrSlider2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/specHrSlider2.png)|
-|:--:|:--:|
-| <b>左圖為GUI版本specHrSlider.py</b>|<b>右圖為原來命令列版本specHr.py</b>|
+| ![unresp1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp1.png)|
+| <b>leed大學火山SO2預報結果畫面</b>|
+|:--:|
+|![unresp2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp2.png)|
+| <b>台中電廠PM2.5預報結果畫面</b>|
 
 ## 氣象數據下載與解讀
 - 氣象數值預報的選擇
-            雖然國際間公開的數值預報成果有很多，覆蓋台灣地區範圍也不在少數，然而經比較其解析度不足以模擬大型固定源，且對局部地形及海陸風現象亦不足以解析。
-            經比較分析選擇以CWB WRF 模式3KM模擬結果最為恰當。
-            CWB WRF 3KM預報的作業方式、演進與評估，可以參考其發表內容。
-http://photino.cwb.gov.tw/conf/history/105/2016_ppt_all/Session/Session6/6-2-20161005_高解析區域模式預報系統之發展.pdf
-陳依涵等（2017）中央氣象局區域模式2017年更新(OP41）中央氣象局氣象資訊中心
-http://photino.cwb.gov.tw/conf/history/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf
-風場範例如MeteoInfo圖，在島內範圍有較高的解析度。
+  - 雖然國際間公開的數值預報成果有很多，覆蓋台灣地區範圍也不在少數，然而經比較其解析度不足以模擬大型固定源，且對局部地形及海陸風現象亦不足以解析。
+  - 經比較分析選擇以CWB WRF 模式3KM模擬結果最為恰當。
+  - CWB WRF 3KM預報的作業方式、演進與評估，可以參考
+    - [20161005_高解析區域模式預報系統之發展](http://photino.cwb.gov.tw/conf/history/105/2016_ppt_all/Session/Session6/6-2-20161005_高解析區域模式預報系統之發展.pdf)
+    - 陳依涵、戴俐卉、賴曉薇、陳怡儒、林伯勳、黃小玲、江琇瑛、江晉孝、陳白榆、洪景山、馮欽賜（2017）[中央氣象局區域模式2017 年更新 (OP41)](https://conf.cwb.gov.tw/media/cwb_past_conferences/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf)，中央氣象局氣象資訊中心
+- 風場範例如MeteoInfo圖，在島內範圍有較高的解析度。
+
+| ![unresp3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp3.png)|
+|:--:|
+| <b>CWB WRF 模式3KM預報結果風場</b>|
+
 
 - 氣象與空品模式的模擬範圍與解析度之決定
-  WRF 3KM雖然模擬範圍東西有較大的跨距（如圖），但對於空品模式（煙流可能影響範圍）而言，並無必要。
+  - WRF 3KM雖然模擬範圍東西有較大的跨距（如圖），但對於空品模式（煙流可能影響範圍）而言，並無必要。
 - 自動下載我國中央氣象局（CWB）數值預報（WRF）結果，並進行解讀。
-  CWB會員登錄、檔案網址之定位與確認
-  CWB要求先成為會員，才允許進行下載。
-  其會員帳號為電子郵件、秘密為包括大小寫、數字、特殊字元（shift 1～0）
-  檔案網址的資訊，寫在xml檔案內容內，範例為；$i=000~084
-                     https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2
+  - CWB會員登錄、檔案網址之定位與確認
+  - CWB要求先成為會員，才允許進行下載。
+  - 其會員帳號為電子郵件、秘密為包括大小寫、數字、特殊字元（shift 1～0）
+  - 檔案網址的資訊，寫在xml檔案內容內，範例：
+```bash
+for i in {000.084};do
+  wget https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2
+done
+```  
 - 公開資料內容： https://opendata.cwb.gov.tw/opendatadoc/MIC/A0061.pdf
 	- 
 	- 

@@ -1,13 +1,13 @@
 ---
 layout: default
-title: CALPUFF模式的法律位階
+title: 軌跡模式的法律與風波
 nav_order: 1
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
 ---
 
-# CALPUFF模式的法律位階
+# 軌跡模式的法律與風波
 {: .no_toc }
 
 <details open markdown="block">
@@ -21,7 +21,8 @@ last_modified_date: 2022-03-22 08:56:43
 ---
 
 ## 背景
-- 這篇筆記是因應環保署修訂模式模擬技術規範的需求收集的，澄清軌跡模式在法律中存在的價值、以及CALPUFF個案的處境。
+- 這篇筆記是因應環保署修訂模式模擬技術規範的需求收集的，澄清軌跡模式在美國法律中存在的價值、以及GTx在臺灣地區的應用與環保風波。
+- CALPUFF和GTx都是軌跡模式，事實上後者部分機制也有參考前者的作法，雖然GTx模式在臺灣地區環保風波中有所參與，但似無法因此限制CALPUFF在臺灣地區的發展，仍應就實際個案應用情況而議。
 
 ## Support Center for Regulatory Atmospheric Modeling (SCRAM)
 

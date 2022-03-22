@@ -23,8 +23,7 @@ last_modified_date: 2022-03-22 08:56:43
 ## 背景
 - 這篇筆記是因應環保署修訂模式模擬技術規範的需求收集的，澄清軌跡模式在法律中存在的價值、以及CALPUFF個案的處境。
 
-
-## Support Center for Regulatory Atmospheric Modeling (SCRAM)
+## Support Center for Regulatory Atmospheric Modeling (SCRAM)
 
 ### Air Quality Models
 
@@ -32,6 +31,7 @@ The most commonly used air quality models include the following:
 Dispersion Modeling - These models are typically used in the permitting process to estimate the concentration of pollutants at specified ground-level receptors surrounding an emissions source.
 
 Photochemical Modeling - These models are typically used in regulatory or policy assessments to simulate the impacts from all sources by estimating pollutant concentrations and deposition of both inert and chemically reactive pollutants over large spatial scales.
+
 https://www.epa.gov/scram/air-quality-models
 
 ---
@@ -133,15 +133,20 @@ ii. For assessment of the significance of ambient impacts for NAAQS and/or PSD i
 ---
 ## Using GTx
 https://www.epb.taichung.gov.tw/media/398158/臺中市空氣污染防制計畫書-104-108年版-上.pdf
+
 https://www.twreporter.org/a/shenao-power-plant-coal-fired-health
+
 98年度空氣污染綜合防制計畫 康廷工程顧問企業有限公司執行
-桃園縣政府環保局為順利推動空氣品質維護或改善工作，並能達到各項管制計畫預期之目標及效益，故委託執行本計畫，...期末階段歸納執行所獲成果分項說明如下...二、工作項目成果...(二)評估整體空氣品質改善執行成效...2.完成近年空氣品質不良事件日污染成因分析：
+桃園縣政府環保局為順利推動空氣品質維護或改善工作，並能達到各項管制計畫預期之目標及效益，故委託執行本計畫，
+
+...期末階段歸納執行所獲成果分項說明如下...二、工作項目成果...(二)評估整體空氣品質改善執行成效...2.完成近年空氣品質不良事件日污染成因分析：
 分析桃園縣臭氧之空氣品質不良指標值及各類空氣污染物濃度變成情形，並執行VOCs、粒狀物污染成分分析(金屬元素及陰、陽離子)，並利用空氣污染模式(軌跡模式GTx)模擬近四年空品不良事件日發生之傳輸軌跡。
+
 https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6%91%98%E8%A6%81%E8%B3%87%E6%96%99?page=79
 
 ---
 ## 媒體報導「不可承受之重-深澳燃煤電廠健康衝擊評估」環保署回應說明
-提供單位：行政院環境保護署空保處 發布日期：2018.09.11
+提供單位：行政院環境保護署空保處 發布日期：2018.09.11[金門縣政府下載點](https://ws.kinmen.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvMzE3L3JlbGZpbGUvMTAwMTAvNjU5NDA0L2YxODVmOGU0LTQwZjctNGE3Ni04MjFlLWJmZDUyNDAyNTRlYy5wZGY%3D&n=MTA3WTA5LnBkZg%3D%3D&icon=..pdf)
 
 有關 11 日綠色和平組織召開記者會，針對深澳燃煤電 廠所做健康風險評估，環保署回應如下：
 
@@ -153,7 +158,9 @@ https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6
 
 - 未若深澳環差案所採光化網格模式(CAMx)模式，已依空氣品質模式模擬規範規定，進行定性及定量性能評估， 並提出性能評估檢核表，模擬結果與測站觀測結果比較，通過性能評估規範；
 - 美國模式中心針對新污染源模式模擬增量採用 5 種推薦高斯擴散模式包括：AEROMOD、CALINE3、 CAL3OHC、CTDMPLUS、OCD。綜整國內外模式模擬專家的意見，GTx 模式是否適合用在本健康風險之模擬，實有待釐清。
+
 本案距離實際建廠期間還有一段時間，將適用新修定的 空污法，授權主管機關可以依最低可達成排放率控制技術要 求大幅降低排放量，以保障民眾健康。
+
 ---
 ## 燃煤就是髒　空汙學者為什麼說的跟賴清德不一樣？
 文 呂國禎 天下Web only(2018-03-17)
@@ -171,10 +178,21 @@ https://sheethub.com/opendata.epa.gov.tw/%E7%92%B0%E4%BF%9D%E5%B0%88%E6%A1%88%E6
 談空污對北部地區影響卻不能只看深澳，莊秉潔說，如果深澳電燃煤電廠興建完成之後，會跟一樣燒煤炭的台電新林口電廠形成南北夾擊大台北都會區，再加上台北都會區的熱島效應，會惡化大台北都會的空氣品質。
 
 所以莊秉潔、詹長權等空污學者建議，深澳電廠應該改成天然氣電廠，台電預計在基隆協和電廠退役後，在基隆港建天然氣接收站、把協和電廠改建為天然氣發電，可以拉一條專用天然氣海管到深澳，就可以讓深澳發電廠由煤改氣。「如果真的不行，那麼燒煤炭的深澳電廠應該蓋來備用，等天然氣發電的電力供應不足的時候再發電。」莊秉潔說。
+
 https://www.cw.com.tw/article/5088779
+
 ---
-https://ws.kinmen.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvMzE3L3JlbGZpbGUvMTAwMTAvNjU5NDA0L2YxODVmOGU0LTQwZjctNGE3Ni04MjFlLWJmZDUyNDAyNTRlYy5wZGY%3D&n=MTA3WTA5LnBkZg%3D%3D&icon=..pdf
-詹順貴臉書發三千字聲明　請辭環保署副署長 https://www.cw.com.tw/article/5092428
+## 媒體報導「不可承受之重-深澳燃煤電廠健康衝擊評估」環保署回應說明
+提供單位：行政院環境保護署空保處
+
+發布日期：2018.09.11
+
+
+
+詹順貴臉書發三千字聲明　請辭環保署副署長
+
+https://www.cw.com.tw/article/5092428
+
 ---
 ## 揭開蔡英文突襲六輕祕辛　為何六輕無法降空污，由燃煤改燒天然氣？
 - 文 呂國禎 天下Web only(2020-11-22)
@@ -182,7 +200,9 @@ https://ws.kinmen.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvMzE3L3JlbGZpbGUvMTAwMTA
 ...計畫卻卡住了。雖然經濟部能源局樂觀其成，但工業局卻陷入了兩難，因為南碼頭...10個碼頭會剩下3個，如果新興、口湖、四湖區有投資者進來，恐怕不敷使用，因此工業局長呂正華回應，南碼頭蓋天然氣接收站，必須要有通盤考量。
 
 但實際上，所謂的新興、台西、四湖工業區，規劃近萬公頃的工業區，大部分的地方仍是汪洋一片，中興大學環工系教授莊秉潔說，「六輕改天然氣發電、接收站應該快做，最好台塑集團所有燃煤的汽電共生也改成燒天然氣，台灣才能持續做深度減煤、減碳、降低空污，未來投資需要碼頭可另作處理、規劃，不應成為改善現況的絆腳石。」
+
 https://www.cw.com.tw/article/5102853
+
 ---
 ## 深澳是台灣最後一座燃煤電廠
 

@@ -1,13 +1,13 @@
 ---
 layout: default
-title: 軌跡模式的法律與風波
+title: 軌跡模式的法律定位與風波
 nav_order: 1
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
 ---
 
-# 軌跡模式的法律與風波
+# 軌跡模式的法律定位與風波
 {: .no_toc }
 
 <details open markdown="block">

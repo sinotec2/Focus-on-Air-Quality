@@ -22,7 +22,11 @@ last_modified_date: 2022-03-22 08:56:43
 ## 背景
 Leed大學CEMAC中心建置了Masaya 火山噴發SO2/SO4造成地面濃度的預報模式，範例如圖所示。由於氣象預報數據、大氣擴散模式等皆為官方作業系統與優選模式，因此具有高度的參考價值。
 
-此處將其進行本土化，應用於緊急應變作業系統中。改系統自動下載未來48小時MAM氣象數值預報的結果，轉成CALMET的輸入檔，進入CALPUFF模式進行地面空氣品質的模擬，由於CALPUFF模式具有考慮3D風場、地形變化、化學反應等模擬能力，為美國環保署列為大氣擴散中的優選模式，用於大型固定污染源原生污染物以及二次氣膠長程傳輸的模式。
+此處將其進行本土化，應用於緊急應變作業系統中。
+
+改系統自動下載未來48小時MAM氣象數值預報的結果，轉成CALMET的輸入檔，進入CALPUFF模式進行地面空氣品質的模擬。
+
+由於CALPUFF模式具有考慮3D風場、地形變化、化學反應等模擬能力，為美國環保署列為大氣擴散中的優選模式，用於大型固定污染源原生污染物以及二次氣膠長程傳輸的模式。
 
 ## 挑戰任務
 系統工作流程由Run.sh批次檔所控制，重要節點及困難如下：
@@ -120,13 +124,13 @@ runmodel=true
 	- 解決方式，直接將 15個小時數寫出來：
 ```bash  
 for i in 000 006 012 018 024 030 036 042 048 054 060 066 072 078 084 ;do
-  wget     https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2;done
+  wget https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-$i.grb2
+done
 ```  
 - 美國MAM預報內容與台灣WRF模式預報內容的差異與對照、
 	- GRIB2 格式可以用wgrib2程式進行解讀
 	- 也可以轉成nc檔案，用python來解讀
-	- convert2nc必須在 ncl_stable 環境中運作
-	- https://bairdlangenbrunner.github.io/python-for-climate-scientists/conda/setting-up-conda-environments.html
+	- convert2nc必須在 ncl_stable 環境中運作，參[bairdlangenbrunner.github.io](https://bairdlangenbrunner.github.io/python-for-climate-scientists/conda/setting-up-conda-environments.html)
 	- 經比較結果，只有格點的經緯度變數名稱不同，前者為lat/lon、後者為gridlat_0/gridlon_0，在Create3DDAT.py之前須先準備好內容。
 - 格點lat/lon之讀取
   - 先將GRIB轉成NC格式
@@ -159,7 +163,7 @@ df.to_csv(fname+'.csv')
 ```
 - 路徑檔名存成：data/M-A0064.nc2.csv
 - 檔案大小
-  - 一個grb2檔案大小約183~187MB,15個檔案（1天分）約3.1G
+  - 一個grb2檔案大小約183~187MB，1天份共15個檔案計3.1G
   - 一天圖檔共約360M。
 
 ## Create3DDAT.py的安裝與修改
@@ -295,32 +299,37 @@ df.to_csv(fname+'.csv')
 ---
 >     filenames.append(filePrefix+'{:02d}'.format((i)*6)+fileSuffix)
 ```
-## CALMET模式的偵錯
+## CALPUFF系統的更新
+### CALMET模式的偵錯
 1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）
 	- dec舊式fortran可以接受未定寬度的輸出格式，如(i)、(f)等
-	  read(cfver,'(f)') cfdataset
-	  ifort/pgi皆可接受，但gfortran無法接受
-	  使用-fdec-format-defaults新版gfortran不能接受
-	- 解決方法：直接將未定長度格式改成自由格式(*)
+	- 如`read(cfver,'(f)') cfdataset`
+	- ifort/pgi皆可接受，但gfortran無法接受
+	  - 使用-fdec-format-defaults，但新版gfortran不能接受
+	  - 解決方法：直接將程式碼中未定長度格式，改成自由格式(*)
 2. 輸入資料間隔6小時程式的偵錯
 - 基本版本：CALMET_v6.5.0_L150223
 - ifort 與centos6 的差異
-		(unresp)
-		kuang@master /cluster/CALPUFF6/CALMET
-		$ diff CALMET_v6.5.0_L150223/CALMET.FOR new/calmet.for
-		21043c21045
-		<       save it1,it2,isec1,isec2
-		---
-		>       save it1,it2,isec1,isec2,nlevag11
+```bash
+(unresp)
+kuang@master /cluster/CALPUFF6/CALMET
+$ diff CALMET_v6.5.0_L150223/CALMET.FOR new/calmet.for
+21043c21045
+<       save it1,it2,isec1,isec2
+---
+>       save it1,it2,isec1,isec2,nlevag11
+```    
 - mac gfortran與centos6 gfortran的差異
-		kuang@master ~/MyPrograms/UNRESPForecastingSystem/CALPUFF_MODS/CALMET
-		$ diff calmet.for /cluster/CALPUFF6/CALMET/new/calmet.for
-		21045c21045
-		<       save it1,it2,isec1,isec2,nlevag1,msec
-		---
-		>       save it1,it2,isec1,isec2,nlevag11
-		
-CALPUFF模式輸出的修改
+
+```bash
+kuang@master ~/MyPrograms/UNRESPForecastingSystem/CALPUFF_MODS/CALMET
+$ diff calmet.for /cluster/CALPUFF6/CALMET/new/calmet.for
+21045c21045
+<       save it1,it2,isec1,isec2,nlevag1,msec
+---
+>       save it1,it2,isec1,isec2,nlevag11
+```		
+### CALPUFF模式輸出的修改
 1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）
 	- dec舊式fortran可以接受未定寬度的輸出格式，如(i)、(f)等 in readcf.f and runsize.f 
 	  read(cfver,'(f)') cfdataset
@@ -335,118 +344,128 @@ CALPUFF模式輸出的修改
 	  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 	  檔案另輸出成data/xy_taiwan3.dat
 3. output.f 離散點之輸出
-	- $ diff CALPUFF_v7.2.1_L150618/output.f new/output.f
-	- 125a126
-	- >       character*150 infile
-	- 373a375,392
-	- > c--------------------------------------------------------------
-	- > ckuang
-	- > c --- Sara 08/10/2004: Just to have an output of the concentration
-	- > c --- directly readable.
-	- > c --- Concentration in g/m^3 is written for each receptor
-	- >             do ispec=1,nspec
-	- >               write(infile,10000) ispec, istep
-	- > c     &                     I2.2,I4.4,'.vtk')
-	- > 10000         format('concrec',I2.2,I4.4,'.dat')
-	- > c             print *, nspec,',',ispec,',',nn,',',infile,',',
-	- > c     +       nrec,',',chirec(1,ispec)
-	- >               open(50,file=infile)
-	- >               do i=1,nrec
-	- >                 write(50,*) chirec(i,ispec)
-	- >               end do
-	- >               close(50)
-	- >             end do
-	- 
+
+```bash
+$ diff CALPUFF_v7.2.1_L150618/output.f new/output.f
+125a126
+>       character*150 infile
+373a375,392
+> c--------------------------------------------------------------
+> ckuang
+> c --- Sara 08/10/2004: Just to have an output of the concentration
+> c --- directly readable.
+> c --- Concentration in g/m^3 is written for each receptor
+>             do ispec=1,nspec
+>               write(infile,10000) ispec, istep
+> c     &                     I2.2,I4.4,'.vtk')
+> 10000         format('concrec',I2.2,I4.4,'.dat')
+> c             print *, nspec,',',ispec,',',nn,',',infile,',',
+> c     +       nrec,',',chirec(1,ispec)
+>               open(50,file=infile)
+>               do i=1,nrec
+>                 write(50,*) chirec(i,ispec)
+>               end do
+>               close(50)
+>             end do
+``` 
 4. PM2.5 的計算（結合銨鹽重量的計算）
 	- CALPUFF之CSPEC共有8種，利用其中的成份計算總PM2.5，包括結合銨鹽
 	- 以DataFrame架構整理檔案名稱(spec, hour)，再讀入個別檔案的內容成為3維矩陣C。
 	- 輸出檔案為00-hhhh.dat。
-		kuang@master ~/MyPrograms/UNRESPForecastingSystem/Python
-		$ cat conc2pm25.py
-		import numpy as np
-		import os,sys,subprocess
-		from pandas import *
-		CSPEC='SO2 SO4 NOX HNO3 NO3 PMS1 PMS2 PMS3'.split()
-		fnames=list(subprocess.check_output('ls concrec*dat',shell=True).split(b'\n'))
-		fnames=[i.decode('utf8') for i in fnames if len(i)>0 ]
-		if len(fnames)==0:sys.exit('concrec not found')
-		wc=int(subprocess.check_output('cat '+fnames[0]+'|wc -l',shell=True).split(b'\n')[0])
-		jt=[int(fname.split('/')[-1].replace('.dat','')[-4:]) for fname in fnames if len(fname)>0]
-		js=[int(fname.split('/')[-1].replace('.dat','')[-6:-4]) for fname in fnames if len(fname)>0]
-		df=DataFrame({'hr':jt,'spec':js,'fname':fnames})
-		df=df.loc[df.spec>0].reset_index(drop=True)
-		C=np.zeros(shape=(max(js)+1,max(jt)+1,wc))
-		for i in range(len(df)):
-		  with open(df.loc[i,'fname'],'r') as f:
-		    tmp=[float(l.strip('\n')) for l in f]
-		  C[df.loc[i,'spec'],df.loc[i,'hr'],:]=tmp[:]
-		so4 =C[1,:,:]
-		hno3=C[3,:,:]
-		no3 =C[4,:,:]
-		p25 =C[5,:,:]
-		nh4=so4*(36./96.)+no3*(18./62.)+hno3*(18./63.)
-		total=so4+no3+hno3+nh4+p25
-		fnRoot=fnames[0].replace('.dat','')[:-6]+'00'
-		for it in range(1,max(jt)+1):
-		  fname=fnRoot+'{:04d}'.format(it)+'.dat'
-		  with open(fname,'w') as f:
-		    for ic in range(wc):
-		      f.write(str(total[it,ic])+'\n')
 
-等濃度圖與網站設定
-模擬污染物項目、小時數、動畫、濃度等級的修改，
-- Python/genmaps.py
-  主要修改污染物項目，
-  由SO2/SO4→PM2.5/NOX/SO2/SO4等四項，
-  成份變數SOX→SPEC
-  檔案個數(總時數)
-		100c109
-		<     nconc = 48
-		---
-		>     nconc = 83
-- Python/maptoolkit.py
-  除上述污染項目之外，尚有：
-  指定PMF及NOX concrec的file name前2碼
-  座標系統的計算方式
-		32d31
-		< import utm
-		35a35,36
-		> import twd97
-		123,128c128,131
-		>     Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
-		>     Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
-		>     ll = np.array([twd97.towgs84(i*1000+Xcent,j*1000+Ycent) for i, j in zip(x, y)])
-		>     lat, lon = (ll[:, i] for i in [0, 1])
-		166,169c169,172
-		>     Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
-		>     Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
-		>     ll = np.array([twd97.towgs84(i*1000+Xcent,j*1000+Ycent) for i, j in zip(x2, y2)])
-		>     lat, lon = (ll[:, i] for i in [0, 1])
-	- 濃度等級(ug/m3)
-		273,274c276,277
-		<         self.binLims = [10, 350, 600, 2600, 9000, 14000]  # SO2 bin limits
-		<         self.binLimsSO4 = [1E-8, 12, 35, 55, 150, 250]  # SO4 bin limits from:
-		---
-		>         self.binLims = [1E-3,1E-2,1,5, 10, 350]  # SO2 bin limits
-		>         self.binLimsSO4 = [1E-3, 1E-2,1E-1, 1, 5, 15]  # SO4 bin limits from:
+```python
+kuang@master ~/MyPrograms/UNRESPForecastingSystem/Python
+$ cat conc2pm25.py
+import numpy as np
+import os,sys,subprocess
+from pandas import *
+CSPEC='SO2 SO4 NOX HNO3 NO3 PMS1 PMS2 PMS3'.split()
+fnames=list(subprocess.check_output('ls concrec*dat',shell=True).split(b'\n'))
+fnames=[i.decode('utf8') for i in fnames if len(i)>0 ]
+if len(fnames)==0:sys.exit('concrec not found')
+wc=int(subprocess.check_output('cat '+fnames[0]+'|wc -l',shell=True).split(b'\n')[0])
+jt=[int(fname.split('/')[-1].replace('.dat','')[-4:]) for fname in fnames if len(fname)>0]
+js=[int(fname.split('/')[-1].replace('.dat','')[-6:-4]) for fname in fnames if len(fname)>0]
+df=DataFrame({'hr':jt,'spec':js,'fname':fnames})
+df=df.loc[df.spec>0].reset_index(drop=True)
+C=np.zeros(shape=(max(js)+1,max(jt)+1,wc))
+for i in range(len(df)):
+  with open(df.loc[i,'fname'],'r') as f:
+    tmp=[float(l.strip('\n')) for l in f]
+  C[df.loc[i,'spec'],df.loc[i,'hr'],:]=tmp[:]
+so4 =C[1,:,:]
+hno3=C[3,:,:]
+no3 =C[4,:,:]
+p25 =C[5,:,:]
+nh4=so4*(36./96.)+no3*(18./62.)+hno3*(18./63.)
+total=so4+no3+hno3+nh4+p25
+fnRoot=fnames[0].replace('.dat','')[:-6]+'00'
+for it in range(1,max(jt)+1):
+  fname=fnRoot+'{:04d}'.format(it)+'.dat'
+  with open(fname,'w') as f:
+    for ic in range(wc):
+      f.write(str(total[it,ic])+'\n')
+```
+## 等濃度圖與網站設定
+- 模擬污染物項目、小時數、動畫、濃度等級的修改，
+### Python/genmaps.py
+-  主要修改污染物項目，
+-  由SO2/SO4→PM2.5/NOX/SO2/SO4等四項，
+-  成份變數SOX→SPEC
+-  檔案個數(總時數)
+```bash  
+100c109
+<     nconc = 48
+---
+>     nconc = 83
+```    
+### Python/maptoolkit.py
+-  除上述污染項目之外，尚有：
+  - 指定PMF及NOX concrec的file name前2碼
+  - 座標系統的計算方式
+
+```bash
+32d31
+< import utm
+35a35,36
+> import twd97
+123,128c128,131
+>     Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+>     Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
+>     ll = np.array([twd97.towgs84(i*1000+Xcent,j*1000+Ycent) for i, j in zip(x, y)])
+>     lat, lon = (ll[:, i] for i in [0, 1])
+166,169c169,172
+>     Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+>     Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
+>     ll = np.array([twd97.towgs84(i*1000+Xcent,j*1000+Ycent) for i, j in zip(x2, y2)])
+>     lat, lon = (ll[:, i] for i in [0, 1])
+- 濃度等級(ug/m3)
+```bash
+273,274c276,277
+<         self.binLims = [10, 350, 600, 2600, 9000, 14000]  # SO2 bin limits
+<         self.binLimsSO4 = [1E-8, 12, 35, 55, 150, 250]  # SO4 bin limits from:
+---
+>         self.binLims = [1E-3,1E-2,1,5, 10, 350]  # SO2 bin limits
+>         self.binLimsSO4 = [1E-3, 1E-2,1E-1, 1, 5, 15]  # SO4 bin limits from:
+```
 - XYFILE:xy_masaya.da→xy_taiwan3.dat
 - 圖框之tic
-		399,400c403,404
-		>         latTicks = np.arange(round(latMin, 1), round(latMax, 1) + 0.1, 0.5)
-		>         lonTicks = np.arange(round(lonMin, 1), round(lonMax, 1) + 0.1, 0.5)
+```bash
+399,400c403,404
+>         latTicks = np.arange(round(latMin, 1), round(latMax, 1) + 0.1, 0.5)
+>         lonTicks = np.arange(round(lonMin, 1), round(lonMax, 1) + 0.1, 0.5)
+```
 - 指定外部IP（內設是本機）
-  python -m http.server --bind 200.200.12.191 8030&
-TODO
-1. crontab自動每天執行
+
+  `python -m http.server --bind 200.200.12.191 8030&`
+
+## TODO
+1. crontab自動每天執行(已完成)
 2. 點、線、面源模擬分析
 3. 重要點污染源分析
 4. 測站時間序列
-5. 掛網：與天氣小編整合、鼎環或其他
+5. 掛網：委託專業網址
 6. 臭氧煙陣軌跡
 7. 縮小範圍、增加污染源
 8. 教學用
-
-
-<HOME>
-
 

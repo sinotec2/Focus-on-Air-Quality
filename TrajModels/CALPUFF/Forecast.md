@@ -462,15 +462,21 @@ for it in range(1,max(jt)+1):
 >         lonTicks = np.arange(round(lonMin, 1), round(lonMax, 1) + 0.1, 0.5)
 ```
 - 指定外部IP（內設是本機）
+- 網址：http://200.200.12.191:8030/UNRESP_VIZ/index.html
 
-  `python -m http.server --bind 200.200.12.191 8030&`
+```bash
+cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
+/cluster/anaconda3/bin/python3.7/python -m http.server --bind 200.200.12.191 8030 >&/dev/null &
+```
 
 ## TODO
 1. crontab自動每天執行(已完成)
+1. 解決自動下載問題(Today目錄下檔案多達366MB)。
+	1. 掛網、加速網站速度流量：委託專業網址。
+	1. 降低圖檔容量：不論背景是topo或者是衛星照片，單一jpg檔案均為0.7~1.2M，如僅有縣市界線應可有效降低。
 2. 點、線、面源模擬分析
 3. 重要點污染源分析
 4. 測站時間序列
-5. 掛網：委託專業網址
 6. 臭氧煙陣軌跡
 7. 縮小範圍、增加污染源
 8. 教學用

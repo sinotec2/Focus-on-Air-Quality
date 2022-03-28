@@ -4,7 +4,7 @@ title: MMIF
 parent: ME Pathways
 grand_parent: Plume Models
 nav_order: 1
-last_modified_date: 2022-02-12 19:52:38
+last_modified_date: 2022-03-28 11:02:41
 ---
 # MMIF
 {: .no_toc }
@@ -30,11 +30,12 @@ last_modified_date: 2022-02-12 19:52:38
 mmif將會生成aermod執行所需要的氣象檔案，包括地面氣象要素與參數.sfc檔，以及垂直探空數據檔.pfl檔案。
 
 ### 遠端執行系統
-- 這個系統有3個版本，目前營運的是第2與第3版本(詳MMIF_CaaS*)。
+- 這個遠端執行系統有3個版本，目前營運的是第2與第3版本(詳[MMIF_CaaS]())。
 - 2016～2020 3Km網格點預處理結果檔案[連結](https://umap.openstreetmap.fr/zh-tw/map/mmif-resultstwn_3x3_grids_588696)。
 
 ## 版本差異
-2019年至2021年間新增之改變
+- MMIF目前最新版本為2021年版。
+- 2019年至2021年間新增之改變
 
 |date|change|
 |-|:-|
@@ -150,3 +151,6 @@ for i in $(ls /Users/WRF4.1/WRFv3/201909/run1[01]/wrfout_d04*);do
 done >fnames.wrf
 cat fnames.wrf >> mmif.inp
 ```
+
+## Reference
+- [MMIF使用手冊](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/mmif/MMIFv3.4.2_Users_Manual.pdf)，2021-06-30

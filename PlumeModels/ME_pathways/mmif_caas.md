@@ -421,17 +421,17 @@ $ cat -n do_mmif2.cs
 ## Reference
 
 - CGI(Common Gateway Interface，CGI)程式([通用网关接口](https://zh.wikipedia.org/wiki/%E9%80%9A%E7%94%A8%E7%BD%91%E5%85%B3%E6%8E%A5%E5%8F%A3))
-- crontab
+- [crontab](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)
 - Ask Difference, [How do I change the time format used by ls command line on osx?](https://apple.stackexchange.com/questions/15170/how-do-i-change-the-time-format-used-by-ls-command-line-on-osx)
 - browser timeout
-	- 请问chrome浏览器的默认超时时间是多久？
+	- [请问chrome浏览器的默认超时时间是多久？](https://segmentfault.com/q/1010000011041316)
 		- 测试时间：2019/02/26
 		- MacOS 环境下，timeout在各浏览器默认值为（以下浏览器都为当前时间最新版本）
 		- chrome 72.x 为4min
 		- safari 12 为8min
 		- firefox 65 貌似没有超时时间(編按：非然也，約3min)
-	- 如何在 Internet Explorer 中變更預設的 keep-alive 超時值
-	- 網站Time Out時自動轉到指定頁面告知使用者解決方法
+	- [如何在 Internet Explorer 中變更預設的 keep-alive 超時值](https://docs.microsoft.com/zh-tw/troubleshoot/browsers/change-keep-alive-time-out)
+	- [網站Time Out時自動轉到指定頁面告知使用者解決方法](https://ithelp.ithome.com.tw/questions/10185433)
 
 ### Family
 

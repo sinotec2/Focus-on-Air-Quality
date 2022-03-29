@@ -132,6 +132,19 @@ ii. For assessment of the significance of ambient impacts for NAAQS and/or PSD i
 
 - source [ecfr.gov](https://www.ecfr.gov/cgi-bin/text-idx?SID=b7d0bd27661737a2693ab6aebd83f911&mc=true&node=pt40.2.51&rgn=div5#ap40.2.51_11319.w)
 
+## Reviewing of Experts
+### The Removal of CALPUFF as a Guideline Model
+In January 2017 in the US EPA Appendix W, Federal Register, Volume 82, No. 10 under Rules and Regulations 3 , the CALPUFF dispersion modelling system was removed from the US EPA Appendix A as the preferred long range transport model with no replacement.
+
+In the US, AERMOD is now the only dispersion model with guideline status and is the recommended US EPA dispersion model for use for all near field applications out to 50km 4 . The US EPA approved version of CALPUFF 5 , Version 5.85 of the model (equivalent to the 2008 version of the model with bug fixes) can be still be found on the ‘Alternative Models’ web page. It is essential to point out here that the Developers recommend the use of CALPUFF, Version 7 (2017) 6 over the US EPA recommended Version 5.85 for all applications outside of the US. Version 7 of the model contains significant model code changes and improvements as well as bug fixes, plus the inclusion of the sub hourly time step (Version 6).
+
+The wording of the original 2013 Federal Register 7 was that CALPUFF be allowed to be used for all regulatory applications involving long range transport (> 50 km) and, more importantly, on a case-by-case basis in situations involving near-field complex flows or, non-steady-state situations such as in a coastal area, fumigation event, stagnation and complex terrain.
+
+The new wording in Appendix W (2017) 8 points out that removing CALPUFF as an Appendix A model does not affect its use under the Federal Land Managers guidance regarding Air Quality assessments in National Parks, nor any previous use of the model as part of regulatory applications requiring Civil Aviation Authority. Similarly, this does not affect the EPA’s recommendation that states use of CALPUFF to determine the applicability and level of BART (Best Available Retrofit Technology) in regional haze implementation. Appendix W (2017) also states that the use of CALPUFF in the near field as an alternative model for situations involving complex terrain and complex winds has not changed by the removal of CALPUFF as a preferred model in Appendix A.
+
+In this same document, the EPA further points out that it recognises that “AERMOD is limited” and, that CALPUFF or another Lagrangian model may be more suitable in complex environments, therefore they have continued to provide the flexibility to use it. This last point is important as the EPA recognise that AERMOD has its limitations in complex non steady state environments. This is especially important for odour assessments which are often located in complex meteorological environments, i.e., close to water bodies, such as WWTPs and in complex terrain environments such as Pulp and Paper Mills.
+- Barclay, J. (2019). CALPUFF Model, History and Current Status – Part 1Olores.org. Available at [olores.org](https://www.olores.org/en/techniques/dispersion-modelling/869-calpuff-model-history-and-current-status-part-1) (Accessed 29 March 2022).
+
 ---
 ## Using GTx
 -  [臺中市空氣污染防制計畫書-104-108年版-上](https://www.epb.taichung.gov.tw/media/398158/臺中市空氣污染防制計畫書-104-108年版-上.pdf)

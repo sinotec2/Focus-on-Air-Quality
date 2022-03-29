@@ -94,7 +94,16 @@ Results are compared with data measured at ground level in monitoring campaigns 
 ### 中國關中平原交通污染 (2022)
 - Lu, P., Deng, S., Li, G., Li, J., Xu, K., and Lu, Z. (2022). [Spatial Distribution of Primary and Secondary PM2.5 Concentrations Emitted by Vehicles in the Guanzhong Plain, China](https://www.researchgate.net/publication/358753894_Spatial_Distribution_of_Primary_and_Secondary_PM25_Concentrations_Emitted_by_Vehicles_in_the_Guanzhong_Plain_China). Atmosphere 13:347. doi:10.3390/atmos13020347.
 
+## Saftey Assessment
+### hypothetical case study
+The most relevant outcome is that sensitivities of the two models are generally comparable, except for the source diameter: if the SPRAY model is applied with the specific fire source option, then the concentrations result almost independent from this parameter. Conversely, when considering other source-types, the concentrations vary up to ± 60% within the selected uncertainty range.
+- Tagliaferri, F., Invernizzi, M., and Capelli, L. (2022). [A sensitivity analysis applied to SPRAY and CALPUFF models when simulating dispersion from industrial fires](https://www.researchgate.net/publication/356082681_A_sensitivity_analysis_applied_to_SPRAY_and_CALPUFF_models_when_simulating_dispersion_from_industrial_fires). Atmospheric Pollution Research 13:101249. doi:10.1016/j.apr.2021.101249.
+
+
 ## HRA Applications
+### Forest Fires (2008)
+- Henderson, S., Burkholder, B., Jackson, P., Brauer, M., and Ichoku, C. (2008). [Use of MODIS products to simplify and evaluate a forest fire plume dispersion model for PM10 exposure assessment](https://www.researchgate.net/publication/222687494_Use_of_MODIS_products_to_simplify_and_evaluate_a_forest_fire_plume_dispersion_model_for_PM10_exposure_assessment). Atmospheric Environment 42:8524–8532. doi:10.1016/j.atmosenv.2008.05.008.
+
 ### Zinc smelter in USA (2010)
 CALPUFF is an atmospheric source-receptor model recommended by the U.S. Environmental Protection Agency for use on a case-by-case basis in complex terrain and wind conditions. The ability of the model to provide useful information for exposure assessments in areas with those topographical and meteorological conditions has received little attention. This is an important knowledge gap for use of CALPUFF outside of regulatory applications, such as exposure analyses conducted in support of risk assessments and health studies. We compared deposition of cadmium (Cd), lead (Pb), and zinc (Zn) calculated with CALPUFF as a result of emissions from a zinc smelter with corresponding concentrations of the metals measured in attic dust and soil samples obtained from the surrounding area. 
 
@@ -102,6 +111,23 @@ On a point-by-point analysis, predictions from CALPUFF explained 11% (lead) to 5
 
 These findings demonstrate that CALPUFF can provide reasonably accurate predictions of the patterns of long-term air pollutant deposition in the near-field associated with emissions from a discrete source in complex terrain. Because deposition estimates are calculated as a linear function of air concentrations, CALPUFF is expected to be reliable model for prediction of long-term average, near-field ambient air concentrations in complex terrain as well.
 - MacIntosh, D.L., Stewart, J.H., Myatt, T.A., Sabato, J.E., Flowers, G.C., Brown, K.W., Hlinka, D.J., and Sullivan, D.A. (2010). [Use of CALPUFF for exposure assessment in a near-field, complex terrain setting](https://www.sciencedirect.com/science/article/abs/pii/S1352231009007985). Atmospheric Environment 44 (2):262–270. doi:10.1016/j.atmosenv.2009.09.023.
+
+### Tema metropolis and refinery, Ghana (2018)
+Overall, AERMOD better predicted ambient SO2 and NO2 levels than the reported CALPUFF model. For SO2, AERMOD showed a good agreement with FB, IOA, and MG while CALPUFF showed a good prediction in NMSE and VG. Also, AERMOD predicted NO2 well with NMSE, IOA, MG, and VG compared with FB for CALPUFF. The performace of the models may provide a better understanding for future epidemiological studies.
+
+- Amoatey, P., Omidvarborna, H., Affum, H., and Baawain, M. (2018). [Performance of AERMOD and CALPUFF models on SO2 and NO2 emissions for future health risk assessment in Tema metropolis](https://www.researchgate.net/publication/323869860_Performance_of_AERMOD_and_CALPUFF_models_on_SO2_and_NO2_emissions_for_future_health_risk_assessment_in_Tema_metropolis). Human and Ecological Risk Assessment 25:772–786. doi:10.1080/10807039.2018.1451745.
+- Amoatey, P., Omidvarborna, H., Baawain, M., and Al-Mamun, Md.A. (2019). [Emissions and exposure assessments of SOX, NOX, PM10/2.5 and trace metals from oil industries: A review study (2000–2018)](https://www.researchgate.net/publication/330527231_Emissions_and_exposure_assessments_of_SOX_NOX_PM1025_and_trace_metals_from_oil_industries_A_review_study_2000-2018). Process Safety and Environmental Protection 123. doi:10.1016/j.psep.2019.01.014.
+
+### Ulsan, Korea (2020)
+A numerical simulation system is developed to predict the dispersion of hazardous air pollutants (HAPs) over a populated city due to accidental release. Ulsan, as one of the megacities in Korea, is chosen as an ideal testbed for the simulation, as it is located in complex terrain and hosts a national industrial complex on the outskirts of the city. The system is based on the California puff model (CALPUFF) for simulating a HAP’s dispersion, in which the three-dimensional atmospheric circulation derived from the observed weather station data is specified at a fine horizontal resolution of 200 m. A test scenario is developed for the accidental release of benzene during the daytime and nighttime, respectively, by a fictitious explosion of a storage container, and the injection amount is determined arbitrarily yet comparable to those in the past accidents. In attempting a quantitative assessment and zoning the level of potential risk over the impacted area, multiple simulations have been conducted each day with different hourly varying meteorological conditions in August. The dispersion characteristics of the air pollutant depend largely on the local wind patterns that vary substantially from day to day. Nevertheless, the composite analysis sufficiently identifies the impacted area by the HAP’s dispersion due to the local prevailing wind such as the land–sea breeze circulation. An immediate hazardous area is determined based on the vulnerability map constructed by zoning the level of risk determined by the spatial distribution of the HAPs’ concentration and the harmfulness standard to the human body.
+- Kim, G., Lee, M.-I., Lee, S., Choi, S.-D., Kim, S.-J., and Song, C.-K. (2020). [Numerical Modeling for the Accidental Dispersion of Hazardous Air Pollutants in the Urban Metropolitan Area](https://www.mdpi.com/2073-4433/11/5/477). Atmosphere 11 (5):477. doi:10.3390/atmos11050477.
+
+## Remote/Automatic Executions of CALPUFF
+
+### Cloud Computing Platform of the Ukrainian National Grid Infrastructure 
+- Kovalets, I., Maistrenko, S., Khalchenkov, A., O.O., P., Doncov-Zagreba, T., Khurtsilava, K.V., and Udovenko, O. (2021). [Adaptation of the Web-Service of Air Pollution Forecasting for Operation within Cloud Computing Platform of the Ukrainian National Grid Infrastructure](https://www.researchgate.net/publication/349809247_Adaptation_of_the_Web-Service_of_Air_Pollution_Forecasting_for_Operation_within_Cloud_Computing_Platform_of_the_Ukrainian_National_Grid_Infrastructure). Science and Innovation 17:78–88. doi:10.15407/scine17.01.078.
+- Instance:[Povitrya System](http://cloud-2.bitp.kiev.ua/airsystem_english/airsystem_connect.html)
+- Kovalets, I.V., Maistrenko, S.Yа., Khalchenkov, O.V., Zagreba, T.O., Khurtsilava, K.V., Anulich, S.M., Bespalov, V.P., and Udovenko, O.I. (2017). [«Povitrya» Web-Based Software System for Operational Forecasting Atmospheric Pollution after Manmade Accidents in Ukraine](http://scinn-eng.org.ua/sites/default/files/pdf/2017/N6/Kovalets.pdf). Sci. innov. 13 (6):13–24. doi:10.15407/scine13.06.013.
 
 ---
 

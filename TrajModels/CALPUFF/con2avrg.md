@@ -30,3 +30,5 @@ last_modified_date: 2022-03-22 08:56:43
 |SO4|CO|particulate|
 |NO3|NO2|gas|
 |HNO3|O3|gas|
+
+https://data.taipower.com.tw/opendata01/apply/file/d006001/001.txt

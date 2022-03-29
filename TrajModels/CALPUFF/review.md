@@ -99,6 +99,17 @@ Results are compared with data measured at ground level in monitoring campaigns 
 The most relevant outcome is that sensitivities of the two models are generally comparable, except for the source diameter: if the SPRAY model is applied with the specific fire source option, then the concentrations result almost independent from this parameter. Conversely, when considering other source-types, the concentrations vary up to ± 60% within the selected uncertainty range.
 - Tagliaferri, F., Invernizzi, M., and Capelli, L. (2022). [A sensitivity analysis applied to SPRAY and CALPUFF models when simulating dispersion from industrial fires](https://www.researchgate.net/publication/356082681_A_sensitivity_analysis_applied_to_SPRAY_and_CALPUFF_models_when_simulating_dispersion_from_industrial_fires). Atmospheric Pollution Research 13:101249. doi:10.1016/j.apr.2021.101249.
 
+### Volcano Analysis
+Under EXPLOSIVE ERUPTION RISK AND DECISION SUPPORT FOR EU POPULATIONS THREATENED BY VOLCANOES - EXPLORIS Project [EXPLORIS](http://exploris.pi.ingv.it/non_conf/p_products/index.html),
+
+Objectives: The world's population has become increasingly concentrated in large conurbations at high risk from volcanic hazards. European cities on explosive volcanoes and volcanic islands are particularly threatened by pyroclastic flows and tephra fall. Quantification of the risk associated with a range of eruption scenarios, the risk's potential impact, and risk mitigation are priorities. The EXPLORIS project addresses these issues by advancing scientific and technological capabilities (e.g. simulation codes, vulnerability databases, and probabilistic risk protocols) needed for volcanic risk assessment and mitigation. The project applies the techniques and methods to four European volcanoes representing a high risk: Vesuvius , **Italy** ; La Soufrière , Guadeloupe , **France** ; Sete Cidades, Azores , **Portugal** ; and Teide, Canary Islands, **Spain** . The aim is to provide examples of the capabilities for supporting officials in planning priorities and decision-making during volcanic crises. 
+
+- Barsotti, S., Neri, A., Scire, J. (2004). [Assessing Volcanic Ash Hazard by Using the CALPUFF System](https://trid.trb.org/view/756313), Presented at the 2nd International Conference on Volcanic Ash and Aviation Safety U.S. Geological Survey, National Oceanic and Atmospheric Administration, Federal Aviation Administration, National Aeronautics and Space Administration, Smithsonian Associates, Air Line Pilots Association, Meteorological Service, Canada, International Association of Volcanology and Chemistry of the Earth’s Interior and Tenix Corporation.
+- Barsotti, S., Neri, A., Scire, J.S. (2008). [The VOL-CALPUFF model for atmospheric ash dispersal: 1. Approach and physical formulation](https://doi.org/10.1029/2006JB004623). Journal of Geophysical Research: Solid Earth 113. 
+- Barsotti, S., Neri, A. (2008). [The VOL-CALPUFF model for atmospheric ash dispersal: 2. Application to the weak Mount Etna plume of July 2001](https://doi.org/10.1029/2006JB004624). Journal of Geophysical Research: Solid Earth 113. 
+- Barsotti, S., Di Rienzo, D.I., Thordarson, T., Björnsson, B.B., Karlsdóttir, S. (2018). [Assessing Impact to Infrastructures Due to Tephra Fallout From Öræfajökull Volcano (Iceland) by Using a Scenario-Based Approach and a Numerical Model](https://www.frontiersin.org/articles/10.3389/feart.2018.00196/full). Frontiers in Earth Science 6.
+- Home > Pollution > Volcanic gas > Hazard zoning[Icelandic Met Office](https://en.vedur.is/pollution-and-radiation/volcanic-gas/hazard-zoning/)
+
 
 ## HRA Applications
 ### Forest Fires (2008)
@@ -122,12 +133,21 @@ Overall, AERMOD better predicted ambient SO2 and NO2 levels than the reported CA
 A numerical simulation system is developed to predict the dispersion of hazardous air pollutants (HAPs) over a populated city due to accidental release. Ulsan, as one of the megacities in Korea, is chosen as an ideal testbed for the simulation, as it is located in complex terrain and hosts a national industrial complex on the outskirts of the city. The system is based on the California puff model (CALPUFF) for simulating a HAP’s dispersion, in which the three-dimensional atmospheric circulation derived from the observed weather station data is specified at a fine horizontal resolution of 200 m. A test scenario is developed for the accidental release of benzene during the daytime and nighttime, respectively, by a fictitious explosion of a storage container, and the injection amount is determined arbitrarily yet comparable to those in the past accidents. In attempting a quantitative assessment and zoning the level of potential risk over the impacted area, multiple simulations have been conducted each day with different hourly varying meteorological conditions in August. The dispersion characteristics of the air pollutant depend largely on the local wind patterns that vary substantially from day to day. Nevertheless, the composite analysis sufficiently identifies the impacted area by the HAP’s dispersion due to the local prevailing wind such as the land–sea breeze circulation. An immediate hazardous area is determined based on the vulnerability map constructed by zoning the level of risk determined by the spatial distribution of the HAPs’ concentration and the harmfulness standard to the human body.
 - Kim, G., Lee, M.-I., Lee, S., Choi, S.-D., Kim, S.-J., and Song, C.-K. (2020). [Numerical Modeling for the Accidental Dispersion of Hazardous Air Pollutants in the Urban Metropolitan Area](https://www.mdpi.com/2073-4433/11/5/477). Atmosphere 11 (5):477. doi:10.3390/atmos11050477.
 
+### Great Mendoza, Argentina.
+- Ruggeri, M.F., Lana, N.B., Altamirano, J.C., Puliafito, S.E. (2020). [Spatial distribution, patterns and source contributions of POPs in the atmosphere of Great Mendoza using the WRF/CALMET/CALPUFF modelling system](https://doi.org/10.1016/j.emcon.2020.02.002). Emerging Contaminants 6, 103–113. 
+
+
 ## Remote/Automatic Executions of CALPUFF
 
 ### Cloud Computing Platform of the Ukrainian National Grid Infrastructure 
 - Kovalets, I., Maistrenko, S., Khalchenkov, A., O.O., P., Doncov-Zagreba, T., Khurtsilava, K.V., and Udovenko, O. (2021). [Adaptation of the Web-Service of Air Pollution Forecasting for Operation within Cloud Computing Platform of the Ukrainian National Grid Infrastructure](https://www.researchgate.net/publication/349809247_Adaptation_of_the_Web-Service_of_Air_Pollution_Forecasting_for_Operation_within_Cloud_Computing_Platform_of_the_Ukrainian_National_Grid_Infrastructure). Science and Innovation 17:78–88. doi:10.15407/scine17.01.078.
 - Instance:[Povitrya System](http://cloud-2.bitp.kiev.ua/airsystem_english/airsystem_connect.html)
 - Kovalets, I.V., Maistrenko, S.Yа., Khalchenkov, O.V., Zagreba, T.O., Khurtsilava, K.V., Anulich, S.M., Bespalov, V.P., and Udovenko, O.I. (2017). [«Povitrya» Web-Based Software System for Operational Forecasting Atmospheric Pollution after Manmade Accidents in Ukraine](http://scinn-eng.org.ua/sites/default/files/pdf/2017/N6/Kovalets.pdf). Sci. innov. 13 (6):13–24. doi:10.15407/scine13.06.013.
+
+### Masaya volcano, Nicaragua
+UNRESP is a research project working on building resilience to an environmental pollution hazard caused by persistent volcanic emissions. The volcanic emissions are termed **vumo**.
+UNRESP is working on Masaya volcano in Nicaragua, one of the biggest volcanic polluters in the world. Very little is known about the dispersion and levels of the air pollution caused by the vumo, and there no established procedures for communicating the vumo hazard between the local authorities and the public. 
+- [http://homepages.see.leeds.ac.uk/~earhbu/Projects/UNRESP.html](http://homepages.see.leeds.ac.uk/~earhbu/Projects/UNRESP.html)
 
 ---
 

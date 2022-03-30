@@ -1,13 +1,13 @@
 ---
 layout: default
-title: calmet.inp
-nav_order: 2
+title: calpuff.inp
+nav_order: 3
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
 ---
 
-# calmet.inp
+# calpuff.inp
 {: .no_toc }
 
 <details open markdown="block">
@@ -22,166 +22,547 @@ last_modified_date: 2022-03-22 08:56:43
 
 ## Title
 
-CALMET.INP      2.1             
+    CALPUFF test case run - 3 point sources
+    24-Hour Simulation using CALMET met. data
+    Gridded receptors on 35x55  9-km met grid
+---------------- Run title (3 lines) ------------------------------------------
 
-    Hour Start and End Times with Seconds
-
-    1 km resolution CALMET simulation for 4 hours from 5AM January 9, 1990  with MM4 data, 5 surface met stations, 1 overwater station,
-
-    3 upper air met stations, and 16 precip stations
----------------- 
-Run title (3 lines) 
-
-------------------------------------------
-
-                    CALMET MODEL CONTROL FILE
+                    CALPUFF MODEL CONTROL FILE
                     --------------------------
 
 -------------------------------------------------------------------------------
 
 ## INPUT GROUP: 0 -- Input and Output File Names
 
+--------------
+Default Name  Type          File Name
+------------  ----          ---------
+CALMET.DAT    input    ! METDAT =data/calmet_20200415.dat !
+    or
+ISCMET.DAT    input    * ISCDAT =             *
+    or
+PLMMET.DAT    input    * PLMDAT =             *
+    or
+PROFILE.DAT   input    * PRFDAT =             *
+SURFACE.DAT   input    * SFCDAT =             *
+RESTARTB.DAT  input    ! RSTARTB= restart_20200425.dat ! 
+--------------------------------------------------------------------------------
+CALPUFF.LST   output   ! PUFLST =CALPUFF.LST  !
+CONC.DAT      output   ! CONDAT =CALPUFF.CON  !
+DFLX.DAT      output   ! DFDAT  =CALPUFF.DFX  !
+WFLX.DAT      output   ! WFDAT  =CALPUFF.WFX  !
 
-### Subgroup (a)
-------------
-
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|GEO.DAT|       input|    ! GEODAT=DATA/TAI3GEO_LCC.DAT    !|
-|SURF.DAT|      input|    * SRFDAT=../SURF.DAT      *|
-|CLOUD.DAT|     input|    * CLDDAT=            *|
-|PRECIP.DAT|    input|    * PRCDAT=../PRECIP.DAT    *|
-|WT.DAT|        input|    * WTDAT=../WT.DAT         *|
-|CALMET.LST|    output|   ! METLST=CALMET.LST     !|
-|CALMET.DAT|    output|   ! METDAT=CALMET.DAT    !|
-|PACOUT.DAT|    output|   * PACDAT=            *|
-
+VISB.DAT      output   * VISDAT =             *
+TK2D.DAT      output   * T2DDAT =             *
+RHO2D.DAT     output   * RHODAT =             *
+RESTARTE.DAT  output   ! RSTARTE=  restart_20200427.dat  !
+--------------------------------------------------------------------------------
+Emission Files
+--------------
+PTEMARB.DAT   input    * PTDAT  = ../PTEMTAIC.DAT*
+VOLEMARB.DAT  input    * VOLDAT =             *
+BAEMARB.DAT   input    * ARDAT  =             *
+LNEMARB.DAT   input    * LNDAT  =             *
+--------------------------------------------------------------------------------
+Other Files
+-----------
+OZONE.DAT     input    * OZDAT  = ../OZONE.DAT *
+VD.DAT        input    * VDDAT  =             *
+CHEM.DAT      input    * CHEMDAT=             *
+H2O2.DAT      input    * H2O2DAT=             *
+HILL.DAT      input    * HILDAT=             *
+HILLRCT.DAT   input    * RCTDAT=             *
+COASTLN.DAT   input    * CSTDAT=             *
+FLUXBDY.DAT   input    * BDYDAT=             *
+BCON.DAT      input    * BCNDAT=             *
+DEBUG.DAT     output   ! DEBUG = debug.out   !
+MASSFLX.DAT   output   * FLXDAT=             *
+MASSBAL.DAT   output   ! BALDAT=massbal.dat  !
+FOG.DAT       output   * FOGDAT=             *
+RISE.DAT      output   * RISDAT=             *
+--------------------------------------------------------------------------------
 All file names will be converted to lower case if LCFILES = T
-
 Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
-
          T = lower case      ! LCFILES = T !
          F = UPPER CASE
+NOTE: (1) file/path names can be up to 70 characters in length
 
-NUMBER OF UPPER AIR & OVERWATER STATIONS:
 
-    Number of upper air stations (NUSTA)  No default     ! NUSTA =  0  !
-    Number of overwater met stations
-                                 (NOWSTA) No default     ! NOWSTA = 0  !
-    Number of MM4/MM5/M3D.DAT files
-                                 (NM3D) No default       ! NM3D =  1  !
+Provision for multiple input files
+----------------------------------
+     Number of CALMET.DAT Domains (NMETDOM)
+                                     Default: 1       ! NMETDOM =   1   !
 
-    Number of IGF-CALMET.DAT files
-                                 (NIGF)   No default     ! NIGF =  0  !
+     Number of CALMET.DAT files for run (NMETDAT)
+                                     Default: 1       ! NMETDAT =   1   !
 
-                       !END!
---------------------------------------------------------------------------------
-### Subgroup (b) Upper air files (one per station)
+     Number of PTEMARB.DAT files for run (NPTDAT)
+                                     Default: 0       ! NPTDAT =  0  !
 
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|UP1.DAT   |    input     |1  * UPDAT=../CWB692.DAT*    *END\*|
-|UP2.DAT   |    input     |2  * UPDAT=../CWB699.DAT*    *END\*|
---------------------------------------------------------------------------------
-### Subgroup (c) Overwater station files (one per station)
+     Number of BAEMARB.DAT files for run (NARDAT)
+                                     Default: 0       ! NARDAT =  0  !
 
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|SEA1.DAT|       input|     1  * SEADAT=../SEA1.DAT*  *END\*|
-|SEA1.DAT|       input|     2  * SEADAT=../SEA2.DAT*  *END\*|  
---------------------------------------------------------------------------------
-### Subgroup (d) MM4/MM5/M3D.DAT files (consecutive or overlapping)
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|MM51.DAT    |   input  |   1  ! M3DDAT=data/processed/met_20200415.dat !    !END! |
---------------------------------------------------------------------------------
-### Subgroup (e) Other file names
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|DIAG.DAT  |    input    |  * DIADAT=                  *|
-|PROG.DAT  |   input     | * PRGDAT=                  *|
-|TEST.PRT  |    output   |  * TSTPRT=                  *|
-|TEST.OUT  |    output   |  * TSTOUT=                  *|
-|TEST.KIN  |    output   |  * TSTKIN=                  *|
-|TEST.FRD  |    output   |  * TSTFRD=                  *|
-|TEST.SLP  |    output   |  * TSTSLP=                  *|
+     Number of VOLEMARB.DAT files for run (NVOLDAT)
+                                     Default: 0       ! NVOLDAT =  0  !
+
+!END!
+
+
+### Subgroup (0a)
+-------------
+
+  The following CALMET.DAT filenames are processed in sequence if NMETDAT>1
+
+Default Name  Type          File Name
+------------  ----          ---------
+ none         input    * PTDAT=../PTEMTAIC.DAT  *   *END*
+ none         input    * METDAT=../CMET1.DAT  *   *END*
+
 
 --------------------------------------------------------------------------------
-NOTES: 
-1. File/path names can be up to 70 characters in length
-2. Subgroups (a) and (d) must have ONE 'END' (surround by
-           delimiters) at the end of the group
-3. Subgroups (b) and (c) must have an 'END' (surround by
-           delimiters) at the end of EACH LINE
-
-                         !END!
-
-
--------------------------------------------------------------------------------
 
 ## INPUT GROUP: 1 -- General run control parameters
 --------------
+
+    Option to run all periods found
+    in the met. file     (METRUN)   Default: 0       ! METRUN =   0  !
+
+         METRUN = 0 - Run period explicitly defined below
+         METRUN = 1 - Run all periods in met. file
      Starting date:    Year   (IBYR)  --    No default   ! IBYR  =  2020  !
                        Month  (IBMO)  --    No default   ! IBMO  =  04  !
                        Day    (IBDY)  --    No default   ! IBDY  =  15  !
      Starting time:    Hour   (IBHR)  --    No default   ! IBHR  =  0  !
+                       Minute (IBMIN) --    No default   ! IBMIN =  0  !
                        Second (IBSEC) --    No default   ! IBSEC =  0  !
 
      Ending date:      Year   (IEYR)  --    No default   ! IEYR  =  2020  !
-                       Month  (IEMO)  --    No default   ! IEMO  =  04  !
-                       Day    (IEDY)  --    No default   ! IEDY  =  30  !
+                       Month  (IEMO)  --    No default   ! IEMO  =  04 !
+                       Day    (IEDY)  --    No default   ! IEDY  =  27  !
      Ending time:      Hour   (IEHR)  --    No default   ! IEHR  =  0  !
+                       Minute (IEMIN) --    No default   ! IEMIN =  0  !
                        Second (IESEC) --    No default   ! IESEC =  0  !
 
-      UTC time zone         (ABTZ) -- No default         ! ABTZ = UTC+0000 !
-         (character*8)
-         PST = UTC-0800, MST = UTC-0700 , GMT = UTC-0000
-         CST = UTC-0600, EST = UTC-0500
+     (These are only used if METRUN = 0)
+							! ABTZ= UTC+0000 !
+     Base time zone        (XBTZ) -- No default       * XBTZ=  0.  *
+     The zone is the number of hours that must be
+     ADDED to the time to obtain UTC (or GMT)
+     Examples: PST = 8., MST = 7.
+               CST = 6., EST = 5.
 
      Length of modeling time-step (seconds)
-     Must be a fraction of 1 hour
-     (NSECDT)                        Default:3600     ! NSECDT =  3600 !
+     Equal to update period in the primary
+     meteorological data files, or an
+     integer fraction of it (1/2, 1/3 ...)
+     Must be no larger than 1 hour
+     (NSECDT)                        Default:3600     ! NSECDT =3600   !
                                      Units: seconds
 
-     Run type            (IRTYPE) -- Default: 1       ! IRTYPE=  1  !
+     Number of chemical species (NSPEC)
+                                     Default: 5       ! NSPEC =  8   !
 
-        0 = Computes wind fields only
-        1 = Computes wind fields and micrometeorological variables
-            (u*, w*, L, zi, etc.)
-        (IRTYPE must be 1 to run CALPUFF or CALGRID)
+     Number of chemical species
+     to be emitted  (NSE)            Default: 3       ! NSE =  8   !
 
-     Compute special data fields required
-     by CALGRID (i.e., 3-D fields of W wind
-     components and temperature)
-     in additional to regular            Default: T    ! LCALGRD = T !
-     fields ? (LCALGRD)
-     (LCALGRD must be T to run CALGRID)
+     Flag to stop run after
+     SETUP phase (ITEST)             Default: 2       ! ITEST =  2   !
+     (Used to allow checking
+     of the model inputs, files, etc.)
+           ITEST = 1 - STOPS program after SETUP phase
+           ITEST = 2 - Continues with execution of program
+                       after SETUP
 
-      Flag to stop run after
-      SETUP phase (ITEST)             Default: 2       ! ITEST=  2   !
-      (Used to allow checking
-      of the model inputs, files, etc.)
-      ITEST = 1 - STOPS program after SETUP phase
-      ITEST = 2 - Continues with execution of
-                  COMPUTATIONAL phase after SETUP
-    Test options specified to see if
-     they conform to regulatory
-     values? (MREG)                   No Default       ! MREG =  0   !
+     Restart Configuration:
 
-        0 = NO checks are made
-        1 = Technical options must conform to USEPA guidance
-                  IMIXH    -1       Maul-Carson convective mixing height
-                                    over land; OCD mixing height overwater
-                  ICOARE   0        OCD deltaT method for overwater fluxes
-                  THRESHL  0.0      Threshold buoyancy flux over land needed
-                                    to sustain convective mixing height growth
+        Control flag (MRESTART)      Default: 0       ! MRESTART = 2 !
+
+           0 = Do not read or write a restart file
+           1 = Read a restart file at the beginning of
+               the run
+           2 = Write a restart file during run
+           3 = Read a restart file at beginning of run
+               and write a restart file during run
+
+        Number of periods in Restart
+        output cycle (NRESPD)        Default: 0       ! NRESPD =  0   !
+
+           0 = File written only at last period
+          >0 = File updated every NRESPD periods
+
+     Meteorological Data Format (METFM)
+                                     Default: 1       ! METFM =  1   !
+
+           METFM = 1 - CALMET binary file (CALMET.MET)
+           METFM = 2 - ISC ASCII file (ISCMET.MET)
+           METFM = 3 - AUSPLUME ASCII file (PLMMET.MET)
+           METFM = 4 - CTDM plus tower file (PROFILE.DAT) and
+                       surface parameters file (SURFACE.DAT)
+           METFM = 5 - AERMET tower file (PROFILE.DAT) and
+                       surface parameters file (SURFACE.DAT)
+
+     Meteorological Profile Data Format (MPRFFM)
+            (used only for METFM = 1, 2, 3)
+                                     Default: 1       ! MPRFFM =  1   !
+
+           MPRFFM = 1 - CTDM plus tower file (PROFILE.DAT)
+           MPRFFM = 2 - AERMET tower file (PROFILE.DAT)
+
+     PG sigma-y is adjusted by the factor (AVET/PGTIME)**0.2
+     Averaging Time (minutes) (AVET)
+                                     Default: 60.0    ! AVET = 60. !
+     PG Averaging Time (minutes) (PGTIME)
+                                     Default: 60.0    ! PGTIME = 60. !
 
 
 !END!
 
+
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 2 -- Map Projection and Grid control parameters
+## INPUT GROUP: 2 -- Technical options
+--------------
+
+
+     Vertical distribution used in the
+     near field (MGAUSS)                   Default: 1     ! MGAUSS =  1   !
+        0 = uniform
+        1 = Gaussian
+
+     Terrain adjustment method
+     (MCTADJ)                              Default: 3     ! MCTADJ =  3   !
+        0 = no adjustment
+        1 = ISC-type of terrain adjustment
+        2 = simple, CALPUFF-type of terrain
+            adjustment 
+        3 = partial plume path adjustment
+
+     Subgrid-scale complex terrain
+     flag (MCTSG)                          Default: 0     ! MCTSG =  0   !
+        0 = not modeled
+        1 = modeled
+
+     Near-field puffs modeled as
+     elongated slugs? (MSLUG)              Default: 0     ! MSLUG =  1   !
+        0 = no
+        1 = yes (slug model used)
+
+     Transitional plume rise modeled?
+     (MTRANS)                              Default: 1     ! MTRANS =  1   !
+        0 = no  (i.e., final rise only)
+        1 = yes (i.e., transitional rise computed)
+
+     Stack tip downwash? (MTIP)            Default: 1     ! MTIP =  1  !
+        0 = no  (i.e., no stack tip downwash)
+        1 = yes (i.e., use stack tip downwash)
+
+     Method used to compute plume rise for
+     point sources not subject to building
+     downwash? (MRISE)                     Default: 1     ! MRISE =   1  !
+        1 = Briggs plume rise
+        2 = Numerical plume rise
+
+     Method used to simulate building
+     downwash? (MBDW)                      Default: 1     ! MBDW =   1  !
+        1 = ISC method
+        2 = PRIME method
+
+     Vertical wind shear modeled above
+     stack top (modified Briggs plume rise)?
+     (MSHEAR)                              Default: 0     ! MSHEAR =  0  !
+        0 = no  (i.e., vertical wind shear not modeled)
+        1 = yes (i.e., vertical wind shear modeled)
+
+     Puff splitting allowed? (MSPLIT)      Default: 0     ! MSPLIT =  0  !
+        0 = no (i.e., puffs not split)
+        1 = yes (i.e., puffs are split)
+
+     Chemical mechanism flag (MCHEM)       Default: 1     ! MCHEM =  1   !
+        0 = chemical transformation not
+            modeled
+        1 = transformation rates computed
+            internally (MESOPUFF II scheme)
+        2 = user-specified transformation
+            rates used
+        3 = transformation rates computed
+            internally (RIVAD/ARM3 scheme)
+        4 = secondary organic aerosol formation
+            computed (MESOPUFF II scheme for OH)
+
+     Aqueous phase transformation flag (MAQCHEM)
+     (Used only if MCHEM = 1, or 3)        Default: 0     ! MAQCHEM =  0   !
+        0 = aqueous phase transformation
+            not modeled
+        1 = transformation rates adjusted
+            for aqueous phase reactions
+
+     Wet removal modeled ? (MWET)          Default: 1     ! MWET =  1   !
+        0 = no
+        1 = yes
+
+     Dry deposition modeled ? (MDRY)       Default: 1     ! MDRY =  1   !
+        0 = no
+        1 = yes
+        (dry deposition method specified
+         for each species in Input Group 3)
+
+
+     Gravitational settling (plume tilt)
+     modeled ? (MTILT)                     Default: 0     ! MTILT =  0   !
+        0 = no
+        1 = yes
+        (puff center falls at the gravitational
+         settling velocity for 1 particle species)
+
+     Restrictions:
+         - MDRY  = 1
+         - NSPEC = 1  (must be particle species as well)
+         - sg    = 0  GEOMETRIC STANDARD DEVIATION in Group 8 is
+                      set to zero for a single particle diameter
+
+     Method used to compute dispersion
+     coefficients (MDISP)                  Default: 3     ! MDISP =  3   !
+
+        1 = dispersion coefficients computed from measured values
+            of turbulence, sigma v, sigma w
+        2 = dispersion coefficients from internally calculated 
+            sigma v, sigma w using micrometeorological variables
+            (u*, w*, L, etc.)
+        3 = PG dispersion coefficients for RURAL areas (computed using
+            the ISCST multi-segment approximation) and MP coefficients in
+            urban areas
+        4 = same as 3 except PG coefficients computed using
+            the MESOPUFF II eqns.
+        5 = CTDM sigmas used for stable and neutral conditions.
+            For unstable conditions, sigmas are computed as in
+            MDISP = 3, described above.  MDISP = 5 assumes that
+            measured values are read
+
+     Sigma-v/sigma-theta, sigma-w measurements used? (MTURBVW)
+     (Used only if MDISP = 1 or 5)         Default: 3     ! MTURBVW =  3  !
+        1 = use sigma-v or sigma-theta measurements
+            from PROFILE.DAT to compute sigma-y
+            (valid for METFM = 1, 2, 3, 4, 5)
+        2 = use sigma-w measurements
+            from PROFILE.DAT to compute sigma-z
+            (valid for METFM = 1, 2, 3, 4, 5)
+        3 = use both sigma-(v/theta) and sigma-w
+            from PROFILE.DAT to compute sigma-y and sigma-z
+            (valid for METFM = 1, 2, 3, 4, 5)
+        4 = use sigma-theta measurements
+            from PLMMET.DAT to compute sigma-y
+            (valid only if METFM = 3)
+
+     Back-up method used to compute dispersion
+     when measured turbulence data are
+     missing (MDISP2)                      Default: 3     ! MDISP2 =  3  !
+     (used only if MDISP = 1 or 5)
+        2 = dispersion coefficients from internally calculated 
+            sigma v, sigma w using micrometeorological variables
+            (u*, w*, L, etc.)
+        3 = PG dispersion coefficients for RURAL areas (computed using
+            the ISCST multi-segment approximation) and MP coefficients in
+            urban areas
+        4 = same as 3 except PG coefficients computed using
+            the MESOPUFF II eqns.
+
+     [DIAGNOSTIC FEATURE]
+     Method used for Lagrangian timescale for Sigma-y
+     (used only if MDISP=1,2 or MDISP2=1,2)
+     (MTAULY)                              Default: 0     ! MTAULY =  0  !
+        0 = Draxler default 617.284 (s)
+        1 = Computed as Lag. Length / (.75 q) -- after SCIPUFF
+       10 < Direct user input (s)             -- e.g., 306.9
+
+
+     [DIAGNOSTIC FEATURE]
+     Method used for Advective-Decay timescale for Turbulence
+     (used only if MDISP=2 or MDISP2=2)
+     (MTAUADV)                             Default: 0     ! MTAUADV =  0  !
+        0 = No turbulence advection
+        1 = Computed (OPTION NOT IMPLEMENTED)
+       10 < Direct user input (s)   -- e.g., 800
+
+
+     Method used to compute turbulence sigma-v &
+     sigma-w using micrometeorological variables
+     (Used only if MDISP = 2 or MDISP2 = 2)
+     (MCTURB)                              Default: 1     ! MCTURB =  1  !
+        1 = Standard CALPUFF subroutines
+        2 = AERMOD subroutines
+
+     PG sigma-y,z adj. for roughness?      Default: 0     ! MROUGH =  0  !
+     (MROUGH)
+        0 = no
+        1 = yes
+
+     Partial plume penetration of          Default: 1     ! MPARTL =  1  !
+     elevated inversion modeled for
+     point sources?
+     (MPARTL)
+        0 = no
+        1 = yes
+
+     Partial plume penetration of          Default: 1     ! MPARTLBA =  0  !
+     elevated inversion modeled for
+     buoyant area sources?
+     (MPARTLBA)
+        0 = no
+        1 = yes
+
+     Strength of temperature inversion     Default: 0     ! MTINV =  0  !
+     provided in PROFILE.DAT extended records?
+     (MTINV)
+        0 = no (computed from measured/default gradients)
+        1 = yes
+
+     PDF used for dispersion under convective conditions?
+                                           Default: 0     ! MPDF =  0  !
+     (MPDF)
+        0 = no
+        1 = yes
+
+     Sub-Grid TIBL module used for shore line?
+                                           Default: 0     ! MSGTIBL = 0  !
+     (MSGTIBL)
+        0 = no
+        1 = yes
+
+     Boundary conditions (concentration) modeled?
+                                           Default: 0     ! MBCON = 0  !
+     (MBCON)
+        0 = no
+        1 = yes, using formatted BCON.DAT file
+        2 = yes, using unformatted CONC.DAT file
+
+     Note:  MBCON > 0 requires that the last species modeled
+            be 'BCON'.  Mass is placed in species BCON when
+            generating boundary condition puffs so that clean
+            air entering the modeling domain can be simulated
+            in the same way as polluted air.  Specify zero
+            emission of species BCON for all regular sources.
+
+     Individual source contributions saved?
+                                           Default: 0     ! MSOURCE = 0  !
+     (MSOURCE)
+        0 = no
+        1 = yes
+
+
+     Analyses of fogging and icing impacts due to emissions from
+     arrays of mechanically-forced cooling towers can be performed
+     using CALPUFF in conjunction with a cooling tower emissions
+     processor (CTEMISS) and its associated postprocessors.  Hourly
+     emissions of water vapor and temperature from each cooling tower
+     cell are computed for the current cell configuration and ambient
+     conditions by CTEMISS. CALPUFF models the dispersion of these
+     emissions and provides cloud information in a specialized format
+     for further analysis. Output to FOG.DAT is provided in either
+     'plume mode' or 'receptor mode' format.
+
+     Configure for FOG Model output?
+                                           Default: 0     ! MFOG =  0   !
+     (MFOG)
+        0 = no
+        1 = yes  - report results in PLUME Mode format
+        2 = yes  - report results in RECEPTOR Mode format
+
+
+     Test options specified to see if
+     they conform to regulatory
+     values? (MREG)                        Default: 1     ! MREG =  0   !
+
+        0 = NO checks are made
+        1 = Technical options must conform to USEPA
+            Long Range Transport (LRT) guidance
+                       METFM    1 or 2
+                       AVET     60. (min)
+                       PGTIME   60. (min)
+                       MGAUSS   1
+                       MCTADJ   3
+                       MTRANS   1
+                       MTIP     1
+                       MRISE    1
+                       MCHEM    1 or 3 (if modeling SOx, NOx)
+                       MWET     1
+                       MDRY     1
+                       MDISP    2 or 3
+                       MPDF     0 if MDISP=3
+                                1 if MDISP=2
+                       MROUGH   0
+                       MPARTL   1
+                       MPARTLBA 0
+                       SYTDEP   550. (m)
+                       MHFTSZ   0
+                       SVMIN    0.5
+
+
+!END!
+
+
+-------------------------------------------------------------------------------
+
+## INPUT GROUP: 3a, 3b -- Species list
+-------------------
+
+------------
+### Subgroup (3a)
+------------
+
+  The following species are modeled:
+
+! CSPEC =          SO2 !         !END!
+! CSPEC =          SO4 !         !END!
+! CSPEC =          NOX !         !END!
+! CSPEC =          HNO3 !         !END!
+! CSPEC =          NO3 !         !END!
+! CSPEC =          PMS1! !END!
+! CSPEC =          PMS2! !END!
+! CSPEC =          PMS3! !END!
+
+                                                       Dry                OUTPUT GROUP
+    SPECIES          MODELED          EMITTED       DEPOSITED                NUMBER
+     NAME         (0=NO, 1=YES)    (0=NO, 1=YES)    (0=NO,                 (0=NONE,
+   (Limit: 12                                        1=COMPUTED-GAS        1=1st CGRUP,
+    Characters                                       2=COMPUTED-PARTICLE   2=2nd CGRUP,
+    in length)                                       3=USER-SPECIFIED)     3= etc.)
+
+!          SO2  =         1,               1,           1,                 0   !
+!          SO4  =         1,               1,           2,                 0   !
+!          NOX  =         1,               1,           1,                 0   !
+!          HNO3 =         1,               1,           1,                 0   !
+!          NO3  =         1,               1,           2,                 0   !
+!          PMS1 =         1,               1,           2,                 1   !
+!          PMS2 =         1,               1,           2,                 2   !
+!          PMS3 =         1,               1,           2,                 3   !
+
+!END!
+
+  Note:  The last species in (3a) must be 'BCON' when using the
+         boundary condition option (MBCON > 0).  Species BCON should
+         typically be modeled as inert (no chem transformation or
+         removal).
+
+
+-------------
+### Subgroup (3b)
+-------------
+  The following names are used for Species-Groups in which results
+  for certain species are combined (added) prior to output.  The
+  CGRUP name will be used as the species name in output files.
+  Use this feature to model specific particle-size distributions
+  by treating each size-range as a separate species.
+  Order must be consistent with 3(a) above.
+
+! CGRUP = PM25 ! !END!
+! CGRUP = PM10 ! !END!
+! CGRUP = TSP  ! !END!
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUP: 4 -- Map Projection and Grid control parameters
 --------------
 
      Projection for all (X,Y):
@@ -199,8 +580,8 @@ NOTES:
 
      False Easting and Northing (km) at the projection origin
      (Used only if PMAP= TTM, LCC, or LAZA)
-     (FEAST)                    Default=0.0     ! FEAST  =  0.000  !
-     (FNORTH)                   Default=0.0     ! FNORTH =  0.000  !
+     (FEAST)                    Default=0.0     ! FEAST  = 0.000  !
+     (FNORTH)                   Default=0.0     ! FNORTH = 0.000  !
 
      UTM zone (1 to 60)
      (Used only if PMAP=UTM)
@@ -214,8 +595,8 @@ NOTES:
 
      Latitude and Longitude (decimal degrees) of projection origin
      (Used only if PMAP= TTM, LCC, PS, EM, or LAZA)
-     (RLAT0)                    No Default      ! RLAT0 =  23.61N!
-     (RLON0)                    No Default      ! RLON0 = 120.99E!
+     (RLAT0)                    No Default      ! RLAT0 =  23.61N !
+     (RLON0)                    No Default      ! RLON0 = 120.99E !
 
          TTM :  RLON0 identifies central (true N/S) meridian of projection
                 RLAT0 selected for convenience
@@ -248,10 +629,16 @@ NOTES:
      Datum-region
      ------------
 
-     The Datum-Region for the coordinates is identified by a character string.  Many mapping products currently available use the model of the WGS-84).  Other local models may be in use, and their selection in CALMET will make its output consistent with local mapping products.  The list of Datum-Regions with official transformation parameters is provided by the National Imagery and Mapping Agency (NIMA).
+     The Datum-Region for the coordinates is identified by a character
+     string.  Many mapping products currently available use the model of the
+     Earth known as the World Geodetic System 1984 (WGS-84).  Other local
+     models may be in use, and their selection in CALMET will make its output
+     consistent with local mapping products.  The list of Datum-Regions with
+     official transformation parameters is provided by the National Imagery and
+     Mapping Agency (NIMA).
 
      NIMA Datum - Regions(Examples)
-------------------------------------------------------------------------------
+     ------------------------------------------------------------------------------
      WGS-84    WGS-84 Reference Ellipsoid and Geoid, Global coverage (WGS84)
      NAS-C     NORTH AMERICAN 1927 Clarke 1866 Spheroid, MEAN FOR CONUS (NAD27)
      NAR-C     NORTH AMERICAN 1983 GRS 80 Spheroid, MEAN FOR CONUS (NAD83)
@@ -262,794 +649,1345 @@ NOTES:
      (DATUM)                    Default: WGS-84    ! DATUM = WGS-G  !
 
 
-     Horizontal grid definition:
-     ---------------------------
+METEOROLOGICAL Grid:
 
      Rectangular grid defined for projection PMAP,
      with X the Easting and Y the Northing coordinate
 
      No. X grid cells (NX)      No default     ! NX =  83 !
-     No. Y grid cells (NY)      No default     ! NY =  137  !
-    Grid spacing (DGRIDKM)      No default     ! DGRIDKM =3.000 !
+     No. Y grid cells (NY)      No default     ! NY =  137 !
+     No. vertical layers (NZ)   No default     ! NZ =   15  !
+     Grid spacing (DGRIDKM)     No default  ! DGRIDKM = 3.000 !
                                        Units: km
-     Reference grid coordinate of
-     SOUTHWEST corner of grid cell (1,1)
-    X coordinate (XORIGKM)     No default   72! XORIGKM = -124.5!
-    Y coordinate (YORIGKM)     No default     ! YORIGKM = -205.5!
 
-     Vertical grid definition:
-     -------------------------
-
-    No. of vertical layers (NZ)    No default     ! NZ =  15  !
-
-        Cell face heights in arbitrary
-        vertical grid (ZFACE(NZ+1))    No defaults
+                Cell face heights
+                    (ZFACE(nz+1))      No defaults
                                        Units: m
-    !ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
+!ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
 
-    *ZFACE=0, 20., 32.03, 64.07,96.32, 128.58, 193.77, 258.96, 358.51, 458.05,730.37, 1011.02, 1374.45, 1753.08, 2562.08, 11656.23*
+            Reference Coordinates
+           of SOUTHWEST corner of
+                 grid cell(1, 1):
+
+ X coordinate (XORIGKM)     No default   72! XORIGKM = -124.5!
+ Y coordinate (YORIGKM)     No default     ! YORIGKM = -205.5!
+                                      Units: km
+
+
+COMPUTATIONAL Grid:
+
+     The computational grid is identical to or a subset of the MET. grid.
+     The lower left (LL) corner of the computational grid is at grid point
+     (IBCOMP, JBCOMP) of the MET. grid.  The upper right (UR) corner of the
+     computational grid is at grid point (IECOMP, JECOMP) of the MET. grid.
+     The grid spacing of the computational grid is the same as the MET. grid.
+
+        X index of LL corner (IBCOMP)      No default     ! IBCOMP =  1   !
+                  (1 <= IBCOMP <= NX)
+
+        Y index of LL corner (JBCOMP)      No default     ! JBCOMP =  1   !
+                  (1 <= JBCOMP <= NY)
+
+
+        X index of UR corner (IECOMP)      No default     ! IECOMP = 83   !
+                  (1 <= IECOMP <= NX)
+
+        Y index of UR corner (JECOMP)      No default     ! JECOMP = 137  !
+                  (1 <= JECOMP <= NY)
+
+
+
+SAMPLING Grid (GRIDDED RECEPTORS):
+
+     The lower left (LL) corner of the sampling grid is at grid point
+     (IBSAMP, JBSAMP) of the MET. grid.  The upper right (UR) corner of the
+     sampling grid is at grid point (IESAMP, JESAMP) of the MET. grid.
+     The sampling grid must be identical to or a subset of the computational
+     grid.  It may be a nested grid inside the computational grid.
+     The grid spacing of the sampling grid is DGRIDKM/MESHDN.
+
+        Logical flag indicating if gridded
+        receptors are used (LSAMP)         Default: T     ! LSAMP = T !
+        (T=yes, F=no)
+
+        X index of LL corner (IBSAMP)      No default     ! IBSAMP =  1   !
+         (IBCOMP <= IBSAMP <= IECOMP)
+
+        Y index of LL corner (JBSAMP)      No default     ! JBSAMP =  1   !
+         (JBCOMP <= JBSAMP <= JECOMP)
+
+
+        X index of UR corner (IESAMP)      No default     ! IESAMP = 83  !
+         (IBCOMP <= IESAMP <= IECOMP)
+
+        Y index of UR corner (JESAMP)      No default     ! JESAMP = 137  !
+         (JBCOMP <= JESAMP <= JECOMP)
+
+
+       Nesting factor of the sampling
+        grid (MESHDN)                      Default: 1     ! MESHDN =  1  !
+        (MESHDN is an integer >= 1)
+
 !END!
 
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 3 -- Output Options
+
+## INPUT GROUP: 5 -- Output Options
 --------------
+                                             *                          *
+     FILE                       DEFAULT VALUE             VALUE THIS RUN
+     ----                       -------------             --------------
+
+   Concentrations (ICON)              1                   !  ICON =  1   !
+   Dry Fluxes (IDRY)                  1                   !  IDRY =  1   !
+   Wet Fluxes (IWET)                  1                   !  IWET =  1   !
+   2D Temperature (IT2D)              0                   !  IT2D =  0   !
+   2D Density (IRHO)                  0                   !  IRHO =  0   !
+   Relative Humidity (IVIS)           1                   !  IVIS =  0   !
+    (relative humidity file is
+     required for visibility
+     analysis)
+   Use data compression option in output file?
+   (LCOMPRS)                           Default: T         ! LCOMPRS = T !
+
+   *
+    0 = Do not create file, 1 = create file
 
 
-    DISK OUTPUT OPTION
+    QA PLOT FILE OUTPUT OPTION:
 
-       Save met. fields in an unformatted
-       output file ?              (LSAVE)  Default: T     ! LSAVE = T !
-       (F = Do not save, T = Save)
+       Create a standard series of output files (e.g.
+       locations of sources, receptors, grids ...)
+       suitable for plotting?
+       (IQAPLOT)                       Default: 1         ! IQAPLOT =  1   !
+         0 = no
+         1 = yes
 
-       Type of unformatted output file:
-       (IFORMO)                            Default: 1    ! IFORMO =  1  !
+    DIAGNOSTIC MASS FLUX OUTPUT OPTIONS:
 
-            1 = CALPUFF/CALGRID type file (CALMET.DAT)
-            2 = MESOPUFF-II type file     (PACOUT.DAT)
+       Mass flux across specified boundaries
+       for selected species reported?
+       (IMFLX)                         Default: 0         ! IMFLX =  0  !
+         0 = no
+         1 = yes (FLUXBDY.DAT and MASSFLX.DAT filenames
+                  are specified in Input Group 0)
+
+       Mass balance for each species
+       reported?
+       (IMBAL)                         Default: 0         ! IMBAL =  0  !
+         0 = no
+         1 = yes (MASSBAL.DAT filename is
+              specified in Input Group 0)
+
+
+    NUMERICAL RISE OUTPUT OPTION:
+
+       Create a file with plume properties for each rise
+       increment, for each model timestep?
+       This applies to sources modeled with numerical rise.
+       (INRISE)                        Default: 0         ! INRISE =  0   !
+         0 = no
+         1 = yes (RISE.DAT filename is
+                  specified in Input Group 0)
 
 
     LINE PRINTER OUTPUT OPTIONS:
 
-       Print met. fields ?  (LPRINT)       Default: F     ! LPRINT = F !
-       (F = Do not print, T = Print)
-       (NOTE: parameters below control which
-              met. variables are printed)
+       Print concentrations (ICPRT)    Default: 0         ! ICPRT =  1   !
+       Print dry fluxes (IDPRT)        Default: 0         ! IDPRT =  0   !
+       Print wet fluxes (IWPRT)        Default: 0         ! IWPRT =  0   !
+       (0 = Do not print, 1 = Print)
 
-       Print interval
-       (IPRINF) in hours                   Default: 1     ! IPRINF =  1  !
-       (Meteorological fields are printed
-        every  1  hours)
+       Concentration print interval
+       (ICFRQ) in timesteps            Default: 1         ! ICFRQ =  24   !
+       Dry flux print interval
+       (IDFRQ) in timesteps            Default: 1         ! IDFRQ =  1   !
+       Wet flux print interval
+       (IWFRQ) in timesteps            Default: 1         ! IWFRQ =  1   !
 
+       Units for Line Printer Output
+       (IPRTU)                         Default: 1         ! IPRTU =  1   !
+                       for            for
+                  Concentration    Deposition
+           1 =       g/m**3         g/m**2/s
+           2 =      mg/m**3        mg/m**2/s
+           3 =      ug/m**3        ug/m**2/s
+           4 =      ng/m**3        ng/m**2/s
+           5 =     Odour Units
 
-       Specify which layers of U, V wind component
-       to print (IUVOUT(NZ)) -- NOTE: NZ values must be entered
-       (0=Do not print, 1=Print)
-       (used only if LPRINT=T)        Defaults: NZ*0 
-       ! IUVOUT =  1 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0  !
-       -----------------------
-
-
-       Specify which levels of the W wind component to print
-       (NOTE: W defined at TOP cell face --  10  values)
-       (IWOUT(NZ)) -- NOTE: NZ values must be entered
-       (0=Do not print, 1=Print)
-       (used only if LPRINT=T & LCALGRD=T)
-       -----------------------------------
-                                            Defaults: NZ*0 
-        ! IWOUT =  1 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0  !
-
-
-       Specify which levels of the 3-D temperature field to print
-       (ITOUT(NZ)) -- NOTE: NZ values must be entered
-       (0=Do not print, 1=Print)
-       (used only if LPRINT=T & LCALGRD=T)
-       -----------------------------------
-                                            Defaults: NZ*0 
-        ! ITOUT =  1 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0  !
-
-       Specify which meteorological fields
-       to print
-       (used only if LPRINT=T)             Defaults: 0 (all variables)
-       -----------------------
+       Messages tracking progress of run
+       written to the screen ?
+       (IMESG)                         Default: 2         ! IMESG =  2   !
+         0 = no
+         1 = yes (advection step, puff ID)
+         2 = yes (YYYYJJJHH, # old puffs, # emitted puffs)
 
 
-         Variable            Print ?
-                         (0 = do not print,
-                          1 = print)
-         --------        ------------------
+     SPECIES (or GROUP for combined species) LIST FOR OUTPUT OPTIONS
 
-      !  STABILITY  =           1           ! - PGT stability class
-      !  USTAR      =           1           ! - Friction velocity
-      !  MONIN      =           1           ! - Monin-Obukhov length
-      !  MIXHT      =           1           ! - Mixing height
-      !  WSTAR      =           1           ! - Convective velocity scale
-      !  PRECIP     =           1           ! - Precipitation rate
-      !  SENSHEAT   =           1           ! - Sensible heat flux
-      !  CONVZI     =           1           ! - Convective mixing ht.
+                 ---- CONCENTRATIONS ----   ------ DRY FLUXES ------   ------ WET FLUXES ------   -- MASS FLUX --
+   SPECIES
+   /GROUP        PRINTED?  SAVED ON DISK?   PRINTED?  SAVED ON DISK?   PRINTED?  SAVED ON DISK?   SAVED ON DISK?
+   -------       ------------------------   ------------------------   ------------------------   ---------------
+!          SO2 =     0,           1,           0,           1,           0,           1,           1   !
+!          SO4 =     0,           1,           0,           1,           0,           1,           1   !
+!          NOX =     0,           1,           0,           1,           0,           1,           1   !
+!          HNO3=     0,           1,           0,           1,           0,           1,           1   !
+!          NO3 =     0,           1,           0,           1,           0,           1,           1   !
+!          PM25=     0,           1,           0,           1,           0,           1,           1   !
+!          PM10=     0,           1,           0,           1,           0,           1,           1   !
+!          TSP =     0,           1,           0,           1,           0,           1,           1   !
 
-
-       Testing and debug print options for micrometeorological module
-
-          Print input meteorological data and
-          internal variables (LDB)         Default: F       ! LDB = F !
-          (F = Do not print, T = print)
-          (NOTE: this option produces large amounts of output)
-
-          First time step for which debug data
-          are printed (NN1)                Default: 1       ! NN1 =  1  !
-
-          Last time step for which debug data
-          are printed (NN2)                Default: 1       ! NN2 =  1  !
+  Note:  Species BCON (for MBCON > 0) does not need to be saved on disk.
 
 
-       Testing and debug print options for wind field module
-       (all of the following print options control output to
-        wind field module's output files: TEST.PRT, TEST.OUT,
-        TEST.KIN, TEST.FRD, and TEST.SLP)
+     OPTIONS FOR PRINTING "DEBUG" QUANTITIES (much output)   
 
-          Control variable for writing the test/debug
-          wind fields to disk files (IOUTD)
-          (0=Do not write, 1=write)        Default: 0       ! IOUTD =  0  !
+       Logical for debug output
+       (LDEBUG)                                 Default: F     ! LDEBUG = F !
 
-          Number of levels, starting at the surface,
-          to print (NZPRN2)                Default: 1       ! NZPRN2 =  1  !
+       First puff to track
+       (IPFDEB)                                 Default: 1     ! IPFDEB =  1  !
 
-          Print the INTERPOLATED wind components ?
-          (IPR0) (0=no, 1=yes)             Default: 0       !  IPR0 =  1  !
+       Number of puffs to track
+       (NPFDEB)                                 Default: 1     ! NPFDEB =  10  !
 
-          Print the TERRAIN ADJUSTED surface wind
-          components ?
-          (IPR1) (0=no, 1=yes)             Default: 0       !  IPR1 =  1  !
+       Met. period to start output
+       (NN1)                                    Default: 1     ! NN1 =  1   !
 
-          Print the SMOOTHED wind components and
-          the INITIAL DIVERGENCE fields ?
-          (IPR2) (0=no, 1=yes)             Default: 0       !  IPR2 =  1  !
-
-          Print the FINAL wind speed and direction
-          fields ?
-          (IPR3) (0=no, 1=yes)             Default: 0       !  IPR3 =  1  !
-
-          Print the FINAL DIVERGENCE fields ?
-          (IPR4) (0=no, 1=yes)             Default: 0       !  IPR4 =  1  !
-
-          Print the winds after KINEMATIC effects
-          are added ?
-          (IPR5) (0=no, 1=yes)             Default: 0       !  IPR5 =  1  !
-
-          Print the winds after the FROUDE NUMBER
-          adjustment is made ?
-          (IPR6) (0=no, 1=yes)             Default: 0       !  IPR6 =  1  !
-
-          Print the winds after SLOPE FLOWS
-          are added ?
-          (IPR7) (0=no, 1=yes)             Default: 0       !  IPR7 =  1  !
-
-          Print the FINAL wind field components ?
-          (IPR8) (0=no, 1=yes)             Default: 0       !  IPR8 =  1  !
+       Met. period to end output
+       (NN2)                                    Default: 10    ! NN2 =  10  !
 
 !END!
 
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 4 -- Meteorological data options
---------------
 
-    NO OBSERVATION MODE             (NOOBS)  Default: 0     ! NOOBS =  2   !
-          0 = Use surface, overwater, and upper air stations
-          1 = Use surface and overwater stations (no upper air observations)
-              Use MM4/MM5/M3D for upper air data
-          2 = No surface, overwater, or upper air observations
-              Use MM4/MM5/M3D for surface, overwater, and upper air data
+## INPUT GROUP: 6a, 6b, & 6c -- Subgrid scale complex terrain inputs
+-------------------------
 
-    NUMBER OF SURFACE & PRECIP. METEOROLOGICAL STATIONS
+---------------
+### Subgroup (6a)
+---------------
+       Number of terrain features (NHILL)       Default: 0     ! NHILL =  0   !
 
-       Number of surface stations   (NSSTA)  No default     ! NSSTA =  0 !
+       Number of special complex terrain
+       receptors  (NCTREC)                      Default: 0     ! NCTREC =  0   !
 
-       Number of precipitation stations
-       (NPSTA=-1: flag for use of MM5/M3D precip data)
-                                    (NPSTA)  No default    ! NPSTA=-1 !
+       Terrain and CTSG Receptor data for 
+       CTSG hills input in CTDM format ?
+       (MHILL)                                  No Default     ! MHILL =  2   !
+       1 = Hill and Receptor data created
+           by CTDM processors & read from
+           HILL.DAT and HILLRCT.DAT files
+       2 = Hill data created by OPTHILL &
+           input below in Subgroup (6b);
+           Receptor data in Subgroup (6c)
 
-    CLOUD DATA OPTIONS
-       Gridded cloud fields:
-                                   (ICLOUD)  Default: 0     ! ICLOUD =  3  !
-       ICLOUD = 0 - Gridded clouds not used
-       ICLOUD = 1 - Gridded CLOUD.DAT generated as OUTPUT
-       ICLOUD = 2 - Gridded CLOUD.DAT read as INPUT
-       ICLOUD = 3 - Gridded cloud cover from Prognostic Rel. Humidity
+       Factor to convert horizontal dimensions  Default: 1.0   ! XHILL2M = .0 !
+       to meters (MHILL=1)
 
-    FILE FORMATS
+       Factor to convert vertical dimensions    Default: 1.0   ! ZHILL2M = .0 !
+       to meters (MHILL=1)
 
-       Surface meteorological data file format
-                                   (IFORMS)  Default: 2     ! IFORMS =  2  !
-       (1 = unformatted (e.g., SMERGE output))
-       (2 = formatted   (free-formatted user input))
+       X-origin of CTDM system relative to      No Default     ! XCTDMKM = 0 !
+       CALPUFF coordinate system, in Kilometers (MHILL=1)
 
-       Precipitation data file format
-                                   (IFORMP)  Default: 2     ! IFORMP =  2  !
-       (1 = unformatted (e.g., PMERGE output))
-       (2 = formatted   (free-formatted user input))
+       Y-origin of CTDM system relative to      No Default     ! YCTDMKM = 0 !
+       CALPUFF coordinate system, in Kilometers (MHILL=1)
 
-       Cloud data file format
-                                   (IFORMC)  Default: 2     ! IFORMC =  2  !
-       (1 = unformatted - CALMET unformatted output)
-       (2 = formatted   - free-formatted CALMET output or user input)
+! END !
 
-!END!
+---------------
+### Subgroup (6b)
+---------------
 
+                      1 **
+     HILL information
 
--------------------------------------------------------------------------------
 
-## INPUT GROUP: 5 -- Wind Field Options and Parameters
---------------
+HILL           XC        YC       THETAH  ZGRID  RELIEF    EXPO 1    EXPO 2   SCALE 1    SCALE 2    AMAX1     AMAX2
+ NO.          (km)      (km)      (deg.)   (m)     (m)      (m)       (m)       (m)        (m)       (m)       (m)
+----          ----      ----      ------  -----  ------    ------    ------   -------    -------    -----     -----
 
+---------------
+### Subgroup (6c)
+---------------
 
-    WIND FIELD MODEL OPTIONS
-       Model selection variable (IWFCOD)     Default: 1      ! IWFCOD =  0  !
-          0 = Objective analysis only
-          1 = Diagnostic wind module
+    COMPLEX TERRAIN RECEPTOR INFORMATION
 
-       Compute Froude number adjustment
-       effects ? (IFRADJ)                    Default: 1      ! IFRADJ =  1  !
-       (0 = NO, 1 = YES)
+                      XRCT         YRCT        ZRCT          XHH
+                      (km)         (km)         (m)
+                     ------        -----      ------         ----
 
-       Compute kinematic effects ? (IKINE)   Default: 0      ! IKINE  =  1  !
-       (0 = NO, 1 = YES)
 
-       Use O'Brien procedure for adjustment
-       of the vertical velocity ? (IOBR)     Default: 0      ! IOBR =  1  !
-       (0 = NO, 1 = YES)
-
-       Compute slope flow effects ? (ISLOPE) Default: 1      ! ISLOPE  =  1  !
-       (0 = NO, 1 = YES)
-
-       Extrapolate surface wind observations
-       to upper layers ? (IEXTRP)            Default: -4     ! IEXTRP =  1  !
-       (1 = no extrapolation is done,
-        2 = power law extrapolation used,
-        3 = user input multiplicative factors
-            for layers 2 - NZ used (see FEXTRP array)
-        4 = similarity theory used
-        -1, -2, -3, -4 = same as above except layer 1 data
-            at upper air stations are ignored
-
-       Extrapolate surface winds even
-       if calm? (ICALM)                      Default: 0      ! ICALM  =  0  !
-       (0 = NO, 1 = YES)
-
-       Layer-dependent biases modifying the weights of
-       surface and upper air stations (BIAS(NZ))
-         -1<=BIAS<=1
-       Negative BIAS reduces the weight of upper air stations
-         (e.g. BIAS=-0.1 reduces the weight of upper air stations
-       by 10%; BIAS= -1, reduces their weight by 100 %)
-       Positive BIAS reduces the weight of surface stations
-         (e.g. BIAS= 0.2 reduces the weight of surface stations
-       by 20%; BIAS=1 reduces their weight by 100%)
-       Zero BIAS leaves weights unchanged (1/R**2 interpolation)
-       Default: NZ*0
-                               ! BIAS =  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0  !
-
-       Minimum distance from nearest upper air station
-       to surface station for which extrapolation
-       of surface winds at surface station will be allowed
-       (RMIN2: Set to -1 for IEXTRP = 4 or other situations
-        where all surface stations should be extrapolated)
-                                              Default: 4.    ! RMIN2 = -1.0 !
-
-       Use gridded prognostic wind field model
-       output fields as input to the diagnostic
-       wind field model (IPROG)              Default: 0      ! IPROG = 13  !
-       (0 = No, [IWFCOD = 0 or 1]
-        1 = Yes, use CSUMM prog. winds as Step 1 field, [IWFCOD = 0]
-        2 = Yes, use CSUMM prog. winds as initial guess field [IWFCOD = 1]
-        3 = Yes, use winds from MM4.DAT file as Step 1 field [IWFCOD = 0]
-        4 = Yes, use winds from MM4.DAT file as initial guess field [IWFCOD = 1]
-        5 = Yes, use winds from MM4.DAT file as observations [IWFCOD = 1]
-        13 = Yes, use winds from MM5/M3D.DAT file as Step 1 field [IWFCOD = 0]
-        14 = Yes, use winds from MM5/M3D.DAT file as initial guess field [IWFCOD = 1]
-        15 = Yes, use winds from MM5/M3D.DAT file as observations [IWFCOD = 1]
-
-       Timestep (hours) of the prognostic
-       model input data   (ISTEPPG)          Default: 1      ! ISTEPPG =  6   !
-
-    RADIUS OF INFLUENCE PARAMETERS
-
-       Use varying radius of influence       Default: F      ! LVARY =  F!
-       (if no stations are found within RMAX1,RMAX2,
-        or RMAX3, then the closest station will be used)
-
-       Maximum radius of influence over land
-       in the surface layer (RMAX1)          No default      ! RMAX1 =  2. !
-                                             Units: km
-       Maximum radius of influence over land
-       aloft (RMAX2)                         No default      ! RMAX2 =  2. !
-                                             Units: km
-       Maximum radius of influence over water
-       (RMAX3)                               No default      ! RMAX3 =  2. !
-                                             Units: km
-
-
-    OTHER WIND FIELD INPUT PARAMETERS
-
-       Minimum radius of influence used in
-       the wind field interpolation (RMIN)   Default: 0.1    ! RMIN =0.1!
-                                             Units: km
-       Radius of influence of terrain
-       features (TERRAD)                     No default      ! TERRAD = 2. !
-
-                                             Units: km
-       Relative weighting of the first
-       guess field and observations in the
-       SURFACE layer (R1)                    No default      ! R1 =2. !
-       (R1 is the distance from an           Units: km
-       observational station at which the
-       observation and first guess field are
-       equally weighted)
-
-       Relative weighting of the first
-       guess field and observations in the
-       layers ALOFT (R2)                     No default      ! R2 = 2. !
-       (R2 is applied in the upper layers    Units: km
-       in the same manner as R1 is used in
-       the surface layer).
-
-       Relative weighting parameter of the
-       prognostic wind field data (RPROG)    No default      ! RPROG = 3. !
-       (Used only if IPROG = 1)              Units: km
-       ------------------------
-
-       Maximum acceptable divergence in the
-       divergence minimization procedure
-       (DIVLIM)                              Default: 5.E-6  ! DIVLIM= 5.0E-06 !
-
-       Maximum number of iterations in the
-       divergence min. procedure (NITER)     Default: 50     ! NITER =  50  !
-
-       Number of passes in the smoothing
-       procedure (NSMTH(NZ))
-       NOTE: NZ values must be entered
-            Default: 2,(mxnz-1)*4 
-! NSMTH =  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0, 0,0,0,0,0,0  !
-
-       Maximum number of stations used in
-       each layer for the interpolation of
-       data to a grid point (NINTR2(NZ))
-       NOTE: NZ values must be entered       Default: 99.    
-! NINTR2 =  5  ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5, 5, 5, 5, 5, 5, 5  !
-
-       Critical Froude number (CRITFN)       Default: 1.0    ! CRITFN = 1. !
-
-       Empirical factor controlling the
-       influence of kinematic effects
-       (ALPHA)                               Default: 0.1    ! ALPHA = 0.1 !
-
-       Multiplicative scaling factor for
-       extrapolation of surface observations
-       to upper layers (FEXTR2(NZ))          Default: NZ*0.0 
-! FEXTR2 = 0., 0., 0., 0., 0., 0., 0., 0., 0., 0. !
-       (Used only if IEXTRP = 3 or -3)
-
-
-    BARRIER INFORMATION
-
-       Number of barriers to interpolation
-       of the wind fields (NBAR)             Default: 0      ! NBAR =  0  !
-
-       Level (1 to NZ) up to which barriers
-       apply (KBAR)                          Default: NZ     * KBAR = NZ *
-
-       THE FOLLOWING 4 VARIABLES ARE INCLUDED
-       ONLY IF NBAR > 0
-       NOTE: NBAR values must be entered     No defaults
-             for each variable               Units: km
-
-          X coordinate of BEGINNING
-          of each barrier (XBBAR(NBAR))      ! XBBAR = 43.02,46.02 !
-          Y coordinate of BEGINNING
-          of each barrier (YBBAR(NBAR))      ! YBBAR = 108.16,83.16 !
-
-          X coordinate of ENDING
-          of each barrier (XEBAR(NBAR))      ! XEBAR = 23.02,-24.98 !
-          Y coordinate of ENDING
-          of each barrier (YEBAR(NBAR))      ! YEBAR = 85.16,-126.84 !
-
-
-    DIAGNOSTIC MODULE DATA INPUT OPTIONS
-
-       Surface temperature (IDIOPT1)         Default: 0      ! IDIOPT1 =  0  !
-          0 = Compute internally from
-              hourly surface observations
-          1 = Read preprocessed values from
-              a data file (DIAG.DAT)
-
-          Surface met. station to use for
-          the surface temperature (ISURFT)   No default     ! ISURFT =  -1 !
-          (Must be a value from 1 to NSSTA)
-          (Used only if IDIOPT1 = 0)
-          --------------------------
-
-       Domain-averaged temperature lapse
-       rate (IDIOPT2)                        Default: 0     ! IDIOPT2 =  0  !
-          0 = Compute internally from
-              twice-daily upper air observations
-          1 = Read hourly preprocessed values
-              from a data file (DIAG.DAT)
-
-          Upper air station to use for
-          the domain-scale lapse rate (IUPT) No default     ! IUPT   =  -1 !
-          (Must be a value from 1 to NUSTA)
-          (Used only if IDIOPT2 = 0)
-          --------------------------
-
-          Depth through which the domain-scale
-          lapse rate is computed (ZUPT)      Default: 200.  ! ZUPT = 200. !
-          (Used only if IDIOPT2 = 0)         Units: meters
-          --------------------------
-
-       Domain-averaged wind components
-       (IDIOPT3)                             Default: 0     ! IDIOPT3 =  0  !
-          0 = Compute internally from
-              twice-daily upper air observations
-          1 = Read hourly preprocessed values
-              a data file (DIAG.DAT)
-
-          Upper air station to use for
-          the domain-scale winds (IUPWND)    Default: -1    ! IUPWND = 2  !
-          (Must be a value from -1 to NUSTA)
-          (Used only if IDIOPT3 = 0)
-          --------------------------
-
-          Bottom and top of layer through
-          which the domain-scale winds
-          are computed
-          (ZUPWND(1), ZUPWND(2))        Defaults: 1., 1000. ! ZUPWND= 1., 1000. !
-          (Used only if IDIOPT3 = 0)    Units: meters
-          --------------------------
-
-       Observed surface wind components
-       for wind field module (IDIOPT4)  Default: 0     ! IDIOPT4 =  0  !
-          0 = Read WS, WD from a surface
-              data file (SURF.DAT)
-          1 = Read hourly preprocessed U, V from
-              a data file (DIAG.DAT)
-
-       Observed upper air wind components
-       for wind field module (IDIOPT5)  Default: 0     ! IDIOPT5 =  0  !
-          0 = Read WS, WD from an upper
-              air data file (UP1.DAT, UP2.DAT, etc.)
-          1 = Read hourly preprocessed U, V from
-              a data file (DIAG.DAT)
-
-       LAKE BREEZE INFORMATION
-
-          Use Lake Breeze Module  (LLBREZE)
-                                           Default: F      ! LLBREZE = F !
-
-           Number of lake breeze regions (NBOX)            ! NBOX =  0  !
-
-        X Grid line 1 defining the region of interest
-                                                        ! XG1 = 0. !
-        X Grid line 2 defining the region of interest
-                                                        ! XG2 = 0. !
-        Y Grid line 1 defining the region of interest
-                                                        ! YG1 = 0. !
-        Y Grid line 2 defining the region of interest
-                                                        ! YG2 = 0. !
-
-         X Point defining the coastline (Straight line)
-                   (XBCST)  (KM)   Default: none    ! XBCST = 0. !
-
-         Y Point defining the coastline (Straight line)
-                   (YBCST)  (KM)   Default: none    ! YBCST = 0. !
-
-         X Point defining the coastline (Straight line)
-                   (XECST)  (KM)   Default: none    ! XECST = 0. !
-
-         Y Point defining the coastline (Straight line)
-                   (YECST)  (KM)   Default: none    ! YECST = 0. !
-
-
-       Number of stations in the region     Default: none ! NLB =  0 ! 
-       (Surface stations + upper air stations)
-
-       Station ID's  in the region   (METBXID(NLB))
-       (Surface stations first, then upper air stations)
-         ! METBXID =  0 !
-
-!END!
-
-
--------------------------------------------------------------------------------
-
-## INPUT GROUP: 6 -- Mixing Height, Temperature and Precipitation Parameters
---------------
-
-    EMPIRICAL MIXING HEIGHT CONSTANTS
-
-       Neutral, mechanical equation
-       (CONSTB)                              Default: 1.41   ! CONSTB = 1.41 !
-       Convective mixing ht. equation
-       (CONSTE)                              Default: 0.15   ! CONSTE = 0.15 !
-       Stable mixing ht. equation
-       (CONSTN)                              Default: 2400.  ! CONSTN = 2400.!
-       Overwater mixing ht. equation
-       (CONSTW)                              Default: 0.16   ! CONSTW = 0.16 !
-       Absolute value of Coriolis
-       parameter (FCORIOL)                   Default: 1.E-4  ! FCORIOL = 1.0E-04!
-                                             Units: (1/s)
-
-    SPATIAL AVERAGING OF MIXING HEIGHTS
-
-       Conduct spatial averaging
-       (IAVEZI)  (0=no, 1=yes)               Default: 1      ! IAVEZI =  1  !
-
-       Max. search radius in averaging
-       process (MNMDAV)                      Default: 1      ! MNMDAV = 1000 !
-                                             Units: Grid
-                                                    cells
-       Half-angle of upwind looking cone
-       for averaging (HAFANG)                Default: 30.    ! HAFANG = 30. !
-                                             Units: deg.
-       Layer of winds used in upwind
-       averaging (ILEVZI)                    Default: 1      ! ILEVZI =  1  !
-       (must be between 1 and NZ)
-
-    OTHER MIXING HEIGHT VARIABLES
-
-       Minimum potential temperature lapse
-       rate in the stable layer above the
-       current convective mixing ht.         Default: 0.001  ! DPTMIN = 0.001 !
-       (DPTMIN)                              Units: deg. K/m
-       Depth of layer above current conv.
-       mixing height through which lapse     Default: 200.   ! DZZI = 20. !
-       rate is computed (DZZI)               Units: meters
-
-       Minimum overland mixing height        Default:  50.   ! ZIMIN = 20. !
-       (ZIMIN)                               Units: meters
-       Maximum overland mixing height        Default: 3000.  ! ZIMAX = 2500. !
-       (ZIMAX)                               Units: meters
-       Minimum overwater mixing height       Default:   50.  ! ZIMINW = 20. !
-       (ZIMINW) -- (Not used if observed     Units: meters
-       overwater mixing hts. are used)
-       Maximum overwater mixing height       Default: 3000.  ! ZIMAXW = 2500. !
-       (ZIMAXW) -- (Not used if observed     Units: meters
-       overwater mixing hts. are used)
-
-
-    TEMPERATURE PARAMETERS
-
-       3D temperature from observations or
-       from prognostic data? (ITPROG)        Default:0         !ITPROG =  2   !
-
-          0 = Use Surface and upper air stations
-              (only if NOOBS = 0)
-          1 = Use Surface stations (no upper air observations)
-              Use MM5/M3D for upper air data
-              (only if NOOBS = 0,1)
-          2 = No surface or upper air observations
-              Use MM5/M3D for surface and upper air data
-              (only if NOOBS = 0,1,2)
-
-       Interpolation type
-       (1 = 1/R ; 2 = 1/R**2)                Default:1         ! IRAD =  1  !
-
-       Radius of influence for temperature
-       interpolation (TRADKM)                Default: 500.     ! TRADKM =10 !
-                                             Units: km
-
-       Maximum Number of stations to include
-       in temperature interpolation (NUMTS)  Default: 5        ! NUMTS = 5  !
-
-       Conduct spatial averaging of temp-
-       eratures (IAVET)  (0=no, 1=yes)         Default: 1     ! IAVET =  1  !
-       (will use mixing ht MNMDAV,HAFANG
-        so make sure they are correct)
-
-       Default temperature gradient        Default: -.0098 ! TGDEFB = -0.0098 !
-       below the mixing height over
-       water (K/m) (TGDEFB)
-
-       Default temperature gradient        Default: -.0045 ! TGDEFA = -0.0045 !
-       above the mixing height over
-       water (K/m) (TGDEFA)
-
-       Beginning (JWAT1) and ending (JWAT2)
-       land use categories for temperature                    ! JWAT1 =  55  !
-       interpolation over water -- Make                       ! JWAT2 =  55  !
-       bigger than largest land use to disable
-
-   PRECIP INTERPOLATION PARAMETERS
-
-       Method of interpolation (NFLAGP)      Default = 2    ! NFLAGP =  2  !
-        (1=1/R,2=1/R**2,3=EXP/R**2)
-       Radius of Influence (km) (SIGMAP)     Default = 100.0  ! SIGMAP =100 !
-        (0.0 => use half dist. btwn
-         nearest stns w & w/out
-         precip when NFLAGP = 3)
-       Minimum Precip. Rate Cutoff (mm/hr)   Default = 0.01  ! CUTP = 0.01 !
-        (values < CUTP = 0.0 mm/hr)
-!END!
-
-
--------------------------------------------------------------------------------
-
-## INPUT GROUP: 7 -- Surface meteorological station parameters
---------------
-
-     SURFACE STATION VARIABLES
-     (One record per station --  5  records in all)
-
-
-|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km) Time_zone Anem.Ht.(m)
-|----------------------------------------------------------
-|! SS1  ='BnQi'   466880   47.031  153.302         -8  10 !
-|! SS2  ='DnSh'   466900   47.860  171.692         -8  10 !
-|! SS3  ='AnBu'   466910   55.949  173.908         -8  10 !
-|! SS4  ='TaiB'   466920   54.426  157.679         -8  10 !
-|! SS5  ='ZhZH'   466930   57.575  171.521         -8  10 !
-|! SS6  ='KeLn'   466940   77.283  167.968         -8  10 !
-|! SS7  ='PnJY'   466950   25.141 -175.140         -8  10 !
-|! SS8  ='HLia'   466990   63.159   39.884         -8  10 !
-|! SS9  ='SuAo'   467060   90.120  108.821         -8  10 !
-|! SS10 ='YiLn'   467080   78.502  127.072         -8  10 !
-|! SS11 ='DngJ'   467300 -136.148  -38.257         -8  10 !
-|! SS12 ='PenH'   467350 -146.464   -3.787         -8  10 !
-|! SS13 ='TNan'   467410  -82.330  -66.772         -8  10 !
-|! SS14 ='YnKn'   467420  -78.932  -61.911         -8  10 !
-|! SS15 ='GaXg'   467440  -71.739 -114.313         -8  10 !
-|! SS16 ='JiYi'   467480  -57.951  -11.506         -8  10 !
-|! SS17 ='TZho'   467490  -31.087   60.024         -8  10 !
-|! SS18 ='ALSh'   467530  -19.050  -10.767         -8  10 !
-|! SS19 ='DaWu'   467540  -11.629 -138.571         -8  10 !
-|! SS20 ='YShn'   467550   -4.103  -13.326         -8  10 !
-|! SS21 ='XnZh'   467570    3.574  135.100         -8  10 !
-|! SS22 ='HnCh'   467590  -28.435 -177.312         -8  10 !
-|! SS23 ='ChgG'   467610   37.658  -57.052         -8  10 !
-|! SS24 ='LanY'   467620   55.496 -174.671         -8  10 !
-|! SS25 ='MnTn'   467650   -7.920   30.177         -8  10 !
-|! SS26 ='TDon'   467660   14.781  -94.988         -8  10 !
-|! SS27 ='Wchi'   467770  -47.218   72.614         -8  10 !
-|! SS28 ='QiGu'   467780  -99.999  -99.999         -8  10 !
-|! SS29 ='MaTz'   467990  -90.39   283.999         -8  10 !
-|! SS30 ='KeLn'   460010   71.323  160.778         -8  10 !
-|! SS31 ='Xizh'   460020   62.555  154.275         -8  10 !
-|! SS32 ='WanL'   460030   65.794  166.367         -8  10 !
-|! SS33 ='XnDn'   460040   51.222  144.779         -8  10 !
-|! SS34 ='XnZh'   460070   41.040  150.732         -8  10 !
-|! SS35 ='CLio'   460080   46.518  153.850         -8  10 !
-|! SS36 ='LinK'   460090   35.692  155.280         -8  10 !
-|! SS37 ='WnHu'   460130   47.487  150.213         -8  10 !
-|! SS38 ='GtTg'   460140   50.372  149.299         -8  10 !
-|! SS39 ='SngS'   460150   55.182  152.584         -8  10 !
-|! SS40 ='TYua'   460170   30.413  146.535         -8  10 !
-|! SS41 ='DaYu'   460180   20.075  155.619         -8  10 !
-|! SS42 ='GnYn'   460190    7.157  151.224         -8  10 !
-|! SS43 ='PnZh'   460200   19.850  142.478         -8  10 !
-|! SS44 ='LgTn'   460210   20.238  132.550         -8  10 !
-|! SS45 ='HuKo'   460220    3.126  136.315         -8  10 !
-|! SS46 ='ZhDg'   460230    7.893  119.414         -8  10 !
-|! SS47 ='XnZh'   460240   -3.652  126.565         -8  10 !
-|! SS48 ='ToFn'   460250  -10.361  113.545         -8  10 !
-|! SS49 ='MiLi'   460260  -18.099  100.783         -8  10 !
-|! SS50 ='SanY'   460270  -24.050   81.304         -8  10 !
-|! SS51 ='FnYn'   460280  -28.451   67.039         -8  10 !
-|! SS52 ='ShLu'   460290  -43.766   64.746         -8  10 !
-|! SS53 ='DaLi'   460300  -31.971   51.216         -8  10 !
-|! SS54 ='ZhMg'   460310  -33.804   57.543         -8  10 !
-|! SS55 ='ZhHu'   460330  -44.751   49.394         -8  10 !
-|! SS56 ='XnXi'   460340  -52.128   54.564         -8  10 !
-|! SS57 ='NnTo'   460360  -30.730   30.200         -8  10 !
-|! SS58 ='LnBe'   460380  -63.743   15.063         -8  10 !
-|! SS59 ='PuZh'   460400  -74.250  -16.131         -8  10 !
-|! SS60 ='TaXi'   460410  -79.119    8.923         -8  10 !
-|! SS61 ='JiYi'   460420  -55.509  -15.465         -8  10 !
-|! SS62 ='XnYn'   460430  -67.546  -33.055         -8  10 !
-|! SS63 ='ShnH'   460440  -69.553  -53.552         -8  10 !
-|! SS64 ='AnNn'   460450  -77.259  -60.324         -8  10 !
-|! SS65 ='MeNn'   460470  -46.417  -78.002         -8  10 !
-|! SS66 ='QiTo'   460480  -68.857  -91.444         -8  10 !
-|! SS67 ='RnWu'   460490  -65.898  -98.950         -8  10 !
-|! SS68 ='FnSh'   460500  -63.820 -105.284         -8  10 !
-|! SS69 ='DLia'   460510  -57.223 -111.914         -8  10 !
-|! SS70 ='NnZi'   460530  -66.794  -93.896         -8  10 !
-|! SS71 ='ZuYi'   460540  -70.005  -99.882         -8  10 !
-|! SS72 ='QnJn'   460560  -70.756 -104.799         -8  10 !
-|! SS73 ='XGan'   460580  -65.816 -111.905         -8  10 !
-|! SS74 ='PnDg'   460590  -50.953 -100.514         -8  10 !
-|! SS75 ='ChaZ'   460600  -46.223 -117.663         -8  10 !
-|! SS76 ='HenC'   460610  -21.569 -176.905         -8  10 !
-|! SS77 ='TDon'   460620   14.093  -91.874         -8  10 !
-|! SS78 ='YLan'   460650   72.322  120.863         -8  10 !
-|! SS79 ='DonS'   460660   76.223  108.226         -8  10 !
-|! SS80 ='ZhuS'   460690  -32.153   14.691         -8  10 !
-|! SS81 ='YoHe'   460700   49.120  148.973         -8  10 !
 -------------------
-      1
-        Four character string for station name
-        (MUST START IN COLUMN 9)
+1
+     Description of Complex Terrain Variables:
+          XC, YC  = Coordinates of center of hill
+          THETAH  = Orientation of major axis of hill (clockwise from
+                    North)
+          ZGRID   = Height of the  0  of the grid above mean sea
+                    level
+          RELIEF  = Height of the crest of the hill above the grid elevation
+          EXPO 1  = Hill-shape exponent for the major axis
+          EXPO 2  = Hill-shape exponent for the major axis
+          SCALE 1 = Horizontal length scale along the major axis
+          SCALE 2 = Horizontal length scale along the minor axis
+          AMAX    = Maximum allowed axis length for the major axis
+          BMAX    = Maximum allowed axis length for the major axis
 
-      2
-        Six digit integer for station ID
+          XRCT, YRCT = Coordinates of the complex terrain receptors
+          ZRCT    = Height of the ground (MSL) at the complex terrain
+                    Receptor
+          XHH     = Hill number associated with each complex terrain receptor
+                    (NOTE: MUST BE ENTERED AS A REAL NUMBER)
+
+   **
+     NOTE: DATA for each hill and CTSG receptor are treated as a separate
+           input subgroup and therefore must end with an input group terminator.
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUP: 7 -- Chemical parameters for dry deposition of gases
+--------------
+
+SPECIES     DIFFUSIVITY      ALPHA STAR      REACTIVITY    MESOPHYLL RESISTANCE     HENRY'S LAW COEFFICIENT
+NAME        (cm**2/s)                                            (s/cm)                (dimensionless)
+-------     -----------      ----------      ----------    --------------------     -----------------------
+! SO2 = 0.1509 , 1.00E3 , 8.0 , 0.0 , 4.e-2 !
+! NOX = 0.1656 , 1.00 , 8.0 , 5.0 , 3.5 !
+! HNO3 = 0.1628 , 1.00 , 18.0 , 0.0 , 8.e-8 !
 
 !END!
 
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 8 -- Upper air meteorological station parameters
+
+## INPUT GROUP: 8 -- Size parameters for dry deposition of particles
 --------------
 
-     UPPER AIR STATION VARIABLES
-     (One record per station --  3  records in all)
+     For SINGLE SPECIES, the mean and standard deviation are used to
+     compute a deposition velocity for NINT (see group 9) size-ranges,
+     and these are then averaged to obtain a mean deposition velocity.
 
-|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km) Time_zone
-|------------------------------------
-|! US1  ='BnQi'    46692       48.020   159.158  -8 !
-|! US2  ='HuLn'    46699       66.020   42.158   -8 !
--------------------
-      1
-        Four character string for station name
-        (MUST START IN COLUMN 9)
+     For GROUPED SPECIES, the size distribution should be explicitly
+     specified (by the 'species' in the group), and the standard deviation
+     for each should be entered as 0.  The model will then use the
+     deposition velocity for the stated mean diameter.
 
-      2
-        Five digit integer for station ID
+      SPECIES      GEOMETRIC MASS MEAN        GEOMETRIC STANDARD
+       NAME             DIAMETER                   DEVIATION
+                        (microns)                  (microns)
+      -------      -------------------        ------------------
+!     SO4 =        0.48,                     2. !
+!     NO3 =        0.48,                     2. !
+!     PMS1 =        2.5,                     2. !
+!     PMS2 =        10.,                     2. !
+!     PMS3 =        15.,                     2. !
+!END!
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUP: 9 -- Miscellaneous dry deposition parameters
+--------------
+
+     Reference cuticle resistance (s/cm)
+     (RCUTR)                           Default: 30    !  RCUTR = 30.0 !
+     Reference ground resistance  (s/cm)
+     (RGR)                             Default: 10    !    RGR = 10.0 !
+     Reference pollutant reactivity
+     (REACTR)                          Default: 8     ! REACTR = 8.0 !
+
+     Number of particle-size intervals used to 
+     evaluate effective particle deposition velocity
+     (NINT)                            Default: 9     !   NINT =  9  !
+
+     Vegetation state in unirrigated areas
+     (IVEG)                            Default: 1     !   IVEG =  1   !
+        IVEG=1 for active and unstressed vegetation
+        IVEG=2 for active and stressed vegetation
+        IVEG=3 for inactive vegetation
 
 !END!
 
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 9 -- Precipitation station parameters
---------------
 
-PRECIPITATION STATION VARIABLES
+## INPUT GROUP: 10 -- Wet Deposition Parameters
+---------------
 
-(One record per station --  16  records in all)
+                                                          
+                      Scavenging Coefficient -- Units: (sec)**(-1)
 
-(NOT INCLUDED IF NPSTA = 0)
-
-|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km)
-|------------------------------------
-|! PS1  ='BnQi'   466880   47.031  153.302 !
-|! PS2  ='DnSh'   466900   47.860  171.692 !
-|! PS3  ='AnBu'   466910   55.949  173.908 !
-|! PS4  ='TaiB'   466920   54.426  157.679 !
-|! PS5  ='ZhZH'   466930   57.575  171.521 !
-|! PS6  ='KeLn'   466940   77.283  167.968 !
-|! PS7  ='PnJY'   466950   25.141 -175.140 !
-|! PS8  ='HLia'   466990   63.159   39.884 !|
-|! PS9  ='SuAo'   467060   90.120  108.821 !|
-|! PS10 ='YiLn'   467080   78.502  127.072 !|
-|! PS11 ='DngJ'   467300 -136.148  -38.257 !|
-|! PS12 ='PenH'   467350 -146.464   -3.787 !|
-|! PS13 ='TNan'   467410  -82.330  -66.772 !|
-|! PS14 ='YnKn'   467420  -78.932  -61.911 !|
-|! PS15 ='GaXg'   467440  -71.739 -114.313 !|
-|! PS16 ='JiYi'   467480  -57.951  -11.506 !|
-|! PS17 ='TZho'   467490  -31.087   60.024 !|
-|! PS18 ='ALSh'   467530  -19.050  -10.767 !|
-|! PS19 ='DaWu'   467540  -11.629 -138.571 !|
-|! PS20 ='YShn'   467550   -4.103  -13.326 !|
-|! PS21 ='XnZh'   467570    3.574  135.100 !|
-|! PS22 ='HnCh'   467590  -28.435 -177.312 !|
-|! PS23 ='ChgG'   467610   37.658  -57.052 !|
-|! PS24 ='LanY'   467620   55.496 -174.671 !|
-|! PS25 ='MnTn'   467650   -7.920   30.177 !|
-|! PS26 ='TDon'   467660   14.781  -94.988 !|
-|! PS27 ='Wchi'   467770  -47.218   72.614 !|
-|! PS28 ='QiGu'   467780  -99.999  -99.999 !|
-|! PS29 ='MaTz'   467990  -90.39   283.999 !|
--------------------
-      1
-        Four character string for station name
-        (MUST START IN COLUMN 9)
-
-      2
-        Six digit station code composed of state
-        code (first 2 digits) and station ID (last
-        4 digits)
+       Pollutant      Liquid Precip.       Frozen Precip.
+       ---------      --------------       --------------
+      !   SO2 =            3.0E-5,          0.0           !
+      !   SO4 =            10.0E-5,         3.0E-5        !
+      !   NOX =            0.0E-5,          0.0           !
+      !   HNO3=            6.0E-5,          0.0           !
+      !   NO3 =            10.0E-5,         3.0E-5        ! 
+      !   PMS1=            1.0E-4,          3.0E-5        ! 
+      !   PMS2=            1.0E-4,          3.0E-5        ! 
+      !   PMS3=            1.0E-4,          3.0E-5        ! 
 
 !END!
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUP: 11 -- Chemistry Parameters
+---------------
+
+     Ozone data input option (MOZ)     Default: 1            ! MOZ =  0   !
+     (Used only if MCHEM = 1, 3, or 4)
+        0 = use a monthly background ozone value
+        1 = read hourly ozone concentrations from
+            the OZONE.DAT data file
+
+     Monthly ozone concentrations
+     (Used only if MCHEM = 1, 3, or 4 and 
+      MOZ = 0 or MOZ = 1 and all hourly O3 data missing)
+     (BCKO3) in ppb                    Default: 12*80.
+     !  BCKO3 = 80.00, 80.00, 80.00, 80.00, 80.00, 80.00, 80.00, 80.00, 80.00, 80.00, 80.00, 80.00 !
+
+     Monthly ammonia concentrations
+     (Used only if MCHEM = 1, or 3)
+     (BCKNH3) in ppb                   Default: 12*10.       
+     !  BCKNH3 = 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 !
+
+     Nighttime SO2 loss rate (RNITE1)
+     in percent/hour                   Default: 0.2          ! RNITE1 = .2 !
+
+     Nighttime NOx loss rate (RNITE2)
+     in percent/hour                   Default: 2.0          ! RNITE2 = 2.0 !
+
+     Nighttime HNO3 formation rate (RNITE3)
+     in percent/hour                   Default: 2.0          ! RNITE3 = 2.0 !
+
+     H2O2 data input option (MH2O2)    Default: 1            ! MH2O2 =  1   !
+     (Used only if MAQCHEM = 1)
+        0 = use a monthly background H2O2 value
+        1 = read hourly H2O2 concentrations from
+            the H2O2.DAT data file
+
+     Monthly H2O2 concentrations
+     (Used only if MQACHEM = 1 and
+      MH2O2 = 0 or MH2O2 = 1 and all hourly H2O2 data missing)
+     (BCKH2O2) in ppb                  Default: 12*1.        
+     !  BCKH2O2 = 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00 !
+
+
+ --- Data for SECONDARY ORGANIC AEROSOL (SOA) Option
+     (used only if MCHEM = 4)
+
+     The SOA module uses monthly values of:
+          Fine particulate concentration in ug/m^3 (BCKPMF)
+          Organic fraction of fine particulate     (OFRAC)
+          VOC / NOX ratio (after reaction)         (VCNX)
+     to characterize the air mass when computing
+     the formation of SOA from VOC emissions.
+     Typical values for several distinct air mass types are:
+
+        Month    1    2    3    4    5    6    7    8    9   10   11   12
+                Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
+
+     Clean Continental
+        BCKPMF   1.   1.   1.   1.   1.   1.   1.   1.   1.   1.   1.   1.
+        OFRAC  .15  .15  .20  .20  .20  .20  .20  .20  .20  .20  .20  .15
+        VCNX    50.  50.  50.  50.  50.  50.  50.  50.  50.  50.  50.  50.
+
+     Clean Marine (surface)
+        BCKPMF  .5   .5   .5   .5   .5   .5   .5   .5   .5   .5   .5   .5
+        OFRAC  .25  .25  .30  .30  .30  .30  .30  .30  .30  .30  .30  .25
+        VCNX    50.  50.  50.  50.  50.  50.  50.  50.  50.  50.  50.  50.
+
+     Urban - low biogenic (controls present)
+        BCKPMF  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.
+        OFRAC  .20  .20  .25  .25  .25  .25  .25  .25  .20  .20  .20  .20
+        VCNX     4.   4.   4.   4.   4.   4.   4.   4.   4.   4.   4.   4.
+
+     Urban - high biogenic (controls present)
+        BCKPMF  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.
+        OFRAC  .25  .25  .30  .30  .30  .55  .55  .55  .35  .35  .35  .25
+        VCNX    15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.
+
+     Regional Plume
+        BCKPMF  20.  20.  20.  20.  20.  20.  20.  20.  20.  20.  20.  20.
+        OFRAC  .20  .20  .25  .35  .25  .40  .40  .40  .30  .30  .30  .20
+        VCNX    15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.
+
+     Urban - no controls present
+        BCKPMF 100. 100. 100. 100. 100. 100. 100. 100. 100. 100. 100. 100.
+        OFRAC  .30  .30  .35  .35  .35  .55  .55  .55  .35  .35  .35  .30
+        VCNX     2.   2.   2.   2.   2.   2.   2.   2.   2.   2.   2.   2.
+
+     Default: Clean Continental
+     !  BCKPMF = 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00 !
+     !  OFRAC  = 0.15, 0.15, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.15 !
+     !  VCNX   = 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00 !
+
+
+!END!
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUP: 12 -- Misc. Dispersion and Computational Parameters
+---------------
+
+     Horizontal size of puff (m) beyond which
+     time-dependent dispersion equations (Heffter)
+     are used to determine sigma-y and
+     sigma-z (SYTDEP)                           Default: 550.   ! SYTDEP = 5.5E02 !
+
+     Switch for using Heffter equation for sigma z           
+     as above (0 = Not use Heffter; 1 = use Heffter
+     (MHFTSZ)                                   Default: 0      ! MHFTSZ =  0   !
+
+     Stability class used to determine plume
+     growth rates for puffs above the boundary
+     layer (JSUP)                               Default: 5      ! JSUP =  5   !
+
+     Vertical dispersion constant for stable
+     conditions (k1 in Eqn. 2.7-3)  (CONK1)     Default: 0.01   ! CONK1 = .01 !
+
+     Vertical dispersion constant for neutral/
+     unstable conditions (k2 in Eqn. 2.7-4)
+     (CONK2)                                    Default: 0.1    ! CONK2 = .1 !
+
+     Factor for determining Transition-point from
+     Schulman-Scire to Huber-Snyder Building Downwash
+     scheme (SS used for Hs < Hb + TBD * HL)
+     (TBD)                                      Default: 0.5    ! TBD = .5 !
+        TBD < 0   ==> always use Huber-Snyder
+        TBD = 1.5 ==> always use Schulman-Scire
+        TBD = 0.5 ==> ISC Transition-point
+
+     Range of land use categories for which
+     urban dispersion is assumed
+     (IURB1, IURB2)                             Default: 10     ! IURB1 =  10  !
+                                                         19     ! IURB2 =  19  !
+
+     Site characterization parameters for single-point Met data files ---------
+     (needed for METFM = 2,3,4,5)
+
+        Land use category for modeling domain
+        (ILANDUIN)                              Default: 20     ! ILANDUIN =  20  !
+
+        Roughness length (m) for modeling domain
+        (Z0IN)                                  Default: 0.25   ! Z0IN = .25 !
+
+        Leaf area index for modeling domain
+        (XLAIIN)                                Default: 3.0    ! XLAIIN = 3.0 !
+
+        Elevation above sea level (m)
+        (ELEVIN)                                Default: 0.0    ! ELEVIN = .0 !
+
+        Latitude (degrees) for met location
+        (XLATIN)                                Default: -999.  ! XLATIN = -999.0 !
+
+        Longitude (degrees) for met location
+        (XLONIN)                                Default: -999.  ! XLONIN = -999.0 !
+
+     Specialized information for interpreting single-point Met data files -----
+
+        Anemometer height (m) (Used only if METFM = 2,3)
+        (ANEMHT)                                Default: 10.    ! ANEMHT = 10.0 !
+
+        Form of lateral turbulance data in PROFILE.DAT file
+        (Used only if METFM = 4,5 or MTURBVW = 1 or 3)
+        (ISIGMAV)                               Default: 1      ! ISIGMAV =  1  !
+            0 = read sigma-theta
+            1 = read sigma-v
+
+        Choice of mixing heights (Used only if METFM = 4)
+        (IMIXCTDM)                              Default: 0      ! IMIXCTDM =  0  !
+            0 = read PREDICTED mixing heights
+            1 = read OBSERVED mixing heights
+
+     Maximum length of a slug (met. grid units)
+     (XMXLEN)                                   Default: 1.0    ! XMXLEN = 1.0 !
+
+     Maximum travel distance of a puff/slug (in
+     grid units) during one sampling step
+     (XSAMLEN)                                  Default: 1.0    ! XSAMLEN = 1.0 !
+
+     Maximum Number of slugs/puffs release from
+     one source during one time step            
+     (MXNEW)                                    Default: 99     ! MXNEW =  99   !
+
+     Maximum Number of sampling steps for    
+     one puff/slug during one time step             
+     (MXSAM)                                    Default: 99     ! MXSAM =  5   !
+
+     Number of iterations used when computing
+     the transport wind for a sampling step
+     that includes gradual rise (for CALMET
+     and PROFILE winds)
+     (NCOUNT)                                   Default: 2      ! NCOUNT =  2   !
+
+     Minimum sigma y for a new puff/slug (m)      
+     (SYMIN)                                    Default: 1.0    ! SYMIN = 1.0  !
+
+     Minimum sigma z for a new puff/slug (m)     
+     (SZMIN)                                    Default: 1.0    ! SZMIN = 1.0  !
+
+     Maximum sigma z (m) allowed to avoid
+     numerical problem in calculating virtual
+     time or distance.  Cap should be large
+     enough to have no influence on normal events.
+     Enter a negative cap to disable.
+     (SZCAP_M)                                  Default: 5.0e06 ! SZCAP_M = -1.0  !
+
+
+     Default minimum turbulence velocities sigma-v and sigma-w
+     for each stability class over land and over water (m/s)
+     (SVMIN(12) and SWMIN(12))
+
+                     ----------  LAND  ----------       ---------  WATER  ----------
+        Stab Class :  A    B    C    D    E    F         A    B    C    D    E    F
+                     ---  ---  ---  ---  ---  ---       ---  ---  ---  ---  ---  ---
+     Default SVMIN : .50, .50, .50, .50, .50, .50,      .37, .37, .37, .37, .37, .37
+     Default SWMIN : .20, .12, .08, .06, .03, .016,     .20, .12, .08, .06, .03, .016
+
+           ! SVMIN = 0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.500!
+           ! SWMIN = 0.200, 0.120, 0.080, 0.060, 0.030, 0.016, 0.200, 0.120, 0.080, 0.060, 0.030, 0.016!
+
+     Divergence criterion for dw/dz across puff
+     used to initiate adjustment for horizontal
+     convergence (1/s)
+     Partial adjustment starts at CDIV(1), and
+     full adjustment is reached at CDIV(2)
+     (CDIV(2))                                  Default: 0.0,0.0  ! CDIV = .01, .01 !
+
+     Search radius (number of cells) for nearest
+     land and water cells used in the subgrid
+     TIBL module
+     (NLUTIBL)                                  Default: 4      ! NLUTIBL = 4 !
+
+     Minimum wind speed (m/s) allowed for
+     non-calm conditions. Also used as minimum
+     speed returned when using power-law 
+     extrapolation toward surface
+     (WSCALM)                                   Default: 0.5    ! WSCALM = .5 !
+
+     Maximum mixing height (m)                      
+     (XMAXZI)                                   Default: 3000.  ! XMAXZI = 3000.0 !
+
+     Minimum mixing height (m)                     
+     (XMINZI)                                   Default: 50.    ! XMINZI = 50.0 !
+
+     Default wind speed classes --
+     5 upper bounds (m/s) are entered;
+     the 6th class has no upper limit
+     (WSCAT(5))                      Default   : 
+                                     ISC RURAL : 1.54, 3.09, 5.14, 8.23, 10.8 (10.8+)
+
+                              Wind Speed Class :  1     2     3     4     5  
+                                                 ---   ---   ---   ---   --- 
+                                       ! WSCAT = 1.54, 3.09, 5.14, 8.23, 10.80 !
+
+     Default wind speed profile power-law
+     exponents for stabilities 1-6
+     (PLX0(6))                       Default   : ISC RURAL values
+                                     ISC RURAL : .07, .07, .10, .15, .35, .55
+                                     ISC URBAN : .15, .15, .20, .25, .30, .30
+
+                               Stability Class :  A     B     C     D     E     F
+                                                 ---   ---   ---   ---   ---   ---
+                                        ! PLX0 = 0.07, 0.07, 0.10, 0.15, 0.35, 0.55 !
+
+     Default potential temperature gradient
+     for stable classes E, F (degK/m)
+     (PTG0(2))                       Default: 0.020, 0.035
+                                        ! PTG0 = 0.020,   0.035 !
+
+     Default plume path coefficients for
+     each stability class (used when option
+     for partial plume height terrain adjustment
+     is selected -- MCTADJ=3)
+     (PPC(6))                  Stability Class :  A     B     C     D     E     F
+                                  Default  PPC : .50,  .50,  .50,  .50,  .35,  .35
+                                                 ---   ---   ---   ---   ---   ---
+                                        !  PPC = 0.50, 0.50, 0.50, 0.50, 0.35, 0.35 !
+
+     Slug-to-puff transition criterion factor
+     equal to sigma-y/length of slug
+     (SL2PF)                               Default: 10.        ! SL2PF = 5.0 !
+
+     Puff-splitting control variables ------------------------
+
+       VERTICAL SPLIT
+       --------------
+
+       Number of puffs that result every time a puff
+       is split - nsplit=2 means that 1 puff splits
+       into 2
+       (NSPLIT)                            Default:   3        ! NSPLIT =  3  !
+
+       Time(s) of a day when split puffs are eligible to
+       be split once again; this is typically set once
+       per day, around sunset before nocturnal shear develops.
+       24 values: 0 is midnight (00:00) and 23 is 11 PM (23:00)
+       0=do not re-split    1=eligible for re-split
+       (IRESPLIT(24))                      Default:  Hour 17 = 1
+       !  IRESPLIT = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0 !
+
+       Split is allowed only if last hour's mixing
+       height (m) exceeds a minimum value
+       (ZISPLIT)                           Default: 100.       ! ZISPLIT = 100.0 !
+
+       Split is allowed only if ratio of last hour's
+       mixing ht to the maximum mixing ht experienced
+       by the puff is less than a maximum value (this
+       postpones a split until a nocturnal layer develops)
+       (ROLDMAX)                           Default: 0.25       ! ROLDMAX = 0.25 !
+
+
+       HORIZONTAL SPLIT
+       ----------------
+
+       Number of puffs that result every time a puff
+       is split - nsplith=5 means that 1 puff splits
+       into 5
+       (NSPLITH)                           Default:   5        ! NSPLITH =  5  !
+
+       Minimum sigma-y (Grid Cells Units) of puff
+       before it may be split
+       (SYSPLITH)                          Default:  1.0       ! SYSPLITH = 1.0 !
+
+       Minimum puff elongation rate (SYSPLITH/hr) due to
+       wind shear, before it may be split
+       (SHSPLITH)                          Default:  2.        ! SHSPLITH = 2.0 !
+
+       Minimum concentration (g/m^3) of each
+       species in puff before it may be split
+       Enter array of NSPEC values; if a single value is
+       entered, it will be used for ALL species
+       (CNSPLITH)                          Default:  1.0E-07   ! CNSPLITH = 1.0E-07 !
+
+     Integration control variables ------------------------
+
+       Fractional convergence criterion for numerical SLUG
+       sampling integration
+       (EPSSLUG)                           Default:   1.0e-04  ! EPSSLUG = 1.0E-04 !
+
+       Fractional convergence criterion for numerical AREA
+       source integration
+       (EPSAREA)                           Default:   1.0e-06  ! EPSAREA = 1.0E-06 !
+
+       Trajectory step-length (m) used for numerical rise
+       integration
+       (DSRISE)                            Default:   1.0      ! DSRISE = 1.0 !
+
+       Boundary Condition (BC) Puff control variables ------------------------
+
+       Minimum height (m) to which BC puffs are mixed as they are emitted
+       (MBCON=2 ONLY).  Actual height is reset to the current mixing height
+       at the release point if greater than this minimum.
+       (HTMINBC)                           Default:   500.     ! HTMINBC = 500.0 !
+
+       Search radius (km) about a receptor for sampling nearest BC puff.
+       BC puffs are typically emitted with a spacing of one grid cell
+       length, so the search radius should be greater than DGRIDKM.
+       (RSAMPBC)                           Default:   10.      ! RSAMPBC = 15.0 !
+
+       Near-Surface depletion adjustment to concentration profile used when
+       sampling BC puffs?
+       (MDEPBC)                            Default:   1        ! MDEPBC =  0  !
+          0 = Concentration is NOT adjusted for depletion
+          1 = Adjust Concentration for depletion
+
+!END!
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUPS: 13a, 13b, 13c, 13d -- Point source parameters
+--------------------------------
+
+---------------
+### Subgroup (13a)
+---------------
+
+     Number of point sources with
+     parameters provided below      (NPT1)  No default  !  NPT1 = 1!
+
+     Units used for point source
+     emissions below                (IPTU)  Default: 1  !  IPTU =   1  !
+           1 =        g/s
+           2 =       kg/hr
+           3 =       lb/hr
+           4 =     tons/yr
+           5 =     Odour Unit * m**3/s  (vol. flux of odour compound)
+           6 =     Odour Unit * m**3/min
+           7 =     metric tons/yr
+
+     Number of source-species
+     combinations with variable
+     emissions scaling factors
+     provided below in (13d)        (NSPT1) Default: 0  !  NSPT1 =  0  !
+
+     Number of point sources with
+     variable emission parameters
+     provided in external file      (NPT2)  No default  !  NPT2 =  0!
+
+     (If NPT2 > 0, these point
+     source emissions are read from
+     the file: PTEMARB.DAT)
+
+!END!
+
+---------------
+### Subgroup (13b)
+---------------
+                                      a
+          POINT SOURCE: CONSTANT DATA
+          -----------------------------
+                                                                              b          c
+  Source       X         Y       Stack    Base     Stack    Exit  Exit    Bldg.  Emission
+   No.     Coordinate Coordinate Height Elevation Diameter  Vel.  Temp.   Dwash   Rates
+              (km)      (km)       (m)      (m)       (m)  (m/s) (deg. K)         
+SO2 SO4 NOX HNO3 NO3 PMS1(fine),PMS2(10)PMS3(coarse)
+  ------   ---------- ---------- ------  ------   -------- ----- -------- ----- --------
+L0200473PNG1
+   1 ! SRCNAM = 1 !
+   1 ! X =  -32.064, 97.505,  150,      4.7,    11.00,  19.8, 363.0,   .0,   5.440,
+    1.08, 34.511,0.,0., 2.104,0.0,0.0!
+   1 ! ZPLTFM  =      .0 !
+   1 ! FMFAC  =      1.0 !   !END!
+import PseudoNetCDF as pnc
+fname1='/home/camxruns/2013/ptse/fortBE.14.g1112.h150.11Mp'
+pt1=pnc.pncopen(fname1,format='point_source')
+v3=filter(lambda x:pt1.variables[x].ndim==3, [i for i in pt1.variables])
+v2=filter(lambda x:pt1.variables[x].ndim==2, [i for i in pt1.variables])
+v1=filter(lambda x:pt1.variables[x].ndim==1, [i for i in pt1.variables])
+nhr,nvar,dt=pt1.variables[v3[0]].shape
+nt,nopts=pt1.variables[v2[0]].shape
+for i in xrange(nopts):
+    if pt1.variables[v1[2]][i]==150:
+        print i, [pt1.variables[v1[j]][i] for j in xrange(6)]
+61603 [-49873.54, 63288.062, 150.0, 11.0, 363.0, 19.8]
+61604 [-49839.88, 63373.83, 150.0, 11.0, 363.0, 19.8]
+dd={}
+for i in xrange(len(v2)):
+  a=pt1.variables[v2[i]][0,i2]
+  if a==0:continue
+  print v2[i], a
+  dd.update({v2[i]:a})
+In [66]: (dd['NO']+dd['NO2'])*46./3600.
+Out[66]: 34.51100273980035
+s=0
+for i in ['FPRM','CPRM','FCRS']:
+  s+=dd[i]/3600.
+print s
+2.10400017632
+--------
+
+    a
+     Data for each source are treated as a separate input subgroup
+     and therefore must end with an input group terminator.
+
+     SRCNAM  is a 12-character name for a source
+             (No default)
+     X       is an array holding the source data listed by the column headings
+             (No default)
+     SIGYZI  is an array holding the initial sigma-y and sigma-z (m)
+             (Default: 0.,0.)
+     FMFAC   is a vertical momentum flux factor (0. or 1.0) used to represent
+             the effect of rain-caps or other physical configurations that
+             reduce momentum rise associated with the actual exit velocity.
+             (Default: 1.0  -- full momentum used)
+     ZPLTFM  is the platform height (m) for sources influenced by an isolated
+             structure that has a significant open area between the surface
+             and the bulk of the structure, such as an offshore oil platform.
+             The Base Elevation is that of the surface (ground or ocean),
+             and the Stack Height is the release height above the Base (not
+             above the platform).  Building heights entered in Subgroup 13c
+             must be those of the buildings on the platform, measured from
+             the platform deck.  ZPLTFM is used only with MBDW=1 (ISC
+             downwash method) for sources with building downwash.
+             (Default: 0.0)
+
+    b
+     0. = No building downwash modeled
+     1. = Downwash modeled for buildings resting on the surface
+     2. = Downwash modeled for buildings raised above the surface (ZPLTFM > 0.)
+     NOTE: must be entered as a REAL number (i.e., with decimal point)
+
+    c
+     An emission rate must be entered for every pollutant modeled.
+     Enter emission rate of zero for secondary pollutants that are
+     modeled, but not emitted.  Units are specified by IPTU
+     (e.g. 1 for g/s).
+
+---------------
+### Subgroup (13c)
+---------------
+
+           BUILDING DIMENSION DATA FOR SOURCES SUBJECT TO DOWNWASH
+           -------------------------------------------------------
+Source                                                                     a
+ No.       Effective building height, width, length and X/Y offset (in meters)
+           every 10 degrees.  LENGTH, XBADJ, and YBADJ are only needed for
+           MBDW=2 (PRIME downwash option)
+------     --------------------------------------------------------------------
+ 1    * SRCNAM  =   1 *
+ 1    * HEIGHT  =  50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
+                   50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
+                   50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
+                   50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
+                   50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
+                   50.0,   50.0,   50.0,   50.0,   50.0,   50.0 *
+ 1    * WIDTH  =   62.26,   72.64,   80.8,   86.51,   89.59,   89.95,   
+                   87.58,   82.54,   75.0,   82.54,   87.58,   89.95,   
+                   89.59,   86.51,   80.8,   72.64,   62.26,   50.0,   
+                   62.26,   72.64,   80.8,   86.51,   89.59,   89.95,   
+                   87.58,   82.54,   75.0,   82.54,   87.58,   89.95,   
+                   89.59,   86.51,   80.8,   72.64,   62.26,   50.0 *
+ 1  *  LENGTH =  82.54,  87.58,  89.95,  89.59,  86.51,  80.80, 
+                 72.64,  62.26,  50.00,  62.26,  72.64,  80.80, 
+                 86.51,  89.59,  89.95,  87.58,  82.54,  75.00, 
+                 82.54,  87.58,  89.95,  89.59,  86.51,  80.80, 
+                 72.64,  62.26,  50.00,  62.26,  72.64,  80.80, 
+                 86.51,  89.59,  89.95,  87.58,  82.54,  75.00 *
+ 1  *  XBADJ =  -47.35, -55.76, -62.48, -67.29, -70.07, -70.71, 
+                -69.21, -65.60, -60.00, -65.60, -69.21, -70.71, 
+                -70.07, -67.29, -62.48, -55.76, -47.35, -37.50, 
+                -35.19, -31.82, -27.48, -22.30, -16.44, -10.09, 
+                 -3.43,   3.34,  10.00,   3.34,  -3.43, -10.09, 
+                -16.44, -22.30, -27.48, -31.82, -35.19, -37.50 *
+ 1  *  YBADJ =   34.47,  32.89,  30.31,  26.81,  22.50,  17.50, 
+                 11.97,   6.08,   0.00,  -6.08, -11.97, -17.50, 
+                -22.50, -26.81, -30.31, -32.89, -34.47, -35.00, 
+                -34.47, -32.89, -30.31, -26.81, -22.50, -17.50, 
+                -11.97,  -6.08,   0.00,   6.08,  11.97,  17.50, 
+                 22.50,  26.81,  30.31,  32.89,  34.47,  35.00 *
+*END*
+
+
+--------
+
+    a
+     Building height, width, length, and X/Y offset from the source are treated
+     as a separate input subgroup for each source and therefore must end with
+     an input group terminator.  The X/Y offset is the position, relative to the
+     stack, of the center of the upwind face of the projected building, with the
+     x-axis pointing along the flow direction.
+
+---------------
+### Subgroup (13d)
+---------------
+                                                a
+          POINT SOURCE: VARIABLE EMISSIONS DATA
+          ---------------------------------------
+
+     Use this subgroup to describe temporal variations in the emission
+     rates given in 13b.  Factors entered multiply the rates in 13b.
+     Skip sources here that have constant emissions.  For more elaborate
+     variation in source parameters, use PTEMARB.DAT and NPT2 > 0.
+
+     IVARY determines the type of variation, and is source-specific:
+     (IVARY)                                Default: 0
+           0 =       Constant
+           1 =       Diurnal cycle (24 scaling factors: hours 1-24)
+           2 =       Monthly cycle (12 scaling factors: months 1-12)
+           3 =       Hour & Season (4 groups of 24 hourly scaling factors,
+                                    where first group is DEC-JAN-FEB)
+           4 =       Speed & Stab. (6 groups of 6 scaling factors, where
+                                    first group is Stability Class A,
+                                    and the speed classes have upper
+                                    bounds (m/s) defined in Group 12
+           5 =       Temperature   (12 scaling factors, where temperature
+                                    classes have upper bounds (C) of:
+                                    0, 5, 10, 15, 20, 25, 30, 35, 40,
+                                    45, 50, 50+)
+
+
+
+--------
+    a
+     Data for each species are treated as a separate input subgroup
+     and therefore must end with an input group terminator.
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUPS: 14a, 14b, 14c, 14d -- Area source parameters
+--------------------------------
+
+---------------
+### Subgroup (14a)
+---------------
+
+     Number of polygon area sources with
+     parameters specified below (NAR1)       No default  !  NAR1 =  0   !
+
+     Units used for area source
+     emissions below            (IARU)       Default: 1  !  IARU =   1  !
+           1 =        g/m**2/s
+           2 =       kg/m**2/hr
+           3 =       lb/m**2/hr
+           4 =     tons/m**2/yr
+           5 =     Odour Unit * m/s  (vol. flux/m**2 of odour compound)
+           6 =     Odour Unit * m/min
+           7 =     metric tons/m**2/yr
+
+     Number of source-species
+     combinations with variable
+     emissions scaling factors
+     provided below in (14d)        (NSAR1) Default: 0  !  NSAR1 =  0  !
+
+     Number of buoyant polygon area sources
+     with variable location and emission
+     parameters (NAR2)                      No default  !  NAR2 =  0   !
+     (If NAR2 > 0, ALL parameter data for
+     these sources are read from the file: BAEMARB.DAT)
+
+!END!
+
+---------------
+### Subgroup (14b)
+---------------
+                                     a
+          AREA SOURCE: CONSTANT DATA
+          ----------------------------
+                                                         b
+Source           Effect.    Base      Initial    Emission
+ No.             Height   Elevation   Sigma z     Rates
+                   (m)       (m)        (m)      
+-------          ------    ------     --------   ---------
+
+
+--------
+    a
+     Data for each source are treated as a separate input subgroup
+     and therefore must end with an input group terminator.
+    b
+     An emission rate must be entered for every pollutant modeled.
+     Enter emission rate of zero for secondary pollutants that are
+     modeled, but not emitted.  Units are specified by IARU 
+     (e.g. 1 for g/m**2/s).
+
+---------------
+### Subgroup (14c)
+---------------
+
+           COORDINATES (km) FOR EACH VERTEX(4) OF EACH POLYGON
+           --------------------------------------------------------
+Source                                                               a
+ No.       Ordered list of X followed by list of Y, grouped by source
+------     ------------------------------------------------------------
+
+
+--------
+    a
+     Data for each source are treated as a separate input subgroup
+     and therefore must end with an input group terminator.
+
+
+---------------
+### Subgroup (14d)
+---------------
+                                               a
+          AREA SOURCE: VARIABLE EMISSIONS DATA
+          --------------------------------------
+
+     Use this subgroup to describe temporal variations in the emission
+     rates given in 14b.  Factors entered multiply the rates in 14b.
+     Skip sources here that have constant emissions.  For more elaborate
+     variation in source parameters, use BAEMARB.DAT and NAR2 > 0.
+
+     IVARY determines the type of variation, and is source-specific:
+     (IVARY)                                Default: 0
+           0 =       Constant
+           1 =       Diurnal cycle (24 scaling factors: hours 1-24)
+           2 =       Monthly cycle (12 scaling factors: months 1-12)
+           3 =       Hour & Season (4 groups of 24 hourly scaling factors,
+                                    where first group is DEC-JAN-FEB)
+           4 =       Speed & Stab. (6 groups of 6 scaling factors, where
+                                    first group is Stability Class A,
+                                    and the speed classes have upper
+                                    bounds (m/s) defined in Group 12
+           5 =       Temperature   (12 scaling factors, where temperature
+                                    classes have upper bounds (C) of:
+                                    0, 5, 10, 15, 20, 25, 30, 35, 40,
+                                    45, 50, 50+)
+
+
+
+--------
+    a
+     Data for each species are treated as a separate input ### Subgroup
+     and therefore must end with an input group terminator.
+
+
+-------------------------------------------------------------------------------
+
+## INPUT GROUPS: 15a, 15b, 15c -- Line source parameters
+---------------------------
+
+---------------
+### Subgroup (15a)
+---------------
+
+     Number of buoyant line sources
+     with variable location and emission
+     parameters (NLN2)                              No default  !  NLN2 =  0   !
+
+     (If NLN2 > 0, ALL parameter data for
+      these sources are read from the file: LNEMARB.DAT)
+
+     Number of buoyant line sources (NLINES)        No default   ! NLINES =  0  !
+
+     Units used for line source
+     emissions below                (ILNU)          Default: 1  !  ILNU =   1  !
+           1 =        g/s
+           2 =       kg/hr
+           3 =       lb/hr
+           4 =     tons/yr
+           5 =     Odour Unit * m**3/s  (vol. flux of odour compound)
+           6 =     Odour Unit * m**3/min
+           7 =     metric tons/yr
+
+     Number of source-species
+     combinations with variable
+     emissions scaling factors
+     provided below in (15c)        (NSLN1) Default: 0  !  NSLN1 =  0  !
+
+     Maximum number of segments used to model
+     each line (MXNSEG)                             Default: 7   ! MXNSEG =  7  !
+
+     The following variables are required only if NLINES > 0.  They are
+     used in the buoyant line source plume rise calculations.
+
+        Number of distances at which                Default: 6   ! NLRISE =  6  !
+        transitional rise is computed
+
+        Average building length (XL)                No default   ! XL = .0 !
+                                                    (in meters)
+
+        Average building height (HBL)               No default   ! HBL = .0 !
+                                                    (in meters)
+
+        Average building width (WBL)                No default   ! WBL = .0 !
+                                                    (in meters)
+
+        Average line source width (WML)             No default   ! WML = .0 !
+                                                    (in meters)
+
+        Average separation between buildings (DXL)  No default   ! DXL = .0 !
+                                                    (in meters)
+
+        Average buoyancy parameter (FPRIMEL)        No default   ! FPRIMEL = .0 !
+                                                    (in m**4/s**3)
+
+!END!
+
+---------------
+### Subgroup (15b)
+---------------
+
+          BUOYANT LINE SOURCE: CONSTANT DATA
+          ----------------------------------
+                                                                                          a
+Source     Beg. X      Beg. Y      End. X    End. Y     Release    Base        Emission
+ No.     Coordinate  Coordinate  Coordinate Coordinate  Height    Elevation      Rates
+            (km)        (km)        (km)       (km)       (m)       (m)          
+------   ----------  ----------  ---------  ----------  -------   ---------    ---------
+
+--------
+
+    a
+     Data for each source are treated as a separate input Subgroup and therefore must end with an input group terminator.
+
+    b
+     An emission rate must be entered for every pollutant modeled.
+     Enter emission rate of zero for secondary pollutants that are
+     modeled, but not emitted.  Units are specified by ILNTU 
+     (e.g. 1 for g/s).
+
+---------------
+Subgroup (15c)
+---------------
+                                                       a
+          BUOYANT LINE SOURCE: VARIABLE EMISSIONS DATA
+          ----------------------------------------------
+
+     Use this Subgroup to describe temporal variations in the emission rates given in 15b.  Factors entered multiply the rates in 15b.
+     Skip sources here that have constant emissions.
+
+     IVARY determines the type of variation, and is source-specific:
+     (IVARY)                                Default: 0
+           0 =       Constant
+           1 =       Diurnal cycle (24 scaling factors: hours 1-24)
+           2 =       Monthly cycle (12 scaling factors: months 1-12)
+           3 =       Hour & Season (4 groups of 24 hourly scaling factors,
+                                    where first group is DEC-JAN-FEB)
+           4 =       Speed & Stab. (6 groups of 6 scaling factors, where
+                                    first group is Stability Class A,
+                                    and the speed classes have upper
+                                    bounds (m/s) defined in Group 12
+           5 =       Temperature   (12 scaling factors, where temperature
+                                    classes have upper bounds (C) of:
+                                    0, 5, 10, 15, 20, 25, 30, 35, 40,
+                                    45, 50, 50+)
+
+
+
+--------
+    a
+     Data for each species are treated as a separate input Subgroup
+     and therefore must end with an input group terminator.
+
+
+-------------------------------------------------------------------------------
+
+
+## INPUT GROUPS: 16a, 16b, 16c -- Volume source parameters
+---------------------------
+
+---------------
+### Subgroup (16a)
+---------------
+
+     Number of volume sources with
+     parameters provided in 16b,c (NVL1)     No default  !  NVL1 =  0   !
+
+     Units used for volume source
+     emissions below in 16b       (IVLU)     Default: 1  !  IVLU =   1  !
+           1 =        g/s
+           2 =       kg/hr
+           3 =       lb/hr
+           4 =     tons/yr
+           5 =     Odour Unit * m**3/s  (vol. flux of odour compound)
+           6 =     Odour Unit * m**3/min
+           7 =     metric tons/yr
+
+     Number of source-species
+     combinations with variable
+     emissions scaling factors
+     provided below in (16c)      (NSVL1)    Default: 0  !  NSVL1 =  0  !
+
+     Number of volume sources with
+     variable location and emission
+     parameters                   (NVL2)     No default  !  NVL2 =   0   !
+
+     (If NVL2 > 0, ALL parameter data for
+      these sources are read from the VOLEMARB.DAT file(s) )
+
+!END!
+
+---------------
+### Subgroup (16b)
+---------------
+                                        a
+           VOLUME SOURCE: CONSTANT DATA
+           ------------------------------
+                                                                               b
+         X           Y        Effect.    Base     Initial    Initial    Emission
+     Coordinate  Coordinate   Height   Elevation  Sigma y    Sigma z     Rates
+        (km)       (km)         (m)       (m)        (m)       (m)      
+     ----------  ----------   ------    ------    --------   --------   --------
+
+
+--------
+    a
+     Data for each source are treated as a separate input  Subgroup
+     and therefore must end with an input group terminator.
+
+    b
+     An emission rate must be entered for every pollutant modeled.
+     Enter emission rate of zero for secondary pollutants that are
+     modeled, but not emitted.  Units are specified by IVLU 
+     (e.g. 1 for g/s).
+
+---------------
+### Subgroup (16c)
+---------------
+                                                 a
+          VOLUME SOURCE: VARIABLE EMISSIONS DATA
+          ----------------------------------------
+
+     Use this subgroup to describe temporal variations in the emission
+     rates given in 16b.  Factors entered multiply the rates in 16b.
+     Skip sources here that have constant emissions.  For more elaborate
+     variation in source parameters, use VOLEMARB.DAT and NVL2 > 0.
+
+     IVARY determines the type of variation, and is source-specific:
+     (IVARY)                                Default: 0
+           0 =       Constant
+           1 =       Diurnal cycle (24 scaling factors: hours 1-24)
+           2 =       Monthly cycle (12 scaling factors: months 1-12)
+           3 =       Hour & Season (4 groups of 24 hourly scaling factors,
+                                    where first group is DEC-JAN-FEB)
+           4 =       Speed & Stab. (6 groups of 6 scaling factors, where
+                                    first group is Stability Class A,
+                                    and the speed classes have upper
+                                    bounds (m/s) defined in Group 12
+           5 =       Temperature   (12 scaling factors, where temperature
+                                    classes have upper bounds (C) of:
+                                    0, 5, 10, 15, 20, 25, 30, 35, 40,
+                                    45, 50, 50+)
+
+
+
+--------
+    a
+     Data for each species are treated as a separate input subgroup
+     and therefore must end with an input group terminator.
+
+
+-------------------------------------------------------------------------------
+
+## INPUT GROUPS: 17a & 17b -- Non-gridded (discrete) receptor information
+-----------------------
+
+---------------
+### Subgroup (17a)
+---------------
+
+     Number of non-gridded receptors (NREC)  No default  !  NREC =  11371 !
+     Number of receptor group names (NRGRP)  Default: 0  !  NRGRP =  0   !
+
+!END!
+* RGRPNAM =   X          *   *END*
+
+---------------
+### Subgroup (17b)
+---------------
+                                               a
+           NON-GRIDDED (DISCRETE) RECEPTOR DATA
+           ------------------------------------
+
+                        X            Y          Ground        Height   b
+    Receptor       Coordinate   Coordinate    Elevation   Above Ground
+      No.             (km)         (km)          (m)           (m)
+    --------       ----------   ----------    ---------   ------------
+    1 !  X  = -124.5,-205.5,0.0,0 !!END!
+    2 !  X  = -121.5,-205.5,0.0,0 !!END!
+    3 !  X  = -118.5,-205.5,0.0,0 !!END!
+    ...
+    11371 !  X  = 121.5,202.5,0.0076263417,0 !!END!
+-------------
+    a
+     Data for each receptor are treated as a separate input subgroup
+     and therefore must end with an input group terminator.
+
+    b
+     Receptor height above ground is optional.  If no value is entered,
+     the receptor is placed on the ground.
+

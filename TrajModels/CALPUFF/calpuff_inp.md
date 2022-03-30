@@ -35,34 +35,34 @@ last_modified_date: 2022-03-22 08:56:43
 ## INPUT GROUP: 0 -- Input and Output File Names
 --------------
 
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|CALMET.DAT|    input|    ! METDAT =data/calmet_20200415.dat !|
-|ISCMET.DAT|    input|    * ISCDAT =             *|
-|PLMMET.DAT|    input|    * PLMDAT =             *|
-|PROFILE.DAT|   input|    * PRFDAT =             *|
-|SURFACE.DAT|   input|    * SFCDAT =             *|
-|RESTARTB.DAT|  input|    ! RSTARTB= restart_20200425.dat ! |
-|CALPUFF.LST|   output|   ! PUFLST =CALPUFF.LST  !|
-|CONC.DAT|      output|   ! CONDAT =CALPUFF.CON  !|
-|DFLX.DAT|      output|   ! DFDAT  =CALPUFF.DFX  !|
-|WFLX.DAT|      output|   ! WFDAT  =CALPUFF.WFX  !|
-|VISB.DAT|      output|   * VISDAT =             *|
-|TK2D.DAT|      output|   * T2DDAT =             *|
-|RHO2D.DAT|     output|   * RHODAT =             *|
-|RESTARTE.DAT|  output|   ! RSTARTE=  restart_20200427.dat  !|
+|Default Name|  Type|          File_Name|說明|
+|-|-|-|-|
+|CALMET.DAT|    input|    ! METDAT =data/calmet_20200415.dat !|下列5項擇一。CALMET處理結果|
+|ISCMET.DAT|    input|    * ISCDAT =             *|ISC氣象檔|
+|PLMMET.DAT|    input|    * PLMDAT =             *|AUSPLUME(澳洲煙陣模式)氣象檔|
+|PROFILE.DAT|   input|    * PRFDAT =             *|aermet或ctdm垂直剖面|
+|SURFACE.DAT|   input|    * SFCDAT =             *|同上之地面氣象檔|
+|RESTARTB.DAT|  input|    ! RSTARTB= restart_20200425.dat ! |濃度起始瞬時煙陣濃度|
+|CALPUFF.LST|   output|   ! PUFLST =CALPUFF.LST  !|執行訊息檔|
+|CONC.DAT|      output|   ! CONDAT =CALPUFF.CON  !|3維網格濃度|
+|DFLX.DAT|      output|   ! DFDAT  =CALPUFF.DFX  !|乾沉降|
+|WFLX.DAT|      output|   ! WFDAT  =CALPUFF.WFX  !|溼沉降
+|VISB.DAT|      output|   * VISDAT =             *|能見度|
+|TK2D.DAT|      output|   * T2DDAT =             *|2m溫度|
+|RHO2D.DAT|     output|   * RHODAT =             *|空氣密度|
+|RESTARTE.DAT|  output|   ! RSTARTE=  restart_20200427.dat  !|模擬結束瞬時之煙陣濃度|
 
 --------------------------------------------------------------------------------
 
-### Emission Files
+### Hourly Emission Files
 --------------
 
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|PTEMARB.DAT|   input|    * PTDAT  = ../PTEMTAIC.DAT*|
-|VOLEMARB.DAT|  input|    * VOLDAT =             *|
-|BAEMARB.DAT|   input|    * ARDAT  =             *|
-|LNEMARB.DAT|   input|    * LNDAT  =             *|
+|Default Name|  Type|          File_Name|說明|
+|-|-|-|-|
+|PTEMARB.DAT|   input|    * PTDAT  = ../PTEMTAIC.DAT*|點源|
+|VOLEMARB.DAT|  input|    * VOLDAT =             *|體源|
+|BAEMARB.DAT|   input|    * ARDAT  =             *|面源|
+|LNEMARB.DAT|   input|    * LNDAT  =             *|線源|
 
 --------------------------------------------------------------------------------
 
@@ -113,28 +113,30 @@ last_modified_date: 2022-03-22 08:56:43
       !END!
 
 
-### Subgroup (0a)
+### Subgroup (0a) CALMET.DAT filenames
 -------------
 
       The following CALMET.DAT filenames are processed in sequence if NMETDAT>1
 
 |Default Name|  Type|          File_Name|
 |-|-|-|
-| none|         input|    * PTDAT=../PTEMTAIC.DAT  *   *END\*|
 | none|         input|    * METDAT=../CMET1.DAT  *   *END\*|
+| none|         input|    * METDAT=../CMET2.DAT  *   *END\*|
+| none|         input|    * METDAT=../CMET3.DAT  *   *END\*|
+| none|         input|    * METDAT=../CMET4.DAT  *   *END\*|
 
 --------------------------------------------------------------------------------
 
-## INPUT GROUP: 1 -- General run control parameters
+## INPUT GROUP: 1 -- General Run Control Parameters
 --------------
-### run all periods
+### Run all periods
     Option to run all periods found
     in the met. file     (METRUN)   Default: 0       ! METRUN =   0  !
 
          METRUN = 0 - Run period explicitly defined below
          METRUN = 1 - Run all periods in met. file
 
-### start and end
+### Start and end
      Starting date:    Year   (IBYR)  --    No default   ! IBYR  =  2020  !
                        Month  (IBMO)  --    No default   ! IBMO  =  04  !
                        Day    (IBDY)  --    No default   ! IBDY  =  15  !
@@ -149,7 +151,7 @@ last_modified_date: 2022-03-22 08:56:43
                        Minute (IEMIN) --    No default   ! IEMIN =  0  !
                        Second (IESEC) --    No default   ! IESEC =  0  !
 
-### time zone
+### Time zone
      (These are only used if METRUN = 0)
 							! ABTZ= UTC+0000 !
      Base time zone        (XBTZ) -- No default       * XBTZ=  0.  *
@@ -234,7 +236,7 @@ last_modified_date: 2022-03-22 08:56:43
 ## INPUT GROUP: 2 -- Technical options
 --------------
 
-
+### Plume Behaviors
      Vertical distribution used in the
      near field (MGAUSS)                   Default: 1     ! MGAUSS =  1   !
         0 = uniform
@@ -288,6 +290,7 @@ last_modified_date: 2022-03-22 08:56:43
         0 = no (i.e., puffs not split)
         1 = yes (i.e., puffs are split)
 
+### Chemistry and Deposition
      Chemical mechanism flag (MCHEM)       Default: 1     ! MCHEM =  1   !
         0 = chemical transformation not
             modeled
@@ -331,6 +334,7 @@ last_modified_date: 2022-03-22 08:56:43
          - sg    = 0  GEOMETRIC STANDARD DEVIATION in Group 8 is
                       set to zero for a single particle diameter
 
+### Plume Dispersion
      Method used to compute dispersion
      coefficients (MDISP)                  Default: 3     ! MDISP =  3   !
 
@@ -439,6 +443,7 @@ last_modified_date: 2022-03-22 08:56:43
         0 = no
         1 = yes
 
+### Generate the BCON
      Boundary conditions (concentration) modeled?
                                            Default: 0     ! MBCON = 0  !
      (MBCON)
@@ -459,7 +464,7 @@ last_modified_date: 2022-03-22 08:56:43
         0 = no
         1 = yes
 
-
+### Fog and Ice
      Analyses of fogging and icing impacts due to emissions from
      arrays of mechanically-forced cooling towers can be performed
      using CALPUFF in conjunction with a cooling tower emissions
@@ -478,7 +483,7 @@ last_modified_date: 2022-03-22 08:56:43
         1 = yes  - report results in PLUME Mode format
         2 = yes  - report results in RECEPTOR Mode format
 
-
+### USEPA LRT Guidance
      Test options specified to see if
      they conform to regulatory
      values? (MREG)                        Default: 1     ! MREG =  0   !
@@ -511,9 +516,9 @@ last_modified_date: 2022-03-22 08:56:43
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 3a, 3b -- Species list
+## INPUT GROUP: 3 -- Species list
 ------------
-### Subgroup (3a)
+### Subgroup (3a) Model Species
 ------------
 
       The following species are modeled:
@@ -551,7 +556,7 @@ last_modified_date: 2022-03-22 08:56:43
 
 
 -------------
-### Subgroup (3b)
+### Subgroup (3b) PM Group Names
 -------------
       The following names are used for Species-Groups in which results
       for certain species are combined (added) prior to output.  The
@@ -570,7 +575,7 @@ last_modified_date: 2022-03-22 08:56:43
 ## INPUT GROUP: 4 -- Map Projection and Grid control parameters
 --------------
 
-     Projection for all (X,Y):
+### Projection for all (X,Y):
      -------------------------
 
      Map projection
@@ -653,8 +658,7 @@ last_modified_date: 2022-03-22 08:56:43
      Datum-region for output coordinates
      (DATUM)                    Default: WGS-84    ! DATUM = WGS-G  !
 
-
-METEOROLOGICAL Grid:
+### METEOROLOGICAL Grid:
 
      Rectangular grid defined for projection PMAP,
      with X the Easting and Y the Northing coordinate
@@ -668,18 +672,18 @@ METEOROLOGICAL Grid:
                 Cell face heights
                     (ZFACE(nz+1))      No defaults
                                        Units: m
-!ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
+      !ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
 
             Reference Coordinates
            of SOUTHWEST corner of
                  grid cell(1, 1):
 
- X coordinate (XORIGKM)     No default   72! XORIGKM = -124.5!
- Y coordinate (YORIGKM)     No default     ! YORIGKM = -205.5!
+      X coordinate (XORIGKM)     No default   72! XORIGKM = -124.5!
+      Y coordinate (YORIGKM)     No default     ! YORIGKM = -205.5!
                                       Units: km
 
 
-COMPUTATIONAL Grid:
+### COMPUTATIONAL Grid:
 
      The computational grid is identical to or a subset of the MET. grid.
      The lower left (LL) corner of the computational grid is at grid point
@@ -702,7 +706,7 @@ COMPUTATIONAL Grid:
 
 
 
-SAMPLING Grid (GRIDDED RECEPTORS):
+### SAMPLING Grid (GRIDDED RECEPTORS):
 
      The lower left (LL) corner of the sampling grid is at grid point
      (IBSAMP, JBSAMP) of the MET. grid.  The upper right (UR) corner of the
@@ -741,22 +745,22 @@ SAMPLING Grid (GRIDDED RECEPTORS):
 ## INPUT GROUP: 5 -- Output Options
 --------------
                                              *                          *
-     FILE                       DEFAULT VALUE             VALUE THIS RUN
-     ----                       -------------             --------------
+      FILE                       DEFAULT VALUE             VALUE THIS RUN
+      ----                       -------------             --------------
 
-   Concentrations (ICON)              1                   !  ICON =  1   !
-   Dry Fluxes (IDRY)                  1                   !  IDRY =  1   !
-   Wet Fluxes (IWET)                  1                   !  IWET =  1   !
-   2D Temperature (IT2D)              0                   !  IT2D =  0   !
-   2D Density (IRHO)                  0                   !  IRHO =  0   !
-   Relative Humidity (IVIS)           1                   !  IVIS =  0   !
-    (relative humidity file is
-     required for visibility
-     analysis)
-   Use data compression option in output file?
-   (LCOMPRS)                           Default: T         ! LCOMPRS = T !
+      Concentrations (ICON)              1                   !  ICON =  1   !
+      Dry Fluxes (IDRY)                  1                   !  IDRY =  1   !
+      Wet Fluxes (IWET)                  1                   !  IWET =  1   !
+      2D Temperature (IT2D)              0                   !  IT2D =  0   !
+      2D Density (IRHO)                  0                   !  IRHO =  0   !
+      Relative Humidity (IVIS)           1                   !  IVIS =  0   !
+      (relative humidity file is
+      required for visibility
+      analysis)
+      Use data compression option in output file?
+      (LCOMPRS)                           Default: T         ! LCOMPRS = T !
 
-   *
+      *
     0 = Do not create file, 1 = create file
 
 
@@ -831,18 +835,18 @@ SAMPLING Grid (GRIDDED RECEPTORS):
 
      SPECIES (or GROUP for combined species) LIST FOR OUTPUT OPTIONS
 
-                 ---- CONCENTRATIONS ----   ------ DRY FLUXES ------   ------ WET FLUXES ------   -- MASS FLUX --
-   SPECIES
-   /GROUP        PRINTED?  SAVED ON DISK?   PRINTED?  SAVED ON DISK?   PRINTED?  SAVED ON DISK?   SAVED ON DISK?
-   -------       ------------------------   ------------------------   ------------------------   ---------------
-!          SO2 =     0,           1,           0,           1,           0,           1,           1   !
-!          SO4 =     0,           1,           0,           1,           0,           1,           1   !
-!          NOX =     0,           1,           0,           1,           0,           1,           1   !
-!          HNO3=     0,           1,           0,           1,           0,           1,           1   !
-!          NO3 =     0,           1,           0,           1,           0,           1,           1   !
-!          PM25=     0,           1,           0,           1,           0,           1,           1   !
-!          PM10=     0,           1,           0,           1,           0,           1,           1   !
-!          TSP =     0,           1,           0,           1,           0,           1,           1   !
+                     ---- CONCENTRATIONS ----   ------ DRY FLUXES ------   ------ WET FLUXES ------   -- MASS FLUX --
+         SPECIES
+         /GROUP        PRINTED?  SAVED ON DISK?   PRINTED?  SAVED ON DISK?   PRINTED?  SAVED ON DISK?   SAVED ON DISK?
+         -------       ------------------------   ------------------------   ------------------------   ---------------
+      !          SO2 =     0,           1,           0,           1,           0,           1,           1   !
+      !          SO4 =     0,           1,           0,           1,           0,           1,           1   !
+      !          NOX =     0,           1,           0,           1,           0,           1,           1   !
+      !          HNO3=     0,           1,           0,           1,           0,           1,           1   !
+      !          NO3 =     0,           1,           0,           1,           0,           1,           1   !
+      !          PM25=     0,           1,           0,           1,           0,           1,           1   !
+      !          PM10=     0,           1,           0,           1,           0,           1,           1   !
+      !          TSP =     0,           1,           0,           1,           0,           1,           1   !
 
   Note:  Species BCON (for MBCON > 0) does not need to be saved on disk.
 
@@ -870,7 +874,7 @@ SAMPLING Grid (GRIDDED RECEPTORS):
 -------------------------------------------------------------------------------
 
 
-## INPUT GROUP: 6a, 6b, & 6c -- Subgrid scale complex terrain inputs
+## INPUT GROUP: 6 -- Subgrid scale complex terrain inputs
 
 ---------------
 ### Subgroup (6a)
@@ -902,7 +906,7 @@ SAMPLING Grid (GRIDDED RECEPTORS):
        Y-origin of CTDM system relative to      No Default     ! YCTDMKM = 0 !
        CALPUFF coordinate system, in Kilometers (MHILL=1)
 
-! END !
+      ! END !
 
 ---------------
 ### Subgroup (6b)
@@ -1416,11 +1420,11 @@ SAMPLING Grid (GRIDDED RECEPTORS):
 -------------------------------------------------------------------------------
 
 
-## INPUT GROUPS: 13a, 13b, 13c, 13d -- Point source parameters
+## INPUT GROUPS: 13 -- Point source parameters
 --------------------------------
 
 ---------------
-### Subgroup (13a)
+### Subgroup (13a) Number of point sources
 ---------------
 
      Number of point sources with
@@ -1452,7 +1456,7 @@ SAMPLING Grid (GRIDDED RECEPTORS):
       !END!
 
 ---------------
-### Subgroup (13b)
+### Subgroup (13b) Constant Emissions
 ---------------
                                           a
                POINT SOURCE: CONSTANT DATA
@@ -1510,7 +1514,7 @@ SAMPLING Grid (GRIDDED RECEPTORS):
      (e.g. 1 for g/s).
 
 ---------------
-### Subgroup (13c)
+### Subgroup (13c) Building Dimensions
 ---------------
 
            BUILDING DIMENSION DATA FOR SOURCES SUBJECT TO DOWNWASH
@@ -1564,7 +1568,7 @@ Source                                                                     a
      x-axis pointing along the flow direction.
 
 ---------------
-### Subgroup (13d)
+### Subgroup (13d) Variable Emissions
 ---------------
                                                 a
           POINT SOURCE: VARIABLE EMISSIONS DATA
@@ -1602,10 +1606,10 @@ Source                                                                     a
 -------------------------------------------------------------------------------
 
 
-## INPUT GROUPS: 14a, 14b, 14c, 14d -- Area source parameters
+## INPUT GROUPS: 14 -- Area source parameters
 
 ---------------
-### Subgroup (14a)
+### Subgroup (14a) Number of Sources
 ---------------
 
      Number of polygon area sources with
@@ -1635,7 +1639,7 @@ Source                                                                     a
       !END!
 
 ---------------
-### Subgroup (14b)
+### Subgroup (14b) Constant Emissions
 ---------------
                                           a
                AREA SOURCE: CONSTANT DATA
@@ -1658,7 +1662,7 @@ Source                                                                     a
      (e.g. 1 for g/m**2/s).
 
 ---------------
-### Subgroup (14c)
+### Subgroup (14c) Location of Source Vertex
 ---------------
 
            COORDINATES (km) FOR EACH VERTEX(4) OF EACH POLYGON
@@ -1715,7 +1719,7 @@ Source                                                                     a
 ---------------------------
 
 ---------------
-### Subgroup (15a)
+### Subgroup (15a) Number of Sources
 ---------------
 
      Number of buoyant line sources
@@ -1772,7 +1776,7 @@ Source                                                                     a
       !END!
 
 ---------------
-### Subgroup (15b)
+### Subgroup (15b) Constant Emissions
 ---------------
 
                BUOYANT LINE SOURCE: CONSTANT DATA
@@ -1795,7 +1799,7 @@ Source                                                                     a
      (e.g. 1 for g/s).
 
 ---------------
-Subgroup (15c)
+### Subgroup (15c) Variable Emissions
 ---------------
                                                        a
           BUOYANT LINE SOURCE: VARIABLE EMISSIONS DATA
@@ -1819,9 +1823,6 @@ Subgroup (15c)
                                     classes have upper bounds (C) of:
                                     0, 5, 10, 15, 20, 25, 30, 35, 40,
                                     45, 50, 50+)
-
-
-
 --------
     a
      Data for each species are treated as a separate input Subgroup
@@ -1834,7 +1835,7 @@ Subgroup (15c)
 ## INPUT GROUPS: 16 -- Volume source parameters
 ---------------------------
 
-### Subgroup (16a)
+### Subgroup (16a) Number of Sources
 ---------------
 
      Number of volume sources with
@@ -1865,7 +1866,7 @@ Subgroup (15c)
       !END!
 
 ---------------
-### Subgroup (16b)
+### Subgroup (16b) Constant Data
 ---------------
                                         a
            VOLUME SOURCE: CONSTANT DATA
@@ -1889,7 +1890,7 @@ Subgroup (15c)
      (e.g. 1 for g/s).
 
 ---------------
-### Subgroup (16c)
+### Subgroup (16c) Variable Emissions
 ---------------
                                                  a
           VOLUME SOURCE: VARIABLE EMISSIONS DATA
@@ -1930,7 +1931,7 @@ Subgroup (15c)
 -----------------------
 
 ---------------
-### Subgroup (17a)
+### Subgroup (17a) Number of Receptors
 ---------------
 
      Number of non-gridded receptors (NREC)  No default  !  NREC =  11371 !
@@ -1940,7 +1941,7 @@ Subgroup (15c)
       * RGRPNAM =   X          *   *END*
 
 ---------------
-### Subgroup (17b)
+### Subgroup (17b) List of Receptors
 ---------------
                                                a
            NON-GRIDDED (DISCRETE) RECEPTOR DATA

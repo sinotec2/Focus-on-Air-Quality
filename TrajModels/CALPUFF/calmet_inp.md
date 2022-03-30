@@ -122,9 +122,9 @@ NOTES:
 
                          !END!
 
--------------------------------s------------------------------------------------
+-------------------------------------------------------------------------------
 
-## INPUT GROUP: 1 -- General run control parameters
+## INPUT GROUP: 1 -- General Run Control Parameters
 --------------
      Starting date:    Year   (IBYR)  --    No default   ! IBYR  =  2020  !
                        Month  (IBMO)  --    No default   ! IBMO  =  04  !
@@ -182,7 +182,7 @@ NOTES:
                                     to sustain convective mixing height growth
 
 
-!END!
+    !END!
 
 -------------------------------------------------------------------------------
 
@@ -293,7 +293,7 @@ NOTES:
     !ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
 
     *ZFACE=0, 20., 32.03, 64.07,96.32, 128.58, 193.77, 258.96, 358.51, 458.05,730.37, 1011.02, 1374.45, 1753.08, 2562.08, 11656.23*
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -433,7 +433,7 @@ NOTES:
           Print the FINAL wind field components ?
           (IPR8) (0=no, 1=yes)             Default: 0       !  IPR8 =  1  !
 
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -482,7 +482,7 @@ NOTES:
        (1 = unformatted - CALMET unformatted output)
        (2 = formatted   - free-formatted CALMET output or user input)
 
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -764,7 +764,7 @@ NOTES:
        (Surface stations first, then upper air stations)
          ! METBXID =  0 !
 
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -876,7 +876,7 @@ NOTES:
          precip when NFLAGP = 3)
        Minimum Precip. Rate Cutoff (mm/hr)   Default = 0.01  ! CUTP = 0.01 !
         (values < CUTP = 0.0 mm/hr)
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -904,7 +904,7 @@ NOTES:
       2
         Six digit integer for station ID
 
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -928,7 +928,7 @@ NOTES:
       2
         Five digit integer for station ID
 
-!END!
+    !END!
 
 
 -------------------------------------------------------------------------------
@@ -956,5 +956,4 @@ NOTES:
         Six digit station code composed of state
         code (first 2 digits) and station ID (last
         4 digits)
-
-!END!
+    !END!

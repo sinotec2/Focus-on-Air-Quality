@@ -1,13 +1,13 @@
 ---
 layout: default
-title: calpuff.inp
+title: calmet.inp
 nav_order: 2
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
 ---
 
-# calpuff.inp
+# calmet.inp
 {: .no_toc }
 
 <details open markdown="block">
@@ -22,11 +22,17 @@ last_modified_date: 2022-03-22 08:56:43
 
 ## Title
 
-CALMET.INP      2.1             Hour Start and End Times with Seconds
-1 km resolution CALMET simulation for 4 hours from 5AM January 9, 1990  
-with MM4 data, 5 surface met stations, 1 overwater station,
-3 upper air met stations, and 16 precip stations
----------------- Run title (3 lines) ------------------------------------------
+CALMET.INP      2.1             
+
+    Hour Start and End Times with Seconds
+
+    1 km resolution CALMET simulation for 4 hours from 5AM January 9, 1990  with MM4 data, 5 surface met stations, 1 overwater station,
+
+    3 upper air met stations, and 16 precip stations
+---------------- 
+Run title (3 lines) 
+
+------------------------------------------
 
                     CALMET MODEL CONTROL FILE
                     --------------------------
@@ -36,21 +42,24 @@ with MM4 data, 5 surface met stations, 1 overwater station,
 ## INPUT GROUP: 0 -- Input and Output File Names
 
 
-Subgroup (a)
+### Subgroup (a)
 ------------
-Default Name  Type          File Name
-------------  ----          ---------
-GEO.DAT       input    ! GEODAT=DATA/TAI3GEO_LCC.DAT    !
-SURF.DAT      input    * SRFDAT=../SURF.DAT      *
-CLOUD.DAT     input    * CLDDAT=            *
-PRECIP.DAT    input    * PRCDAT=../PRECIP.DAT    *
-WT.DAT        input    * WTDAT=../WT.DAT         *
-CALMET.LST    output   ! METLST=CALMET.LST     !
-CALMET.DAT    output   ! METDAT=CALMET.DAT    !
-PACOUT.DAT    output   * PACDAT=            *
+
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|GEO.DAT|       input|    ! GEODAT=DATA/TAI3GEO_LCC.DAT    !|
+|SURF.DAT|      input|    * SRFDAT=../SURF.DAT      *|
+|CLOUD.DAT|     input|    * CLDDAT=            *|
+|PRECIP.DAT|    input|    * PRCDAT=../PRECIP.DAT    *|
+|WT.DAT|        input|    * WTDAT=../WT.DAT         *|
+|CALMET.LST|    output|   ! METLST=CALMET.LST     !|
+|CALMET.DAT|    output|   ! METDAT=CALMET.DAT    !|
+|PACOUT.DAT|    output|   * PACDAT=            *|
 
 All file names will be converted to lower case if LCFILES = T
+
 Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
+
          T = lower case      ! LCFILES = T !
          F = UPPER CASE
 
@@ -67,53 +76,42 @@ NUMBER OF UPPER AIR & OVERWATER STATIONS:
 
                        !END!
 --------------------------------------------------------------------------------
-Subgroup (b)
----------------------------------
-Upper air files (one per station)
----------------------------------
-Default Name  Type       File Name
-------------  ----       ---------
-UP1.DAT       input     1  * UPDAT=../CWB692.DAT*    *END*
-UP2.DAT       input     2  * UPDAT=../CWB699.DAT*    *END*
---------------------------------------------------------------------------------
-Subgroup (c)
------------------------------------------
-Overwater station files (one per station)
------------------------------------------
-Default Name  Type       File Name
-------------  ----       ---------
-SEA1.DAT       input     1  * SEADAT=../SEA1.DAT*  *END*
-SEA1.DAT       input     2  * SEADAT=../SEA2.DAT*  *END*  
---------------------------------------------------------------------------------
-Subgroup (d)
--------------------------------------------------
-MM4/MM5/M3D.DAT files (consecutive or overlapping)
--------------------------------------------------
-Default Name  Type       File Name
-------------  ----       ---------
-MM51.DAT       input     1  ! M3DDAT=data/processed/met_20200415.dat !    !END!
---------------------------------------------------------------------------------
-Subgroup (e)
-----------------
-Other file names
-----------------
+### Subgroup (b) Upper air files (one per station)
 
-Default Name  Type       File Name
-------------  ----       ---------
-DIAG.DAT      input      * DIADAT=                  *
-PROG.DAT      input      * PRGDAT=                  *
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|UP1.DAT   |    input     |1  * UPDAT=../CWB692.DAT*    *END\*|
+|UP2.DAT   |    input     |2  * UPDAT=../CWB699.DAT*    *END\*|
+--------------------------------------------------------------------------------
+### Subgroup (c) Overwater station files (one per station)
 
-TEST.PRT      output     * TSTPRT=                  *
-TEST.OUT      output     * TSTOUT=                  *
-TEST.KIN      output     * TSTKIN=                  *
-TEST.FRD      output     * TSTFRD=                  *
-TEST.SLP      output     * TSTSLP=                  *
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|SEA1.DAT|       input|     1  * SEADAT=../SEA1.DAT*  *END\*|
+|SEA1.DAT|       input|     2  * SEADAT=../SEA2.DAT*  *END\*|  
+--------------------------------------------------------------------------------
+### Subgroup (d) MM4/MM5/M3D.DAT files (consecutive or overlapping)
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|MM51.DAT    |   input  |   1  ! M3DDAT=data/processed/met_20200415.dat !    !END! |
+--------------------------------------------------------------------------------
+### Subgroup (e) Other file names
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|DIAG.DAT  |    input    |  * DIADAT=                  *|
+|PROG.DAT  |   input     | * PRGDAT=                  *|
+|TEST.PRT  |    output   |  * TSTPRT=                  *|
+|TEST.OUT  |    output   |  * TSTOUT=                  *|
+|TEST.KIN  |    output   |  * TSTKIN=                  *|
+|TEST.FRD  |    output   |  * TSTFRD=                  *|
+|TEST.SLP  |    output   |  * TSTSLP=                  *|
 
 --------------------------------------------------------------------------------
-NOTES: (1) File/path names can be up to 70 characters in length
-       (2) Subgroups (a) and (d) must have ONE 'END' (surround by
+NOTES: 
+1. File/path names can be up to 70 characters in length
+2. Subgroups (a) and (d) must have ONE 'END' (surround by
            delimiters) at the end of the group
-       (3) Subgroups (b) and (c) must have an 'END' (surround by
+3. Subgroups (b) and (c) must have an 'END' (surround by
            delimiters) at the end of EACH LINE
 
                          !END!
@@ -250,16 +248,10 @@ NOTES: (1) File/path names can be up to 70 characters in length
      Datum-region
      ------------
 
-     The Datum-Region for the coordinates is identified by a character
-     string.  Many mapping products currently available use the model of the
-     WGS-84).  Other local
-     models may be in use, and their selection in CALMET will make its output
-     consistent with local mapping products.  The list of Datum-Regions with
-     official transformation parameters is provided by the National Imagery and
-     Mapping Agency (NIMA).
+     The Datum-Region for the coordinates is identified by a character string.  Many mapping products currently available use the model of the WGS-84).  Other local models may be in use, and their selection in CALMET will make its output consistent with local mapping products.  The list of Datum-Regions with official transformation parameters is provided by the National Imagery and Mapping Agency (NIMA).
 
      NIMA Datum - Regions(Examples)
-     ------------------------------------------------------------------------------
+------------------------------------------------------------------------------
      WGS-84    WGS-84 Reference Ellipsoid and Geoid, Global coverage (WGS84)
      NAS-C     NORTH AMERICAN 1927 Clarke 1866 Spheroid, MEAN FOR CONUS (NAD27)
      NAR-C     NORTH AMERICAN 1983 GRS 80 Spheroid, MEAN FOR CONUS (NAD83)
@@ -278,24 +270,24 @@ NOTES: (1) File/path names can be up to 70 characters in length
 
      No. X grid cells (NX)      No default     ! NX =  83 !
      No. Y grid cells (NY)      No default     ! NY =  137  !
- Grid spacing (DGRIDKM)      No default     ! DGRIDKM =3.000 !
+    Grid spacing (DGRIDKM)      No default     ! DGRIDKM =3.000 !
                                        Units: km
      Reference grid coordinate of
      SOUTHWEST corner of grid cell (1,1)
- X coordinate (XORIGKM)     No default   72! XORIGKM = -124.5!
- Y coordinate (YORIGKM)     No default     ! YORIGKM = -205.5!
+    X coordinate (XORIGKM)     No default   72! XORIGKM = -124.5!
+    Y coordinate (YORIGKM)     No default     ! YORIGKM = -205.5!
 
      Vertical grid definition:
      -------------------------
 
- No. of vertical layers (NZ)    No default     ! NZ =  15  !
+    No. of vertical layers (NZ)    No default     ! NZ =  15  !
 
         Cell face heights in arbitrary
         vertical grid (ZFACE(NZ+1))    No defaults
                                        Units: m
-!ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
+    !ZFACE=0.0,20.0,47.0,75.0,106.5,141.5,181.0,226.0,277.0,334.5,399.5,555.5,757.0,1177.0,1566.5,2403.5!
 
-*ZFACE=0, 20., 32.03, 64.07,96.32, 128.58, 193.77, 258.96, 358.51, 458.05,730.37, 1011.02, 1374.45, 1753.08, 2562.08, 11656.23*
+    *ZFACE=0, 20., 32.03, 64.07,96.32, 128.58, 193.77, 258.96, 358.51, 458.05,730.37, 1011.02, 1374.45, 1753.08, 2562.08, 11656.23*
 !END!
 
 
@@ -619,14 +611,14 @@ NOTES: (1) File/path names can be up to 70 characters in length
        Number of passes in the smoothing
        procedure (NSMTH(NZ))
        NOTE: NZ values must be entered
-            Default: 2,(mxnz-1)*4 ! NSMTH = 
- 0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0, 0,0,0,0,0,0  !
+            Default: 2,(mxnz-1)*4 
+! NSMTH =  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0, 0,0,0,0,0,0  !
 
        Maximum number of stations used in
        each layer for the interpolation of
        data to a grid point (NINTR2(NZ))
-       NOTE: NZ values must be entered       Default: 99.    ! NINTR2 = 
- 5  ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5, 5, 5, 5, 5, 5, 5  !
+       NOTE: NZ values must be entered       Default: 99.    
+! NINTR2 =  5  ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5 ,  5, 5, 5, 5, 5, 5, 5  !
 
        Critical Froude number (CRITFN)       Default: 1.0    ! CRITFN = 1. !
 
@@ -637,7 +629,7 @@ NOTES: (1) File/path names can be up to 70 characters in length
        Multiplicative scaling factor for
        extrapolation of surface observations
        to upper layers (FEXTR2(NZ))          Default: NZ*0.0 
-       ! FEXTR2 = 0., 0., 0., 0., 0., 0., 0., 0., 0., 0. !
+! FEXTR2 = 0., 0., 0., 0., 0., 0., 0., 0., 0., 0. !
        (Used only if IEXTRP = 3 or -3)
 
 
@@ -891,91 +883,89 @@ NOTES: (1) File/path names can be up to 70 characters in length
      (One record per station --  5  records in all)
 
 
-             1     2
-         Name   ID            X coord.   Y coord.   Time   Anem.
-                               (km)       (km)      zone   Ht.(m)
-       ----------------------------------------------------------
-! SS1  ='BnQi'   466880   47.031  153.302         -8  10 !
-! SS2  ='DnSh'   466900   47.860  171.692         -8  10 !
-! SS3  ='AnBu'   466910   55.949  173.908         -8  10 !
-! SS4  ='TaiB'   466920   54.426  157.679         -8  10 !
-! SS5  ='ZhZH'   466930   57.575  171.521         -8  10 !
-! SS6  ='KeLn'   466940   77.283  167.968         -8  10 !
-! SS7  ='PnJY'   466950   25.141 -175.140         -8  10 !
-! SS8  ='HLia'   466990   63.159   39.884         -8  10 !
-! SS9  ='SuAo'   467060   90.120  108.821         -8  10 !
-! SS10 ='YiLn'   467080   78.502  127.072         -8  10 !
-! SS11 ='DngJ'   467300 -136.148  -38.257         -8  10 !
-! SS12 ='PenH'   467350 -146.464   -3.787         -8  10 !
-! SS13 ='TNan'   467410  -82.330  -66.772         -8  10 !
-! SS14 ='YnKn'   467420  -78.932  -61.911         -8  10 !
-! SS15 ='GaXg'   467440  -71.739 -114.313         -8  10 !
-! SS16 ='JiYi'   467480  -57.951  -11.506         -8  10 !
-! SS17 ='TZho'   467490  -31.087   60.024         -8  10 !
-! SS18 ='ALSh'   467530  -19.050  -10.767         -8  10 !
-! SS19 ='DaWu'   467540  -11.629 -138.571         -8  10 !
-! SS20 ='YShn'   467550   -4.103  -13.326         -8  10 !
-! SS21 ='XnZh'   467570    3.574  135.100         -8  10 !
-! SS22 ='HnCh'   467590  -28.435 -177.312         -8  10 !
-! SS23 ='ChgG'   467610   37.658  -57.052         -8  10 !
-! SS24 ='LanY'   467620   55.496 -174.671         -8  10 !
-! SS25 ='MnTn'   467650   -7.920   30.177         -8  10 !
-! SS26 ='TDon'   467660   14.781  -94.988         -8  10 !
-! SS27 ='Wchi'   467770  -47.218   72.614         -8  10 !
-! SS28 ='QiGu'   467780  -99.999  -99.999         -8  10 !
-! SS29 ='MaTz'   467990  -90.39   283.999         -8  10 !
-! SS30 ='KeLn'   460010   71.323  160.778         -8  10 !
-! SS31 ='Xizh'   460020   62.555  154.275         -8  10 !
-! SS32 ='WanL'   460030   65.794  166.367         -8  10 !
-! SS33 ='XnDn'   460040   51.222  144.779         -8  10 !
-! SS34 ='XnZh'   460070   41.040  150.732         -8  10 !
-! SS35 ='CLio'   460080   46.518  153.850         -8  10 !
-! SS36 ='LinK'   460090   35.692  155.280         -8  10 !
-! SS37 ='WnHu'   460130   47.487  150.213         -8  10 !
-! SS38 ='GtTg'   460140   50.372  149.299         -8  10 !
-! SS39 ='SngS'   460150   55.182  152.584         -8  10 !
-! SS40 ='TYua'   460170   30.413  146.535         -8  10 !
-! SS41 ='DaYu'   460180   20.075  155.619         -8  10 !
-! SS42 ='GnYn'   460190    7.157  151.224         -8  10 !
-! SS43 ='PnZh'   460200   19.850  142.478         -8  10 !
-! SS44 ='LgTn'   460210   20.238  132.550         -8  10 !
-! SS45 ='HuKo'   460220    3.126  136.315         -8  10 !
-! SS46 ='ZhDg'   460230    7.893  119.414         -8  10 !
-! SS47 ='XnZh'   460240   -3.652  126.565         -8  10 !
-! SS48 ='ToFn'   460250  -10.361  113.545         -8  10 !
-! SS49 ='MiLi'   460260  -18.099  100.783         -8  10 !
-! SS50 ='SanY'   460270  -24.050   81.304         -8  10 !
-! SS51 ='FnYn'   460280  -28.451   67.039         -8  10 !
-! SS52 ='ShLu'   460290  -43.766   64.746         -8  10 !
-! SS53 ='DaLi'   460300  -31.971   51.216         -8  10 !
-! SS54 ='ZhMg'   460310  -33.804   57.543         -8  10 !
-! SS55 ='ZhHu'   460330  -44.751   49.394         -8  10 !
-! SS56 ='XnXi'   460340  -52.128   54.564         -8  10 !
-! SS57 ='NnTo'   460360  -30.730   30.200         -8  10 !
-! SS58 ='LnBe'   460380  -63.743   15.063         -8  10 !
-! SS59 ='PuZh'   460400  -74.250  -16.131         -8  10 !
-! SS60 ='TaXi'   460410  -79.119    8.923         -8  10 !
-! SS61 ='JiYi'   460420  -55.509  -15.465         -8  10 !
-! SS62 ='XnYn'   460430  -67.546  -33.055         -8  10 !
-! SS63 ='ShnH'   460440  -69.553  -53.552         -8  10 !
-! SS64 ='AnNn'   460450  -77.259  -60.324         -8  10 !
-! SS65 ='MeNn'   460470  -46.417  -78.002         -8  10 !
-! SS66 ='QiTo'   460480  -68.857  -91.444         -8  10 !
-! SS67 ='RnWu'   460490  -65.898  -98.950         -8  10 !
-! SS68 ='FnSh'   460500  -63.820 -105.284         -8  10 !
-! SS69 ='DLia'   460510  -57.223 -111.914         -8  10 !
-! SS70 ='NnZi'   460530  -66.794  -93.896         -8  10 !
-! SS71 ='ZuYi'   460540  -70.005  -99.882         -8  10 !
-! SS72 ='QnJn'   460560  -70.756 -104.799         -8  10 !
-! SS73 ='XGan'   460580  -65.816 -111.905         -8  10 !
-! SS74 ='PnDg'   460590  -50.953 -100.514         -8  10 !
-! SS75 ='ChaZ'   460600  -46.223 -117.663         -8  10 !
-! SS76 ='HenC'   460610  -21.569 -176.905         -8  10 !
-! SS77 ='TDon'   460620   14.093  -91.874         -8  10 !
-! SS78 ='YLan'   460650   72.322  120.863         -8  10 !
-! SS79 ='DonS'   460660   76.223  108.226         -8  10 !
-! SS80 ='ZhuS'   460690  -32.153   14.691         -8  10 !
-! SS81 ='YoHe'   460700   49.120  148.973         -8  10 !
+|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km) Time_zone Anem.Ht.(m)
+|----------------------------------------------------------
+|! SS1  ='BnQi'   466880   47.031  153.302         -8  10 !
+|! SS2  ='DnSh'   466900   47.860  171.692         -8  10 !
+|! SS3  ='AnBu'   466910   55.949  173.908         -8  10 !
+|! SS4  ='TaiB'   466920   54.426  157.679         -8  10 !
+|! SS5  ='ZhZH'   466930   57.575  171.521         -8  10 !
+|! SS6  ='KeLn'   466940   77.283  167.968         -8  10 !
+|! SS7  ='PnJY'   466950   25.141 -175.140         -8  10 !
+|! SS8  ='HLia'   466990   63.159   39.884         -8  10 !
+|! SS9  ='SuAo'   467060   90.120  108.821         -8  10 !
+|! SS10 ='YiLn'   467080   78.502  127.072         -8  10 !
+|! SS11 ='DngJ'   467300 -136.148  -38.257         -8  10 !
+|! SS12 ='PenH'   467350 -146.464   -3.787         -8  10 !
+|! SS13 ='TNan'   467410  -82.330  -66.772         -8  10 !
+|! SS14 ='YnKn'   467420  -78.932  -61.911         -8  10 !
+|! SS15 ='GaXg'   467440  -71.739 -114.313         -8  10 !
+|! SS16 ='JiYi'   467480  -57.951  -11.506         -8  10 !
+|! SS17 ='TZho'   467490  -31.087   60.024         -8  10 !
+|! SS18 ='ALSh'   467530  -19.050  -10.767         -8  10 !
+|! SS19 ='DaWu'   467540  -11.629 -138.571         -8  10 !
+|! SS20 ='YShn'   467550   -4.103  -13.326         -8  10 !
+|! SS21 ='XnZh'   467570    3.574  135.100         -8  10 !
+|! SS22 ='HnCh'   467590  -28.435 -177.312         -8  10 !
+|! SS23 ='ChgG'   467610   37.658  -57.052         -8  10 !
+|! SS24 ='LanY'   467620   55.496 -174.671         -8  10 !
+|! SS25 ='MnTn'   467650   -7.920   30.177         -8  10 !
+|! SS26 ='TDon'   467660   14.781  -94.988         -8  10 !
+|! SS27 ='Wchi'   467770  -47.218   72.614         -8  10 !
+|! SS28 ='QiGu'   467780  -99.999  -99.999         -8  10 !
+|! SS29 ='MaTz'   467990  -90.39   283.999         -8  10 !
+|! SS30 ='KeLn'   460010   71.323  160.778         -8  10 !
+|! SS31 ='Xizh'   460020   62.555  154.275         -8  10 !
+|! SS32 ='WanL'   460030   65.794  166.367         -8  10 !
+|! SS33 ='XnDn'   460040   51.222  144.779         -8  10 !
+|! SS34 ='XnZh'   460070   41.040  150.732         -8  10 !
+|! SS35 ='CLio'   460080   46.518  153.850         -8  10 !
+|! SS36 ='LinK'   460090   35.692  155.280         -8  10 !
+|! SS37 ='WnHu'   460130   47.487  150.213         -8  10 !
+|! SS38 ='GtTg'   460140   50.372  149.299         -8  10 !
+|! SS39 ='SngS'   460150   55.182  152.584         -8  10 !
+|! SS40 ='TYua'   460170   30.413  146.535         -8  10 !
+|! SS41 ='DaYu'   460180   20.075  155.619         -8  10 !
+|! SS42 ='GnYn'   460190    7.157  151.224         -8  10 !
+|! SS43 ='PnZh'   460200   19.850  142.478         -8  10 !
+|! SS44 ='LgTn'   460210   20.238  132.550         -8  10 !
+|! SS45 ='HuKo'   460220    3.126  136.315         -8  10 !
+|! SS46 ='ZhDg'   460230    7.893  119.414         -8  10 !
+|! SS47 ='XnZh'   460240   -3.652  126.565         -8  10 !
+|! SS48 ='ToFn'   460250  -10.361  113.545         -8  10 !
+|! SS49 ='MiLi'   460260  -18.099  100.783         -8  10 !
+|! SS50 ='SanY'   460270  -24.050   81.304         -8  10 !
+|! SS51 ='FnYn'   460280  -28.451   67.039         -8  10 !
+|! SS52 ='ShLu'   460290  -43.766   64.746         -8  10 !
+|! SS53 ='DaLi'   460300  -31.971   51.216         -8  10 !
+|! SS54 ='ZhMg'   460310  -33.804   57.543         -8  10 !
+|! SS55 ='ZhHu'   460330  -44.751   49.394         -8  10 !
+|! SS56 ='XnXi'   460340  -52.128   54.564         -8  10 !
+|! SS57 ='NnTo'   460360  -30.730   30.200         -8  10 !
+|! SS58 ='LnBe'   460380  -63.743   15.063         -8  10 !
+|! SS59 ='PuZh'   460400  -74.250  -16.131         -8  10 !
+|! SS60 ='TaXi'   460410  -79.119    8.923         -8  10 !
+|! SS61 ='JiYi'   460420  -55.509  -15.465         -8  10 !
+|! SS62 ='XnYn'   460430  -67.546  -33.055         -8  10 !
+|! SS63 ='ShnH'   460440  -69.553  -53.552         -8  10 !
+|! SS64 ='AnNn'   460450  -77.259  -60.324         -8  10 !
+|! SS65 ='MeNn'   460470  -46.417  -78.002         -8  10 !
+|! SS66 ='QiTo'   460480  -68.857  -91.444         -8  10 !
+|! SS67 ='RnWu'   460490  -65.898  -98.950         -8  10 !
+|! SS68 ='FnSh'   460500  -63.820 -105.284         -8  10 !
+|! SS69 ='DLia'   460510  -57.223 -111.914         -8  10 !
+|! SS70 ='NnZi'   460530  -66.794  -93.896         -8  10 !
+|! SS71 ='ZuYi'   460540  -70.005  -99.882         -8  10 !
+|! SS72 ='QnJn'   460560  -70.756 -104.799         -8  10 !
+|! SS73 ='XGan'   460580  -65.816 -111.905         -8  10 !
+|! SS74 ='PnDg'   460590  -50.953 -100.514         -8  10 !
+|! SS75 ='ChaZ'   460600  -46.223 -117.663         -8  10 !
+|! SS76 ='HenC'   460610  -21.569 -176.905         -8  10 !
+|! SS77 ='TDon'   460620   14.093  -91.874         -8  10 !
+|! SS78 ='YLan'   460650   72.322  120.863         -8  10 !
+|! SS79 ='DonS'   460660   76.223  108.226         -8  10 !
+|! SS80 ='ZhuS'   460690  -32.153   14.691         -8  10 !
+|! SS81 ='YoHe'   460700   49.120  148.973         -8  10 !
 -------------------
       1
         Four character string for station name
@@ -995,12 +985,10 @@ NOTES: (1) File/path names can be up to 70 characters in length
      UPPER AIR STATION VARIABLES
      (One record per station --  3  records in all)
 
-             1     2
-         Name    ID      X coord.   Y coord.  Time zone
-                           (km)       (km)    
-        -----------------------------------------------
-! US1  ='BnQi'    46692       48.020   159.158  -8 !
-! US2  ='HuLn'    46699       66.020   42.158   -8 !
+|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km) Time_zone
+|------------------------------------
+|! US1  ='BnQi'    46692       48.020   159.158  -8 !
+|! US2  ='HuLn'    46699       66.020   42.158   -8 !
 -------------------
       1
         Four character string for station name
@@ -1017,43 +1005,43 @@ NOTES: (1) File/path names can be up to 70 characters in length
 ## INPUT GROUP: 9 -- Precipitation station parameters
 --------------
 
-     PRECIPITATION STATION VARIABLES
-     (One record per station --  16  records in all)
-     (NOT INCLUDED IF NPSTA = 0)
+PRECIPITATION STATION VARIABLES
 
-            1          2
-         Name   Station    X coord.  Y coord.
-                  Code       (km)      (km)
-         ------------------------------------
-! PS1  ='BnQi'   466880   47.031  153.302 !
-! PS2  ='DnSh'   466900   47.860  171.692 !
-! PS3  ='AnBu'   466910   55.949  173.908 !
-! PS4  ='TaiB'   466920   54.426  157.679 !
-! PS5  ='ZhZH'   466930   57.575  171.521 !
-! PS6  ='KeLn'   466940   77.283  167.968 !
-! PS7  ='PnJY'   466950   25.141 -175.140 !
-! PS8  ='HLia'   466990   63.159   39.884 !
-! PS9  ='SuAo'   467060   90.120  108.821 !
-! PS10 ='YiLn'   467080   78.502  127.072 !
-! PS11 ='DngJ'   467300 -136.148  -38.257 !
-! PS12 ='PenH'   467350 -146.464   -3.787 !
-! PS13 ='TNan'   467410  -82.330  -66.772 !
-! PS14 ='YnKn'   467420  -78.932  -61.911 !
-! PS15 ='GaXg'   467440  -71.739 -114.313 !
-! PS16 ='JiYi'   467480  -57.951  -11.506 !
-! PS17 ='TZho'   467490  -31.087   60.024 !
-! PS18 ='ALSh'   467530  -19.050  -10.767 !
-! PS19 ='DaWu'   467540  -11.629 -138.571 !
-! PS20 ='YShn'   467550   -4.103  -13.326 !
-! PS21 ='XnZh'   467570    3.574  135.100 !
-! PS22 ='HnCh'   467590  -28.435 -177.312 !
-! PS23 ='ChgG'   467610   37.658  -57.052 !
-! PS24 ='LanY'   467620   55.496 -174.671 !
-! PS25 ='MnTn'   467650   -7.920   30.177 !
-! PS26 ='TDon'   467660   14.781  -94.988 !
-! PS27 ='Wchi'   467770  -47.218   72.614 !
-! PS28 ='QiGu'   467780  -99.999  -99.999 !
-! PS29 ='MaTz'   467990  -90.39   283.999 !
+(One record per station --  16  records in all)
+
+(NOT INCLUDED IF NPSTA = 0)
+
+|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km)
+|------------------------------------
+|! PS1  ='BnQi'   466880   47.031  153.302 !
+|! PS2  ='DnSh'   466900   47.860  171.692 !
+|! PS3  ='AnBu'   466910   55.949  173.908 !
+|! PS4  ='TaiB'   466920   54.426  157.679 !
+|! PS5  ='ZhZH'   466930   57.575  171.521 !
+|! PS6  ='KeLn'   466940   77.283  167.968 !
+|! PS7  ='PnJY'   466950   25.141 -175.140 !
+|! PS8  ='HLia'   466990   63.159   39.884 !|
+|! PS9  ='SuAo'   467060   90.120  108.821 !|
+|! PS10 ='YiLn'   467080   78.502  127.072 !|
+|! PS11 ='DngJ'   467300 -136.148  -38.257 !|
+|! PS12 ='PenH'   467350 -146.464   -3.787 !|
+|! PS13 ='TNan'   467410  -82.330  -66.772 !|
+|! PS14 ='YnKn'   467420  -78.932  -61.911 !|
+|! PS15 ='GaXg'   467440  -71.739 -114.313 !|
+|! PS16 ='JiYi'   467480  -57.951  -11.506 !|
+|! PS17 ='TZho'   467490  -31.087   60.024 !|
+|! PS18 ='ALSh'   467530  -19.050  -10.767 !|
+|! PS19 ='DaWu'   467540  -11.629 -138.571 !|
+|! PS20 ='YShn'   467550   -4.103  -13.326 !|
+|! PS21 ='XnZh'   467570    3.574  135.100 !|
+|! PS22 ='HnCh'   467590  -28.435 -177.312 !|
+|! PS23 ='ChgG'   467610   37.658  -57.052 !|
+|! PS24 ='LanY'   467620   55.496 -174.671 !|
+|! PS25 ='MnTn'   467650   -7.920   30.177 !|
+|! PS26 ='TDon'   467660   14.781  -94.988 !|
+|! PS27 ='Wchi'   467770  -47.218   72.614 !|
+|! PS28 ='QiGu'   467780  -99.999  -99.999 !|
+|! PS29 ='MaTz'   467990  -90.39   283.999 !|
 -------------------
       1
         Four character string for station name

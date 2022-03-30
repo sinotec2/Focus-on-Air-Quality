@@ -33,62 +33,63 @@ last_modified_date: 2022-03-22 08:56:43
 -------------------------------------------------------------------------------
 
 ## INPUT GROUP: 0 -- Input and Output File Names
-
 --------------
-Default Name  Type          File Name
-------------  ----          ---------
-CALMET.DAT    input    ! METDAT =data/calmet_20200415.dat !
-    or
-ISCMET.DAT    input    * ISCDAT =             *
-    or
-PLMMET.DAT    input    * PLMDAT =             *
-    or
-PROFILE.DAT   input    * PRFDAT =             *
-SURFACE.DAT   input    * SFCDAT =             *
-RESTARTB.DAT  input    ! RSTARTB= restart_20200425.dat ! 
---------------------------------------------------------------------------------
-CALPUFF.LST   output   ! PUFLST =CALPUFF.LST  !
-CONC.DAT      output   ! CONDAT =CALPUFF.CON  !
-DFLX.DAT      output   ! DFDAT  =CALPUFF.DFX  !
-WFLX.DAT      output   ! WFDAT  =CALPUFF.WFX  !
 
-VISB.DAT      output   * VISDAT =             *
-TK2D.DAT      output   * T2DDAT =             *
-RHO2D.DAT     output   * RHODAT =             *
-RESTARTE.DAT  output   ! RSTARTE=  restart_20200427.dat  !
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|CALMET.DAT|    input|    ! METDAT =data/calmet_20200415.dat !|
+|ISCMET.DAT|    input|    * ISCDAT =             *|
+|PLMMET.DAT|    input|    * PLMDAT =             *|
+|PROFILE.DAT|   input|    * PRFDAT =             *|
+|SURFACE.DAT|   input|    * SFCDAT =             *|
+|RESTARTB.DAT|  input|    ! RSTARTB= restart_20200425.dat ! |
+|CALPUFF.LST|   output|   ! PUFLST =CALPUFF.LST  !|
+|CONC.DAT|      output|   ! CONDAT =CALPUFF.CON  !|
+|DFLX.DAT|      output|   ! DFDAT  =CALPUFF.DFX  !|
+|WFLX.DAT|      output|   ! WFDAT  =CALPUFF.WFX  !|
+|VISB.DAT|      output|   * VISDAT =             *|
+|TK2D.DAT|      output|   * T2DDAT =             *|
+|RHO2D.DAT|     output|   * RHODAT =             *|
+|RESTARTE.DAT|  output|   ! RSTARTE=  restart_20200427.dat  !|
 --------------------------------------------------------------------------------
-Emission Files
+
+### Emission Files
 --------------
-PTEMARB.DAT   input    * PTDAT  = ../PTEMTAIC.DAT*
-VOLEMARB.DAT  input    * VOLDAT =             *
-BAEMARB.DAT   input    * ARDAT  =             *
-LNEMARB.DAT   input    * LNDAT  =             *
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|PTEMARB.DAT|   input|    * PTDAT  = ../PTEMTAIC.DAT*|
+|VOLEMARB.DAT|  input|    * VOLDAT =             *|
+|BAEMARB.DAT|   input|    * ARDAT  =             *|
+|LNEMARB.DAT|   input|    * LNDAT  =             *|
 --------------------------------------------------------------------------------
-Other Files
+
+### Other Files
 -----------
-OZONE.DAT     input    * OZDAT  = ../OZONE.DAT *
-VD.DAT        input    * VDDAT  =             *
-CHEM.DAT      input    * CHEMDAT=             *
-H2O2.DAT      input    * H2O2DAT=             *
-HILL.DAT      input    * HILDAT=             *
-HILLRCT.DAT   input    * RCTDAT=             *
-COASTLN.DAT   input    * CSTDAT=             *
-FLUXBDY.DAT   input    * BDYDAT=             *
-BCON.DAT      input    * BCNDAT=             *
-DEBUG.DAT     output   ! DEBUG = debug.out   !
-MASSFLX.DAT   output   * FLXDAT=             *
-MASSBAL.DAT   output   ! BALDAT=massbal.dat  !
-FOG.DAT       output   * FOGDAT=             *
-RISE.DAT      output   * RISDAT=             *
+|Default Name|  Type|          File_Name|
+|-|-|-|
+|OZONE.DAT|     input|    * OZDAT  = ../OZONE.DAT *|
+|VD.DAT|        input|    * VDDAT  =             *|
+|CHEM.DAT|      input|    * CHEMDAT=             *|
+|H2O2.DAT|      input|    * H2O2DAT=             *|
+|HILL.DAT|      input|    * HILDAT=             *|
+|HILLRCT.DAT|   input|    * RCTDAT=             *|
+|COASTLN.DAT|   input|    * CSTDAT=             *|
+|FLUXBDY.DAT|   input|    * BDYDAT=             *|
+|BCON.DAT|      input|    * BCNDAT=             *|
+|DEBUG.DAT|     output|   ! DEBUG = debug.out   !|
+|MASSFLX.DAT|   output|   * FLXDAT=             *|
+|MASSBAL.DAT|   output|   ! BALDAT=massbal.dat  !|
+|FOG.DAT|       output|   * FOGDAT=             *|
+|RISE.DAT|      output|   * RISDAT=             *|
 --------------------------------------------------------------------------------
-All file names will be converted to lower case if LCFILES = T
-Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
-         T = lower case      ! LCFILES = T !
-         F = UPPER CASE
-NOTE: (1) file/path names can be up to 70 characters in length
+      All file names will be converted to lower case if LCFILES = T
+      Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
+               T = lower case      ! LCFILES = T !
+               F = UPPER CASE
+      NOTE: (1) file/path names can be up to 70 characters in length
 
 
-Provision for multiple input files
+### Provision for multiple input files
 ----------------------------------
      Number of CALMET.DAT Domains (NMETDOM)
                                      Default: 1       ! NMETDOM =   1   !
@@ -111,24 +112,24 @@ Provision for multiple input files
 ### Subgroup (0a)
 -------------
 
-  The following CALMET.DAT filenames are processed in sequence if NMETDAT>1
+      The following CALMET.DAT filenames are processed in sequence if NMETDAT>1
 
-Default Name  Type          File Name
-------------  ----          ---------
- none         input    * PTDAT=../PTEMTAIC.DAT  *   *END*
- none         input    * METDAT=../CMET1.DAT  *   *END*
-
+|Default Name|  Type|          File_Name|
+|-|-|-|
+| none|         input|    * PTDAT=../PTEMTAIC.DAT  *   *END\*|
+| none|         input|    * METDAT=../CMET1.DAT  *   *END\*|
 
 --------------------------------------------------------------------------------
 
 ## INPUT GROUP: 1 -- General run control parameters
 --------------
-
+### run all periods
     Option to run all periods found
     in the met. file     (METRUN)   Default: 0       ! METRUN =   0  !
 
          METRUN = 0 - Run period explicitly defined below
          METRUN = 1 - Run all periods in met. file
+### start and end
      Starting date:    Year   (IBYR)  --    No default   ! IBYR  =  2020  !
                        Month  (IBMO)  --    No default   ! IBMO  =  04  !
                        Day    (IBDY)  --    No default   ! IBDY  =  15  !
@@ -142,7 +143,7 @@ Default Name  Type          File Name
      Ending time:      Hour   (IEHR)  --    No default   ! IEHR  =  0  !
                        Minute (IEMIN) --    No default   ! IEMIN =  0  !
                        Second (IESEC) --    No default   ! IESEC =  0  !
-
+### time zone
      (These are only used if METRUN = 0)
 							! ABTZ= UTC+0000 !
      Base time zone        (XBTZ) -- No default       * XBTZ=  0.  *
@@ -150,7 +151,7 @@ Default Name  Type          File Name
      ADDED to the time to obtain UTC (or GMT)
      Examples: PST = 8., MST = 7.
                CST = 6., EST = 5.
-
+### Length of modeling time-step
      Length of modeling time-step (seconds)
      Equal to update period in the primary
      meteorological data files, or an
@@ -158,7 +159,7 @@ Default Name  Type          File Name
      Must be no larger than 1 hour
      (NSECDT)                        Default:3600     ! NSECDT =3600   !
                                      Units: seconds
-
+### Number of chemical species
      Number of chemical species (NSPEC)
                                      Default: 5       ! NSPEC =  8   !
 
@@ -173,7 +174,7 @@ Default Name  Type          File Name
            ITEST = 2 - Continues with execution of program
                        after SETUP
 
-     Restart Configuration:
+### Restart Configuration:
 
         Control flag (MRESTART)      Default: 0       ! MRESTART = 2 !
 
@@ -190,7 +191,7 @@ Default Name  Type          File Name
            0 = File written only at last period
           >0 = File updated every NRESPD periods
 
-     Meteorological Data Format (METFM)
+### Meteorological Data Format (METFM)
                                      Default: 1       ! METFM =  1   !
 
            METFM = 1 - CALMET binary file (CALMET.MET)
@@ -207,7 +208,7 @@ Default Name  Type          File Name
 
            MPRFFM = 1 - CTDM plus tower file (PROFILE.DAT)
            MPRFFM = 2 - AERMET tower file (PROFILE.DAT)
-
+### PG sigma-y adjustment
      PG sigma-y is adjusted by the factor (AVET/PGTIME)**0.2
      Averaging Time (minutes) (AVET)
                                      Default: 60.0    ! AVET = 60. !

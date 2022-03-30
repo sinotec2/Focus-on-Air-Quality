@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 模式應用相關論文
-nav_order: 2
+nav_order: 4
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
@@ -133,7 +133,8 @@ Overall, AERMOD better predicted ambient SO2 and NO2 levels than the reported CA
 A numerical simulation system is developed to predict the dispersion of hazardous air pollutants (HAPs) over a populated city due to accidental release. Ulsan, as one of the megacities in Korea, is chosen as an ideal testbed for the simulation, as it is located in complex terrain and hosts a national industrial complex on the outskirts of the city. The system is based on the California puff model (CALPUFF) for simulating a HAP’s dispersion, in which the three-dimensional atmospheric circulation derived from the observed weather station data is specified at a fine horizontal resolution of 200 m. A test scenario is developed for the accidental release of benzene during the daytime and nighttime, respectively, by a fictitious explosion of a storage container, and the injection amount is determined arbitrarily yet comparable to those in the past accidents. In attempting a quantitative assessment and zoning the level of potential risk over the impacted area, multiple simulations have been conducted each day with different hourly varying meteorological conditions in August. The dispersion characteristics of the air pollutant depend largely on the local wind patterns that vary substantially from day to day. Nevertheless, the composite analysis sufficiently identifies the impacted area by the HAP’s dispersion due to the local prevailing wind such as the land–sea breeze circulation. An immediate hazardous area is determined based on the vulnerability map constructed by zoning the level of risk determined by the spatial distribution of the HAPs’ concentration and the harmfulness standard to the human body.
 - Kim, G., Lee, M.-I., Lee, S., Choi, S.-D., Kim, S.-J., and Song, C.-K. (2020). [Numerical Modeling for the Accidental Dispersion of Hazardous Air Pollutants in the Urban Metropolitan Area](https://www.mdpi.com/2073-4433/11/5/477). Atmosphere 11 (5):477. doi:10.3390/atmos11050477.
 
-### Great Mendoza, Argentina.
+### Great Mendoza, Argentina (2020)
+Determinations of atmospheric concentrations of four POPs (DDTs, HCB, PCBs, PBDEs) using PUFs in eleven sites of the study area are presented. Furthermore, the atmospheric dispersion of selected POPs was simulated using the WRF/CALMET/CALPUFF modeling system [23,24], based on a high-resolution emission inventory previously elaborated by the authors, for the same compounds determined analytically in the PUFs [6]. The implemented model also served as a tool to evaluate the emission inventory mentioned above.
 - Ruggeri, M.F., Lana, N.B., Altamirano, J.C., Puliafito, S.E. (2020). [Spatial distribution, patterns and source contributions of POPs in the atmosphere of Great Mendoza using the WRF/CALMET/CALPUFF modelling system](https://doi.org/10.1016/j.emcon.2020.02.002). Emerging Contaminants 6, 103–113. 
 
 

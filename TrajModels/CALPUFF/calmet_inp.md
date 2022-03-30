@@ -122,7 +122,7 @@ NOTES:
 
                          !END!
 
--------------------------------------------------------------------------------
+-------------------------------s------------------------------------------------
 
 ## INPUT GROUP: 1 -- General run control parameters
 --------------
@@ -895,6 +895,7 @@ NOTES:
 |! SS3  ='AnBu' |  466910 |  55.949 | 173.908   |      -8  10 !|
 |...|||
 |! SS81 ='YoHe' |  460700 |  49.120 | 148.973    |     -8  10 !|
+
 -------------------
       1
         Four character string for station name
@@ -915,9 +916,10 @@ NOTES:
      (One record per station --  3  records in all)
 
 |Name<sup>1</sup>|   Station_Code<sup>2</sup>|    X_coord.(km)|  Y_coord.(km)| Time_zone|
-|-|-|-|-|--------------------------------
+|-|-|-|-|-|
 |! US1  ='BnQi' |   46692   |    48.020 |  159.158 | -8 !|
 |! US2  ='HuLn' |   46699   |   66.020  | 42.158 |  -8 !|
+
 -------------------
       1
         Four character string for station name
@@ -934,43 +936,17 @@ NOTES:
 ## INPUT GROUP: 9 -- Precipitation station parameters
 --------------
 
-PRECIPITATION STATION VARIABLES
+      PRECIPITATION STATION VARIABLES
+      (One record per station --  16  records in all)
+      (NOT INCLUDED IF NPSTA = 0)
 
-(One record per station --  16  records in all)
-
-(NOT INCLUDED IF NPSTA = 0)
-
-|Name<sup>1</sup>   Station_Code<sup>2</sup>    X_coord.(km)  Y_coord.(km)
-|------------------------------------
-|! PS1  ='BnQi'   466880   47.031  153.302 !
-|! PS2  ='DnSh'   466900   47.860  171.692 !
-|! PS3  ='AnBu'   466910   55.949  173.908 !
-|! PS4  ='TaiB'   466920   54.426  157.679 !
-|! PS5  ='ZhZH'   466930   57.575  171.521 !
-|! PS6  ='KeLn'   466940   77.283  167.968 !
-|! PS7  ='PnJY'   466950   25.141 -175.140 !
-|! PS8  ='HLia'   466990   63.159   39.884 !|
-|! PS9  ='SuAo'   467060   90.120  108.821 !|
-|! PS10 ='YiLn'   467080   78.502  127.072 !|
-|! PS11 ='DngJ'   467300 -136.148  -38.257 !|
-|! PS12 ='PenH'   467350 -146.464   -3.787 !|
-|! PS13 ='TNan'   467410  -82.330  -66.772 !|
-|! PS14 ='YnKn'   467420  -78.932  -61.911 !|
-|! PS15 ='GaXg'   467440  -71.739 -114.313 !|
-|! PS16 ='JiYi'   467480  -57.951  -11.506 !|
-|! PS17 ='TZho'   467490  -31.087   60.024 !|
-|! PS18 ='ALSh'   467530  -19.050  -10.767 !|
-|! PS19 ='DaWu'   467540  -11.629 -138.571 !|
-|! PS20 ='YShn'   467550   -4.103  -13.326 !|
-|! PS21 ='XnZh'   467570    3.574  135.100 !|
-|! PS22 ='HnCh'   467590  -28.435 -177.312 !|
-|! PS23 ='ChgG'   467610   37.658  -57.052 !|
-|! PS24 ='LanY'   467620   55.496 -174.671 !|
-|! PS25 ='MnTn'   467650   -7.920   30.177 !|
-|! PS26 ='TDon'   467660   14.781  -94.988 !|
-|! PS27 ='Wchi'   467770  -47.218   72.614 !|
-|! PS28 ='QiGu'   467780  -99.999  -99.999 !|
-|! PS29 ='MaTz'   467990  -90.39   283.999 !|
+|Name<sup>1</sup>|   Station_Code<sup>2</sup>|    X_coord.(km)  |Y_coord.(km)|
+|-|-|-|-|
+|! PS1  ='BnQi'|   466880|   47.031|  153.302 !|
+|! PS2  ='DnSh'|   466900|   47.860|  171.692 !|
+|! PS3  ='AnBu'|   466910|   55.949|  173.908 !|
+|...|||
+|! PS29 ='MaTz'|   467990|  -90.39|   283.999 !|
 -------------------
       1
         Four character string for station name

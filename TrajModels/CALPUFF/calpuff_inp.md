@@ -34,6 +34,8 @@ last_modified_date: 2022-03-22 08:56:43
 
 ## INPUT GROUP: 0 -- Input and Output File Names
 --------------
+### Main I/O Files
+---
 
 |Default Name|  Type|          File_Name|說明|
 |-|-|-|-|
@@ -69,22 +71,22 @@ last_modified_date: 2022-03-22 08:56:43
 ### Other Files
 -----------
 
-|Default Name|  Type|          File_Name|
-|-|-|-|
-|OZONE.DAT|     input|    * OZDAT  = ../OZONE.DAT *|
-|VD.DAT|        input|    * VDDAT  =             *|
-|CHEM.DAT|      input|    * CHEMDAT=             *|
-|H2O2.DAT|      input|    * H2O2DAT=             *|
-|HILL.DAT|      input|    * HILDAT=             *|
-|HILLRCT.DAT|   input|    * RCTDAT=             *|
-|COASTLN.DAT|   input|    * CSTDAT=             *|
-|FLUXBDY.DAT|   input|    * BDYDAT=             *|
-|BCON.DAT|      input|    * BCNDAT=             *|
-|DEBUG.DAT|     output|   ! DEBUG = debug.out   !|
-|MASSFLX.DAT|   output|   * FLXDAT=             *|
-|MASSBAL.DAT|   output|   ! BALDAT=massbal.dat  !|
-|FOG.DAT|       output|   * FOGDAT=             *|
-|RISE.DAT|      output|   * RISDAT=             *|
+|Default Name|  Type|          File_Name|說明|
+|-|-|-|-|
+|OZONE.DAT|     input|    * OZDAT  = ../OZONE.DAT *|測站逐時臭氧值|
+|VD.DAT|        input|    * VDDAT  =             *|沉降速度|
+|CHEM.DAT|      input|    * CHEMDAT=             *|化學反應|
+|H2O2.DAT|      input|    * H2O2DAT=             *|逐時過氧化氫濃度|
+|HILL.DAT|      input|    * HILDAT=             *|CTDM山高|
+|HILLRCT.DAT|   input|    * RCTDAT=             *|CTDM複雜地形接受點|
+|COASTLN.DAT|   input|    * CSTDAT=             *|海岸線|
+|FLUXBDY.DAT|   input|    * BDYDAT=             *|邊界通量|
+|BCON.DAT|      input|    * BCNDAT=             *|邊界濃度|
+|DEBUG.DAT|     output|   ! DEBUG = debug.out   !|偵錯訊息|
+|MASSFLX.DAT|   output|   * FLXDAT=             *|質量通量|
+|MASSBAL.DAT|   output|   ! BALDAT=massbal.dat  !|質量平衡|
+|FOG.DAT|       output|   * FOGDAT=             *|霧|
+|RISE.DAT|      output|   * RISDAT=             *|煙流上升|
 
 --------------------------------------------------------------------------------
       All file names will be converted to lower case if LCFILES = T

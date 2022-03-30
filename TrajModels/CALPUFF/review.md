@@ -20,6 +20,13 @@ last_modified_date: 2022-03-22 08:56:43
 </details>
 ---
 
+## User Guides
+- Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (1990). [MODEL FORMULATION AND USER’S GUIDE FOR THE CALPUFF DISPERSION MODEL](https://ww2.arb.ca.gov/sites/default/files/classic/research/apr/past/a025-2a.pdf).
+- Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (2000). [A User’s Guide for the CALPUFF Dispersion Model (version 5)](http://www.src.com/calpuff/download/CALPUFF_UsersGuide.pdf).
+- Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (2011). [CALPUFF Modeling System Version 6 User Instructions](http://www.src.com/calpuff/download/CALPUFF_Version6_UserInstructions.pdf).
+- Exponent, Inc. (2019). [CALPUFF Version 7 Users Guide Addendum](http://www.src.com/calpuff/download/CALPUFF_v7_UserGuide_Addendum.pdf) (No. Doc. no. Z170308064614-0072).
+
+
 ## Evaluations of CALPUFF
 ### Greater Athens Area, Greece(2005)
 This study has been carried out in order to evaluate the performance of CALPUFF modelling system in an area of complex topography. For this reason a comparison was performed between numerical results produced by this modelling system and those derived by two Eulerian models (UAM-V and REMSAD), together with experimental measurements. The meteorological input parameters, produced by the meteorological model CALMET are also examined through comparison with observations and to MM5 model results. Emphasis is given to the mixing height calculation, due to its importance in the prediction of pollutant concentrations. It was found that the overall performance of the CALPUFF is satisfactory and the results derived are compatible with these produced by the Eulerian models, especially under unstable atmospheric conditions. The CALPUFF model’s performance is improved significantly when vertical meteorological profiles produced by MM5 are additionally employed. 
@@ -63,7 +70,7 @@ When the measurements in residential areas were examined to identify the effect 
 - Demirarslan, K., Doğruparmak, Ş., and Karademir, A. (2017). [Evaluation of three pollutant dispersion models for the environmental assessment of a district in Kocaeli, Turkey](https://www.researchgate.net/publication/321461958_Evaluation_of_three_pollutant_dispersion_models_for_the_environmental_assessment_of_a_district_in_Kocaeli_Turkey). Global Nest Journal 19:37–48.
 
 ### 中國遼寧省本溪市 (2017)
-- Wu, H., Zhang, Y., Yu, Q., and Ma, W. (2017). Application of an integrated WRF/CALPUFF modeling tool for source apportionment of atmospheric pollutants for air quality management: a case study in the urban area of Benxi, China. Journal of the Air & Waste Management Association 68. doi:10.1080/10962247.2017.1391009.
+- Wu, H., Zhang, Y., Yu, Q., and Ma, W. (2017). [Application of an integrated WRF/CALPUFF modeling tool for source apportionment of atmospheric pollutants for air quality management: a case study in the urban area of Benxi, China](https://www.researchgate.net/publication/320342534_Application_of_an_integrated_WRFCALPUFF_modeling_tool_for_source_apportionment_of_atmospheric_pollutants_for_air_quality_management_a_case_study_in_the_urban_area_of_Benxi_China). Journal of the Air & Waste Management Association 68. doi:10.1080/10962247.2017.1391009.
 
 ### Baghdad- Iraq (2019)
 In order to evaluate the accuracy of CALPUFF model for prediction of the pollutants concentration in ambient air at the study area, a comparison conducted between the predicted re-sults of this model and the observed results, which measured by Gzar, (1998) in August 1997. The hourly concentration re-sults of CALPUFF were compared with measured ones at two Cases. The first Case on 23 August was better correlation than the second Case on 25 August 1997, however, it showed good agreement for SO2, CO, and NO2, but for PM2.5 was less agree-ment. 

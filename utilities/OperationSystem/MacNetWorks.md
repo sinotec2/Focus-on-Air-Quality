@@ -88,7 +88,7 @@ cat .ssh/id_rsa.pub_client >> .ssh/authorized_keys 即可
 
 ### ssh white list
 - https://blog.wu-boy.com/2016/12/create-account-and-ssh-permission-on-mac/
-### MAC 封鎖存取特定 IP
+### MAC 封鎖存取特定 IP 
 - https://blog.yowko.com/mac-block-outgoing-ip/
 
 ## 在 macOS 安裝 Apache HTTP Server

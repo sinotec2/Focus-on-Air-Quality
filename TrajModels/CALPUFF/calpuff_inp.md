@@ -56,6 +56,7 @@ last_modified_date: 2022-03-22 08:56:43
 
 ### Emission Files
 --------------
+
 |Default Name|  Type|          File_Name|
 |-|-|-|
 |PTEMARB.DAT|   input|    * PTDAT  = ../PTEMTAIC.DAT*|
@@ -109,8 +110,7 @@ last_modified_date: 2022-03-22 08:56:43
 
      Number of VOLEMARB.DAT files for run (NVOLDAT)
                                      Default: 0       ! NVOLDAT =  0  !
-
-!END!
+      !END!
 
 
 ### Subgroup (0a)
@@ -133,6 +133,7 @@ last_modified_date: 2022-03-22 08:56:43
 
          METRUN = 0 - Run period explicitly defined below
          METRUN = 1 - Run all periods in met. file
+
 ### start and end
      Starting date:    Year   (IBYR)  --    No default   ! IBYR  =  2020  !
                        Month  (IBMO)  --    No default   ! IBMO  =  04  !
@@ -147,6 +148,7 @@ last_modified_date: 2022-03-22 08:56:43
      Ending time:      Hour   (IEHR)  --    No default   ! IEHR  =  0  !
                        Minute (IEMIN) --    No default   ! IEMIN =  0  !
                        Second (IESEC) --    No default   ! IESEC =  0  !
+
 ### time zone
      (These are only used if METRUN = 0)
 							! ABTZ= UTC+0000 !
@@ -155,6 +157,7 @@ last_modified_date: 2022-03-22 08:56:43
      ADDED to the time to obtain UTC (or GMT)
      Examples: PST = 8., MST = 7.
                CST = 6., EST = 5.
+
 ### Length of modeling time-step
      Length of modeling time-step (seconds)
      Equal to update period in the primary
@@ -163,6 +166,7 @@ last_modified_date: 2022-03-22 08:56:43
      Must be no larger than 1 hour
      (NSECDT)                        Default:3600     ! NSECDT =3600   !
                                      Units: seconds
+
 ### Number of chemical species
      Number of chemical species (NSPEC)
                                      Default: 5       ! NSPEC =  8   !
@@ -195,7 +199,9 @@ last_modified_date: 2022-03-22 08:56:43
            0 = File written only at last period
           >0 = File updated every NRESPD periods
 
-### Meteorological Data Format (METFM)
+### Meteorological Data Formats
+      Meteorological Data Format (METFM)
+
                                      Default: 1       ! METFM =  1   !
 
            METFM = 1 - CALMET binary file (CALMET.MET)
@@ -212,6 +218,7 @@ last_modified_date: 2022-03-22 08:56:43
 
            MPRFFM = 1 - CTDM plus tower file (PROFILE.DAT)
            MPRFFM = 2 - AERMET tower file (PROFILE.DAT)
+
 ### PG sigma-y adjustment
      PG sigma-y is adjusted by the factor (AVET/PGTIME)**0.2
      Averaging Time (minutes) (AVET)
@@ -219,8 +226,7 @@ last_modified_date: 2022-03-22 08:56:43
      PG Averaging Time (minutes) (PGTIME)
                                      Default: 60.0    ! PGTIME = 60. !
 
-
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -500,50 +506,45 @@ last_modified_date: 2022-03-22 08:56:43
                        SYTDEP   550. (m)
                        MHFTSZ   0
                        SVMIN    0.5
-
-
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
 
 ## INPUT GROUP: 3a, 3b -- Species list
--------------------
-
 ------------
 ### Subgroup (3a)
 ------------
 
-  The following species are modeled:
+      The following species are modeled:
 
-! CSPEC =          SO2 !         !END!
-! CSPEC =          SO4 !         !END!
-! CSPEC =          NOX !         !END!
-! CSPEC =          HNO3 !         !END!
-! CSPEC =          NO3 !         !END!
-! CSPEC =          PMS1! !END!
-! CSPEC =          PMS2! !END!
-! CSPEC =          PMS3! !END!
+      ! CSPEC =          SO2 !         !END!
+      ! CSPEC =          SO4 !         !END!
+      ! CSPEC =          NOX !         !END!
+      ! CSPEC =          HNO3 !         !END!
+      ! CSPEC =          NO3 !         !END!
+      ! CSPEC =          PMS1! !END!
+      ! CSPEC =          PMS2! !END!
+      ! CSPEC =          PMS3! !END!
 
                                                        Dry                OUTPUT GROUP
     SPECIES          MODELED          EMITTED       DEPOSITED                NUMBER
      NAME         (0=NO, 1=YES)    (0=NO, 1=YES)    (0=NO,                 (0=NONE,
-   (Limit: 12                                        1=COMPUTED-GAS        1=1st CGRUP,
-    Characters                                       2=COMPUTED-PARTICLE   2=2nd CGRUP,
-    in length)                                       3=USER-SPECIFIED)     3= etc.)
+      (Limit: 12                                        1=COMPUTED-GAS        1=1st CGRUP,
+         Characters                                       2=COMPUTED-PARTICLE   2=2nd CGRUP,
+         in length)                                       3=USER-SPECIFIED)     3= etc.)
 
-!          SO2  =         1,               1,           1,                 0   !
-!          SO4  =         1,               1,           2,                 0   !
-!          NOX  =         1,               1,           1,                 0   !
-!          HNO3 =         1,               1,           1,                 0   !
-!          NO3  =         1,               1,           2,                 0   !
-!          PMS1 =         1,               1,           2,                 1   !
-!          PMS2 =         1,               1,           2,                 2   !
-!          PMS3 =         1,               1,           2,                 3   !
+      !          SO2  =         1,               1,           1,                 0   !
+      !          SO4  =         1,               1,           2,                 0   !
+      !          NOX  =         1,               1,           1,                 0   !
+      !          HNO3 =         1,               1,           1,                 0   !
+      !          NO3  =         1,               1,           2,                 0   !
+      !          PMS1 =         1,               1,           2,                 1   !
+      !          PMS2 =         1,               1,           2,                 2   !
+      !          PMS3 =         1,               1,           2,                 3   !
+      !END!
 
-!END!
-
-  Note:  The last species in (3a) must be 'BCON' when using the
+      Note:  The last species in (3a) must be 'BCON' when using the
          boundary condition option (MBCON > 0).  Species BCON should
          typically be modeled as inert (no chem transformation or
          removal).
@@ -552,17 +553,16 @@ last_modified_date: 2022-03-22 08:56:43
 -------------
 ### Subgroup (3b)
 -------------
-  The following names are used for Species-Groups in which results
-  for certain species are combined (added) prior to output.  The
-  CGRUP name will be used as the species name in output files.
-  Use this feature to model specific particle-size distributions
-  by treating each size-range as a separate species.
-  Order must be consistent with 3(a) above.
+      The following names are used for Species-Groups in which results
+      for certain species are combined (added) prior to output.  The
+      CGRUP name will be used as the species name in output files.
+      Use this feature to model specific particle-size distributions
+      by treating each size-range as a separate species.
+      Order must be consistent with 3(a) above.
 
-! CGRUP = PM25 ! !END!
-! CGRUP = PM10 ! !END!
-! CGRUP = TSP  ! !END!
-
+      ! CGRUP = PM25 ! !END!
+      ! CGRUP = PM10 ! !END!
+      ! CGRUP = TSP  ! !END!
 
 -------------------------------------------------------------------------------
 
@@ -732,8 +732,7 @@ SAMPLING Grid (GRIDDED RECEPTORS):
        Nesting factor of the sampling
         grid (MESHDN)                      Default: 1     ! MESHDN =  1  !
         (MESHDN is an integer >= 1)
-
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -865,14 +864,13 @@ SAMPLING Grid (GRIDDED RECEPTORS):
        Met. period to end output
        (NN2)                                    Default: 10    ! NN2 =  10  !
 
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
 
 
 ## INPUT GROUP: 6a, 6b, & 6c -- Subgrid scale complex terrain inputs
--------------------------
 
 ---------------
 ### Subgroup (6a)
@@ -914,11 +912,11 @@ SAMPLING Grid (GRIDDED RECEPTORS):
      HILL information
 
 
-HILL           XC        YC       THETAH  ZGRID  RELIEF    EXPO 1    EXPO 2   SCALE 1    SCALE 2    AMAX1     AMAX2
- NO.          (km)      (km)      (deg.)   (m)     (m)      (m)       (m)       (m)        (m)       (m)       (m)
-----          ----      ----      ------  -----  ------    ------    ------   -------    -------    -----     -----
+      HILL           XC        YC       THETAH  ZGRID  RELIEF    EXPO 1    EXPO 2   SCALE 1    SCALE 2    AMAX1     AMAX2
+      NO.          (km)      (km)      (deg.)   (m)     (m)      (m)       (m)       (m)        (m)       (m)       (m)
+      ----          ----      ----      ------  -----  ------    ------    ------   -------    -------    -----     -----
 
----------------
+      ---------------
 ### Subgroup (6c)
 ---------------
 
@@ -930,8 +928,8 @@ HILL           XC        YC       THETAH  ZGRID  RELIEF    EXPO 1    EXPO 2   SC
 
 
 -------------------
-1
-     Description of Complex Terrain Variables:
+      1
+      Description of Complex Terrain Variables:
           XC, YC  = Coordinates of center of hill
           THETAH  = Orientation of major axis of hill (clockwise from
                     North)
@@ -951,9 +949,9 @@ HILL           XC        YC       THETAH  ZGRID  RELIEF    EXPO 1    EXPO 2   SC
           XHH     = Hill number associated with each complex terrain receptor
                     (NOTE: MUST BE ENTERED AS A REAL NUMBER)
 
-   **
-     NOTE: DATA for each hill and CTSG receptor are treated as a separate
-           input subgroup and therefore must end with an input group terminator.
+      **
+         NOTE: DATA for each hill and CTSG receptor are treated as a separate
+               input subgroup and therefore must end with an input group terminator.
 
 -------------------------------------------------------------------------------
 
@@ -961,14 +959,14 @@ HILL           XC        YC       THETAH  ZGRID  RELIEF    EXPO 1    EXPO 2   SC
 ## INPUT GROUP: 7 -- Chemical parameters for dry deposition of gases
 --------------
 
-SPECIES     DIFFUSIVITY      ALPHA STAR      REACTIVITY    MESOPHYLL RESISTANCE     HENRY'S LAW COEFFICIENT
-NAME        (cm**2/s)                                            (s/cm)                (dimensionless)
--------     -----------      ----------      ----------    --------------------     -----------------------
-! SO2 = 0.1509 , 1.00E3 , 8.0 , 0.0 , 4.e-2 !
-! NOX = 0.1656 , 1.00 , 8.0 , 5.0 , 3.5 !
-! HNO3 = 0.1628 , 1.00 , 18.0 , 0.0 , 8.e-8 !
+      SPECIES     DIFFUSIVITY      ALPHA STAR      REACTIVITY    MESOPHYLL RESISTANCE     HENRY'S LAW COEFFICIENT
+      NAME        (cm**2/s)                                            (s/cm)                (dimensionless)
+      -------     -----------      ----------      ----------    --------------------     -----------------------
+      ! SO2 = 0.1509 , 1.00E3 , 8.0 , 0.0 , 4.e-2 !
+      ! NOX = 0.1656 , 1.00 , 8.0 , 5.0 , 3.5 !
+      ! HNO3 = 0.1628 , 1.00 , 18.0 , 0.0 , 8.e-8 !
 
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -986,16 +984,16 @@ NAME        (cm**2/s)                                            (s/cm)         
      for each should be entered as 0.  The model will then use the
      deposition velocity for the stated mean diameter.
 
-      SPECIES      GEOMETRIC MASS MEAN        GEOMETRIC STANDARD
-       NAME             DIAMETER                   DEVIATION
-                        (microns)                  (microns)
-      -------      -------------------        ------------------
-!     SO4 =        0.48,                     2. !
-!     NO3 =        0.48,                     2. !
-!     PMS1 =        2.5,                     2. !
-!     PMS2 =        10.,                     2. !
-!     PMS3 =        15.,                     2. !
-!END!
+            SPECIES      GEOMETRIC MASS MEAN        GEOMETRIC STANDARD
+            NAME             DIAMETER                   DEVIATION
+                              (microns)                  (microns)
+            -------      -------------------        ------------------
+      !     SO4 =        0.48,                     2. !
+      !     NO3 =        0.48,                     2. !
+      !     PMS1 =        2.5,                     2. !
+      !     PMS2 =        10.,                     2. !
+      !     PMS3 =        15.,                     2. !
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -1021,7 +1019,7 @@ NAME        (cm**2/s)                                            (s/cm)         
         IVEG=2 for active and stressed vegetation
         IVEG=3 for inactive vegetation
 
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -1141,8 +1139,7 @@ NAME        (cm**2/s)                                            (s/cm)         
      !  OFRAC  = 0.15, 0.15, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.15 !
      !  VCNX   = 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00, 50.00 !
 
-
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -1413,8 +1410,7 @@ NAME        (cm**2/s)                                            (s/cm)         
        (MDEPBC)                            Default:   1        ! MDEPBC =  0  !
           0 = Concentration is NOT adjusted for depletion
           1 = Adjust Concentration for depletion
-
-!END!
+      !END!
 
 
 -------------------------------------------------------------------------------
@@ -1453,52 +1449,27 @@ NAME        (cm**2/s)                                            (s/cm)         
      source emissions are read from
      the file: PTEMARB.DAT)
 
-!END!
+      !END!
 
 ---------------
 ### Subgroup (13b)
 ---------------
-                                      a
-          POINT SOURCE: CONSTANT DATA
-          -----------------------------
-                                                                              b          c
-  Source       X         Y       Stack    Base     Stack    Exit  Exit    Bldg.  Emission
-   No.     Coordinate Coordinate Height Elevation Diameter  Vel.  Temp.   Dwash   Rates
-              (km)      (km)       (m)      (m)       (m)  (m/s) (deg. K)         
-SO2 SO4 NOX HNO3 NO3 PMS1(fine),PMS2(10)PMS3(coarse)
-  ------   ---------- ---------- ------  ------   -------- ----- -------- ----- --------
-L0200473PNG1
-   1 ! SRCNAM = 1 !
-   1 ! X =  -32.064, 97.505,  150,      4.7,    11.00,  19.8, 363.0,   .0,   5.440,
-    1.08, 34.511,0.,0., 2.104,0.0,0.0!
-   1 ! ZPLTFM  =      .0 !
-   1 ! FMFAC  =      1.0 !   !END!
-import PseudoNetCDF as pnc
-fname1='/home/camxruns/2013/ptse/fortBE.14.g1112.h150.11Mp'
-pt1=pnc.pncopen(fname1,format='point_source')
-v3=filter(lambda x:pt1.variables[x].ndim==3, [i for i in pt1.variables])
-v2=filter(lambda x:pt1.variables[x].ndim==2, [i for i in pt1.variables])
-v1=filter(lambda x:pt1.variables[x].ndim==1, [i for i in pt1.variables])
-nhr,nvar,dt=pt1.variables[v3[0]].shape
-nt,nopts=pt1.variables[v2[0]].shape
-for i in xrange(nopts):
-    if pt1.variables[v1[2]][i]==150:
-        print i, [pt1.variables[v1[j]][i] for j in xrange(6)]
-61603 [-49873.54, 63288.062, 150.0, 11.0, 363.0, 19.8]
-61604 [-49839.88, 63373.83, 150.0, 11.0, 363.0, 19.8]
-dd={}
-for i in xrange(len(v2)):
-  a=pt1.variables[v2[i]][0,i2]
-  if a==0:continue
-  print v2[i], a
-  dd.update({v2[i]:a})
-In [66]: (dd['NO']+dd['NO2'])*46./3600.
-Out[66]: 34.51100273980035
-s=0
-for i in ['FPRM','CPRM','FCRS']:
-  s+=dd[i]/3600.
-print s
-2.10400017632
+                                          a
+               POINT SOURCE: CONSTANT DATA
+               -----------------------------
+                                                                                 b          c
+      Source       X         Y       Stack    Base     Stack    Exit  Exit    Bldg.  Emission
+      No.     Coordinate Coordinate Height Elevation Diameter  Vel.  Temp.   Dwash   Rates
+                  (km)      (km)       (m)      (m)       (m)  (m/s) (deg. K)         
+      SO2 SO4 NOX HNO3 NO3 PMS1(fine),PMS2(10)PMS3(coarse)
+      ------   ---------- ---------- ------  ------   -------- ----- -------- ----- --------
+      L0200473PNG1
+      1 ! SRCNAM = 1 !
+      1 ! X =  -32.064, 97.505,  150,      4.7,    11.00,  19.8, 363.0,   .0,   5.440,
+         1.08, 34.511,0.,0., 2.104,0.0,0.0!
+      1 ! ZPLTFM  =      .0 !
+      1 ! FMFAC  =      1.0 !   !END!
+
 --------
 
     a
@@ -1549,38 +1520,38 @@ Source                                                                     a
            every 10 degrees.  LENGTH, XBADJ, and YBADJ are only needed for
            MBDW=2 (PRIME downwash option)
 ------     --------------------------------------------------------------------
- 1    * SRCNAM  =   1 *
- 1    * HEIGHT  =  50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
+      1    * SRCNAM  =   1 *
+      1    * HEIGHT  =  50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
                    50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
                    50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
                    50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
                    50.0,   50.0,   50.0,   50.0,   50.0,   50.0,   
                    50.0,   50.0,   50.0,   50.0,   50.0,   50.0 *
- 1    * WIDTH  =   62.26,   72.64,   80.8,   86.51,   89.59,   89.95,   
+      1    * WIDTH  =   62.26,   72.64,   80.8,   86.51,   89.59,   89.95,   
                    87.58,   82.54,   75.0,   82.54,   87.58,   89.95,   
                    89.59,   86.51,   80.8,   72.64,   62.26,   50.0,   
                    62.26,   72.64,   80.8,   86.51,   89.59,   89.95,   
                    87.58,   82.54,   75.0,   82.54,   87.58,   89.95,   
                    89.59,   86.51,   80.8,   72.64,   62.26,   50.0 *
- 1  *  LENGTH =  82.54,  87.58,  89.95,  89.59,  86.51,  80.80, 
+      1  *  LENGTH =  82.54,  87.58,  89.95,  89.59,  86.51,  80.80, 
                  72.64,  62.26,  50.00,  62.26,  72.64,  80.80, 
                  86.51,  89.59,  89.95,  87.58,  82.54,  75.00, 
                  82.54,  87.58,  89.95,  89.59,  86.51,  80.80, 
                  72.64,  62.26,  50.00,  62.26,  72.64,  80.80, 
                  86.51,  89.59,  89.95,  87.58,  82.54,  75.00 *
- 1  *  XBADJ =  -47.35, -55.76, -62.48, -67.29, -70.07, -70.71, 
+      1  *  XBADJ =  -47.35, -55.76, -62.48, -67.29, -70.07, -70.71, 
                 -69.21, -65.60, -60.00, -65.60, -69.21, -70.71, 
                 -70.07, -67.29, -62.48, -55.76, -47.35, -37.50, 
                 -35.19, -31.82, -27.48, -22.30, -16.44, -10.09, 
                  -3.43,   3.34,  10.00,   3.34,  -3.43, -10.09, 
                 -16.44, -22.30, -27.48, -31.82, -35.19, -37.50 *
- 1  *  YBADJ =   34.47,  32.89,  30.31,  26.81,  22.50,  17.50, 
+      1  *  YBADJ =   34.47,  32.89,  30.31,  26.81,  22.50,  17.50, 
                  11.97,   6.08,   0.00,  -6.08, -11.97, -17.50, 
                 -22.50, -26.81, -30.31, -32.89, -34.47, -35.00, 
                 -34.47, -32.89, -30.31, -26.81, -22.50, -17.50, 
                 -11.97,  -6.08,   0.00,   6.08,  11.97,  17.50, 
                  22.50,  26.81,  30.31,  32.89,  34.47,  35.00 *
-*END*
+      *END*
 
 
 --------
@@ -1632,7 +1603,6 @@ Source                                                                     a
 
 
 ## INPUT GROUPS: 14a, 14b, 14c, 14d -- Area source parameters
---------------------------------
 
 ---------------
 ### Subgroup (14a)
@@ -1662,19 +1632,19 @@ Source                                                                     a
      (If NAR2 > 0, ALL parameter data for
      these sources are read from the file: BAEMARB.DAT)
 
-!END!
+      !END!
 
 ---------------
 ### Subgroup (14b)
 ---------------
-                                     a
-          AREA SOURCE: CONSTANT DATA
-          ----------------------------
-                                                         b
-Source           Effect.    Base      Initial    Emission
- No.             Height   Elevation   Sigma z     Rates
-                   (m)       (m)        (m)      
--------          ------    ------     --------   ---------
+                                          a
+               AREA SOURCE: CONSTANT DATA
+               ----------------------------
+                                                               b
+      Source           Effect.    Base      Initial    Emission
+      No.             Height   Elevation   Sigma z     Rates
+                        (m)       (m)        (m)      
+      -------          ------    ------     --------   ---------
 
 
 --------
@@ -1693,9 +1663,8 @@ Source           Effect.    Base      Initial    Emission
 
            COORDINATES (km) FOR EACH VERTEX(4) OF EACH POLYGON
            --------------------------------------------------------
-Source                                                               a
- No.       Ordered list of X followed by list of Y, grouped by source
-------     ------------------------------------------------------------
+      Source^a
+      No. Ordered list of X followed by list of Y, grouped by source
 
 
 --------
@@ -1705,7 +1674,7 @@ Source                                                               a
 
 
 ---------------
-### Subgroup (14d)
+### Subgroup (14d) Temporal variation of area sources
 ---------------
                                                a
           AREA SOURCE: VARIABLE EMISSIONS DATA
@@ -1742,7 +1711,7 @@ Source                                                               a
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUPS: 15a, 15b, 15c -- Line source parameters
+## INPUT GROUPS: 15 -- Line source parameters
 ---------------------------
 
 ---------------
@@ -1800,19 +1769,19 @@ Source                                                               a
         Average buoyancy parameter (FPRIMEL)        No default   ! FPRIMEL = .0 !
                                                     (in m**4/s**3)
 
-!END!
+      !END!
 
 ---------------
 ### Subgroup (15b)
 ---------------
 
-          BUOYANT LINE SOURCE: CONSTANT DATA
-          ----------------------------------
-                                                                                          a
-Source     Beg. X      Beg. Y      End. X    End. Y     Release    Base        Emission
- No.     Coordinate  Coordinate  Coordinate Coordinate  Height    Elevation      Rates
-            (km)        (km)        (km)       (km)       (m)       (m)          
-------   ----------  ----------  ---------  ----------  -------   ---------    ---------
+               BUOYANT LINE SOURCE: CONSTANT DATA
+               ----------------------------------
+                                                                                                a
+      Source     Beg. X      Beg. Y      End. X    End. Y     Release    Base        Emission
+      No.     Coordinate  Coordinate  Coordinate Coordinate  Height    Elevation      Rates
+                  (km)        (km)        (km)       (km)       (m)       (m)          
+      ------   ----------  ----------  ---------  ----------  -------   ---------    ---------
 
 --------
 
@@ -1862,10 +1831,9 @@ Subgroup (15c)
 -------------------------------------------------------------------------------
 
 
-## INPUT GROUPS: 16a, 16b, 16c -- Volume source parameters
+## INPUT GROUPS: 16 -- Volume source parameters
 ---------------------------
 
----------------
 ### Subgroup (16a)
 ---------------
 
@@ -1894,7 +1862,7 @@ Subgroup (15c)
      (If NVL2 > 0, ALL parameter data for
       these sources are read from the VOLEMARB.DAT file(s) )
 
-!END!
+      !END!
 
 ---------------
 ### Subgroup (16b)
@@ -1958,7 +1926,7 @@ Subgroup (15c)
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUPS: 17a & 17b -- Non-gridded (discrete) receptor information
+## INPUT GROUPS: 17 -- Non-gridded (discrete) receptor information
 -----------------------
 
 ---------------
@@ -1968,8 +1936,8 @@ Subgroup (15c)
      Number of non-gridded receptors (NREC)  No default  !  NREC =  11371 !
      Number of receptor group names (NRGRP)  Default: 0  !  NRGRP =  0   !
 
-!END!
-* RGRPNAM =   X          *   *END*
+      !END!
+      * RGRPNAM =   X          *   *END*
 
 ---------------
 ### Subgroup (17b)

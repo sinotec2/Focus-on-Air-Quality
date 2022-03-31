@@ -303,6 +303,7 @@ for spec in ['PMF','SO2','SO4','NOX']:
   - 因此如果要更換，只能從外部將其暫時對調，待批次執行完畢再換回原來檔案。
 - bin檔案的準備可以詳見[底圖的選擇與自行增加底圖](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/#底圖的選擇與自行增加底圖)
 - 此處刻意選擇較舊的縣市界版本($BIN1)，留存舊台中及高雄市範圍，以增加圖面的解釋資訊。
+
 ### 批次檔模版
 - 此處以sed指令置換模版中的特定變數
 - 模版參照[程式內之批次檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式內之批次檔script-editorbatchfile)撰寫
@@ -350,6 +351,9 @@ TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
 ### demo gif
 - [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
 
+| ![calpuff_PMF.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/calpuff_PMF.PNG)|
+|:-:|
+| <b>CALPUFF模擬結果GIF檔展示畫面</b>|
 
 ## Reference
 - lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019

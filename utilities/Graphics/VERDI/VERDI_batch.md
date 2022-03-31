@@ -144,5 +144,212 @@ done
 - 從命令列啟動editor script file: `run.bat –b [dir][script file]`。不必指定-quit，執行完會自己跳出JAVA程式。
 - **命令列預設**和**editor script**二者無法同時作用。
 
+## 程式外批次檔(CALPUFF結果時間序列圖檔展示)
+
+- /home/cpuff/UNRESPForecastingSystem/Run.sh有關VERDI批次作業的內容
+
+```bash
+today=$(date +%Y%m%d)
+rundate=$(date -d "$today - 1 day" +%Y%m%d)
+...
+  VERDI=/cluster/VERDI/VERDI_1.5.0/verdi.sh
+...
+  ln -sf ../../CALPUFF_OUT/CALPUFF/${rundate}/calpuff.con .
+  ln -sf ../../CALPUFF_INP/calpost.inp .
+  if [ -e calpuff.con.S.grd02 ];then rm calpuff.con.S.grd02*;fi
+  /usr/kbin/con2nc >& /dev/null
+  if ! [ -e calpuff.con.S.grd02.nc];then echo con2avrg fail!; exit 0;fi
+  python ../../Python/join_nc.py
+  python ../../Python/mxNC
+  # link the basemap of VERDI
+  BIN1=/cluster/VERDI/VERDI_1.5.0/plugins/bootstrap/data/twn_county.bin
+  BIN2=/cluster/VERDI/VERDI_1.5.0/plugins/bootstrap/data/map_world.bin
+  ln -sf ${BIN1} ${BIN2}
+  for s in PMF SO2 SO4 NOX;do
+    ss=$s
+    test $s == SO2 && n=1
+    test $s == SO4 && n=2
+    test $s == NOX && n=3
+    test $s == PMF && n=0
+    test $s == PMF && ss=PM10 #total PM25
+    static=_static_topoconcrec0${n}00
+    for ((i=1;i<${numhours};i+=1));do
+      ii=`printf "%02d" $i`
+      i8=$(( $i + 7 ))
+      OUT=${s}${static}$ii
+      TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
+      cp ../../CALPUFF_INP/batch_template.cmd bat.cmd
+      for cmd in "s/TS/"$ii"/g" "s/SPEC/"$ss"/g"  "s/RUNDATE/"$rundate"/g" "s/OUT/"$OUT"/g" "s/TIMESTAMP/"$TSMP"/g";do
+        sed -i $cmd bat.cmd
+      done
+      $VERDI -b bat.cmd>&/dev/null
+    done
+    convert ${s}${static}??.jpg ${s}.gif
+    cp ${s}.gif /var/www/html/LC-GIF-Player/example_gifs
+...
+  BIN1=/cluster/VERDI/VERDI_1.5.0/plugins/bootstrap/data/map_world.bin_old
+  ln -sf ${BIN1} ${BIN2}
+```
+### 輸入檔(.nc)的準備
+- calpuff輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
+  - 程式版本為CALPOST_v7.1.0_L141010
+- 因為是連續執行，calpuff需要讀取初始煙陣濃度(restart)，避免煙流從新計算、濃度瞬間歸0。
+  - 而隔日執行可能遇到機組個數的差異，無法順利接續，只得放棄restart。
+  - 此處改採跨日濃度檔案漸變連接的方式([join_nc.py]())，降低calpuff從0啟動時的誤差，得到較合理的結果。
+  - 漸變採24小時(`nt=24`)、新、舊檔案照小時數正比線性加權方式進行
+
+```python
+kuang@master /home/cpuff/UNRESPForecastingSystem/Python
+$ cat join_nc.py
+#!/cluster/miniconda/envs/unresp/bin/python
+import subprocess, os
+import netCDF4
+import numpy as np
+
+old_date=subprocess.check_output('date -ud "-2 day" +%Y%m%d',shell=True).decode('utf8').strip('\n')
+
+fname='../'+old_date+'/calpuff.con.S.grd02.nc'
+nc0 = netCDF4.Dataset(fname, 'r')
+V=[list(filter(lambda x:nc0.variables[x].ndim==j, [i for i in nc0.variables])) for j in [1,2,3,4]]
+fname='./calpuff.con.S.grd02.nc'
+nc = netCDF4.Dataset(fname, 'r+')
+nt=24
+for v in V[3]:
+  for t in range(nt):
+    var0=nc0[v][t+nt,:,:,:]*(nt-t)/nt
+    var1=nc[v][t,:,:,:]*t/nt
+    nc[v][t,:,:,:]=var0+var1
+```  
+
+### 濃度等級(.cfg)之調整
+- 同一批次的圖面，只能有一個最大值、同一組的濃度等級，以避免gif檔圖面跳動不穩定。
+- .cfg可以參考VERDI提供的樣版檔案，如：
+  - ./data/configs/modis_.5_0.cfg
+  - ./data/configs/o3_Calif_4km.cfg
+  - ./data/configs/o3_10bin.cfg
+  - 範例都是以Newton RGB (AVS)約10層來顯示。
+  - 經證實在`<ColorMap> </ColorMap>`內指定的內容，會被後面`<Step> </Step>`覆蓋，即使ColorMap指定是線性等值區間、最大及最小值，後面的Step數字還是可以作用。
+- 因為濃度等級與nc檔中的最高濃度有關，此處參考[mxNC]()來進行修改，找到最大濃度值之後，產生各個濃度等級的值，寫在`<Step> </Step>`區段內。
+  - 最大濃度
+    - 經試誤以時間平均過後、區域內的最大值為之。可以避免圖面太偏向低濃度、訊息量太少。
+    - VERDI會自動在Footer加註各小時的最大濃度，可以提供足夠的訊息。
+  - 濃度等級
+    - 由於煙流濃度空間變化很大，如果採用線性等級大多數面積處於低濃度狀態而沒有差異。
+    - 此處選擇以log10方式、在最大濃度與0.01之間切割成10等分。
+    - 最後輸出到Step內容時，將其還原成正常值
+- Footer內容的設定
+  - Footer 第1行內設會寫出nc檔案的時間標籤(UTC)，為避免干擾，此處將其關閉，替代以calpuff的模擬日期
+  - 內容在cfg檔案`anl.verdi.plot.config.PlotConfiguration.footer_line_1`的value(`lines[38]`)
+  - 開關在`anl.verdi.plot.config.PlotConfiguration.footer_line_1_auto_text`
+    - true為程式自動刊列UTC時間
+    - false則將列出前述內容。在模版中一次關閉即可。
+
+```python
+kuang@master /home/cpuff/UNRESPForecastingSystem/Python
+$ cat mxNC
+#!/usr/bin/python
+
+import numpy as np
+import netCDF4
+import os,sys,subprocess
+if not sys.warnoptions:
+    import warnings
+    warnings.simplefilter("ignore")
+fname=['calpuff.con.S.grd02.nc']
+rw=['r','r+']
+nc0=netCDF4.Dataset(fname[0],rw[0])
+V=[list(filter(lambda x:nc0.variables[x].ndim==j, [i for i in nc0.variables])) for j in [1,2,3,4]]
+if len(V[3])>0:
+  tt=nc0.variables[V[3][0]].dimensions[0]
+else:
+  tt=nc0.variables[V[2][0]].dimensions[0]
+
+mxv={}
+if len(V[3])>0:
+  for v in V[3]:
+    mxv.update({v:np.max(np.mean(nc0[v][:,:,:,:],axis=0))})
+fname='../../CALPUFF_INP/PM25.cfg'
+with open(fname,'r') as f:
+  lines=[i for i in f]
+line7=lines[7]
+line50=lines[50]
+line38=lines[38] #footer_line_1 value
+date=subprocess.check_output('date -d "-1 day" +"%Y-%m-%d"',shell=True).decode('utf8').strip('\n')
+if 'footer1' not in line38:
+  sys.exit(line38)
+line38=line38.replace('footer1','Based on Operation Rate of '+date)
+for spec in ['PMF','SO2','SO4','NOX']:
+  ss=spec
+  if spec=='PMF':ss='PM10'
+  fname=ss+'.cfg'
+  lines[7]=line7.replace('max=\"0.1\"','max=\"'+str(mxv[ss])+'\"')
+  #min=0.01
+  dc=(np.log10(mxv[ss])+2)/10
+  lines[10]='<Step>0</Step>\n'
+  for i in range(1,11):
+    lines[10+i]='<Step>'+str(10**(dc*i-2))+'</Step>\n'
+  lines[50]=line50
+  lines[38]=line38
+  if spec=='PMF':
+    lines[50]=line50.replace('PPBv','ug/M3')
+  with open(fname,'+w') as f:
+    for line in lines:
+      f.write(line)
+```
+
+### 底圖的修改與應用
+- 幾經改版，VERDI已經放棄在批次檔層級指定底圖了，亦即mapName不再作用。
+  - 固定的內設檔名就是map_world.bin(前述批次檔Run.sh中的變數$BIN2)，
+  - 因此如果要更換，只能從外部將其暫時對調，待批次執行完畢再換回原來檔案。
+- bin檔案的準備可以詳見[底圖的選擇與自行增加底圖](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/#底圖的選擇與自行增加底圖)
+- 此處刻意選擇較舊的縣市界版本($BIN1)，留存舊台中及高雄市範圍，以增加圖面的解釋資訊。
+### 批次檔模版
+- 此處以sed指令置換模版中的特定變數
+- 模版參照[程式內之批次檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式內之批次檔script-editorbatchfile)撰寫
+- imageWidth及imageHeight：如不設定將會有大量範圍是空白。適當調整可以放大圖面、減少空白。
+- 新版VERDI可接受時間步階(ts)直接寫在批次檔內，而不接受將ts寫在物種之後(s:ts)
+- 變數及範圍範例
+  - RUNDATE：20220331
+  - SPEC：SO2、NOX、SO4、PMF
+  - TS：1\~84
+  - OUT：輸出檔名(不必加註附加檔.jpg)
+  - TIMESTAMP：時間標籤。2022-03-31_12:00_LST
+
+
+```bash
+kuang@master /home/cpuff/UNRESPForecastingSystem
+$ cat CALPUFF_INP/batch_template.cmd
+                <Global>
+                configFile=/home/cpuff/UNRESPForecastingSystem/vis/RUNDATE/SPEC.cfg
+                dir=/home/cpuff/UNRESPForecastingSystem/vis/RUNDATE
+                #pattern=*CCTM46*
+                f=calpuff.con.S.grd02.nc
+                saveImage=jpg
+                gtype=tile
+                imageDir=/home/cpuff/UNRESPForecastingSystem/vis/RUNDATE
+                imageWidth=600
+                #imageHeight=500
+                </Global>
+                <Task>
+                s=SPEC[1]
+                ts=TS
+                imageFile=OUT
+                subTitle1=TIMESTAMP
+                </Task>
+```
+### 時間標籤
+- VERDI的時間標籤在Footer，但批次檔不能修改Footer的內容、只能在cfg檔案中關閉、或指定Footer顯示的內容。
+- 不論nc檔案內容的ITZON為何，VERDI的標準時間固定為UTC，因此，如果要以Footer來顯示nc檔的時間標籤，只能遷就UTC。
+- 此處就批次檔能修改的範圍(titleString、subTitle1~2)註明當地時間，而關閉Footer之UTC內容，避免干擾。
+  - sed不接受空格，因此以橫線、底線及冒號填滿
+  - 模擬自`${rundate}`0時UTC開始，因此LST為`$i+7`。
+```bash
+i8=$(( $i + 7 ))
+TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
+```
+### demo gif
+- [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
+
+
 ## Reference
 - lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019

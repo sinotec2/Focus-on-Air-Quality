@@ -41,13 +41,14 @@ last_modified_date: 2022-03-15 10:41:25
   - 應用於不存在背景地圖的新建築物、計畫設施等情況
   - 其結果為直角座標的文字檔，需自行撰寫程式進行旋轉平移。還需設定參考點、同時有該點的經緯度與直角座標值，方能與既有地圖系統重疊。
 - Leaflet數位方案：[單點點選](https://github.com/stefanocudini/leaflet-locationpicker)、[多邊形](https://github.com/banmedo/LeafletDigitizer)範例
-  - 可以搭配open streetmap、open topomap等，版權較無問題。
-  - 直接輸出成KML檔案，方便檢核、讀取、以及後續之計算。
+  - [Leaflet官網](https://leafletjs.com/)已經累積了許多好用的程式庫，可以在互動式地圖平台上加上圖層。
+  - Leaflet可以搭配open streetmap、open topomap等，版權較無問題。
+  - 也直接輸出成KML檔案，方便檢核、讀取、以及後續之計算。
 
 ### 必要之修改
-- 前述banmedo網友提供的範本（[多邊形範例](https://github.com/banmedo/LeafletDigitizer)）中，功能還有待開啟或擴充：
-  - 只有google Image，還需要有open street、open topomap，方便參考並出圖。(Google Map影像具有版權)
-  - 只有開啟Polygon、還需要開啟Marks功能，以利選取個別點位座標。
+- 前述banmedo網友提供的範本（[多邊形範例](https://github.com/banmedo/LeafletDigitizer)）中，已有一些基本的功能，然而還有待開啟、或擴充，項目包括：
+  - 底圖只有google Image(Google Map影像具有版權)，還需要有open street、open topomap等[圖層](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#加入圖層)，方便參考並出圖，尤其是地形([OpenTopoMap](https://wiki.openstreetmap.org/wiki/OpenTopoMap))，對空氣品質的模擬有很重要的參考價值。
+  - 只有開啟Polygon、還需要[開啟Marks功能](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#啟動marks點選)，以利選取個別點位之座標。
 
 ## 成果應用說明
 - CaaS成果位置：[http://114.32.164.198/LeafletDigitizer/](http://114.32.164.198/LeafletDigitizer/)

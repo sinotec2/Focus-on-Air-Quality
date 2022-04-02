@@ -1,0 +1,414 @@
+---
+layout: default
+title: 地面二維軌跡分析
+nav_order: 2
+parent: Trajectory Models
+last_modified_date: 2022-03-31 15:20:02
+---
+
+# 地面二維軌跡分析
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+
+ftuv10.py
+一、前言
+(一) Using UV10 as wind fields to generate trajectories
+Python：
+
+```python
+#!/opt/anaconda3/envs/py37/bin/python
+import bisect
+from datetime import datetime, timedelta
+import netCDF4
+import numpy as np
+import os, sys, subprocess, time, json
+from pandas import *
+from pyproj import Proj
+from scipy import interpolate
+from scipy.io import FortranFile
+from scipy.interpolate import griddata
+import twd97
+
+#get the UVW data from NC files
+#z not interpolated yet
+def get_uvw(ncft,t0,z,y,x):
+  (ncf,tt)=ncft[:]
+  t=1#abs(tt-t0)
+  n0=locate_nest(x,y)
+  #make sure the point is in d1(at least)
+  if n0==-1:
+    return -1
+  iii=int(x//dx[2]+ncol[2]//2)
+  jjj=int(y//dx[2]+nrow[2]//2)
+  kkk=int(z//dz)
+  idx=(t,kkk,jjj,iii)
+  if idx in f: return idx,f
+
+  #loop for every possible nest
+  for n in range(n0,n0-1,-1):
+    ix=int(x//dx[n]+ncol[n]//2)
+    iy=int(y//dx[n]+nrow[n]//2)
+#   print(ix,iy)
+    iz=1 #bisect.bisect_left(zh[n][t1,:,iy,ix],z)
+
+    #the data are stored in the vast, sparce matrix
+    for k in range(max(0,iz-1),min(iz+3,nlay[n])):
+      kk=int(z//dz)
+      for j in range(max(0,iy-1),min(iy+3,nrow[n])):
+        jj=int((j-nrow[n]//2)*fac[n] +nrow[2]//2)
+        for i in range(max(0,ix-1),min(ix+3,ncol[n])):
+          ii=int((i-ncol[n]//2)*fac[n] +ncol[2]//2)
+          if (t,kk,jj,ii) in withdata:continue
+          #average the stagger wind to the grid_points
+          uvwg[0,t,kk,jj,ii]=(ncf[n].variables['U10'][tt,j,i]+ncf[n].variables['U10'][tt,j,i+1])/2.
+          uvwg[1,t,kk,jj,ii]=(ncf[n].variables['V10'][tt,j,i]+ncf[n].variables['V10'][tt,j+1,i])/2.
+          uvwg[2,t,kk,jj,ii]=0.#(ncf[n].variables['W'][tt,k,j,i]+ncf[n].variables['W'][tt,k+1,j,i])/2.
+          #np.where(abs(uvwg)>0) is too slow, remember the locations directly
+          withdata.append((t,kk,jj,ii))
+  wd2=[i[2] for i in withdata]
+  wd3=[i[3] for i in withdata]
+  xx,yy=x_g[wd2,wd3], y_g[wd2,wd3]
+  if n0<3:
+    xx_mesh, yy_mesh=np.arange(min(xx),max(xx)+1,3000),np.arange(min(yy),max(yy)+1,3000)
+    iis,jjs=x_mesh.index(min(xx)),  y_mesh.index(min(yy))
+    iie,jje=x_mesh.index(max(xx))+1,y_mesh.index(max(yy))+1
+    xxg, yyg = np.meshgrid(xx_mesh, yy_mesh)
+    for Lv in range(3):
+      points=[(i,j) for i,j in zip(xx,yy)]
+      grid_z2 = griddata(points, uvwg[Lv,t,kk,wd2,wd3], (xxg, yyg),  method='cubic')      
+      uvwg[Lv,t,kk,jjs:jje,iis:iie]=grid_z2
+  fcn=[]
+#  for Lv in range(3):
+#    try:
+#      fcn.append(interpolate.interp2d(yy, xx, uvwg[Lv,t,kk,wd2,wd3], kind='cubic'))
+#    except:
+#      fcn.append(interpolate.interp2d(yy, xx, uvwg[Lv,t,kk,wd2,wd3], kind='linear'))
+#  f.update({idx:fcn})
+  return idx,f
+
+def locate_nest(x,y):
+    for n in range(1,-1,-1):
+        if xmin[n]<=x<xmax[n] and ymin[n]<=y<ymax[n]:
+            return n
+    return -1
+
+
+def getarg():
+  """ read time period and station name from argument(std input)
+  traj2kml.py -t daliao -d 20171231 """
+  import argparse
+  ap = argparse.ArgumentParser()
+  ap.add_argument("-t", "--STNAM", required=True, type=str, help="station name,sep by ,or Lat,Lon")
+  ap.add_argument("-d", "--DATE", required=True, type=str, help="yyyymmddhh")
+  ap.add_argument("-b", "--BACK", required=True, type=str, help="True or False")
+  args = vars(ap.parse_args())
+  return [args['STNAM'], args['DATE'],args['BACK']]
+
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+def nstnam():
+  import json
+  fn = open(path+'sta_list.json')
+  d_nstnam = json.load(fn)
+  d_namnst = {v: k for k, v in d_nstnam.items()}
+  return (d_nstnam, d_namnst)
+
+
+def beyond(xpp, ypp, zpp, ddt):
+  dday= abs(ddt.total_seconds()/3600/24)
+  boo = not (((xpp - x_mesh[0]) * (xpp - x_mesh[-1]) < 0 and \
+             (ypp - y_mesh[0]) * (ypp - y_mesh[-1]) < 0 and \
+             (zpp - z_mesh[0]) * (zpp - z_mesh[-1]) < 0  ) and \
+                         (dday < 3))
+  return boo
+
+
+#open the NC's for some day (this present day, first time, or next/yesterday)
+def openNC(sdate):
+  gdate=sdate+timedelta(hours=-8)
+  dd=0
+  if gdate.hour<6:dd=-1
+  ymd = (gdate+timedelta(days=dd)).strftime('%Y-%m-%d')
+  fnames=['/Users/Data/cwb/e-service/btraj_WRFnests/CWB_forecast/U10V10_d0'+str(i)+'_'+ymd+'_06:00:00' for i in [1,3]]
+  ncf,mt,mlay,mrow,mcol,dtimes=[],[],[],[],[],[]
+  for fname in fnames:
+    if not os.path.isfile(fname): sys.exit('no file for '+fname)
+    nc1=netCDF4.Dataset(fname,'r')
+    ncf.append(nc1)
+    v3=list(filter(lambda x:nc1.variables[x].ndim==3, [i for i in nc1.variables]))
+    t,row,col=nc1.variables['U10'].shape
+    lay=1
+    for v in 't,lay,row,col'.split(','):
+      exec('m'+v+'.append('+v+')')
+    #get Times in datetime form (local time)
+    dtime=[]
+    for it in range(t):
+      s=''
+      for j in [i.decode('utf-8') for i in nc1.variables['Times'][it,:]]:
+        s+=j
+      dtime.append(datetime.strptime(s,"%Y-%m-%d_%H:00:00")+timedelta(hours=8))
+    if sdate not in dtime:
+      return [[-1] for i in range(6)]
+#sys.exit('Times not right'+ymd)
+    dtimes.append(dtime)
+  return ncf, mt, mlay, mrow, mcol, dtimes
+
+path='/Users/Data/cwb/e-service/surf_trj/'
+# restore the matrix
+
+(d_nstnam, d_namnst) = nstnam()
+stnam, DATE, BACK = getarg()
+BACK=str2bool(BACK)
+BF=-1
+if not BACK:BF=1
+Latitude_Pole, Longitude_Pole = 23.61000, 120.990
+Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
+pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,
+        lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
+
+bdate = datetime(int(DATE[:4]), int(DATE[4:6]), int(DATE[6:8]), int(DATE[8:]))
+nam = [i for i in stnam.split(',')]
+if len(nam) > 1:
+  try:
+    lat = float(nam[0])
+    lon = float(nam[1])
+  except:
+    sys.exit('more than two station, suggest executing iteratively')
+  else:
+    # in case of lat,lon
+    if lat < 90.:
+#      xy0 = twd97.fromwgs84(lat,lon)
+#      x0, y0 =([xy0[i]] for i in [0,1])
+#      x0,y0=x0-Xcent,y0-Ycent
+      x0,y0=pnyc(lon,lat, inverse=False)
+      nam[0] = str(round(lat,2))+'_'+str(round(lon,2))+'_'
+    #   in case of twd97_x,y
+    else:
+      # test the coordinate unit
+      if lat>1000.:
+        x0, y0 = [lat],[lon]
+        x0,y0=x0-Xcent,y0-Ycent
+        nam[0] = str(int(lat/1000))+'+'+str(int(lon/1000))+'_'
+      else:
+        x0, y0 = [lat*1000],[lon*1000]
+        x0,y0=x0-Xcent,y0-Ycent
+        nam[0] = str(int(lat))+'_'+str(int(lon))+'_'
+
+# len(nam)==1, read the location from csv files
+else:
+  for stnam in nam:
+    if stnam not in d_namnst: sys.exit("station name not right: " + stnam)
+  nst = [int(d_namnst[i]) for i in nam]
+  # locations of air quality stations
+  # read from the EPA web.sprx
+  fname = path+'sta_ll.csv'
+  sta_list = read_csv(fname)
+  x0, y0 = [], []
+  for s in nst:
+    sta1 = sta_list.loc[sta_list.ID == s].reset_index(drop=True)
+    xx0,yy0=pnyc(list(sta1['lon'])[0],list(sta1['lat'])[0], inverse=False)
+    x0.append(xx0) #list(sta1['twd_x'])[0]-Xcent)
+    y0.append(yy0) #list(sta1['twd_y'])[0]-Ycent)
+
+#initialization of traj. source, output and label lists
+xp, yp, zp = x0, y0, [50.]
+nc, nt, nlay, nrow, ncol, dtimes0 = openNC(bdate)
+pdate = bdate
+nc0=nc
+nc1=nc
+nlay.append(251)
+nrow.append(nrow[0]*5)
+ncol.append(ncol[0]*5)
+dx=[15000,3000,3000]
+dz=20
+fac=[dx[n]//dx[2] for n in range(3)]
+#_mesh and _g in lamber conifer projection system
+x_mesh = [(i-ncol[2]//2)*dx[2] for i in range(ncol[2])]
+y_mesh = [(j-nrow[2]//2)*dx[2] for j in range(nrow[2])]
+z_mesh = [k*dz for k in range(nlay[2])]
+x_g, y_g = np.meshgrid(x_mesh, y_mesh)
+xmin=[-dx[i]*(int(ncol[i]/2)) for i in range(2)]
+xmax=[ dx[i]*(int(ncol[i]/2)) for i in range(2)]
+ymin=[-dx[i]*(int(nrow[i]/2)) for i in range(2)]
+ymax=[ dx[i]*(int(nrow[i]/2)) for i in range(2)]
+#zh=[]
+#for n in range(2):
+#  ph_n=nc[n].variables['PH'][:,:,:,:]
+#  phb_n=nc[n].variables['PHB'][:,:,:,:]
+#  ph=(ph_n+phb_n)/9.81
+#  zh_n=np.zeros(shape=(nt[n],nlay[n]+1,nrow[n],ncol[n],))
+#  for k in range(nlay[n]):
+#    zh_n[:,k+1,:,:]=ph[:,k+1,:,:]-ph[:,0,:,:]
+#  zh_n=np.clip(zh_n,0.,np.max(zh_n))
+#  zh.append(zh_n)
+
+uvwt=np.zeros(shape=(2,3))      
+delt = 15
+s = 0
+o_ymdh,o_time,o_xp,o_yp,o_zp,l_xp,l_yp,l_zp=[],[],[],[],[],[],[],[]
+itime=0
+ymdh=int(DATE)
+o_ymdh.append('ymd='+DATE+'_'+str(int(round(zp[s],0))))
+o_time.append('hour='+str(itime))
+for i in 'ol':
+  for j in 'xy':
+    exec(i+'_'+j+'p.append('+j+'p[s]+'+j.upper()+'cent)') #
+o_zp.append(zp[s])
+l_zp.append(zp[s])
+IW=0
+#loop for traj as long as in the domain and 24 hours
+while not beyond(xp[s], yp[s], zp[s], pdate-bdate):
+#  print ('run within domain, ymdh=' + str(ymdh))
+#    break
+  t0=dtimes0[0].index(pdate)
+  t1=t0+BF
+  if nt[0]==24:
+    boo=(t1==nt[0])
+  else:
+    boo=(bdate.hour+int(abs((pdate-bdate).total_seconds()/3600))==nt[0])
+  if boo or t1<0:
+    if nt[0]!=24:break
+    sdate = pdate + timedelta(hours=BF)
+    nc1,nt,dnlay,dnrow,dncol, dtimes0 = openNC(sdate)
+    if type(nc1)==int:break
+    if BACK:
+      t1=t1+nt[0]
+    else:
+      t1=0
+
+  f={}
+  withdata=[]
+  uvwg=np.zeros(shape=(3,2,nlay[2],nrow[2],ncol[2],))
+  for sec in range(0, 3601, delt):
+    boo = beyond(xp[s], yp[s], zp[s], pdate-bdate)
+    if boo:
+#      print('beyond TRUE')
+      break
+    for ncft in [(nc0,t0),(nc1,t1)]: 
+      result=get_uvw(ncft,t0,zp[s],yp[s],xp[s])
+      if result==-1:break
+      (tt,kk,jj,ii),f=result[0], result[1]
+      uvwt[tt,:] = [uvwg[i,tt,kk,jj,ii] for i in range(3)]# [f[(tt,kk,jj,ii)][i](yp[s],xp[s]) for i in range(3)] 
+    if result==-1:break
+    fcnt=interpolate.interp1d([0,3600], uvwt,axis=0)
+    ub, vb, wb= fcnt(sec)
+    xp[s], yp[s], zp[s] = xp[s]+BF*delt * ub, yp[s]+BF*delt * vb,  zp[s]+BF*delt * wb
+    l_xp.append(xp[s]+Xcent)    
+    l_yp.append(yp[s]+Ycent)    
+    l_zp.append(zp[s])
+  if result==-1:break
+  pdate = pdate + timedelta(hours=BF)
+  ymdh = int(pdate.strftime('%Y%m%d%H'))
+  itime+=1
+  o_ymdh.append('ymd='+str(ymdh)+'_'+str(int(round(zp[s],0))))
+  o_time.append('hour='+str(itime))
+  o_xp.append(xp[s]+Xcent)
+  o_yp.append(yp[s]+Ycent)
+  o_zp.append(zp[s])
+
+  if pdate not in dtimes0[0]:
+    if nt[0]==24:
+      nc0,nt,dnlay,dnrow,dncol, dtimes0 = openNC(pdate)
+      if type(nc0)==int:break
+      nc1=nc0
+    if nt[0]<24:break
+  df=DataFrame({'ymdh':o_ymdh,'xp':o_xp,'yp':o_yp,'zp':o_zp,'Hour':o_time})
+  #geodetic LL
+  lon, lat = pnyc(np.array(o_xp)-Xcent,np.array(o_yp)-Ycent, inverse=True)
+  dfg=DataFrame({'lon':lon,'lat':lat})
+  
+  col=['xp','yp','Hour','ymdh','zp']
+  dr='f'
+  if BACK:dr='b'
+  name='trj_results/'+dr+'trj'+nam[0]+DATE+'.csv'
+  with open('trj_results/filename.txt','w') as f:
+    f.write(name.split('/')[1])
+  # output the line segments for each delta_t
+  dfL=DataFrame({'TWD97_x':l_xp,'TWD97_y':l_yp,'zp':l_zp})
+  #geodetic LL
+  lon, lat = pnyc(np.array(l_xp)-Xcent, np.array(l_yp)-Ycent, inverse=True)
+  dfLg=DataFrame({'lon':lon,'lat':lat})
+    
+  if IW==0:
+    df[col].set_index('xp').to_csv(name)
+    dfg.set_index('lon').to_csv(name.replace('.csv','_mark.csv'),header=None)
+    dfL.set_index('TWD97_x').to_csv(name.replace('.csv','L.csv'))
+    dfLg.set_index('lon').to_csv(name.replace('.csv','_line.csv'),header=None)
+    IW=1
+  else:
+    df[col].set_index('xp').to_csv(name,mode='a',header=False)
+  o_ymdh.append('ymd='+str(ymdh)+'_'+str(int(round(zp[s],0))))
+  o_time.append('hour='+str(itime))
+  o_xp.append(xp[s]+Xcent)
+  o_yp.append(yp[s]+Ycent)
+  o_zp.append(zp[s])
+
+  if pdate not in dtimes0[0]:
+    if nt[0]==24:
+      nc0,nt,dnlay,dnrow,dncol, dtimes0 = openNC(pdate)
+      if type(nc0)==int:break
+      nc1=nc0
+    if nt[0]<24:break
+  df=DataFrame({'ymdh':o_ymdh,'xp':o_xp,'yp':o_yp,'zp':o_zp,'Hour':o_time})
+  #geodetic LL
+  lon, lat = pnyc(np.array(o_xp)-Xcent,np.array(o_yp)-Ycent, inverse=True)
+  dfg=DataFrame({'lon':lon,'lat':lat})
+  
+  col=['xp','yp','Hour','ymdh','zp']
+  dr='f'
+  if BACK:dr='b'
+  name='trj_results/'+dr+'trj'+nam[0]+DATE+'.csv'
+  with open('trj_results/filename.txt','w') as f:
+    f.write(name.split('/')[1])
+  # output the line segments for each delta_t
+  dfL=DataFrame({'TWD97_x':l_xp,'TWD97_y':l_yp,'zp':l_zp})
+  #geodetic LL
+  lon, lat = pnyc(np.array(l_xp)-Xcent, np.array(l_yp)-Ycent, inverse=True)
+  dfLg=DataFrame({'lon':lon,'lat':lat})
+    
+  if IW==0:
+    df[col].set_index('xp').to_csv(name)
+    dfg.set_index('lon').to_csv(name.replace('.csv','_mark.csv'),header=None)
+    dfL.set_index('TWD97_x').to_csv(name.replace('.csv','L.csv'))
+    dfLg.set_index('lon').to_csv(name.replace('.csv','_line.csv'),header=None)
+    IW=1
+  else:
+    df[col].set_index('xp').to_csv(name,mode='a',header=False)
+    dfg.set_index('lon').to_csv(name.replace('.csv','_mark.csv'),mode='a',header=None)
+    dfL.set_index('TWD97_x').to_csv(name.replace('.csv','L.csv'),mode='a',header=False)
+    dfLg.set_index('lon').to_csv(name.replace('.csv','_line.csv'),mode='a',header=None)
+  o_ymdh,o_time,o_xp,o_yp,o_zp,l_xp,l_yp,l_zp=[],[],[],[],[],[],[],[]
+
+#make kml file
+dir='NL'
+if not BACK:dir='NL'
+os.system('/opt/local/bin/csv2kml.py -f '+name+' -n '+dir+' -g TWD97')
+os.system('/opt/local/bin/csv2bln.cs '+name)
+```
+
+## Usage
+
+```bash
+PY=/Users/Data/cwb/e-service/btraj_WRFnests/ftuv10_5d.py
+cd /Library/WebServer/Documents
+today=$(date +%Y%m%d)
+for t in zhongshan zhongming jiayi qianjin;do
+  $PY -t $t -d ${today}12 -b True
+```

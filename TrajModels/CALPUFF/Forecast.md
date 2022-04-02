@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 濃度預報系統之實現
-nav_order: 3
+nav_order: 5
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
@@ -474,8 +474,10 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 1. 解決自動下載問題(Today目錄下檔案多達366MB)。
 	1. 掛網、加速網站速度流量：委託專業網址。
 	1. 降低圖檔容量：不論背景是topo或者是衛星照片，單一jpg檔案均為0.7~1.2M，如僅有縣市界線應可有效降低。
+	1. (已使用[VERDI批次檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔calpuff結果時間序列圖檔展示)解決)
 2. 點、線、面源模擬分析
 3. 重要點污染源分析
+	1. (已採用opendata之所有火力發電機組運轉實況數據)
 4. 測站時間序列
 6. 臭氧煙陣軌跡
 7. 縮小範圍、增加污染源

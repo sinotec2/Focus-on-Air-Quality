@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 模式應用相關論文
-nav_order: 2
+nav_order: 4
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
@@ -19,6 +19,13 @@ last_modified_date: 2022-03-22 08:56:43
 {:toc}
 </details>
 ---
+
+## User Guides
+- Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (1990). [MODEL FORMULATION AND USER’S GUIDE FOR THE CALPUFF DISPERSION MODEL](https://ww2.arb.ca.gov/sites/default/files/classic/research/apr/past/a025-2a.pdf).
+- Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (2000). [A User’s Guide for the CALPUFF Dispersion Model (version 5)](http://www.src.com/calpuff/download/CALPUFF_UsersGuide.pdf).
+- Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (2011). [CALPUFF Modeling System Version 6 User Instructions](http://www.src.com/calpuff/download/CALPUFF_Version6_UserInstructions.pdf).
+- Exponent, Inc. (2019). [CALPUFF Version 7 Users Guide Addendum](http://www.src.com/calpuff/download/CALPUFF_v7_UserGuide_Addendum.pdf) (No. Doc. no. Z170308064614-0072).
+
 
 ## Evaluations of CALPUFF
 ### Greater Athens Area, Greece(2005)
@@ -63,7 +70,7 @@ When the measurements in residential areas were examined to identify the effect 
 - Demirarslan, K., Doğruparmak, Ş., and Karademir, A. (2017). [Evaluation of three pollutant dispersion models for the environmental assessment of a district in Kocaeli, Turkey](https://www.researchgate.net/publication/321461958_Evaluation_of_three_pollutant_dispersion_models_for_the_environmental_assessment_of_a_district_in_Kocaeli_Turkey). Global Nest Journal 19:37–48.
 
 ### 中國遼寧省本溪市 (2017)
-- Wu, H., Zhang, Y., Yu, Q., and Ma, W. (2017). Application of an integrated WRF/CALPUFF modeling tool for source apportionment of atmospheric pollutants for air quality management: a case study in the urban area of Benxi, China. Journal of the Air & Waste Management Association 68. doi:10.1080/10962247.2017.1391009.
+- Wu, H., Zhang, Y., Yu, Q., and Ma, W. (2017). [Application of an integrated WRF/CALPUFF modeling tool for source apportionment of atmospheric pollutants for air quality management: a case study in the urban area of Benxi, China](https://www.researchgate.net/publication/320342534_Application_of_an_integrated_WRFCALPUFF_modeling_tool_for_source_apportionment_of_atmospheric_pollutants_for_air_quality_management_a_case_study_in_the_urban_area_of_Benxi_China). Journal of the Air & Waste Management Association 68. doi:10.1080/10962247.2017.1391009.
 
 ### Baghdad- Iraq (2019)
 In order to evaluate the accuracy of CALPUFF model for prediction of the pollutants concentration in ambient air at the study area, a comparison conducted between the predicted re-sults of this model and the observed results, which measured by Gzar, (1998) in August 1997. The hourly concentration re-sults of CALPUFF were compared with measured ones at two Cases. The first Case on 23 August was better correlation than the second Case on 25 August 1997, however, it showed good agreement for SO2, CO, and NO2, but for PM2.5 was less agree-ment. 
@@ -133,7 +140,8 @@ Overall, AERMOD better predicted ambient SO2 and NO2 levels than the reported CA
 A numerical simulation system is developed to predict the dispersion of hazardous air pollutants (HAPs) over a populated city due to accidental release. Ulsan, as one of the megacities in Korea, is chosen as an ideal testbed for the simulation, as it is located in complex terrain and hosts a national industrial complex on the outskirts of the city. The system is based on the California puff model (CALPUFF) for simulating a HAP’s dispersion, in which the three-dimensional atmospheric circulation derived from the observed weather station data is specified at a fine horizontal resolution of 200 m. A test scenario is developed for the accidental release of benzene during the daytime and nighttime, respectively, by a fictitious explosion of a storage container, and the injection amount is determined arbitrarily yet comparable to those in the past accidents. In attempting a quantitative assessment and zoning the level of potential risk over the impacted area, multiple simulations have been conducted each day with different hourly varying meteorological conditions in August. The dispersion characteristics of the air pollutant depend largely on the local wind patterns that vary substantially from day to day. Nevertheless, the composite analysis sufficiently identifies the impacted area by the HAP’s dispersion due to the local prevailing wind such as the land–sea breeze circulation. An immediate hazardous area is determined based on the vulnerability map constructed by zoning the level of risk determined by the spatial distribution of the HAPs’ concentration and the harmfulness standard to the human body.
 - Kim, G., Lee, M.-I., Lee, S., Choi, S.-D., Kim, S.-J., and Song, C.-K. (2020). [Numerical Modeling for the Accidental Dispersion of Hazardous Air Pollutants in the Urban Metropolitan Area](https://www.mdpi.com/2073-4433/11/5/477). Atmosphere 11 (5):477. doi:10.3390/atmos11050477.
 
-### Great Mendoza, Argentina.
+### Great Mendoza, Argentina (2020)
+Determinations of atmospheric concentrations of four POPs (DDTs, HCB, PCBs, PBDEs) using PUFs in eleven sites of the study area are presented. Furthermore, the atmospheric dispersion of selected POPs was simulated using the WRF/CALMET/CALPUFF modeling system [23,24], based on a high-resolution emission inventory previously elaborated by the authors, for the same compounds determined analytically in the PUFs [6]. The implemented model also served as a tool to evaluate the emission inventory mentioned above.
 - Ruggeri, M.F., Lana, N.B., Altamirano, J.C., Puliafito, S.E. (2020). [Spatial distribution, patterns and source contributions of POPs in the atmosphere of Great Mendoza using the WRF/CALMET/CALPUFF modelling system](https://doi.org/10.1016/j.emcon.2020.02.002). Emerging Contaminants 6, 103–113. 
 
 

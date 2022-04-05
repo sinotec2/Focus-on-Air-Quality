@@ -4,7 +4,7 @@ title: calpuff.inp from V7.0 eg
 nav_order: 4
 parent: CALPUFF
 grand_parent: Trajectory Models
-last_modified_date: 2022-03-22 08:56:43
+last_modified_date: 2022-04-05 14:28:18
 ---
 
 # 由7.0版範例編輯calpuff.inp
@@ -21,9 +21,14 @@ last_modified_date: 2022-03-22 08:56:43
 ---
 
 ## 背景
+- 由[官方網站](http://www.src.com/calpuff/download/download.htm)提供的控制檔範例開始編輯，是一個穩妥的方案。畢竟大多數設定已經通過測試。
+   - 目前官網提供的是7.3.1版，以下範例是7.1.0版
+- 主要編輯的內容是臺灣地區的座標系統是TWD系統，有別於一般常用的UTM系統，如果有外島、或範圍超過2度範圍(如執行WRF)，也無法適用TWD，必須改用LCC系統。
+- 離散接受點的設定，也必須視使用者的需要而更改。
 
 ## 時間與空間架構
 
+### [起訖時間](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-1--general-run-control-parameters)
 - [METRUN](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#run-all-periods)
 
 ```bash
@@ -149,3 +154,6 @@ diff calpuff_7.0.inp calpuff.inp
 ---
 >      Number of non-gridded receptors (NREC)  No default  !  NREC =   0   !
 ```
+
+## 編輯後檔案下載點
+- [githup.io](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/calpuff.inp)

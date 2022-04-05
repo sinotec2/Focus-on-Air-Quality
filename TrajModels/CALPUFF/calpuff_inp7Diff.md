@@ -120,6 +120,7 @@ diff calpuff_7.0.inp calpuff.inp
 - 輸出網格範圍
    - 原本輸出10～80、10～70之部分網格
    - 改為全部輸出
+   
 ```bash
 908c908
 <         X index of LL corner (IBSAMP)      No default     ! IBSAMP =  10   !
@@ -143,6 +144,7 @@ diff calpuff_7.0.inp calpuff.inp
 ## 化學設定
 - 臭氧值設定方式([MOZ](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-11--chemistry-parameters))
    - 取消讀取測站逐時值，該以月均值。
+
 ```bash
 1279c1279
 <      Ozone data input option (MOZ)     Default: 1            ! MOZ =  1   !

@@ -23,6 +23,7 @@ last_modified_date: 2022-04-05 14:28:18
 ## 背景
 - 由[官方網站](http://www.src.com/calpuff/download/download.htm)提供的控制檔範例開始編輯，是一個穩妥的方案。畢竟大多數設定已經通過測試。
    - 目前官網提供的是7.3.1版，以下範例是7.1.0版
+   - 各版次差異詳見[官網說明](http://www.src.com/)。
 - 主要編輯的內容是臺灣地區的座標系統是TWD系統，有別於一般常用的UTM系統，如果有外島、或範圍超過2度範圍(如執行WRF)，也無法適用TWD，必須改用LCC系統。
 - 離散接受點的設定，也必須視使用者的需要而更改。
 
@@ -116,8 +117,32 @@ diff calpuff_7.0.inp calpuff.inp
 ---
 >         Y index of UR corner (JECOMP)      No default     ! JECOMP = 137   !
 ```
+- 輸出網格範圍
+   - 原本輸出10～80、10～70之部分網格
+   - 改為全部輸出
+```bash
+908c908
+<         X index of LL corner (IBSAMP)      No default     ! IBSAMP =  10   !
+---
+>         X index of LL corner (IBSAMP)      No default     ! IBSAMP =  1   !
+911c911
+<         Y index of LL corner (JBSAMP)      No default     ! JBSAMP =  10   !
+---
+>         Y index of LL corner (JBSAMP)      No default     ! JBSAMP =  1   !
+915c915
+<         X index of UR corner (IESAMP)      No default     ! IESAMP =  80   !
+---
+>         X index of UR corner (IESAMP)      No default     ! IESAMP =  83   !
+918c918
+<         Y index of UR corner (JESAMP)      No default     ! JESAMP =  70   !
+---
+>         Y index of UR corner (JESAMP)      No default     ! JESAMP = 137   !
+
+```
+
 ## 化學設定
 - 臭氧值設定方式([MOZ](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-11--chemistry-parameters))
+   - 取消讀取測站逐時值，該以月均值。
 ```bash
 1279c1279
 <      Ozone data input option (MOZ)     Default: 1            ! MOZ =  1   !
@@ -126,6 +151,7 @@ diff calpuff_7.0.inp calpuff.inp
 ```
 ## 排放設定
 - [點源位置及其條件](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#subgroup-13b-constant-emissions)
+   - 假設為台中電廠位置
 
 ```bash
 1797c1797
@@ -147,6 +173,7 @@ diff calpuff_7.0.inp calpuff.inp
 ```
 ## 接受點
 - 離散接受點([NREC](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#subgroup-17a-number-of-receptors))
+   - 關閉離散接受點，直接分析calpuff.con網格濃度檔案
 
 ```bash
 2569c2569

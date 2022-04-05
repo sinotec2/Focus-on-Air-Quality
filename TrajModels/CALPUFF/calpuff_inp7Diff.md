@@ -184,3 +184,12 @@ diff calpuff_7.0.inp calpuff.inp
 
 ## 編輯後檔案下載點
 - [githup.io](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/calpuff.inp)
+
+## 執行結果
+- 下載CALPOST結果grd檔案
+- 使用[http://114.32.164.198/dat2kml.html](http://114.32.164.198/dat2kml.html)進行轉檔
+- 將kml檔案貼到google map結果
+
+| ![cpuff_result.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_result.png)|
+|:--:|
+| <b>cpuff 模擬台中電廠PM10增量濃度結果範例</b>|

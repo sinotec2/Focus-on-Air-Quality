@@ -2,7 +2,7 @@
 layout: default
 title: calmet.inp
 nav_order: 2
-parent: CALPUFF
+parent: CALMET
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
 ---

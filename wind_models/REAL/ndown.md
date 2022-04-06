@@ -71,8 +71,9 @@ last_modified_date: 2022-02-19 17:56:21
 		1. 調整機制是否有錯!可否直接用EPAst之obs_domain
 - Attainment Comparison
  
-｜｜OB_TMP｜GE_TMP ｜ OB_WS ｜  GE_WS  ｜ OB_WD ｜  GE_WD｜
-｜obs_domain｜73.0%  ｜ 46.6% ｜  89.7% ｜  34.5% ｜  81.0%  ｜ 89.7%  ｜ 96.6%｜
+|Case|Overall Attainment|OB_TMP|GE_TMP| OB_WS|GE_WS|OB_WD|GE_WD|
+|-|-|-|-|-|-|-|-|
+|obs_domain|73.0%  | 46.6% |  89.7% |  34.5% |  81.0%  | 89.7%  | 96.6%|
 |ndown|62.4%  |   48.3%  |  89.7% | 13.8%  | 46.6%  |   79.3%  |   96.6%|
 
 - only nest 4 所需時間(2013/10/08~10共72hr)

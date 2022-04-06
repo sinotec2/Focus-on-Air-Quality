@@ -348,6 +348,12 @@ $ cat CALPUFF_INP/batch_template.cmd
 i8=$(( $i + 7 ))
 TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
 ```
+
+### Parallel Execution of VERDI 
+- 如前所述，重複進入java、產生圖檔、退出、再進入，實為一耗費資源的過程，但似乎目前也沒有更好的解決方案。(如果要在每一張圖面上標上特定的時間標籤)
+- java程式本身具有多工的能力，經觀察，單一java程式可以使用到2個核心的CPU。
+  - 如果工作站核心數較多，可以考慮同步進行VERDI，以節省時間。
+
 ### demo gif
 - [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
 

@@ -1,16 +1,16 @@
 ---
 layout: default
-title: CALPUFF
+title: CALMET
 nav_order: 1
 has_children: true
 parent: Trajectory Models
-permalink: /TrajModels/CALPUFF
+permalink: /TrajModels/CALMET
 ---
 
-# CALPUFF
+# CALMET
 {: .no_toc }
 
-CALPUFF的複雜度基本上是介於煙流模式與網格模式之間，國外也有不少應用在電廠的長程傳輸、山區的能見度衝擊、以及海陸交替地區複雜風場情況下的健康風險評估。
+這裡介紹CALPUFF的氣象前處理方式，包括由mm5/wrf所產生的數值模擬結果應用、以及由觀測數據綜整的方式。
 
 {: .fs-6 .fw-300 }
 

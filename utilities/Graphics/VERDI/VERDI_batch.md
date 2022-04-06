@@ -3,7 +3,7 @@ layout: default
 title:  VERDI的批次作業
 parent: VERDI
 grand_parent: Graphics
-last_modified_date: 2022-03-19 20:13:11
+last_modified_date: 2022-04-06 11:41:04
 ---
 
 # VERDI的批次作業

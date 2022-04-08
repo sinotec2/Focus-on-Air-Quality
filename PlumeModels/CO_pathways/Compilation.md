@@ -241,3 +241,6 @@ for f in modules grsm aermod setup coset soset reset meset ouset\
 done
 gfortran -o iscst3.exe $LINK_FLAGS *.o
 ```
+
+## Reference
+- [交大白曛綾教授空氣品質影響之預測](http://ocw.nctu.edu.tw/course/arm071/Chapter%207.pdf)

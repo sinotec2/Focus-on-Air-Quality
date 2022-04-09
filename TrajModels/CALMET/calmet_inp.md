@@ -29,15 +29,13 @@ CALMET.INP      2.1
     1 km resolution CALMET simulation for 4 hours from 5AM January 9, 1990  with MM4 data, 5 surface met stations, 1 overwater station,
 
     3 upper air met stations, and 16 precip stations
----------------- 
-Run title (3 lines) 
-
-------------------------------------------
+    ---------------- 
+    Run title (3 lines) 
+    ------------------------------------------
 
                     CALMET MODEL CONTROL FILE
                     --------------------------
-
--------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------
 
 ## INPUT GROUP: 0 -- Input and Output File Names
 
@@ -56,23 +54,23 @@ Run title (3 lines)
 |CALMET.DAT|    output|   ! METDAT=CALMET.DAT    !|
 |PACOUT.DAT|    output|   * PACDAT=            *|
 
-All file names will be converted to lower case if LCFILES = T
+    All file names will be converted to lower case if LCFILES = T
 
-Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
+    Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
 
          T = lower case      ! LCFILES = T !
          F = UPPER CASE
 
-NUMBER OF UPPER AIR & OVERWATER STATIONS:
+    NUMBER OF UPPER AIR & OVERWATER STATIONS:
 
-    Number of upper air stations (NUSTA)  No default     ! NUSTA =  0  !
-    Number of overwater met stations
-                                 (NOWSTA) No default     ! NOWSTA = 0  !
-    Number of MM4/MM5/M3D.DAT files
-                                 (NM3D) No default       ! NM3D =  1  !
+        Number of upper air stations (NUSTA)  No default     ! NUSTA =  0  !
+        Number of overwater met stations
+                                    (NOWSTA) No default     ! NOWSTA = 0  !
+        Number of MM4/MM5/M3D.DAT files
+                                    (NM3D) No default       ! NM3D =  1  !
 
-    Number of IGF-CALMET.DAT files
-                                 (NIGF)   No default     ! NIGF =  0  !
+        Number of IGF-CALMET.DAT files
+                                    (NIGF)   No default     ! NIGF =  0  !
 
                        !END!
 --------------------------------------------------------------------------------
@@ -113,12 +111,12 @@ NUMBER OF UPPER AIR & OVERWATER STATIONS:
 |TEST.SLP  |    output   |  * TSTSLP=                  *|
 
 --------------------------------------------------------------------------------
-NOTES: 
-1. File/path names can be up to 70 characters in length
-2. Subgroups (a) and (d) must have ONE 'END' (surround by
-           delimiters) at the end of the group
-3. Subgroups (b) and (c) must have an 'END' (surround by
-           delimiters) at the end of EACH LINE
+    NOTES: 
+    1. File/path names can be up to 70 characters in length
+    2. Subgroups (a) and (d) must have ONE 'END' (surround by
+            delimiters) at the end of the group
+    3. Subgroups (b) and (c) must have an 'END' (surround by
+            delimiters) at the end of EACH LINE
 
                          !END!
 

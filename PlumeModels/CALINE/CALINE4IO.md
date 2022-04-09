@@ -6,7 +6,7 @@ grand_parent: Plume Models
 nav_order: 2
 last_modified_date: 2022-04-08 15:30:32
 ---
-# *CALINE4*的標準輸入輸出
+# *CALINE4*的標準輸入及3/4版轉換
 {: .no_toc }
 
 <details open markdown="block">
@@ -139,10 +139,13 @@ Oxford
 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
 0.0 1.0 7 1000.0 15.0 3.0 0.0
 ```
-## 讀取程式
-- 讀取界面結果.dat檔案的python程式[rd_dat.py](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/rd_dat.py)
+## 轉換程式
+- 界面程式CL4結果.dat檔案，原本是為輸入*CALINE4*，但因該程式無法在64位元電腦執行，只能使用*CALINE3*來執行，過程需轉換格式。
+- python程式可由github.io下載（[rd_dat.py](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/rd_dat.py)）
   - 依照前述段落順序、依序讀取模式各項變數
   - NR、NL、NM必須轉成整數
+  - 需注意*CALINE3*/4版間的定義差異（詳下述）
+
 ### 執行方式
 
 ```bash
@@ -153,7 +156,7 @@ python rd_dat.py central_campus.dat
 ../CALINE3/caline3 <central_campus3.INP >central_campus3.OUT 
 ```
 
-### 2版CALINE輸入的差異
+### 3、4版CALINE輸入的差異
 
 ||CALINE3|CALINE4|
 |-|-|-|
@@ -219,7 +222,7 @@ with open(fnameO,'w') as f:
     f.write(l)
 ```
 
-## CALINE3 執行CL4 .dat之結果範例
+## *CALINE3* 執行CL4 .dat之結果範例
 ```
 $ cat central_campus3.OUT
 1                     CALINE3              (DATED 12317)

@@ -143,34 +143,220 @@ Oxford
 - 讀取界面結果.dat檔案的python程式[rd_dat.py](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/rd_dat.py)
   - 依照前述段落順序、依序讀取模式各項變數
   - NR、NL、NM必須轉成整數
+### 執行方式
+
+```bash
+#.dat轉成.INP
+python rd_dat.py central_campus.dat
+
+#執行CALINE3
+../CALINE3/caline3 <central_campus3.INP >central_campus3.OUT 
+```
+
+### 2版CALINE輸入的差異
+
+||CALINE3|CALINE4|
+|-|-|-|
+|ATIM|min|hour|
+|TYP|AG,DP,FL,BR|1~4|
+|CLAS|1~6|1~7|
+
+### code listing
 
 ```python
 import numpy as np
-with open('central_campus.dat','r') as f:
-    lines=[i.strip('\n') for i in f]
+import fortranformat as ff
+import sys
+
+fnameI=sys.argv[1]
+fnameO=fnameI.replace('.dat','3.INP')
+with open(fnameI,'r') as f:
+  lines=[i.strip('\n') for i in f]
 job=lines[0].strip(' ')
 z0,mw,vs,vd,NR,NL,ATIM,SCAL,NM,ASL=[float(i) for i in lines[2].split()]
 NR,NL,NM=[int(i) for i in [NR,NL,NM]]
 recp=[lines[i] for i in range(3,NR+3)]
 xr,yr,zr=np.zeros(shape=NR),np.zeros(shape=NR),np.zeros(shape=NR)
 for i in range(NR):
-    xr[i],yr[i],zr[i]=[float(j) for j in lines[3+NR+i].split()]
+  xr[i],yr[i],zr[i]=[float(j) for j in lines[3+NR+i].split()]
 lnks=[lines[i] for i in range(NR*2+3,NR*2+3+NL)]
 for var in 'X1,Y1,X2,Y2,H,W,CBMl,CBMr,D'.split(','):
-    exec(var+'=np.zeros(shape=NL)')
+  exec(var+'=np.zeros(shape=NL)')
 istr=NR*2+3+NL
 iend=istr+NL
 for var in 'TYP,X1,Y1,X2,Y2,H,W,CBMl,CBMr,D'.split(','):
-    exec(var+'=np.zeros(shape=NL)')
+  exec(var+'=np.zeros(shape=NL)')
 for i in range(NL):
-    TYP[i],X1[i],Y1[i],X2[i],Y2[i],H[i],W[i],CBMl[i],CBMr[i],D[i]=[float(j) for j in lines[istr+i].split()]
+  TYP[i],X1[i],Y1[i],X2[i],Y2[i],H[i],W[i],CBMl[i],CBMr[i],D[i]=[float(j) for j in lines[istr+i].split()]
+dtyp={1:'AG',2:'DP',3:'FL',4:'BR'}
+TYP=[dtyp[int(i)] for i in TYP] #change int to A2
+ATIM*=60. #change hour to min
 run=lines[iend]
 VPH=[float(i) for i in lines[iend+1].split()]
 EMF=[float(i) for i in lines[iend+2].split()]
 for var in 'U,BRG,CLAS,MIXH,SIGM,AMB,T'.split(','):
-    exec(var+'=np.zeros(shape=NM)')
+  exec(var+'=np.zeros(shape=NM)')
 istr=iend+3
 iend=istr+NM
 for i in range(NM):
-    U[i],BRG[i],CLAS[i],MIXH[i],SIGM[i],AMB[i],T[i]=[float(j) for j in lines[istr+i].split()]
+  BRG[i],U[i],CLAS[i],MIXH[i],SIGM[i],AMB[i],T[i]=[float(j) for j in lines[istr+i].split()]
+CLAS=[min([6,i]) for i in CLAS]
+
+#1:SITE VARIABLES, 2:RECEPTOR LOCATIONS, 3:RUN CASE, 4:LINK VARIABLES, 5:MET CONDITIONS
+fmt=['A40,2F4.0,2F5.0,I2,F10.0','A12,8X,3F10.0',  'A40,2I3',  'A8,12X,A2,4F7.0,F8.0,3F4.0',      'F3.0,F4.0,I1,F6.0,F4.0']
+var=[(job,ATIM,z0,vs,vd,NR,SCAL),(recp,xr,yr,zr),(run,NL,NM),(lnks,TYP,X1,Y1,X2,Y2,VPH,EMF,H,W),(U,BRG,CLAS,MIXH,AMB)]
+nln=[1,NR,1,NL,NM]
+lns=[]
+for ig in range(5):
+  w_line = ff.FortranRecordWriter(fmt[ig])
+  if ig in [0,2]:
+    lns.append(w_line.write([v for v in var[ig]])+'\n')
+  else:
+    for l in range(nln[ig]):
+      lns.append(w_line.write([v[l] for v in var[ig]])+'\n')
+with open(fnameO,'w') as f:
+  for l in lns:
+    f.write(l)
+```
+
+## CALINE3 執行CL4 .dat之結果範例
+```
+$ cat central_campus3.OUT
+1                     CALINE3              (DATED 12317)
+0                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  1
+
+
+      JOB:                           Central Campus             RUN:                        31101Hour 1      
+
+
+
+        I.  SITE VARIABLES
+
+
+       U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+     BRG =   0. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+       II.  LINK VARIABLES
+
+
+        LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                             *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+    -------------------------*--------------------------------*-------------------------------------------------------
+    A. Fuller                *    347.   1896.    860.   1662.*      564.      115.      AG   2995.  10.0   0.0  16.0
+    B. State                 *    464.   1820.    439.    396.*     1424.      181.      AG    481.  10.0   0.0  16.0
+    C. Catherin              *    461.   1460.    977.   1460.*      516.       90.      AG    776.  10.0   0.0  16.0
+    D. Ann                   *    458.   1370.   1151.   1375.*      693.       90.      AG    330.  10.0   0.0  16.0
+    E. Huron                 *    456.   1272.    977.   1288.*      521.       88.      AG   1025.  10.0   0.0  16.0
+    F. Washingt              *    456.   1192.    712.   1192.*      256.       90.      AG    515.  10.0   0.0  16.0
+    G. N. Unive              *    456.   1031.    794.   1031.*      338.       90.      AG    523.  10.0   0.0  16.0
+    H. Washtena              *    794.   1031.   1509.    254.*     1056.      137.      AG   1835.  10.0   0.0  16.0
+    I. S. Unive              *    450.    690.   1479.    682.*     1029.       90.      AG    436.  10.0   0.0  16.0
+    J. Hill                  *    439.    396.   1345.    428.*      907.       88.      AG    963.  10.0   0.0  16.0
+    K. Fletcher              *    709.   1277.    709.   1031.*      246.      180.      AG    801.  10.0   0.0  16.0
+    L. E. Unive              *    794.    685.    794.    232.*      453.      180.      AG    653.   0.0   0.0  16.0
+    M. Church                *    890.    928.    884.    232.*      696.      180.      AG    700.   0.0   0.0  16.0
+    N. S. Fores              *    971.    235.    977.   1460.*     1225.        0.      AG    647.   0.0   0.0  16.0
+    O. Observat              *   1151.   1375.   1149.    898.*      477.      180.      AG   1059.   0.0   0.0  16.0
+    P. Geddes                *   1149.    898.   1487.    767.*      362.      111.      AG    823.   0.0   0.0  16.0
+    Q. E. Med.               *   1149.   1285.   1460.   1288.*      311.       89.      AG   1080.   0.0   0.0  16.0
+    R. Glen-Sec              *    832.   1460.    860.   1662.*      204.        8.      AG   1325.   0.0   0.0  16.0
+    S. Glen-Sec              *    860.   1662.   1051.   1765.*      217.       62.      AG   1325.   0.0   0.0  16.0
+    T. Oxford                *   1487.    761.   1449.    317.*      446.      185.      AG    413.   0.0   0.0  16.0
+```
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  2
+
+
+      JOB:                           Central Campus             RUN:                        31101Hour 1      
+
+
+
+        I.  SITE VARIABLES
+
+
+       U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+     BRG =   0. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+
+
+      III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                             *                               *  TOTAL
+                             *        COORDINATES (M)        *  + AMB
+        RECEPTOR             *      X        Y        Z      *  (PPM)
+    -------------------------*-------------------------------*--------
+     1.     Universi         *     1296.    1555.      2.0   *   3.0
+     2.     Kresge           *     1045.    1394.      2.0   *   3.0
+     3.     Frieze           *      508.    1206.      2.0   *   3.3
+     4.     Rackham          *      639.    1209.      2.0   *   3.3
+     5.     Power Pl         *      911.    1192.      2.0   *   3.1
+     6.     Mary Mar         *     1302.    1201.      2.0   *   3.0
+     7.     Hill Aud         *      578.    1045.      2.0   *   3.2
+     8.     Dental S         *      786.    1067.      2.0   *   3.2
+     9.     Mosher J         *     1130.    1100.      2.0   *   3.0
+    10.     Angell H         *      513.     827.      2.0   *   3.2
+    11.     CC Littl         *      827.     876.      2.0   *   3.4
+    12.     West Hal         *      778.     715.      2.0   *   3.1
+    13.     East Hal         *      843.     720.      2.0   *   3.3
+    14.     Michigan         *      387.     674.      2.0   *   3.1
+    15.     Social W         *      761.     608.      2.0   *   3.2
+    16.     Law Quad         *      548.     630.      2.0   *   3.2
+    17.     Buisines         *      668.     461.      2.0   *   3.1
+    18.     East Qua         *      851.     472.      2.0   *   3.2
+    19.     Trotter          *     1228.     614.      2.0   *   3.1
+    20.     Wallace          *     1473.     619.      2.0   *   3.0
+```
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  3
+
+
+      JOB:                           Central Campus             RUN:                        31101Hour 1      
+
+
+
+        I.  SITE VARIABLES
+
+
+       U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+     BRG =   0. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+
+
+       IV.  MODEL RESULTS (RECEPTOR-LINK MATRIX)
+
+
+                             *
++                                                                           CO/LINK
+                             *                                               (PPM)
+        RECEPTOR             *   A    B    C    D    E    F    G    H    I    J    K    L    M    N    O    P    Q    R    S    T
+    -------------------------*
++                             ------------------------------------------------------------------------------------------------------
+     1.     Universi         *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     2.     Kresge           *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     3.     Frieze           *  0.1  0.0  0.1  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     4.     Rackham          *  0.1  0.0  0.1  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     5.     Power Pl         *  0.0  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     6.     Mary Mar         *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     7.     Hill Aud         *  0.1  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     8.     Dental S         *  0.1  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+     9.     Mosher J         *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    10.     Angell H         *  0.1  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    11.     CC Littl         *  0.1  0.0  0.0  0.0  0.1  0.0  0.0  0.2  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    12.     West Hal         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    13.     East Hal         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.2  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    14.     Michigan         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    15.     Social W         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    16.     Law Quad         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    17.     Buisines         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    18.     East Qua         *  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    19.     Trotter          *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+    20.     Wallace          *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+(base) 
 ```

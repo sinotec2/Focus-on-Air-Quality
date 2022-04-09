@@ -1,7 +1,7 @@
 ---
 layout: default
 title: calpuff.inp from V7.0 eg
-nav_order: 3
+nav_order: 4
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-04-05 14:28:18
@@ -120,7 +120,7 @@ diff calpuff_7.0.inp calpuff.inp
 - 輸出網格範圍
    - 原本輸出10～80、10～70之部分網格
    - 改為全部輸出
-   
+      
 ```bash
 908c908
 <         X index of LL corner (IBSAMP)      No default     ! IBSAMP =  10   !

@@ -22,14 +22,15 @@ last_modified_date: 2022-04-08 15:30:32
 ## 背景
 - 執行CALINE3模式不必設定檔案，全部的數據都以標準輸入(standard input)方式，以**<**符號飼入程式。輸出數據也是以standard out形式，需以**>**指引到指定的檔名。
 - CALINE3模式沒有複雜的氣象檔案，但是對於線源的設定有別於其他煙流模式，需要進一步說明。
-- CALINE3有圖形界面版本([CALINE4]())。使用手冊可自[官網](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/other/caline3/caline3-unabridged.pdf)下載。
+- CALINE3有圖形界面版本([CALINE4]())。
+- 使用手冊可自[官網](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/other/caline3/caline3-unabridged.pdf)下載。
 
 ## 輸入檔範例
-1. 一般設定：JOB(title)、ATIM(平均時間、分鐘)、z0(粗糙度cm)、Vs(沉降速cm/s)、Vd(沉積速度cm/s)、NR(接受點個數)、SCAL(座標、高、寬度等轉換系數1/m)
+1. 一般設定：JOB(title)、ATIM(平均時間、分鐘)、z0(粗糙度cm)、Vs(沉降速cm/s)、Vd(沉積速度cm/s)、NR(接受點個數)、SCAL(座標、高、寬度等轉換系數m)
 1. 各接受點位置：名稱、X、Y、Z
 1. 批次訊息：RUN(title)、NL(路段數)、NM(氣象條件筆數)
 1. 路段訊息：道路類型(路堤AG、填平FL、路塹DP、橋樑BR)、(XL1,YL1)、(XL2,YL2)路段端點座標、VPHL(流量veh/hr)、EFL(排放係數g/mile)、HL(排放源高度)、WL(混合區寬度)
-1. 氣象個案：U(風速m/s)、BRG(正Y方向之夾角0\~360度)、CLAS(穩定度1\~6)
+1. 氣象個案：U(風速m/s)、BRG(正Y方向之夾角0\~360度)、CLAS(穩定度1~6)、背景濃度(PPM)
 
 ### 範例1
 - 同一路段、同一接受點、

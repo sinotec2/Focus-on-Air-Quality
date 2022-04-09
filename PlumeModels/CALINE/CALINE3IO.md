@@ -27,16 +27,16 @@ last_modified_date: 2022-04-08 15:30:32
 
 ## 輸入檔範例
 - *CALINE3*為舊式[fortran固定格式](http://homepage.ntu.edu.tw/~weitingc/fortran_lecture/Lecture_F_File_IO_Format.pdf)的輸入方式
-1. 一般設定：JOB(title)、ATIM(平均時間、分鐘)、z0(粗糙度cm)、Vs(沉降速cm/s)、Vd(沉積速度cm/s)、NR(接受點個數)、SCAL(座標、高、寬度等轉換系數m)
+- 一般設定：JOB(title)、ATIM(平均時間、分鐘)、z0(粗糙度cm)、Vs(沉降速cm/s)、Vd(沉積速度cm/s)、NR(接受點個數)、SCAL(座標、高、寬度等轉換系數m)
   - '(A40,2F4.0,2F5.0,I2,F10.0)'
-1. 各接受點位置：名稱、X、Y、Z
+- 各接受點位置：名稱、X、Y、Z
   - '(A20,3F10.0)'
-1. 批次訊息：RUN(title)、NL(路段數)、NM(氣象條件筆數)
+- 批次訊息：RUN(title)、NL(路段數)、NM(氣象條件筆數)
   - '(A40,2I3)'
-1. 路段訊息：道路類型(路堤AG、填平FL、路塹DP、橋樑BR)、(XL1,YL1)、(XL2,YL2)路段端點座標、VPHL(流量veh/hr)、EFL(排放係數g/mile)、HL(排放源高度)、WL(混合區寬度)
-  - '(A20,I2,4F7.0,F8.0,3F4.0)'
-  - 路段座標只有7格無法容納TWD座標值（南北向7碼加小數點至少8格，需修改原始碼或輸入整數值）
-1. 氣象個案：U(風速m/s)、BRG(正Y方向之夾角0\~360度)、CLAS(穩定度1~6)、背景濃度(PPM)
+- 路段訊息：道路類型(路堤AG、填平FL、路塹DP、橋樑BR)、(XL1,YL1)、(XL2,YL2)路段端點座標、VPHL(流量veh/hr)、EFL(排放係數g/mile)、HL(排放源高度)、WL(混合區寬度)
+  - '(A20,A2,4F7.0,F8.0,3F4.0)'
+  - 路段座標只有7格無法容納TWD座標值（南北向7碼加小數點至少8格，需修改原始碼、或輸入7碼整數值）
+- 氣象個案：U(風速m/s)、BRG(正Y方向之夾角0\~360度)、CLAS(穩定度1~6)、混合層(m)、背景濃度(PPM)
   - '(F3.0,F4.0,I1,F6.0,F4.0)'
 
 ### 範例1

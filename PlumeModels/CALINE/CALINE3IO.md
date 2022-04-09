@@ -33,7 +33,7 @@ last_modified_date: 2022-04-08 15:30:32
   - '(A20,3F10.0)'
 - 批次訊息：RUN(title)、NL(路段數)、NM(氣象條件筆數)
   - '(A40,2I3)'
-- 路段訊息：道路類型(路堤AG、填平FL、路塹DP、橋樑BR)、(XL1,YL1)、(XL2,YL2)路段端點座標、VPHL(流量veh/hr)、EFL(排放係數g/mile)、HL(排放源高度)、WL(混合區寬度)
+- 路段訊息：道路類型(路堤AG、填平FL、路塹DP、橋樑BR)、(XL1,YL1)、(XL2,YL2)路段端點座標、VPHL(流量veh/hr)、EFL([排放係數](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/EMISFACT/)g/mile)、HL(排放源高度)、WL(混合區寬度)
   - '(A20,A2,4F7.0,F8.0,3F4.0)'
   - 路段座標只有7格無法容納TWD座標值（南北向7碼加小數點至少8格，需修改原始碼、或輸入7碼整數值）
 - 氣象個案：U(風速m/s)、BRG(正Y方向之夾角0\~360度)、CLAS(穩定度1~6)、混合層(m)、背景濃度(PPM)
@@ -602,3 +602,7 @@ $ cat CALINE3.LST
    11. RECP. 11             *     -550.      25.      1.8   * 26.3  *  0.0  0.0 16.3  3.3  0.0  0.0
    12. RECP. 12             *     -550.      25.      6.1   * 25.6  *  0.0  0.0 15.7  3.2  0.0  0.0
 ```
+
+## caline3遠端計算服務
+- 網址[http://114.32.164.198/CALINE3.html](http://114.32.164.198/CALINE3.html)
+- 選取輸入檔案、按下Run鍵即可。

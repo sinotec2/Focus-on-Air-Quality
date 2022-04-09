@@ -133,4 +133,464 @@ LINK F              BR  -100.   200.  -100.  -200.   5000. 50. 6.1 27.
  1.270.6 1000. 6.7
 ```
 
+## 輸出檔範例
+### 範例1
+- 共執行了4個批次、測試路型的敏感性
 
+｜CASE｜Road Type|CO ppm|
+|-|-|-|
+|1| AG 路堤|7.6|
+|2| BR 橋樑|6.2|
+|3| DP 路塹|5.8|
+|4| FL 平坦|7.6|
+
+```bash
+kuang@114-32-164-198 /Users/1.PlumeModels/CALINE3
+$ cat CALINE3.LST 
+                     CALINE3              (DATED 89219)
+
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  1
+
+
+     JOB: EXAMPLE ONE                                          RUN: CASE ONE                                
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG = 270. DEGREES          Z0 =  10. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *     0.  -5000.      0.   5000. *    10000.      360.      AG   7500.  30.0   0.0  30.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *        COORDINATES (M)        *  CO
+       RECEPTOR             *      X        Y        Z      * (PPM)
+   -------------------------*-------------------------------*-------
+    1. RECP. 1              *       30.       0.      1.8   *  7.6
+```
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  2
+
+
+     JOB: EXAMPLE ONE                                          RUN: CASE TWO                                
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG = 270. DEGREES          Z0 =  10. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *     0.  -5000.      0.   5000. *    10000.      360.      BR   7500.  30.0   5.0  30.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *        COORDINATES (M)        *  CO
+       RECEPTOR             *      X        Y        Z      * (PPM)
+   -------------------------*-------------------------------*-------
+    1. RECP. 1              *       30.       0.      1.8   *  6.2
+```
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  3
+
+
+     JOB: EXAMPLE ONE                                          RUN: CASE THREE                              
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG = 270. DEGREES          Z0 =  10. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *     0.  -5000.      0.   5000. *    10000.      360.      DP   7500.  30.0  -5.0  30.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *        COORDINATES (M)        *  CO
+       RECEPTOR             *      X        Y        Z      * (PPM)
+   -------------------------*-------------------------------*-------
+    1. RECP. 1              *       30.       0.      1.8   *  5.8
+```
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  4
+
+
+     JOB: EXAMPLE ONE                                          RUN: CASE FOUR                               
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG = 270. DEGREES          Z0 =  10. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *     0.  -5000.      0.   5000. *    10000.      360.      FL   7500.  30.0   5.0  30.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *        COORDINATES (M)        *  CO
+       RECEPTOR             *      X        Y        Z      * (PPM)
+   -------------------------*-------------------------------*-------
+    1. RECP. 1              *       30.       0.      1.8   *  7.6
+```
+### 範例2
+- S-CURVE
+
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  5
+
+
+     JOB: EXAMPLE TWO                                          RUN: RURAL LOCATION: S-CURVE                 
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG =  45. DEGREES          Z0 =  50. CM         VD =   0.0 CM/S        AMB =  3.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *  -707.   -707.      0.      0. *     1000.       45.      AG   8500.  30.0   0.0  28.0
+   B. LINK B                *     0.      0.    120.    175. *      212.       34.      AG   8500.  30.0   0.0  28.0
+   C. LINK C                *   120.    175.    150.    350. *      178.       10.      AG   8500.  30.0   0.0  28.0
+   D. LINK D                *   150.    350.    150.   1350. *     1000.      360.      AG   8500.  30.0   0.0  28.0
+   E. LINK E                *   150.   1350.    175.   1510. *      162.        9.      AG   8500.  30.0   0.0  28.0
+   F. LINK F                *   175.   1510.    265.   1640. *      158.       35.      AG   8500.  30.0   0.0  28.0
+   G. LINK G                *   265.   1640.    350.   1760. *      147.       35.      AG   8500.  30.0   0.0  28.0
+   H. LINK H                *   350.   1760.    475.   1830. *      143.       61.      AG   8500.  30.0   0.0  28.0
+   I. LINK I                *   475.   1830.    650.   1850. *      176.       83.      AG   8500.  30.0   0.0  28.0
+   J. LINK J                *   650.   1850.   1650.   1850. *     1000.       90.      AG   8500.  30.0   0.0  28.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *                               * TOTAL *
+                                                                                            CO/LINK
+                            *        COORDINATES (M)        * + AMB *                        (PPM)
+       RECEPTOR             *      X        Y        Z      * (PPM) *   A    B    C    D    E    F    G    H    I    J
+   -------------------------*-------------------------------*-------*
+                                                                     ----------------------------------------------------
+    1. RECP. 1              *      400.    1700.      1.8   *  6.1  *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  3.1  0.0
+    2. RECP. 2              *      100.    1500.      1.8   * 10.7  *  0.0  0.0  0.0  0.0  0.0  1.5  3.7  2.1  0.4  0.0
+    3. RECP. 3              *      200.    1300.      1.8   *  4.4  *  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.1  1.3
+    4. RECP. 4              *      100.     350.      1.8   *  8.3  *  0.0  0.0  0.0  4.8  0.0  0.0  0.0  0.0  0.0  0.5
+```
+### 範例3
+- INTERSECTION
+
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  6
+
+
+     JOB: EXAMPLE THREE                                        RUN: URBAN LOCATION: INTERSECTION            
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =   100. M
+    BRG =  90. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  5.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *     0.    500.      0.     50. *      450.      180.      AG   1000.  50.0   0.0  14.0
+   B. LINK B                *   100.      0.    500.      0. *      400.       90.      AG   5000.  60.0   0.0  26.0
+   C. LINK C                *     0.    -50.      0.   -500. *      450.      180.      AG   1000.  50.0   0.0  14.0
+   D. LINK D                *  -500.      0.   -100.      0. *      400.       90.      AG   5000.  60.0   0.0  26.0
+   E. LINK E                *  -100.      0.    100.      0. *      200.       90.      AG   5000. 100.0   0.0  28.0
+   F. LINK F                *     0.     50.      0.    -50. *      100.      180.      AG   1000. 100.0   0.0  14.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *                               * TOTAL *
+                                                                                  CO/LINK
+                            *        COORDINATES (M)        * + AMB *              (PPM)
+       RECEPTOR             *      X        Y        Z      * (PPM) *   A    B    C    D    E    F
+   -------------------------*-------------------------------*-------*
+                                                                     --------------------------------
+    1. RECP. 1              *      -30.      30.      1.8   * 13.1  *  0.0  5.4  0.0  0.0  0.8  1.9
+    2. RECP. 2              *      -30.     -30.      1.8   * 13.1  *  0.0  5.4  0.0  0.0  0.8  1.9
+    3. RECP. 3              *     -100.      30.      1.8   * 13.6  *  0.0  5.1  0.0  0.0  2.5  1.0
+```
+### 範例4
+- BRG=0度北風
+
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  7
+
+
+     JOB: EXAMPLE FOUR                                         RUN: URBAN LOCATION: MULTIPLE LINKS, ETC.    
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG =   0. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB = 12.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *   500.      0.   3000.      0. *     2500.       90.      AG   9700.  30.0   0.0  23.0
+   B. LINK B                *   500.      0.   1000.    100. *      510.       79.      DP   1200. 150.0  -2.0  13.0
+   C. LINK C                * -3000.      0.    500.      0. *     3500.       90.      AG  10900.  30.0   0.0  23.0
+   D. LINK D                * -3000.    -75.   3000.    -75. *     6000.       90.      AG   9300.  30.0   0.0  23.0
+   E. LINK E                *  -500.    200.   -500.   -300. *      500.      180.      BR   4000.  50.0   6.1  27.0
+   F. LINK F                *  -100.    200.   -100.   -200. *      400.      180.      BR   5000.  50.0   6.1  27.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *                               * TOTAL *
+                                                                                  CO/LINK
+                            *        COORDINATES (M)        * + AMB *              (PPM)
+       RECEPTOR             *      X        Y        Z      * (PPM) *   A    B    C    D    E    F
+   -------------------------*-------------------------------*-------*
+                                                                     --------------------------------
+    1. RECP. 1              *     -350.      30.      1.8   * 12.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+    2. RECP. 2              *        0.      30.      1.8   * 12.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+    3. RECP. 3              *      750.     100.      1.8   * 12.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+    4. RECP. 4              *      850.      30.      1.8   * 14.8  *  0.0  2.8  0.0  0.0  0.0  0.0
+    5. RECP. 5              *     -850.    -100.      1.8   * 21.6  *  0.0  0.0  3.6  6.0  0.0  0.0
+    6. RECP. 6              *     -550.    -100.      1.8   * 21.9  *  0.0  0.0  3.6  6.0  0.3  0.0
+    7. RECP. 7              *     -350.    -100.      1.8   * 21.6  *  0.0  0.0  3.6  6.0  0.0  0.0
+    8. RECP. 8              *       50.    -100.      1.8   * 21.6  *  0.0  0.0  3.6  6.0  0.0  0.0
+    9. RECP. 9              *      450.    -100.      1.8   * 21.6  *  0.0  0.0  3.6  6.0  0.0  0.0
+   10. RECP. 10             *      800.    -100.      1.8   * 22.6  *  3.2  1.4  0.0  6.0  0.0  0.0
+   11. RECP. 11             *     -550.      25.      1.8   * 12.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+   12. RECP. 12             *     -550.      25.      6.1   * 12.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+```
+- BRG=90度
+
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  8
+
+
+     JOB: EXAMPLE FOUR                                         RUN: URBAN LOCATION: MULTIPLE LINKS, ETC.    
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG =  90. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  7.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *   500.      0.   3000.      0. *     2500.       90.      AG   9700.  30.0   0.0  23.0
+   B. LINK B                *   500.      0.   1000.    100. *      510.       79.      DP   1200. 150.0  -2.0  13.0
+   C. LINK C                * -3000.      0.    500.      0. *     3500.       90.      AG  10900.  30.0   0.0  23.0
+   D. LINK D                * -3000.    -75.   3000.    -75. *     6000.       90.      AG   9300.  30.0   0.0  23.0
+   E. LINK E                *  -500.    200.   -500.   -300. *      500.      180.      BR   4000.  50.0   6.1  27.0
+   F. LINK F                *  -100.    200.   -100.   -200. *      400.      180.      BR   5000.  50.0   6.1  27.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *                               * TOTAL *
+                                                                                  CO/LINK
+                            *        COORDINATES (M)        * + AMB *              (PPM)
+       RECEPTOR             *      X        Y        Z      * (PPM) *   A    B    C    D    E    F
+   -------------------------*-------------------------------*-------*
+                                                                     --------------------------------
+    1. RECP. 1              *     -350.      30.      1.8   * 28.4  *  5.7  1.3  8.9  3.9  0.0  1.6
+    2. RECP. 2              *        0.      30.      1.8   * 26.6  *  8.0  2.1  5.9  3.6  0.0  0.0
+    3. RECP. 3              *      750.     100.      1.8   * 13.7  *  3.2  2.6  0.0  0.9  0.0  0.0
+    4. RECP. 4              *      850.      30.      1.8   * 21.7  * 12.0  0.0  0.0  2.7  0.0  0.0
+    5. RECP. 5              *     -850.    -100.      1.8   * 29.6  *  3.1  0.4  1.8 15.3  1.1  0.9
+    6. RECP. 6              *     -550.    -100.      1.8   * 30.5  *  3.5  0.3  1.1 15.1  2.3  1.2
+    7. RECP. 7              *     -350.    -100.      1.8   * 28.2  *  3.7  0.3  0.7 14.9  0.0  1.6
+    8. RECP. 8              *       50.    -100.      1.8   * 25.5  *  3.9  0.1  0.0 14.5  0.0  0.0
+    9. RECP. 9              *      450.    -100.      1.8   * 24.5  *  3.5  0.0  0.0 14.0  0.0  0.0
+   10. RECP. 10             *      800.    -100.      1.8   * 23.6  *  3.1  0.0  0.0 13.5  0.0  0.0
+   11. RECP. 11             *     -550.      25.      1.8   * 33.0  *  4.9  1.0 12.3  4.3  2.3  1.2
+   12. RECP. 12             *     -550.      25.      6.1   * 32.0  *  4.8  1.0 11.7  4.3  2.0  1.2
+```
+- BRG=180度
+
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE  9
+
+
+     JOB: EXAMPLE FOUR                                         RUN: URBAN LOCATION: MULTIPLE LINKS, ETC.    
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG = 180. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  5.0 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *   500.      0.   3000.      0. *     2500.       90.      AG   9700.  30.0   0.0  23.0
+   B. LINK B                *   500.      0.   1000.    100. *      510.       79.      DP   1200. 150.0  -2.0  13.0
+   C. LINK C                * -3000.      0.    500.      0. *     3500.       90.      AG  10900.  30.0   0.0  23.0
+   D. LINK D                * -3000.    -75.   3000.    -75. *     6000.       90.      AG   9300.  30.0   0.0  23.0
+   E. LINK E                *  -500.    200.   -500.   -300. *      500.      180.      BR   4000.  50.0   6.1  27.0
+   F. LINK F                *  -100.    200.   -100.   -200. *      400.      180.      BR   5000.  50.0   6.1  27.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *                               * TOTAL *
+                                                                                  CO/LINK
+                            *        COORDINATES (M)        * + AMB *              (PPM)
+       RECEPTOR             *      X        Y        Z      * (PPM) *   A    B    C    D    E    F
+   -------------------------*-------------------------------*-------*
+                                                                     --------------------------------
+    1. RECP. 1              *     -350.      30.      1.8   * 14.5  *  0.0  0.0  6.5  3.0  0.0  0.0
+    2. RECP. 2              *        0.      30.      1.8   * 14.5  *  0.0  0.0  6.5  3.0  0.0  0.0
+    3. RECP. 3              *      750.     100.      1.8   * 13.0  *  3.2  2.5  0.0  2.3  0.0  0.0
+    4. RECP. 4              *      850.      30.      1.8   * 13.8  *  5.8  0.0  0.0  3.0  0.0  0.0
+    5. RECP. 5              *     -850.    -100.      1.8   *  5.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+    6. RECP. 6              *     -550.    -100.      1.8   *  5.1  *  0.0  0.0  0.0  0.0  0.1  0.0
+    7. RECP. 7              *     -350.    -100.      1.8   *  5.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+    8. RECP. 8              *       50.    -100.      1.8   *  5.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+    9. RECP. 9              *      450.    -100.      1.8   *  5.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+   10. RECP. 10             *      800.    -100.      1.8   *  5.0  *  0.0  0.0  0.0  0.0  0.0  0.0
+   11. RECP. 11             *     -550.      25.      1.8   * 15.5  *  0.0  0.0  7.0  3.1  0.4  0.0
+   12. RECP. 12             *     -550.      25.      6.1   * 11.8  *  0.0  0.0  3.8  2.6  0.4  0.0
+```
+- BRG=270度
+
+```
+                            CALINE3: CALIFORNIA LINE SOURCE DISPERSION MODEL - SEPTEMBER, 1979 VERSION                     PAGE 10
+
+
+     JOB: EXAMPLE FOUR                                         RUN: URBAN LOCATION: MULTIPLE LINKS, ETC.    
+
+
+
+       I.  SITE VARIABLES
+
+
+      U =  1.0 M/S            CLAS =   6  (F)        VS =   0.0 CM/S       ATIM =  60. MINUTES                   MIXH =  1000. M
+    BRG = 270. DEGREES          Z0 = 100. CM         VD =   0.0 CM/S        AMB =  6.7 PPM
+
+
+
+      II.  LINK VARIABLES
+
+
+       LINK DESCRIPTION     *      LINK COORDINATES (M)      * LINK LENGTH  LINK BRG   TYPE  VPH     EF     H    W
+                            *   X1      Y1      X2      Y2   *     (M)       (DEG)                 (G/MI)  (M)  (M)
+   -------------------------*--------------------------------*-------------------------------------------------------
+   A. LINK A                *   500.      0.   3000.      0. *     2500.       90.      AG   9700.  30.0   0.0  23.0
+   B. LINK B                *   500.      0.   1000.    100. *      510.       79.      DP   1200. 150.0  -2.0  13.0
+   C. LINK C                * -3000.      0.    500.      0. *     3500.       90.      AG  10900.  30.0   0.0  23.0
+   D. LINK D                * -3000.    -75.   3000.    -75. *     6000.       90.      AG   9300.  30.0   0.0  23.0
+   E. LINK E                *  -500.    200.   -500.   -300. *      500.      180.      BR   4000.  50.0   6.1  27.0
+   F. LINK F                *  -100.    200.   -100.   -200. *      400.      180.      BR   5000.  50.0   6.1  27.0
+
+
+     III.  RECEPTOR LOCATIONS AND MODEL RESULTS
+
+
+                            *                               * TOTAL *
+                                                                                  CO/LINK
+                            *        COORDINATES (M)        * + AMB *              (PPM)
+       RECEPTOR             *      X        Y        Z      * (PPM) *   A    B    C    D    E    F
+   -------------------------*-------------------------------*-------*
+                                                                     --------------------------------
+    1. RECP. 1              *     -350.      30.      1.8   * 25.8  *  0.0  0.0 14.3  3.2  1.6  0.0
+    2. RECP. 2              *        0.      30.      1.8   * 28.4  *  0.0  0.0 14.8  3.6  0.9  2.4
+    3. RECP. 3              *      750.     100.      1.8   * 15.2  *  0.0  0.0  5.2  2.0  0.5  0.8
+    4. RECP. 4              *      850.      30.      1.8   * 32.8  *  3.4  5.2 11.9  4.3  0.5  0.8
+    5. RECP. 5              *     -850.    -100.      1.8   * 23.5  *  0.0  0.0  3.4 13.4  0.0  0.0
+    6. RECP. 6              *     -550.    -100.      1.8   * 24.4  *  0.0  0.0  3.8 13.9  0.0  0.0
+    7. RECP. 7              *     -350.    -100.      1.8   * 26.6  *  0.0  0.0  4.1 14.2  1.6  0.0
+    8. RECP. 8              *       50.    -100.      1.8   * 28.9  *  0.0  0.0  4.6 14.7  0.9  2.0
+    9. RECP. 9              *      450.    -100.      1.8   * 28.6  *  0.0  0.0  5.0 15.1  0.7  1.1
+   10. RECP. 10             *      800.    -100.      1.8   * 28.7  *  0.0  0.0  5.3 15.3  0.6  0.8
+   11. RECP. 11             *     -550.      25.      1.8   * 26.3  *  0.0  0.0 16.3  3.3  0.0  0.0
+   12. RECP. 12             *     -550.      25.      6.1   * 25.6  *  0.0  0.0 15.7  3.2  0.0  0.0
+```

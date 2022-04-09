@@ -21,6 +21,7 @@ last_modified_date: 2022-04-08 15:30:32
 
 ## 背景
 - CALINE4並未列在USEPA的網站中，CALtran似乎也已經下架，但[EAST Lab -  University of Michigan](http://www-personal.umich.edu/~weberg/caline4.htm)還有一份可以下載(32bit執行檔)，[此處](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/caline4.zip)為壓縮檔。
+  - 圖形界面尚可運用，可用於輸入、檢視、及儲存（.dat自由格式詳下），主程式無法作動，需將.dat轉至CALINE3執行。
 
 ## CALINE4 輸入檔範例
 - 專案名稱
@@ -104,7 +105,7 @@ Glen-Sec. 1
 Glen-Sec. 2
 Oxford
 ```
-- 20個路段的路形(1\~4)、端點X、Y、link Hgt高度、混合區寬度、Canyon/Bluff Mixing left、right
+- 20個路段的路形(1\~4)、端點X、Y、link Hgt高度、混合區寬度、Canyon/Bluff Mixing left、right（峽谷、斷崖）
 
 ```bash
 1 347.0 1896.0 860.0 1662.0 0.0 16.0 0.0 0.0 0
@@ -137,4 +138,39 @@ Oxford
 2995.0 481.0 776.0 330.0 1025.0 515.0 523.0 1835.0 436.0 963.0 801.0 653.0 700.0 647.0 1059.0 823.0 1080.0 1325.0 1325.0 413.0
 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
 0.0 1.0 7 1000.0 15.0 3.0 0.0
+```
+## 讀取程式
+- 讀取界面結果.dat檔案的python程式[rd_dat.py](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/rd_dat.py)
+  - 依照前述段落順序、依序讀取模式各項變數
+  - NR、NL、NM必須轉成整數
+
+```python
+import numpy as np
+with open('central_campus.dat','r') as f:
+    lines=[i.strip('\n') for i in f]
+job=lines[0].strip(' ')
+z0,mw,vs,vd,NR,NL,ATIM,SCAL,NM,ASL=[float(i) for i in lines[2].split()]
+NR,NL,NM=[int(i) for i in [NR,NL,NM]]
+recp=[lines[i] for i in range(3,NR+3)]
+xr,yr,zr=np.zeros(shape=NR),np.zeros(shape=NR),np.zeros(shape=NR)
+for i in range(NR):
+    xr[i],yr[i],zr[i]=[float(j) for j in lines[3+NR+i].split()]
+lnks=[lines[i] for i in range(NR*2+3,NR*2+3+NL)]
+for var in 'X1,Y1,X2,Y2,H,W,CBMl,CBMr,D'.split(','):
+    exec(var+'=np.zeros(shape=NL)')
+istr=NR*2+3+NL
+iend=istr+NL
+for var in 'TYP,X1,Y1,X2,Y2,H,W,CBMl,CBMr,D'.split(','):
+    exec(var+'=np.zeros(shape=NL)')
+for i in range(NL):
+    TYP[i],X1[i],Y1[i],X2[i],Y2[i],H[i],W[i],CBMl[i],CBMr[i],D[i]=[float(j) for j in lines[istr+i].split()]
+run=lines[iend]
+VPH=[float(i) for i in lines[iend+1].split()]
+EMF=[float(i) for i in lines[iend+2].split()]
+for var in 'U,BRG,CLAS,MIXH,SIGM,AMB,T'.split(','):
+    exec(var+'=np.zeros(shape=NM)')
+istr=iend+3
+iend=istr+NM
+for i in range(NM):
+    U[i],BRG[i],CLAS[i],MIXH[i],SIGM[i],AMB[i],T[i]=[float(j) for j in lines[istr+i].split()]
 ```

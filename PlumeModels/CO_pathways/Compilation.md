@@ -243,4 +243,4 @@ gfortran -o iscst3.exe $LINK_FLAGS *.o
 ```
 
 ## Reference
-- [交大白曛綾教授空氣品質影響之預測](http://ocw.nctu.edu.tw/course/arm071/Chapter%207.pdf)
+- 白曛綾教授、交通大學開放式課程[空氣品質影響之預測](http://ocw.nctu.edu.tw/course/arm071/Chapter%207.pdf)

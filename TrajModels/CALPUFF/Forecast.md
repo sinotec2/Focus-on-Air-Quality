@@ -485,7 +485,7 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 ### 網站與播放器
 - 前述使用python網站及瀏覽器內設GIF播放器，前者相容性較低、要平移到不同平台的衝突較大，後者的控制程度較低，不能暫停、前後微調、放大等等。有待改善。
 - 參考網友buzzfeed提供的[LC-GIF-Player](https://github.com/LCweb-ita/LC-GIF-Player)，並加上windy外掛小視窗作為區域流向的參考，如圖所示。
-- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io，可以大幅降低對家用電腦頻寬的暫用，並且開放服務時間到24-7-365。
+- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
 
 | ![cpuff_forecast.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_forecast.png)|
 |:-:|

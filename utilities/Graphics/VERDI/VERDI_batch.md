@@ -152,6 +152,7 @@ done
 today=$(date +%Y%m%d)
 rundate=$(date -d "$today - 1 day" +%Y%m%d)
 ...
+export DISPLAY=master:0.0
   VERDI=/cluster/VERDI/VERDI_1.5.0/verdi.sh
 ...
   ln -sf ../../CALPUFF_OUT/CALPUFF/${rundate}/calpuff.con .
@@ -190,6 +191,11 @@ rundate=$(date -d "$today - 1 day" +%Y%m%d)
   BIN1=/cluster/VERDI/VERDI_1.5.0/plugins/bootstrap/data/map_world.bin_old
   ln -sf ${BIN1} ${BIN2}
 ```
+### $DISPLAY的設定
+- 當命令列狀態批次執行VERDI時，因為putty已經設定了DISPLAY的環境變數，所以沒有出現問題。但在crontab自動執行批次檔時，沒有設定DISPLAY，會造成VERDI的錯誤與終止。
+  - 事實上批次執行並沒有任何螢幕的輸出。此乃程式內設，無法更改。
+- 此處將DISPLAY設到本機(HOSTNAME=master)，即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
+
 ### 輸入檔(.nc)的準備
 - calpuff輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
   - 程式版本為CALPOST_v7.1.0_L141010

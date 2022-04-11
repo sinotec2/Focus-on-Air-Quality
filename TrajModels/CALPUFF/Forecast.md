@@ -409,7 +409,7 @@ for it in range(1,max(jt)+1):
     for ic in range(wc):
       f.write(str(total[it,ic])+'\n')
 ```
-## 等濃度圖與網站設定
+## 等濃度圖與網站設定(格柵底圖方案)
 - 模擬污染物項目、小時數、動畫、濃度等級的修改，
 ### Python/genmaps.py
 -  主要修改污染物項目，
@@ -468,6 +468,18 @@ for it in range(1,max(jt)+1):
 cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 /cluster/anaconda3/bin/python3.7/python -m http.server --bind 200.200.12.191 8030 >&/dev/null &
 ```
+
+## VERDI向量底圖方案
+- 前述格柵底圖結果檔案過於龐大(84小時的gif檔約80\~150MB)，終究拖累網站而告失敗。解決方案就是以VERDI批次作業，以向量底圖來降低檔案容量。過程與設定可以詳見[程式外批次檔(CALPUFF結果時間序列圖檔展示)](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔CALPUFF結果時間序列圖檔展示)的說明。
+- 結果
+	- [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
+	- [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)，檔案大小約6\~7MB，
+	- [github.io](https://sinotec2.github.io/cpuff_forecast/index.html)
+
+| ![calpuff_PMF.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/calpuff_PMF.PNG)|
+|:-:|
+| <b>CALPUFF模擬結果GIF檔展示畫面</b>|
+
 
 ## TODO
 1. crontab自動每天執行(已完成)

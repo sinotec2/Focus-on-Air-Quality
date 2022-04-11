@@ -356,7 +356,7 @@ TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
 
 ### demo gif
 - [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
-
+- [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)
 | ![calpuff_PMF.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/calpuff_PMF.PNG)|
 |:-:|
 | <b>CALPUFF模擬結果GIF檔展示畫面</b>|

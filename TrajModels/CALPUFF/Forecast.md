@@ -474,18 +474,16 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 - 前述格柵底圖結果檔案過於龐大(84小時的gif檔約80\~150MB)，終究拖累網站而告失敗。解決方案就是以VERDI批次作業，以向量底圖來降低檔案容量。過程與設定可以詳見[程式外批次檔(CALPUFF結果時間序列圖檔展示)](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔CALPUFF結果時間序列圖檔展示)的說明。
 - 向量底圖採五都升等前的縣市界線，對污染集中的範圍有較多的空間資訊。
 - 結果
-	- [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
+	- [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
 	- [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)，檔案大小約6\~7MB，
-	- [github.io](https://sinotec2.github.io/cpuff_forecast/index.html)
+	- 外部網址：[https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html)(較快)
+	- 內部網址：[http://200.200.12.191/LC-GIF-Player/demo.html](http://200.200.12.191/LC-GIF-Player/demo.html)(最快)
 
-| ![calpuff_PMF.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/calpuff_PMF.PNG)|
-|:-:|
-| <b>CALPUFF模擬結果GIF檔展示畫面</b>|
 
 ### 網站與播放器
 - 前述使用python網站及瀏覽器內設GIF播放器，前者相容性較低、要平移到不同平台的衝突較大，後者的控制程度較低，不能暫停、前後微調、放大等等。有待改善。
-- 參考網友buzzfeed提供的[LC-GIF-Player](https://github.com/LCweb-ita/LC-GIF-Player)，並加上windy外掛小視窗作為區域流向的參考，如圖所示。
-- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
+- 參考網友[buzzfeed](https://github.com/buzzfeed)提供的[LC-GIF-Player](https://github.com/LCweb-ita/LC-GIF-Player)，並加上windy外掛小視窗作為區域流向的參考，如圖所示。
+- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
 
 | ![cpuff_forecast.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_forecast.png)|
 |:-:|

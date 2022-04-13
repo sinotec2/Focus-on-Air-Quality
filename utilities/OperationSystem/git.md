@@ -54,6 +54,7 @@ last_modified_date: 2022-03-11 15:46:30
 - 先登記此次的更新內容：新增檔案(git add path/file)
 - 此次更新的標題訊息：git commit -m "..." (注意必須是**雙引號**)
 - 上傳檔案：git push https:...
+
 ```bash
 #upload to github
 TOKEN=$(cat ~/git.token)
@@ -71,4 +72,7 @@ fi
 
 
 ## Reference
-- 
+- wiki, [git](https://zh.wikipedia.org/wiki/Git), 页面最后修订于2022年3月23日 (星期三) 22:58。
+- wiki, [github.com](https://zh.wikipedia.org/zh-tw/GitHub)，頁面最後修訂於2022年3月3日 (星期四) 06:07。
+-  高見龍、[使用 GitHub 免費製作個人網站](https://gitbook.tw/chapters/github/using-github-pages)
+- 唯鹿、[使用personal access token進行Github認證](https://iter01.com/611911.html) 發表於 2021-08-16

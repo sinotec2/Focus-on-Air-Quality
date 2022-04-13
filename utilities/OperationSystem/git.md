@@ -49,7 +49,7 @@ last_modified_date: 2022-03-11 15:46:30
     - $TOKEN為40碼的字串，需另外在github網頁申請
     - $DEPOSITORY在此次範例為sinotec2.github.io
 
-### Run.sh中有關git的部分
+### [Run.sh](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/Forecast/#網站與播放器)中有關git的部分
 - 須至repository目錄下執行
 - 先登記此次的更新內容：新增檔案(git add path/file)
 - 此次更新的標題訊息：git commit -m "..." (注意必須是**雙引號**)

@@ -73,7 +73,7 @@ runmodel=true
 	- -p 繪製所有物質的圖形
  
 ### 排放位置等參數之改變
-1. 檔案模板：
+1. 檔案模板：[calpuff.inp](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff.inp)
 2. 修改位置
 	- 模式採用Lambert 投影座標系統，原點位在台灣中心點，北緯24.61，東經120.99.
 	- (Taizhong PP)<    1 ! X =  -49.873, 63.288,  150,      4.7,    11.00,  19.8, 363.0,   .0,   5.440,
@@ -415,7 +415,7 @@ df[col[:5]+['UTM_E','UTM_N']].set_index('CP_NO').to_csv('p'+date+'.csv')
 ### CALPUFF逐時排放量檔案之準備
 - *CALPUFF*排放量允許輸入逐時之排放，由外部檔案提供，calpuff.inp內需對點源個數、排放量檔案名稱等，予以率定。
 - 產生程式
-	- 目前仍以舊的[fortran檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/ptem_PWR.f)先暫代之
+	- 目前仍以舊的[fortran檔案](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/ptem_PWR.f)先暫代之
 	- 該程式會讀取命令列輸入的3個日期，分別開啟前述p與g開頭的2個逐日檔案、輸出所需之起迄時間範圍的逐時排放量檔案。
 - calpuff.inp內
 	- 逐時排放量檔案名稱為固定值：ptemarb_pwr.dat
@@ -615,7 +615,7 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 ### 網站與播放器
 - 前述使用python網站及瀏覽器內設GIF播放器，前者相容性較低、要平移到不同平台的衝突較大，後者的控制程度較低，不能暫停、前後微調、放大等等。有待改善。
 - 參考網友[buzzfeed](https://github.com/buzzfeed)提供的[LC-GIF-Player](https://github.com/LCweb-ita/LC-GIF-Player)，並加上windy外掛小視窗作為區域流向的參考，如圖所示。
-- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
+- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))，並且使用*git*指令[每日更新](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/git/#定期上載)，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
 
 | ![cpuff_forecast.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_forecast.png)|
 |:-:|

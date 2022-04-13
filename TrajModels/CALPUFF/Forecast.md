@@ -20,13 +20,13 @@ last_modified_date: 2022-03-22 08:56:43
 ---
 
 ## 背景
-Leed大學CEMAC中心建置了Masaya 火山噴發SO2/SO4造成地面濃度的預報模式，範例如圖所示。由於氣象預報數據、大氣擴散模式等皆為官方作業系統與優選模式，因此具有高度的參考價值。
+Leed大學[CEMAC中心](https://www.cemac.leeds.ac.uk/)建置了Masaya 火山噴發SO2/SO4造成地面濃度的[預報模式](https://www.cemac.leeds.ac.uk/home/project-summaries/unresp/)，範例如圖所示。由於氣象預報數據、大氣擴散模式等皆為官方作業系統與優選模式，因此具有高度的參考價值。
 
-此處將其進行本土化，應用於緊急應變作業系統中。
+此處將其進行本土化，應用於空氣品質預報、緊急應變作業系統中。
 
-改系統自動下載未來48小時MAM氣象數值預報的結果，轉成CALMET的輸入檔，進入CALPUFF模式進行地面空氣品質的模擬。
+該系統自動下載未來48小時MAM氣象數值預報的結果，轉成CALMET的輸入檔，進入CALPUFF模式進行地面空氣品質的模擬。
 
-由於CALPUFF模式具有考慮3D風場、地形變化、化學反應等模擬能力，為美國環保署列為大氣擴散中的優選模式，用於大型固定污染源原生污染物以及二次氣膠長程傳輸的模式。
+由於CALPUFF模式具有考慮3D風場、地形變化、化學反應等模擬能力，曾被美國環保署列為大氣擴散中的優選模式，用於大型固定污染源原生污染物以及二次氣膠長程傳輸的模式。
 
 ## 挑戰任務與成果
 ### 挑戰任務
@@ -39,15 +39,16 @@ Leed大學CEMAC中心建置了Masaya 火山噴發SO2/SO4造成地面濃度的預
 2. 解讀程式（Create3DDAT.py）的安裝與修改
 	1. Python環境之設定（內設為3.6版）
 	2. grib-api模組之安裝（wasg不能import的問題）
-	3. 座標系統的調整轉換（經緯度twd97 VS LCP）
+	3. 座標系統的調整轉換（經緯度twd97 vs LCP）
 3. CALMET模式的偵錯
-	1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）
+	1. Fortran程式編譯（內設使用pgf90，與ifort、gfortran版本的差異）
 	2. 輸入資料間隔6小時程式的偵錯
-4. CALPUFF模式輸出的修改
+4. 排放量的設定
+5. CALPUFF模式輸出的修改
 	1. Calpuff.inp中離散點的設定
 	2. output.f 離散點之輸出
 	3. PM2.5 的計算（結合銨鹽重量的計算）
-5. 等濃度圖與網站設定
+6. 等濃度圖與網站設定
 	1. 模擬污染物項目、小時數、動畫、濃度等級的修改
 	2. 指定外部IP（內設是本機）
 
@@ -329,7 +330,7 @@ df.to_csv(fname+'.csv')
 	- 每日運轉的機組數可能會有差異，*calpuff*不允許排放量全為0的狀況，同時也非常耗費模式計算時間，因此需將未運轉的點源剔除。
 - 開啟檔案：names.csv
 	- 檔頭 `CP_NO,C_NO,All_In_One,CO_GPS,DIA,EnergyForm,HEI,NMHC_GPS,NOX_GPS,NO_S,PM25_GPS,PM_GPS,PlantName,SOX_GPS,SUM_EMI,TEMP,UnitName,VEL,UTM_N,UTM_E`
-	- 分別是管編+煙道(**管煙**)、管編、集合否(T/F)、CO、DIA、發電形態、煙囪高、NMHC、NOX、管道編號、PM25、PM、廠名、SOX、總量、溫度、機組名稱、流速、座標
+	- 分別是`管編+煙道(**管煙**)、管編、集合否(T/F)、CO、DIA、發電形態、煙囪高、NMHC、NOX、管道編號、PM25、PM、廠名、SOX、總量、溫度、機組名稱、流速、座標`
 		- 由於部分電廠以所有機組陳報，其運轉率只有一個，All_In_One會是True，按照過去排放量正比分配到每一個污染源。
 	-	此一檔案記錄TEDS11時排放率(全年總量/總運轉時數)，排放單位為g/s
 	- 流速單位為m/s為最大排氣量計算而得
@@ -432,7 +433,6 @@ NPT2=$(head -n11 ptemarb_pwr.dat|tail -n1| awk '{print $1}')
   sed   -e ...
         -e "s/?NPT2?/$NPT2/g"  \
     ./CALPUFF_INP/calpuff_template.inp > ./CALPUFF_INP/calpuff.inp
-
 ```
 ## CALPUFF系統的更新
 ### CALMET模式的偵錯
@@ -635,4 +635,9 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 6. 臭氧煙陣軌跡
 7. 縮小範圍、增加污染源
 8. 教學用
+
+## Reference
+- cemac, [UNRESPForecastingSystem](https://github.com/cemac/UNRESPForecastingSystem), last modifed on 30 Sep 2021.
+- sexyoung, [從零開始-用github-pages-上傳靜態網站](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276), Sep 4, 2017
+- 陳依涵、戴俐卉、賴曉薇、陳怡儒、林伯勳、黃小玲、江琇瑛、江晉孝、陳白榆、洪景山、馮欽賜（2017）[中央氣象局區域模式2017 年更新 (OP41)](https://conf.cwb.gov.tw/media/cwb_past_conferences/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf)，中央氣象局氣象資訊中心
 

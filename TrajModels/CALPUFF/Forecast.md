@@ -30,7 +30,7 @@ Leed大學[CEMAC中心](https://www.cemac.leeds.ac.uk/)建置了Masaya 火山噴
 
 ## 挑戰任務與成果
 ### 挑戰任務
-系統工作流程由Run.sh批次檔所控制，重要節點及困難如下：
+系統工作流程由[Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)批次檔所控制，重要節點及困難如下：
 1. 自動下載我國中央氣象局（CWB）數值預報（WRF）結果，並進行解讀。
 	1. CWB會員登錄、檔案網址之定位與確認
 	2. 氣象與空品模式的模擬範圍與解析度之決定
@@ -54,7 +54,7 @@ Leed大學[CEMAC中心](https://www.cemac.leeds.ac.uk/)建置了Masaya 火山噴
 
 ### 執行方式
 1. 切換目錄到UNRESPForcastingSystem
-2. 編輯Run.sh打開要執行的程式
+2. 編輯[Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)打開要執行的程式
 
 ```bash
 # Defaults that can be overwritten by editing HERE:
@@ -420,7 +420,7 @@ df[col[:5]+['UTM_E','UTM_N']].set_index('CP_NO').to_csv('p'+date+'.csv')
 - calpuff.inp內
 	- 逐時排放量檔案名稱為固定值：ptemarb_pwr.dat
 	- NPT2為變數，每日以*sed*指令進行更換
-- *Run.sh*相關的內容
+- [Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)相關的內容
 
 ```bash
 ...
@@ -621,6 +621,8 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 |:-:|
 | <b>CALPUFF預測網頁畫面</b>|
 
+## Download Run.sh
+- github: [Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)
 ## TODO
 1. crontab自動每天執行(已完成)
 1. 解決自動下載問題(Today目錄下檔案多達366MB)。

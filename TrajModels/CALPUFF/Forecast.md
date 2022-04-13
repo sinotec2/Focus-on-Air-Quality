@@ -301,6 +301,139 @@ df.to_csv(fname+'.csv')
 ---
 >     filenames.append(filePrefix+'{:02d}'.format((i)*6)+fileSuffix)
 ```
+## 即時排放數據
+### 數據來源及處理
+- 臺灣地區最大型的點污染源非火力發電機組莫屬。由於臺灣天然資源缺乏，又因地狹人稠不適發展核能發電，因此火力發電佔了發電量的大宗。目前相關訊息包括：
+	- 各發電機組發電量即時資訊已經在[opendata網站](https://data.gov.tw/dataset/8931)公開，每分鐘更新，除此之外，
+	- 亦有每分鐘[CEMS數據](https://data.gov.tw/dataset/31969)
+- 相關考慮條列如下
+
+|項目|發電量即時資訊|發電量即時資訊|選擇考量|
+|-|-|-|-|
+|污染源完整性|所有發電機組都有|有的污染源沒有(原因未知)|沒有數據就無從推估|
+|污染項目|只有**運轉率**%|煙氣流量、溫度、SOX、NOX及不透光率|後者太過複雜還有待QCQA|
+|時間頻率|10min|15min|只需要逐時|
+|資料穩定性|穩定|不甚穩定|(CEMS允許一定時數之離線)|
+
+- 有鑒於數據的涵概面及穩定性，此處選則以**運轉率**進行排放推估。
+	- 排放量 = 2019 TEDS11資料庫中之小時排放*該小時平均**運轉率**
+	- 污染物：適合TEDS資料庫中所有排放項目
+	- 煙氣量：*CALPUFF*可以接受逐時的排氣速度，也是平均值乘上**運轉率**
+- 數據時間點：
+	- 由於預報自前一日開始，因此排放數據也引用前一日之24小時數據
+	- 預報期間排放量：假設與前一日24小時相同，不做修正預報。
+
+### 前日運轉率之彙整與應用
+- 逐時*wget*下載前述opendata運轉率數據存檔備用
+- 逐日(*crontab*控制凌晨運作)將前一日所有24小時檔案合併彙整。
+	- 每日運轉的機組數可能會有差異，*calpuff*不允許排放量全為0的狀況，同時也非常耗費模式計算時間，因此需將未運轉的點源剔除。
+- 開啟檔案：names.csv
+	- 檔頭 `CP_NO,C_NO,All_In_One,CO_GPS,DIA,EnergyForm,HEI,NMHC_GPS,NOX_GPS,NO_S,PM25_GPS,PM_GPS,PlantName,SOX_GPS,SUM_EMI,TEMP,UnitName,VEL,UTM_N,UTM_E`
+	- 分別是管編+煙道(**管煙**)、管編、集合否(T/F)、CO、DIA、發電形態、煙囪高、NMHC、NOX、管道編號、PM25、PM、廠名、SOX、總量、溫度、機組名稱、流速、座標
+		- 由於部分電廠以所有機組陳報，其運轉率只有一個，All_In_One會是True，按照過去排放量正比分配到每一個污染源。
+	-	此一檔案記錄TEDS11時排放率(全年總量/總運轉時數)，排放單位為g/s
+	- 流速單位為m/s為最大排氣量計算而得
+- 輸出排放量檔案(檔名字頭為'g')，範例如下。此檔案有24小時序列。
+	- **管煙**、溫度、流速(已經乘上運轉率)、各污染物之g/s排放量、時間標籤
+
+```
+$ head g20220412.csv
+CP_NO,TEMP,VEL,CO_GPS,NMHC_GPS,NOX_GPS,PM25_GPS,PM_GPS,SOX_GPS,DateHr
+F1700736P601,114,16.57785,0.0,0.0,21.48246822694089,1.1103541221509972,1.882682180377493,19.653922323336385,2022041200
+F1700736P701,108,16.575588,0.0,0.0,16.499618542048232,1.1976660590277777,2.0307950954861114,12.677973511904762,2022041200
+```
+- 輸出排放量檔案(檔名字頭為'p')，範例如下。此檔將在逐時排放量之檔頭
+	- **管煙**、高度、內徑、溫度、流速(最大值)、座標值
+
+```
+kuang@master /home/sespub/power
+$ head p20220412.csv
+CP_NO,HEI,DIA,TEMP,VEL,UTM_E,UTM_N
+C1400170P301,202.0,6.4,127,20.0,321548.0,2777220.0
+C1400170P401,205.0,6.4,118,20.0,321548.0,2777220.0
+E5400878P001,60.0,6.2,150,9.1,180595.0,2503815.0
+```
+- 每日執行之彙整程式
+
+```python
+kuang@master /home/sespub/power
+$ cat rd_today.py
+#!/cluster/miniconda/envs/unresp/bin/python
+from pandas import *
+import subprocess, os
+from pypinyin import pinyin, lazy_pinyin
+cole=['CO_EMI', 'NMHC_EMI', 'NOX_EMI', 'PM25_EMI', 'PM_EMI', 'SOX_EMI']
+colg=[i.replace('EMI','GPS') for i in cole]
+hdtv=[ 'HEI', 'DIA', 'TEMP', 'VEL']
+
+date=subprocess.check_output('date -d "-1 day" +%Y%m%d',shell=True).decode('utf8').strip('\n')
+df=read_csv('names.csv')
+unit2={}
+col=['CP_NO']+hdtv+colg
+for c in col:
+  dd= {i:j for i,j in zip(list(df.UnitName),list(df[c]))}
+  unit2.update({c:dd})
+
+td=DataFrame({})
+for t in range(24):
+  tt='{:02d}'.format(t)
+  fname='b'+date+tt+'.txt'
+  if not os.path.exists(fname):continue
+  with open(fname,'r') as f:
+    lines=[i.strip('\n') for i in f]
+  a=[i.split(',')[2] for i in lines[1:]]
+  b=[]
+  for i in a:
+    ll=lazy_pinyin(i)
+    s=''
+    for ii in ll:
+        s+=ii
+    b.append(s)
+  perc=[i.split(',')[5] for i in lines[1:] ]
+  dft=DataFrame({'Name':b,'Perc':perc})
+  dft=dft.loc[dft.Name.map(lambda x:x in set(df.UnitName))].reset_index(drop=True)
+  dft.Perc=[float(i[:-1])/100. for i in dft.Perc]
+  dft['DateHr']=[date+tt for i in range(len(dft))]
+  dft['CP_NO']=[unit2['CP_NO'][i] for i in dft.Name]
+  dft=dft.loc[dft.Perc>0]
+  td=td.append(dft,ignore_index=True)
+for c in colg:
+  c0=np.array([unit2[c][i] for i in td.Name])
+  td[c]=c0*td.Perc
+for c in hdtv:
+  c0=np.array([unit2[c][i] for i in td.Name])
+  if c=='VEL':
+    td[c]=c0*td.Perc
+  else:
+    td[c]=c0
+td[col[:1]+col[3:]+['DateHr']].set_index('CP_NO').to_csv('g'+date+'.csv')
+
+df=read_csv('names.csv')
+df=df.loc[df.CP_NO.map(lambda x:x in set(td.CP_NO))].reset_index(drop=True)
+df[col[:5]+['UTM_E','UTM_N']].set_index('CP_NO').to_csv('p'+date+'.csv')
+```	
+### CALPUFF逐時排放量檔案之準備
+- *CALPUFF*排放量允許輸入逐時之排放，由外部檔案提供，calpuff.inp內需對點源個數、排放量檔案名稱等，予以率定。
+- 產生程式
+	- 目前仍以舊的[fortran檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/ptem_PWR.f)先暫代之
+	- 該程式會讀取命令列輸入的3個日期，分別開啟前述p與g開頭的2個逐日檔案、輸出所需之起迄時間範圍的逐時排放量檔案。
+- calpuff.inp內
+	- 逐時排放量檔案名稱為固定值：ptemarb_pwr.dat
+	- NPT2為變數，每日以*sed*指令進行更換
+- *Run.sh*相關的內容
+
+```bash
+...
+echo ${rundate} ${prevdate} ${enddate}> ptem_PWR.inp
+/home/cpuff/2018/ptem/ptem_PWR<ptem_PWR.inp
+if ! [ -e ptemarb_pwr.dat ]; then echo -n "fail ptemarb_PWR !";exit 0;fi
+NPT2=$(head -n11 ptemarb_pwr.dat|tail -n1| awk '{print $1}')
+...
+  sed   -e ...
+        -e "s/?NPT2?/$NPT2/g"  \
+    ./CALPUFF_INP/calpuff_template.inp > ./CALPUFF_INP/calpuff.inp
+
+```
 ## CALPUFF系統的更新
 ### CALMET模式的偵錯
 1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）

@@ -152,7 +152,7 @@ done
 today=$(date +%Y%m%d)
 rundate=$(date -d "$today - 1 day" +%Y%m%d)
 ...
-export DISPLAY=master:0.0
+export DISPLAY=:0.0
   VERDI=/cluster/VERDI/VERDI_1.5.0/verdi.sh
 ...
   ln -sf ../../CALPUFF_OUT/CALPUFF/${rundate}/calpuff.con .
@@ -192,16 +192,19 @@ export DISPLAY=master:0.0
   ln -sf ${BIN1} ${BIN2}
 ```
 ### $DISPLAY的設定
-- 當命令列狀態批次執行VERDI時，因為putty已經設定了DISPLAY的環境變數，所以沒有出現問題。但在crontab自動執行批次檔時，沒有設定DISPLAY，會造成VERDI的錯誤與終止。
+- 當命令列狀態批次執行VERDI時，因為*putty*已經設定了DISPLAY的環境變數，所以沒有出現問題。但在*crontab*自動執行批次檔時，沒有設定DISPLAY，會造成VERDI的錯誤與終止。
   - 事實上批次執行並沒有任何螢幕的輸出。此乃程式內設，無法更改。
-- 此處將DISPLAY設到本機(HOSTNAME=master)，即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
+- 此處將DISPLAY設到本機
+  -但不能指定實際的機器、hostname或IP、localhost等等、且
+  - console必須保持登入狀態、使用者須與*crontab*相同
+  - 即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
 
 ### 輸入檔(.nc)的準備
-- calpuff輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
+- *calpuff*輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
   - 程式版本為CALPOST_v7.1.0_L141010
-- 因為是連續執行，calpuff需要讀取初始煙陣濃度(restart)，避免煙流從新計算、濃度瞬間歸0。
+- 因為是連續執行，*calpuff*需要讀取初始煙陣濃度(restart)，避免煙流從新計算、濃度瞬間歸0。
   - 而隔日執行可能遇到機組個數的差異，無法順利接續，只得放棄restart。
-  - 此處改採跨日濃度檔案漸變連接的方式([join_nc.py]())，降低calpuff從0啟動時的誤差，得到較合理的結果。
+  - 此處改採跨日濃度檔案漸變連接的方式([join_nc.py]())，降低*calpuff*從0啟動時的誤差，得到較合理的結果。
   - 漸變採24小時(`nt=24`)、新、舊檔案照小時數正比線性加權方式進行
 
 ```python

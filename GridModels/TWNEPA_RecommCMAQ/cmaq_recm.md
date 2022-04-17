@@ -66,7 +66,25 @@ mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/p
 -rwxr-xr-x 1 root root 348K Nov 12  2020 libfabric.so.1
 lrwxrwxrwx 1 root root   14 Nov 16  2020 libfabric.so -> libfabric.so.1
 ```
+
 ## intel.sh
+
+### Usage of module commands
+    +-----------------------------------------------------------------------------+
+    |                        Module Command Usage Information                     |
+    +-----------------------------------------------------------------------------+
+    |         Command          |           Module Comamnd Description             |
+    +-----------------------------------------------------------------------------+
+    |   $ module load [...]    |   load module(s)                                 |
+    |   $ module unload [...]  |   Remove module(s)                               |
+    |   $ module purge         |   unload all modules                             |
+    |   $ module list          |   List loaded modules                            |
+    |   $ module avail         |   List available modules                         |
+    |   $ module whatis module |   Print whatis information about module          |
+    |   $ module keyword string|   Search all name and whatis that contain string |
+    +-----------------------------------------------------------------------------+
+
+###    
 ```bash
 #sinotec2@clogin2 ~/cmaq_recommend
 #$ ls -lh ~/cmaq_recommend/work/2019-01/grid03/cctm.raw/intel.sh
@@ -105,14 +123,71 @@ echo $LD_LIBRARY_PATH
 /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib:
 /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/release:
 /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:
-
+## group 3 compiler 
 /opt/ohpc/Taiwania3/pkg/intel/2021/compiler/2021.1.1/linux/lib:
 /opt/ohpc/Taiwania3/pkg/intel/2021/compiler/2021.1.1/linux/lib/x64:
 /opt/ohpc/Taiwania3/pkg/intel/2021/compiler/2021.1.1/linux/lib/emu:
 /opt/ohpc/Taiwania3/pkg/intel/2021/compiler/2021.1.1/linux/compiler/lib/intel64_lin:
+## group 3 debugger 
 /opt/ohpc/Taiwania3/pkg/intel/2021/debugger/10.0.0/dep/lib:
 /opt/ohpc/Taiwania3/pkg/intel/2021/debugger/10.0.0/libipt/intel64/lib:
 /opt/ohpc/Taiwania3/pkg/intel/2021/debugger/10.0.0/gdb/intel64/lib:
 /opt/ohpc/Taiwania3/pkg/intel/2021/mkl/2021.1.1/lib/intel64:
 /opt/ohpc/Taiwania3/pkg/intel/2021/tbb/2021.1.1/lib/intel64/gcc4.8
 ```
+### Effects of module load hdf5
+```bash
+#echo $LD_LIBRARY_PATH|grep -i hdf
+/opt/ohpc/Taiwania3/libs/Iimpi-2021/hdf5-1.12/lib:/opt/ohpc/Taiwania3/libs/Iimpi-2021/szip-2.1.1/lib
+```
+
+## run scripts
+
+```bash
+#inotec2@lgn301 ~/cmaq_recommend/work/0000.model.source
+#$ ls -lrth
+total 65K
+-rwxr-xr-x 1 sinotec2 TRI1111114  11K Sep 14  2021 mcip.source.csh
+-rwxr-xr-x 1 sinotec2 TRI1111114 3.2K Oct  1  2021 bcon.source.csh
+-rwxr-xr-x 1 sinotec2 TRI1111114 3.4K Feb 24 18:20 icon_source.csh
+-rwxr-xr-x 1 sinotec2 TRI1111114  33K Mar  4 12:38 cctm.source.v5.3.1.ae7
+```
+
+## slurm commands
+    +-----------------------------------------------------------------------------+
+    |                   Resource Manager Command Usage Information                |
+    +-----------------------------------------------------------------------------+
+    |         Command          |                SLURM                             |
+    +-----------------------------------------------------------------------------+
+    | Submit batch jobl        | sbatch [job script]                              |
+    | Request interactive shell| srun –pty /bin/bash                              |
+    | Delete job               | scancel [job id]                                 |
+    | Queue status             | sinfo                                            |
+    | Job status               | scontrol show job [job id]                       |
+    | Node status              | scontrol show node [NodeID]                      |
+    +-----------------------------------------------------------------------------+
+
+  Workload Characterization Key (WCKey)
+
+```bash
+#$ sreport cluster AccountUtilizationByUser All_Clusters accounts=ent111046 start=4/15/22 end=4/17/22 format=Accounts,Cluster,TresCount,Login,Proper,Used
+```
+--------------------------------------------------------------------------------
+    Cluster/Account/User Utilization 2022-04-15T00:00:00 - 2022-04-16T23:59:59 (172800 secs)
+    Usage reported in CPU Minutes
+--------------------------------------------------------------------------------
+        Account   Cluster TRES Count     Login     Proper Name     Used 
+--------------- --------- ---------- --------- --------------- -------- 
+      ent111046 taiwania3          0                               5218 
+      ent111046 taiwania3          0  sinotec2        sinotec2     5218 
+
+
+|姓名| 	狀態|	111/04/15| 	111/04/16| 	111/04/17| 	小計|
+|-|-|-|-|-|-|
+|曠永銓|計畫建立者|	8.5714| 	5.3424| 	0| 	13.9138|
+|小計| 	  	|8.5714| 	5.3424| 	0| 	13.9138| 
+
+- 13.9/(5218/200)=0.53元/min@200CPU
+- (datetime(2022,2,24,16,1)-datetime(2022,2,16,21,34)).days/11 * 12 * 24 * 60 * 0.53 元/min
+  - = **7.63** days * 24 * 60 * 0.53 元/min
+  - = **5828.07**元

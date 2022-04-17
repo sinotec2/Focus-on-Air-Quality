@@ -167,6 +167,28 @@ total 65K
     | Node status              | scontrol show node [NodeID]                      |
     +-----------------------------------------------------------------------------+
 
+### SBATCH
+```bash
+#sinotec2@lgn301 ~/cmaq_recommend/1901
+#$ cat ~/bin/gorun.sh 
+
+pro="ENT111046"
+queue="ct224"
+
+module load compiler/intel/2021
+module load IntelMPI/2021
+module load hdf5/1.12
+module load netcdf/4.7.4
+module load pnetcdf/1.12.2
+
+sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --ntasks=${1} --cpus-per-task=1 --nodes=5 --ntasks-per-node=40  ${2}
+```
+### SCONTROL
+```bash
+#scontrol show job $j
+
+```
+### SREPORT
   Workload Characterization Key (WCKey)
 
 ```bash
@@ -182,12 +204,34 @@ total 65K
       ent111046 taiwania3          0  sinotec2        sinotec2     5218 
 
 
+```bash
+#sreport job sizesbyaccount accounts=ent111046 start=4/15/22 end=4/17/22
+```
+--------------------------------------------------------------------------------
+    Job Sizes 2022-04-15T00:00:00 - 2022-04-16T23:59:59 (172800 secs)
+    Time reported in Minutes
+--------------------------------------------------------------------------------
+      Cluster   Account     0-49 CPUs   50-249 CPUs  250-499 CPUs  500-999 CPUs  >= 1000 CPUs % of cluster 
+--------- --------- ------------- ------------- ------------- ------------- ------------- ------------ 
+    taiwania3 ent111046             0          5176            42             0             0      100.00% 
+### Billing
+- [會員中心->計畫管理->我的計畫->計畫資訊->用量統計->區間類型-日區間](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=nchc_service_usage_statistic&uuid=33b3eda2-480b-40aa-97cc-5dddec5540c5&searchs_type=member&searchs_date=day&searchs_str=111/04/15&searchs_end=111/04/17&service_type=&detail_search=)
+
 |姓名| 	狀態|	111/04/15| 	111/04/16| 	111/04/17| 	小計|
 |-|-|-|-|-|-|
 |曠永銓|計畫建立者|	8.5714| 	5.3424| 	0| 	13.9138|
 |小計| 	  	|8.5714| 	5.3424| 	0| 	13.9138| 
 
+#### 單價
 - 13.9/(5218/200)=0.53元/min@200CPU
+- [表列單價](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=su_apply_step_1&prj_uuid=33b3eda2-480b-40aa-97cc-5dddec5540c5&prj_mode=personal) 0.16元/核心小時 *200/60
+  - = 0.53 元/min
+#### file-time estimates
 - (datetime(2022,2,24,16,1)-datetime(2022,2,16,21,34)).days/11 * 12 * 24 * 60 * 0.53 元/min
   - = **7.63** days * 24 * 60 * 0.53 元/min
   - = **5828.07**元
+- （12個月似乎不是連續操作）
+
+#### job-time estimates
+- 4/15~16 共run了（5+3=8）次，每次約26min/8~3min,全年應約～1200min
+- 全年job billing=1200*0.53～600元

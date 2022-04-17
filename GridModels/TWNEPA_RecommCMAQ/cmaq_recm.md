@@ -22,20 +22,46 @@ last_modified_date:   2021-12-02 11:08:53
 </details>
 ---
 
-## 背景
+# I/O Files
+
+## Inputs
 ```bash
-#results
+# ~/download/input/201901//grid03/smoke
+-rwxr-xr-x 1 sinotec2 TRI1111114 1.2G Feb 10 11:07 cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.tar.gz
+# ~/cmaq_recommend/work/2019-01/grid03/cctm.raw
+#$ more run.cctm.03.csh
+...
+ setenv N_EMIS_GR 2
+ setenv GR_EMIS_001    ${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
+ setenv GR_EMIS_002    ${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.ContEms.ncf
+
+ setenv GR_EMIS_LAB_001  biotaiwan
+ setenv GR_EMIS_LAB_002  tedstaiwan
+...
+# ~/download/input/201901//grid03/mcip
+-rwxr-xr-x 1 sinotec2 TRI1111114 1000K May 31  2021 LUFRAC_CRO_Taiwan.nc
+```
+
+## Results
+```bash
+# results
 
 sinotec2@clogin2 /work1/simenvipub01/download/model/output_cctm_combine
 -rwxrwxr-x 1 simenvipub01 TRI111490 4.8G Feb 16 21:34 v4.2019-05.conc.nc
 -rwxrwxr-x 1 simenvipub01 TRI111490 4.7G Feb 24 15:48 v4.2019-01.conc.nc
 -rwxrwxr-x 1 simenvipub01 TRI111490 4.7G Feb 24 16:02 v4.2019-12.conc.nc
 -rw------- 1 simenvipub01 TRI111490   19 Apr  6 14:57 nohup.out
-#executable file
-sinotec2@lgn301 ~/cmaq_recommend/CCTM/scripts/BLD_CCTM_v532_intel
+```
+# EXEC and Libs
+
+## executable file
+```bash
+#sinotec2@lgn301 ~/cmaq_recommend/CCTM/scripts/BLD_CCTM_v532_intel
 -rwxr-xr-x 1 sinotec2 TRI1111114  24M Nov 16 09:05 CCTM_v532.exe*
 -rwxr-xr-x 1 sinotec2 TRI1111114 18M Feb 15 15:18 cmaq_recommend/POST/combine/scripts/BLD_combine_v532_intel/combine_v532.exe
-#lib links
+```
+## lib links
+```bash
 #sinotec2@clogin2 ~/cmaq_recommend/lib/x86_64/intel
 # ls -lh ~/cmaq_recommend/lib/x86_64/intel
 drwxr-xr-x 2 sinotec2 TRI1111114 4.0K Aug 31  2021 ioapi
@@ -66,8 +92,32 @@ mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/p
 -rwxr-xr-x 1 root root 348K Nov 12  2020 libfabric.so.1
 lrwxrwxrwx 1 root root   14 Nov 16  2020 libfabric.so -> libfabric.so.1
 ```
+## Effective Libs
+```bash
+#$ cat ~/cmaq_recommend/exec.sh
+#!/bin/bash
+P0=/opt/ohpc/Taiwania3/libs/Iimpi-2021/hdf5-1.12/lib:/opt/ohpc/Taiwania3/libs/Iimpi-2021/szip-2.1.1/lib
+P1=/opt/ohpc/Taiwania3/libs/Iimpi-2020/pnetcdf-1.12.2/lib
+P2=/opt/ohpc/Taiwania3/pkg/cmp/compilers/intel/compilers_and_libraries_2017.7.259/linux/compiler/lib/intel64_lin
+P3=/opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
+P4=/opt/ohpc/Taiwania3/libs/libfabric/1.11.2/lib
+LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4} 
+```
 
-## intel.sh
+# scripts
+
+```bash
+#sinotec2@clogin2 ~/cmaq_recommend/work/0000.model.source:
+-rwxr-xr-x 1 sinotec2 TRI1111114 33537 Mar  4 12:38 cctm.source.v5.3.1.ae7
+#sinotec2@clogin2 ~/cmaq_recommend/work/2019-01:
+-rwxr-xr-x 1 sinotec2 TRI1111114  512 Mar  1 15:57 project.config
+#sinotec2@clogin2 ~/cmaq_recommend/work/2019-01/grid03/cctm.raw/
+-rwxr-xr-x 1 sinotec2 TRI1111114  783 Feb 25 14:39 intel.sh
+-rwxr-xr-x 1 sinotec2 TRI1111114   12 Mar  1 15:57 machines8
+-rwxr-xr-x 1 sinotec2 TRI1111114 1361 Mar  1 14:46 run.cctm.03.csh
+```
+
+## intel.sh and running scripts
 
 ### Usage of module commands
     +-----------------------------------------------------------------------------+
@@ -84,7 +134,7 @@ lrwxrwxrwx 1 root root   14 Nov 16  2020 libfabric.so -> libfabric.so.1
     |   $ module keyword string|   Search all name and whatis that contain string |
     +-----------------------------------------------------------------------------+
 
-###    
+###  intel.sh
 ```bash
 #sinotec2@clogin2 ~/cmaq_recommend
 #$ ls -lh ~/cmaq_recommend/work/2019-01/grid03/cctm.raw/intel.sh
@@ -214,7 +264,9 @@ sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --
       Cluster   Account     0-49 CPUs   50-249 CPUs  250-499 CPUs  500-999 CPUs  >= 1000 CPUs % of cluster 
 --------- --------- ------------- ------------- ------------- ------------- ------------- ------------ 
     taiwania3 ent111046             0          5176            42             0             0      100.00% 
-### Billing
+
+# NCHC Billing
+## 用量統計網址
 - [會員中心->計畫管理->我的計畫->計畫資訊->用量統計->區間類型-日區間](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=nchc_service_usage_statistic&uuid=33b3eda2-480b-40aa-97cc-5dddec5540c5&searchs_type=member&searchs_date=day&searchs_str=111/04/15&searchs_end=111/04/17&service_type=&detail_search=)
 
 |姓名| 	狀態|	111/04/15| 	111/04/16| 	111/04/17| 	小計|
@@ -222,16 +274,17 @@ sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --
 |曠永銓|計畫建立者|	8.5714| 	5.3424| 	0| 	13.9138|
 |小計| 	  	|8.5714| 	5.3424| 	0| 	13.9138| 
 
-#### 單價
+## 單價
 - 13.9/(5218/200)=0.53元/min@200CPU
 - [表列單價](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=su_apply_step_1&prj_uuid=33b3eda2-480b-40aa-97cc-5dddec5540c5&prj_mode=personal) 0.16元/核心小時 *200/60
   - = 0.53 元/min
-#### file-time estimates
+## 複價
+### file-time estimates
 - (datetime(2022,2,24,16,1)-datetime(2022,2,16,21,34)).days/11 * 12 * 24 * 60 * 0.53 元/min
   - = **7.63** days * 24 * 60 * 0.53 元/min
   - = **5828.07**元
 - （12個月似乎不是連續操作）
 
-#### job-time estimates
+### job-time estimates
 - 4/15~16 共run了（5+3=8）次，每次約26min/8~3min,全年應約～1200min
 - 全年job billing=1200*0.53～600元

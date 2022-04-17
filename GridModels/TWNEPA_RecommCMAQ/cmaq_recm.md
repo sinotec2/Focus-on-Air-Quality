@@ -22,6 +22,14 @@ last_modified_date:   2021-12-02 11:08:53
 </details>
 ---
 
+# Quick Start
+1. 工作目錄：~/cmaq_recommend/*yymm*
+2. 起訖時間：~/cmaq_recommend/*yymm*/project.config
+3. IO path and files:~/cmaq_recommend/*yymm*/run.cctm.03.csh
+4. LD_LIBRARY_PATH:~/cmaq_recommend/exec.sh
+5. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
+6. Link daily and combine：~/cmaq_recommend/combine.sh
+
 # I/O Files
 
 ## Inputs

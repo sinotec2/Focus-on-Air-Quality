@@ -145,28 +145,27 @@ LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}
       Where:
       D:  Default Module
 
-    Use "module spider" to find all possible modules.
-    Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
+      Use "module spider" to find all possible modules.
+      Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
 
 
 ## slurm commands
 - [slurm](https://zh.wikipedia.org/wiki/Slurm工作调度工具)是全球超級電腦或叢集電腦常用的資源調度工具，也為國網所採用。
-- [簡易指令](https://www2.nsysu.edu.tw/gpu/submit.html)
-  - screen類似tmux可以設置特定slurm環境
+- [簡易指令](https://www2.nsysu.edu.tw/gpu/submit.html) screen類似tmux可以設置特定slurm環境
 
-    +-----------------------------------------------------------------------------+
-    |                   Resource Manager Command Usage Information                |
-    +-----------------------------------------------------------------------------+
-    |         Command          |                SLURM                             |
-    +-----------------------------------------------------------------------------+
-    | Submit batch jobl        | sbatch [job script]                              |
-    | Request interactive shell| srun –pty /bin/bash                              |
-    | Delete job               | scancel [job id]                                 |
-    | Queue status             | sinfo                                            |
-    | Job status               | scontrol show job [job id]                       |
-    | Node status              | scontrol show node [NodeID]                      |
-    +-----------------------------------------------------------------------------+
+      +-----------------------------------------------------------------------------+
+      |                   Resource Manager Command Usage Information                |
+      +-----------------------------------------------------------------------------+
+      |         Command          |                SLURM                             |
+      +-----------------------------------------------------------------------------+
+      | Submit batch jobl        | sbatch [job script]                              |
+      | Request interactive shell| srun –pty /bin/bash                              |
+      | Delete job               | scancel [job id]                                 |
+      | Queue status             | sinfo                                            |
+      | Job status               | scontrol show job [job id]                       |
+      | Node status              | scontrol show node [NodeID]                      |
+      +-----------------------------------------------------------------------------+
 
 ### SBATCH
 - $1=200

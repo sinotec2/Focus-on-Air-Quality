@@ -47,6 +47,31 @@ module load hdf5/1.12
 module load netcdf/4.7.4
 module load pnetcdf/1.12.2
 ```
+- 因遇記憶體不足問題(如下)，module load還不如直接設定LD_LIBRARY_PATH，啟用下列5個目錄的程式庫即可。
+
+```bash
+#sinotec2@lgn303 ~/cmaq_recommend/1901
+#$ head buff_CMAQ_CCTMv532_sinotec2_20220416_150403_523992255.txt
+[1650121445.321789] [cpn3286:242769:0]          select.c:514  UCX  ERROR   no active messages transport to <no debug data>: posix/memory - Destination is unreachable, sysv/memory - Destination is unreachable, self/memory0 - Destination is unreachable, cma/memory - no am bcopy, knem/memory - no am bcopy
+```
+
+```bash
+#$ source ~/cmaq_recommend/exec.sh
+#$ cat ~/cmaq_recommend/exec.sh
+#!/bin/bash
+P0=/opt/ohpc/Taiwania3/libs/Iimpi-2021/hdf5-1.12/lib:/opt/ohpc/Taiwania3/libs/Iimpi-2021/szip-2.1.1/lib
+P1=/opt/ohpc/Taiwania3/libs/Iimpi-2020/pnetcdf-1.12.2/lib
+P2=/opt/ohpc/Taiwania3/pkg/cmp/compilers/intel/compilers_and_libraries_2017.7.259/linux/compiler/lib/intel64_lin
+P3=/opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
+P4=/opt/ohpc/Taiwania3/libs/libfabric/1.11.2/lib
+LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}
+```
+
+### python
+- module purge
+- module load pkg/Anaconda3
+- module load pkg/Python/3.9.7
+- 執行時必須加註版本(python3)，否則會啟動python2 (/usr/bin/python)
 
 ### 其它可用模組
 - $ module avail
@@ -119,10 +144,6 @@ module load pnetcdf/1.12.2
     Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
 
-### python
-- module load pkg/Anaconda3
-- module load pkg/Python/3.9.7
-- 執行時必須加註版本(python3)，否則會啟動python2 (/usr/bin/python)
 
 ## slurm commands
 
@@ -140,6 +161,8 @@ module load pnetcdf/1.12.2
     +-----------------------------------------------------------------------------+
 
 ### SBATCH
+- $1=200
+- $2=run.cctm.03.csh
 ```bash
 #sinotec2@lgn301 ~/cmaq_recommend/1901
 #$ cat ~/bin/gorun.sh 
@@ -147,18 +170,29 @@ module load pnetcdf/1.12.2
 pro="ENT111046"
 queue="ct224"
 
-module load compiler/intel/2021
-module load IntelMPI/2021
-module load hdf5/1.12
-module load netcdf/4.7.4
-module load pnetcdf/1.12.2
-
 sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --ntasks=${1} --cpus-per-task=1 --nodes=5 --ntasks-per-node=40  ${2}
 ```
+### SQUEUE
+
+```bash
+squeue|grep 'NAME|$USERNAME'
+```
+
+    $ squeue|H
+      JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+    1403160      ct56 st_archi minhuilo PD       0:00      1 (Dependency)
+    1403488      ct56       C1 ericente  R       0:30      1 cpn3605
+    1386477      ct56     vasp u9576505  R   17:07:56      1 cpn3166
+    1376874      ct56 Sheet-A1 bnbmax00  R 2-19:40:55      1 cpn3014
+    1370483      ct56 StraL7e- jimmy081  R 3-21:18:00      1 cpn3185
+    1372350      ct56  noP.txt jimmy081  R 3-16:12:19      1 cpn3062
+    1385787      ct56     vasp percy097  R   20:10:41      1 cpn3168
+    1376233     ct224 testGoPa u8926524  R 2-22:08:57      3 cpn[3493-3495]
+    1403119      ct56 config-S u5411358  R    1:23:47      1 cpn3020
+
 ### SCONTROL
 ```bash
 #scontrol show job $j
-
 ```
 ### SREPORT
   Workload Characterization Key (WCKey)
@@ -187,4 +221,14 @@ sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --
 --------- --------- ------------- ------------- ------------- ------------- ------------- ------------ 
     taiwania3 ent111046             0          5176            42             0             0      100.00% 
 
+
+### slurm-$JOB_ID.out
+- 為執行檔的standard output，會從一開始執行就累積
+  - 相對的CTM*只會記錄每日的print_out，檔案較小
+  - 可以用grepDDD檢視進度
+
+```bash
+#$ cat ~/bin/grepDDD
+grep -n DDD $(ls -rt CTM*|tail)|tail -n1
+```
 

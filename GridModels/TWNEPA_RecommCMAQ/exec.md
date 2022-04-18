@@ -86,21 +86,6 @@ LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}
 
 ## intel.sh and running scripts
 
-### Usage of module commands
-    +-----------------------------------------------------------------------------+
-    |                        Module Command Usage Information                     |
-    +-----------------------------------------------------------------------------+
-    |         Command          |           Module Comamnd Description             |
-    +-----------------------------------------------------------------------------+
-    |   $ module load [...]    |   load module(s)                                 |
-    |   $ module unload [...]  |   Remove module(s)                               |
-    |   $ module purge         |   unload all modules                             |
-    |   $ module list          |   List loaded modules                            |
-    |   $ module avail         |   List available modules                         |
-    |   $ module whatis module |   Print whatis information about module          |
-    |   $ module keyword string|   Search all name and whatis that contain string |
-    +-----------------------------------------------------------------------------+
-
 ###  intel.sh
 ```bash
 #sinotec2@clogin2 ~/cmaq_recommend
@@ -169,67 +154,4 @@ total 65K
 -rwxr-xr-x 1 sinotec2 TRI1111114 3.4K Feb 24 18:20 icon_source.csh
 -rwxr-xr-x 1 sinotec2 TRI1111114  33K Mar  4 12:38 cctm.source.v5.3.1.ae7
 ```
-
-## slurm commands
-    +-----------------------------------------------------------------------------+
-    |                   Resource Manager Command Usage Information                |
-    +-----------------------------------------------------------------------------+
-    |         Command          |                SLURM                             |
-    +-----------------------------------------------------------------------------+
-    | Submit batch jobl        | sbatch [job script]                              |
-    | Request interactive shell| srun –pty /bin/bash                              |
-    | Delete job               | scancel [job id]                                 |
-    | Queue status             | sinfo                                            |
-    | Job status               | scontrol show job [job id]                       |
-    | Node status              | scontrol show node [NodeID]                      |
-    +-----------------------------------------------------------------------------+
-
-### SBATCH
-```bash
-#sinotec2@lgn301 ~/cmaq_recommend/1901
-#$ cat ~/bin/gorun.sh 
-
-pro="ENT111046"
-queue="ct224"
-
-module load compiler/intel/2021
-module load IntelMPI/2021
-module load hdf5/1.12
-module load netcdf/4.7.4
-module load pnetcdf/1.12.2
-
-sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --ntasks=${1} --cpus-per-task=1 --nodes=5 --ntasks-per-node=40  ${2}
-```
-### SCONTROL
-```bash
-#scontrol show job $j
-
-```
-### SREPORT
-  Workload Characterization Key (WCKey)
-
-```bash
-#$ sreport cluster AccountUtilizationByUser All_Clusters accounts=ent111046 start=4/15/22 end=4/17/22 format=Accounts,Cluster,TresCount,Login,Proper,Used
-```
---------------------------------------------------------------------------------
-    Cluster/Account/User Utilization 2022-04-15T00:00:00 - 2022-04-16T23:59:59 (172800 secs)
-    Usage reported in CPU Minutes
---------------------------------------------------------------------------------
-        Account   Cluster TRES Count     Login     Proper Name     Used 
---------------- --------- ---------- --------- --------------- -------- 
-      ent111046 taiwania3          0                               5218 
-      ent111046 taiwania3          0  sinotec2        sinotec2     5218 
-
-
-```bash
-#sreport job sizesbyaccount accounts=ent111046 start=4/15/22 end=4/17/22
-```
---------------------------------------------------------------------------------
-    Job Sizes 2022-04-15T00:00:00 - 2022-04-16T23:59:59 (172800 secs)
-    Time reported in Minutes
---------------------------------------------------------------------------------
-      Cluster   Account     0-49 CPUs   50-249 CPUs  250-499 CPUs  500-999 CPUs  >= 1000 CPUs % of cluster 
---------- --------- ------------- ------------- ------------- ------------- ------------- ------------ 
-    taiwania3 ent111046             0          5176            42             0             0      100.00% 
-
 

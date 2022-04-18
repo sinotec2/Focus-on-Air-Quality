@@ -34,6 +34,7 @@ last_modified_date: 2022-04-18 11:07:17
     - twnia3.nchc.org.tw:/home/$USERNAME (100G)
     - twnia3.nchc.org.tw:/tmp/(arbitary) (100G)
 - OTP(one-time password)認證碼[顯示](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=nchc_motp_unix_account_edit)
+- scp -r $USERNAME:$HOSTNAME_1:$PATH/$FILE $USERNAME:$HOSTNAME_2:$PATH
 
 ## 執行模擬
 
@@ -45,3 +46,6 @@ last_modified_date: 2022-04-18 11:07:17
 6. Link daily and combine：~/cmaq_recommend/combine.sh
 
 ## 後處理
+1. 啟用python模組：module load pkg/Python/3.9.7
+1. 計算濃度差異：dNC old.nc out.demo.conc.nc old-new.nc &
+1. 時間空間的最大值：mxNC old-new.nc 

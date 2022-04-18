@@ -68,9 +68,14 @@ LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}
 ```
 
 ### python
-- module purge
-- module load pkg/Anaconda3
-- module load pkg/Python/3.9.7
+- @clogin2
+  - module load biology/Python3/default
+  - 為py37
+- @lgn303
+  - module purge
+  - module load pkg/Anaconda3
+  - module load pkg/Python/3.9.7
+  - 另有py37
 - 執行時必須加註版本(python3)，否則會啟動python2 (/usr/bin/python)
 
 ### 其它可用模組
@@ -146,6 +151,9 @@ LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}
 
 
 ## slurm commands
+- [slurm](https://zh.wikipedia.org/wiki/Slurm工作调度工具)是全球超級電腦或叢集電腦常用的資源調度工具，也為國網所採用。
+- [簡易指令](https://www2.nsysu.edu.tw/gpu/submit.html)
+  - screen類似tmux可以設置特定slurm環境
 
     +-----------------------------------------------------------------------------+
     |                   Resource Manager Command Usage Information                |

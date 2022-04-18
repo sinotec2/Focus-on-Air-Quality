@@ -3,7 +3,7 @@ layout: default
 title: 輸入輸出檔案管理
 parent: Recommend System
 grand_parent: CMAQ Model System
-nav_order: 1
+nav_order: 2
 date: 2022-04-18 09:28:55
 last_modified_date: 2022-04-18 09:28:58
 ---
@@ -108,3 +108,24 @@ last_modified_date: 2022-04-18 09:28:58
 | ![Old-New_dVOCs.gif](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Old-New_dVOCs.gif) |
 |:--:|
 | <b>重跑第1日與下載output的差值(VOC_logPPBC)</b>|
+
+
+
+## 磁碟機空間估算
+- 一個月輸入30G
+- 輸出(379G)、後處理(1.6G)約需381G
+- 合計約411G
+- 可減至131G
+
+
+```bash
+#kuang@DEVP /nas2/cmaqruns/2019force/output/2019-01/grid03
+#$ du_lsd .
+8.1G    ./bcon/
+287G    ./cctm.ContEms/
+486M    ./icon/
+26G     ./mcip/
+148K    ./ocean/
+59G     ./smoke/
+```
+- 單一個案、12個月估計：最大約需4.5T，至少1.5T

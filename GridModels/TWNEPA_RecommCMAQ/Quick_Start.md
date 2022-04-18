@@ -1,0 +1,47 @@
+---
+layout: default
+title: 快速啟動
+parent: Recommend System
+grand_parent: CMAQ Model System
+nav_order: 1
+date: 2022-04-18 11:07:14
+last_modified_date: 2022-04-18 11:07:17
+---
+
+# 公版模式快速啟動
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+
+## 國網帳戶設定
+- [註冊](https://iservice.nchc.org.tw/nchc_service/index.php?lang_type=#secondPage)
+- 申請新計畫/加入既有計畫
+  - [申請新計畫](https://iservice.nchc.org.tw/nchc_service/nchc_account_verify.php?return_address=767786f8-66fc-40e9-8c15-351a48c8ad2c)
+  - 加入既有計畫[會員中心>計畫管理>申請加入計畫](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=join_apply_list)    
+
+## 上傳模式及檔案
+- 位址
+  - 台灣杉1號(儲存空間位置)：140.110.148.12
+  - 台灣杉3號(計算/暫存位置)：
+    - twnia3.nchc.org.tw:/home/$USERNAME (100G)
+    - twnia3.nchc.org.tw:/tmp/(arbitary) (100G)
+- OTP(one-time password)認證碼[顯示](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=nchc_motp_unix_account_edit)
+
+## 執行模擬
+
+1. 工作目錄：~/cmaq_recommend/*yymm*
+2. 起訖時間：~/cmaq_recommend/*yymm*/project.config
+3. IO path and files:~/cmaq_recommend/*yymm*/run.cctm.03.csh
+4. LD_LIBRARY_PATH:~/cmaq_recommend/exec.sh
+5. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
+6. Link daily and combine：~/cmaq_recommend/combine.sh
+
+## 後處理

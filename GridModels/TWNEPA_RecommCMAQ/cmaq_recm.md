@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Recommed Sys. by TWN_EPA
+title: Recommend System
 parent: CMAQ Model System
 nav_order: 11
 has_children: true
@@ -12,17 +12,18 @@ last_modified_date:   2022-04-18 09:27:50
 # 環保署建議公版模式
 {: .no_toc }
 
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-- TOC
+
+{: .fs-6 .fw-300 }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
 {:toc}
-</details>
+
 ---
 
-# Quick Start
+## Quick Start
 1. 工作目錄：~/cmaq_recommend/*yymm*
 2. 起訖時間：~/cmaq_recommend/*yymm*/project.config
 3. IO path and files:~/cmaq_recommend/*yymm*/run.cctm.03.csh
@@ -30,7 +31,33 @@ last_modified_date:   2022-04-18 09:27:50
 5. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
 6. Link daily and combine：~/cmaq_recommend/combine.sh
 
-# [I/O Files](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/輸入輸出檔案管理)
+## [I/O Files](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/IO_Files)
+- input tree
+
+```bash
+#kuang@DEVP /nas2/cmaq2019/download/input/201901/grid03
+#$ tree bcon icon mcip ocean smoke
+```
+
+    bcon
+    `-- BCON_v532_Taiwan_2018359
+    icon
+    `-- ICON_v532_Taiwan_2018359
+    mcip
+    |-- GRIDBDY2D_Taiwan.nc
+    |-- GRIDCRO2D_Taiwan.nc
+    |-- GRIDDESC
+    |-- GRIDDOT2D_Taiwan.nc
+    |-- LUFRAC_CRO_Taiwan.nc
+    |-- METBDY3D_Taiwan.nc
+    |-- METCRO2D_Taiwan.nc
+    |-- METCRO3D_Taiwan.nc
+    |-- METDOT3D_Taiwan.nc
+    `-- SOI_CRO_Taiwan.nc
+    ocean
+    `-- ocean.ncf
+    smoke
+    `-- cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
 
 
 # EXEC and Libs

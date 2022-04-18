@@ -22,35 +22,60 @@ last_modified_date: 2022-04-18 09:28:58
 ---
 
 ## 背景
+- inputs and model sources
+
+```bash
+#sinotec2@clogin2 /work1/simenvipub01/download
+#$ tree
+.
+├── input
+│   ├── 201901.tar.xz
+│   ├── 201902.tar.xz
+...
+│   └── 201912.tar.xz
+└── model
+    ├── cmaq_recommend.tar.xz
+    ├── output_cctm_combine
+    │   ├── nohup.out
+    │   ├── v4.2019-01.conc.nc
+    │   ├── v4.2019-02.conc.nc
+...
+    │   └── v4.2019-12.conc.nc
+    └── post_process.tar.xz
+
+3 directories, 27 files
+#sinotec2@clogin2 /work1/simenvipub01/download
+#$ du -ach|tail -n1
+229G    total
+```
 
 ## Inputs
 - input tree
 
 ```bash
 #kuang@DEVP /nas2/cmaq2019/download/input/201901/grid03
-#$ tree bcon icon mcip ocean smoke
-```
-
-    bcon
-    `-- BCON_v532_Taiwan_2018359
-    icon
-    `-- ICON_v532_Taiwan_2018359
-    mcip
-    |-- GRIDBDY2D_Taiwan.nc
-    |-- GRIDCRO2D_Taiwan.nc
-    |-- GRIDDESC
-    |-- GRIDDOT2D_Taiwan.nc
-    |-- LUFRAC_CRO_Taiwan.nc
-    |-- METBDY3D_Taiwan.nc
-    |-- METCRO2D_Taiwan.nc
-    |-- METCRO3D_Taiwan.nc
-    |-- METDOT3D_Taiwan.nc
-    `-- SOI_CRO_Taiwan.nc
-    ocean
-    `-- ocean.ncf
-    smoke
+#$ tree |grep -v CTM
+.
+|-- bcon
+|   `-- BCON_v532_Taiwan_2018359
+|-- icon
+|   `-- ICON_v532_Taiwan_2018359
+|-- mcip
+|   |-- GRIDBDY2D_Taiwan.nc
+|   |-- GRIDCRO2D_Taiwan.nc
+|   |-- GRIDDESC
+|   |-- GRIDDOT2D_Taiwan.nc
+|   |-- LUFRAC_CRO_Taiwan.nc
+|   |-- METBDY3D_Taiwan.nc
+|   |-- METCRO2D_Taiwan.nc
+|   |-- METCRO3D_Taiwan.nc
+|   |-- METDOT3D_Taiwan.nc
+|   `-- SOI_CRO_Taiwan.nc
+|-- ocean
+|   `-- ocean.ncf
+`-- smoke
     `-- cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
-
+```
 
 ### 排放量檔案
 - 版本：2022/2/10

@@ -35,6 +35,10 @@ last_modified_date: 2022-04-18 12:26:50
   - = 0.53 元/min
 
 - 台灣杉三號運算費
+  - Reserved Queue, RQ有優先性
+  - Reserved Time Slot Queue, RTSQ最貴
+  - Non-Reserved Queue最便宜
+
 
 |類別| 費率(元/核心小時) |租用期限|
 |-|-|-|
@@ -61,3 +65,16 @@ last_modified_date: 2022-04-18 12:26:50
 - 台灣杉一號儲存費用：5000 NTD/TB/年
   - 1.5T\~4.5T 約需7.5K\~22.5K NTD/yr
 - 台灣杉三號(HFS)：4 NTD/GB/月
+
+## 批次運作規劃
+- job sequence
+  - 上載->解壓縮
+  - sbatch執行CCTM、combine
+    - 每日結果刪除只剩CCTM_A*
+  - ncks -v and ncrcat
+  - 刪除、壓縮、下載
+- 每月至少(輸入30G+CCTM_A 33G~)60G。
+  - 免費額度(200GB)可同時做3個批次
+  - input、CCTM_A放在/tmp
+  - ncks結果放在/home
+

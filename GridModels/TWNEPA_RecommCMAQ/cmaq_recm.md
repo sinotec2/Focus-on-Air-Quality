@@ -1,12 +1,12 @@
 ---
 layout: default
-title: TWNEPA Recommed System
+title: Recommed Sys. by TWN_EPA
 parent: CMAQ Model System
-nav_order: 6
+nav_order: 11
 has_children: true
-permalink: /GridModels/PTSE/
+permalink: /GridModels/TWNEPA_RecommCMAQ/
 date:               
-last_modified_date:   2021-12-02 11:08:53
+last_modified_date:   2022-04-18 09:27:50
 ---
 
 # 環保署建議公版模式
@@ -30,36 +30,9 @@ last_modified_date:   2021-12-02 11:08:53
 5. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
 6. Link daily and combine：~/cmaq_recommend/combine.sh
 
-# I/O Files
+# [I/O Files]()
 
-## Inputs
-```bash
-# ~/download/input/201901//grid03/smoke
--rwxr-xr-x 1 sinotec2 TRI1111114 1.2G Feb 10 11:07 cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.tar.gz
-# ~/cmaq_recommend/work/2019-01/grid03/cctm.raw
-#$ more run.cctm.03.csh
-...
- setenv N_EMIS_GR 2
- setenv GR_EMIS_001    ${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
- setenv GR_EMIS_002    ${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.ContEms.ncf
 
- setenv GR_EMIS_LAB_001  biotaiwan
- setenv GR_EMIS_LAB_002  tedstaiwan
-...
-# ~/download/input/201901//grid03/mcip
--rwxr-xr-x 1 sinotec2 TRI1111114 1000K May 31  2021 LUFRAC_CRO_Taiwan.nc
-```
-
-## Results
-```bash
-# results
-
-sinotec2@clogin2 /work1/simenvipub01/download/model/output_cctm_combine
--rwxrwxr-x 1 simenvipub01 TRI111490 4.8G Feb 16 21:34 v4.2019-05.conc.nc
--rwxrwxr-x 1 simenvipub01 TRI111490 4.7G Feb 24 15:48 v4.2019-01.conc.nc
--rwxrwxr-x 1 simenvipub01 TRI111490 4.7G Feb 24 16:02 v4.2019-12.conc.nc
--rw------- 1 simenvipub01 TRI111490   19 Apr  6 14:57 nohup.out
-```
 # EXEC and Libs
 
 ## executable file

@@ -39,11 +39,12 @@ last_modified_date: 2022-04-18 11:07:17
 ## 執行模擬
 
 1. 工作目錄：~/cmaq_recommend/*yymm*
-2. 起訖時間：~/cmaq_recommend/*yymm*/project.config
-3. IO path and files:~/cmaq_recommend/*yymm*/run.cctm.03.csh
-4. LD_LIBRARY_PATH:~/cmaq_recommend/exec.sh
-5. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
-6. Link daily and combine：~/cmaq_recommend/combine.sh
+2. 設定起訖時間：~/cmaq_recommend/*yymm*/project.config
+3. setting IO path and files:~/cmaq_recommend/*yymm*/run.cctm.03.csh
+4. setting LD_LIBRARY_PATH:~/cmaq_recommend/exec.sh
+5. prepare ocean.ncf:~/cmaq_recommend/work/2019-01/grid03/ocean/run.ocean.sh
+6. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
+7. Link daily and combine：~/cmaq_recommend/combine.sh
 
 ## 後處理
 1. 啟用python模組：module load pkg/Python/3.9.7

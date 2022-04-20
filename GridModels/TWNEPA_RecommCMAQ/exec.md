@@ -245,4 +245,99 @@ total 65K
 <   ( /usr/bin/time -p $MPIRUN -np $NPROCS $BLD/$EXEC ) |& tee buff_${EXECUTION_ID}.txt
 ---
 >    ${MPIRUN} -bootstrap slurm -n $SLURM_NTASKS  $BLD/$EXEC  |& tee buff_${EXECUTION_ID}.txt
-```  
+```
+
+## COMBINE 腳本
+
+### bash版本的run_combine
+- 公版的combine相對較單純，只有執行濃度部分，沉降就沒有進一步分析
+- 因為所有檔案都在同一個目錄，沒有run的區別，此處以ymd來成為疊代的變數，逐一處理每天的結果
+
+```bash
+#!/bin/bash
+cpl=intel #gcc
+if [ $cpl == "gcc" ];then
+  LD_LIBRARY_PATH=/home/cmaqruns/2016base/lib/x86_64/gcc/netcdf/lib:/opt/netcdf/netcdf4_gcc/lib:/opt/openmpi/openmpi4_gcc/lib
+  PATH=/opt/openmpi/openmpi4_gcc/bin:/usr/bin:$PATH
+  export BASE=/nas2/cmaq2019/download/model/cmaq_recommend_Gfortran/POST/combine/scripts
+elseif [ $cpl == "intel" ];then
+  LD_LIBRARY_PATH=/opt/netcdf/netcdf4_intel/lib:/opt/mpich/mpich-3.4.2-icc/lib:/opt/hdf/hdf5_intel/lib
+  PATH=/opt/mpich/mpich-3.4.2-icc/bin:/usr/bin:$PATH
+  export BASE=/nas2/cmaq2019/download/model/cmaq_recommend_ifort/POST/combine/scripts
+fi
+
+export m3input=/nas2/cmaq2019/download/input/201901/grid03
+# user define
+#> File [1]: CMAQ conc/aconc file
+#> File [2]: MCIP METCRO3D file
+#> File [3]: CMAQ APMDIAG file
+#> File [4]: MCIP METCRO2D file
+export INFILE2="${m3input}/mcip/METCRO3D_Taiwan.nc"
+export INFILE4="${m3input}/mcip/METCRO2D_Taiwan.nc"
+
+# programs
+export LC_ALL=C
+export LANG=C
+export EXEC=${BASE}/BLD_combine_v532_${cpl}/combine_v532.exe
+export GENSPEC=N
+export SPECIES_DEF=${BASE}/spec_def_files/SpecDef_cb6r3_ae7_aq.txt
+
+for i in in $(ls daily/CCTM_ACONC_v532_${cpl}_Taiwan_*);do ymd=$(echo $i|cut -d'_' -f6|cut -c1-8);echo $ymd
+export INFILE1="daily/CCTM_ACONC_v532_${cpl}_Taiwan_${ymd}.nc"
+export INFILE3="daily/CCTM_APMDIAG_v532_${cpl}_Taiwan_${ymd}.nc"
+export OUTFILE="out.${ymd}.conc.nc"
+if [ -e ${OUTFILE} ]; then
+        echo "${OUTFILE} exist..."
+        exit 1
+fi
+
+time ${EXEC}
+done
+```
+
+### SpecDef_cb6r3_ae7_aq.txt
+- 公版模式並未提供其定義檔
+- 相較USEPA之原始設定檔，公版模式多輸出6項氣象數據
+  - 雲量、雲底、雲頂高、2個溫度及平均W值
+
+- 打開VOC(此處以USEPA的設定方式計算)
+- 另創8種PM顆粒之組合
+  - 顆粒水含量、金屬物質(無汞)、OC之原生與二次分量濃度、海鹽之總量、SOC之人為與生物分量濃度、以及OTHER
+- 輸出3種PM粒徑比例
+
+```bash
+#sinotec2@lgn303 ~/cmaq_recommend/1901
+#$ diff ../POST/combine/scripts/spec_def_files/SpecDef_cb6r3_ae7_aq.txt /tmp/sinotec2/cmaq_recommend/1901/SpecDef_cb6r3_ae7_aq.txt
+#49,55c49
+< !! from v4.2019-01.conc.nc
+< CFRAC           ,1         ,CFRAC[4]
+< CLDT            ,m         ,CLDT[4]
+< CLDB            ,m         ,CLDB[4]
+< TEMP2           ,k         ,TEMP2[4]
+< TEMPG           ,k         ,TEMPG[4]
+< WBAR            ,g m-3     ,WBAR[4]
+---
+>
+#114,119c108,113
+< VOC             ,ppbC       ,1000.0* (PAR[1] +2.0*ETHA[1] +3.0*PRPA[1] +MEOH[1]\
+<                             +2.0*ETH[1] +2.0*ETOH[1] +2.0*OLE[1] +3.0*ACET[1] \
+<                             +7.0*TOL[1] +8.0*XYLMN[1] +6.0*BENZENE[1] \
+<                             +FORM[1] +3.0*GLY[1] +4.0*KET[1] +2.0*ETHY[1] \
+<                             +2.0*ALD2[1] + 2.0*ETHA[1] + 4.0*IOLE[1] + 2.0*ALDX[1]  \
+<                             +5.0*ISOP[1] + 10.0*TERP[1]+ 10.0*NAPH[1] +10.*APIN[1])
+#277,290c271
+< !! from v4.2019-01.conc.nc
+< PM25_H2O        ,ug m-3     ,AH2OI[1]*PM25AT[3]+AH2OJ[1]*PM25AC[3]+AH2OK[1]*PM25CO[3]
+< PM25_METAL      ,ug m-3     ,PM25_MG[0]+PM25_K[0]+PM25_CA[0]
+< PM25_OC_PRI     ,ugC m-3    ,APOCI[0]*PM25AT[3]+APOCJ[0]*PM25AC[3]
+< PM25_OC_SEC     ,ugC m-3    ,ASOCI[0]*PM25AT[3]+ASOCJ[0]*PM25AC[3]
+< PM25_OTHER      ,ug m-3     ,PM25_TOT[0]-(PM25_SO4[0]+PM25_NO3[0]+PM25_NH4[0] \
+<                             +PM25_OC_PRI[0]+PM25_OC_SEC[0]+PM25_METAL[0])
+< PM25_SEA        ,ug m-3     ,PM25_CL[0]+PM25_NA[0]
+< PM25_SOC_BIO    ,ug m-3     ,AORGBJ[0]*PM25AC[3]
+< PM25_SOC_MAN    ,ug m-3     ,AORGAJ[0]*PM25AC[3]
+< RAC             ,%          ,PM25AC[3]
+< RAT             ,%          ,PM25AT[3]
+< RCO             ,%          ,PM25CO[3]
+---
+```

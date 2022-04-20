@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  按日拆分m3.nc檔案
+title:  2個nc檔案間的差值
 parent:   NetCDF Relatives
 grand_parent: Utilities
-last_modified_date: 2021-12-18 20:50:01
+last_modified_date: 2022-04-20 14:50:26
 ---
-# 按日拆分m3.nc檔案(brk_day2.cs)
+# 2個nc檔案間的差值
 {: .no_toc }
 
 <details open markdown="block">

@@ -1,0 +1,44 @@
+#!/bin/csh -f
+# VBird settings
+set mydomain    = "grid03"
+set mympi       = "yes"
+set sfile       = "../../project.config"
+set sourcefile  = ../../../0000.model.source/cctm.source.v5.3.1.ae7
+
+#foreach checkfile ( ${sfile} ${sourcefile} )
+#        if ( ! -e ${checkfile}) then
+#                echo "cannot find '${checkfile}' Please check your settings."
+#                exit 1
+#        endif
+#end
+
+source ${sfile}
+set cmaqproject = ${cmaqproject}/${mydomain}
+
+#set NX = 131
+#set NY = 92
+set NY = 131
+set NX = 92
+
+# VBird settings
+# ===================================================================
+
+# setenv NPCOL_NPROW "14 10"; set NPROCS   = 140
+ setenv NPCOL_NPROW "10 20"; set NPROCS   = 200
+# set cpus = 57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86
+ set myjob   = ContEms                      # which cases
+
+# ===================================================================
+ set OUTDIR    = ${cmaqproject}/cctm.${myjob}          #> Output Directory
+
+#> Gridded Emissions files
+ setenv N_EMIS_GR 2
+ setenv GR_EMIS_001    ${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
+ setenv GR_EMIS_002    ${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.ContEms.ncf
+
+ setenv GR_EMIS_LAB_001  biotaiwan
+ setenv GR_EMIS_LAB_002  tedstaiwan
+
+ echo "force11:240" > machines8
+
+ source ${sourcefile}

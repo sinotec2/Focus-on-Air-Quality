@@ -21,13 +21,18 @@ last_modified_date: 2022-04-18 12:31:20
 </details>
 ---
 
-## executable file
+# executable file
+- 國網臺灣杉3號上的執行檔、搭配高速平行運算的程式庫
+
 ```bash
 #sinotec2@lgn301 ~/cmaq_recommend/CCTM/scripts/BLD_CCTM_v532_intel
 -rwxr-xr-x 1 sinotec2 TRI1111114  24M Nov 16 09:05 CCTM_v532.exe*
 -rwxr-xr-x 1 sinotec2 TRI1111114 18M Feb 15 15:18 cmaq_recommend/POST/combine/scripts/BLD_combine_v532_intel/combine_v532.exe
 ```
-## lib links
+# lib links
+## cmaq_recommand/lib下的連結
+### intel目錄
+
 ```bash
 #sinotec2@clogin2 ~/cmaq_recommend/lib/x86_64/intel
 # ls -lh ~/cmaq_recommend/lib/x86_64/intel
@@ -35,19 +40,24 @@ drwxr-xr-x 2 sinotec2 TRI1111114 4.0K Aug 31  2021 ioapi
 lrwxrwxrwx 1 sinotec2 TRI1111114  173 Sep 23  2021 mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/release:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib
 drwxr-xr-x 2 sinotec2 TRI1111114 4.0K May 19  2021 netcdf
 drwxr-xr-x 2 sinotec2 TRI1111114 4.0K May 19  2021 netcdff
+```
 
-
-#netcd lib
+### netcd lib
+```bash
 #sinotec2@lgn301 ~/cmaq_recommend/lib/x86_64/intel/netcdf
 lrwxrwxrwx 1 sinotec2 TRI1111114 56 May 19  2021 include -> /opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/include
 lrwxrwxrwx 1 sinotec2 TRI1111114 52 May 19  2021 lib -> /opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
 #$ ls -lrth /opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
 -rw-r--r-- 1 root root 2.9M Mar 16  2021 libnetcdf.a
 -rw-r--r-- 1 root root 975K Mar 16  2021 libnetcdff.a
-#ioapi lib
+```
+### ioapi lib
+```bash
 lrwxrwxrwx 1 sinotec2 TRI1111114 33 Aug 31  2021 include_files -> /home/joy01162002/ioapi-3.2/ioapi
 lrwxrwxrwx 1 sinotec2 TRI1111114 49 Aug 31  2021 lib -> /home/joy01162002/ioapi-3.2/Linux2_x86_64ifortmpi
-#mpi lib
+```
+### mpi lib
+```bash
 mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/release:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib
 #$ ls -lrth /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/*.a|T
 -rw-r--r-- 1 root root 9.7M Nov 12  2020 /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/libmpifort.a
@@ -59,6 +69,7 @@ mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/p
 -rwxr-xr-x 1 root root 348K Nov 12  2020 libfabric.so.1
 lrwxrwxrwx 1 root root   14 Nov 16  2020 libfabric.so -> libfabric.so.1
 ```
+
 ## Effective Libs
 ```bash
 #$ cat ~/cmaq_recommend/exec.sh

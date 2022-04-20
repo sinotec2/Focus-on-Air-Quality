@@ -143,7 +143,81 @@ echo $LD_LIBRARY_PATH
 /opt/ohpc/Taiwania3/libs/Iimpi-2021/hdf5-1.12/lib:/opt/ohpc/Taiwania3/libs/Iimpi-2021/szip-2.1.1/lib
 ```
 
-## run scripts
+## CCTM run scripts
+- 公版模式將原來USEPA提供的[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)腳本拆分成主程式、案例時間設定以及科學設定等3個部分。
+
+### 主程式([run.cctm.03.csh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.cctm.03.csh.TXT))
+- 稱之為主程式，是因為此程式會包括到其他2個設定檔，為gorun.sh的執行標的。
+- 本身也有NPROC(mpirun核心數)之設定、排放量檔案的設定等等
+
+```bash
+#kuang@DEVP /nas2/cmaq2019/download
+#$ diff ./model/cmaq_recommend/work/2019-01/grid03/cctm.raw/run.cctm.03.csh /nas2/cmaqruns/2019force/run.cctm.03.csh
+#3,6c3,8
+< set mydomain    = "grid03"
+< set mympi       = "yes"
+< set sfile       = "../../project.config"
+< set sourcefile  = ../../../0000.model.source/cctm.source.v5.3.1.ae7
+---
+> set compilerString = intel
+> set mydomain    = grid03
+> set mympi       = yes
+> set sfile       = ./project.config
+> set sourcefile  = ./cctm.source.v5.3.1.ae7
+> set CMAQ_HOME   = /nas2/cmaq2019/download/model/cmaq_recommend_ifort
+#27c29,30
+<  setenv NPCOL_NPROW "10 20"; set NPROCS   = 200
+---
+>  setenv NPCOL_NPROW "8 12"; set NPROCS   =  96
+35c38
+<  setenv N_EMIS_GR 2
+---
+>  setenv N_EMIS_GR 3
+37,39c40,41
+<  setenv GR_EMIS_002    ${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.ContEms.ncf
+<
+<  setenv GR_EMIS_LAB_001  biotaiwan
+---
+>  setenv GR_EMIS_LAB_001  bio3taiwan
+>  setenv GR_EMIS_002    ${cmaqproject}/smoke/egts_l.20181225.38.d4.ea2019_d4.ncf
+40a43,44
+>  setenv GR_EMIS_003    ${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
+>  setenv GR_EMIS_LAB_003  basetaiwan
+```
+
+### 模擬案例與時間(project.config)
+- cmaqproject：為CCTM工作目錄
+- startdate/START_DATE：為icon檔案的時間，必須在mcip、smoke等檔案時間範圍之內
+- runlen/END_DATE：執行時間，與END_DATE二者取最先到達者。
+- MCIP_START/MCIP_END：與mcip檔案一致即可
+
+```bash
+kuang@DEVP /nas2/cmaqruns/2019force
+$ cat project.config
+#!/bin/csh -f
+
+#for total settings:
+ set cmaqproject = /nas2/cmaqruns/2019force/output/2019-01
+ set startdate = 2018359        # YYYYDDD
+ set runlen    = 8400000        # HHH0000
+
+#for MCIP start and end time
+ set MCIP_START = 2018-12-25-00:00:00.0000  # [UTC]
+ set MCIP_END   = 2019-01-31-23:00:00.0000  # [UTC]
+
+#for BC startdate
+ set cmaqbcdate = ${startdate}
+
+#for IC startdate
+ set cmaqicdate = ${startdate}
+
+#for CCTM 請配合 MCIP 的時間即可！
+ set START_DATE   = "2018-12-25"
+ set END_DATE     = "2019-01-31"
+```
+
+### 科學設定檔[cctm.source.v5.3.1.ae7](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/cctm.source.v5.3.1.ae7)
+- CCTM主要的設定、科學設定全都在此，公版模式不允許更動內容。
 
 ```bash
 #inotec2@lgn301 ~/cmaq_recommend/work/0000.model.source
@@ -154,4 +228,21 @@ total 65K
 -rwxr-xr-x 1 sinotec2 TRI1111114 3.4K Feb 24 18:20 icon_source.csh
 -rwxr-xr-x 1 sinotec2 TRI1111114  33K Mar  4 12:38 cctm.source.v5.3.1.ae7
 ```
-### cctm.source.v5.3.1.ae7
+
+- 本地執行須修改項目
+  1. mpirun的位置
+  1. mpirun的執行方式
+  1. NPROCS另外在[run.cctm.03.csh]()中給定
+
+```bash
+#kuang@DEVP /nas2/cmaqruns/2019force
+#$ diff cctm.source.v5.3.1.ae7 /nas2/cmaq2019/download/model/cmaq_recommend/work/0000.model.source/cctm.source.v5.3.1.ae7
+#579,581c579
+<   set MPI = /opt/mpich/mpich-3.4.2-icc/bin
+---
+>   set MPI = /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin
+#583c581,586
+<   ( /usr/bin/time -p $MPIRUN -np $NPROCS $BLD/$EXEC ) |& tee buff_${EXECUTION_ID}.txt
+---
+>    ${MPIRUN} -bootstrap slurm -n $SLURM_NTASKS  $BLD/$EXEC  |& tee buff_${EXECUTION_ID}.txt
+```  

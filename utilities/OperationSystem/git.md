@@ -69,7 +69,29 @@ if [ -e PMF.gif ];then
   cd $cwd
 fi
 ```
+### 定期更新cmaq執行進度
+- 基本上只是個`grepDDD=grep DDD $(ls -rt CTM_LOG_000*|tail -n1)|tail -n1)`指令，顯示CTM_LOG的最後日期標籤。
+- 運用crontab每分鐘執行GT.cs(如下)、以及html的autorefresh功能，將其內容PO在[https://sinotec2.github.io/cmaqprog/](https://sinotec2.github.io/cmaqprog/)
 
+```bash
+#kuang@master /nas2/cmaqruns/2019force
+#$ cat GT.cs
+cwd=$PWD
+GT=/usr/bin/git
+if [ -e /nas2/cmaqruns/2019force/CTM_LOG_000.v532* ];then
+ cd ~/GitHubRepos/sinotec2.github.io
+ TOKEN=$(cat ~/bin/git.token)
+ DATE=$(date -d now +"%Y%m%d%H%M")
+ itm=$(ls -rt /nas2/cmaqruns/2019force/CTM_LOG_000.v532*|tail -n1)
+ echo $itm $(grep DDD $itm|tail -n1) >cmaqprog/progres.txt
+ $GT pull
+ $GT add cmaqprog/progres.txt
+ $GT commit -m "update cmaqprog/progres.txt $DATE"
+ $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git
+fi
+cd $cwd
+
+```
 
 ## Reference
 - wiki, [git](https://zh.wikipedia.org/wiki/Git), 页面最后修订于2022年3月23日 (星期三) 22:58。

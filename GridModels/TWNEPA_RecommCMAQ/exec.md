@@ -252,6 +252,7 @@ total 65K
 ### bash版本的run_combine
 - 公版的combine相對較單純，只有執行濃度部分，沉降就沒有進一步分析
 - 因為所有檔案都在同一個目錄，沒有run的區別，此處以ymd來成為疊代的變數，逐一處理每天的結果
+- 此處的程式庫為devp/dev2的gcc與intel版本
 
 ```bash
 #!/bin/bash
@@ -297,9 +298,8 @@ done
 
 ### SpecDef_cb6r3_ae7_aq.txt
 - 公版模式並未提供其定義檔
-- 相較USEPA之原始設定檔，公版模式多輸出6項氣象數據
-  - 雲量、雲底、雲頂高、2個溫度及平均W值
-
+- 相較USEPA之[原始設定檔](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)，公版模式多輸出6項氣象數據
+  - 雲量、雲底、雲頂高、2m及地表溫度、以及平均雲中水含量
 - 打開VOC(此處以USEPA的設定方式計算)
 - 另創8種PM顆粒之組合
   - 顆粒水含量、金屬物質(無汞)、OC之原生與二次分量濃度、海鹽之總量、SOC之人為與生物分量濃度、以及OTHER

@@ -45,6 +45,7 @@ last_modified_date: 2022-04-18 11:07:17
 5. prepare ocean.ncf:~/cmaq_recommend/work/2019-01/grid03/ocean/run.ocean.sh
 6. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
 7. Link daily and combine：~/cmaq_recommend/combine.sh
+8. ``
 
 ## 後處理
 1. 啟用python模組：module load pkg/Python/3.9.7

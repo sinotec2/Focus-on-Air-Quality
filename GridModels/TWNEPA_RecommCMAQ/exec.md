@@ -68,7 +68,7 @@ P1=/opt/ohpc/Taiwania3/libs/Iimpi-2020/pnetcdf-1.12.2/lib
 P2=/opt/ohpc/Taiwania3/pkg/cmp/compilers/intel/compilers_and_libraries_2017.7.259/linux/compiler/lib/intel64_lin
 P3=/opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
 P4=/opt/ohpc/Taiwania3/libs/libfabric/1.11.2/lib
-LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4} 
+LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}:$LD_LIBRARY_PATH 
 ```
 
 # scripts

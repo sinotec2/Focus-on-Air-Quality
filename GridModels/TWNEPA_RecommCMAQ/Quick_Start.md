@@ -40,14 +40,15 @@ last_modified_date: 2022-04-18 11:07:17
 
 1. 工作目錄：~/cmaq_recommend/*yymm*
 2. 設定起訖時間：~/cmaq_recommend/*yymm*/project.config
-3. setting IO path and files:~/cmaq_recommend/*yymm*/run.cctm.03.csh
-4. setting LD_LIBRARY_PATH:~/cmaq_recommend/exec.sh
+3. setting IO path and files(主程式):~/cmaq_recommend/*yymm*/[run.cctm.03.csh]()
+4. setting LD_LIBRARY_PATH:[~/cmaq_recommend/exec.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#effective-libs)
 5. prepare ocean.ncf:~/cmaq_recommend/work/2019-01/grid03/ocean/run.ocean.sh
 6. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh
 7. Link daily and combine：~/cmaq_recommend/combine.sh
-8. ``
+8. Compression：`ncrcat -4 --cnk_map nc4 --cnk_plc all -L3 $RAWFILE $CMPRSFILE`
 
 ## 後處理
 1. 啟用python模組：module load pkg/Python/3.9.7
-1. 計算濃度差異：dNC old.nc out.demo.conc.nc old-new.nc &
-1. 時間空間的最大值：mxNC old-new.nc 
+1. 設定LD_LIBRARY_PATH：[exec.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#effective-libs)
+1. 計算濃度差異：[dNC](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/dNC/) old.nc out.demo.conc.nc old-new.nc &
+1. 時間空間的最大值：[mxNC]() old-new.nc 

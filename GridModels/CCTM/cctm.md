@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CCTM
+title: CCTM Main Program
 parent: CMAQ Model System
 nav_order: 7
 has_children: true

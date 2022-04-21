@@ -90,8 +90,36 @@ if [ -e /nas2/cmaqruns/2019force/CTM_LOG_000.v532* ];then
  $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git
 fi
 cd $cwd
-
 ```
+### Off-Duty-Hour Version GT.cs
+- 離線時間（<800 or > 1750）必須透過外部主機進行git上載
+- 多了文字檔大小的判斷，如果為空白檔案，則停止執行crontab
+- crontab的實際檔案存在/var/spool/cron目錄下，必須root身分才能修改
+- 如果還需要再執行GT.cs，還是需要手動開啟crontab.
+```bash
+#kuang@centos8 /data/cmaqruns/2019base
+#$ cat GT.cs
+cwd=$PWD
+GT=/opt/anaconda3/bin/git
+HM=$(date -d now +"%H%M")
+if [ $HM -le 800 ] || [ $HM -ge 1730 ];then
+  cd ~/GitHubRepos/sinotec2.github.io
+  siz=$(wc cmaqprog/progres.txt|~/bin/awkk 2)
+  if [ $siz -gt 0 ];then
+    TOKEN=$(cat ~/bin/git.token)
+    DATE=$(date -d now +"%Y%m%d%H%M")
+    $GT pull
+    $GT add cmaqprog/progres.txt
+    $GT commit -m "update cmaqprog/progres.txt $DATE"
+    $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git
+  else
+    echo 'no CMAQ is running'
+    /usr/bin/sudo sed -i '/GT.cs/s/\*/\#\*/' /var/spool/cron/kuang
+  fi
+  cd $cwd
+fi
+```
+
 
 ## Reference
 - wiki, [git](https://zh.wikipedia.org/wiki/Git), 页面最后修订于2022年3月23日 (星期三) 22:58。

@@ -76,6 +76,15 @@ last_modified_date: 2022-04-18 09:28:58
 `-- smoke
     `-- cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
 ```
+### ICBC
+```bash
+#kuang@master /nas2/cmaq2019/download/input/201901/grid03
+#$ ll icon/*9 bcon/*9
+kuang@DEVP /nas2/cmaq2019/download/input/201901/grid03
+$ ll icon/*9 bcon/*9
+-rwxr-xr-x. 1 kuang SESAir 8678823188 Feb 25 15:00 bcon/BCON_v532_Taiwan_2018359
+-rwxr-xr-x. 1 kuang SESAir  254605196 Feb 25 14:21 icon/ICON_v532_Taiwan_2018359
+```
 
 ### 排放量檔案
 - 版本：2022/2/10
@@ -103,7 +112,6 @@ last_modified_date: 2022-04-18 09:28:58
   - WRF ARW V3.8.1
 - 全月(自前月25日起)合併成一個檔案
 - 24層高度(海上)
-
 
       [  19.973816,    59.98133 ,   120.13907 ,   241.18448 ,
         445.79684 ,   739.0711  ,  1085.8995  ,  1490.2742  ,
@@ -134,14 +142,11 @@ last_modified_date: 2022-04-18 09:28:58
 |:--:|
 | <b>重跑第1日與下載output的差值(VOC_logPPBC)</b>|
 
-
-
 ## 磁碟機空間估算
 - 一個月輸入30G
 - 輸出(379G、最少CCTM_A*需33G)、後處理(1.6G)約需381G
 - 合計約411G
 - 可減至131G
-
 
 ```bash
 #kuang@DEVP /nas2/cmaqruns/2019force/output/2019-01/grid03

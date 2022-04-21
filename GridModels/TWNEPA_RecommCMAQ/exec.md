@@ -267,16 +267,10 @@ total 65K
 
 ```bash
 #!/bin/bash
-cpl=intel #gcc
-if [ $cpl == "gcc" ];then
+cpl=gcc #COMBINE.EXE
   LD_LIBRARY_PATH=/home/cmaqruns/2016base/lib/x86_64/gcc/netcdf/lib:/opt/netcdf/netcdf4_gcc/lib:/opt/openmpi/openmpi4_gcc/lib
   PATH=/opt/openmpi/openmpi4_gcc/bin:/usr/bin:$PATH
   export BASE=/nas2/cmaq2019/download/model/cmaq_recommend_Gfortran/POST/combine/scripts
-elseif [ $cpl == "intel" ];then
-  LD_LIBRARY_PATH=/opt/netcdf/netcdf4_intel/lib:/opt/mpich/mpich-3.4.2-icc/lib:/opt/hdf/hdf5_intel/lib
-  PATH=/opt/mpich/mpich-3.4.2-icc/bin:/usr/bin:$PATH
-  export BASE=/nas2/cmaq2019/download/model/cmaq_recommend_ifort/POST/combine/scripts
-fi
 
 export m3input=/nas2/cmaq2019/download/input/201901/grid03
 # user define
@@ -294,6 +288,7 @@ export EXEC=${BASE}/BLD_combine_v532_${cpl}/combine_v532.exe
 export GENSPEC=N
 export SPECIES_DEF=${BASE}/spec_def_files/SpecDef_cb6r3_ae7_aq.txt
 
+cpl=intel #CCTM.EXE
 for i in in $(ls daily/CCTM_ACONC_v532_${cpl}_Taiwan_*);do ymd=$(echo $i|cut -d'_' -f6|cut -c1-8);echo $ymd
 export INFILE1="daily/CCTM_ACONC_v532_${cpl}_Taiwan_${ymd}.nc"
 export INFILE3="daily/CCTM_APMDIAG_v532_${cpl}_Taiwan_${ymd}.nc"

@@ -2,7 +2,7 @@
 layout: default
 title: CCTM之設定
 parent: Recommend System
-grand_parent: CCTM
+grand_parent: CCTM Main Program
 nav_order: 1
 date: 2022-04-20 20:27:59
 last_modified_date: 2022-04-20 20:28:02

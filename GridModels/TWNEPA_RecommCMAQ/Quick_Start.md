@@ -40,7 +40,7 @@ last_modified_date: 2022-04-18 11:07:17
 
 1. 工作目錄：~/cmaq_recommend/*yymm*
 2. 設定起訖時間：~/cmaq_recommend/*yymm*/project.config
-3. setting IO path and files(主程式):~/cmaq_recommend/*yymm*/[run.cctm.03.csh]()
+3. setting IO path and files(主程式):~/cmaq_recommend/*yymm*/[run.cctm.03.csh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#主程式runcctm03csh)
 4. setting LD_LIBRARY_PATH:[~/cmaq_recommend/exec.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#effective-libs)
 5. prepare ocean.ncf:~/cmaq_recommend/work/2019-01/grid03/ocean/run.ocean.sh
 6. Start mpirun：~/bin/gorun.sh 200 run.cctm.03.csh

@@ -21,6 +21,24 @@ last_modified_date: 2022-04-20 20:45:42
 </details>
 ---
 
+|項目|環境變數|US EPA|2019base|2019force|comment|
+|-|:-|:-:|:-:|:-:|-|
+|海洋飛沫|CTM_OCEAN_CHEM|Y|N|Y|由於新版WRF在外海有高估的趨勢，開啟海洋飛沫會造成高估|
+|風吹砂|CTM_WB_DUST|Y|Y|N|公版似乎不太著重PM10計算、沒有處理本土沙塵暴問題|
+|閃電NOx|CTM_LTNG_NO|N|N|N|-|
+|edyintb|KZMIN|Y|Y|Y|-|
+|沉降速度土地使用差別化|CTM_MOSAIC|N|N|N|-|
+|葉面氣孔通量差別化|CTM_FST|N|N|N|-|
+|PX模組|PX_VERSION|Y|Y|Y|-|
+|CLM模組|CLM_VERSION|N|N|N|-|
+|NOAH模組|NOAH_VERSION|N|N|N|-|
+|雙向氨沉降在線計算|CTM_ABFLUX|Y|Y|N|公版直接引入氨排放量估算值|
+|扣除肥料氨氣排放|CTM_BIDI_FERT_NH3 |Y|Y|N|直接引入就不必扣除|
+|雙向汞沉降在線計算|CTM_HGBIDI|N|N|N|(沒有涉及汞的議題)|
+|HONO表面反應|CTM_SFC_HONO|Y|Y|Y|-|
+|顆粒物重力沉降|CTM_GRAV_SETL|Y|Y|Y|-|
+|生物排放在線計算|CTM_BIOGEMIS|N|N|N|-|
+
 
 ```bash
 167 #> Science Options

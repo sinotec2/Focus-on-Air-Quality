@@ -21,13 +21,18 @@ last_modified_date: 2022-04-18 12:31:20
 </details>
 ---
 
-## executable file
+# executable file
+- 國網臺灣杉3號上的執行檔、搭配高速平行運算的程式庫
+
 ```bash
 #sinotec2@lgn301 ~/cmaq_recommend/CCTM/scripts/BLD_CCTM_v532_intel
 -rwxr-xr-x 1 sinotec2 TRI1111114  24M Nov 16 09:05 CCTM_v532.exe*
 -rwxr-xr-x 1 sinotec2 TRI1111114 18M Feb 15 15:18 cmaq_recommend/POST/combine/scripts/BLD_combine_v532_intel/combine_v532.exe
 ```
-## lib links
+# lib links
+## cmaq_recommand/lib下的連結
+### intel目錄
+
 ```bash
 #sinotec2@clogin2 ~/cmaq_recommend/lib/x86_64/intel
 # ls -lh ~/cmaq_recommend/lib/x86_64/intel
@@ -35,19 +40,24 @@ drwxr-xr-x 2 sinotec2 TRI1111114 4.0K Aug 31  2021 ioapi
 lrwxrwxrwx 1 sinotec2 TRI1111114  173 Sep 23  2021 mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/release:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib
 drwxr-xr-x 2 sinotec2 TRI1111114 4.0K May 19  2021 netcdf
 drwxr-xr-x 2 sinotec2 TRI1111114 4.0K May 19  2021 netcdff
+```
 
-
-#netcd lib
+### netcd lib
+```bash
 #sinotec2@lgn301 ~/cmaq_recommend/lib/x86_64/intel/netcdf
 lrwxrwxrwx 1 sinotec2 TRI1111114 56 May 19  2021 include -> /opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/include
 lrwxrwxrwx 1 sinotec2 TRI1111114 52 May 19  2021 lib -> /opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
 #$ ls -lrth /opt/ohpc/Taiwania3/libs/Iimpi-2021/netcdf-4.7.4/lib
 -rw-r--r-- 1 root root 2.9M Mar 16  2021 libnetcdf.a
 -rw-r--r-- 1 root root 975K Mar 16  2021 libnetcdff.a
-#ioapi lib
+```
+### ioapi lib
+```bash
 lrwxrwxrwx 1 sinotec2 TRI1111114 33 Aug 31  2021 include_files -> /home/joy01162002/ioapi-3.2/ioapi
 lrwxrwxrwx 1 sinotec2 TRI1111114 49 Aug 31  2021 lib -> /home/joy01162002/ioapi-3.2/Linux2_x86_64ifortmpi
-#mpi lib
+```
+### mpi lib
+```bash
 mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/release:/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib
 #$ ls -lrth /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/*.a|T
 -rw-r--r-- 1 root root 9.7M Nov 12  2020 /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib/libmpifort.a
@@ -59,6 +69,7 @@ mpi -> /opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/lib:/opt/ohpc/Taiwania3/p
 -rwxr-xr-x 1 root root 348K Nov 12  2020 libfabric.so.1
 lrwxrwxrwx 1 root root   14 Nov 16  2020 libfabric.so -> libfabric.so.1
 ```
+
 ## Effective Libs
 ```bash
 #$ cat ~/cmaq_recommend/exec.sh
@@ -252,6 +263,7 @@ total 65K
 ### bash版本的run_combine
 - 公版的combine相對較單純，只有執行濃度部分，沉降就沒有進一步分析
 - 因為所有檔案都在同一個目錄，沒有run的區別，此處以ymd來成為疊代的變數，逐一處理每天的結果
+- 此處的程式庫為devp/dev2的gcc與intel版本
 
 ```bash
 #!/bin/bash
@@ -297,9 +309,8 @@ done
 
 ### SpecDef_cb6r3_ae7_aq.txt
 - 公版模式並未提供其定義檔
-- 相較USEPA之原始設定檔，公版模式多輸出6項氣象數據
-  - 雲量、雲底、雲頂高、2個溫度及平均W值
-
+- 相較USEPA之[原始設定檔](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)，公版模式多輸出6項氣象數據
+  - 雲量、雲底、雲頂高、2m及地表溫度、以及平均雲中水含量
 - 打開VOC(此處以USEPA的設定方式計算)
 - 另創8種PM顆粒之組合
   - 顆粒水含量、金屬物質(無汞等重金屬)、OC之原生與二次分量濃度、海鹽之總量、SOC之人為與生物分量濃度、以及OTHER

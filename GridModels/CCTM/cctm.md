@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Post Processing
+title: CCTM
 parent: CMAQ Model System
-nav_order: 8
+nav_order: 7
 has_children: true
-permalink: /GridModels/POST/
+permalink: /GridModels/CCTM/
 ---
 
-# **CMAQ**之後處理
+# CCTM主程式之執行
 {: .no_toc }
-
+氣象、排放、與地理相關檔案既已準備妥當，就可以執行網格模式了。
 
 {: .fs-6 .fw-300 }
 

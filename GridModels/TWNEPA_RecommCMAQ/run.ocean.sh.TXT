@@ -1,0 +1,211 @@
+#!/bin/bash
+#
+# 這個程式用在處理 CMAQ 的 cb5 所需要的海洋、海岸線的製作，
+# 你需要輸入氣象資料，以及預計輸出的地點即可。
+#################################################################################
+cmaqproject=$(grep cmaqproject ../../project.config | cut -d '=' -f 2| sed 's/ //g')/grid03
+metfile="$cmaqproject"/mcip/GRIDCRO2D_Taiwan.nc
+
+rm -f land.ht.txt ocean.* zzz.*
+
+echo "準備處理的海洋資料位於: $cmaqproject"
+echo "氣象資料檔案: $metfile"
+
+
+#################################################################################
+# 0.1 先測試氣象檔案是否存在？
+if [ ! -e "$metfile" ]; then
+	echo "氣象檔案 '$metfile' 不存在！"
+	exit 1
+fi
+
+# 0.2 測試一下輸出的目錄是否存在？
+outfile="$cmaqproject/ocean/ocean.ncf"
+if [ -e "$outfile" ]; then
+	echo "預計輸出的檔案檔名：'$outfile' 已經存在，請先刪除他！"
+	exit 1
+else
+	mkdir -p $cmaqproject/ocean
+fi
+
+
+#################################################################################
+# 1. 先找出所需要的相關網格參數再說：
+out_row=`ncdump -h $metfile | grep 'ROW =' | awk '{print $3}'`
+out_col=`ncdump -h $metfile | grep 'COL =' | awk '{print $3}'`
+
+echo $out_row
+echo $out_col
+
+
+#################################################################################
+# 2. 開始將氣象檔內的地表高度給他輸出！
+ncdump -b c $metfile -v HT -p 7 -l 2000  | \
+        grep '^  *[0-9\-]'  | sed 's/,//g' | \
+        awk '{for (j=1;j<=NF;j++) printf "%10.5f",$j} {printf "\n", ""}' > land.ht.txt
+
+
+#################################################################################
+# 3. 開始產生 fortran 的檔案來處理：
+echo "	program ocean
+	implicit 	none			! 宣告變數必須要有設定
+	integer 	col, row		! 網格點啦！
+	real		ht(120,140)		! 由氣象資料檔案讀出來的地面高度
+	integer		mask1(120,140)		! 底下三個為我們的 ocean 所需要的資料啦！
+	real		surf1(120,140)
+	real		open1(120,140)
+	integer		i, j, k, x, y, z
+
+	col = $out_col
+	row = $out_row
+
+	open ( unit = 1, file = 'land.ht.txt' )
+	do 100 j = 1, row
+	  read ( 1, \"(120F10.5)\") (ht(i,j),i=1,col)
+100	continue
+	close (1)
+
+	do 200 i = 1, $out_col
+	  do 200 j = 1, $out_row
+	    if ( ht(i,j) .lt. 1 ) then	! 當為海平面時的情況
+		mask1(i,j) = 2			! open ocean
+		surf1(i,j) = 0.			! 沒有海岸線
+		open1(i,j) = 1.			! 海面所佔的比例
+	    endif
+C	    if ( ht(i,j) .ge. 0.1 .and. 
+C&	         ht(i,j) .lt. 10 ) then		! 有海岸線的情況下
+C		mask1(i,j) = 1
+C		surf1(i,j) = 0.001389
+C		open1(i,j) = 0.5
+C	    endif
+	    if ( ht(i,j) .ge. 1 ) then	! 視陸地的情況
+		mask1(i,j) = 0
+		surf1(i,j) = 0
+		open1(i,j) = 0
+	    endif
+200	continue
+
+	open ( unit = 1, file = 'zzz.mask' )
+	open ( unit = 2, file = 'zzz.surf' )
+	open ( unit = 3, file = 'zzz.open' )
+
+	do 300 j = 1, row
+	  write (1,10000) (mask1(i,j),i=1,col)
+	  write (2,10010) (surf1(i,j),i=1,col)
+	  write (3,10010) (open1(i,j),i=1,col)
+300	continue
+
+10000	format ( ${out_col}I12 )
+10010	format ( ${out_col}F12.5 )
+
+	end "		> ocean.f
+
+	gfortran -o ocean.exe ocean.f
+	./ocean.exe
+
+
+#################################################################################
+# 重新編寫那三個新成立的檔案去！
+headline=$(( `wc -l zzz.mask | awk '{print $1}'` - 1 ))
+head -n $headline zzz.mask | awk '{for (j=1;j<=NF;j++) printf "%10s%s",$j, ","} {printf "\n", ""}'  	> zzz.mask.txt
+temp=`tail -n 1 zzz.mask | awk '{for (j=1;j<=NF;j++) printf "%10s%s",$j, ","} {printf "\n", ""}' `
+echo ${temp%,*}												>> zzz.mask.txt
+head -n $headline zzz.surf | awk '{for (j=1;j<=NF;j++) printf "%10.5f%s",$j, ","} {printf "\n", ""}' 	> zzz.surf.txt
+temp=`tail -n 1 zzz.surf | awk '{for (j=1;j<=NF;j++) printf "%10s%s",$j, ","} {printf "\n", ""}' `
+echo ${temp%,*}												>> zzz.surf.txt
+head -n $headline zzz.open | awk '{for (j=1;j<=NF;j++) printf "%10.5f%s",$j, ","} {printf "\n", ""}' 	> zzz.open.txt
+temp=`tail -n 1 zzz.open | awk '{for (j=1;j<=NF;j++) printf "%10s%s",$j, ","} {printf "\n", ""}' `
+echo ${temp%,*}												>> zzz.open.txt
+
+
+#################################################################################
+# 最後輸出結果
+echo "netcdf ocean.ncf {"  	>  ocean.cdl
+echo "dimensions:"		>> ocean.cdl
+echo "	TSTEP = 1 ;
+	DATE-TIME = 2 ;
+	LAY = 1 ;
+	VAR = 3 ;
+	ROW = $out_row ;
+	COL = $out_col ;"	>> ocean.cdl
+echo "variables:
+	int TFLAG(TSTEP, VAR, DATE-TIME) ;
+		TFLAG:units = \"<YYYYDDD,HHMMSS>\" ;
+		TFLAG:long_name = \"TFLAG           \" ;
+		TFLAG:var_desc = \"Timestep-valid flags:  (1) YYYYDDD or (2) HHMMSS                                \" ;
+	float MASK(TSTEP, LAY, ROW, COL) ;
+		MASK:long_name = \"MASK            \" ;
+		MASK:units = \"none            \" ;
+		MASK:var_desc = \"2=open ocean, 1=coastline, 0=other                                              \" ;
+	float SURF(TSTEP, LAY, ROW, COL) ;
+		SURF:long_name = \"SURF            \" ;
+		SURF:units = \"none            \" ;
+		SURF:var_desc = \"surf zone area / total area                                                     \" ;
+	float OPEN(TSTEP, LAY, ROW, COL) ;
+		OPEN:long_name = \"OPEN            \" ;
+		OPEN:units = \"none            \" ;
+		OPEN:var_desc = \"open ocean area / total area                                                    \" ;"	>> ocean.cdl
+echo "// global attributes:" 	>> ocean.cdl
+echo "		:IOAPI_VERSION = \"$Id: \@\(#\) ioapi library version 3.0 \$    \" ;"	>> ocean.cdl
+echo "		:EXEC_ID = \"OCEAN  \" ;"						>> ocean.cdl
+echo "		:FTYPE = 1 ;"			>> ocean.cdl
+echo "		:CDATE = `date +%Y%j` ;"	>> ocean.cdl
+myhh=$(date +%k)
+mymm=$(date +%M | sed 's/^0//g' )
+myss=$(date +%S | sed 's/^0//g' )
+out_second=$(( $myhh * 3600 + $mymm * 60 + $myss ))
+echo "		:CTIME = $out_second ; "	>> ocean.cdl
+echo "		:WDATE = `date +%Y%j` ;"	>> ocean.cdl
+echo "		:WTIME = $out_second ; "	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':SDATE'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':STIME'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':TSTEP'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':NTHIK'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':NCOLS'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':NROWS'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':NLAYS'`"	>> ocean.cdl
+echo "		:NVARS = 3 ; "			>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':GDTYP'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':P_ALP'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':P_BET'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':P_GAM'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':XCENT'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':YCENT'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':XORIG'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':YORIG'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':XCELL'`"	>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':YCELL'`"	>> ocean.cdl
+echo "		:VGTYP = -9999 ; "		>> ocean.cdl
+echo "		:VGTOP = 10000.f ; "		>> ocean.cdl
+echo "`ncdump -h $metfile | grep ':VGLVLS'`"	>> ocean.cdl
+echo "		:GDNAM = \"Taiwan_OCEAN\" ; "	>> ocean.cdl
+echo "		:UPNAM = \"Taiwan\" ; "		>> ocean.cdl
+echo "		:VAR-LIST = \"MASK            SURF            OPEN            \" ; " 	>> ocean.cdl
+echo "		:FILEDESC = \"Gridded Landuse Totals?\" ; "				>> ocean.cdl
+echo "		:HISTORY = \"\" ; "		>> ocean.cdl
+echo "data:"					>> ocean.cdl
+echo 						>> ocean.cdl
+echo " TFLAG =
+  // TFLAG(1-2 ,1,1)
+    0, 0,
+  // TFLAG(1-2 ,2,1)
+    0, 0,
+  // TFLAG(1-2 ,3,1)
+    0, 0 ;"					>> ocean.cdl
+echo						>> ocean.cdl
+echo " MASK = "					>> ocean.cdl
+cat zzz.mask.txt				>> ocean.cdl
+echo " ; "					>> ocean.cdl
+echo 						>> ocean.cdl
+echo " SURF = "					>> ocean.cdl
+cat zzz.surf.txt				>> ocean.cdl
+echo " ; "					>> ocean.cdl
+echo 						>> ocean.cdl
+echo " OPEN = "					>> ocean.cdl
+cat zzz.open.txt				>> ocean.cdl
+echo " ; "					>> ocean.cdl
+echo " } "					>> ocean.cdl
+
+ncgen -o $outfile ocean.cdl
+
+rm -f land.ht.txt ocean.* zzz.*

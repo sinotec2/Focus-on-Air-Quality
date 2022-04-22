@@ -25,24 +25,30 @@ last_modified_date: 2022-04-18 13:17:43
 - OTP的輸入需要在瀏覽器登入國網、進入主機管理網頁、按下「顯示」、並且在30秒內執行點選(double click)、Ctrl-C複製、切回ssh登入界面、Ctrl-V貼上，過程還蠻緊張的，貼慢一點就得重來。
 - [教材](https://drive.google.com/drive/mobile/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX?usp=sharing)中提到國網OTP的相機掃描功能(設定如下圖1)，是利用瀏覽器自動填入密碼提供的方便門
   - 有Microsoft會員帳號的用戶，使用[Edge]()及Authenticator for Microsoft Edge
-  - 使用google帳戶及Chrome者，下載[authenticator擴充套件](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai)  
+  - 使用google帳戶及Chrome者，下載[authenticator擴充套件](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai) ，Firefox則要下載[另外的套件](https://addons.mozilla.org/zh-TW/firefox/addon/auth-helper/?src=external-github) 
 - 下載Authenticator後、在瀏覽器設定處(右上方選單)啟用該延伸功能
-  - 點選圖2的icon後會告知還沒有設定使用者帳號，點選[-]方塊將國網右上方二維條碼納入(內容為登入使用者名稱、只需執行一次)
-  - 點選右上方二維條碼icon(圖2)便可隨時顯示6位數OTP(圖3)，點一次即複製。
-    - 下次就不必再登入國網的網頁(只需登入瀏覽器google/firefox/microsoft會員)
+  - 點選圖2的icon後會告知還沒有設定使用者帳號
+    - 點選[-]方塊(掃描QR code)將國網右上方二維條碼納入
+    - 內容為登入使用者名稱
+    - 只需執行一次
+  - 點選右上方二維條碼icon(圖2)便可**隨時**顯示6位數OTP(圖3)，點一次即複製。
+    - 下次就不必再登入國網的網頁
+    - 只需登入瀏覽器google/firefox/microsoft會員)
     - 藍色數字表示正常
-    - 如果出現紅字表示最後3秒鐘、可以等等再點一次
-  - 再到ssh登入對話框貼上即可
+    - 如果出現紅字表示最後3秒鐘、可以等等、再點一次
+  - 再到ssh登入對話框，貼上(shift-Insert)數字即可
   
 | ![OTP_iphone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/OTP_iphone.PNG) |
 |:--:|
 | <b>圖1以手機相機取得國網OTP並由Edge自動填入</b>|
 
-- 瀏覽器
+- 啟動延伸套件後，在瀏覽器右上方會出現套件的icon(小二維碼)
 
 | ![chrome_extend.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/chrome_extend.PNG) |
 |:--:|
 | <b>圖2啟動Chrome Authenticator擴充套件後右上方出現icon </b>|
+
+- 登記使用者及網域後，點選icon後就會出現6位數字。只要在數字上點選1次就會複製到剪貼簿。
 
 | ![6digit.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/6digit.PNG) |
 |:--:|

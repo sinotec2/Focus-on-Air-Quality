@@ -82,3 +82,9 @@ last_modified_date: 2022-04-18 12:26:50
   - input放在/tmp，輪流複製到$HOME進行模擬
   - ncks結果暫時放在/tmp，再慢慢scp回到local
 
+## [ms EDGE](https://www.microsoft.com/zh-tw/edge)與相機掃描
+- [教材](https://drive.google.com/drive/mobile/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX?usp=sharing)中提到國網OTP的相機掃瞄功能(設定如下圖)，是針對有Microsoft會員帳號的用戶提供的方便門
+
+| ![OTP_iphone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/OTP_iphone.PNG) |
+|:--:|
+| <b>以手機相機取得國網OTP並由Edge自動填入</b>|

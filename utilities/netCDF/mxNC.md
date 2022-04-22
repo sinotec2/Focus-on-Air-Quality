@@ -24,7 +24,7 @@ last_modified_date: 2022-04-22 11:04:44
 ## Coding
 - 只有1個引數，就是IOAPI之netCDF檔案名稱
 - 將會輸出**時間**最大值檔案
-- 螢幕會顯示各項變數**時空**的最大值。不會存檔，請自行redirect到文件檔、或其他的pipeline指令。
+- 螢幕會顯示各項變數**時空**的最大值。不會存檔，請自行redirect到文件檔、或其他的pipeline指令(如*grep*)。
 
 ```python
 #$ cat ~/bin/mxNC

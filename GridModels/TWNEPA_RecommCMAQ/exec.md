@@ -243,7 +243,8 @@ total 65K
 - 本地執行須修改項目
   1. mpirun的位置
   1. mpirun的執行方式
-  1. NPROCS另外在[run.cctm.03.csh]()中給定
+  1. NPROCS(處理器個數)另外在[run.cctm.03.csh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#主程式runcctm03csh)中給定
+    - 經驗證NRPOCS設定與濃度結果無關，與計算效率有關(多設有損)。
 
 ```bash
 #kuang@DEVP /nas2/cmaqruns/2019force

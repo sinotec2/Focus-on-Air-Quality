@@ -153,7 +153,14 @@ echo $LD_LIBRARY_PATH
 #echo $LD_LIBRARY_PATH|grep -i hdf
 /opt/ohpc/Taiwania3/libs/Iimpi-2021/hdf5-1.12/lib:/opt/ohpc/Taiwania3/libs/Iimpi-2021/szip-2.1.1/lib
 ```
+## run.ocean.sh
+- 這支簡單的腳本是用來產生海洋飛沫模擬所需的海陸遮罩檔案
+- 只需執行一次。每執行批次複製(連結)即可
+- 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下
 
+```bash
+
+```
 ## CCTM run scripts
 - 公版模式將原來USEPA提供的[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)腳本拆分成主程式、案例時間設定以及科學設定等3個部分。
 

@@ -46,8 +46,10 @@ py37                  *  /opt/anaconda3/envs/py37
 |:--:|
 | <b>圖1空品性能評估工具程式庫、數據檔案目錄架構</b>|
 
-### [AirEva_Taiwan_d4.py]()
-- 此程式由環保署委託單位撰寫、提供 
+### [AirEva_Taiwan_d4.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/AirEva_Taiwan_d4.py)
+- 此程式由環保署委託單位撰寫、提供。 
+  - 對話框出現後輸入年月(ex:2019-01)
+  - 按法規架構區分北、中、雲、南、東等6區分別評估
 
 ```python
 # kuang@DEVP /nas2/cmaq2019/download/model/post_process/Performance/Perf_Tools/Air_Evaluate_tool/Taiwan_d4
@@ -143,3 +145,66 @@ py37                  *  /opt/anaconda3/envs/py37
 89
 90  print('finish')
 ```
+- 結果
+  - 按照分析日期單獨建立目錄
+  - 其下按照前述6區分別儲存
+  - 每個空品區以下按照臭氧及PM分別儲存污染物總表
+  - 每個污染項目、每一測站分別詳列驗證結果
+
+```bash
+#kuang@master /nas2/cmaq2019/download/model/post_process/Performance/Perf_Tools/Air_Evaluate_tool/Taiwan_d4/Data/Evaluate/2022-04-14-10-40-23( 2019-01)
+$ tree
+.
+|-- 中部
+|   |-- O3
+|   |   |-- 201901_NMHC_(for O3).csv
+|   |   |-- 201901_NO2_(for O3).csv
+|   |   `-- 201901_O3_(for O3).csv
+|   `-- PM
+|       |-- 201901_NO2_(for PM).csv
+|       |-- 201901_PM10_(for PM).csv
+|       |-- 201901_PM25_(for PM).csv
+|       `-- 201901_SO2_(for PM).csv
+|-- 北部
+|   |-- O3
+|   |   |-- 201901_NMHC_(for O3).csv
+|   |   |-- 201901_NO2_(for O3).csv
+|   |   `-- 201901_O3_(for O3).csv
+|   `-- PM
+|       |-- 201901_NO2_(for PM).csv
+|       |-- 201901_PM10_(for PM).csv
+|       |-- 201901_PM25_(for PM).csv
+|       `-- 201901_SO2_(for PM).csv
+|-- 東部
+|   |-- O3
+|   |   |-- 201901_NMHC_(for O3).csv
+|   |   |-- 201901_NO2_(for O3).csv
+|   |   `-- 201901_O3_(for O3).csv
+|   `-- PM
+|       |-- 201901_NO2_(for PM).csv
+|       |-- 201901_PM10_(for PM).csv
+|       |-- 201901_PM25_(for PM).csv
+|       `-- 201901_SO2_(for PM).csv
+|-- 南部
+|   |-- O3
+|   |   |-- 201901_NMHC_(for O3).csv
+|   |   |-- 201901_NO2_(for O3).csv
+|   |   `-- 201901_O3_(for O3).csv
+|   `-- PM
+|       |-- 201901_NO2_(for PM).csv
+|       |-- 201901_PM10_(for PM).csv
+|       |-- 201901_PM25_(for PM).csv
+|       `-- 201901_SO2_(for PM).csv
+`-- 雲嘉
+    |-- O3
+    |   |-- 201901_NMHC_(for O3).csv
+    |   |-- 201901_NO2_(for O3).csv
+    |   `-- 201901_O3_(for O3).csv
+    `-- PM
+        |-- 201901_NO2_(for PM).csv
+        |-- 201901_PM10_(for PM).csv
+        |-- 201901_PM25_(for PM).csv
+        `-- 201901_SO2_(for PM).csv
+```
+
+evalEO3.PNG

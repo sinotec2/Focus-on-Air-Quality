@@ -62,6 +62,10 @@ last_modified_date: 2022-04-18 12:26:50
 - 全年job billing=1200*0.53～600元
 
 ## 儲存空間
+- 免費空間
+  - 台灣杉1/3號(計算/暫存位置)：
+  - /home/$USERNAME (100G)
+  - /tmp/(arbitary) (100G、但不能用做為Slurm執行之IO、連結也不能)
 - 台灣杉一號儲存費用：5000 NTD/TB/年
   - 1.5T\~4.5T 約需7.5K\~22.5K NTD/yr
 - 台灣杉三號(HFS)：4 NTD/GB/月
@@ -75,6 +79,6 @@ last_modified_date: 2022-04-18 12:26:50
   - 刪除、壓縮、下載
 - 每月至少(輸入30G+CCTM_A 33G~)60G。
   - 免費額度(200GB)可同時做3個批次
-  - input、CCTM_A放在/tmp
-  - ncks結果放在/home
+  - input放在/tmp，輪流複製到$HOME進行模擬
+  - ncks結果暫時放在/tmp，再慢慢scp回到local
 

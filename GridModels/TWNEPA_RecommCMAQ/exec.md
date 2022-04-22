@@ -304,11 +304,11 @@ done
 ```
 
 ### SpecDef_cb6r3_ae7_aq.txt
-- 公版模式並未提供其定義檔
-- 相較USEPA之[原始設定檔](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)，公版模式多輸出6項氣象數據
+- 公版模式並未提供其定義檔(SpecDef_cb6r3_ae7_aq.txt.epa)
+- 相較USEPA之[原始設定檔](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)，公版模式的濃度結果(ncdump結果)多輸出6項氣象數據
   - 雲量(CLD)、雲底(CLDB)、雲頂高(CLDT)、2m(TEMP2)及地表溫度(TEMPG)、以及平均雲中水含量(WBAR)
-- 打開VOC(此處以[USEPA的設定方式](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)計算)
-- 另創8種PM顆粒之組合
+- 打開VOC(此處以[USEPA的設定方式](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/#species_def檔案之設定)計算)
+- 另創8種PM顆粒之組合，應為學術論文比較所需。
   - 顆粒水含量、金屬物質(非汞等重金屬)、OC之原生與二次分量濃度、海鹽之總量、SOC之人為與生物分量濃度、以及OTHER
 - 輸出3種PM粒徑比例
 

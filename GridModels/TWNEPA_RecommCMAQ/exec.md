@@ -157,7 +157,7 @@ echo $LD_LIBRARY_PATH
 - 這支簡單的腳本是用來產生海洋飛沫模擬所需的海陸遮罩檔案
 - 只需執行一次。每執行批次複製(連結)即可
 - 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下(作者為鳥哥)
-- 讀取GRIDCRO2D_Taiwan.nc檔案內的高度輸出成暫存檔land.ht.txt
+- 讀取GRIDCRO2D_Taiwan.nc檔案內的地形高度HT輸出成暫存檔land.ht.txt
 - 將網格等數據寫成fortran檔案、編譯(gfortran)、並將高度大於1m之網格視為陸地、將數據輸出成文字檔。
 - 經整理後將文字檔整理成ncdump順利之文字檔(ocean.cdl)，以ncgen將文字檔轉成ioapi之nc檔。
 
@@ -170,9 +170,9 @@ ncgen -o $outfile ocean.cdl
   - 以GRIDCRO2D做為模版，python處理好後以ncrename更名即可
 
 ## CCTM run scripts
-- 公版模式將原來USEPA提供的[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)腳本拆分成主程式、案例時間設定以及科學設定等3個部分。
+- 公版模式將原來USEPA提供的[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)腳本拆分成主程式、案例時間設定以及科學設定等**3**個部分。
 
-### 主程式([run.cctm.03.csh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.cctm.03.csh.TXT))
+### 1. 主程式([run.cctm.03.csh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.cctm.03.csh.TXT))
 - 稱之為主程式，是因為此程式會包括到其他2個設定檔，為gorun.sh的執行標的。
 - 本身也有NPROC(mpirun核心數)之設定、排放量檔案的設定等等
 
@@ -211,7 +211,7 @@ ncgen -o $outfile ocean.cdl
 >  setenv GR_EMIS_LAB_003  basetaiwan
 ```
 
-### 模擬案例與時間(project.config)
+### 2. 模擬案例與時間(project.config)
 - cmaqproject：為CCTM工作目錄
 - startdate/START_DATE：為icon檔案的時間，必須在mcip、smoke等檔案時間範圍之內
 - runlen/END_DATE：執行時間，與END_DATE二者取最先到達者。
@@ -242,8 +242,8 @@ $ cat project.config
  set END_DATE     = "2019-01-31"
 ```
 
-### 科學設定檔[cctm.source.v5.3.1.ae7](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/cctm.source.v5.3.1.ae7)
-- CCTM主要的設定、科學設定全都在此，公版模式不允許更動內容。
+### 3. 科學設定檔[cctm.source.v5.3.1.ae7](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/cctm.source.v5.3.1.ae7)
+- CCTM主要的執行檔、科學設定全都在此，國網上執行公版模式不需更動內容。
 
 ```bash
 #inotec2@lgn301 ~/cmaq_recommend/work/0000.model.source
@@ -254,12 +254,12 @@ total 65K
 -rwxr-xr-x 1 sinotec2 TRI1111114 3.4K Feb 24 18:20 icon_source.csh
 -rwxr-xr-x 1 sinotec2 TRI1111114  33K Mar  4 12:38 cctm.source.v5.3.1.ae7
 ```
-
+- CCTM科學設定的內容詳見[science_setting](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/CCTM/science/)
 - 本地執行須修改項目
   1. mpirun的位置
   1. mpirun的執行方式
   1. NPROCS(處理器個數)另外在[run.cctm.03.csh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#主程式runcctm03csh)中給定
-    - 經驗證NRPOCS設定與濃度結果無關，與計算效率有關(多設有損)。
+    - (經驗證NRPOCS設定與濃度結果無關，與計算效率有關、多設有損。)
 
 ```bash
 #kuang@DEVP /nas2/cmaqruns/2019force

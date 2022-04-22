@@ -362,6 +362,10 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
    209	 
    210	 exit()
 ```
-
+## bash版本
+- 詳見[公版combine.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#combine-腳本)
+  - 當月所有日數都在同一目錄
+  - 沒有處理沉降量
+  
 ## Reference
 - Aitken Nuclei - an overview \| ScienceDirect Topics (n.d.). Available at [sciencedirect](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) (Accessed 3 January 2022).

@@ -263,7 +263,8 @@ total 65K
 ### bash版本的run_combine
 - 公版的combine相對較單純，只有執行濃度部分，沒有進一步分析沉降量
 - 因為所有檔案都在同一個目錄，沒有run的區別，此處以ymd來成為疊代的變數，逐一處理每天的結果
-- 此處的程式庫為devp/dev2的gcc與intel版本
+- 此處的程式庫為devp/dev2的gcc版本
+- USEPA版本的詳細介紹可以見[CMAQ綜合空品項目之計算(combine)](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)說明
 
 ```bash
 #!/bin/bash

@@ -156,11 +156,19 @@ echo $LD_LIBRARY_PATH
 ## run.ocean.sh
 - 這支簡單的腳本是用來產生海洋飛沫模擬所需的海陸遮罩檔案
 - 只需執行一次。每執行批次複製(連結)即可
-- 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下
+- 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下(作者為鳥哥)
+- 讀取GRIDCRO2D_Taiwan.nc檔案內的高度輸出成暫存檔land.ht.txt
+- 將網格等數據寫成fortran檔案、編譯(gfortran)、並將高度大於1m之網格視為陸地、將數據輸出成文字檔。
+- 經整理後將文字檔整理成ncdump順利之文字檔(ocean.cdl)，以ncgen將文字檔轉成ioapi之nc檔。
 
 ```bash
-
+ncgen -o $outfile ocean.cdl
 ```
+- 原腳本200多行、運用gfortran、ncdump、ncgen等似無需如此複雜、可行改法
+  - 以土地使用檔案中LUFRAC_CRO_Taiwan.nc第17種水體、扣除第21種湖河沼澤即可、或(及)
+  - 以python nc.createVariable創新的變數名稱、或
+  - 以GRIDCRO2D做為模版，python處理好後以ncrename更名即可
+
 ## CCTM run scripts
 - 公版模式將原來USEPA提供的[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)腳本拆分成主程式、案例時間設定以及科學設定等3個部分。
 

@@ -39,10 +39,10 @@ last_modified_date: 2022-04-18 11:07:17
 ## 執行模擬
 
 1. 工作目錄：~/cmaq_recommend/*yymm*
-2. 設定起訖時間：~/cmaq_recommend/*yymm*/project.config
+2. 設定起訖時間：~/cmaq_recommend/*yymm*/[project.config](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#模擬案例與時間projectconfig)
 3. setting IO path and files(主程式):~/cmaq_recommend/*yymm*/[run.cctm.03.csh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#主程式runcctm03csh)
 4. setting LD_LIBRARY_PATH:[~/cmaq_recommend/exec.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#effective-libs)
-5. prepare ocean.ncf:~/cmaq_recommend/work/2019-01/grid03/ocean/[run.ocean.sh]()
+5. prepare ocean.ncf:~/cmaq_recommend/work/2019-01/grid03/ocean/[run.ocean.sh](combine.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#runoceansh))
 6. Start mpirun：[~/bin/gorun.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/module_slurm/#sbatch) 200 [run.cctm.03.csh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#主程式runcctm03csh)
 7. Link daily and combine：~/cmaq_recommend/[combine.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#combine-腳本)
 8. Compression：`ncrcat -4 --cnk_map nc4 --cnk_plc all -L3 $RAWFILE $CMPRSFILE`

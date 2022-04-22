@@ -32,7 +32,7 @@ last_modified_date: 2022-04-18 11:07:17
   - 台灣杉1號(儲存空間位置)：140.110.148.11\~12
   - 台灣杉3號(計算/暫存位置)：
     - twnia3.nchc.org.tw:/home/$USERNAME (100G)
-    - twnia3.nchc.org.tw:/tmp/(arbitary) (100G)
+    - twnia3.nchc.org.tw:/tmp/(arbitary) (100G不能做為Slurm執行之IO、連結也不能)
 - OTP(one-time password)認證碼[顯示](https://iservice.nchc.org.tw/module_page.php?module=nchc_service#nchc_service/nchc_service.php?action=nchc_motp_unix_account_edit)
 - scp -r $USERNAME:$HOSTNAME_1:$PATH/$FILE $USERNAME:$HOSTNAME_2:$PATH
 

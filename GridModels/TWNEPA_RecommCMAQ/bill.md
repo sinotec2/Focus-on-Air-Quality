@@ -82,16 +82,18 @@ last_modified_date: 2022-04-18 12:26:50
   - input放在/tmp，輪流複製到$HOME進行模擬
   - ncks結果暫時放在/tmp，再慢慢scp回到local
 
-## 與相機掃描
+## 相機掃描與瀏覽器擴充功能
+- OTP的輸入需要在30秒內執行點選(double click)、Ctrl-C複製、切回ssh登入界面、Ctrl-V貼上，過程還蠻緊張的，貼慢一點就得重來。
 - [教材](https://drive.google.com/drive/mobile/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX?usp=sharing)中提到國網OTP的相機掃描功能(設定如下圖1)，是利用瀏覽器自動填入密碼提供的方便門
   - 有Microsoft會員帳號的用戶，使用[Edge]()及Authenticator for Microsoft Edge
-  - 使用google帳戶及Chrome者，下載[authenticator擴充套件](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai)
-  - 
-- 下載Authenticator後在瀏覽器設定處啟用該延伸功能，
-  - 點選[-]方塊將國網右上方二維條碼納入(內容為登入使用者名稱、只需執行一次)
-  - 點選右上方二維條碼icon(圖2)便可隨時顯示6位數OTP(圖3)，點一次即複製
+  - 使用google帳戶及Chrome者，下載[authenticator擴充套件](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai)  
+- 下載Authenticator後、在瀏覽器設定處(右上方選單)啟用該延伸功能
+  - 點選圖2的icon後會告知還沒有設定使用者帳號，點選[-]方塊將國網右上方二維條碼納入(內容為登入使用者名稱、只需執行一次)
+  - 點選右上方二維條碼icon(圖2)便可隨時顯示6位數OTP(圖3)，點一次即複製。
+    - 藍色數字表示正常
+    - 如果出現紅字表示時限快到、可以等等再點一次
   - 再到ssh登入對話框貼上即可
-- 
+  
 | ![OTP_iphone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/OTP_iphone.PNG) |
 |:--:|
 | <b>圖1以手機相機取得國網OTP並由Edge自動填入</b>|

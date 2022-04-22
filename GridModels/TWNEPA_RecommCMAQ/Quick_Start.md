@@ -48,7 +48,7 @@ last_modified_date: 2022-04-18 11:07:17
 8. Compression：`ncrcat -4 --cnk_map nc4 --cnk_plc all -L3 $RAWFILE $CMPRSFILE`
 
 ## 後處理
-1. 啟用python模組：module load pkg/Python/3.9.7
-1. 設定LD_LIBRARY_PATH：[exec.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#effective-libs)
+1. 讀出combine.sh逐日檔其中之法規污染項目：[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs)、ncrcat整合全月結果
+1. 啟用python模組：module load pkg/Python/3.9.7 
 1. 計算濃度差異：[dNC](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/dNC/) old.nc out.demo.conc.nc old-new.nc &
-1. 時間空間的最大值：[mxNC]() old-new.nc 
+1. 時間空間的最大值：[mxNC](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/mxNC/) old-new.nc 

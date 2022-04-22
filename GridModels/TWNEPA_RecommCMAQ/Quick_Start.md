@@ -52,3 +52,7 @@ last_modified_date: 2022-04-18 11:07:17
 1. 啟用python模組：[module](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/module_slurm/#usage-of-module-commands) load pkg/Python/3.9.7 
 1. 計算濃度差異：[dNC](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/dNC/) old.nc out.demo.conc.nc old-new.nc &
 1. 時間空間的最大值：[mxNC](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/mxNC/) old-new.nc 
+
+## Reference and Material
+- 台灣杉3號lgn303:/tmp/sinotec2
+- [教育訓練教材](https://drive.google.com/drive/mobile/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX?usp=sharing)

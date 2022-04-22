@@ -29,7 +29,7 @@ last_modified_date: 2022-04-18 11:07:17
 
 ## 上傳模式及檔案
 - 位址
-  - 台灣杉1號(儲存空間位置)：140.110.148.12
+  - 台灣杉1號(儲存空間位置)：140.110.148.11\~12
   - 台灣杉3號(計算/暫存位置)：
     - twnia3.nchc.org.tw:/home/$USERNAME (100G)
     - twnia3.nchc.org.tw:/tmp/(arbitary) (100G)

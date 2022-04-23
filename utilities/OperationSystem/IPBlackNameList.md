@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Mac網路設定及服務
+title: 自動添加並啟用IP黑名單
 parent:   Operation System
 grand_parent: Utilities
 ---

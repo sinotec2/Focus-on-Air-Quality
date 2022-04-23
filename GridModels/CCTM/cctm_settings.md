@@ -39,20 +39,20 @@ CCTM的執行過程採用c-shell的環境變數進行設定，因此必須使用
     4. 在線排放之設定(未測試)
     5. 程序分析之設定(未測試)
     6. 輸出檔案名稱(不建議修改)
-4. 執行環境有關之設定
+4. 執行有關之環境設定
     1. 控制程式之環境變數設定(不建議修改)
     2. 執行環境資源與路徑設定(視機器而異)
 ### 範例位置
 https://github.com/sinotec2/cmaq_relatives/blob/master/run_cctmMM_RR_DM.csh
 
 
-CCTM編譯相關設定
+## CCTM編譯相關設定
 除非測試不同編譯的差異、或移轉到不同電腦平台上，否則這一段應無修改的必要。
 設定內容 包括：
 1. 編譯程式(範例為gcc)。由於netCDF、IOAPI等都必須同一編譯軟體進行編譯，因此其選項為系統性須配套。
 2. CCTM編譯環境(範例為/opt/CMAQ_Project/config_cmaq.csh $compiler $compilerVrsn)
 3. 連結程式庫位置(範例為/opt/netcdf/netcdf4_gcc/lib)
-4. 偵錯階段可以打開DIAG_LVL，否則設為0有較少的輸出(範例為setenv CTM_DIAG_LVL 0)
+4. 偵錯階段可以打開DIAG_LVL，否則設為0，有較少的輸出(範例為setenv CTM_DIAG_LVL 0)
 - 範例
 
 ```bash
@@ -83,7 +83,7 @@ CCTM編譯相關設定
  35  setenv LD_LIBRARY_PATH /opt/netcdf/netcdf4_gcc/lib
  36  cd $CMAQ_HOME
 ```
-
+## 總體設定
 ### 時間、空間及反應機制設定，執行程式位置設定
 CCTM的執行是由粗網格執行後再進行細網格、時間上也是分月、分批次(與wrf相同)進行，此處以引數方式輸入。
 反應機制與執行程式除非偵錯或敏感性測試階段、或移轉到不同電腦平台上，否則其位置應無修改的必要。
@@ -271,8 +271,7 @@ CCTM的執行是由粗網格執行後再進行細網格、時間上也是分月�
 ```
 ### 時間步階、容錯範圍與科學設定
 為使模式有比較性，這段盡量使用內設值，應無修改的必要。
-設定內容
-包括：
+設定內容詳見[CCTM之科學設定](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/CCTM/science/)，包括：
 1. 同步時間步階：縮短時間步階可提高正確性。加長步階秒數可有效使用CPU。
 2. CTM_OCEAN_CHEM（海洋飛沫在風大時會增加PM10濃度、尚未測試）
 3. CTM_WB_DUST（風蝕揚塵、可能會與TEDS重複，未測試）
@@ -391,6 +390,7 @@ CCTM的執行是由粗網格執行後再進行細網格、時間上也是分月�
 249 set LUpath    = $INPDIR/land                        #> BELD landuse data for windblown dust model
 250 set SZpath    = $INPDIR/land                        #> surf zone file for in-line seaspray emissions
 ```
+## 逐日之設定
 ### 逐日迴圈之準備及啟動
 - CCTM.exe為每24小時模擬的方式來進行，在同一批次內的4天中，依序進行4次的CCTM.exe。
 - 批次檔內以當日(TODAY)及昨日(YESTERDAY)2日輪轉方式來簡化換日的檔名問題。
@@ -576,6 +576,7 @@ EMISSCTRL_NML之設定
 398
 ```
 ### 在線排放之設定
+- 呼應前述[科學設定](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/CCTM/science/)，此處提供每日數據。
 - 在線排放會逐時讀取氣象數據(雲雨、風速、氣溫等)來計算當時的排放量，此部分尚未測試。
 - 設定內容 包括：
 1. 雷電NOx
@@ -637,7 +638,7 @@ EMISSCTRL_NML之設定
 程序分析是空氣品質管理很重要的模擬工作，包括模式程序分析、來源分配解析、以及硫份追蹤3個部分，目前都還未開啟。
 設定內容 包括：
 1. CTM_PROCAN 程序分析
-2. CTM_ISAM 來源分配解析
+2. CTM_ISAM [來源分配解析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/run_isamMM_RR_DM/)
 3. STM_SO4TRACK硫份追蹤
 - 範例
 
@@ -645,16 +646,6 @@ EMISSCTRL_NML之設定
 445 #> Inline Process Analysis
 446   setenv CTM_PROCAN N        #> use process analysis [ default: N]
 447   if ( $?CTM_PROCAN ) then   # $CTM_PROCAN is defined
-448      if ( $CTM_PROCAN == 'Y' || $CTM_PROCAN == 'T' ) then
-449 #> process analysis global column, row and layer ranges
-450 #       setenv PA_BCOL_ECOL "10 90"  # default: all columns
-451 #       setenv PA_BROW_EROW "10 80"  # default: all rows
-452 #       setenv PA_BLEV_ELEV "1  4"   # default: all levels
-453         setenv PACM_INFILE ${NMLpath}/pa_${MECH}.ctl
-454         setenv PACM_REPORT $OUTDIR/"PA_REPORT".${YYYYMMDD}
-455      endif
-456   endif
-457
 448      if ( $CTM_PROCAN == 'Y' || $CTM_PROCAN == 'T' ) then
 449 #> process analysis global column, row and layer ranges
 450 #       setenv PA_BCOL_ECOL "10 90"  # default: all columns
@@ -713,19 +704,21 @@ EMISSCTRL_NML之設定
 * 檔名因與後處理有關，「不建議」任何修改
 * 高空層數
     * 如用做下一網格子系統的邊界值，「必須」有3D的輸出
-    * 如果沒有下一網格子系統，可以只輸出第一層，以減省磁碟機空間。
-        * 無設定：將會輸出所有層數
+    * 如果沒有下一網格子系統(IC/BC會需要完整層數)，可以只輸出第一層，以減省磁碟機空間。
+        * 無設定（整句加註）：將會輸出所有層數
         * 1 1：只輸出第1層、地面層
     * 影響所及之設定
 
-```bash
-run_cctmMM_RR_DM.csh:   setenv CONC_BLEV_ELEV " 1 1" #> CONC file layer range; comment to write all layers to CONC
-run_cctmMM_RR_DM.csh:   setenv ACONC_BLEV_ELEV " 1 1" #> ACONC file layer range; comment to write all layers to ACONC
-run_cctmMM_RR_DM.csh:setenv APMDIAG_BLEV_ELEV "1 1"  #> layer range for average pmdiag = NLAYS
-run_cctmMM_RR_DM.csh:#       setenv PA_BLEV_ELEV "1  4"   # default: all levels
-run_cctmMM_RR_DM.csh:       setenv ISAM_BLEV_ELEV " 1 1"
-run_cctmMM_RR_DM.csh:       setenv AISAM_BLEV_ELEV " 1 1"
-```
+|Variable|Setting|default|Line#|
+|-|:-:|-|:-:|
+|CONC_BLEV_ELEV|" 1 1"|all layers|151|
+|ACONC_BLEV_ELEV|" 1 1"|all layers|156|
+|APMDIAG_BLEV_ELEV|(according to ACONC)|NLAYS|226|
+|PA_BLEV_ELEV|"1  4"|all levels|452|
+|ISAM_BLEV_ELEV|" 1 1"|all levels|463|
+|AISAM_BLEV_ELEV|" 1 1"|all levels|464|
+
+
 - 範例
 
 ```bash
@@ -832,11 +825,12 @@ run_cctmMM_RR_DM.csh:       setenv AISAM_BLEV_ELEV " 1 1"
 600   endif
 601
 ```
-
+## 執行有關之環境設定
 ### 控制程式之環境變數設定
+- 起始日時、時間長度與步階、IC/BC/OMI及光解數據
 - 污染物名稱定義
 - 光化學反應與係數
-- 無修改的必要。
+- 此段應無修改的必要，只要確定連結得到正確的檔案
 - 範例
 
 ```bash
@@ -873,7 +867,7 @@ run_cctmMM_RR_DM.csh:       setenv AISAM_BLEV_ELEV " 1 1"
 632
 ```
 
-## 執行環境資源與路徑設定
+### 記憶體與路徑設定、執行程式
 - 執行程式所需電腦的環境資源，一般用unlimit控制，須視機器的情況來設定。
 - 此外mpi的路徑也不同，須考量EXE編譯程式版本配套使用。
 - 設定內容 包括：

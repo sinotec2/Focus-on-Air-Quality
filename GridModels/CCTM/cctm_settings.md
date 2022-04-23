@@ -56,6 +56,16 @@ https://github.com/sinotec2/cmaq_relatives/blob/master/run_cctmMM_RR_DM.csh
 - 範例
 
 ```bash
+  1 #!/bin/csh -f
+  2
+  3 # ===================== CCTMv5.3 Run Script ========================= 
+  4 # Usage: run.cctm >&! cctm_v53.log &                                
+  5 #
+  6 # To report problems or request help with this script/program:     
+  7 #             http://www.epa.gov/cmaq    (EPA CMAQ Website)
+  8 #             http://www.cmascenter.org  (CMAS Website)
+  9 # ===================================================================  
+ 10 # ===================================================================
  11 # ===================================================================
  12 #> Runtime Environment Options
  13 # ===================================================================

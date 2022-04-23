@@ -120,6 +120,7 @@ pvsc.set_index('ip').to_csv('~/bin/BlockIP/IP_count.csv')
 - 以[osascript](https://support.apple.com/zh-tw/guide/terminal/trml1003/mac)出現在consol的對話框來提醒注意
 - 將每個存取超過500次的IP列到pf.conf檔案裏
 - 最後啟動（更新）pfctl
+
 ```python
 #kuang@114-32-164-198 ~/bin/BlockIP
 #$ cat ana_accHr.py

@@ -66,7 +66,15 @@ make install 2>&1 | tee mi.txt
 - 裝置[ssh-askpass](https://ishm.idv.tw/?p=53)
   - 為了讓使用者有安全的通訊協定之外，ssh-askpass還提供了遠端登入、遠端傳遞檔案、遠端執行命令、以及為 rsync 和 rdist 提供安全通道等功能。
   - [How To Install openssh-askpass on CentOS 7](https://installati.one/centos/7/openssh-askpass/)，雖然工作站間已經設定好免密登入，但執行mpirun時仍會需要執行ssh-askpass。正常的centos是不會自帶的，需要安裝。
+- machinefile
 
+```bash
+#kuang@dev2 /nas2/cmaqruns/2019force/output/2019-01
+#$ cat machinefile
+DEVP:10
+dev2:10
+```
+- 執行指令：`time $MPIRUN -f machinefile -np 20 $EXEC`
 
 ## Reference
 - dywang.csie.cyut.edu.tw, [SSH 免密碼登入](https://dywang.csie.cyut.edu.tw/dywang/security/node84.html), 2020-05-19

@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  工作站防火牆管理
-parent:   ParallelComputation
+parent:   Parallel Computation
 grand_parent: Utilities
 last_modified_date: 2022-04-25 12:20:36
 ---

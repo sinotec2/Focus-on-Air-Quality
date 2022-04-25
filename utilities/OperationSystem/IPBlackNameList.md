@@ -69,30 +69,46 @@ tail $f
   - 所提供的付費服務方案是給一月之內詢問15萬次的用戶。這裏即使每小時詢問10次，一天240次，應該也不會造成業者的負擔（最後沒有使用在日常作業，不論是哪裡來的存取、不合理就必須阻擋）。
   - 在該網免費註冊會即可得到**TOKE**，在每次詢問時必須提供。
   - 該業者也將[python程式庫](https://github.com/ipinfo/python)提供出來,會方便很多。但是Mac裝置不成功，只好保留以curl程式下載文字、再詳細分析IP位置的內容（dip）。
+- 程式除了讀取完整的存取log檔，也分析當時的登入地點，這樣可以即時了解網站是否被駭。
 
 ```python
 from pandas import *
-pvs2=read_csv('~/bin/BlockIP/IP_count.csv')
+import subprocess
+from datetime import datetime,timedelta
+import sys, os
+import numpy as np
+
+def wrt_csv(lines,fname):
+  ip=[i.split()[0] for i in lines]
+  tflag=[i.split()[3].replace('[','') for i in lines]
+  dates=[i.split(':')[0] for i in tflag]
+  df=DataFrame({'ip':ip,'time':tflag,'date':dates})
+  pv=pivot_table(df,index=['ip','date'],values='time',aggfunc='count').reset_index()
+  pvc=pivot_table(pv,index='ip',values='date',aggfunc='count').reset_index()
+  pvs=pivot_table(pv,index='ip',values='time',aggfunc='sum').reset_index()
+  pvsc=merge(pvc,pvs,on='ip')
+  pvsc=pvsc.sort_values('time',ascending=False).reset_index(drop=True)
+  pvsc['city']=[0 for i in range(len(pvsc))]
+  for i in range(min(10,len(pvsc))):
+    ii=pvsc.ip[i]
+    lst=subprocess.check_output('curl -s ipinfo.io/'+ii+'\?token=TOKEN',shell=True).decode('utf8').split('\n')
+    itm=[j.split('"')[1] for j in lst if len(j)>1]
+    val=[j.split('"')[3] for j in lst if len(j)>1]
+    dip={it:va for it,va in zip(itm,val)}
+    pvsc.loc[i,'city']=dip['city']
+  pvsc.set_index('ip').to_csv(fname)
+  return 0
 with open('/usr/local/var/log/httpd/access_log','r') as f:
   lines=[i for i in f]
-ip=[i.split()[0] for i in lines]
-tflag=[i.split()[3].replace('[','') for i in lines]
-dates=[i.split(':')[0] for i in tflag]
-df=DataFrame({'ip':ip,'time':tflag,'date':dates})
-pv=pivot_table(df,index=['ip','date'],values='time',aggfunc='count').reset_index()
-pvc=pivot_table(pv,index='ip',values='date',aggfunc='count').reset_index()
-pvs=pivot_table(pv,index='ip',values='time',aggfunc='sum').reset_index()
-pvsc=merge(pvc,pvs,on='ip')
-pvsc=pvsc.sort_values('time',ascending=False).reset_index(drop=True)
-pvsc['city']=[0 for i in range(len(pvsc))]
-for i in range(10):
-  ii=pvsc.ip[i]
-  lst=subprocess.check_output('curl ipinfo.io/'+ii+'\?token=TOKEN',shell=True).decode('utf8').split('\n')
-  itm=[j.split('"')[1] for j in lst if len(j)>1]
-  val=[j.split('"')[3] for j in lst if len(j)>1]
-  dip={it:va for it,va in zip(itm,val)}
-  pvsc['city'][i]=dip['city']
-pvsc.set_index('ip').to_csv('~/bin/BlockIP/IP_count.csv')
+fname='~/bin/BlockIP/IP_count.csv'
+r=wrt_csv(lines,fname)
+
+TF=(datetime.now()+timedelta(hours=0)).strftime("%d/%b/%Y:%H")
+accfname='/usr/local/var/log/httpd/access_log'
+lines=subprocess.check_output('/usr/bin/grep --color=never  "'+TF+'" '+accfname,shell=True).decode('utf8').split('\n')
+lines=[i for i in lines if len(i)>1]
+fname='~/bin/BlockIP/IP_count'+TF.replace('/','_')+'.csv'
+r=wrt_csv(lines,fname)
 ```
 
 |ip|date|time|location|

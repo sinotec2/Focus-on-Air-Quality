@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  mpich installation
-parent:   ParallelComputation
+title:  重新編譯mpich 
+parent:   Parallel Computation
 grand_parent: Utilities
 last_modified_date: 2022-04-25 12:20:36
 ---
-# mpich
+# 重新編譯mpich
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,8 +19,12 @@ last_modified_date: 2022-04-25 12:20:36
 
 ---
 ## 背景
-- MPICH(High-Performance Portable MPI)、原名MPICH2，是免費提供的，便攜式的實施MPI，用於消息傳遞用於並行計算中使用分佈式內存應用的標準的程式庫。
+- MPICH(High-Performance Portable MPI)、原名MPICH2、是免費提供的、便攜式的MPI方案，用於傳遞消息並行計算中使用分佈式內存應用的標準的程式及程式庫。
 - MPICH是由美國政府組織開發的具有某些公共領域組件的免費開源軟件，可用於大多數類Unix操作系統
+- 何時會需要重新編譯mpich
+  - 更新編譯器：種類或版本
+  - 更新mpich版本
+  - 啟用更多nodes、欲啟用溝通設備或方式時
 
 ## 安裝
 - 由於MPICH的核心程式及程式庫都與編譯器緊迫連結，必須按照編譯器版本進行安裝。

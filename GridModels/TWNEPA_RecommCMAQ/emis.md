@@ -55,8 +55,24 @@ last_modified_date: 2022-04-18 09:28:58
   1. 可以個別開啟PinG模組，對新污染源有較好的處理。
 - 處理程式可以運用既有的[pt_timvar.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/PTSE/#pt_timvarpy)與[pt_const.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/PTSE/#pt_constpy)
 
-### 轉接程式
+### 程式邏輯
+- 程式仍以CAMx點源檔案為主要運作的平台，理由有幾：
+  - 與過去環評接軌
+  - 背景點源資料庫已經整理成該格式檔案，大多數計畫是基於既有廠，由既有資料庫中汲取數據還是比較方便可靠。
+  - 處理結果也可以給CAMx模式執行
+  - 程式只需稍加修改即可、既有程式仍然可用
 
+### 輸入輸出與執行順序
+- 輸入檔案：
+  - 環評CAMx點源檔案`fortBE.14.hsinda.1.h80.n5.09Mp`
+  - TEDS11背景點源檔案`'../twn/fortBE.413_teds11.ptse'+mo+'.nc‘`
+- OS程式：`ncks`
+- 暫存檔：單一點源空白模版（CAMx格式）：`New3G.ptse00.nc`  
+- 結果：`'New3G.ptse'+mo+'.nc'`
+- 後續處理：
+  1. 由CAMx點源檔案讀取煙囪條件，存成CCTM點源常數檔案：`../twn/pt_constLL.py `
+  1. 由CAMx點源檔案讀取逐時排放，存成CCTM點源暫態檔案：`../twn/pt_timvarLL.py `
+### 程式碼  
 ```python
 kuang@114-32-164-198 ~
 $ cat mk_ptAdd3G.py
@@ -137,3 +153,6 @@ for m in range(12):
 #  os.system(python+' ../twn/pt_constLL.py '+fnameO)
 #  os.system(python+' ../twn/pt_timvarLL.py '+fnameO)
 ```
+
+### 成果檢核
+- 因2點源檔案沒有空間顯示軟體可供檢核，只能以ncdump直接打開檢查內容數字。

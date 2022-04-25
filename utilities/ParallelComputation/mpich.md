@@ -19,7 +19,7 @@ last_modified_date: 2022-04-25 12:20:36
 
 ---
 ## 背景
-- MPICH(High-Performance Portable MPI)、原名MPICH2、是免費提供的、便攜式的MPI方案，用於傳遞消息並行計算中使用分佈式內存應用的標準的程式及程式庫。
+- [MPICH](https://baike.baidu.hk/item/MPICH/7488372) (High-Performance Portable MPI)、原名MPICH2、是免費提供的、便攜式的MPI方案，用於傳遞消息並行計算中使用分佈式內存應用的標準的程式及程式庫。
 - MPICH是由美國政府組織開發的具有某些公共領域組件的免費開源軟件，可用於大多數類Unix操作系統
 - 何時會需要重新編譯mpich
   - 更新編譯器：種類或版本
@@ -38,6 +38,7 @@ last_modified_date: 2022-04-25 12:20:36
 ### 安裝
 - 為傳統的configure->make->make install程序
 - 執行前注意準備好編譯器執行檔及程式庫所需的路徑
+- 目標路徑(--prefix)：如果是**跨機器**的架構，可以考慮放在網路磁碟機。如果沒有，**跨機器**執行時也必須在每一台工作站上相同位置複製一份。
 - 此處以ifort為例
   - 指定環境變數FC及CC為機器上的ifort及icc
 
@@ -60,6 +61,13 @@ make install 2>&1 | tee mi.txt
   - Its interfaces target high- bandwidth, low-latency NICs([network interface controller](https://zh.wikipedia.org/wiki/%E7%BD%91%E5%8D%A1)), with a goal to scale to **tens of thousands of nodes**. 
   - Libfabric is supported by a variety of open source HPC middleware applications, including **MPICH**, **Open MPI**, Sandia SHMEM, Open SHMEM, Charm++, GasNET, Clang, UPC, and others. 
 
-- https://installati.one/centos/7/openssh-askpass/
+## mpirun的**跨機器**執行
+- 使用者必須在各機器間能夠[免密登入](https://dywang.csie.cyut.edu.tw/dywang/security/node84.html)。
+- 裝置[ssh-askpass](https://ishm.idv.tw/?p=53)
+  - 為了讓使用者有安全的通訊協定之外，ssh-askpass還提供了遠端登入、遠端傳遞檔案、遠端執行命令、以及為 rsync 和 rdist 提供安全通道等功能。
+  - [How To Install openssh-askpass on CentOS 7](https://installati.one/centos/7/openssh-askpass/)，雖然工作站間已經設定好免密登入，但執行mpirun時仍會需要執行ssh-askpass。正常的centos是不會自帶的，需要安裝。
+
+
 ## Reference
+- dywang.csie.cyut.edu.tw, [SSH 免密碼登入](https://dywang.csie.cyut.edu.tw/dywang/security/node84.html), 2020-05-19
 - chenhh, [MPICH安裝與設定](https://chenhh.gitbooks.io/parallel_processing/content/mpi/mpich_setting.html)，此說明為Ubuntu直接安裝執行檔與程式庫。

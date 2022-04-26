@@ -155,28 +155,47 @@ for m in range(12):
 #  os.system(python+' ../twn/pt_timvarLL.py '+fnameO)
 ```
 
-### 移轉到公版座標系統
-- 援引一個smoke的結果檔案，從中讀取座標系統設定值
+### 移轉到公版座標系統與時間標籤
+- 援引一個smoke的結果檔案，從中讀取座標系統設定、以及時間標籤值
 - const、timvar 二個檔案都必須修改檔案屬性
   - 使用`exec`指令以迴圈修改
   - const檔案有點源的位置、COL/ROW值，也必須按照新的座標系統定位
+  - timvar檔案則需修改TFLAG時間標籤的內容與長度
+- 注意
+  1. 點源檔案的NCOLS及NROWS 2屬性有不一樣的定義，不能被一般檔案覆蓋過去。
+  1. COL、ROW是整數，而不是實數
 
 ```python
 import netCDF4
 from pyproj import Proj
 import numpy as np
-atts=['P_ALP', 'P_BET', 'P_GAM', 'XCELL', 'XCENT', 'XORIG', 'YCELL', 'YCENT', 'YORIG']
+atts=['SDATE','STIME', 'P_ALP', 'P_BET', 'P_GAM', 'XCELL', 'XCENT', 'XORIG', 'YCELL', 'YCENT', 'YORIG']
 
 fname='cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf'
 nc0 = netCDF4.Dataset(fname,'r')
+tflag0=nc0['TFLAG'][:,0,:]
+nt0=len(tflag0[:,0])
 
+# time-variable data
 fname='New3G.1901.timvar.nc'
 nc = netCDF4.Dataset(fname,'r+')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]
+
+#update the attributes
 for i in atts:
   if i not in dir(nc0):continue
   exec('nc.'+i+'=nc0.'+i)
+
+#change/lengthen the time flags
+for t in range(nt0):
+  for dt in range(2):
+    nc['TFLAG'][t,:,dt]=tflag0[t,dt]
+#also the values of emissions    
+for v in V[3]:
+  nc[v][:,0,0,0]=nc[v][0,0,0,0]
 nc.close()
 
+#stack parameters
 fname='New3G.1901.const.nc'
 nc = netCDF4.Dataset(fname,'r+')
 for i in atts:

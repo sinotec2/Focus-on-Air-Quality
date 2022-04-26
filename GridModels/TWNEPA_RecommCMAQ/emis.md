@@ -210,5 +210,35 @@ nc['ROW'][0,0,:,0]=np.array((y0[:]-nc.YORIG)/nc.YCELL,dtype=int)
 nc.close()
 ```
 
-### 成果檢核
+## 成果檢核
 - 因2點源檔案沒有空間顯示軟體可供檢核，只能以ncdump直接打開檢查內容數字。
+- 也可使用下列程式讀成json檔案
+
+### pt2json.py
+- 將CCTM點源檔案讀成json的程式
+- 引數：const/timvar前之ROOT(含年月,eg `'New3G.1901'`)
+
+```python
+import os,sys, json
+import netCDF4
+
+ROOT=sys.argv[1]
+
+dd={}
+fnames=[ROOT+i+'.nc' for i in ['.const','.timvar']]
+fnameO=ROOT+'.json'
+for fname in fnames:
+  nc = netCDF4.Dataset(fname,'r')
+  V=[list(filter(lambda x:nc[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+  for v in V[3]:
+    if nc[v][0,0,0,0]==0.:continue
+    dd.update({v:str(nc[v][0,0,0,0].flatten()[0])})
+
+with open(fnameO,'w',newline='') as jsonfile:
+  json.dump(dd, jsonfile)
+```
+- 得到結果如下
+
+```json
+{"COL": "30", "IFIP": "1000", "ISTACK": "1", "LATITUDE": "22.843828", "LMAJOR": "1", "LONGITUDE": "120.205605", "ROW": "38", "STKCNT": "1", "STKDM": "11.0", "STKFLW": "7.6913733", "STKHT": "80.0", "STKTK": "363.0", "STKVE": "-22.721462", "XLOCA": "20405.605", "YLOCA": "-230769.28", "NO": "1.2660064", "NO2": "0.14066738", "PMOTHR": "5.680801", "SO2": "0.22570312"}
+```

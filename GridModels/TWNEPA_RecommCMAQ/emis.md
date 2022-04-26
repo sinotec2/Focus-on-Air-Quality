@@ -73,6 +73,7 @@ last_modified_date: 2022-04-18 09:28:58
   1. 由CAMx點源檔案讀取煙囪條件，存成CCTM點源常數檔案：`../twn/pt_constLL.py `
   1. 由CAMx點源檔案讀取逐時排放，存成CCTM點源暫態檔案：`../twn/pt_timvarLL.py `
 ### 程式碼  
+
 ```python
 kuang@114-32-164-198 ~
 $ cat mk_ptAdd3G.py

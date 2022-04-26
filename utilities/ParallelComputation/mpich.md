@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  重新編譯mpich 
+title:  mpich編譯及應用 
 parent:   Parallel Computation
 grand_parent: Utilities
 last_modified_date: 2022-04-25 12:20:36
 ---
-# 重新編譯mpich
+# mpich編譯及應用
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,14 +19,15 @@ last_modified_date: 2022-04-25 12:20:36
 
 ---
 ## 背景
-- [MPICH](https://baike.baidu.hk/item/MPICH/7488372) (High-Performance Portable MPI)、原名MPICH2、是免費提供的、便攜式的MPI方案，用於傳遞消息並行計算中使用分佈式內存應用的標準的程式及程式庫。
+- [MPICH](https://baike.baidu.hk/item/MPICH/7488372) (MPI  derived from Chameleon)、原名MPICH2、是免費提供的、便攜式的[MPI方案](https://zh.wikipedia.org/wiki/訊息傳遞介面)，用於傳遞消息並行計算中使用分佈式內存應用的標準的程式及程式庫。
 - MPICH是由美國政府組織開發的具有某些公共領域組件的免費開源軟件，可用於大多數類Unix操作系統
 - 何時會需要重新編譯mpich
   - 更新編譯器：種類或版本
   - 更新mpich版本
   - 啟用更多nodes、欲啟用溝通設備或方式時
+- [openmpi](https://www.open-mpi.org/)為另一常用的MPI種類，主要為大學間開放平台所發展，經常應用於全球最快的超級電腦，二者在局部比較似乎以[MPICH較快些](https://users.open-mpi.narkive.com/ZE5vyikd/ompi-performance-mpich2-vs-openmpi)
 
-## 安裝
+## 安裝與編譯
 - 由於MPICH的核心程式及程式庫都與編譯器緊迫連結，必須按照編譯器版本進行安裝。
   - 因此如果是[直接安裝]，要注意其內設的fortran/c 編譯器種類及版本
   - 一般是GNU，可以執行mpifort --version檢視
@@ -66,15 +67,19 @@ make install 2>&1 | tee mi.txt
 - 裝置[ssh-askpass](https://ishm.idv.tw/?p=53)
   - 為了讓使用者有安全的通訊協定之外，ssh-askpass還提供了遠端登入、遠端傳遞檔案、遠端執行命令、以及為 rsync 和 rdist 提供安全通道等功能。
   - [How To Install openssh-askpass on CentOS 7](https://installati.one/centos/7/openssh-askpass/)，雖然工作站間已經設定好免密登入，但執行mpirun時仍會需要執行ssh-askpass。正常的centos是不會自帶的，需要安裝。
-- machinefile
+- 編輯machinefile
 
 ```bash
 #kuang@dev2 /nas2/cmaqruns/2019force/output/2019-01
 #$ cat machinefile
-DEVP:10
-dev2:10
+DEVP:96
+dev2:96
 ```
-- 執行指令：`time $MPIRUN -f machinefile -np 20 $EXEC`
+- 所有的機器都需要相同版本的mpirun程式與程式庫、以及相同的路徑
+- 將所需的程式庫(compiler、netcdf、hd5、mpi、等)，存放在共用的網路磁碟機
+- 設定環境變數`LD_LIBRARY_PATH`
+  - 注意：csh必須`setenv`，只`set`不能作用
+- 執行指令：`time $MPIRUN -f machinefile -np 192  $EXEC`
 
 ## Reference
 - dywang.csie.cyut.edu.tw, [SSH 免密碼登入](https://dywang.csie.cyut.edu.tw/dywang/security/node84.html), 2020-05-19

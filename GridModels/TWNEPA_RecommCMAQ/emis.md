@@ -155,5 +155,41 @@ for m in range(12):
 #  os.system(python+' ../twn/pt_timvarLL.py '+fnameO)
 ```
 
+### 移轉到公版座標系統
+- 援引一個smoke的結果檔案，從中讀取座標系統設定值
+- const、timvar 二個檔案都必須修改檔案屬性
+  - 使用`exec`指令以迴圈修改
+  - const檔案有點源的位置、COL/ROW值，也必須按照新的座標系統定位
+
+```python
+import netCDF4
+from pyproj import Proj
+import numpy as np
+atts=['P_ALP', 'P_BET', 'P_GAM', 'XCELL', 'XCENT', 'XORIG', 'YCELL', 'YCENT', 'YORIG']
+
+fname='cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf'
+nc0 = netCDF4.Dataset(fname,'r')
+
+fname='New3G.1901.timvar.nc'
+nc = netCDF4.Dataset(fname,'r+')
+for i in atts:
+  if i not in dir(nc0):continue
+  exec('nc.'+i+'=nc0.'+i)
+nc.close()
+
+fname='New3G.1901.const.nc'
+nc = netCDF4.Dataset(fname,'r+')
+for i in atts:
+  if i not in dir(nc0):continue
+  exec('nc.'+i+'=nc0.'+i)
+pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
+lat,lon=nc['LATITUDE'][0,0,:,0],nc['LONGITUDE'][0,0,:,0]
+x0,y0=pnyc(lon,lat, inverse=False)
+nc['XLOCA'][0,0,:,0], nc['YLOCA'][0,0,:,0]=x0,y0
+nc['COL'][0,0,:,0]=np.array((x0[:]-nc.XORIG)/nc.XCELL,dtype=int)
+nc['ROW'][0,0,:,0]=np.array((y0[:]-nc.YORIG)/nc.YCELL,dtype=int)
+nc.close()
+```
+
 ### 成果檢核
 - 因2點源檔案沒有空間顯示軟體可供檢核，只能以ncdump直接打開檢查內容數字。

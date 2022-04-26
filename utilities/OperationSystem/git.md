@@ -72,22 +72,32 @@ fi
 ### 定期更新cmaq執行進度
 - 基本上只是個`grepDDD=grep DDD $(ls -rt CTM_LOG_000*|tail -n1)|tail -n1)`指令，顯示CTM_LOG的最後日期標籤。
 - 運用crontab每分鐘執行GT.cs(如下)、以及html的autorefresh功能，將其內容PO在[https://sinotec2.github.io/cmaqprog/](https://sinotec2.github.io/cmaqprog/)
+  - wildcard (` -e *`)用來研判是否檔案存在容易出錯，[可以用](https://www.itread01.com/p/1372201.html)`-n ls`指令取代。
+  - 夜間github將會被防火牆擋住，因此需將檔案另存至外部硬碟，由該機直接git上傳。
 
 ```bash
-#kuang@master /nas2/cmaqruns/2019force
-#$ cat GT.cs
+#kuang@DEVP /nas2/cmaqruns/2019N3G
+$ cat GT.cs
 cwd=$PWD
 GT=/usr/bin/git
-if [ -e /nas2/cmaqruns/2019force/CTM_LOG_000.v532* ];then
- cd ~/GitHubRepos/sinotec2.github.io
- TOKEN=$(cat ~/bin/git.token)
- DATE=$(date -d now +"%Y%m%d%H%M")
- itm=$(ls -rt /nas2/cmaqruns/2019force/CTM_LOG_000.v532*|tail -n1)
- echo $itm $(grep DDD $itm|tail -n1) >cmaqprog/progres.txt
- $GT pull
- $GT add cmaqprog/progres.txt
- $GT commit -m "update cmaqprog/progres.txt $DATE"
- $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git
+PTH=/nas2/cmaqruns/2019N3G
+if [ -n "ls $PTH/CTM_* > /dev/null 2>&1" ];then
+  cd ~/GitHubRepos/sinotec2.github.io
+  itm=$(ls -rt $PTH/CTM_LOG_000.v532*|tail -n1)
+  echo $itm $(grep DDD $itm|tail -n1) >cmaqprog/progres.txt
+  HM=$(date -d now +"%H%M")
+  if [ $HM -gt 800 ] && [ $HM -lt 1730 ];then
+    TOKEN=$(cat ~/bin/git.token)
+    DATE=$(date -d now +"%Y%m%d%H%M")
+    itm=$(ls -rt $PTH/CTM_LOG_000.v532*|tail -n1)
+    echo $itm $(grep DDD $itm|tail -n1) >cmaqprog/progres.txt
+    $GT pull
+    $GT add cmaqprog/progres.txt
+    $GT commit -m "update cmaqprog/progres.txt $DATE"
+    $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git
+  else
+    /usr/bin/sshpass -f ~/.ssh/.pw scp -q cmaqprog/progres.txt centos8:~/GitHubReps/sinotec2.github.io/cmaqprog/progres.txt
+  fi
 fi
 cd $cwd
 ```

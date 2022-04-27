@@ -243,8 +243,9 @@ with open(fnameO,'w',newline='') as jsonfile:
 {"COL": "30", "IFIP": "1000", "ISTACK": "1", "LATITUDE": "22.843828", "LMAJOR": "1", "LONGITUDE": "120.205605", "ROW": "38", "STKCNT": "1", "STKDM": "11.0", "STKFLW": "7.6913733", "STKHT": "80.0", "STKTK": "363.0", "STKVE": "-22.721462", "XLOCA": "20405.605", "YLOCA": "-230769.28", "NO": "1.2660064", "NO2": "0.14066738", "PMOTHR": "5.680801", "SO2": "0.22570312"}
 ```
 ### 201901模擬結果差值
-- 2019force:公版N3G-base
-- 2019base：不含澎湖版3G-base
+- 全月最大差異小時值，氣狀物單位ppb、粒狀物&mu;g/M<sup>3</sup>
+- 2019force：公版N3G-base，雲雨多、擴散能力較差，原生性濃度高，臭氧低。
+- 2019base：不含澎湖版3G-base，臭氧較高，轉化硝酸鹽濃度較高。
 
 |項目|2019force|2019base|
 |:-:|:-:|:-:|

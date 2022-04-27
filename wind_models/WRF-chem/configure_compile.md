@@ -67,6 +67,7 @@ set LD_LIBRARY_PATH=/opt/netcdf/netcdf4_intel/lib:/opt/hdf/hdf5_intel/lib:/nas1/
   ```
 
 ### HDF5編譯
+- 有關HDF5的編譯與應用，詳見[NC相關程式庫之編譯](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/lib_comp/)
 - 因[netCDF]()會用到[HDF5]()的程式庫，因此要先編譯[HDF5]()
   - 要記得開啟`--enable-fortran`
 

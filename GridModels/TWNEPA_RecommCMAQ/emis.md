@@ -244,7 +244,7 @@ with open(fnameO,'w',newline='') as jsonfile:
 ```
 ### 201901模擬結果差值
 - 全月最大差異小時值，氣狀物單位ppb、粒狀物&mu;g/M<sup>3</sup>
-- 2019force：公版N3G-base，雲雨多、擴散能力較差，原生性濃度高，臭氧低。
+- 2019force：公版N3G-base，雲雨多、擴散能力較差，原生性濃度高，臭氧低。PM<sub>2.5</sub>只在污染源所在地網格有高值。
 - 2019base：不含澎湖版3G-base，臭氧較高，轉化硝酸鹽濃度較高。
 
 |項目|2019force|2019base|

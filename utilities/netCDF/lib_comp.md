@@ -39,9 +39,9 @@ last_modified_date: 2022-04-26 16:14:13
 - 因[netCDF]()會用到[HDF5]()的程式庫，因此要先編譯[HDF5]()
   - 同一版本可能會編譯好幾次，建議在目錄下另建`build_VER`目錄以資識別
   - 要記得開啟`--enable-fortran`、這樣netcdff才會連結得上
-  - 開啟`--enable-parallel`才會開啟MPI-I/O
-- 編譯順利為傳統之configure->make->make install順序
-- intel version
+  - 開啟`--enable-parallel`才會開啟MPI-I/O([ucar](https://www.unidata.ucar.edu/software/netcdf/workshops/most-recent/pnetcdf/BuildingParallel.html))
+- 編譯順序為傳統之configure->make->make install順序
+#### intel version
 
 ```bash
 $ cat ~/MyPrograms/hdf5-1.10.5/cfg.kng
@@ -49,21 +49,22 @@ source /opt/intel/bin/compilervars.sh intel64
 source /opt/intel_f/bin/compilervars.sh intel64
 FC=ifort FCFLAG='-auto -warn notruncated_source -Bstatic -static-intel -O3 -unroll -stack_temps -safe_cray_ptr -convert big_endian -assume byterecl -traceback -xHost -qopenmp' CC=icc ../configure --prefix=/opt/hdf/hdf5_intel --enable-parallel --enable-fortran 
 ```
-- gnu version
+#### gnu version
 
 ```bash
-FC=gfortran ./configure --enable-fortran --with-zlib=/usr/lib64 --prefix=/opt/hdf/hdf5_gcc
+FC=mpifort CC=mpicc ../configure --prefix=/opt/hdf/hdf5_gccMPICH --enable-fortran --enable-parallel --with-zlib=/opt/Zlib
 ```
+
 ### 其他程式庫
 - 編譯過程會連結到電腦裏既有的libz.a、libpng.a、libld.a、libm.a等
 - 在$PREFIX/lib/libhdf5.settings中有詳細的說明
   - 如果在/lib64目錄下沒有這些程式庫，就必須建立LD_LIBRARY_PATH將其連結起來。
 
-
 ## netCDF
+- [WRF]()、[CCTM]()等程式都會需要`libnetcdf.a`及`libnetcdff.a`2個檔案
 
-### netCDF編譯
-- [WRF]()程式會需要`libnetcdf.a`及`libnetcdff.a`2個檔案
+### netCDF-c編譯
+
 - [netcdf-c]()環境設定如下
 
 ```bash
@@ -71,7 +72,9 @@ export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2022.0.2/linux/lib:/opt/intel/
 FC=mpifort CC=mpicc CPPFLAGS="-I/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/include" \
 LDFLAGS="-L/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib" \
 ../configure --prefix=/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc --enable-parallel-tests
-```    
+```
+
+### netCDF-fortran編譯
 - [netcdf-f]()環境設定如下
 
 ```bash
@@ -81,6 +84,13 @@ CPPFLAGS="-I/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/include -I/opt/netcdf/netcdf4_hd
 LDFLAGS="-L/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib -L/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc/lib" \
 ../configure --prefix=/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc --enable-parallel-tests
 ```
+- 遭遇錯誤
+  1. `checking size of off_t... configure: error`
+    - 可能原因：找不到程式庫
+    - [ 求助：安装netcdf-fortran出错cannot compute sizeof (off_t)](http://bbs.06climate.com/forum.php?mod=viewthread&tid=91286)
+    - [cannot compute sizeof (off_t)](https://www.unidata.ucar.edu/support/help/MailArchives/netcdf/msg13615.html)
+  2. 要求較新版本的libnetcdf.a
+    - 重新以新版netcdf-c編譯
 
 ## PnetCDF
 - 因應UCAR提出平行HDF5的netCDF4技術，PnetCDF表示歡迎，因此除了原本的MPI-I/O方案，也可以接受與netCDF4結合([parallel-netcdf.github.io](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html))。
@@ -98,7 +108,7 @@ LDFLAGS="-L/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib -L/opt/netcdf/netcdf4_hdf5P_m
 - 可能錯誤
   - `undefined reference to `_intel_fast_memcpy'`
   - [解決方式](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815)：
-    - 增加configure時的LDFLAGS環境變數內容
+    - 增加configure時c++的LDFLAGS環境變數內容
     - `LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -lirc"`
 ### configure環境設定及選項
 - with-mpi可以直接連到根目錄，不必再指定include及lib
@@ -114,12 +124,16 @@ FC=mpifort FCFLAG="-auto -warn notruncated_source -Bstatic -static-intel -O3 -un
 CC=mpicc \
 LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -lirc" \
 ../configure --prefix=/opt/pnetcdf/pnetcdf-1.12.3_intel_mpich-icc --with-mpi=/opt/mpich/mpich-3.4.2-icc --with-netcdf4=/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc
-
 ```
+
+-L/opt/bld/CMAQ-master/lib/x86_64/gcc/ioapi/lib -lpnetcdf -o cctm.exe
+/usr/bin/ld: Warning: alignment 32 of symbol `bstate3_' in /opt/bld/CMAQ-master/lib/x86_64/gcc/ioapi/lib/libioapi.a(initblk3.o) is smaller than 64 in pshut3.o
+
 ## Reference
 - 陳柏源, [分層數據格式資料庫Hierarchical Data Format (HDF5)簡介](https://blog.xuite.net/cpy930814355/twblog/100497173-分層數據格式資料庫Hierarchical+Data+Format+(HDF5)簡介), 2011-08-20
 - 北京焱融科技有限公司, [关于MPI-IO，你该知道的](https://www.yanrongyun.com/zh-cn/blogs/all-you-should-know-about-MPI-IO), 2021-03-08 11:30
 - William Gropp, [Lecture 32: Introduction to MPI I/O](https://wgropp.cs.illinois.edu/courses/cs598-s16/lectures/lecture32.pdf)
   - 啟用MPI IO需在程式內使用下列指令：`MPI_File_open`, `MPI_File_write`, `MPI_File_read`, `MPI_File_close`
+- ucar,  2012 Unidata NetCDF Workshop, [Building NetCDF-4 with Parallel I/O](https://www.unidata.ucar.edu/software/netcdf/workshops/most-recent/pnetcdf/BuildingParallel.html), 2012.
 - parallel-netcdf.github.io, [PnetCDF and NetCDF-4](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html)
 - TimP, community.intel.com, [undefined reference to `_intel_fast_memcpy'](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815), 09-05-2009.

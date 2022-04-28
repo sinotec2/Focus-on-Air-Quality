@@ -86,12 +86,34 @@ FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -aut
 ```
 
 ## PnetCDF
-```
---with-mpi=
---with-netcdf4=
+- 因應UCAR提出平行HDF5的netCDF4技術，PnetCDF表示歡迎，因此除了原本的MPI-I/O方案，也可以接受與netCDF4結合([parallel-netcdf.github.io](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html))。
+- 此方案也是ioapi的路徑：利用開啟檔案時的PNETCDF選項，連結到PnetCDF程式庫，而不是在程式內直接呼叫MPI_FILE指另。
+- 編譯順序
+  - HDF5：必須開啟--enable-parallel
+  - netCDF-c：必須開啟--enable-parallel
+  - netCDF-fortran：
+  - PnetCDF編譯：必須開啟--enable-netcdf4選項，與前述所有程式庫連結
+- 不必另建MPI-I/O系統
+- 因為整個流程到PnetDF建置已屬於下游，強烈建議要進行完整測試，俟無誤後再安裝到定點。
+  - make;make tests;make check;make ptest;make ptests;make install
+  - 可能錯誤：`undefined reference to `_intel_fast_memcpy'`
+  - [解決方式](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815)：
+    - 增加configure時的LDFLAGS環境變數內容
+    - `LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -lirc"`
+```bash
+source /opt/intel/oneapi/compiler/2022.0.2/env/vars.sh intel64
+export PATH=/opt/mpich/mpich-3.4.2-icc/bin:$PATH
+export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2022.0.2/linux/lib:/opt/intel/oneapi/compiler/2022.0.2/linux/lib/x64:/opt/intel/oneapi/compiler/2022.0.2/linux/lib/oclfpga/host/linux64/lib:/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin:/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib:/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc/lib
+FC=mpifort FCFLAG="-auto -warn notruncated_source -Bstatic -static-intel -O3 -unroll -stack_temps -safe_cray_ptr -convert big_endian -assume byterecl -traceback -xHost -qopenmp" \
+CC=mpicc \
+LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -lirc" \
+../configure --prefix=/opt/pnetcdf/pnetcdf-1.12.3_intel_mpich-icc --with-mpi=/opt/mpich/mpich-3.4.2-icc --with-netcdf4=/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc
+
 ```
 ## Reference
 - 陳柏源, [分層數據格式資料庫Hierarchical Data Format (HDF5)簡介](https://blog.xuite.net/cpy930814355/twblog/100497173-分層數據格式資料庫Hierarchical+Data+Format+(HDF5)簡介), 2011-08-20
 - 北京焱融科技有限公司, [关于MPI-IO，你该知道的](https://www.yanrongyun.com/zh-cn/blogs/all-you-should-know-about-MPI-IO), 2021-03-08 11:30
 - William Gropp, [Lecture 32: Introduction to MPI I/O](https://wgropp.cs.illinois.edu/courses/cs598-s16/lectures/lecture32.pdf)
   - 啟用MPI IO需在程式內使用下列指令：`MPI_File_open`, `MPI_File_write`, `MPI_File_read`, `MPI_File_close`
+- parallel-netcdf.github.io, [](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html)
+- TimP, community.intel.com, [undefined reference to `_intel_fast_memcpy'](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815), 09-05-2009.

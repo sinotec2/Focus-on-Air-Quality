@@ -3,6 +3,7 @@ layout: default
 title: 自動添加並啟用IP黑名單
 parent:   Operation System
 grand_parent: Utilities
+last_modified_date: 2022-04-28 10:09:48
 ---
 
 # 自動添加並啟用IP黑名單
@@ -28,7 +29,7 @@ grand_parent: Utilities
 
 ### 存取記錄
 - Mac將httpd的存取記錄寫在httpd/access_log裏，內容如下：
-  - IP、存取時間（LST）、動作、以及指向檔案
+  - IP、[存取時間（LST）]、動作、以及指向檔案
 
 ```bash
 #kuang@114-32-164-198 ~/bin/BlockIP
@@ -50,6 +51,7 @@ tail /usr/local/var/log/httpd/access_log
   - /usr/local/var/log是搭配/usr/local/opt/httpd/bin/httpd（Apache2.4）
   - /var/log/apache2/access_log是搭配/usr/sbin/apachectl(自帶Apache)
   - MacOS更新後必須[重裝Apache2.4](https://getgrav.org/blog/macos-monterey-apache-multiple-php-versions)，不能使用自帶的apachectl。
+
 ```bash
 #kuang@114-32-164-198 ~/bin/BlockIP
 $ cat ~/bin/tacc
@@ -61,14 +63,15 @@ f=/usr/local/var/log/httpd/access_log
 echo tail $f
 tail $f
 ```
+
 ### 存取分析程式
-- 使用pandas的樞紐分析，可以看到駭客一天內就存取了900～15萬次，有的分成7天慢慢下載。可能等到一天結束再來阻擋不太來得及。
+- 使用pandas的樞紐分析，可以看到駭客一天內就存取了900～15萬次，有的分成7天慢慢下載。所以等到一天結束再來阻擋、應該是不太來得及。
 - 又分析小時的分布，大致上一個小時、一個ip要存取500次以上、而又不是駭客的機會不多。
 - ip location infomation(lst)
-  - ip地理位置基本是個猜測值、猜得準不準就是各家本事。[業者](https://ipinfo.io/)的詢問結果差強人意，但為是免費，還蠻具競爭優勢的。
-  - 所提供的付費服務方案是給一月之內詢問15萬次的用戶。這裏即使每小時詢問10次，一天240次，應該也不會造成業者的負擔（最後沒有使用在日常作業，不論是哪裡來的存取、不合理就必須阻擋）。
-  - 在該網免費註冊會即可得到**TOKE**，在每次詢問時必須提供。
-  - 該業者也將[python程式庫](https://github.com/ipinfo/python)提供出來,會方便很多。但是Mac裝置不成功，只好保留以curl程式下載文字、再詳細分析IP位置的內容（dip）。
+  - ip地理位置基本是個猜測值、猜得準不準就是各家本事。[業者](https://ipinfo.io/)的詢問結果差強人意，但因為是免費，還蠻具競爭優勢的。
+  - 所提供的付費服務方案是給一月之內詢問15萬次的用戶。這裏即使每小時詢問10次，一天240次，應該也不會造成業者的負擔（最後沒有使用在日常作業。因為不論是哪裡來的大量存取、不合理就必須阻擋）。
+  - 在該網免費註冊會即可得到**TOKEN**，在每次詢問時必須提供。
+  - 該業者也將[python程式庫](https://github.com/ipinfo/python)提供出來，會方便很多。但是Mac裝置不成功，只好保留以curl程式下載文字、再詳細分析IP位置的內容（dip, dictionary of ip）。
 - 程式除了讀取完整的存取log檔，也分析當時的登入地點，這樣可以即時了解網站是否被駭。
 
 ```python
@@ -110,8 +113,9 @@ lines=[i for i in lines if len(i)>1]
 fname='~/bin/BlockIP/IP_count'+TF.replace('/','_')+'.csv'
 r=wrt_csv(lines,fname)
 ```
+- head of IP_count.csv，可以看到iMac是如何被駭客蹂躪
 
-|ip|date|time|location|
+|ip|date|count|location|
 |:-:|:-:|:-:|-|
 |179.61.240.77|1|153082|Newmarket|
 |34.140.248.32|7|150463|Brussels|
@@ -123,7 +127,18 @@ r=wrt_csv(lines,fname)
 |45.136.4.119|1|990|Istanbul|
 |114.84.195.13|1|989|Shanghai|
 
-## 封包過濾 PFctl程式
+## 防止駭客侵擾的策略方法
+- 其實知道網站被駭客盯上，關閉就可以了。這是過去iMac只在上班時間開放的理由。但還是有困難：
+  - 非上班時間，還是有正常使用的需求。這要怪華人焚膏繼晷的民族精神。
+  - 上班時間駭客從正常使用的通訊過程得知iMac的存在，也大方的造訪。不僅沒有防護、而且嚴重降低網路的速度
+  - 上班時間無預警關閉網站，對客戶實在是不好的網站經驗
+  - 畢竟關閉網站還是必須手動操作，總不能讓電腦自己開關，這網管也太不負責了。
+- IP黑名單方案
+  - UCAR的[資料庫網站](https://rda.ucar.edu/)，曾經就是以這個方式管理(這是個人親身實證經歷)，經多方閃躲，最後UCAR網管還是選擇以username黑名單而不用IP，而Mac後來也改以[每天少量下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/)，而不是久久一次大批次下載的策略。因為擋IP真的很嚴酷。
+  - 網友提供了Mac上的寶貴經驗([Block Access to Particular IP Address on Mac](https://medium.com/ringcentral-developers/how-to-block-a-particular-ip-address-on-mac-a587805972e5))
+  - 只要能夠確認IP存取過程確實是駭客的無聊行為，即使黑名單策略較為嚴苛應該也不為過。
+
+### 封包過濾 PFctl程式
 - Mac自帶封包過濾的控制程式PFctl,可以做為動態[阻擋IP黑名單](https://medium.com/ringcentral-developers/how-to-block-a-particular-ip-address-on-mac-a587805972e5)的主程式。
 - pfctl是透過/etc/pf.conf檔案來指定黑名單IP。
 - 其設定方式為：`block drop from any to 192.168.1.1`
@@ -158,8 +173,8 @@ mip=np.max(nip)
 if mip>500:
   msg='tell app "System Events" to display dialog "Hourly acc >500 !!,tail /etc/pf.conf"'
   os.system("/usr/bin/osascript -e '"+msg+"'&")
-  df=DataFrame({'ip':sip,'count':nip})
-  dfm=df.loc[df.count>500]
+  df=DataFrame({'ip':sip,'nm':nip})
+  dfm=df.loc[df.nm>500]
   for i in dfm.ip:
     os.system('echo "block drop from any to '+i+'">>/etc/pf.conf')   
   os.system('pfctl -e -f /etc/pf.conf')
@@ -176,7 +191,30 @@ if mip>500:
 
 ## Result
 - 希望最好不要看到對話框出現
+- 4/27清晨真的啟動了機制，一個小時就存取了近2000次，這應該沒有錯怪它了。
+- 其餘的好兄弟試了1\~2次就會放棄
 
+|ip|date|count|location|
+|:-:|:-:|:-:|-|
+|35.233.62.116|1|1890|Brussels|
+|66.249.68.57|1|2|Salem|
+|103.59.156.16|1|1|Haegok|
+|14.225.253.120|1|1|Hạ Long|
+
+```bash
+#kuang@114-32-164-198 ~/bin/BlockIP
+$ tail /etc/pf.conf
+#
+# com.apple anchor point
+#
+scrub-anchor "com.apple/*"
+nat-anchor "com.apple/*"
+rdr-anchor "com.apple/*"
+dummynet-anchor "com.apple/*"
+anchor "com.apple/*"
+load anchor "com.apple" from "/etc/pf.anchors/com.apple"
+block drop from any to 35.233.62.116
+```
 ## Reference
 - 阿百, [自動透過 iptables 封鎖 IP 黑名單](http://yenpai.idis.com.tw/archives/399-教學-自動透過-iptables-封鎖-ip-黑名單), 2012 年 11 月 12 日
 - Vyshakh Babji, [Block Access to Particular IP Address on Mac](https://medium.com/ringcentral-developers/how-to-block-a-particular-ip-address-on-mac-a587805972e5), Jul 3, 2019

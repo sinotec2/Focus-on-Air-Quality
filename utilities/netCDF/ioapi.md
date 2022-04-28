@@ -52,7 +52,10 @@ configure: ${IODIR}/Makefile ${TOOLDIR}/Makefile
 - 注意：編譯完成、存到最終位置時，要記得去除這些連結，否則在應用時會重複連結。
 
 ## 應用程式是否開啟openmp
-- 一般程式有2個多工的選項，使用編譯器的openmp(SMP)，或者是mpi方案(DMP)，包括openmpi或者是mpich
+- 一般程式有2個多工的選項
+  - 使用編譯器的openmp(SMP)，或者是
+  - mpi方案(DMP)，包括openmpi或者是mpich
+  - 二者無法同時開啟
 - 如果是後者，ioapi編譯時不能出現openmp選項(如ifort的-qopenmp)，否則後面的編譯會出錯。
 
 ## Reference

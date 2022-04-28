@@ -87,7 +87,7 @@ FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -aut
 
 ## PnetCDF
 - 因應UCAR提出平行HDF5的netCDF4技術，PnetCDF表示歡迎，因此除了原本的MPI-I/O方案，也可以接受與netCDF4結合([parallel-netcdf.github.io](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html))。
-- 此方案也是ioapi的路徑：利用開啟檔案時的PNETCDF選項，連結到PnetCDF程式庫，而不是在程式內直接呼叫MPI_FILE指另。
+- 此方案也是ioapi的路徑：利用開啟檔案(`nc_create_par`)時的NC_PNETCDF選項，就能連結到PnetCDF程式庫，而不必在程式內直接呼叫MPI_FILE指令。
 - 編譯順序
   - HDF5：必須開啟--enable-parallel
   - netCDF-c：必須開啟--enable-parallel
@@ -115,5 +115,5 @@ LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -l
 - 北京焱融科技有限公司, [关于MPI-IO，你该知道的](https://www.yanrongyun.com/zh-cn/blogs/all-you-should-know-about-MPI-IO), 2021-03-08 11:30
 - William Gropp, [Lecture 32: Introduction to MPI I/O](https://wgropp.cs.illinois.edu/courses/cs598-s16/lectures/lecture32.pdf)
   - 啟用MPI IO需在程式內使用下列指令：`MPI_File_open`, `MPI_File_write`, `MPI_File_read`, `MPI_File_close`
-- parallel-netcdf.github.io, [](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html)
+- parallel-netcdf.github.io, [PnetCDF and NetCDF-4](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html)
 - TimP, community.intel.com, [undefined reference to `_intel_fast_memcpy'](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815), 09-05-2009.

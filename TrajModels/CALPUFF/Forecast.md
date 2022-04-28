@@ -6,7 +6,7 @@ parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
 ---
-# CALPUFF濃度預報系統之實現
+# 本土化CALPUFF濃度預報系統之實現
 {: .no_toc }
 
 <details open markdown="block">
@@ -47,7 +47,7 @@ Leed大學[CEMAC中心](https://www.cemac.leeds.ac.uk/)建置了Masaya 火山噴
 5. CALPUFF模式輸出的修改
 	1. Calpuff.inp中離散點的設定
 	2. output.f 離散點之輸出
-	3. PM2.5 的計算（結合銨鹽重量的計算）
+	3. PM<sub>2.5</sub> 的計算（結合銨鹽重量的計算）
 6. 等濃度圖與網站設定
 	1. 模擬污染物項目、小時數、動畫、濃度等級的修改
 	2. 指定外部IP（內設是本機）
@@ -107,7 +107,7 @@ runmodel=true
 - 自動下載我國中央氣象局（CWB）數值預報（WRF）結果，並進行解讀。
   - CWB會員登錄、檔案網址之定位與確認
   - CWB要求先成為會員，才允許進行下載。
-  - 其會員帳號為電子郵件、秘密為包括大小寫、數字、特殊字元（shift 1～0）
+  - 其會員帳號為電子郵件、密碼為包括大小寫、數字、特殊字元（shift 1～0）
 - 檔案網址的資訊，寫在`xml`檔案內容內，範例如下：
   - 2021/10/12前舊址：
     - `https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A006${dom}-0$i.grb2`
@@ -179,7 +179,8 @@ df.to_csv(fname+'.csv')
   - 解決方式：將環境套件整體升級到py37之gribby
 	  - `conda create -n gribby -c conda-forge python-eccodes`
 	  - (Grib2 with python 3.7)
-	  - see [stackoverflow](https://stackoverflow.com/questions/39787578/importerror-when-using-python-anaconda-package-grib-api)            
+	  - see [stackoverflow](https://stackoverflow.com/questions/39787578/importerror-when-using-python-anaconda-package-grib-api)      
+
 ### 模擬範圍之選取
 - 濃度場的模擬範圍、輸出入檔的目錄位置、高度氣壓座標
 - 程式差異
@@ -209,8 +210,8 @@ df.to_csv(fname+'.csv')
 ### 座標系統的調整轉換（經緯度twd97 VS LCP）
 -  原程式是以gribapi模組中的grib_get_array來解讀格點經緯度與格點數，解讀的對象是任意的2維變數(如海平面氣壓PRMSL)
 - 求取不同經緯度：適用在以經緯度為座標軸的等度數網格系統
-- 然在小範圍模擬一般是以等距離、正交之直角座標系統，其座標點的經緯度將會是2個2維陣列
--  由於格點位置及格點數並無會每一次不一樣，由固定的一個檔來提供似乎比較單純合理。(修改程式gribapi似更複雜)
+- 然在小範圍的空品模式模擬一般是以等距離、正交之直角座標系統，其座標點的經、緯度將會是2個2維陣列
+- 由於格點位置及格點數並不會每一次改變，由固定檔案來提供似乎比較單純合理。(csv檔詳前述[nc2db.py](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/Forecast/#nc2dbpy內容)。修改程式gribapi似更複雜)
 
 ```bash
 < lats = gribapi.grib_get_array(gidPRMSL,'distinctLatitudes')
@@ -229,8 +230,8 @@ df.to_csv(fname+'.csv')
 > Nj = 673
 ```
 ### 濃度場模擬範圍在氣象場中相對位置與切割
--  原來的網格是等間距經緯度系統，因此其取網格是1維線性切割、四角經緯度為其向量中之某一值
--  直角座標4角經緯度，為所有點中，最接近該4點位置的點座標中得知。
+-  原來的網格是等間距經緯度系統，因此網格對照過程是1維線性切割、四角經緯度只是其向量中之某一值
+-  而在直角座標中4角落的定位，也只需按照最接近該4點位置的網格點決定之。
 ```bash
 < for i in range(len(lats)-1):
 <     if lats[i+1] >= latMinCP:
@@ -266,6 +267,7 @@ df.to_csv(fname+'.csv')
 > iLatMaxGRIB = int(ji/Ni)
 > iLonMaxGRIB = ji - Ni * iLatMaxGRIB
 ```
+
 ### 格點座標值由1維增加為(實質)2維
 
 ```bash
@@ -287,9 +289,10 @@ df.to_csv(fname+'.csv')
 <             XLONGDOT = lons[iLonMinGRIB+i]  # E longitude of grid point
 ---
 >             XLONGDOT = lons[ijLLMinGRIB+i]  # E longitude of grid point
-```		
+```
+
 ### 檔案名稱系統
-- 舊檔名系統是逐3小時。修改為6小時間隔之˙檔名系統。
+- 舊檔名系統是逐3小時。修改為6小時間隔之檔名系統。
 ```bash
 < filePrefix = 'nam.t00z.afwaca'
 < fileSuffix = '.tm00.grib2'
@@ -301,38 +304,40 @@ df.to_csv(fname+'.csv')
 ---
 >     filenames.append(filePrefix+'{:02d}'.format((i)*6)+fileSuffix)
 ```
+
 ## 即時排放數據
 ### 數據來源及處理
-- 臺灣地區最大型的點污染源非火力發電機組莫屬。由於臺灣天然資源缺乏，又因地狹人稠不適發展核能發電，因此火力發電佔了發電量的大宗。目前相關訊息包括：
-	- 各發電機組發電量即時資訊已經在[opendata網站](https://data.gov.tw/dataset/8931)公開，每分鐘更新，除此之外，
+- 臺灣地區最大型的點污染源非火力發電機組莫屬。由於臺灣天然資源缺乏，又因地狹人稠不適發展核能發電，因此火力發電佔了發電量的大宗。目前即時運轉與排放等相關訊息包括：
+	- 各發電機組發電量(運轉率)即時資訊。已經在[opendata網站](https://data.gov.tw/dataset/8931)公開，每分鐘更新，除此之外，
 	- 亦有每分鐘[CEMS數據](https://data.gov.tw/dataset/31969)
-- 相關考慮條列如下
+- 如何引用相關考慮條列如下
 
-|項目|發電量即時資訊|發電量即時資訊|選擇考量|
+|項目|發電量即時資訊|CEMS數據|選擇考量|
 |-|-|-|-|
-|污染源完整性|所有發電機組都有|有的污染源沒有(原因未知)|沒有數據就無從推估|
-|污染項目|只有**運轉率**%|煙氣流量、溫度、SOX、NOX及不透光率|後者太過複雜還有待QCQA|
-|時間頻率|10min|15min|只需要逐時|
-|資料穩定性|穩定|不甚穩定|(CEMS允許一定時數之離線)|
+|污染源完整性|所有發電機組都有|有的污染源沒有(可能因為規模太小未列管)|沒有數據就無從推估|
+|污染項目|無(只有**運轉率**%)|煙氣流量、溫度、SOX、NOX及不透光率|後者太過複雜還有待QCQA|
+|時間頻率|10min|15min|此處作業只需要逐時|
+|資料穩定性|穩定|不甚穩定(CEMS允許一定時數之離線)||
 
 - 有鑒於數據的涵概面及穩定性，此處選則以**運轉率**進行排放推估。
-	- 排放量 = 2019 TEDS11資料庫中之小時排放*該小時平均**運轉率**
-	- 污染物：適合TEDS資料庫中所有排放項目
-	- 煙氣量：*CALPUFF*可以接受逐時的排氣速度，也是平均值乘上**運轉率**
+	- 排放量 = 2019 [TEDS11資料庫]((https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx))中之小時排放 &times; 該小時平均**運轉率**
+	- 污染物：適用TEDS資料庫中所有排放項目(PM<sub>2.5</sub>、PM<sub>10</sub>)
+	- 煙氣量：*CALPUFF* 可以接受逐時的排氣速度，也是平均值乘上**運轉率**得之
 - 數據時間點：
 	- 由於預報自前一日開始，因此排放數據也引用前一日之24小時數據
 	- 預報期間排放量：假設與前一日24小時相同，不做修正預報。
 
 ### 前日運轉率之彙整與應用
-- 逐時*wget*下載前述opendata運轉率數據存檔備用
+- 逐時*wget*下載前述[opendata運轉率數據](https://data.gov.tw/dataset/8931)存檔備用
 - 逐日(*crontab*控制凌晨運作)將前一日所有24小時檔案合併彙整。
-	- 每日運轉的機組數可能會有差異，*calpuff*不允許排放量全為0的狀況，同時也非常耗費模式計算時間，因此需將未運轉的點源剔除。
+	- 每日運轉的機組數可能會有差異，*calpuff* 不允許排放量全為0的狀況，同時也非常耗費模式計算時間，因此需將未運轉的污染源予以剔除。
 - 開啟檔案：names.csv
-	- 檔頭 `CP_NO,C_NO,All_In_One,CO_GPS,DIA,EnergyForm,HEI,NMHC_GPS,NOX_GPS,NO_S,PM25_GPS,PM_GPS,PlantName,SOX_GPS,SUM_EMI,TEMP,UnitName,VEL,UTM_N,UTM_E`
+	- 檔頭 `CP_NO,C_NO,All_In_One,CO_GPS,DIA,EnergyForm,HEI,NMHC_GPS,NOX_GPS,NO_S,PM25_GPS,PM_GPS,PlantName,`
+	`SOX_GPS,SUM_EMI,TEMP,UnitName,VEL,UTM_N,UTM_E`
 	- 分別是`管編+煙道(**管煙**)、管編、集合否(T/F)、CO、DIA、發電形態、煙囪高、NMHC、NOX、管道編號、PM25、PM、廠名、SOX、總量、溫度、機組名稱、流速、座標`
-		- 由於部分電廠以所有機組陳報，其運轉率只有一個，All_In_One會是True，按照過去排放量正比分配到每一個污染源。
-	-	此一檔案記錄TEDS11時排放率(全年總量/總運轉時數)，排放單位為g/s
-	- 流速單位為m/s為最大排氣量計算而得
+		- 由於部分電廠以所有機組陳報，其運轉率只有一個，All_In_One會是True，按照過去該廠排放量之分布，正比分配到每一個污染源。
+	-	此一檔案為[TEDS11]((https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx))之小時排放率(全年總量/總運轉時數)，排放單位為g/s
+	- 流速單位為m/s，為最大排氣量計算而得
 - 輸出排放量檔案(檔名字頭為'g')，範例如下。此檔案有24小時序列。
 	- **管煙**、溫度、流速(已經乘上運轉率)、各污染物之g/s排放量、時間標籤
 
@@ -353,7 +358,7 @@ C1400170P301,202.0,6.4,127,20.0,321548.0,2777220.0
 C1400170P401,205.0,6.4,118,20.0,321548.0,2777220.0
 E5400878P001,60.0,6.2,150,9.1,180595.0,2503815.0
 ```
-- 每日執行之彙整程式
+- 彙整前日24小時之程式(在Run.sh內每日執行)
 
 ```python
 kuang@master /home/sespub/power
@@ -411,9 +416,10 @@ td[col[:1]+col[3:]+['DateHr']].set_index('CP_NO').to_csv('g'+date+'.csv')
 df=read_csv('names.csv')
 df=df.loc[df.CP_NO.map(lambda x:x in set(td.CP_NO))].reset_index(drop=True)
 df[col[:5]+['UTM_E','UTM_N']].set_index('CP_NO').to_csv('p'+date+'.csv')
-```	
-### CALPUFF逐時排放量檔案之準備
-- *CALPUFF*排放量允許輸入逐時之排放，由外部檔案提供，calpuff.inp內需對點源個數、排放量檔案名稱等，予以率定。
+```
+
+### *CALPUFF*逐時排放量檔案之準備
+- *CALPUFF* 允許輸入逐時之排放量，由外部檔案提供，calpuff.inp內只需對點源個數、排放量檔案名稱等予以率定。
 - 產生程式
 	- 目前仍以舊的[fortran檔案](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/ptem_PWR.f)先暫代之
 	- 該程式會讀取命令列輸入的3個日期，分別開啟前述p與g開頭的2個逐日檔案、輸出所需之起迄時間範圍的逐時排放量檔案。
@@ -433,17 +439,18 @@ NPT2=$(head -n11 ptemarb_pwr.dat|tail -n1| awk '{print $1}')
         -e "s/?NPT2?/$NPT2/g"  \
     ./CALPUFF_INP/calpuff_template.inp > ./CALPUFF_INP/calpuff.inp
 ```
-## CALPUFF系統的更新
-### CALMET模式的偵錯
+## *CALPUFF*系統的更新
+### *CALMET*模式的偵錯
 1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）
 	- dec舊式fortran可以接受未定寬度的輸出格式，如(i)、(f)等
 	- 如`read(cfver,'(f)') cfdataset`
 	- ifort/pgi皆可接受，但gfortran無法接受
-	  - 使用-fdec-format-defaults，但新版gfortran不能接受
-	  - 解決方法：直接將程式碼中未定長度格式，改成自由格式(*)
-2. 輸入資料間隔6小時程式的偵錯
+	  - 過去可以使用-fdec-format-defaults選項控制，但新版gfortran已經取消這個選項，不能接受未定寬度的輸出格式，詳[gcc官網](https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html)
+	  - 解決方法：因錯誤並不多，直接將程式碼中未定長度格式，改成自由格式(*)
+2. 輸入資料間隔(nlevag11)6小時程式的偵錯
 - 基本版本：CALMET_v6.5.0_L150223
-- ifort 與centos6 的差異
+- ifort 新舊版本的差異
+
 ```bash
 (unresp)
 kuang@master /cluster/CALPUFF6/CALMET
@@ -462,21 +469,27 @@ $ diff calmet.for /cluster/CALPUFF6/CALMET/new/calmet.for
 <       save it1,it2,isec1,isec2,nlevag1,msec
 ---
 >       save it1,it2,isec1,isec2,nlevag11
-```		
-### CALPUFF模式輸出的修改
+```
+
+### *CALPUFF*模式輸出的修改
 1. Fortran程式編譯（內設使用ifort、gfortran版本的差異）
-	- dec舊式fortran可以接受未定寬度的輸出格式，如(i)、(f)等 in readcf.f and runsize.f 
-	  read(cfver,'(f)') cfdataset
-	  ifort/pgi皆可接受，但gfortran無法接受
-	  使用-fdec-format-defaults新版gfortran不能接受(https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html )
+	- 與前述*CALMET*相同，也具有未定寬度的輸出格式的問題
+		- dec舊式fortran可以接受未定寬度的輸出格式，如(i)、(f)等
+		- in readcf.f and runsize.f 
+	  `read(cfver,'(f)') cfdataset`
 	- 解決方法：直接將未定長度格式改成自由格式(*)
-2. Calpuff.inp中離散點的設定
+2. calpuff.inp中離散點的設定
 	- 研究團隊並沒有使用CALPOST做為後處理程式，而是利用CALPUFF模式逐時輸出離散點濃度的做法，將各污染物的逐時濃度逐一開啟檔案輸出。
-	- CALPUFF.INP須輸入總接受點的總數，以及各點的座標(LCP)，
-	   先由前述csv檔讀入lat/lon值，經由twd97模組將經緯度轉成twd97座標，扣除Xcent、Ycent之offset即成為LCP座標(CALPUFF為KM單位)
-	  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
-	  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
-	  檔案另輸出成data/xy_taiwan3.dat
+	- CALPUFF.INP須輸入所有接受點的總數，以及各點的座標(LCP)，
+	- 先由前述csv檔讀入lat/lon值，經由twd97模組將經緯度轉成twd97座標，扣除Xcent、Ycent之offset即成為LCP座標
+	- *CALPUFF*為KM單位
+	- 檔案另輸出成data/xy_taiwan3.dat
+
+```python	
+Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
+Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
+```		
+
 3. output.f 離散點之輸出
 
 ```bash
@@ -502,8 +515,8 @@ $ diff CALPUFF_v7.2.1_L150618/output.f new/output.f
 >               close(50)
 >             end do
 ``` 
-4. PM2.5 的計算（結合銨鹽重量的計算）
-	- CALPUFF之CSPEC共有8種，利用其中的成份計算總PM2.5，包括結合銨鹽
+4. PM<sub>2.5</sub> 的計算（結合銨鹽重量的計算）
+	- CALPUFF之CSPEC共有8種，利用其中的成份計算總PM<sub>2.5</sub>，包括結合銨鹽
 	- 以DataFrame架構整理檔案名稱(spec, hour)，再讀入個別檔案的內容成為3維矩陣C。
 	- 輸出檔案為00-hhhh.dat。
 	- 程式下載點[conc2pm25.py](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/conc2pm25.py)
@@ -545,7 +558,7 @@ for it in range(1,max(jt)+1):
 - 模擬污染物項目、小時數、動畫、濃度等級的修改，
 ### Python/genmaps.py
 -  主要修改污染物項目，
--  由SO2/SO4→PM2.5/NOX/SO2/SO4等四項，
+-  由SO<sub>2</sub>/SO<sub>4</sub>→PM<sub>2.5</sub>/NOX/SO<sub>2</sub>/SO<sub>4</sub>等四項，
 -  成份變數SOX→SPEC
 -  檔案個數(總時數)
 ```bash  
@@ -603,23 +616,25 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 
 ## VERDI向量底圖方案
 ### 向量底圖
-- 前述格柵底圖結果檔案過於龐大(84小時的gif檔約80\~150MB)，終究拖累網站而告失敗。解決方案就是以VERDI批次作業，以向量底圖來降低檔案容量。過程與設定可以詳見[程式外批次檔(CALPUFF結果時間序列圖檔展示)](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔CALPUFF結果時間序列圖檔展示)的說明。
+- 前述格柵底圖結果檔案過於龐大(84小時的gif檔約80\~150MB)，終究拖累網站而告失敗。
+- 解決方案就是以VERDI批次作業，以向量底圖來降低檔案容量。過程與設定可以詳見[程式外批次檔(CALPUFF結果時間序列圖檔展示)](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔CALPUFF結果時間序列圖檔展示)的說明。
 - 向量底圖採五都升等前的縣市界線，對污染集中的範圍有較多的空間資訊。
 - 結果
-	- [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
-	- [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)，檔案大小約6\~7MB，
-	- 外部網址：[https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html)(較快)
+	- [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)，檔案大小約6\~7MB
+	- 外部網址
+		- [https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html)(較快)
+		-	[http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
 	- 內部網址：[http://200.200.12.191/LC-GIF-Player/demo.html](http://200.200.12.191/LC-GIF-Player/demo.html)(最快)
 
 
 ### 網站與播放器
-- 前述使用python網站及瀏覽器內設GIF播放器，前者相容性較低、要平移到不同平台的衝突較大，後者的控制程度較低，不能暫停、前後微調、放大等等。有待改善。
+- 不論python網站方案、或是瀏覽器內設GIF播放器方案，不是相容性較低、要平移到不同平台的衝突較大，就是控制程度較低，不能暫停、前後微調、放大等等。都需要進一步改善。
 - 參考網友[buzzfeed](https://github.com/buzzfeed)提供的[LC-GIF-Player](https://github.com/LCweb-ita/LC-GIF-Player)，並加上windy外掛小視窗作為區域流向的參考，如圖所示。
 - 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))，並且使用*git*指令[每日更新](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/git/#定期上載)，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
 
 | ![cpuff_forecast.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_forecast.png)|
 |:-:|
-| <b>CALPUFF預測網頁畫面</b>|
+| <b>CALPUFF[預測網頁](https://sinotec2.github.io/cpuff_forecast/)畫面</b>|
 
 ## Download Run.sh
 - github: [Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)

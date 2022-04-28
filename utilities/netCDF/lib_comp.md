@@ -67,22 +67,19 @@ FC=gfortran ./configure --enable-fortran --with-zlib=/usr/lib64 --prefix=/opt/hd
 - [netcdf-c]()環境設定如下
 
 ```bash
-cat ~/MyPrograms/netCDF/netcdf-c-4.7.1/build_intel/cfg.kng
-source /opt/intel/bin/compilervars.sh intel64
-source /opt/intel_f/bin/compilervars.sh intel64
-
-CC=icc CPPFLAGS=-I/opt/hdf/hdf5_intel/include LDFLAGS=-L/opt/hdf/hdf5_intel/lib ../configure --prefix=/opt/netcdf/netcdf4_intel  --disable-dap --with-zlib=/usr/lib64 --enable-netcdf4
+export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2022.0.2/linux/lib:/opt/intel/oneapi/compiler/2022.0.2/linux/lib/x64:/opt/intel/oneapi/compiler/2022.0.2/linux/lib/oclfpga/host/linux64/lib:/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin:/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib
+FC=mpifort CC=mpicc CPPFLAGS="-I/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/include" \
+LDFLAGS="-L/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib" \
+../configure --prefix=/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc --enable-parallel-tests
 ```    
 - [netcdf-f]()環境設定如下
 
 ```bash
-kuang@DEVP ~/MyPrograms/netCDF/netcdf-fortran-4.5.2/build_intel
-$ cat ~/MyPrograms/netCDF/netcdf-fortran-4.5.2/build_intel/cfg.kng
-source /opt/intel/bin/compilervars.sh intel64
-source /opt/intel_f/bin/compilervars.sh intel64
-export NCDIR=/opt/netcdf/netcdf4_intel
-export NFDIR=/opt/netcdf/netcdf4_intel
-FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -auto -warn notruncated_source -Bstatic -static-intel -O3 -unroll -stack_temps -safe_cray_ptr -convert big_endian -assume byterecl -traceback -xHost -qopenmp' ../configure --prefix=${NFDIR} --enable-netcdf4
+export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2022.0.2/linux/lib:/opt/intel/oneapi/compiler/2022.0.2/linux/lib/x64:/opt/intel/oneapi/compiler/2022.0.2/linux/lib/oclfpga/host/linux64/lib:/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin:/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib:/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc/lib
+FC=mpifort CC=mpicc \
+CPPFLAGS="-I/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/include -I/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc/include" \
+LDFLAGS="-L/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib -L/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc/lib" \
+../configure --prefix=/opt/netcdf/netcdf4_hdf5P_mpich3.4.2-icc --enable-parallel-tests
 ```
 
 ## PnetCDF
@@ -91,9 +88,9 @@ FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -aut
 
 ### 編譯順序
 - 流程與重要設定
-  - HDF5：必須開啟--enable-parallel
-  - netCDF-c：必須開啟--enable-parallel
-  - netCDF-fortran：
+  - HDF5：必須開啟--enable-parallel, 
+  - netCDF-c
+  - netCDF-fortran(會挑netCDF-c的版次)
   - PnetCDF編譯：必須開啟--enable-netcdf4選項，與前述所有程式庫連結
 - 不必另建MPI-I/O系統
 - 因為整個流程到PnetDF建置已屬於下游，強烈建議要進行完整測試，俟無誤後再安裝到定點。

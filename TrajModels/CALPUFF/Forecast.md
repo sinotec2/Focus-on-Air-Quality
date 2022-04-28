@@ -629,13 +629,9 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 
 ### 網站與播放器
 - 不論python網站方案、或是瀏覽器內設GIF播放器方案，不是相容性較低、要平移到不同平台的衝突較大，就是控制程度較低，不能暫停、前後微調、放大等等。都需要進一步改善。
-- 參考網友[buzzfeed](https://github.com/buzzfeed)提供的[LC-GIF-Player](https://github.com/LCweb-ita/LC-GIF-Player)，並加上windy外掛小視窗作為區域流向的參考，如圖所示。
+- 播放器修改過程及成果詳見[]()說明
+
 - 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))，並且使用*git*指令[每日更新](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/git/#定期上載)，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
-
-| ![cpuff_forecast.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_forecast.png)|
-|:-:|
-| <b>CALPUFF[預測網頁](https://sinotec2.github.io/cpuff_forecast/)畫面</b>|
-
 ## Download Run.sh
 - github: [Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)
 ## TODO

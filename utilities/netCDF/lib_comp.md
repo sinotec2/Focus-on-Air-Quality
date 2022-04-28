@@ -88,7 +88,9 @@ FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -aut
 ## PnetCDF
 - 因應UCAR提出平行HDF5的netCDF4技術，PnetCDF表示歡迎，因此除了原本的MPI-I/O方案，也可以接受與netCDF4結合([parallel-netcdf.github.io](https://parallel-netcdf.github.io/wiki/PnetcdfAndNetcdf4.html))。
 - 此方案也是ioapi的路徑：利用開啟檔案(`nc_create_par`)時的NC_PNETCDF選項，就能連結到PnetCDF程式庫，而不必在程式內直接呼叫MPI_FILE指令。
-- 編譯順序
+
+### 編譯順序
+- 流程與重要設定
   - HDF5：必須開啟--enable-parallel
   - netCDF-c：必須開啟--enable-parallel
   - netCDF-fortran：
@@ -96,10 +98,15 @@ FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -aut
 - 不必另建MPI-I/O系統
 - 因為整個流程到PnetDF建置已屬於下游，強烈建議要進行完整測試，俟無誤後再安裝到定點。
   - make;make tests;make check;make ptest;make ptests;make install
-  - 可能錯誤：`undefined reference to `_intel_fast_memcpy'`
+- 可能錯誤
+  - `undefined reference to `_intel_fast_memcpy'`
   - [解決方式](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815)：
     - 增加configure時的LDFLAGS環境變數內容
     - `LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -lirc"`
+### configure環境設定及選項
+- with-mpi可以直接連到根目錄，不必再指定include及lib
+- with-netcdf4亦然
+
 ```bash
 source /opt/intel/oneapi/compiler/2022.0.2/env/vars.sh intel64
 export PATH=/opt/mpich/mpich-3.4.2-icc/bin:$PATH

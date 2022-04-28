@@ -84,6 +84,12 @@ export NCDIR=/opt/netcdf/netcdf4_intel
 export NFDIR=/opt/netcdf/netcdf4_intel
 FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -auto -warn notruncated_source -Bstatic -static-intel -O3 -unroll -stack_temps -safe_cray_ptr -convert big_endian -assume byterecl -traceback -xHost -qopenmp' ../configure --prefix=${NFDIR} --enable-netcdf4
 ```
+
+## PnetCDF
+```
+--with-mpi=
+--with-netcdf4=
+```
 ## Reference
 - 陳柏源, [分層數據格式資料庫Hierarchical Data Format (HDF5)簡介](https://blog.xuite.net/cpy930814355/twblog/100497173-分層數據格式資料庫Hierarchical+Data+Format+(HDF5)簡介), 2011-08-20
 - 北京焱融科技有限公司, [关于MPI-IO，你该知道的](https://www.yanrongyun.com/zh-cn/blogs/all-you-should-know-about-MPI-IO), 2021-03-08 11:30

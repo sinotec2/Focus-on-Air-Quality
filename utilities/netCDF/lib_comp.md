@@ -106,6 +106,8 @@ FC=ifort CC=icc CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib FCFLAG=' -aut
 ### configure環境設定及選項
 - with-mpi可以直接連到根目錄，不必再指定include及lib
 - with-netcdf4亦然
+- hdf並不需要特別指定，在netCDF程式庫中已經隱含，只要給定程式庫的路徑即可
+- c++程式庫須特別指定，理由如上述。
 
 ```bash
 source /opt/intel/oneapi/compiler/2022.0.2/env/vars.sh intel64

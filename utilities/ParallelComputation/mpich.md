@@ -64,6 +64,7 @@ make install 2>&1 | tee mi.txt
 
 ## mpirun的**跨機器**執行
 - 使用者必須在各機器間能夠[免密登入](https://dywang.csie.cyut.edu.tw/dywang/security/node84.html)。
+  - 免密登入「**必須**」包括本機，否則mpirun還是會問本機的登入密碼
 - 裝置[ssh-askpass](https://ishm.idv.tw/?p=53)
   - 為了讓使用者有安全的通訊協定之外，ssh-askpass還提供了遠端登入、遠端傳遞檔案、遠端執行命令、以及為 rsync 和 rdist 提供安全通道等功能。
   - [How To Install openssh-askpass on CentOS 7](https://installati.one/centos/7/openssh-askpass/)，雖然工作站間已經設定好免密登入，但執行mpirun時仍會需要執行ssh-askpass。正常的centos是不會自帶的，需要安裝。

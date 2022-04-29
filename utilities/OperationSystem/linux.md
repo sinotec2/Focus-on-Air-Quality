@@ -130,3 +130,7 @@ You have learned how to create a swap file and activate and configure swap space
 [CentOS8提前EOL，阿里雲源停止維護後的更新配置方法 2022-2-17](https://www.796t.com/article.php?id=468029)
 
 [How To Install the Apache Web Server on CentOS 8](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-8)
+
+## csh 貼上選取文字前後出現 \~00, 01\~
+- askubuntu.com, [Why bracketed paste mode is enabled sporadically in my terminal screen?](https://askubuntu.com/questions/662222/why-bracketed-paste-mode-is-enabled-sporadically-in-my-terminal-screen), Aug 16, 2015.
+  - close it by $ printf "\e[?2004l" (lowercase of L)

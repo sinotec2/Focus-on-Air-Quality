@@ -86,6 +86,9 @@ clearInterval(interval);
 <div id="text1">downloading PMF.gif, need about 10s, please wait... <span id="sec">10</span> </div>
 ...
 ```
+| ![count_down.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/count_down.PNG)|
+|:-:|
+| <b>CALPUFF[預測網頁](https://sinotec2.github.io/cpuff_forecast/)倒數計時畫面</b>|
 
 ## Reference
 - 阿新、程式人生，[js實現div顯示2秒後自動消失](https://www.796t.com/content/1549098550.html), 2019-02-02

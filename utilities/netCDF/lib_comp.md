@@ -18,10 +18,16 @@ last_modified_date: 2022-04-26 16:14:13
 </details>
 
 ---
+## 背景
+- WRF或者是CMAQ是非常高階的程式，以CMAQ而言，會呼叫[ioapi](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ioapi/#ioapi的編譯)的程式庫，ioapi又應用到netCDF的程式庫，而netCDF則會呼叫HDF的程式庫。
+- 因此整體編譯必須由HDF開始，拾級而上，最後才能編譯到空氣品質應用模式。
+- 這些程式又需要跨節點的[平行計算](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/ParallelComputation/)功能，因此需要MPICH、openMPI等先行編譯，再以編譯過的mpifort、mpicc進行上述程式庫的編譯。
+- 除了平行計算之外，跨節點的平行IO(MPI-I/O)也會對執行速度造成顯著影響(CCTM至少可以減少20%時間)，因與PnetCDF編譯有關，就直接在此介紹。
 
 ## HDF5編譯
 ### 背景
-- HDF([Hierarchical Data Format](https://zh.wikipedia.org/wiki/HDF))是设计用来存储和组织大量数据的一组文件格式。
+- wiki([Hierarchical Data Format](https://zh.wikipedia.org/wiki/HDF))
+  - HDF是设计用来存储和组织大量数据的一组文件格式。
   - 由美国国家超级计算应用中心開發，现在由非营利社团HDF Group支持。
   - HDF的设计组合了来自很多不同格式的想法，包括TIFF、CGM、FITS和Macintosh PICT格式。大约1990年代早期美国国家航空航天局（NASA）研究了用在地球观测系统（EOS）计划中的15种不同文件格式。在两年评述过程之后，HDF被选择为EOS数据和信息系统的标准格式。
   - 1996年美国能源部的劳伦斯利弗摩尔、洛斯阿拉莫斯和桑迪亚国家实验室与NCSA抽调人员成立了数据建模和格式（DMF）小组，研究满足高级模拟和计算规划（ASC）需要的并行I/O能力的文件格式。
@@ -29,8 +35,8 @@ last_modified_date: 2022-04-26 16:14:13
 - 除了傳統的C、Fortran之外，HDF5也支援MATLAB、MATHMATICA、Python、R、等等語言及軟體系統。  
 - 中文介紹可以參考[分層數據格式資料庫Hierarchical Data Format (HDF5)簡介](https://blog.xuite.net/cpy930814355/twblog/100497173-分層數據格式資料庫Hierarchical+Data+Format+(HDF5)簡介)
 - HDF5可以使用MPI IO架構進行平行化之IO，如果程式中呼叫MPI_File指令
-  - WRF程式有
-  - CMAQ無，CMAQ是在ioapi程式庫中呼叫PnetCDF進行MPI-I/O。
+  - WRF程式有直接呼叫MPI_File指令、因此編譯不需要PnetCDF
+  - CMAQ則沒有，CMAQ是在ioapi程式庫中呼叫PnetCDF進行MPI-I/O。
 
 ### 下載
 - 至[官網](https://www.hdfgroup.org/downloads/hdf5)下載
@@ -110,6 +116,7 @@ LDFLAGS="-L/opt/hdf/hdf5-1.12.1_mpich3.4.2-icc/lib -L/opt/netcdf/netcdf4_hdf5P_m
   - [解決方式](https://community.intel.com/t5/Intel-Fortran-Compiler/undefined-reference-to-intel-fast-memcpy/m-p/758815)：
     - 增加configure時c++的LDFLAGS環境變數內容
     - `LDFLAGS="-L/opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64_lin -lirc"`
+
 ### configure環境設定及選項
 - with-mpi可以直接連到根目錄，不必再指定include及lib
 - with-netcdf4亦然

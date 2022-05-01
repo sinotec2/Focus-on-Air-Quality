@@ -210,11 +210,11 @@ nc['ROW'][0,0,:,0]=np.array((y0[:]-nc.YORIG)/nc.YCELL,dtype=int)
 nc.close()
 ```
 
-## 成果檢核
+### 點源增量成果檢核
 - 因2點源檔案沒有空間顯示軟體可供檢核，只能以ncdump直接打開檢查內容數字。
 - 也可使用下列程式讀成json檔案
 
-### pt2json.py
+#### pt2json.py
 - 將CCTM點源檔案讀成json的程式
 - 引數：const/timvar前之ROOT(含年月,eg `'New3G.1901'`)
 
@@ -242,7 +242,7 @@ with open(fnameO,'w',newline='') as jsonfile:
 ```json
 {"COL": "30", "IFIP": "1000", "ISTACK": "1", "LATITUDE": "22.843828", "LMAJOR": "1", "LONGITUDE": "120.205605", "ROW": "38", "STKCNT": "1", "STKDM": "11.0", "STKFLW": "7.6913733", "STKHT": "80.0", "STKTK": "363.0", "STKVE": "-22.721462", "XLOCA": "20405.605", "YLOCA": "-230769.28", "NO": "1.2660064", "NO2": "0.14066738", "PMOTHR": "5.680801", "SO2": "0.22570312"}
 ```
-### 201901模擬結果差值
+#### 201901模擬結果差值
 - 全月最大差異小時值，氣狀物單位ppb、粒狀物&mu;g/M<sup>3</sup>
 - 2019force：公版N3G-base，雲雨多、擴散能力較差，原生性濃度高，臭氧低。PM<sub>2.5</sub>只在污染源所在地網格有高值。
 - 2019base：不含澎湖版3G-base，臭氧較高，轉化硝酸鹽濃度較高。
@@ -266,3 +266,42 @@ with open(fnameO,'w',newline='') as jsonfile:
 | ![N3GM_PMf.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GM_PMf.PNG) |![G-Bm_PMf.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/G-Bm_PMf.PNG) |
 |:--:|:--:|
 | <b>公版模式模擬PMf增量</b>|<b>2019base模擬PMf增量</b>|
+
+## 船舶排放之敏感性分析
+- TEDS11並沒有公開更新後的船舶排放量。
+- 公版基準排放量檔案中船舶的空間分布，與TEDS10很類似，缺乏海峽中線西方與公海部分排放量，這非常可能是低估SO<sub>2</sub>濃度的原因。
+- 要探討這個課題，首先必須要能將基準排放量中開放水域的部分予以歸零，才能探討次部分排放量的影響程度。
+- 公版模式提供了ocean.ncf，其中的MASK有3個數字律定
+  - 2:開放水域
+  - 1:海岸線
+  - 0:其他
+- 程式需要將開放水域位置予以標定，將所有該等位置的排放量歸零，即可。
+### dSHIP.py
+- 使用np.where將開放水域位置予以標定（`idx`）
+- 事先先複製一份基準排放量檔案當成模版
+
+
+```python
+In [24]: pwd
+Out[24]: '/data/cmaqruns/2019simen/input/201901/grid03/smoke'
+
+In [25]: !cat dSHIP.py
+import numpy as np
+import netCDF4
+fname='/data/cmaqruns/2019simen/output/2019-01/grid03/ocean/ocean.ncf'
+nc = netCDF4.Dataset(fname,'r')
+v='MASK'
+mask=nc[v][0,0,:,:]
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+nt,nlay,nrow,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+idx=np.where(mask==2)
+fname='/data/cmaqruns/2019simen/output/2019-01/grid03/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf_dSHIP'
+nc = netCDF4.Dataset(fname,'r+')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+for v in V[3]:
+  var=np.zeros(shape=(nt,nrow,ncol))
+  var=nc[v][:,0,:,:]
+  var[:,idx[0],idx[1]]=0
+  nc[v][:,0,:,:]=var[:,:,:]
+nc.close()
+```

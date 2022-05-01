@@ -371,7 +371,7 @@ done
 ```
 
 ## 叢集分析
-choose10 .py(前處理)
+### choose10 .py(前處理)
 從前述bt2.py所得之軌跡點L.csv檔案，選取其中10個點，將20個維度之矩陣進行k_means分析
 輸入檔案：
      tmplateD1_3km.nc：讀取網格設定，以簡化軌跡點
@@ -423,7 +423,7 @@ $ cat -n choose10.py
 
 
 
-km.py
+### km.py
 - arguments:條列*10.csv檔案路徑名稱之文字檔nclt: number of clusters
 - 輸入檔*10.csv：choose10.py的結果tmplateD1_3km.nc：由JI轉換成網格化座標位置
 - 輸出檔lab.csv：逐時的叢集編號'res'+str(l)+'.csv' ：各叢集的代表性軌跡
@@ -484,7 +484,7 @@ $ cat -n km.py
     51  os.system('for i in {2..3};do csv2kml.py -f res$i.csv -g TWD97 -n HL;done')
     52  os.system('for i in {0..1};do csv2kml.py -f res$i.csv -g TWD97 -n NL;done')
 ```
-google map繪圖、軌跡命名
+## google map繪圖、軌跡命名
 由於叢集分析結果為數字，需繪圖後、從google map上軌跡點之說明內容，來定義數字與文字(區域方向)之對照(path.txt)
 可以參考筆記(繪製逆軌跡圖流程、csv2kml)
 
@@ -502,8 +502,8 @@ $ cat n_clusters6/path.txt
 
 
 
-其他後處理
-acc_prob.py
+## 其他後處理
+### acc_prob.py
 從軌跡點L.csv檔案，統計網格通過機率，以便進行繪圖
 輸入檔案：
      fnames.txt(檔案路徑名稱之listing)
@@ -564,7 +564,6 @@ $ cat -n acc_prob.py
     48    for i in range(len(pv)):
     49      nc.variables[v][0,0,pv.J[i],pv.I[i]]+=pv.TWD97_x[i]
     50  nc.close()
-
 ```
 
 

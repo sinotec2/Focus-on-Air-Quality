@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  NC的線性篩選
+title:  NC檔案多維度批次篩選
 parent:   NetCDF Relatives
 grand_parent: Utilities
 last_modified_date: 2022-05-01 18:54:06
 ---
-# NC的線性篩選
+# NC檔案多維度批次篩選
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,37 +19,35 @@ last_modified_date: 2022-05-01 18:54:06
 
 ---
 ## 背景
-- 指定nc檔案特定時間點、空間位置點的數值，是一件常見的工作。
+- 提取或指定nc檔案多維度之時間、空間位置點的數值，是一件常見的工作，如。
 
 ```python
-idx=np.where(mask==0)
-nc[v][:,0,idx[0],idx[1]]=0
+idx=np.where(mask==0) #maybe thousands in tuple length
+arr=nc[v][:,0,idx[0],idx[1]]  #stucked
+nc[v][:,0,idx[0],idx[1]].shape  #stucked
+nc[v][:,0,idx[0],idx[1]]=0  #stucked
 ```
-- idx不一定是連續時空範圍
-    - 但`(idx[0],idx[1])卻顯然是個線型的陣列
-- 如果這些點是零散、不連續、不相關的，那在nc容器中執行此項任務、過程是非常緩慢的。
+### fancy indexing applied in numpy but not in netCDF
+- 前述篩選如果是規則性的索引，適用fancy indexing
+- 而netCDF4.Dataset與numpy array指定索引的意義有很大的出入，需要注意避免錯誤：
+  - numpy.array `a=temp[0, 0, [0,1,2,3], [0,1,2,3]]`，將會得到長度4的一維序列
+  - ncf `a=nc['TEMP'][0, 0, [0,1,2,3], [0,1,2,3]]`，a.shape=(4,4)
+  - 尤有進者，ncf可以接受`temp[0, [0,1], [1,2,3], :]`，這在numpy是不可能的。
+  - 二者的fancy indexing比較可以詳見[netcdf-python文件](https://unidata.github.io/netcdf4-python/)。
+- 所以前述指令，不單是個錯誤、更會是個災難。
+### arbitary indexing
+- 如果idx不是連續、或不具規則性的時空範圍
+    - 且將`(idx[0],idx[1])`視為線型的軌跡陣列
+- 在ncf數組中執行此項任務、過程是非常緩慢的（除了indexing的意義差異）
   - netCDF4一直有個問題，就是[寫出速度](https://stackoverflow.com/questions/27164414/writing-a-netcdf4-file-is-6-times-slower-than-writing-a-netcdf3-classic-file-and)較netCDF3_classic為慢
   - 因為netCDF4是使用HDF5，因此是透過層級架構進行更新、壓縮、所以[存取也會比較慢](https://stackoverflow.com/questions/31865410/python-replacing-values-in-netcdf-file-using-netcdf4)一些。
-  - 具體問題討論在網路上還真不多。
 
-### Xarray where 篩選
-- xarray雖然有類似array的作法，也可以使用where指令、直接指定不連續時空的數值（如下）
-- 但是速度還是很慢，應該也是因為使用了netcdf4的引擎。
-
-```python
-...
-import xarray as xr
-nc = xr.open_dataset(fname, engine="netcdf4")
-nc[v][:,0,idx[0],idx[1]]=0. 
-...
-```
-
-## np.where線型篩選一個nc檔案
+## np.where線型篩選一個多維度nc檔案
 - 在陣列中指定部分範圍(不連續時空點)成為另外的數值，基本上是個篩選的動作。
 - nv[v][:]是個HDF5檔案，不是一般的陣列記憶體，並不適合作為篩選、置換的容器
 
 ### 解決方案
-- 另外開啟陣列var作為容器，令`var[:,idx[0],idx[1]]=0`,再一次性回存nc[v][:]檔案中，會快很多。
+- 另外開啟陣列var作為容器，令`var[:,idx[0],idx[1]]=0`,再一次性回存 nc[v][:]檔案中，會快很多。
 - 類似情況發生在：
   - [高空點源：排放對照](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/pt2em_d04/#程式分段說明)
   - [船舶：改變解析度(reso.py)](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/FMI-STEAM/old/#改變解析度resopy)
@@ -60,7 +58,7 @@ nc[v][:,0,idx[0],idx[1]]=0.
 ...
 for v in V[3]:
   var=np.zeros(shape=(nt,nrow,ncol))
-  var=nc[v][:,0,:,:]
+  var[:,:,:]=nc[v][:,0,:,:]
   var[:,idx[0],idx[1]]=0
   nc[v][:,0,:,:]=var[:,:,:]
 ...

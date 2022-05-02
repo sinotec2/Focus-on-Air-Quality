@@ -314,6 +314,8 @@ $ cat -n area_YYMMinc.py
 ```
 
 ### 網格化與存檔
+- 注意nc檔案並不適用np.array的fancy indexing(line 230~231)
+   - 詳[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)
 
 ```python
    207	idx=np.where(np.sum(aTPY[:,:,:],axis=0)>0)

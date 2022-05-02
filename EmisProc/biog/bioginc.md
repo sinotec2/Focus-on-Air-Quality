@@ -236,11 +236,16 @@ $ cat -n bioginc.py
    161
 ```
 - 填入過程
+  - 注意nc檔案並不適用np.array的fancy indexing(line 169~171)
+   - 詳[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)
   - 先使矩陣所有內容為0
   - 3個相同長度的序列`(idt,iy,ix)`，分別為矩陣的3個標籤內容
   - 第4個同長度的序列`ss`，即為要給定的值
   - 填入此序列
   - 再整批匯入至`nc`檔案
+  - 注意nc檔案並不適用np.array的fancy indexing(line 169~171)
+   - 詳[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)
+
 ```python
    162    z=np.zeros(shape=(ntm,jmx,imx))
    163    idx=dfc.index

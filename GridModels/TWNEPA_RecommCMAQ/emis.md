@@ -312,8 +312,10 @@ nc.close()
 
 ## 公版各層排放量增量敏感性分析
 
-### 第一層K1排放造成的污染增量
-- 
+### 第一層K1排放造成的地面污染增量
+- 氣象條件：201901～31
+- K1高度：39.7\~79.55m
+
 | ![SO2K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2K1.png) |![PM25K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM25K1.png) |
 |:--:|:--:|
-| <b>公版K1排放量造成SO<sub>2</sub>濃度增量</b>|<b>公版K1排放量造成PM<sub>25</sub>濃度</b>|
+| <b>公版K1排放量造成SO<sub>2</sub>濃度增量(月均值)</b>|<b>公版K1排放量造成PM<sub>25</sub>濃度(月均值)</b>|

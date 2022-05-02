@@ -22,7 +22,7 @@ last_modified_date: 2022-05-01 18:54:06
 - 提取或指定nc檔案多維度之時間、空間位置點的數值，是一件常見的工作，如。
 
 ```python
-idx=np.where(mask==0) #maybe thousands in tuple length
+idx=np.where(mask==0) #tuple length maybe in thousands
 arr=nc[v][:,0,idx[0],idx[1]]  #stucked
 nc[v][:,0,idx[0],idx[1]].shape  #stucked
 nc[v][:,0,idx[0],idx[1]]=0  #stucked
@@ -34,10 +34,10 @@ nc[v][:,0,idx[0],idx[1]]=0  #stucked
   - ncf `a=nc['TEMP'][0, 0, [0,1,2,3], [0,1,2,3]]`，a.shape=(4,4)
   - 尤有進者，ncf可以接受`temp[0, [0,1], [1,2,3], :]`，這在numpy是不可能的。
   - 二者的fancy indexing比較可以詳見[netcdf-python文件](https://unidata.github.io/netcdf4-python/)。
-- 所以前述指令，不單是個錯誤、更會是個災難。
+- 所以前述stucked指令，不單是個錯誤、更會是個災難。
 ### arbitary indexing
 - 如果idx不是連續、或不具規則性的時空範圍
-    - 且將`(idx[0],idx[1])`視為線型的軌跡陣列
+    - 且`(idx[0],idx[1])`可視為線型的軌跡陣列
 - 在ncf數組中執行此項任務、過程是非常緩慢的（除了indexing的意義差異）
   - netCDF4一直有個問題，就是[寫出速度](https://stackoverflow.com/questions/27164414/writing-a-netcdf4-file-is-6-times-slower-than-writing-a-netcdf3-classic-file-and)較netCDF3_classic為慢
   - 因為netCDF4是使用HDF5，因此是透過層級架構進行更新、壓縮、所以[存取也會比較慢](https://stackoverflow.com/questions/31865410/python-replacing-values-in-netcdf-file-using-netcdf4)一些。

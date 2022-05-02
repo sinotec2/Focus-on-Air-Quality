@@ -5,10 +5,10 @@ parent: Recommend System
 grand_parent: CMAQ Model System
 nav_order: 2
 date: 2022-04-18 09:28:55
-last_modified_date: 2022-04-18 09:28:58
+last_modified_date: 2022-05-02 15:44:10
 ---
 
-# 排放檔案管理
+# 排放檔案管理與測試
 {: .no_toc }
 
 <details open markdown="block">
@@ -307,3 +307,8 @@ for v in V[3]:
   nc[v][:,0,:,:]=var[:,:,:]
 nc.close()
 ```
+### 船舶排放造成的污染增量
+
+| ![SO2K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2K1.PNG) |![PM25K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM25K1.PNG) |
+|:--:|:--:|
+| <b>公版K1排放量造成SO<sub>2</sub>濃度增量</b>|<b>公版K1排放量造成PM<sub>25</sub>濃度</b>|

@@ -279,6 +279,8 @@ with open(fnameO,'w',newline='') as jsonfile:
 ### dSHIP.py
 - 使用np.where將開放水域位置予以標定（`idx`）
 - 事先先複製一份基準排放量檔案當成模版
+- 注意nc檔案並不適用np.array的fancy indexing
+  - 詳[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)
 
 
 ```python
@@ -298,9 +300,9 @@ idx=np.where(mask==2)
 fname='/data/cmaqruns/2019simen/output/2019-01/grid03/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf_dSHIP'
 nc = netCDF4.Dataset(fname,'r+')
 V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+var=np.zeros(shape=(nt,nrow,ncol))
 for v in V[3]:
-  var=np.zeros(shape=(nt,nrow,ncol))
-  var=nc[v][:,0,:,:]
+  var[:,:,:]=nc[v][:,0,:,:]
   var[:,idx[0],idx[1]]=0
   nc[v][:,0,:,:]=var[:,:,:]
 nc.close()

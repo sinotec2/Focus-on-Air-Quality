@@ -149,6 +149,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
     76  pv=pivot_table(dfT,index=['YJH','IX','IY'],values=sint,aggfunc=sum).reset_index()
 ```
 - 再將`pivot_table`結果轉成矩陣輸出
+  - 注意nc檔案並不適用np.array的fancy indexing，詳[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)
 
 ```python
     77  pv.IX=[int(i) for i in pv.IX]

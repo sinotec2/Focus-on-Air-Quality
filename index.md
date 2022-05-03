@@ -18,6 +18,7 @@ last_modified_date: 2022-04-28 10:09:34
 ---
 
 ## What's New
+- 2022-05-03 51勞動節假期間回顧了ncf線性篩選的問題，雖然過去解決了很多類似的問題，但究竟是怎麼回事，還是一知半解，網友也很少討論。我給它取名叫[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)，基本上呢這是個誤會，nc.Dataset畢竟和np.array是有不小的差異的。
 - 2022-04-19 疫情來了，有網友把每天公告的數據用leaflet寫了網頁公開在github.io。這引起我的興趣，也把一些靜態(廣播)網頁陸續搬到[https://sinotec2.github.io/](https://sinotec2.github.io/)，實則也想關閉httpd一下，好好找個防止[駭客攻擊](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/IPBlackNameList)的方法（不過這題基本上應該算是完成了@2022-04-23:）。
 - 2022-04-09 新增了[煙流模式](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/)與[軌跡模式](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/)的筆記、遠端計算網站也新增了[CALPUFF](http://114.32.164.198/CALPUFF.html)以及[CALINE](http://114.32.164.198/CALINE3.html)的功能。這2個加州開始發展的模式有著天壤之別的命運，是否開放原始碼似乎是蠻關鍵的因素，引以為戒啊。
 - 2022-02-20 公司新購了工作站，意味著更大範圍、更多網格數的模擬變得更可能實現。不過初步嘗試，同時執行CWBWRF_15及3k雙向巢狀網格的[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)作業並沒有成功，只得以[ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)及單向套疊進行，看起來是OK的。這表示對臺灣佔有80%貢獻的華東～華南地區，以後會跟臺灣本島同框進行空品模擬，這好像比較符合比例原則，有待爾後詳細的ISAM分析加以確認。

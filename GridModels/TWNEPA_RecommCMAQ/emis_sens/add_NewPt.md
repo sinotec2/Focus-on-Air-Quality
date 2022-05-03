@@ -194,11 +194,11 @@ nc['TFLAG'][0,:,1]=nc.STIME
 nc.close()
 ```
 
-### 點源增量成果檢核
+## 點源增量成果檢核
 - 因2點源檔案沒有空間顯示軟體可供檢核，只能以ncdump直接打開檢查內容數字。
 - 也可使用下列程式讀成json檔案
 
-#### pt2json.py
+### pt2json.py
 - 將CCTM點源檔案讀成json的程式
 - 引數：const/timvar前之ROOT(含年月,eg `'New3G.1901'`)
 
@@ -226,7 +226,7 @@ with open(fnameO,'w',newline='') as jsonfile:
 ```json
 {"COL": "30", "IFIP": "1000", "ISTACK": "1", "LATITUDE": "22.843828", "LMAJOR": "1", "LONGITUDE": "120.205605", "ROW": "38", "STKCNT": "1", "STKDM": "11.0", "STKFLW": "7.6913733", "STKHT": "80.0", "STKTK": "363.0", "STKVE": "-22.721462", "XLOCA": "20405.605", "YLOCA": "-230769.28", "NO": "1.2660064", "NO2": "0.14066738", "PMOTHR": "5.680801", "SO2": "0.22570312"}
 ```
-#### 201901模擬結果差值
+### 201901模擬結果差值
 - 全月最大差異小時值，氣狀物單位ppb、粒狀物&mu;g/M<sup>3</sup>
 - 2019force：公版N3G-base，雲雨多、擴散能力較差，原生性濃度高，臭氧低。PM<sub>2.5</sub>只在污染源所在地網格有高值。
 - 2019base：不含澎湖版3G-base，臭氧較高，轉化硝酸鹽濃度較高。

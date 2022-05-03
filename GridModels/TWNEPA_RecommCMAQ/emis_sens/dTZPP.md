@@ -47,9 +47,9 @@ for v in V[3]:
 nc.close()
 ```
 ### 排放差異
-- 將公版模式1月份排放量加總結果與[add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis/#直接選取teds11點源資料庫add_tzpppy)結果排放量比較如下表
+- 將公版模式1月份排放量加總結果與[add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_OldPt/#add_tzpppy)結果排放量比較如下表
   - 時間範圍都以1/1/00~1/31/23
-  - 空間範圍：公版條件如上述2個網格之內容。[add_tzpp.py]()則為符合管編及高度2個條件之內容。
+  - 空間範圍：公版條件如上述2個網格之內容。[add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_OldPt/#add_tzpppy)則為符合管編及高度2個條件之內容。
 - 排放單位：gmole/s(gas)、g/s(P*)  
 
 |Spec|somke|add_tzpp.py|
@@ -75,14 +75,14 @@ nc.close()
 |PTI|55.866913||
 |SO2|3240.5608|3389.6604|
 
-- 除CO外，其餘項目公版排放量略低於[add_tzpp.py]()。二者總量差異有限
+- 除CO外，其餘項目公版排放量略低於[add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_OldPt/#add_tzpppy)。二者總量差異有限
 - 公版有較完整的PM分率，
   - 因各PM物質的水溶性、化學特性都有差異，可能會因詳細計算結果而有較低的濃度。
   - 相對而言PMOTHR較為惰性，應為偏僻原生性污染物之保守設定。
 
-### 結果分析
+## 結果分析
 - 公版排放量模擬臺中電廠燃煤機組關閉後之空品敏感性(TZPP = BASE - dTZPP)
-- [add_tzpp.py]()排放量之增量(TZPP' = aTZPP- dTZPP)
+- [add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_OldPt/#add_tzpppy)排放量之增量(TZPP' = aTZPP- dTZPP)
 
 | ![TZPP_pmfM.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TZPP_pmfM.PNG) |![TZPP_pmfT.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TZPP_pmfT.PNG) |
 |:--:|:--:|

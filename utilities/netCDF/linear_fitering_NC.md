@@ -27,7 +27,7 @@ idx=np.where(mask==0) #tuple length maybe in thousands
 for i in range(len(idx[0])):
   nc[v][:,0,idx[0][i],idx[1][i]]=0  
 ```
-- 任何批次作法都遭遇困難
+- 任何批次作法都遭遇困難(包括使用xarray，因此xr也是使用netcdf引擎來開啟nc檔案)
 
 ```python
 arr=nc[v][:,0,idx[0],idx[1]]  #stucked
@@ -44,7 +44,11 @@ nc[v][:,0,idx[0],idx[1]]=0  #stucked
 - 所以前述stucked指令，不單是個錯誤、更會是個災難。
 ### arbitary indexing
 - 如果idx不是連續、或不具規則性的時空範圍
-    - 且`(idx[0],idx[1])`可視為線型的軌跡陣列
+  - 且`(idx[0],idx[1])`可視為線型的軌跡陣列
+  - 不適用fancy indexing
+  - (目前網路上還找不到批次作業的建議方案)
+
+### nc檔案的結構與存取速度
 - 在ncf數組中執行此項任務、過程是非常緩慢的（除了indexing的意義差異）
   - netCDF4一直有個問題，就是[寫出速度](https://stackoverflow.com/questions/27164414/writing-a-netcdf4-file-is-6-times-slower-than-writing-a-netcdf3-classic-file-and)較netCDF3_classic為慢
   - 因為netCDF4是使用HDF5，因此是透過層級架構進行更新、壓縮、所以[存取也會比較慢](https://stackoverflow.com/questions/31865410/python-replacing-values-in-netcdf-file-using-netcdf4)一些。
@@ -65,6 +69,7 @@ for v in V[3]:
   nc[v][:,0,:,:]=var[:,:,:]
 ...
 ```
+
 ### 實例
 - 類似情況發生在：
   - [高空點源：排放對照](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/pt2em_d04/#程式分段說明)

@@ -141,7 +141,9 @@ for m in range(12):
   - const檔案有點源的位置、COL/ROW值，也必須按照新的座標系統定位
   - timvar檔案則需修改TFLAG時間標籤的內容與長度
 - 注意
-  1. 點源檔案的NCOLS及NROWS 2屬性有不一樣的定義，不能被一般檔案覆蓋過去。
+  1. 點源檔案的NCOLS及NROWS 2屬性與面源檔案有不一樣的定義，不能被一般檔案覆蓋過去。
+    - NCOLS必須為1
+    - NROWS為點源個數
   1. COL、ROW是整數，而不是實數
 
 ```python

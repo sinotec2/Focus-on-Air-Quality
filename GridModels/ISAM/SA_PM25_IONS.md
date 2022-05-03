@@ -33,7 +33,7 @@ last_modified_date:   2021-12-20 15:56:47
   - 此處以中國大陸的[空氣質量預報](http://big5.mee.gov.cn/gate/big5/www.mee.gov.cn/hjzl/dqhj/kqzlyb/)分區為例
 
 |空氣質量預報分區|`$ISAM_REGIONS(REGION(S))`名稱|**ISAM**結果檔名標籤|
-| ---- | ---- | ---- |
+| ---- | :----: | :----: |
 |華北(河北山東)|AQFZ1|JJZ|
 |汾渭平原、山西、陜西、河南|AQFZ2|FWS|
 |東北區域|AQFZ3|NEC|
@@ -45,9 +45,9 @@ last_modified_date:   2021-12-20 15:56:47
 
 ## 程式說明
 
-### **ISAM**執行
+### **ISAM**執行方式
 
-#### 批次
+#### 連續執行批次
 
 ```bash
 kuang@DEVP /home/cmaqruns/2018base

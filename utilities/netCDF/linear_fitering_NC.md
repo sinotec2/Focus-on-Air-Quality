@@ -20,9 +20,16 @@ last_modified_date: 2022-05-01 18:54:06
 ---
 ## 背景
 - 提取或指定nc檔案多維度之時間、空間位置點的數值，是一件常見的工作，如。
+  - 這題最原始的作法就是運用迴圈一一指定(eg.早先寫的[分配港區點源及面源排放量](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/harb_ptse/#程式設計))
 
 ```python
 idx=np.where(mask==0) #tuple length maybe in thousands
+for i in range(len(idx[0])):
+  nc[v][:,0,idx[0][i],idx[1][i]]=0  
+```
+- 任何批次作法都遭遇困難
+
+```python
 arr=nc[v][:,0,idx[0],idx[1]]  #stucked
 nc[v][:,0,idx[0],idx[1]].shape  #stucked
 nc[v][:,0,idx[0],idx[1]]=0  #stucked
@@ -65,4 +72,4 @@ for v in V[3]:
   - [面源：網格化與存檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/#網格化與存檔) 
   - [生物源：線性之dataframe填入3維矩陣](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/#線性之dataframe填入3維矩陣)
   - [公版船舶排放之敏感性分析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis/#dshippy)
-  
+

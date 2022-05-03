@@ -431,7 +431,7 @@ nc.close()
 
 ## 特定高度、特定位置排放量之敏感性
 - 此處範例探討自背景排放量檔案中剔除特定點污染源造成的濃度差異，即為該廠之關閉敏感性。此處以臺中電廠為例。
-- 由[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI)中找到臺中電廠
+- 由[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI)中找到臺中電廠(滑鼠滑過在下方會出現(i,j)座標位置)
   - 位置(fortran notation)為(40,87,5)及(40,88,5)
   - 位置並沒有時間變化。排放量沒有時間變化。
 - 使用下列程式自背景基準排放(BASE)中予以剔除、另存新檔(dTZPP)、執行cctm
@@ -484,7 +484,8 @@ nc.close()
   - 相對而言PMOTHR較為惰性，應為偏僻原生性污染物之保守設定。
 
 ### 結果分析
-- 公版排放量模擬臺中電廠燃煤機組關閉後之空品敏感性
+- 公版排放量模擬臺中電廠燃煤機組關閉後之空品敏感性(TZPP = BASE - dTZPP)
+- [add_tzpp.py]()排放量之增量(TZPP' = aTZPP- dTZPP)
 
 | ![TZPP_pmfM.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TZPP_pmfM.PNG) |![TZPP_pmfT.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TZPP_pmfT.PNG) |
 |:--:|:--:|

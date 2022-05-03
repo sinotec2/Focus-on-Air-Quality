@@ -48,11 +48,6 @@ nc[v][:,0,idx[0],idx[1]]=0  #stucked
 
 ### 解決方案
 - 另外開啟陣列var作為容器，令`var[:,idx[0],idx[1]]=0`,再一次性回存 nc[v][:]檔案中，會快很多。
-- 類似情況發生在：
-  - [高空點源：排放對照](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/pt2em_d04/#程式分段說明)
-  - [船舶：改變解析度(reso.py)](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/FMI-STEAM/old/#改變解析度resopy)
-  - [面源：網格化與存檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/#網格化與存檔) 
-  - [生物源：線性之dataframe填入3維矩陣](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/#線性之dataframe填入3維矩陣)
 
 ```python
 ...
@@ -63,3 +58,11 @@ for v in V[3]:
   nc[v][:,0,:,:]=var[:,:,:]
 ...
 ```
+### 實例
+- 類似情況發生在：
+  - [高空點源：排放對照](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/pt2em_d04/#程式分段說明)
+  - [船舶：改變解析度(reso.py)](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/FMI-STEAM/old/#改變解析度resopy)
+  - [面源：網格化與存檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/#網格化與存檔) 
+  - [生物源：線性之dataframe填入3維矩陣](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/#線性之dataframe填入3維矩陣)
+  - [公版船舶排放之敏感性分析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis/#dshippy)
+  

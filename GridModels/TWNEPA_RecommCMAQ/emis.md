@@ -204,9 +204,12 @@ for i in atts:
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
 lat,lon=nc['LATITUDE'][0,0,:,0],nc['LONGITUDE'][0,0,:,0]
 x0,y0=pnyc(lon,lat, inverse=False)
-nc['XLOCA'][0,0,:,0], nc['YLOCA'][0,0,:,0]=x0,y0
+nc['XLOCA'][0,0,:,0]=x0[:]
+nc['YLOCA'][0,0,:,0]=y0[:]
 nc['COL'][0,0,:,0]=np.array((x0[:]-nc.XORIG)/nc.XCELL,dtype=int)
 nc['ROW'][0,0,:,0]=np.array((y0[:]-nc.YORIG)/nc.YCELL,dtype=int)
+nc['TFLAG'][0,:,0]=nc.SDATE
+nc['TFLAG'][0,:,1]=nc.STIME
 nc.close()
 ```
 

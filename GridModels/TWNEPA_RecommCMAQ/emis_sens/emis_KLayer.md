@@ -47,7 +47,7 @@ done
   - 這些項目的最大值遠較其他粒狀物為高 
 
 |K|m above ground|depth(m)|PMOTHR|PEC|PSO4|POC|
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |0|0~19.85|39.775|7.575|1.311|2.932|1.983|
 |1|19.85~59.62|59.821|4.108|0.372|0.549|0.28|
 |2|59.62~119.4|120.357|5.288|4.364|0.789|0.99|
@@ -57,12 +57,14 @@ done
 |6|734.7~1079|403.888|0.009|0.000|0.000|0.000|
 |7|1079~1483|471.907|0.001|0.000|0.000|0.0001|
 
-### 第二層(K1)排放造成的地面污染增量
+### 第2層(K1)排放造成的地面污染增量
 - 氣象條件：201901～31
 - K1高度：地面以上39.7\~79.55m約40m厚度
-- 
+- 高雄小港地區似有集中之PM<sub>2.5</sub>高值
+  - 沒有延長的煙流形狀，疑似為中鋼原生性污染所致。
+  - 比較第2層PMOTHR排放量分布，當地確實有較高排放量
 
-| ![SO2K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2K1.png) |![PM25K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM25K1.png) |
+| ![PM25K1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM25K1.png) |![PMOTHR_K2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PMOTHR_K2.png) |
 |:--:|:--:|
-| <b>公版K1排放量造成SO<sub>2</sub>濃度增量(月均值)</b>|<b>公版K1排放量造成PM<sub>25</sub>濃度(月均值)</b>|
+| <b>公版K1排放量造成PM<sub>25</sub>濃度增量(月均值)</b>|<b>公版K1 PMOTHR排放量(月均值g/s)</b>|
 

@@ -125,7 +125,29 @@ $ ll icon/*9 bcon/*9
 # ~/download/input/201901//grid03/mcip
 -rwxr-xr-x 1 sinotec2 TRI1111114 1000K May 31  2021 LUFRAC_CRO_Taiwan.nc
 ```
+### 日期個案管理project.config
+- [project.config](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#2-模擬案例與時間projectconfig)是公版CCTM執行腳本中3者其一，為設定個案起迄日期條件之腳本。更動此腳本內容，還需有配套動作，在此詳述。
+- 何時會需要修改個案起迄日期
+  - 電腦資源限制、分段執行
+  - 電腦執行過程被迫中斷、重啟執行
+  - 針對高濃度事件期間進行分析
+  - 其他理由
+- 起始日期
+  - MCIP_START(eg `2018-12-25-00:00:00.0000`)：無需更動，CCTM會自全月檔案中尋找需要的開始時間
+  - cmaqbcdate(eg `2018359`)：同樣也無需更動
+  - cmaqicdate(eg `2019002`)
+    - 因為只有單一個小時，內容為前日23時結束時所有項目的模擬值
+    - 需要連結CCTM_CGRID檔案，範例如下(將**CCTM_CGRID**...20190101連結至**ICON**...20190102)
 
+```bash
+ln -s ${project.config}/${mydomain}/cctm.${myjob}/daily/CCTM_CGRID_v532_intel_Taiwan_20190101.nc ${cmaqproject}/${mydomain}/icon/ICON_v532_Taiwan_2019002
+```  
+- 結束日期
+  - runlen：(單位為MMSS，840小時為**840**0000)
+  - END_DATE(eg. `2019-01-31`)
+  - 此二者取交集(較小值)
+
+- 起迄小時：因公版模式還是維持以日為單位進行CCTM模擬，因此起迄時間均為UTC之0時。**不建議更動**以避免錯誤。
 ## Results
 - 似非連續批次完成
 

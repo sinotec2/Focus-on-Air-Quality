@@ -1,0 +1,187 @@
+---
+layout: default
+title: 心臟血管疾病
+parent: Disease and Air Pollution
+grand_parent: Paper Reviews
+nav_order: 1
+last_modified_date: 2022-05-05 13:56:01
+---
+
+# 心臟血管疾病
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+
+## (1)	國外研究
+美國世代追蹤證據顯示，長期接觸細顆粒物與心血管死亡率相關，其他污染物和心血管疾病的證據較少。 
+
+[Atkinson et al. (2013)][55]  追蹤836,557 名年齡在 40 至 89 歲、在 205 家英國全科診所註冊的患者，自2003 年5 年內室外環境空氣污染與心肌梗死、中風、心律失常和心力衰竭之間的關係。結果顯示：雖然污染物濃度與心肌梗塞、中風或心律失常相關的證據不足，但發現與心力衰竭事件之間存在一致的關聯。 PM10 和 NO2 的四分位間距變化（分別為 3.0 和 10.7 µg/m）在調整混雜因素後均產生 1.06（95% 置信區間 = 1.01-1.11）的風險比。
+
+[Jerrett et al. (2013)][56]  分析PM2.5、NO2和O3個體化暴露與加州成人死亡風險之間的關聯。前2者污染項目使用土地利用回歸模型、O3則使用距離反比加權插值估計暴露量。對象為1982 年居住加州73,711 名受試者，對其生命狀態進行追蹤直至 2000 年。結果發現PM2.5、O3 和 NO2 與缺血性心臟病死亡率呈正相關。 NO2（交通污染的標誌物）和PM2.5與所有原因造成的死亡率有關。只有 NO2 與肺癌死亡率呈顯著正相關。
+
+## (2)	國內研究
+### a.	空氣污染毒理學研究
+空氣污染造成心臟血管疾病(CVD)除了因增加身體氧化壓力之致病機制之外，臺大團隊([張淳昭 2006][57]) 也發現懸浮微粒中的鐵、鎳，併同超細碳黑顆粒合併暴露時會有明顯的交互作用發生，在自發性高血壓大鼠身上導致心血管毒性。
+
+[莊凱任(2006)][58] 以患有呼吸道疾病、心血管疾病的病患、以及年輕健康的族群，對其短期暴露於次微米微粒空氣污染物、微粒成分與人體心血管相關生理指標如血壓、心跳、心跳速率變異性、血液發炎指標高敏感度C反應蛋白、血液凝血指標血纖維蛋白原、血液溶血指標血纖維蛋白溶解酶原活化劑抑制劑第一型及組織型血纖維蛋白溶解酶原活化劑、氧化壓力指標8-氫氧2''-去氧鳥糞核糖等指標變化之相關性進行研究。研究發現大氣次微米微粒的暴露會導致心跳加快、血壓升高及自主神經功能失調。微粒成分中的硫酸鹽、硝酸鹽、有機碳成分會導致心血管系統凝血、發炎、氧化壓力的產生，以及自主神經功能失調。患有冠狀動脈疾病、高血壓的患者，以及肺功能不良的呼吸道疾病患者為微粒空氣污染物的易感受族群。
+
+臺灣大學[陳南廷 (2003)][59]  利用心跳速率（heart rate）、心跳速率變異性（heart rate variability, HRV）等指標，觀察短期暴露於較高濃度微粒之反應關係。結果在控制睡眠時間、性別、年齡、身體質量指數（Body Mass Index, BMI）、抽菸者、疾病型態、β-block藥物、監測當天溫濕度等因子後發現，當PM10 四小時移動平均質量濃度每提高100μg/m3 其心跳速率提高0.49％、SDNN(Standard Deviation of Normal to Normal)、r-MSSD、pNN50、LF、HF、LF/HF、Total Power之改變幅度分別為-4.96％、-6.95％、-0.84％、-6.86％、-6.02、-0.38及-4.73％，當PM2.5 四小時移動平均質量濃度每提高100μg/m3 其心跳速率提高0.44％、SDNN、r-MSSD、pNN50、LF、HF、LF/HF、Total Power之改變幅度分別為-5.44％、-7.76％、-0.96％、-7.54％、-6.43％、-0.41％、-5.09％，PM1 四小時移動平均質量濃度每提高100μg/m3 其心跳速率提高0.50％、SDNN、r-MSSD、pNN50、LF、HF、LF/HF、Total Power之改變幅度分別為-6.21％、-8.87％、-1.09％、-8.53％、-7.33％、-0.42％、-5.71％。
+
+[黎雅如(2008)][60] 針對台北縣新莊18位郵務人員探討環境中大氣懸浮微粒的特性及其對人體健康的影響。結果顯示在校正其他因子後，每增加一四分位距(IQR; 1.9 μg/m3)來自車輛廢氣之PM1.0-2.5濃度，會導致郵差之心-踝血管指數上升2.84 % (95 %信賴區間, 1.37－4.39 %)；每增加一四分位距(1.4 μg/m3)來自煞車磨損之PM1.0-2.5濃度，會導致郵差之正常心律間隔標準差下降11.60 % (95 %信賴區間, -19.68－-2.70 %)；以及每增加一四分位距(10.9 μg/m3)來自工業活動之PM2.5濃度，會導致郵差之正常心律間隔標準差下降10.36 % (95 %信賴區間, -27.97－-1.67 %)。我們也發現來自煞車磨損之PM1.0-2.5濃度與心跳速率呈現正相關的趨勢；來自車輛廢氣之PM1.0-2.5濃度與低頻功率：高頻功率比率呈現正相關的趨勢。
+
+[許愷芯 (2009)][61] 以廣義可加混合模型(GAMM)探討台北都會地區交通相關空氣汙染物對健康年輕族群心血管功能之影響。結果發現懸浮微粒會造成SDNN、LF/HF與HR的上升、pNN50、LF及HF的下降。CO會造成r-MSSD、SDNN、LF、HF、TP與HR的下降。
+
+[吳姿儀 (2010)][62] 自20位18-27歲住校健康成人以攜帶式微粒與氣體偵測器，以及可攜式心電圖紀錄分析器，連續監測個案在校園、公車、捷運上之PM、CO及心電圖的變化，並使用廣義可加混合模型加以分析。結果證實，健康成年者於公車及捷運上暴露濃度均顯著高於校園，GAMM模型分析結果發現，相較於校園內，各粒徑PM和CO均使r-MSSD、SDNN、pNN50+1、LF、HF與TP改變百分比下降，使HR與LF/HF改變百分比上升。不同粒徑之PM引起心跳及HRV上升或下降的情形不同，其中以PM2.5-10引起HRV各參數之改變較多。在短期效應方面，各粒徑PM與CO隨著移動平均時間的增加，對部份HRV有逐漸上升或下降的短期影響，且此影響可長達60分鐘。
+
+[謝安琪 (2011)][63]  針對台灣嘉義地區57位冠心病患，每三個月追蹤一次，共四次無徵狀跑步機運動測試（Symptom-limited Exercise Treadmill Test）及心電圖測試資料以心跳回復率（Heart Rate Recovery, HRR）與HRV作為自律神經功能的健康指標，探討空氣污染的影響。研究結果顯示每增加一個四分位差之SO2暴露會使得第一到第六分鐘的HRR顯著下降，且具有累積效應及延遲效應，即便控制臭氧的影響，效應仍存在第一分鐘HRR，PM10暴露增加亦會使前兩分鐘HRR顯著下降。暖季PM對HRR的影響較冷季來得大，依據不同風向對第一分鐘心跳回復率的影響推測，PM10的主要來源為測站西北方。每增加一個四分位差之SO2和PM2.5濃度暴露會使得HRV顯著改變，且具有較顯著的微粒效應，即便控制臭氧的影響，PM10和PM2.5在LF的部分仍呈現顯著的累積效應。暖季SO2和PM10對HF影響較冷季大，而冷季PM對LF/HF指標的影響則較暖季顯著，依據不同風向對HRV的影響推測，PM2.5的來源為自測站西南方的較西北方多。
+
+[陳立歆(2012)][64]針對台灣地區3位男性，4位女性(平均68.7歲)健康老人進行72小時微環境暴露監測與可攜式心電圖紀錄。發現不論是單一或多污染物模式結果，PM2.5-10、PM1與奈米微粒皆會造成HR上升、時間域指標上升、頻率域指標上升、LF/HF下降；PM1-2.5與BC皆會造成頻率域指標上升；p-PAH會造成HR上升；CO則會造成時間域指標下降、頻率域指標下降。此外，各污染物引起的HRV百分比改變量最大的移動平均時間皆落在4小時後，顯示PM、奈米微粒、p-PAH、CO與BC暴露對HRV具有延遲性效應 。
+
+[沈芙慧 (2014)][65] 在臺北地區選擇117位大樓員工，並在其大樓進行心血管的健康檢查與室內空氣品質監測。結果發現以土地利用模式結合辦公大樓的室內空氣品質監測，相較於單純用土地利用模式，對於心血管效應指標的探討有著更顯著的結果，表示室內空氣品質監測對於暴露評估上的應用，有一定的重要性。在交通汙染物與急性心血管效應的關聯上，我們發現PM2.5 以及 NO2和 臂踝脈波傳播速率(baPWV)有顯著的正相關，而與踝肱指數(ABI)並沒有顯著的相關。在與高敏感度C-反應蛋白(hsCRP)的關係中，僅發現NO2 與其有顯著的正相關。
+
+[周貽珊 (2014)][66] 針對大臺北工業區(32人)及住商混和區(50人)之居民使用個人採樣器採集空氣樣本收集細懸浮微粒作為暴露評估指標，執行問卷調查個人習慣及健康狀態、採集血液進行生化值檢驗、以及心率變異分析儀檢測。經校正後除血管細胞黏附分子-1（VCAM-1）會增加，其他早期生物效應指標皆下降，但皆無顯著意義。於工業區校正後每暴露10µg/m3之PM2.5，其族群平均心率SDNN下降4.89ms，RMSSD下降4.40ms，並皆達顯著意義(95%C.I.: -8.37,-1.41, p<0.01及95%C.I.: -7.87,-0.94, p=0.01)。住商混和區校正後，每暴露10µg/m3之PM2.5，隨著追蹤時間，其族群平均WBC下降0.33×103/µL， 並達統計上顯著意義 (95%C.I.:-0.59,-0.07, p=0.01)。
+
+[Chen et al. (2014)][67] 針對161位小組研究發現，PM2.5短期暴露會導致已有高心血管疾病風險個案(夜間無顯著血壓下降non-dipping)的心臟血管功能失調，包括脈搏壓以及心臟收縮力下降以及血管阻力上升，然而對具夜間血壓下降(blood pressure dipping)低心血管疾病風險個案，PM2.5短期暴露對心臟血管功能參數則沒有顯著的變化。
+
+[鄭凱偉 (2016)][68]  選取大台北地區一般健康成人於基準點、兩個月後(第一次追蹤)和四個月後(第二次追蹤)進行測量，每次第一天以個人PM2.5空氣採樣器進行24小時個人空氣採樣，並做濾紙金屬成份分析，第二天則進行體檢，收取血液和尿液等生物檢體，以測量個案心血管效應生物標記物，並利用問卷收集基本人口學資料等校正相關變項。研究發現PM2.5與PM2.5中金屬濃度隨季節會有變化，冬季最高，春、夏季逐漸下降；橫斷面發現暴露於PM2.5中金屬Cd會增加血漿中NO的濃度；在縱貫面則發現PM2.5中金屬Cu會增加血漿中NO的濃度，血中As濃度則會增加發炎指標hs-CRP之數值。
+### b.	北部地區
+[Chang et al. (2005)][69]  探討了1997 年至 2001 年期間台北因心血管疾病(CVD)入院率和環境空氣污染數據的關係，在控制氣象要素、星期、季節性和長期時間趨勢後，單一污染物模型，在暖天(⩾ 20°C) PM10、NO2、CO 和O3都與 CVD 入院顯著相關。在冷天除 O3 和 SO2 之外的所有污染物都與CVD 入院顯著相關。二污染物模型在暖天CO、NO2 和 O3 與其他四種污染物中的每一種都顯著結合，在冷天PM10 在所有兩種污染物模型中都保持統計顯著性。
+
+[Bell et al. (2008)][70]  針對1995-2002 年台北地區的哮喘、肺炎、缺血性心臟病和腦血管疾病住院與沙塵暴指標、空污濃度的關係。結果顯示，缺血性心臟病入院風險與幾個沙塵暴指標相關，包括台北地區PM10 濃度、背景PM10、粗顆粒比例和 PM10與PM2.5比值。沙塵暴日疾病住院人數高於其他日16-21%，此一現象還與交通相關的污染物、NO2、CO和 PM2.5 相關。延遲3日每增加 28 μg/m3 PM10，哮喘入院率增加 4.48%（95% CI 0.71% 至 8.38%），延遲3日每增加 10 ppb O3，哮喘入院率增加 7.60%（95% CI 2.87% 至 12.54%）。腦血管疾病入院與 PM10 和 CO 相關，兩者均遲滯3天。 SO2 則與住院沒有關係。
+
+[林高立(2009)][71]  以台北市1996年到2006年間因急性心肌梗塞、心絞痛、腦前動脈及腦動脈的阻塞及狹窄、短暫性腦部缺血住院醫療的新發病患與環境暴露因子關係分析。單污染模式結果發現，PM10、SO2、NO2、CO及O3濃度增加與急性缺血性腦心血管疾病住院醫療危險性增加有關。在兩種污染物模式中，除了SO2以外，在其他的污染物(PM10, NO2, CO, O3)仍然可以發現與住院醫療危險性增加有關，而在低溫(<20℃)日每增加10 ppb O3的危險對比值為最高(低溫日OR:1.14-1.43)。在低溫日以單一污染物模式分析，對照空氣品質較佳的情況，反而有較高的危險性。PM10對照日暴露濃度在41 μg/m3以下的病患，當PM10暴露濃度每增加15 μg/m3，其住院醫療危險對比值為5.95 (5.57-6.36)。於對照日暴露濃度NO2在28 ppb以下 (OR 3.38, 3.20-3.56; NO2每增加5 ppb)、CO在1.1 ppm以下 (OR 1.51, 1.48-1.55; CO每增加0.2 ppm)及O3在17 ppb以下 (OR 3.53, 3.21-3.89; O3每增加10 ppb)，目前生物機轉尚不明朗。
+
+[林郁倫 (2009)][72] 結合2004年1月1日至2008年8月31日國立臺灣大學醫學院附設醫院心肺疾病急診與一般及超級空品測站資料建立不包含空氣污染物的疾病基本模型(base model)，再利用廣義加法模型(generalized additive models, GAM）評估對於心血管及呼吸道疾病急診的影響。研究結果在單污染物模型顯示，微粒成分對於心血管疾病、呼吸道疾病的急診情形有顯著的影響(P < 0.05)，多污染物模型硝酸鹽、硫酸鹽、黑碳、有機碳以及元素碳與呼吸道急診有關，其最大相對危險性分別是1.025、1.025、1.023、1.031以及1.012。在心血管疾病方面則發現硫酸鹽、有機碳與元素碳與急診有關，最大相對危險性分別是1.020、1.061以及1.017。再將急診資料依據年齡分成孩童(0-14歲)、成年人(15-64歲)、老年人(> 65歲)等三組進行分析，發現硝酸鹽、硫酸鹽、黑碳、有機碳以及元素碳對成年人呼吸道疾病急診有顯著影響，最大相對危險性分別是1.031、1.043、1.037、1.050以及1.020。而硫酸鹽、有機碳與元素碳則對心血管疾病有影響，最大相對危險性為1.068、1.060以及1.036；在孩童方面，也發現硝酸鹽、硫酸鹽、黑碳、有機碳以及元素碳對呼吸道疾病急診的影響，最大相對危險性分別是1.036、1.020、1.030、1.046以及1.015；而在老年人只看到硝酸鹽與有機碳當天的濃度(lag 0 day)會增加心血管疾病急診的危險性，最大相對危險性為1.017以及1.050。硫酸鹽與有機碳則發現與老年人呼吸道疾病急診有關，最大相對危險性是1.045以及1.032。
+
+北醫團隊([Pangaribuan et al. 2019][73]) 針對2014年至2015年新北市雙和醫院肺科每日入院人數中提取與CVD數據相關的生物標誌，並應用PM10、PM2.5、NO2和SO2的24h濃度和臭氧8h濃度進行多元線性回歸，探討氧化應激 (壓力)和全身炎症的生物學機制關聯。結果發現空氣污染物與CVD患者心率、收縮壓、紅血球細胞數之間存在統計學上顯著的正相關，而空氣污染物與血細胞比容濃度之間存在統計學上顯著的負相關。另一方面，我們發現空氣污染物與舒張壓、白血球細胞數和血紅蛋白濃度之間則沒有顯著關聯。
+
+[王彥鈞(2012)][74]  利用大台北地區2000年至2009年的健保資料庫篩選出50-70歲、有住院資料的缺血性心臟病以及腦血管疾病患者，建構天氣因子、空氣污染因子與疾病復發風險的預測模型。在心血管疾病中SO2有達到顯著正相關(OR=1.096)、以及PM10達到顯著負相關(OR=0.986)、男性復發風險也較女性高1.796倍。而在腦血管疾病中，當天最大溫差有達到顯著負相關(OR=0.932)，以及年齡達到顯著負相關(OR=0.952)，男性復發風險也較女性高1.534倍。
+
+### c.	中部地區
+[李志慶 (2008)][75] 探討中部地區2002-2004年每日空污對於門診量及住院量之影響。結果顯示，污染物和心肺疾病門診量之間有累積效應，較無明顯延遲效應，和住院量之間則同時有累積及延遲效應。單污染物模式全年齡呼吸性疾病門診量僅與SO2、NO2有關，65歲以上則和PM10、SO2、NO2、CO皆有關，且其相對危險比高於全年齡。而在住院量部分，全年齡與PM10、SO2、NO2、O3有關，六十五歲以上住院僅與PM10有關。全年齡心臟血管疾病門診量與SO2、NO2、CO有關，而六十五歲以上門診量與NO2、CO有關，住院部分僅SO2有關。慢性阻塞性肺疾病，只有SO2、NO2與門診量與住院量有關係。多污染物模式受限於此五種污染物間彼此存在著正相關，而導致迴歸模式中共線性問題。
+
+[陳逸修(2009)][76]  以四季及郊區、都會區做空品與年齡呼吸道及心血管疾病的討論。在都會區中，四季中的各種污染物與各組疾病人數分組中，幾乎都無明顯的關連。而郊區中CO和NO2則有顯著的相關聯（P<0.05）。臭氧在春天及秋天對呼吸道及心血管亦有顯著相關。
+
+[臺大團隊Tsai et al. (2010)][77]  針對台灣中部市區1993 年至 2006 年心血管死亡率與交通相關空氣污染物進行研究。單一污染物模型顯示，心血管死亡率與 2 天前NO2，當天丙烷、異丁烷和苯濃度顯著相關。污染物濃度四分位間距增加的相對風險為：NO2 為 1.053，丙烷為 1.064，異丁烷為 1.055，苯為 1.055。
+
+[楊書瑀 (2014)][78]  針對2000-2012年中部某縣的432名急性心肌梗塞病例進行病例交叉研究。使用條件式羅吉斯迴歸模型估計在發病前1-3天(Lag1-Lag3)下，空氣中汙染物之濃度與變化，結果發現CO、NO2、PM10、PM2.5濃度增加及溫度下降在冷季會增加急性心肌梗塞的風險(OR)：
+- 	1.486(CI：1.228~1.799，p<0.001) CO每增加100ppb
+- 	2.030(CI：1.199~3.349，p=0.0084) NO2每增加10ppb
+- 	1.110(CI：1.040~1.185，p=0.0018) PM10每增加10μg/m3
+- 	1.225(CI：1.080~1.390，p=0.0016) PM2.5每增加10μg/m3
+而在暖季溫度上升會增加急性心肌梗塞的發病風險。
+
+[劉思廷 (2015)][79]  探討2006至2008年PM2.5對中部地區(台中市、彰化縣)心血管疾病及呼吸道疾病之急診就醫影響。結果顯示每增加10μg/m3 PM2.5會增加3.9% (95%CI:0.8%-7.1%)呼吸道疾病急診就醫率，且對65歲以下較有顯著影響。沙塵暴時期，此增量將增加心血管疾病急診138.4%(95%CI:12.8%-403.7%)之就醫率及呼吸道疾病急診61.9% (95%CI:16.9%-124.3%)之就醫率，尤其是65歲以下及女性之族群有顯著性增加。調整NO2及SO2後在都會地區民眾暴露PM2.5比鄉村地區民眾更易造成疾病急診就醫，PM2.5濃度每增加10μg/m3會增加7.5% (95%CI:3.0%-12.3%)呼吸道疾病急診就醫率，尤其對65歲以下女性族群有較顯著影響。在都會地區女性暴露PM2.5 2天後會增加17.3% (95%CI:4.2%-32.1%)心血管疾病急診之就醫率。
+### d.	南部地區
+[莊惠萍 (2006)][80]  選取民國2003∼2004年環保署屏東、潮州及恆春站、此三個地區健康保險門診抽樣資料中之易感性人口 (15歲以下兒童及65歲以上老年人)為對象，探討罹患關疾病的情況及與空氣污染關聯性。結果顯示：除了O3 呈現些微上升以外，其他逐年下降。門診就診頻率部分，心血管疾病與呼吸系統疾病就診頻率均以潮州地區最高，且兩年間資料比較是呈現就診頻率上升趨勢，而屏東及恆春則為下降趨勢。進行疾病就診頻率與各污染物質的簡單迴歸，以PM10對心血管及呼吸系統疾病影響最大；採複迴歸分析時，則以NO2對疾病影響最大。
+
+[劉坤穎(2018)][81]  探討2015年高雄都會區空氣污染短期暴與到院前心臟停止(Out-of-hospital cardiac arrest, OHCA)數量的關係。結果發現在校正溫濕度後，OHCA前1天暴露空氣污染物每增高1個四分位距(IQR)濃度OHCA風險增加倍率：
+- 	PM2.5：1.146(95% CI:1.020-1.288, p=0.022)
+- 	PM10：1.186(95% CI:1.053-1.337, p=0.005)
+- 	O3：1.104(95% CI:1.017-1.199, p=0.018)。
+- 	前3天暴露NO2：1.016倍(95% CI:1.000-1.031, p=0.046)。
+
+陳映辰 (2015) 探討2006年至2010年高雄市粗懸浮微粒(PM2.5-10)濃度與心血管疾病住院率的相關。在單汙染物模式中發現，在冷天(小於攝氏25度)，粗懸浮微粒的濃度越高，每10μg/m3 PM2.5-10心血管疾病住院率有顯著的增加：
+- 	缺血性心臟病住院率增加3%(95%CI=2%-4%)
+- 	中風的住院率增加5%(95%CI=4%-6%) 
+- 	充血性心衰竭住院率增加3%(95%CI=1%-6%)
+- 	心律不整的住院率增加3%(95%CI=0%-6%)
+
+在暖天(大於攝氏25度)，粗懸浮微粒和心血管疾病醫院住院率之間沒有觀察到顯著地相關。在冷天雙汙染物模式中，控制SO2、NO2、CO或O3，PM2.5-10與心血管疾病住院率仍保持正相關。與PM2.5濃度每增加10μg/m3所造成的影響相比，粗懸浮微粒濃度每增加10μg/m3對心血管相關疾病住院所造成的影響估計值是較弱的。
+### e.	全台地區
+Chen et al. (2012)研究蒐集包括：基隆、新莊、南投、集集、竹山、仁武全國六鄉鎮 9,238 位個案，進行PM短期暴露和血壓及脈搏壓的影響 ，發現PM 1-3天的暴露和收縮壓以及舒張壓下降相關，也和脈搏壓(pulse pressure)下降有相關。
+
+魏國閔 (2014)  以台灣地區有設置空污監測站的鄉鎮區居民門診或住院診斷為急性心肌梗塞(Acute Myocardial Infarction；AMI)患者進行病例交叉研究，探討短時間內空氣汙染與溫度對AMI的影響。結果顯示：單變量模型延遲一天下(Lag-1 day)，空氣汙染濃度對於AMI門診的勝算風險(OR)分別為：
+- 	1.184(CI：1.026-1.365，p=0.0204) CO每0.1 ppm
+- 	1.136(CI：1.011-1.277，p=0.0318)PM2.5每增加10 μgm^(-3)
+
+從Lag-1 day不同分層下得知，年輕人屬於PM10或PM2.5濃度增加罹患AMI風險也跟著上升的高危險群；在寒冷季節(10-3月)，高濃度的CO、PM10或較低溫度下也愈容易有罹患AMI的風險。但AMI住院風險卻不顯著。
+
+江怡典 (2016) 分析台灣西部空氣品質區 2010 至 2014 年每日空氣污染物濃度變化對於全死因與急性心肌梗塞死亡之影響。研究結果顯示，短期暴露空氣污染物與全死因和急性心肌梗塞致死有關。單一污染物模式NO2、O3、和 PM2.5 的暴露濃度增加會顯著增加全因疾病死亡率，其勝算比分別為1.015 (Lag-1, 95% CI: 1.004~1.025)、 1.004 (Lag-2, 95% CI:1.000~1.008)、1.047(Lag-2, 95% CI: 1.018 ~ 1.076)，PM10、SO2和CO濃度增加也會提高全因死亡率，但統計分析未達顯著性。SO2濃度增加會顯著增加急性心肌梗塞致死之風險，勝算比為 1.133(Lag-1, 95% CI: 1.026~1.331)，PM2.5 和 PM10 濃度增加也會提高心肌梗塞致死的風險，但統計分析未達顯著性。以性別和氣溫分層分析，發現女性為暴露 PM2.5 引發心肌梗塞致死的高危險群，在氣溫較低的季節，暴露PM2.5 顯著增加急性心肌梗塞死亡的風險，較溫暖的季節則以 O3 對急性心肌梗塞死亡影響最顯著。
+
+林恆成 (2016) 分析全臺在2008年10月至2010年1月急性冠狀動脈綜合症(ACS)發病與環境及污染的關聯。結果：高溫(>26度C)之下，低壓與高壓間發病的風險比(Odds Ratio, OR)為2.266 (p-value <0.0001)，相對濕度與PM10無顯著差異。低溫(<21度C)之下，相對濕度每增加1%，OR= 1.018；PM10每增加10μg/m3，OR=1.038，氣壓變化無顯著差異。中間溫度(21~26度)之下，任何環境因子皆無顯著差異，前一天的溫度標準差與ACS也無相關。
+
+
+[55]: <https://pubmed.ncbi.nlm.nih.gov/23222514/> " Atkinson, R.W., Carey, I.M., Kent, A.J., van Staa, T.P., Anderson, H.R., and Cook, D.G. (2013). Long-term exposure to outdoor air pollution and incidence of cardiovascular diseases. Epidemiology 24 (1):44–53. doi:10.1097/EDE.0b013e318276ccb8."
+[56]: <> " Jerrett, M., Burnett, R.T., Beckerman, B.S., Turner, M.C., Krewski, D., Thurston, G., Martin, R.V., van Donkelaar, A., Hughes, E., Shi, Y., Gapstur, S.M., Thun, M.J., and Pope, C.A. (2013). Spatial analysis of air pollution and mortality in California. Am J Respir Crit Care Med 188 (5):593–599. doi:10.1164/rccm.201303-0609OC."
+[57]: <https://hdl.handle.net/11296/4a35b4> " 張淳昭 (2006). 空氣懸浮微粒在自發性高血壓大鼠上之心律調節效應研究 職業醫學與工業衛生研究所. 國立臺灣大學, 台北市."
+[58]: <https://hdl.handle.net/11296/y8tq49> "莊凱任 (2006). 大氣次微米懸浮微粒對人體心血管系統影響之研究 職業醫學與工業衛生研究所. 國立臺灣大學, 台北市."
+[59]: <https://hdl.handle.net/11296/8rysb6> "陳南廷 (2003). 大氣懸浮微粒對易感受族群心跳速率變異性 職業醫學與工業衛生研究所. 國立臺灣大學, 台北市."
+[60]: <https://hdl.handle.net/11296/u2v8n9> " 黎雅如 (2008). 郵差暴露之懸浮微粒來源及其對心血管功能之急性效應 環境衛生研究所. 國立臺灣大學, 台北市."
+[61]: <https://hdl.handle.net/11296/7784ga> " 許愷芯 (2009). 台北都會地區交通相關空氣汙染物對健康年輕族群心血管功能之影響 應用統計學研究所. 輔仁大學, 新北市."
+[62]: <https://hdl.handle.net/11296/6g5p62> " 吳姿儀 (2010). 不同大眾交通工具上懸浮微粒和一氧化碳暴露對健康成年人心跳速率變異性的影響 公共衛生學系碩士班. 輔仁大學, 新北市."
+[63]: <https://hdl.handle.net/11296/hwe342> " 謝安琪 (2011). 空氣污染對冠狀動脈心臟病病人心跳回復率及心律變異性的影響 環境衛生研究所. 國立臺灣大學, 台北市."
+[64]: <https://hdl.handle.net/11296/hucn9g> " 陳立歆 (2012). 微粒濃度及其成分與一氧化碳對健康老年人心跳速率變異性之影響 公共衛生學系碩士班. 輔仁大學, 新北市."
+[65]: <https://hdl.handle.net/11296/535cbb> " 沈芙慧 (2014). 以土地利用回歸模式評估細懸浮微粒與二氧化氮短期暴露量與心血管疾病相關性 職業醫學與工業衛生研究所. 國立臺灣大學, 台北市."
+[66]: <https://hdl.handle.net/11296/dtxxh4> " 周貽珊 (2014). 細懸浮微粒暴露與心血管疾病早期生物效應指標之相關研究 公共衛生學研究所. 國防醫學院, 台北市."
+[67]: <https://pubmed.ncbi.nlm.nih.gov/24607658/> " Chen, S.-Y., Chan, C.-C., Lin, Y.-L., Hwang, J.-S., and Su, T.-C. (2014). Fine particulate matter results in hemodynamic changes in subjects with blunted nocturnal blood pressure dipping. Environ Res 131:1–5. doi:10.1016/j.envres.2014.01.009."
+[68]: <https://hdl.handle.net/11296/hayp3r> " 鄭凱偉 (2016). 大台北地區細懸浮微粒(PM2.5)中金屬濃度與心血管效應相關生物標記物探討 公共衛生學研究所. 國防醫學院, 台北市."
+[69]: <https://www.sciencedirect.com/science/article/pii/S0013935104001355> " Chang, C.-C., Tsai, S.-S., Ho, S.-C., and Yang, C.-Y. (2005). Air pollution and hospital admissions for cardiovascular disease in Taipei, Taiwan. Environmental Research 98 (1):114–119. doi:10.1016/j.envres.2004.07.005."
+[70]: <https://oem.bmj.com/content/65/2/104> " Bell, M.L., Levy, J.K., and Lin, Z. (2008). The effect of sandstorms and air pollution on cause-specific hospital admissions in Taipei, Taiwan. Occupational and Environmental Medicine 65 (2):104–111. doi:10.1136/oem.2006.031500."
+[71]: <https://hdl.handle.net/11296/83328h> "林高立 (2009). 空氣污染與缺血性心血管疾病住院醫療的相關性 環境醫學研究所. 國立成功大學, 台南市."
+[72]: <https://hdl.handle.net/11296/8das92> " 林郁倫 (2009). 空氣污染與每日心肺疾病急診相關研究 職業醫學與工業衛生研究所. 國立臺灣大學, 台北市."
+[73]: <https://www.sciencedirect.com/science/article/pii/S1309104218305178> " Pangaribuan, M., Chuang, K.-J., and Chuang, H.-C. (2019). Association between exposures to air pollution and biomarkers of cardiovascular disease in Northern Taiwan. Atmospheric Pollution Research 10 (4):1250–1259. doi:10.1016/j.apr.2019.02.008."
+[74]: <https://hdl.handle.net/11296/qsvpk4> " 王彥鈞 (2012). 氣象因子、空氣污染物與兩種疾病復發風險關係之探討 流行病學與預防醫學研究所. 國立臺灣大學, 台北市."
+[75]: <https://hdl.handle.net/11296/jd4t9m> "李志慶 (2008). 中部空氣品質保護區空氣污染物與心臟血管疾病、呼吸疾病日門診量或住院治療相關性之研究 環境工程學系所. 國立中興大學, 台中市."
+[76]: <https://hdl.handle.net/11296/5327x8> "陳逸修 (2009). 中部空品區空氣污染物與呼吸道、心血管疾病之關係 環境科學與工程學系. 東海大學, 台中市."
+[77]: <https://www.sciencedirect.com/science/article/pii/S0048969710000690> " Tsai, D.-H., Wang, J.-L., Chuang, K.-J., and Chan, C.-C. (2010). Traffic-related air pollution and cardiovascular mortality in central Taiwan. Science of The Total Environment 408 (8):1818–1823. doi:10.1016/j.scitotenv.2010.01.044."
+[78]: <> " 楊書瑀 (2014). 以病例交叉法探討空氣汙染物與急性心肌梗塞之相關性 統計資訊研究所. 國立彰化師範大學, 彰化縣."
+[79]: <> "劉思廷 (2015). 細懸浮微粒(PM2.5)濃度對台灣中部地區民眾心血管疾病及呼吸道疾病急診就醫之影響 環境與職業衛生研究所. 國立陽明大學, 台北市."
+[80]: <> "莊惠萍 (2006). 屏東地區空氣污染對易感性族群健康影響之研究 公共衛生學研究所碩士班. 高雄醫學大學, 高雄市."
+[1]: <> "劉坤穎 (2018). 高雄市室外空氣污染與到院前心臟停止的相關性研究 環境與安全衛生工程系消防與防災工程碩士在職專班. 國立高雄第一科技大學, 高雄市."
+[1]: <> "陳映辰 (2015). 高雄市空氣汙染物粗懸浮微粒與心血管疾病住院關係之研究 職能治療學系碩士在職專班. 高雄醫學大學, 高雄市."
+[1]: <> " Chen, S.-Y., Su, T.-C., Lin, Y.-L., and Chan, C.-C. (2012). Short-term effects of air pollution on pulse pressure among nonsmoking adults. Epidemiology 23 (2):341–348. doi:10.1097/EDE.0b013e3182452f1d."
+[1]: <> " 魏國閔 (2014). 台灣地區空氣汙染指標與急性心肌梗塞之門診與住院的相關性研究 統計資訊研究所. 國立彰化師範大學, 彰化縣."
+[1]: <> "江怡典 (2016). 細懸浮微粒(PM2.5)短期暴露與急性心肌梗塞致死之關聯性 管理學院資訊管理學程. 國立交通大學, 新竹市."
+[1]: <> "林恆成 (2016). 探討台灣地區環境因子對急性冠心病之影響 統計資訊研究所. 國立彰化師範大學, 彰化縣."
+[1]: <http://www.stroke.org.tw/GoWeb2/include/index.php?Page=5-1&paper02=4156067525bc96c3a9ee9b> "邱弘毅 (2018). 腦中風之現況與流行病學特徵、台灣腦中風學會. Available at stroke.org.tw (Accessed 15 July 2021)."
+[1]: <> " Ljungman, P.L. and Mittleman, M.A. (2014). Ambient Air Pollution and Stroke. Stroke 45 (12):3734–3741. doi:10.1161/STROKEAHA.114.003130."
+[1]: <> " Graber, M., Mohr, S., Baptiste, L., Duloquin, G., Blanc-Labarre, C., Mariet, A.S., Giroud, M., and Béjot, Y. (2019). Air pollution and stroke. A new modifiable risk factor is in the air. Revue Neurologique 175 (10):619–624. doi:10.1016/j.neurol.2019.03.003."
+[1]: <> " Miller, K.A., Siscovick, D.S., Sheppard, L., Shepherd, K., Sullivan, J.H., Anderson, G.L., and Kaufman, J.D. (2007). Long-term exposure to air pollution and incidence of cardiovascular events in women. N Engl J Med 356 (5):447–458. doi:10.1056/NEJMoa054409."
+[1]: <> " Jerrett, M., Burnett, R.T., Beckerman, B.S., Turner, M.C., Krewski, D., Thurston, G., Martin, R.V., van Donkelaar, A., Hughes, E., Shi, Y., Gapstur, S.M., Thun, M.J., and Pope, C.A. (2013). Spatial analysis of air pollution and mortality in California. Am J Respir Crit Care Med 188 (5):593–599. doi:10.1164/rccm.201303-0609OC."
+[1]: <> " Oudin, A., Strömberg, U., Jakobsson, K., Stroh, E., Lindgren, A.G., Norrving, B., Pessah-Rasmussen, H., Engström, G., and Björk, J. (2011). Hospital admissions for ischemic stroke: does long-term exposure to air pollution interact with major risk factors? Cerebrovasc Dis 31 (3):284–293. doi:10.1159/000322600."
+[1]: <> " Atkinson, R.W., Carey, I.M., Kent, A.J., van Staa, T.P., Anderson, H.R., and Cook, D.G. (2013). Long-term exposure to outdoor air pollution and incidence of cardiovascular diseases. Epidemiology 24 (1):44–53. doi:10.1097/EDE.0b013e318276ccb8."
+[1]: <> " Henrotin, J.B., Besancenot, J.P., Bejot, Y., and Giroud, M. (2007). Short-term effects of ozone air pollution on ischaemic stroke occurrence: a case-crossover analysis from a 10-year population-based study in Dijon, France. Occup Environ Med 64 (7):439–445. doi:10.1136/oem.2006.029306."
+[1]: <> " Chan, C.-C., Chuang, K.-J., Chien, L.-C., Chen, W.-J., and Chang, W.-T. (2006). Urban air pollution and emergency admissions for cerebrovascular diseases in Taipei, Taiwan. European Heart Journal 27 (10):1238–1244. doi:10.1093/eurheartj/ehi835."
+[1]: <> " Chiu, H.-F., Chang, C.-C., and Yang, C.-Y. (2014). Relationship Between Hemorrhagic Stroke Hospitalization and Exposure to Fine Particulate Air Pollution in Taipei, Taiwan. Journal of Toxicology and Environmental Health, Part A 77 (19):1154–1163. doi:10.1080/15287394.2014.926801."
+[1]: <> " 謝依如 (2015). 沙塵暴對臺北地區腦中風住院之影響. 國立台北護理健康大學健康事業管理研究所, 臺北."
+[1]: <> " Tsai, S.-S., Goggins, W.B., Chiu, H.-F., and Yang, C.-Y. (2003). Evidence for an Association Between Air Pollution and Daily Stroke Admissions in Kaohsiung, Taiwan. Stroke 34 (11):2612–2616. doi:10.1161/01.STR.0000095564.33543.64."
+[1]: <> "蔡尚學 (2003). 台灣地區室外空氣污染對健康效應之研究(PhD Thesis) 醫學研究所. 高雄醫學大學, 高雄市."
+[1]: <> " 吳宗達 (2015). 斯達汀類藥物與空氣汙染對於糖尿病族群腦中風發生之關係探討 公共衛生學系碩士班. 中國醫藥大學, 台中市."
+[1]: <> " Cheng, H.-C., Pan, R.-H., Yeh, H.-J., Lai, K.R., Yen, M.-Y., Chan, C.-L., and Wang, A.-G. (2016). Ambient Air Pollution and the Risk of Central Retinal Artery Occlusion. Ophthalmology 123 (12):2603–2609. doi:10.1016/j.ophtha.2016.08.046."
+[1]: <> "台灣乳房醫學會 (2018). 台灣地區巴金森氏症之盛行率及發生率，全球醫藥新知網站. Available at https://www.globalmednews.tw/epaper.php?no=459 (Accessed 13 July 2021)."
+[1]: <> "國立臺灣大學醫學院附設醫院 (2012). 提昇巴金森氏症的醫療與照護，巴金森症暨動作障礙中心. Available at http://www.pdcenterntuh.org.tw/ContentAspx/Browser00.aspx?.. (Accessed 13 July 2021)."
+[1]: <> " Palacios, N., Fitzgerald, K., Hart, J., Weisskopf, M., Schwarzschild, M., Ascherio, A., and Laden, F. (2017). Air Pollution and Risk of Parkinson’s Disease in a Large Prospective Study of Men. Environmental Health Perspectives 125. doi:10.1289/EHP259."
+[1]: <> " Nunez, Y., Boehme, A., Weisskopf, M., Re, D., Navas-Acien, A., Donkelaar, A., Martin, R., and Kioumourtzoglou, M.-A. (2021). Fine Particle Exposure and Clinical Aggravation in Neurodegenerative Diseases in New York State. Environmental Health Perspectives 129:027003. doi:10.1289/EHP7425."
+[1]: <> " Ritz, B., Lee, P.-C., Hansen, J., Funch Lassen, C., Ketzel, M., Sørensen, M., and Raaschou-Nielsen, O. (2015). Traffic-Related Air Pollution and Parkinson’s Disease in Denmark: A Case–Control Study. Environmental health perspectives 124. doi:10.1289/ehp.1409313."
+[1]: <> " Fleury, V., Himsl, R., Joost, S., Nicastro, N., Béreau, M., Guessous, I., and Burkhard, P. (2021). Geospatial analysis of individual-based Parkinson’s disease data supports a link with air pollution: A case-control study. Parkinsonism & Related Disorders 41–48. doi:10.1016/j.parkreldis.2020.12.013."
+[1]: <> " Calderón-Garcidueñas, L., Torres-Jardón, R., Kulesza, R.J., Mansour, Y., González-González, L.O., Gónzalez-Maciel, A., Reynoso-Robles, R., and Mukherjee, P.S. (2020). Alzheimer disease starts in childhood in polluted Metropolitan Mexico City. A major health crisis in progress. Environ Res 183:109137. doi:10.1016/j.envres.2020.109137."
+[1]: <> " Calderón-Garcidueñas, L., González-Maciel, A., Rafael, R., Hammond, J., Kulesza, R., Lachmann, I., Torres-Jardón, R., Mukherjee, P.S., and Maher, B. (2020). Quadruple abnormal protein aggregates in brainstem pathology and exogenous metal-rich magnetic nanoparticles. The substantia nigrae is a very early target in young urbanites and the gastrointestinal tract likely a key brainstem portal. Environmental Research 191:110139. doi:10.1016/j.envres.2020.110139."
+[1]: <> " Calderón-Garcidueñas, L., Herrera Soto, A., Jury, N., Maher, B., González-Maciel, A., Rafael, R., Ruiz-Rudolph, P., Zundert, B., and Varela-Nallar, L. (2020). Reduced repressive epigenetic marks, increased DNA damage and Alzheimer’s disease hallmarks in the brain of humans and mice exposed to particulate urban air pollution. Environmental Research 183:109226. doi:10.1016/j.envres.2020.109226."
+[1]: <> " 姜唯 and 林大利 (2020). 研究：年輕人腦部的空污微粒 疑與阿茲海默症有關，環境資訊中心. Available at https://e-info.org.tw/node/227323 (Accessed 9 July 2021)."
+[1]: <> " Calderón-Garcidueñas, L. (2021). Parkinson disease and air pollution: does what we breathe matter? Nature Reviews Neurology 1–2. doi:10.1038/s41582-021-00531-7."
+[1]: <> " Lin, C.-H., Chen, P.-L., Tai, C.-H., Lin, H.-I., Chen, C.-S., Chen, M.-L., and Wu, R.-M. (2019). A clinical and genetic study of early-onset and familial parkinsonism in taiwan: An integrated approach combining gene dosage analysis and next-generation sequencing. Mov Disord 34 (4):506–515. doi:10.1002/mds.27633."
+[1]: <> " Lin, C.-H., Tsai, P.-I., Lin, H.-Y., Hattori, N., Funayama, M., Jeon, B., Sato, K., Abe, K., Mukai, Y., Takahashi, Y., Li, Y., Nishioka, K., Yoshino, H., Daida, K., Chen, M.-L., Cheng, J., Huang, C.-Y., Tzeng, S.-R., Wu, Y.-S., Lai, H.-J., Tsai, H.-H., Yen, R.-F., Lee, N.-C., Lo, W.-C., Hung, Y.-C., Chan, C.-C., Ke, Y.-C., Chao, C.-C., Hsieh, S.-T., Farrer, M., and Wu, R.-M. (2020). Mitochondrial UQCRC1 mutations cause autosomal dominant parkinsonism with polyneuropathy. Brain 143 (11):3352–3373. doi:10.1093/brain/awaa279."
+[1]: <> "國立臺灣大學(2021)遺傳性巴金森症新穎致病基因與粒線體相關機制研究 榮登頂尖期刊Brain(2021/5/26) https://www.ntu.edu.tw/spotlight/2021/1956_20210526.html"
+[1]: <> " 林瑞榮, 樂國柱, Lin, Juei-jueng, and Yueh, Kuo-chu (2004). 巴金森氏病與環境危險因子間的關聯性. 內科學誌 15 (6):249–256.[pdf]: <> "
+[1]: <> " 陳信宏 (2016). 空氣汙染與帕金森氏症疾病風險之關係 公共衛生學系碩士班. 中國醫藥大學, 台中市. https://hdl.handle.net/11296/j644cu"
+[1]: <> " 潘文涵 and 傅茂祖 (2019). 糖尿病之流行病學及病因、診斷、分類糖尿病防治手冊（糖尿病預防、診斷與控制流程指引）-醫事人員參考. Available at https://www.hpa.gov.tw/Pages/ashx/File.ashx?FilePath=~/File/Attach/1235/File_6877.pdf."
+[1]: <> " Rajagopalan, S. and Brook, R.D. (2012). Air pollution and type 2 diabetes: mechanistic insights. Diabetes 61 (12):3037–3045. doi:10.2337/db12-0190.[pdf]"
+[1]: <> " Zanobetti, A. and Schwartz, J. (2002). Cardiovascular damage by airborne particles: are diabetics more susceptible? Epidemiology 13 (5):588–592. doi:10.1097/00001648-200209000-00016."
+[1]: <> " 潘士群 (2011). 台灣糖尿病族群暴露空氣污染物與腦血管疾病之關係探討 公共衛生學系碩士班. 中國醫藥大學, 台中市."
+[1]: <> " 溫怡然 (2013). 第二型糖尿病與居住地空氣污染指標的相關性研究 統計資訊研究所. 國立彰化師範大學, 彰化縣."
+[1]: <> " 林柏秀 (2014). 臺灣地區長期細懸浮微粒暴露與發生第2型糖尿病之研究 環境醫學研究所. 國立成功大學, 台南市."
+[1]: <> " 花聖淵 (2017). 空氣污染物暴露與妊娠糖尿病發生風險之巢式病例對照研究 公共衛生研究所. 國立成功大學, 台南市. https://researchoutput.ncku.edu.tw/zh/studentTheses/空氣污染物暴露與妊娠糖尿病發生風險之巢式病例對照研究"
+[1]: <> "潘士群 (2020). 空氣汙染暴露與糖尿病及其併發症之關係探討 環境與職業健康科學研究所. 國立臺灣大學, 台北市."
+[1]: <> " Pan, S.-C., Huang, C.-C., Lin, S.-J., Chen, B.-Y., Chan, C.-C., and Leon Guo, Y.-L. (2017). Gestational diabetes mellitus was related to ambient air pollutant nitric oxide during early gestation. Environ Res 158:318–323. doi:10.1016/j.envres.2017.06.005."
+[1]: <> "國家環境研究所2018-10-22空氣污染對於第二型糖尿病患者蛋白尿之影響https://em.nhri.org.tw/tw/archives/54，download @ 2021/7/9"
+[1]: <> " Chin, W.-S., Chang, Y.-K., Huang, L.-F., Tsui, H.-C., Hsu, C.-C., and Guo, Y.-L.L. (2018). Effects of long-term exposure to CO and PM2.5 on microalbuminuria in type 2 diabetes. International Journal of Hygiene and Environmental Health 221 (4):602–608. doi:10.1016/j.ijheh.2018.04.009."
+[1]: <> "黎友苓 (2021). 空氣污染物對早發型糖尿病及糖尿病前期之相關性研究 公共衛生學系博士班. 臺北醫學大學, 台北市."

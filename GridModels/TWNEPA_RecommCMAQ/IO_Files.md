@@ -99,19 +99,20 @@ $ ll icon/*9 bcon/*9
  setenv N_EMIS_GR 2
  setenv GR_EMIS_001    ${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
  setenv GR_EMIS_002    ${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.ContEms.ncf
+ setenv GR_EMIS_003    ${cmaqproject}/smoke/egts_l.20181225.38.d4.ea2019_d4.ncf
 
  setenv GR_EMIS_LAB_001  biotaiwan
  setenv GR_EMIS_LAB_002  tedstaiwan
+ setenv GR_EMIS_LAB_003  d3_to_d4
 ...
 ```
-
 
 ### 氣象檔案
 - 版本
   - 2022/2/10
   - WRF ARW V3.8.1
 - 全月(自前月25日起)合併成一個檔案
-- 24層高度(海上)
+- 24層高度(海上為例)
 
       [  19.973816,    59.98133 ,   120.13907 ,   241.18448 ,
         445.79684 ,   739.0711  ,  1085.8995  ,  1490.2742  ,
@@ -137,10 +138,11 @@ $ ll icon/*9 bcon/*9
   - cmaqbcdate(eg `2018359`)：同樣也無需更動
   - cmaqicdate(eg `2019002`)
     - 因為只有單一個小時，內容為前日23時結束時所有項目的模擬值
-    - 需要連結CCTM_CGRID檔案，範例如下(將**CCTM_CGRID**...20190101連結至**ICON**...20190102)
+    - 需要連結CCTM_CGRID檔案，範例如下(將**CCTM_CGRID**...2019**0101**連結至**ICON**...2019**002**)
+    - 注意：CCTM_CGRID的日期型式為%Y%m%d，ICON為%Y%J
 
 ```bash
-ln -s ${project.config}/${mydomain}/cctm.${myjob}/daily/CCTM_CGRID_v532_intel_Taiwan_20190101.nc ${cmaqproject}/${mydomain}/icon/ICON_v532_Taiwan_2019002
+ln -s ${project.config}/${mydomain}/cctm.${myjob}/daily/CCTM_CGRID_${CAS}_20190101.nc ${cmaqproject}/${mydomain}/icon/ICON_${CAS}_2019002
 ```  
 - 結束日期
   - runlen：(單位為MMSS，840小時為**840**0000)

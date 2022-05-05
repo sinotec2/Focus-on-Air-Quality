@@ -194,4 +194,4 @@ diff calpuff_7.0.inp calpuff.inp
 
 | ![cpuff_result.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_result.png)|
 |:--:|
-| <b>cpuff 模擬台中電廠PM10增量濃度結果範例</b>|
+| <b>cpuff 模擬台中電廠PM<sub>10</sub>增量濃度結果範例</b>|

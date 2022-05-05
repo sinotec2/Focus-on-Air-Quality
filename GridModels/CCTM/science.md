@@ -24,7 +24,7 @@ last_modified_date: 2022-04-20 20:45:42
 |項目|環境變數|US EPA|base|force|comment|
 |-|:-|:-:|:-:|:-:|:-|
 |海洋飛沫|CTM_OCEAN_CHEM|Y|N|Y|由於新版WRF在外海有高估的趨勢，開啟海洋飛沫會造成高估|
-|風吹砂|CTM_WB_DUST|Y|Y|N|公版似乎不太著重PM10計算、沒有處理本土沙塵暴問題|
+|風吹砂|CTM_WB_DUST|Y|Y|N|公版似乎不太著重PM<sub>10</sub>計算、沒有處理本土沙塵暴問題|
 |閃電NOx|CTM_LTNG_NO|N|N|N|-|
 |edyintb|KZMIN|Y|Y|Y|-|
 |沉降速度土地使用差別化|CTM_MOSAIC|N|N|N|-|

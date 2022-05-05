@@ -485,7 +485,7 @@ cbin_all 為傳統uamiv檔案的連接程式，功能與ncrcat之基本功能相
   - 逐月檔案之單位尚未轉換成正確單位，仍為mz2camx之結果(PPM)，除了分子量外，其餘皆需還原。(fac, line35)
   - 由於mar_path+'2015'+mo+'.emis.grd'+gd 為d0範圍(59*59)，與d1(53*53)差了6格，分別由四個方向的外圈扣除。(line66~68、78、80)
   - 結果檔案名稱為'fortBE.'+gd[1]+'13.teds10.base'+mo+'S.nc'，S for Ship(line 54)
-  - NO2佔NOx重量的1/10、NO佔NOx重量的9/10
+  - NO<sub>2</sub>佔NOx重量的1/10、NO佔NOx重量的9/10
   - 因資料庫涵括了內陸水運的排放，對臺灣地區而言，似為干擾而非貼近實況，需要去除，因此導入gridmask中對海域之定義(line 41~51)只在d04中反映，其他範圍解析度不考慮d04會有頭尾時間不足的問題，在此一併檢查處理。
 
 ```python
@@ -619,7 +619,7 @@ $ cat -n /home/kuang/mac/cmaqruns/2016base/data/emis/add_Ship.py
 ```
 
 ## 排放量之調整
-- 船舶排放量除NO2之外，其餘污染項目為NO2之一定比例來估算，因此不確定性很高，調整時可以用python進行一次性之乘除，如下：
+- 船舶排放量除NO<sub>2</sub>之外，其餘污染項目為NO<sub>2</sub>之一定比例來估算，因此不確定性很高，調整時可以用python進行一次性之乘除，如下：
   - d1、d2模擬結果比對，SO2的GE約是1.8~2.8，表示原排放量需除2.8~3.8。
 
 ```python
@@ -648,7 +648,7 @@ nc.close()
 Ship Traffic Emission Assessment Model ([STEAM](http://www.temis.nl/globemission/docs/workshop_2015/STEAM-GlobEmissions_Connection.pdf))
 
 ```bash
-For O3, the formula is: VMR = 28.9644 / 47.9982 * 1e6 * MMR
+For O<sub>3</sub>, the formula is: VMR = 28.9644 / 47.9982 * 1e6 * MMR
 For CO the formula is: VMR = 28.9644 / 28.0101 * 1e6 * MMR
 For NO2 the formula is: VMR = 28.9644 / 46.0055 * 1e6 * MMR
 For SO2 the formula is: VMR = 28.9644 / 64.0638 * 1e6 * MMR

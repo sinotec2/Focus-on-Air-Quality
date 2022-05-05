@@ -1,13 +1,13 @@
 ---
 layout: default
-title: 境外O3 8小時值佔比之計算
+title: 境外O<sub>3</sub> 8小時值佔比之計算
 parent: Post Processing
 grand_parent: CMAQ Model System
 nav_order: 3
 last_modified_date: 2022-02-13 21:05:14
 ---
 
-# 境外O3 8小時值佔比之計算
+# 境外O<sub>3</sub> 8小時值佔比之計算
 {: .no_toc }
 
 <details open markdown="block">
@@ -140,7 +140,7 @@ df['bcR']=[j/i for i,j in zip(list(df.o3in),bcm)]
 df.set_index('JDATE').to_csv('bc-in.csv')
 ```
 
-### 日最大O3<sub>8hr</sub>大於60~100ppb濃度之日數分析
+### 日最大O<sub>3</sub><sub>8hr</sub>大於60~100ppb濃度之日數分析
 - 篩選符合條件之日期
 - 進行平均
 - 輸出檔案

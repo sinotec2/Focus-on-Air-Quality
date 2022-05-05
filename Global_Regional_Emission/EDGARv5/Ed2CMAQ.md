@@ -161,7 +161,7 @@ mp=len(idx[0])
 xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
 ```
 ### 污染項目之對照
-- 此處將所有NOx先放在NO2，未來再予以調整
+- 此處將所有NOx先放在NO<sub>2</sub>，未來再予以調整
 - VOCs另行處理(使用REAS的排放比例)
 
 ```python
@@ -241,7 +241,7 @@ nc.close()
 
 | ![NOx_EastAsia.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NOx_EastAsia.PNG) |![NO2_D6.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NO2_D6.PNG) |
 |:--:|:--:|
-| <b>圖 Ding(2017) 衛星反衍東亞地區NOx排放之分布</b>|<b>圖 HUADON_3k範圍EDGARv5 NO2排放之分布(log gmole/s)</b>|  
+| <b>圖 Ding(2017) 衛星反衍東亞地區NOx排放之分布</b>|<b>圖 HUADON_3k範圍EDGARv5 NO<sub>2</sub>排放之分布(log gmole/s)</b>|  
 
 ## Reference
 - Ding, J., Miyazaki, K., van der A, R.J., Mijling, B., Kurokawa, J., Cho, S., Janssens-Maenhout, G., Zhang, Q., Liu, F., and Levelt, P.F. (2017). **Intercomparison of NOx emission inventories over East Asia.** Atmos. Chem. Phys. 17 (16):10125–10141. [doi:10.5194/acp-17-10125-2017](https://acp.copernicus.org/articles/17/10125/2017/acp-17-10125-2017.pdf).

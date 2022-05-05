@@ -20,7 +20,7 @@ last_modified_date: 2022-03-22 08:56:43
 ---
 
 ## 背景
-Leed大學[CEMAC中心](https://www.cemac.leeds.ac.uk/)建置了Masaya 火山噴發SO2/SO4造成地面濃度的[預報模式](https://www.cemac.leeds.ac.uk/home/project-summaries/unresp/)，範例如圖所示。由於氣象預報數據、大氣擴散模式等皆為官方作業系統與優選模式，因此具有高度的參考價值。
+Leed大學[CEMAC中心](https://www.cemac.leeds.ac.uk/)建置了Masaya 火山噴發SO<sub>2</sub>/SO4造成地面濃度的[預報模式](https://www.cemac.leeds.ac.uk/home/project-summaries/unresp/)，範例如圖所示。由於氣象預報數據、大氣擴散模式等皆為官方作業系統與優選模式，因此具有高度的參考價值。
 
 此處將其進行本土化，應用於空氣品質預報、緊急應變作業系統中。
 
@@ -84,10 +84,10 @@ runmodel=true
 - http://114.32.164.198:8000/UNRESP_VIZ/index.html?v=1
 
 | ![unresp1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp1.png)|
-| <b>leed大學火山SO2預報結果畫面</b>|
+| <b>leed大學火山SO<sub>2</sub>預報結果畫面</b>|
 |:--:|
 |![unresp2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp2.png)|
-| <b>台中電廠PM2.5預報結果畫面</b>|
+| <b>台中電廠PM<sub>2.5</sub>預報結果畫面</b>|
 
 ## 氣象數據下載與解讀
 ### 氣象數值預報的選擇

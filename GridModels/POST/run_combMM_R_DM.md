@@ -210,7 +210,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     88	 
 ```
 - 物質名稱之定義
-  - VOC、PM2.5、PM10之開啟與其詳細計算公式
+  - VOC、PM2.5、PM<sub>10</sub>之開啟與其詳細計算公式
   - 「輸出檔的層數」也在此檔案內修改
   - 濃度與沉降量2大類
 

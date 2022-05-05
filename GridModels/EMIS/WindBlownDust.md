@@ -291,7 +291,7 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 
 | ![CMAQ_WBDcomp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDcomp.PNG) |
 |:--:|
-| <b>2018/03/31-04/07沙塵暴期間萬里測站PM10濃度之比較</b>|
+| <b>2018/03/31-04/07沙塵暴期間萬里測站PM<sub>10</sub>濃度之比較</b>|
 
 ## Composition of Wind Blown Dust
 - Tegen, I. & Kohfeld, K.E.: **Atmospheric Transport of Silicon, in: The silica cycle, human perturbations and impacts on aquatic systems**, edited by Ittekot V. et al. anthropic, Scope 66, 2006. [Simon Fraser University](http://rem-main.rem.sfu.ca/papers/kohfeld/TegenKohfeld_Scope_ch_7pp81_92.pdf)

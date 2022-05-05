@@ -283,7 +283,7 @@ CCTM的執行是由粗網格執行後再進行細網格、時間上也是分月�
 為使模式有比較性，這段盡量使用內設值，應無修改的必要。
 設定內容詳見[CCTM之科學設定](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/CCTM/science/)，包括：
 1. 同步時間步階：縮短時間步階可提高正確性。加長步階秒數可有效使用CPU。
-2. CTM_OCEAN_CHEM（海洋飛沫在風大時會增加PM10濃度、尚未測試）
+2. CTM_OCEAN_CHEM（海洋飛沫在風大時會增加PM<sub>10</sub>濃度、尚未測試）
 3. CTM_WB_DUST（風蝕揚塵、可能會與TEDS重複，未測試）
 4. CTM_BIDI_FERT_NH3：如取消程式無法進行
 - 範例

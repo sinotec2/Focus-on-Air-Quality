@@ -57,5 +57,3 @@ last_modified_date: 2022-05-05 14:21:12
 [99]: <https://hdl.handle.net/11296/4fj9tz> "蔡尚學 (2003). 台灣地區室外空氣污染對健康效應之研究(PhD Thesis) 醫學研究所. 高雄醫學大學, 高雄市."
 [100]: <https://hdl.handle.net/11296/n783e5> " 吳宗達 (2015). 斯達汀類藥物與空氣汙染對於糖尿病族群腦中風發生之關係探討 公共衛生學系碩士班. 中國醫藥大學, 台中市."
 [101]: <https://www.sciencedirect.com/science/article/pii/S0161642016310934> " Cheng, H.-C., Pan, R.-H., Yeh, H.-J., Lai, K.R., Yen, M.-Y., Chan, C.-L., and Wang, A.-G. (2016). Ambient Air Pollution and the Risk of Central Retinal Artery Occlusion. Ophthalmology 123 (12):2603–2609. doi:10.1016/j.ophtha.2016.08.046."
-
-

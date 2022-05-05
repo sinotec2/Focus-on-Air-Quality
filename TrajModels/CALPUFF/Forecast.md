@@ -588,7 +588,7 @@ for it in range(1,max(jt)+1):
 >     ll = np.array([twd97.towgs84(i*1000+Xcent,j*1000+Ycent) for i, j in zip(x2, y2)])
 >     lat, lon = (ll[:, i] for i in [0, 1])
 ```
-- 濃度等級(ug/m3)
+- 濃度等級(ug/m<sup>3</sup>)
 
 ```bash
 273,274c276,277

@@ -75,7 +75,7 @@ https://ars.els-cdn.com/content/image/1-s2.0-S1352231017305563-gr4_lrg.jpg
 ### 主程式
 nox_all2.py
 單位由kg/日/網格→g/hr/km^2 (CMAQ emis in second, CAMx emis in hour)
-- 由於MMR轉成MMV或粒狀物時，乘上不同轉換因子(氣狀物 VMR = 28.9644 / mw * 1e6 * MMR 單位為ppm、粒狀物ug/M3=MMR* 1e9 / (g/M3_air) )，
+- 由於MMR轉成MMV或粒狀物時，乘上不同轉換因子(氣狀物 VMR = 28.9644 / mw * 1e6 * MMR 單位為ppm、粒狀物ug/m<sup>3</sup>=MMR* 1e9 / (g/m<sup>3</sup>_air) )，
 - 在1013.25 hPa和15°C時，空氣的密度大約為1225 g/m³
 
 ```python

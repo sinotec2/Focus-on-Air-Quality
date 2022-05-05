@@ -216,6 +216,7 @@ ncgen -o $outfile ocean.cdl
 - startdate/START_DATE：為icon檔案的時間，必須在mcip、smoke等檔案時間範圍之內
 - runlen/END_DATE：執行時間，與END_DATE二者取最先到達者。
 - MCIP_START/MCIP_END：與mcip檔案一致即可
+- 如需更動執行個案的起迄日期，要注意**ICON**與前一日最後小時**CCTM_CGRID**結果檔案之連結，見[日期個案管理](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/IO_Files/#日期個案管理projectconfig)之說明。
 
 ```bash
 kuang@DEVP /nas2/cmaqruns/2019force

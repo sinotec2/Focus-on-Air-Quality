@@ -55,7 +55,7 @@ for v in V[3]:
 ```
 
 - 常數檔
-  - 因各項煙囪參數並沒有時間、層數的維度，只有ROW的維度較為單純，此時ncf的indexing與np.array行為一樣，可以直接指
+  - 因各項煙囪參數並沒有時間、層數的維度，只有ROW的維度較為單純，此時ncf的indexing與np.array行為一樣，可以直接指定數值
   - (YLOCA, XLOCA)、(ROW, COL)需要以新的座標系統校正
 
 ```python

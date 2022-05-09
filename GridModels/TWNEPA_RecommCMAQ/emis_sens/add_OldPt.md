@@ -88,10 +88,10 @@ nc.close()
 - 將同樣高空點源排放量([add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_OldPt/#add_tzpppy))、加在2組不同背景條件下敏感性的比較
 ### 背景條件說明
 - 氣象：2019年1月
-- BASE2
+- BASE2:2組面源，分別是生物源及背景基準排放量(剔除特定高空點源)
   - bio3taiwan：${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
   - basetaiwan：${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf_0-8[NoTZPP](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/dTZPP/#剔除特定位置之排放量)
-- BASE3
+- BASE3：除了前述2者，再加上egts第3層網格排放內插之排放量
   - bio3taiwan：${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
   - basetaiwan：${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
   - d3_to_d4：${cmaqproject}/smoke/egts_l.20181225.38.d4.ea2019_d4.ncf

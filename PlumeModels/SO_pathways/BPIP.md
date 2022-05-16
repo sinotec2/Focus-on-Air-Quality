@@ -28,13 +28,13 @@ last_modified_date: 2022-03-08 10:16:34
   - 在SO路徑段落中提供建築物參數，煙流模式會自行**視需要**啟動下洗之計算
   - 當煙囪高度在所有建築物高的2.5倍以上時，模式就不會計算下洗，即使提供了建築物參數。
   - **保守**起見，個案輸入建築物參數，讓程式自行決定，是比較完整的作法。
-- [BPIP]()全名為Building Profile Input Program。[BPIPPRIME]()則是專為ISC-PRIME模組及AERMOD之預備。
+- [BPIP]()全名為Building Profile Input Program。[BPIPPRM]()則是專為ISC-PRIME模組及AERMOD之預備。
 - USEPA官網之說明
 	- [BPIP]()是一個PC/Linux 上的應用程式，旨在納入煙囪設計之「良好工程實務(GEP)」精神內涵（詳技術支援文檔《確定良好工程實務準則之煙囪高度（PDF）》101 pp，1985年，建築物下沖計算指南以及其他相關參考）。
   - 經由此一程式，使用者可以正確計算簡單、多層或多組結構的建築物高度((BUILDHGT)和建築物橫向的寬度（BUILDWID）或煙流方向切建築物的長度（BUILDLEN）。 
   - 該程序通常與ISC3模型一起使用。[BPIP]()的最新版本4/21/2004已使用fortran可分配陣列進行了升級，提高了程式維度的自由，同時保持了原有程式的基本功能。
-	- [BPIPPRIME]()與[BPIP]()相同，但包括特別升級的算法（P），應用於產生PRIME算法計算煙流下沖之輸入條件，PRIME模組目前已經包含在AERMOD等模型中。
-  - [BPIPPRIME]()的輸入結構與[BPIP]()的輸入結構相同，後者則經常與ISC3模型一起使用。 有關更多信息，請參見《BPIP用戶手冊》。
+	- [BPIPPRM]()與[BPIP]()相同，但包括特別升級的算法（P），應用於產生PRIME算法計算煙流下沖之輸入條件，PRIME模組目前已經包含在AERMOD等模型中。
+  - [BPIPPRM]()的輸入結構與[BPIP]()的輸入結構相同，後者則經常與ISC3模型一起使用。 有關更多信息，請參見《BPIP用戶手冊》。
 
 ## 設定步驟與內容
 ### 設定與執行步驟實例示範
@@ -51,8 +51,8 @@ last_modified_date: 2022-03-08 10:16:34
 1. 按照範例之模板輸入D, (X,Y), E, H等數據，存檔、(上傳工作站或[CaaS](http://114.32.164.198/BPIPPRIM.html))。
 1. 執行[BPIP]()批次檔[run_bpip.sh]() A1P.INP A1P.OUT A1P.SUM
 1. 將OUT檔案中的SO路徑及參數，貼在[ISCST]()或[AERMOD]()的執行控制檔內
-  - ISCST不接受[BPIPPRIME]()結果之`BUILDLEN`、`XBADJ`、`YBADJ`等參數
-  - 必要時在結果檔中去除之，重新執行[BPIPPRIME]()但將設定`P`改為`ST`(short time)，或重新執行[BPIP]()
+  - ISCST不接受[BPIPPRM]()結果之`BUILDLEN`、`XBADJ`、`YBADJ`等參數
+  - 必要時在結果檔中去除之，重新執行[BPIPPRM]()但將設定`P`改為`ST`(short time)，或重新執行[BPIP]()
 
 | ![BPIP1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP1.png)|
 |:--:|
@@ -109,14 +109,14 @@ bpipprm
 |:--:|
 | <b>L形建築物之BPIP輸出結果</b>|
 
-## BPIPPRIME之[遠端計算服務](http://114.32.164.198/BPIPPRIM.html)範例
-- 由於[BPIPPRIME]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。
+## BPIPPRM之[遠端計算服務](http://114.32.164.198/BPIPPRIM.html)範例
+- 由於[BPIPPRM]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。
 - 比較繁雜的程序是座標、夾角的量測、旋轉平移的計算。
   - 然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
 - CaaS的作業方式：
   1. 先在地圖[數位板](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
-  1. 利用[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRIME]()的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
-  1. 執行[BPIPPRIME]()計算(步驟8)
+  1. 利用[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRM]()的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
+  1. 執行[BPIPPRM]()計算(步驟8)
 - 細部操作方式與CaaS程式設計詳見[BPIP_CaaS](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_CaaS)之說明。
 
 | ![BPIP3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP3.png)|
@@ -125,7 +125,7 @@ bpipprm
 | ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
 | <b>圖2實例廠區[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，經[ISCPARSER](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀結果</b>|
 
-- [BPIPPRIME]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式輸入檔的[範例](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
+- [BPIPPRM]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式輸入檔的[範例](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
 
 ## Reference and Resource
 - 有關煙流下洗的現象、原因、以及如何避免，可以參考下列網址
@@ -133,10 +133,10 @@ bpipprm
   - [Plume characteristics for three different stack scenarios](https://www.youtube.com/watch?v=qQJRSrfv8eQ)
   - [FDS Simulation](https://www.youtube.com/watch?v=UkV2JHg9CX8)
   - [www.cppwind.com：Building Downwash – Problems, Solutions and Next Generation](ftp://newftp.epa.gov/Air/aqmg/SCRAM/conferences/2015_11th_Conference_On_Air_Quality_Modeling/Presentations/3-6_Building_Downwash-CPP-11thMC.pdf)
-- BPIP/BPIPPRIM美國環保署[官方網址](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#bpip)
+- BPIP/BPIPPRM美國環保署[官方網址](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#bpip)
 - 原始碼
   - [BIPI原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)
-  - [BPIPPRIME原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip)
+  - [BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip)
 - 使用手冊
   - [bpipd.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipd.pdf)
   - [bpipdup.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipdup.pdf)

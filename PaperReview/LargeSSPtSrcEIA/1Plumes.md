@@ -42,6 +42,15 @@ last_modified_date: 2022-05-16 09:42:56
   - [BREEZE AERMOD 7: Gridded Plume Downwash](https://www.youtube.com/watch?v=bgoU9GTNYHs)
     - 這是一家商用軟體([BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod))的介紹短片，雖然是模式輸出的結果，卻也可以略略描繪煙流受到建築物尾流影響的推估概念。  
 
+### Plume Rise Model Enhancements (PRIME)
+
+| ![PRIME1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PRIME1.PNG)|
+|:--:|
+| <b>受建物尾流影響的煙流與未受影響煙流側面分布之比較([Schulman et al. 2000][Schulman et al. 2000])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
+
+[Schulman et al. 2000]: <https://www.tandfonline.com/doi/full/10.1080/10473289.2000.10464017> "Schulman, L.L., Strimaitis, D.G., and Scire, J.S. (2000). Development and Evaluation of the PRIME Plume Rise and Building Downwash Model. Journal of the Air & Waste Management Association 50 (3):378–390. doi:10.1080/10473289.2000.10464017.
+"
+
 ### 模式模擬方式
 1.  使用[BPIPPRM](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/)進行前處理
   - 將複雜的建築物平面座標系統予以簡化

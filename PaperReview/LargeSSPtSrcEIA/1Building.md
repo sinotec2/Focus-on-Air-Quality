@@ -90,6 +90,9 @@ last_modified_date: 2022-05-16 09:42:56
 
 ## 煙囪頂下洗現象及模擬
 - 風速越大、煙囪越粗、非流線形煙囪，下洗越嚴重
+- 煙氣越熱、出口速度越大、受下洗現象影響越少，然能源浪費越大。
+- 法規應用之煙流模式：須開啟煙囪頂下洗計算，以得到較保守結果。
+- 風洞模擬個案：Cochran, B.(2003). A Case Study for the U.C. Davis Robert Mondavi Institute for Wine and Food Sciences. Presented at [the Labs for the 21st Century Century](https://labs21.lbl.gov/DPM/Assets/H1_Cochran.pdf), International Institude for Sustainable Laboratories, Adams Mark Hotel Denver, CO, p. 19.
 
 | ![ASHRAE.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/ASHRAE.PNG)|
 |:--:|

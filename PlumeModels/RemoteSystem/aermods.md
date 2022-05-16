@@ -155,7 +155,7 @@ last_modified_date: 2022-03-07 13:29:39
 ### [rd_kmlFull.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/rd_kmlFull.py)之程式設計
 此程式讀取html提供之kml檔案，進行解析後將依序執行：
 - Rotate KML
-- [BPIPPRIM]()
+- [PIPPRIM]()
 - [GENINP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/gen_inp/) and AERMAP
 - [MMIF]()
 - [AERMOD]()

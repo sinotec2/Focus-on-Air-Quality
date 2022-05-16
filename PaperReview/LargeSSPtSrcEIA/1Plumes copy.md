@@ -55,11 +55,12 @@ last_modified_date: 2022-05-16 09:42:56
 
 | ![uawm_a_1279088_f0002_b.jpeg](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/uawm_a_1279088_f0002_b.jpeg)|
 |:--:|
-| <b>PRIME及PRIME2之比較([Petersen and Guerra 2018][Petersen and Guerra 2018])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
+| <b>PRIME及PRIME2對紊流空間性質之概念比較([Petersen and Guerra 2018][Petersen and Guerra 2018])，上：PRIME的概念圖，簡單、尚有未交代區域。下：PRIME2，增加漸變段、按實際情況減少紊流增強區之範圍</b>|
 
 | ![uawm_a_1279088_f0005_b.jpeg](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/uawm_a_1279088_f0005_b.jpeg)|
 |:--:|
-| <b>PRIME及PRIME2之比較([Petersen and Guerra 2018][Petersen and Guerra 2018])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
+| <b>PRIME及PRIME2之比較([Petersen and Guerra 2018][Petersen and Guerra 2018])，上：上視圖，BPIP前處理之簡化作法與實際寬幅建物。下：BPIP與PRIME的側面分區概念與實際之差異。</b>|
+
 [Petersen and Guerra 2018]: <https://www.sciencedirect.com/science/article/abs/pii/S0167610517306669> "Petersen, R. L. and Guerra, S. A., (2018). PRIME2: Development and evaluation of improved building downwash algorithms for rectangular and streamlined structures. Atmospheric Environment, 173, 67-78."
 
 ### 模式模擬方式
@@ -69,8 +70,9 @@ last_modified_date: 2022-05-16 09:42:56
 2.  進行AERMOD/PRIME或ISC/PRIME等煙流模式模擬
 3. 模擬方式細節、範例、遠端執行系統詳[建築物煙流下洗現象之模擬設定](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/)
 
-### 建築物下洗模擬的[官方立場][2]
-- USEPA, Issues Related to Building Downwash in AERMOD,  [www.epa.gov, downwash_overview_white_paper](https://www.epa.gov/sites/default/files/2021-01/documents/downwash_overview_white_paper.pdf), 2021,01.
+
+### 建築物下洗模擬的官方立場
+- USEPA, Issues Related to Building Downwash in AERMOD,  [www.epa.gov, downwash_overview_white_paper](https://www.epa.gov/sites/default/files/2021-01/documents/downwash_overview_white_paper.pdf), 05-13-2019.
   - BPIPPRM-AERMOD模式系統係2005年架構
   - 依據近年研究結論，目前適用情況：
     - 實心、矩形、單一高度(無樓裙)之建築物
@@ -79,6 +81,7 @@ last_modified_date: 2022-05-16 09:42:56
 - 近年發現(AERMOD/PRIME低估情況)
   - [Olesen, et al., 2009][3]指出1.5倍建物高的煙囪在超寬建物尾流效應中AERMOD/PRIME將造成**嚴重低估**。
   - [Perry, et al., 2016][4]在這項EPA委託的風洞模擬計畫中發現AERMOD對於煙流質量的散布傾向高估、對於煙流有效高隨下游距離的降低斜率也傾向低估(將會有較高的煙流中心高度)、因此對地面最大濃度值造成**低估**
+- Building Downwash **Alpha Option**s in AERMOD, [www.epa.gov, downwash_alpha_options_white_paper](https://www.epa.gov/sites/default/files/2021-01/documents/downwash_alpha_options_white_paper.pdf), 05-13-2019
 
 [1]: <https://www.researchgate.net/publication/264396988_A_DISPERSION_MODELLING_SYSTEM_FOR_URBAN_AIR_POLLUTION> "Kukkonen, J. (1997). A DISPERSION MODELLING SYSTEM FOR URBAN AIR POLLUTION. Finnish Meteorological Institute, Helsinki, Finland."
 [2]: <https://www.epa.gov/sites/default/files/2021-01/documents/downwash_overview_white_paper.pdf> "USEPA, Issues Related to Building Downwash in AERMOD, 2021,01"

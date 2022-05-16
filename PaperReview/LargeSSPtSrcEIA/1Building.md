@@ -38,7 +38,7 @@ last_modified_date: 2022-05-16 09:42:56
   - [Plume characteristics for three different stack scenarios](https://www.youtube.com/watch?v=qQJRSrfv8eQ)
     - 在模式無法預期的特殊條件，風洞模擬試驗是一個直觀的解決方案。這個英文旁白的視頻介紹了大致上風洞模擬煙流在格柵狀與實心建築物尾流的行為、以及模式高估的可能性。
   - [www.cppwind.com：Building Downwash – Problems, Solutions and Next Generation](ftp://newftp.epa.gov/Air/aqmg/SCRAM/conferences/2015_11th_Conference_On_Air_Quality_Modeling/Presentations/3-6_Building_Downwash-CPP-11thMC.pdf)
-    - 這篇[CPP wind](https://cppwind.com/)公司2015年的研討會論文，檢討了多孔(鏤空)建築物、流線形、極寬或極長建築物的尾流效應。
+    - 這篇[CPP wind](https://cppwind.com/)(Cermak Peterka Petersen, Inc)公司2015年的研討會論文，檢討了多孔(鏤空)建築物、流線形、極寬或極長建築物的尾流效應。
   - [BREEZE AERMOD 7: Gridded Plume Downwash](https://www.youtube.com/watch?v=bgoU9GTNYHs)
     - 這是一家商用軟體([BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod))的介紹短片，雖然是模式輸出的結果，卻也可以略略描繪煙流受到建築物尾流影響的推估概念。  
 
@@ -88,4 +88,23 @@ last_modified_date: 2022-05-16 09:42:56
 [3]: <https://link.springer.com/article/10.1007/s10546-009-9355-9> "Olesen, H.R., Berkowicz, R., Ketzel, M., Lofstrom, P. (2009). Validation of OML, AERMOD/PRIME and MISKAM using the Thompson wind tunnel data set for simple stack-building configurations. Boundary-Layer Meteorol. 131, 73-83."
 [4]: <https://www.sciencedirect.com/science/article/abs/pii/S1352231016305829> "Perry, S.G., Heist, D.K., Brouwer, L.H., Monbureau, E.M., and L.A. Brixley (2016). Characterization of pollutant dispersion near elongated buildings based on wind tunnel simulations, Atmospheric Environment, Vol. 42, 286-295."
 
-## 煙流受地形效應之影響
+## 煙囪頂下洗現象及模擬
+- 風速越大、煙囪越粗、非流線形煙囪，下洗越嚴重
+
+| ![ASHRAE.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/ASHRAE.PNG)|
+|:--:|
+| <b>煙囪頂下洗現象之概念圖與尺寸定義([Cochran, B. 2003][Cochran, B. 2003])，[ASHRAE 2003][ASHRAE 2003]為美國加熱協會有關加熱通風空調之應用規範手冊</b>|
+
+[Cochran, B. 2003]: <https://labs21.lbl.gov/DPM/Assets/H1_Cochran.pdf> "Cochran, B.(2003). A Case Study for the U.C. Davis Robert Mondavi Institute for Wine and Food Sciences. Presented at the Labs for the 21st Century Century, International Institude for Sustainable Laboratories, Adams Mark Hotel Denver, CO, p. 19."
+
+[ASHRAE 2003]: <https://www.amazon.com/s?i=stripbooks&rh=p_27%3AAmerican+Society+of+Heating+%28Compiler%29&s=relevancerank&text=American+Society+of+Heating+%28Compiler%29&ref=dp_byline_sr_book_1> "American Society of Heating, 2003 ASHRAE HANDBOOK : Heating, Ventilating, and Air-Conditioning Applications : Inch-Pound Edition (2003 ASHRAE HANDBOOK: HVAC Applications : I-P Edition), "
+
+- 經風洞模擬研究發現：規範之煙氣速過於嚴苛、有能源浪費之可能。
+
+| ![ASHRAE2.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/ASHRAE2.PNG)|
+|:--:|
+| <b>個案煙囪與建物實體與模型([Cochran, B. 2003][Cochran, B. 2003])</b>|
+
+| ![ASHRAE3.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/ASHRAE3.PNG)|
+|:--:|
+| <b>個案煙囪高度、風量與最大落地濃度([Cochran, B. 2003][Cochran, B. 2003])</b>|

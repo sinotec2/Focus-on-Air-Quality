@@ -218,6 +218,10 @@ block drop from any to 35.233.62.116
 ## Reference
 - 阿百, [自動透過 iptables 封鎖 IP 黑名單](http://yenpai.idis.com.tw/archives/399-教學-自動透過-iptables-封鎖-ip-黑名單), 2012 年 11 月 12 日
 - Vyshakh Babji, [Block Access to Particular IP Address on Mac](https://medium.com/ringcentral-developers/how-to-block-a-particular-ip-address-on-mac-a587805972e5), Jul 3, 2019
-- Ares163, [mac下的iptables---pfctl](https://www.jianshu.com/p/eefe3877650f), 2018.09.28
+- pfctl: Packet Filter Control
+  - Ares163, [mac下的iptables---pfctl](https://www.jianshu.com/p/eefe3877650f), 2018.09.28
+  - 喜欢踢足球的老罗, [macOS的pfctl使用](https://blog.csdn.net/SCHOLAR_II/article/details/111213190) , 2020-12-15.
+  - Johnny 鋼鍊, [Mac OSX 內建防火牆 PF 使用筆記](https://j796160836.pixnet.net/blog/post/45551232--[教學]-mac-osx-內建防火牆-pf-使用筆記), Dec 20 Wed 2017.
+  - Ken, [Blocking bad bots with PF](https://bbken.org/author/ken/page/3/?PageSpeed=noscript), 4 月 4 日， 2020 年
 - ipinfo, [IPinfo Python Client Library](https://github.com/ipinfo/python),22 Nov 2021
 - suupport.apple.com, [在 Mac 上使用 AppleScript 和「終端機」來自動執行任務](https://support.apple.com/zh-tw/guide/terminal/trml1003/mac), 2022

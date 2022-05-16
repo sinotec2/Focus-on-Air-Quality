@@ -63,47 +63,6 @@ pip install .
 - 模版程式：[cross-section-with-mountains](https://wrf-python.readthedocs.io/en/latest/plot.html#cross-section-with-mountains)
 - 副程式
   - None
-### 設定
-- 垂直剖線的起訖點：不限定是X或Y方向、可以是任意點
-```python
-# Define the cross section start and end points
-cross_start = CoordPair(lat=24.335727401728242,  lon=120.03010545651748,)
-cross_end = CoordPair(lat=23.41214780981217, lon=121.79586963982419)
-```
-
-- 高度：因wrfout有40層之多，大多是自由流範圍，因此必須限定繪圖的上邊界，凸顯邊界層現象。
-
-```python
-dbz_contours = ax_cross.contourf(xs,
-                                 ys[:-80],
-                                 to_np(dbz_cross_filled)[:-80,:],
-                                 levels=dbz_levels,
-                                 cmap="rainbow",
-                                 norm=dbz_norm,
-                                 extend="max")
-```
-- X軸標籤的有效位數
-  - wrf-python使用經緯度tuple作為標籤，有效位數未經修剪長短不齊。此處統一修為2碼
-  - 由於原程式是運用to_np之解讀程式，將coord_pairs經緯度值讀成字串，需將其拆解後方能改變有效位數。
-
-```python
-x_labels = [pair.latlon_str() for pair in to_np(coord_pairs)]
-lab=[[round(float(i),2) for i in j.split(',')] for j in x_labels[:]]
-x_labels=[str(i[0])+','+str(i[1]) for i in lab]
-```
-- 色標
-  - 原程式為自主設定。不但顏色沒有連續、也不具辨識能力。
-  - cmap選項有："jet"、"rainbow"、適用所有[matplotlib選項](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
-  
-```python
-cmap="rainbow",
-```
-- 貼上向量
-  - 任意方向上的沿流方向風速分量
-  - $ U =  u \times cost + v \times sint $;
-    - `lent = np.sqrt((x1-x0)**2+(y1-y0)**2)`
-    - `cost = (x1-x0)/lent`
-    - `sint = (y1-y0)/lent`
 ### IO Files and Coordinate translation
 - Input Files
   - wrfout檔案：作為空間定位的模版、地形數據
@@ -144,6 +103,58 @@ dbz[:11,8:8+131,:92-12] = pm[:,:,12:]
 ```python
 pyplot.savefig('pm25_'+'{:02d}'.format(t)+'.png')
 ```
+### 設定
+- 垂直剖線的起訖點：不限定是X或Y方向、可以是任意點
+```python
+# Define the cross section start and end points
+cross_start = CoordPair(lat=24.453917871182558, lon=120.225062233815342,)
+cross_end = CoordPair(lat=23.41214780981217, lon=121.79586963982419)
+```
+
+- 高度：因wrfout有40層之多，大多是自由流範圍，因此必須限定繪圖的上邊界，凸顯邊界層現象。
+
+```python
+dbz_contours = ax_cross.contourf(xs,
+                                 ys[:-80],
+                                 to_np(dbz_cross_filled)[:-80,:],
+                                 levels=dbz_levels,
+                                 cmap="rainbow",
+                                 norm=dbz_norm,
+                                 extend="max")
+```
+- X軸標籤的有效位數
+  - wrf-python使用經緯度tuple作為標籤，有效位數未經修剪長短不齊。此處統一修為2碼
+  - 由於原程式是運用to_np之解讀程式，將coord_pairs經緯度值讀成字串，需將其拆解後方能改變有效位數。
+
+```python
+x_labels = [pair.latlon_str() for pair in to_np(coord_pairs)]
+lab=[[round(float(i),2) for i in j.split(',')] for j in x_labels[:]]
+x_labels=[str(i[0])+','+str(i[1]) for i in lab]
+```
+- 色標
+  - 原程式為自主設定。不但顏色沒有連續、也不具辨識能力。
+  - cmap選項有："jet"、"rainbow"、適用所有[matplotlib選項](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
+  
+```python
+cmap="rainbow",
+```
+- 任意方向上的沿流方向風速分量
+  - 計算分量後，U及W與濃度一樣進行垂直內插到等間距網格上
+  - $ U =  u \times cost + v \times sint $;
+    - `lent = np.sqrt((x1-x0)**2+(y1-y0)**2)`
+    - `cost = (x1-x0)/lent`
+    - `sint = (y1-y0)/lent`
+    
+- 貼上向量
+  - 參考[stackoverflow](https://stackoverflow.com/questions/42117049/plotting-wind-vectors-on-vertical-cross-section-with-matplotlib)
+  - 使用matplotlib[quiver](https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.pyplot.quiver.html)指令來畫箭頭，中文可參考[程式人生](https://www.796t.com/content/1546226540.html)
+  - 同樣使用[:-80]來限定高度範圍、[::2]來控制箭頭的密度
+
+```python
+ax_cross.quiver(xs[::2], ys[:-80],
+          to_np(u_cross_filled[:-80, ::2]), to_np(w_cross_filled[:-80, ::2]))
+```
+
 ### Parallel Operation
 - 因程式沒有時間前後的交互作用，各個時間可以獨立運作。
 - 將時間(小時順序)作為引數
@@ -159,7 +170,7 @@ convert pm2.5*.png PMF.gif
 ```
 
 ### 程式碼
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)
+- [ver_ZhonBu.py@github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/emis_sens/ver_ZhonBu.py)
 
 ## Results
 
@@ -167,4 +178,6 @@ convert pm2.5*.png PMF.gif
 |:--:|
 | <b>圖 CCTM模擬d04範圍中部地區垂直PM<sub>2.5</sub>濃度分布(NCL繪製)，單位&mu;g/M<sup>3</sup> </b>|  
 
+
 ## Reference
+- Gene Z. Ragen, discussion on [Plotting wind vectors on vertical cross-section with matplotlib](https://stackoverflow.com/questions/42117049/plotting-wind-vectors-on-vertical-cross-section-with-matplotlib) 2019, Oct. 8.

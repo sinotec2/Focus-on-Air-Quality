@@ -48,8 +48,19 @@ last_modified_date: 2022-05-16 09:42:56
 |:--:|
 | <b>受建物尾流影響的煙流與未受影響煙流側面分布之比較([Schulman et al. 2000][Schulman et al. 2000])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
 
+
+
 [Schulman et al. 2000]: <https://www.tandfonline.com/doi/full/10.1080/10473289.2000.10464017> "Schulman, L.L., Strimaitis, D.G., and Scire, J.S. (2000). Development and Evaluation of the PRIME Plume Rise and Building Downwash Model. Journal of the Air & Waste Management Association 50 (3):378–390. doi:10.1080/10473289.2000.10464017.
 "
+
+| ![uawm_a_1279088_f0002_b.jpeg](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/uawm_a_1279088_f0002_b.jpeg)|
+|:--:|
+| <b>PRIME及PRIME2之比較([Petersen and Guerra 2018][Petersen and Guerra 2018])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
+
+| ![uawm_a_1279088_f0005_b.jpeg](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/uawm_a_1279088_f0005_b.jpeg)|
+|:--:|
+| <b>PRIME及PRIME2之比較([Petersen and Guerra 2018][Petersen and Guerra 2018])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
+[Petersen and Guerra 2018]: <https://www.sciencedirect.com/science/article/abs/pii/S0167610517306669> "Petersen, R. L. and Guerra, S. A., (2018). PRIME2: Development and evaluation of improved building downwash algorithms for rectangular and streamlined structures. Atmospheric Environment, 173, 67-78."
 
 ### 模式模擬方式
 1.  使用[BPIPPRM](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/)進行前處理

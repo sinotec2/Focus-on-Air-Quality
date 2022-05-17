@@ -91,11 +91,19 @@ last_modified_date: 2022-05-16 09:42:56
 
 [Hunt et. al 1978]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=20015MB7.TXT> " J. C. R. Hunt, W. H. Snyder, and R. E. Lawson, Jr., Flow Structure and Turbulent Diffusion Around a Three-Dimensional Hill, in Fluid Modeling Study on Effects of Stratification, Part I. Flow Structure, Report EPA-600/4-78-041, U. S. Environmental Protection Agency, 1978."
 
-Lin1974.PNG
+- 繞山煙流之濃度分布
+
 | ![Lin1974.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Lin1974.PNG)|
 |:-:|
-| <b>不同流況水洞試驗攝影結果，流體自左方流入，3維鐘形獨立山高H。([Lin et. al 1974][Lin et. al 1974])</b>|
+| <b>水洞模擬煙流通過3維鐘形獨立山之濃度分布，並與平坦地形分布相比([Lin et. al 1974][Lin et. al 1974])</b>|
 
 
 [Lin et. al 1974]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000XKAB.TXT> "J.-T. Lin, H.-T. Liu, and Y.-H. Pao, Laboratory Simulation of Plume Dispersion in Stably Stratified Flows over a Complex Terrain, Flow Research Report No. 29, prepared for U. S. Environmental Protection Agency, Flow Research, Inc., Kent, Wash., 1974.)"
-### CTDMPLUS
+
+### CTDMPLUS 
+
+### AERMOD 的地形模擬
+
+| ![AERMOD1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD1.png)|
+|:-:|
+| <b>([Lin et. al 1974][Lin et. al 1974])</b>|

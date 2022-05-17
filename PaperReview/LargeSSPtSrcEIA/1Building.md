@@ -31,6 +31,15 @@ last_modified_date: 2022-05-16 09:42:56
 | <b>煙流的煙囪頂下洗、建築物下洗現象([Kukkonen 1997][1])</b>|
 
 ### 建築物尾流
+| ![Hosker1984.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Hosker1984.PNG)|
+|:--:|
+| <b>建築物阻體在大氣氣流中所造成的擾動及渦漩
+([Hosker, R. 1984][Hosker, R. 1984])</b>|
+
+[Hosker, R. 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Hosker, R. (1984) Flow and diffusion near obstacles in Atmospheric Science and Power Production,  Ch. 7, DOE/TIC-27601."
+
+[Randerson 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Randerson, D. (1984). Atmospheric science and power production (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN."
+
 - 其現象、原因及模擬、可以參考下列視頻及文章
   - [FDS Simulation](https://www.youtube.com/watch?v=UkV2JHg9CX8)
     - [FDS](https://pages.nist.gov/fds-smv/)是個微尺度、大渦流紊流模式，除了模擬室內火災、空品之外，戶外情況下之煙流細部行為特色亦能有所掌握。
@@ -46,12 +55,11 @@ last_modified_date: 2022-05-16 09:42:56
 
 | ![PRIME1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PRIME1.PNG)|
 |:--:|
-| <b>受建物尾流影響的煙流與未受影響煙流側面分布之比較([Schulman et al. 2000][Schulman et al. 2000])，空腔區渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
+| <b>受建物尾流影響的煙流與未受影響煙流側面分布之比較([Schulman et al. 2000][Schulman et al. 2000])，[空腔區]()渦流將煙流質心向下移動，其影響隨下游距離減少</b>|
 
 
 
-[Schulman et al. 2000]: <https://www.tandfonline.com/doi/full/10.1080/10473289.2000.10464017> "Schulman, L.L., Strimaitis, D.G., and Scire, J.S. (2000). Development and Evaluation of the PRIME Plume Rise and Building Downwash Model. Journal of the Air & Waste Management Association 50 (3):378–390. doi:10.1080/10473289.2000.10464017.
-"
+[Schulman et al. 2000]: <https://www.tandfonline.com/doi/full/10.1080/10473289.2000.10464017> "Schulman, L.L., Strimaitis, D.G., and Scire, J.S. (2000). Development and Evaluation of the PRIME Plume Rise and Building Downwash Model. Journal of the Air & Waste Management Association 50 (3):378–390. doi:10.1080/10473289.2000.10464017."
 
 | ![uawm_a_1279088_f0002_b.jpeg](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/uawm_a_1279088_f0002_b.jpeg)|
 |:--:|

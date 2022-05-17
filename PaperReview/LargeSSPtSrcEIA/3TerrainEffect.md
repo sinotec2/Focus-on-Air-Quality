@@ -20,16 +20,18 @@ last_modified_date: 2022-05-16 09:42:56
 </details>
 ---
 
-## 煙流下洗現象、模擬與限制
-污染源附近建築物造成煙流擴散行為的改變非常劇烈，煙流中心向下移動造成地面嚴重燻煙，稱之為[Plume Downwash](https://solareis.anl.gov/glossacro/dsp_wordpopup.cfm?word_id=5080)煙流下洗。
-- 煙流擴散行為受到附近大氣紊流及渦流影響甚劇，而渦流的產生，除了垂直溫度梯度的熱力紊流之外，就屬氣流受到阻體所產生的機械紊流(渦流)最為嚴重
-- 污染源附近最重要的阻體即是煙囪本身，以及鄰近的煙囪、廠房設備、建築物等等。
-- 2維圖示如下：
+## 大氣紊流的特性
+- 季節變化
 
-| ![The-notation-and-the-flow-regimes-considered-in-the-modelling-of-downwash.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/The-notation-and-the-flow-regimes-considered-in-the-modelling-of-downwash.png)|
+- 日夜變化
+
+| ![Pendergast1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast1.PNG)|
 |:--:|
-| <b>煙流的煙囪頂下洗、建築物下洗現象([Kukkonen 1997][1])</b>|
+| <b>日夜加熱差異造成的環流與空污現象([Pendergast 1984][Pendergast 1984] in [Atmospheric science and power production][Randerson 1984])</b>|
 
+[Pendergast 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Malcolm M. Pendergast, 1984, Chap. 2, METEOROLOGICAL FUNDAMENTALS, in Atmospheric science and power production (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN."
+
+[Randerson 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Randerson, D. (1984). Atmospheric science and power production (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN."
 ### 建築物尾流
 - 其現象、原因及模擬、可以參考下列視頻及文章
   - [FDS Simulation](https://www.youtube.com/watch?v=UkV2JHg9CX8)

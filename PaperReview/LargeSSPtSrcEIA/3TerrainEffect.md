@@ -101,17 +101,39 @@ last_modified_date: 2022-05-16 09:42:56
 [Lin et. al 1974]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000XKAB.TXT> "J.-T. Lin, H.-T. Liu, and Y.-H. Pao, Laboratory Simulation of Plume Dispersion in Stably Stratified Flows over a Complex Terrain, Flow Research Report No. 29, prepared for U. S. Environmental Protection Agency, Flow Research, Inc., Kent, Wash., 1974.)"
 
 ### CTDMPLUS 
+
+| ![CTDMPLUS1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS1.PNG)|
+|:-:|
+| <b>分流點前仍為平坦地形，分流點後其上翻越山嶺，其下繞行山嶺左右。([Perry 1992][Perry 1992])</b>|
+
+| ![CTDMPLUS2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS2.PNG)|
+|:-:|
+| <b>翻越部分煙流的計算方式([Perry 1992][Perry 1992])，此一機制與ISCST3相同</b>|
+
 | ![CTDMPLUS.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS.PNG)|
 |:-:|
-| <b>([Perry 1992][Perry 1992])</b>|
+| <b>分流點下繞山煙流的計算概念：將山嶺壓縮成延流方向之直線線段([Perry 1992][Perry 1992])</b>|
+
+| ![CTDMPLUS3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS3.PNG)|
+|:-:|
+| <b>複雜地形逼近橢圓形模擬山嶺([Perry 1992][Perry 1992])</b>|
 
 [Perry 1992]: <https://www.jstor.org/stable/26186577> "Perry, S.G. (1992). CTDMPLUS: A Dispersion Model for Sources near Complex Topography. Part I: Technical Formulations. Journal of Applied Meteorology (1988-2005) 31 (7):633–645."
 
-
 ### AERMOD 的地形模擬
+- 分流線高度觀念
+  - 高於分流線者將翻越山嶺。以山嶺不存在情況估算。
+  - 低者將繞山、或直接撞擊地表面。以山嶺地表面高度計算。
 
 | ![AERMOD1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD1.png)|
 |:-:|
-| <b>([Lin et. al 1974][Lin et. al 1974])</b>|
+|<b>地形影響煙流的2個極端情況概念圖。地表高度與絕對高度之定義如圖(AERMAP Training, [Roger 2007][Roger 2007])</b>|
+
+- 最後濃度為二者之加權平均
+
 | ![AERMOD2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD2.png)|
-| <b>([Lin et. al 1974][Lin et. al 1974])</b>|
+|:-:|
+| <b>AERMAP Training([Roger 2007][Roger 2007])</b>|
+
+[Roger 2007]: <https://slideplayer.com/slide/10395603/> "Roger W. Brode, AERMAP Training, U.S. EPA/OAQPS/AQAD Air Quality Modeling Group, NESCAUM Permit Modeling Committee Annual Meeting, 5/31, 2007."
+

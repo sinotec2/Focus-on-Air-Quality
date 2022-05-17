@@ -26,8 +26,9 @@ last_modified_date: 2022-05-16 09:42:56
 - 冬季：東北季風，將大陸地區霧霾、沙塵帶到臺灣
 - 夏季：西南季風、帶來海洋較乾淨氣流
 
-| ![Pendergast2a.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast2a.PNG)|![Pendergast2b.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast2b.PNG)|
-|:--:|:--:|
+![Pendergast2a.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast2a.PNG)
+![Pendergast2b.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast2b.PNG)
+
 
  <b>季節加熱差異造成的環流與空污現象([Pendergast 1984][Pendergast 1984] in [Atmospheric science and power production][Randerson 1984])，圖a為一月均溫、圖b為7月均溫，單位為華氏</b>
 
@@ -60,12 +61,12 @@ last_modified_date: 2022-05-16 09:42:56
   - 軌跡線繪製詳參[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ1.PNG)|
-|:--:|
-| <b>(a)2018/10/13/12:00時</b>|
+|:-:|
+| <b>(a)2018/10/13/12:00時，O<sub>3</sub>=126ppb</b>|
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018102712linyuan.png)|
-| <b>(b)2018/10/27/12:00時</b>|
+| <b>(b)2018/10/27/13:00時，O<sub>3</sub>=121ppb</b>|
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ3.PNG)|
-| <b>(c)2018/12/3/14:00時</b>|
+| <b>(c)2018/12/3/13:00時，O<sub>3</sub>=126ppb</b>|
 
 - 燃燒塔正軌跡分析證實了以北高雄燃燒塔對反應生成測站O<sub>3</sub>高值有較大的可能性  
   - 北方工業區燃燒塔以當天凌晨CEMS記錄最大流量發生時間，做為正軌跡線的起始時間，圖中為紅色點線表示。
@@ -73,3 +74,28 @@ last_modified_date: 2022-05-16 09:42:56
   - 然而就污染物受日夜海陸風的性質而言，圖中正、反軌跡線可以確認造成林園測站O<sub>3</sub>高值的污染源，非常可能就是仁大工業區之燃燒塔排放。
 
 ## 氣流、獨立山、與空氣污染
+- 氣流遇山的行為：左右繞過、翻越，
+- 視風速、山形、斜坡、以及大氣穩定度而定
+
+### [水洞](https://slideplayer.com/slide/709993/)試驗
+- 無因次流體力學參數
+  - [福祿數](https://zh.m.wikipedia.org/zh-tw/福祿數)：慣性力和重力效應之比
+  - [雷諾數](https://zh.wikipedia.org/zh-tw/雷诺数)：流體慣性力與黏性力的比值
+- F<sub>H</sub> &le; 0.2 : 繞山
+- F<sub>H</sub> &ge; 0.9 : 中心線可翻越、阻體後渦流隨F<sub>H</sub>增加而減少
+
+
+| ![FrRe.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/FdRe.PNG)|
+|:-:|
+| <b>不同流況水洞試驗攝影結果，流體自左方流入，3維鐘形獨立山高H。([Hunt et. al 1978][Hunt et. al 1978])</b>|
+
+[Hunt et. al 1978]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=20015MB7.TXT> " J. C. R. Hunt, W. H. Snyder, and R. E. Lawson, Jr., Flow Structure and Turbulent Diffusion Around a Three-Dimensional Hill, in Fluid Modeling Study on Effects of Stratification, Part I. Flow Structure, Report EPA-600/4-78-041, U. S. Environmental Protection Agency, 1978."
+
+Lin1974.PNG
+| ![Lin1974.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Lin1974.PNG)|
+|:-:|
+| <b>不同流況水洞試驗攝影結果，流體自左方流入，3維鐘形獨立山高H。([Lin et. al 1974][Lin et. al 1974])</b>|
+
+
+[Lin et. al 1974]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000XKAB.TXT> "J.-T. Lin, H.-T. Liu, and Y.-H. Pao, Laboratory Simulation of Plume Dispersion in Stably Stratified Flows over a Complex Terrain, Flow Research Report No. 29, prepared for U. S. Environmental Protection Agency, Flow Research, Inc., Kent, Wash., 1974.)"
+### CTDMPLUS

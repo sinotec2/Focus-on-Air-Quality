@@ -30,7 +30,13 @@ last_modified_date: 2022-05-16 09:42:56
 
  <b>季節加熱差異造成的環流與空污現象([Pendergast 1984][Pendergast 1984] in [Atmospheric science and power production][Randerson 1984])，圖a為一月均溫、圖b為7月均溫，單位為華氏</b>
 
+- 臺灣地區空品逐月變化
 
+| ![TCCIP第34期電子報_圖2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TCCIP第34期電子報_圖2.png)|
+|:--:|
+| <b>日夜加熱差異造成的環流與空污現象([蔡等2019][蔡等2019])</b>|
+
+[蔡等2019]: <https://tccip.ncdr.nat.gov.tw/km_newsletter_one.aspx?nid=20191202172107> "蔡宜君、謝佩蓉、李貞潁、許晃雄，臺灣空氣品質變化與氣候變遷, 2019/12/01 臺灣氣候變遷推估資訊與調適知識平台電子報034期"
 - 日夜變化(中\~小、都會區尺度)
 
 | ![Pendergast1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast1.PNG)|

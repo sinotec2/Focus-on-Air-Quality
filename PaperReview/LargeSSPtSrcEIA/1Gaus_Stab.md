@@ -1,13 +1,13 @@
 ---
 layout: default
-title: 煙流受地形效應之影響
+title: 高斯模式假設
 parent: Large Seaside PtSrc EIA
 grand_parent: Paper Reviews
-nav_order: 4
+nav_order: 1
 last_modified_date: 2022-05-16 09:42:56
 ---
 
-# 煙流受地形效應之影響
+# 高斯模式假設
 {: .no_toc }
 
 <details open markdown="block">

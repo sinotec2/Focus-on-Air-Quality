@@ -3,7 +3,7 @@ layout: default
 title: 高斯模式及大氣穩定度
 parent: Large Seaside PtSrc EIA
 grand_parent: Paper Reviews
-nav_order: 1
+nav_order: 3
 last_modified_date: 2022-05-16 09:42:56
 ---
 

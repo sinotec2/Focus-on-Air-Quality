@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 高斯模式及大氣穩定度
+title: 煙流受地形效應之影響
 parent: Large Seaside PtSrc EIA
 grand_parent: Paper Reviews
 nav_order: 3

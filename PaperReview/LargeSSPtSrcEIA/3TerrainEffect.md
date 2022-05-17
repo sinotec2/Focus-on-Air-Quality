@@ -101,9 +101,15 @@ last_modified_date: 2022-05-16 09:42:56
 [Lin et. al 1974]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000XKAB.TXT> "J.-T. Lin, H.-T. Liu, and Y.-H. Pao, Laboratory Simulation of Plume Dispersion in Stably Stratified Flows over a Complex Terrain, Flow Research Report No. 29, prepared for U. S. Environmental Protection Agency, Flow Research, Inc., Kent, Wash., 1974.)"
 
 ### CTDMPLUS 
+| ![CTDMPLUS.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS.PNG)|
+|:-:|
+| <b>([Lin et. al 1974][Lin et. al 1974])</b>|
+
 
 ### AERMOD 的地形模擬
 
 | ![AERMOD1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD1.png)|
 |:-:|
+| <b>([Lin et. al 1974][Lin et. al 1974])</b>|
+| ![AERMOD2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD2.png)|
 | <b>([Lin et. al 1974][Lin et. al 1974])</b>|

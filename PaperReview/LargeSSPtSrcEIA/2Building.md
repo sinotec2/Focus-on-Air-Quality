@@ -3,7 +3,7 @@ layout: default
 title: 煙流下洗現象
 parent: Large Seaside PtSrc EIA
 grand_parent: Paper Reviews
-nav_order: 1
+nav_order: 2
 last_modified_date: 2022-05-16 09:42:56
 ---
 
@@ -33,8 +33,7 @@ last_modified_date: 2022-05-16 09:42:56
 ### 建築物尾流
 | ![Hosker1984.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Hosker1984.PNG)|
 |:--:|
-| <b>建築物阻體在大氣氣流中所造成的擾動及渦漩
-([Hosker, R. 1984][Hosker, R. 1984])</b>|
+| <b>建築物阻體在大氣氣流中所造成的擾動及渦漩([Hosker, R. 1984][Hosker, R. 1984] in [Atmospheric science and power production][Randerson 1984])</b>|
 
 [Hosker, R. 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Hosker, R. (1984) Flow and diffusion near obstacles in Atmospheric Science and Power Production,  Ch. 7, DOE/TIC-27601."
 
@@ -51,7 +50,7 @@ last_modified_date: 2022-05-16 09:42:56
   - [BREEZE AERMOD 7: Gridded Plume Downwash](https://www.youtube.com/watch?v=bgoU9GTNYHs)
     - 這是一家商用軟體([BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod))的介紹短片，雖然是模式輸出的結果，卻也可以略略描繪煙流受到建築物尾流影響的推估概念。  
 
-### Plume Rise Model Enhancements (PRIME)
+### AQ Simulation Scheme: Plume Rise Model Enhancements (PRIME)
 
 | ![PRIME1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PRIME1.PNG)|
 |:--:|

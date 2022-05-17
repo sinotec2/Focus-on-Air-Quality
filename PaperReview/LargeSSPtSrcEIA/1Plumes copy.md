@@ -1,13 +1,13 @@
 ---
 layout: default
-title: 煙流在大氣中的行為
+title: 高斯模式及大氣穩定度
 parent: Large Seaside PtSrc EIA
 grand_parent: Paper Reviews
 nav_order: 1
 last_modified_date: 2022-05-16 09:42:56
 ---
 
-# 煙流在大氣中的行為
+# 高斯模式及大氣穩定度
 {: .no_toc }
 
 <details open markdown="block">
@@ -67,7 +67,7 @@ last_modified_date: 2022-05-16 09:42:56
 1.  使用[BPIPPRM](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/)進行前處理
   - 將複雜的建築物平面座標系統予以簡化
   - 解析出以煙囪為中心、36個方位建築物的長、寬、高
-2.  進行AERMOD/PRIME或ISC/PRIME等煙流模式模擬
+2. 進行AERMOD/PRIME或ISC/PRIME等煙流模式模擬
 3. 模擬方式細節、範例、遠端執行系統詳[建築物煙流下洗現象之模擬設定](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/)
 
 

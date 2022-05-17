@@ -103,7 +103,9 @@ last_modified_date: 2022-05-16 09:42:56
 ### CTDMPLUS 
 | ![CTDMPLUS.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS.PNG)|
 |:-:|
-| <b>([Lin et. al 1974][Lin et. al 1974])</b>|
+| <b>([Perry 1992][Perry 1992])</b>|
+
+[Perry 1992]: <https://www.jstor.org/stable/26186577> "Perry, S.G. (1992). CTDMPLUS: A Dispersion Model for Sources near Complex Topography. Part I: Technical Formulations. Journal of Applied Meteorology (1988-2005) 31 (7):633–645."
 
 
 ### AERMOD 的地形模擬

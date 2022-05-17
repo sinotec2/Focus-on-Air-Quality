@@ -21,9 +21,6 @@ last_modified_date: 2022-05-16 09:42:56
 ---
 
 ## 大氣環流的特性
-- 季節變化
-
-- 日夜變化
 
 | ![Pendergast1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast1.PNG)|
 |:--:|

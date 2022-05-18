@@ -112,3 +112,11 @@ last_modified_date: 2022-05-16 09:42:56
 - [高空污染源對地面濃度之影響](https://sinotec2.github.io/cpuff_forecast/)
   - 夜間 ~ 清晨煙流對地面沒有影響，
   - 6 ~ 8時突然出現煙流形狀之地面濃度分布
+
+## 煙流模式的架構
+
+| ![Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png)|
+|:-:|
+|<b>AERMOD模式系統與設定流程([Cerqueira et. al 2019][Cerqueira et. al 2019])</b>|
+
+[Cerqueira et. al 2019]: <https://www.researchgate.net/publication/328505586_Atmospheric_pollutants_modeling_with_Aermod_software> "Cerqueira, J., Albuquerque, H., and Sousa, F. (2019). Atmospheric pollutants: modeling with Aermod software. Air Quality, Atmosphere & Health 12. doi:10.1007/s11869-018-0626-9."

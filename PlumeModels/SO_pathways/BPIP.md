@@ -20,7 +20,7 @@ last_modified_date: 2022-03-08 10:16:34
 ---
 
 ## 背景
-- 污染源附近建築物造成煙流擴散行為的改變非常劇烈，煙流中心向下移動造成地面嚴重燻煙，稱之為Plume Downwash煙流下洗，其現象、原因及模擬、可以參考[Reference](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#reference)之介紹。
+- 污染源附近建築物造成煙流擴散行為的改變非常劇烈，煙流中心向下移動造成地面嚴重燻煙，稱之為Plume Downwash煙流下洗，其現象、原因及模擬、可以參考[Reference](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#reference)、以及[煙流下洗現象](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/2Building/)之介紹。
 - 目的：計算煙囪附近建築物的長、寬、高等尺寸，以便ISCST3/AERMOD等模式可以引用。
   - 參數之定義為每座煙囪為中心、360度每10度方向所遇到的建築物高度、寬度及長度。可以由污染源廠區平面配置逐一量測而得。
   - 廠房建築物如果過於複雜，需要有前處理程式協助產生這些輸入參數

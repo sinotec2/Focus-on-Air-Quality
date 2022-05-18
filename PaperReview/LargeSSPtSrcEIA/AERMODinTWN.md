@@ -175,16 +175,18 @@ mmif 遠端執行系統，作業網址http://114.32.164.198/mmif.html
 
 近年來因為國內外數值地形資料漸漸開放、工作站上也公開許多轉檔程式（gdal_translate），AERMAP的技術瓶頸已不復存在。有關AERMAP的運作過程可以參考崑山科技大學蔡德明教授提供之網頁說明。蔡教授建議一次轉換臺灣全島數值地形數據(Digital Terrain Model DTM)，再視AERMOD需要範圍進行計算，經比較測試，這個策略並沒有較快，因為一般AERMOD模擬範圍有限，臺灣大多地區又是山地，因此計算上不如每次下載以污染源為中心之少量、足夠DTM數據(儲存於「系統」備用)、按照實際需要進行轉換，再進行AERMAP計算，會比較有效率。
 
+#### 圖8 既有點源之AERMAP執行結果
+
+| ![TWN8.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN8.png)|
+|:--:|
+| <b>圖8 既有點源所在網格之AERMAP執行結果(umap與連結範例)</b>|
+
+淺藍色框線為AERMAP/AERMOD接受點網格範圍，深藍色標記為點源位置(1Km解析度)儲存網址：http://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.685/121.278
+
 圖8為「系統」計算現有點源位置(1Km解析度)為中心，周圍複雜地形檔案之計算結果，同樣以連結方式陳列於umap網站。選擇以1Km為解析度，而不是每一家工廠都計算一遍，主要是因為大多個案模擬範圍都會大於1Km，對於污染源是否位於範圍中心尚能允許部分誤差，倘若真的誤差太大，使用者也可以應用「系統」AERMAP功能自行調整範圍與解析度，引用已經下載之DTM數據，重新進行計算。
 
 AERMAP計算結果中的REC檔案，內容即為模擬範圍之地形高及「山丘高」，以包括檔(include file)之形式，用以進行複雜地形之設定。除此之外，計算結果尚包括表1所示檔案。
-## 五、建築物議題
-BPIP前處理在ISC3時代就存在了，AERMOD也繼續延用BPIP(PRIME版本)，使用者可以自訂座標系統簡單點出建築物頂點與煙囪位置、輸入高度、高程至控制檔，程式就會計算ISC3或AERMOD所需的建築物參數。
- 
-圖8 點源所在網格之AERMAP執行結果(umap與連結範例)
-淺藍色框線為AERMAP/AERMOD接受點網格範圍，深藍色標記為點源位置(1Km解析度)儲存網址：http://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.685/121.278
-
-表1 AERMAP前處理之成果檔案
+#### 表1 AERMAP前處理之成果檔案
 
 |檔案(副檔名)|內容用途|
 |-|-|
@@ -199,15 +201,21 @@ BPIP前處理在ISC3時代就存在了，AERMOD也繼續延用BPIP(PRIME版本)�
 
 煙流模式的地形處理，遠端作業網址http://114.32.164.198/terrain.html
 
+## 五、建築物議題
+BPIP前處理在ISC3時代就存在了，AERMOD也繼續延用BPIP(PRIME版本)，使用者可以自訂座標系統簡單點出建築物頂點與煙囪位置、輸入高度、高程至控制檔，程式就會計算ISC3或AERMOD所需的建築物參數。
+ 
 過去在「審查」時這一部分因沒有顯示軟體，只看文字檔可以說是完全空白，無從確認。國外有技術機構(AEREarth)提供免費圖形顯示服務，然而是UTM系統且不接受臺灣之51區。
 
 因應此一情況，「系統」提供了遠端計算服務，在該系統數位版點入前述位置與高度產生KML檔案之後，直接進入「系統」進行BPIP-PRIME計算，或自建控制檔交由「系統」計算，也可以由系統解讀控制檔，反寫成KML檔案，以利繪圖顯示。除了建築物之外，「系統」亦會解讀污染源之空間形態，將其寫成KML檔案。貼在OpenTopoMap如圖9所示。
 
-(a)KML圖面確認	(b) BPIP輸入檔(範例)
- 
-(c)體源空間位置檢核之範例
+#### 圖9 建築物與污染源空間設定之圖面確認範例
 
-圖9 建築物與污染源空間設定之圖面確認範例
+| ![TWN9ab.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN9ab.png)|
+|:--:|
+| <b>(a)KML圖面確認　　　　　　(b) BPIP輸入檔(範例)</b>|
+| ![TWN9ab.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN9ab.png)|
+| <b>(c)體源空間位置檢核之範例</b>|
+
 橙色底為輸入座標所對應之空間位置。藍色汽球為煙囪位置(假想)。底圖為OpenTopoMap
 ## 六、後處理臭氧限制法(OLM Ozone Limiting Method)議題
 2019年9月17日環保署加嚴了NO2的小時濃度標準至0.1ppm，這使得過去以NOx濃度當成NO2的作法顯得太過保守，需考慮實際大氣的轉化能力。簡言之此法乃以最接近測站之O3實際值，做為NO增量轉化成NO2之最大值，加上原來排放中NO2所造成之增量，即為最後增量評估結果。

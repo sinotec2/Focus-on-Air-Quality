@@ -113,10 +113,39 @@ last_modified_date: 2022-05-16 09:42:56
   - 夜間 ~ 清晨煙流對地面沒有影響，
   - 6 ~ 8時突然出現煙流形狀之地面濃度分布
 
-## 煙流模式的架構
+## 煙流模式的架構流程
 
+### [USEPA SCRAM](https://www.epa.gov/scram)模式種類架構
+- Dispersion Modeling
+  - Preferred/Recommended Models 
+    - AERMOD Modeling System ([**AER**MIC][AERMIC] **MOD**el)
+    - [CTDMPLUS][CTDMPLUS]：複雜地形模式。作法詳[後述](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#ctdmplus)。
+    - [OCD][OCD]：近海污染源在陸地的濃度分析。需海上及陸上氣象數據
+  - [Alternative Models](https://www.epa.gov/scram/air-quality-dispersion-modeling-alternative-models)
+    -  ADAM, ADMS, AFTOX, ASPEN, BLP, CAL3QHC/CAL3QHCR, CALINE3, [CALPUFF](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF), DEGADIS, HGSYSTEM, HOTMAC/RAPTAD, HYROAD, ISC3, ISC-PRIME, OBODM, OZIPR, Panache, PLUVUEII, SCIPUFF, SDM, and SLAB.
+  - [Screening Tools](https://www.epa.gov/scram/air-quality-dispersion-modeling-screening-models)
+    - AERSCREEN, CAL3QHC, COMPLEX1, CTSCREEN, RTDM3.2, SCREEN3, TSCREEN, VALLEY, and VISCREEN.
+  - [Related Programs](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs)
+    -  AERCOARE, [AERMAP](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/), AERPLOT, AERSURFACE, [BPIP, BPIPPRM](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/), BPIPPRM-Draft, CALMET2NCF, CALMPRO, CHAVG, CONCOR, EMS-HAP, [MMIF](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/ME_pathways/mmif/), and MMIFstat.
+- Photochemical Modeling
+  - Community Multiscale Air Quality ([CMAQ](https://github.com/USEPA/CMAQ), 2021) 
+  - Comprehensive Air quality Model with extensions ([CAMx](https://www.camx.com/), 2022)
+  - Regional Modeling System for Aerosols and Deposition ([REMSAD](http://remsad.icfconsulting.com/), 2005)
+  - Urban Airshed Model Variable Grid ([UAM-V ®](http://uamv.icfconsulting.com/), 1991)
+- Receptor Modeling
+  - Chemical Mass Balance (CMB)
+  - Positive Matrix Factorization (PMF)
+
+[AERMIC]: <https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#aermod> "American Meteorological Society/Environmental Protection Agency Regulatory Model Improvement Committee"
+[CTDMPLUS]: <https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#ctdmplus> "Complex Terrain Dispersion Model Plus Algorithms for Unstable Situations"
+[OCD]: <https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#ocd> "Offshore and Coastal Dispersion Model Version 5"
+
+### AERMOD執行流程
 | ![Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png)|
 |:-:|
 |<b>AERMOD模式系統與設定流程([Cerqueira et. al 2019][Cerqueira et. al 2019])</b>|
 
 [Cerqueira et. al 2019]: <https://www.researchgate.net/publication/328505586_Atmospheric_pollutants_modeling_with_Aermod_software> "Cerqueira, J., Albuquerque, H., and Sousa, F. (2019). Atmospheric pollutants: modeling with Aermod software. Air Quality, Atmosphere & Health 12. doi:10.1007/s11869-018-0626-9."
+
+### AERMOD在臺灣之應用
+- 有關AERMOD在臺灣應用的實務討論，可以參考[環工技師會訊11007pp39-55](http://www.tpeea.org.tw/upload/news/files/7eea35bc4c7a4189b42566fffe2f2fee.pdf)

@@ -20,7 +20,7 @@ last_modified_date: 2022-05-16 09:42:56
 </details>
 ---
 
-## 大氣環流的特性
+## 大氣紊流的特性
 
 | ![Pendergast1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast1.PNG)|
 |:--:|

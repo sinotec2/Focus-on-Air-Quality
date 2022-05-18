@@ -66,15 +66,13 @@ last_modified_date: 2022-05-18 15:20:06
 
 除了模式本身的「均質」條件限制之外，「規範」也要求模擬範圍要能夠正常顯示污染源所造成最大濃度，模擬範圍會等於污染源到最大落地濃度距離的4倍，就此一實務要求而言，濱海地區風速強勁，搭配較高的煙囪高度，經常使最大濃度發生在污染源下游數Km之外。相對而言，內地、臺北、臺中等盆地地形範圍內、或較低的煙囪，風速就會較低，太大的範圍就顯得不實際，模式使用者經常必須嘗試錯誤，以求得最合適的模擬範圍。如圖3「系統」自動設定模擬範圍與其年均值結果範例。
 
-#### 圖3「系統」模擬濱海及盆地內污染源之模擬範圍與年均值結果(示意圖)
+#### 圖3 濱海及盆地內污染源之模擬範圍與年均值結果
 - 三角形為污染源位置。白色框為合理的模擬範圍。
 - AERMOD 遠端計算服務，作業網址http://114.32.164.198/AERMOD.html
 
-| ![TWN4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN4.png)|
+| ![TWN3f.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN3f.png)|
 |:--:|
-| <b>(a)濱海地區污染源案例</b>| 
-| ![TWN5.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN5.png)|
-| <b>(b)盆地地形污染源案例</b>| 
+| <b>(a)濱海地區污染源案例　　　　　　(b)盆地地形污染源案例</b>| 
 					
 圖3「系統」模擬濱海及盆地內污染源之模擬範圍與年均值結果(示意圖)
 

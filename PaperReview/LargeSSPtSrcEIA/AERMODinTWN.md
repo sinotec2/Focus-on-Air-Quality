@@ -213,7 +213,7 @@ BPIP前處理在ISC3時代就存在了，AERMOD也繼續延用BPIP(PRIME版本)�
 | ![TWN9ab.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN9ab.png)|
 |:--:|
 | <b>(a)KML圖面確認　　　　　　(b) BPIP輸入檔(範例)</b>|
-| ![TWN9ab.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN9ab.png)|
+| ![TWN9c.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN9c.png)|
 | <b>(c)體源空間位置檢核之範例</b>|
 
 橙色底為輸入座標所對應之空間位置。藍色汽球為煙囪位置(假想)。底圖為OpenTopoMap
@@ -258,6 +258,7 @@ AERMOD具有內設之OLM模組，按照美國空品模式指引，可以分階�
 - VBird (2019) AERMOD - AERMAP 地形與受體 https://linux.vbird.org/enve/aermap-op.php
 - 行政院環保署(2019)建置AERMOD本土化模式及空品模式審驗制度專案工作計畫 108A047
 
-附表 臺灣地區應用AERMOD之學位論文一覽表
-
-搜尋排序互動表格 http://114.32.164.198/AERMOD_review.html
+## 附表 臺灣地區應用AERMOD之學位論文一覽表
+- 搜尋排序互動表格 http://114.32.164.198/AERMOD_review.html
+## Source
+- 原文發表於[2021環工技師會訊11007pp39-55](http://www.tpeea.org.tw/upload/news/files/7eea35bc4c7a4189b42566fffe2f2fee.pdf)，經部分修正更新。

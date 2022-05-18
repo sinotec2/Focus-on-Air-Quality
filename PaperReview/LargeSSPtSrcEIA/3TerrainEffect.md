@@ -133,7 +133,16 @@ last_modified_date: 2022-05-16 09:42:56
 
 | ![AERMOD2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD2.png)|
 |:-:|
-| <b>AERMAP Training([Roger 2007][Roger 2007])</b>|
+| <b>AERMOD地形效應的加權計算方式示意圖。from AERMAP Training([Roger 2007][Roger 2007])</b>|
 
 [Roger 2007]: <https://slideplayer.com/slide/10395603/> "Roger W. Brode, AERMAP Training, U.S. EPA/OAQPS/AQAD Air Quality Modeling Group, NESCAUM Permit Modeling Committee Annual Meeting, 5/31, 2007."
 
+### 煙流模式地形前處理遠端執行
+- 因AERMOD地形前處理過程繁雜，又涉及美國地調所檔案特殊格式，解決方式：
+  - 由環保署提供處理程式、處理結果、
+  - 由遠端執行方式分享既有處理系統與結果
+- [煙流模式的地形處理說明](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/)
+- [遠端執行](http://114.32.164.198/terrain.html)
+- TEDS點源附近地形檔案處理結果
+  - [TEDS10](http://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.712/121.009)
+  - [TEDS11](https://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)

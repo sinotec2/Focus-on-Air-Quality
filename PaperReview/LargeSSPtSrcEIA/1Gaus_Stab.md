@@ -93,14 +93,22 @@ last_modified_date: 2022-05-16 09:42:56
 |:-:|
 |<b>不穩定大氣：Looping</b>|
 
-### 混合層日變化與煙流地面濃度
+### 混合層日變化與污染擴散現象
+- 混合層與地面污染
+  - [Yamada and Mellor 1975][Yamada and Mellor 1975], A Simulation of the Wangara Atmospheric Boundary Layer Data, Atmos Sci, 32 2309-2329
 
 | ![Yamada1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Yamada1.PNG)|
 |:-:|
-|<b>混合層與空氣污染日變化概念圖([Yamada and Mellor 1975][Yamada and Mellor 1975])</b>|
+|<b>混合層與地面空氣污染日變化概念圖([Yamada and Mellor 1975][Yamada and Mellor 1975])</b>|
 
 | ![Yamada2.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Yamada2.PNG)|
 |:-:|
 |<b>大氣垂直混合層及地面逆溫層之日變化([Yamada and Mellor 1975][Yamada and Mellor 1975])</b>|
 
 [Yamada and Mellor 1975]: <https://journals.ametsoc.org/view/journals/atsc/32/12/1520-0469_1975_032_2309_asotwa_2_0_co_2.xml?tab_body=pdf> "Yamada, T and G Mellor, 1975, A Simulation of the Wangara Atmospheric Boundary Layer Data, / Atmos Sci, 32 2309-2329"
+
+- [臺灣中部地區東西向垂直截面之PM<sub>2.5</sub>動態分布](https://sinotec2.github.io/PM2.5CrossSect)
+  - 2019/1/30/0~6 污染物累積地面有限範圍，待日間向上擴散
+- [高空污染源對地面濃度之影響](https://sinotec2.github.io/cpuff_forecast/)
+  - 夜間 ~ 清晨煙流對地面沒有影響，
+  - 6 ~ 8時突然出現煙流形狀之地面濃度分布

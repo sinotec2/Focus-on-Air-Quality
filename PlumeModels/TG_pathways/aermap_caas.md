@@ -49,7 +49,7 @@ last_modified_date: 2022-02-21 10:25:20
 
 - [煙流模式的地形處理](http://114.32.164.198/terrain.html)入口畫面
 
-| ![terrain_caas.png](https://sinotec2.github.io/Focus-on-Air-Quality/raw/main/assets/images/terrain_caas.png)|
+| ![terrain_caas.PNG](https://sinotec2.github.io/Focus-on-Air-Quality/assets/images/terrain_caas.PNG)|
 |:--:|
 | <b></b>|
 

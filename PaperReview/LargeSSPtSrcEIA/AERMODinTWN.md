@@ -38,12 +38,12 @@ last_modified_date: 2022-05-18 15:20:06
 #### 圖1　臺灣地區點源之分布與其煙道條件
 - 內容下載自環保署TEDS10.0資料庫，然部分煙道條件不合理處，如座標、高度、溫度、內徑等都經品質管制修正。
 - 點源參數中之座標系統採TWD97，以維持直角座標系統。 
-- [umap](http://umap.openstreetmap.fr/zh/map/teds10-point-data-pm25_594438#9/23.3789/121.0219)
+- umap：[teds10-point-data-pm25](http://umap.openstreetmap.fr/zh/map/teds10-point-data-pm25_594438#9/23.3789/121.0219)
 
 | ![TWN1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN1.png)|
 |:--:|
 | <b>(1)臺灣本島範圍之點源家數</b>|
-| ![TWN1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN1.png)|
+| ![TWN2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN2.png)|
 | <b>（2）個別工廠點源排放條件(ISC3/AERMOD 排放格式)|
 
 ### (一)空間範圍
@@ -57,7 +57,8 @@ last_modified_date: 2022-05-18 15:20:06
 圖2將2020年中央氣象局(CWB)模擬全臺近地層垂直速度結果，進行均方根計算(以cm/s表示)如圖2所示，相對而言，彰化以南的西部縣市，垂直速度年均方根值約在1cm/s以下，是最能符合「均質」條件地區，臺中與桃竹苗地區垂直速度1～2cm/s，略能符合「均質」條件，相對山區海拔越高、坡度越陡峭，越不符合「均質」條件，應避免使用AERMOD，幸而對照圖1這些地區，目前並沒有污染源設置。各縣市範圍內「均質」程度亦有差異，建議後續還需按縣市垂直速度分布、地形、污染源座落情況詳細界定，避免模式的誤用。
  
 #### 圖2 2020 CWB WRF 近地層垂直速度均方根值之分布
-- 資料來源：中央氣象局/opendata/  https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-0$i.grb2 $i=00~84
+- 資料來源：中央氣象局/opendata/  https://opendata.cwb.gov.tw/fileapi/opendata/MIC/M-A0064-0$i.grb2
+- $i=00~84
 
 | ![TWN3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN3.png)|
 |:--:|
@@ -65,11 +66,17 @@ last_modified_date: 2022-05-18 15:20:06
 
 除了模式本身的「均質」條件限制之外，「規範」也要求模擬範圍要能夠正常顯示污染源所造成最大濃度，模擬範圍會等於污染源到最大落地濃度距離的4倍，就此一實務要求而言，濱海地區風速強勁，搭配較高的煙囪高度，經常使最大濃度發生在污染源下游數Km之外。相對而言，內地、臺北、臺中等盆地地形範圍內、或較低的煙囪，風速就會較低，太大的範圍就顯得不實際，模式使用者經常必須嘗試錯誤，以求得最合適的模擬範圍。如圖3「系統」自動設定模擬範圍與其年均值結果範例。
 
+#### 圖3「系統」模擬濱海及盆地內污染源之模擬範圍與年均值結果(示意圖)
+- 三角形為污染源位置。白色框為合理的模擬範圍。
+- AERMOD 遠端計算服務，作業網址http://114.32.164.198/AERMOD.html
 
-(a)濱海地區污染源案例					(b)盆地地形污染源案例
+| ![TWN4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN4.png)|
+|:--:|
+| <b>(a)濱海地區污染源案例</b>| 
+| ![TWN5.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN5.png)|
+| <b>(b)盆地地形污染源案例</b>| 
+					
 圖3「系統」模擬濱海及盆地內污染源之模擬範圍與年均值結果(示意圖)
-三角形為污染源位置。白色框為合理的模擬範圍。
-AERMOD 遠端計算服務，作業網址http://114.32.164.198/AERMOD.html
 
 圖中濱海案例較為單純，污染源及最大濃度之間的距離約3.8Km取4Km，其他並沒有其他的落地煙流，模擬範圍取16Km應屬合理。
 
@@ -77,12 +84,13 @@ AERMOD 遠端計算服務，作業網址http://114.32.164.198/AERMOD.html
 
 就此空間範圍此一項目而言，AERMOD與ISC3並沒有太大的差異。但AERMOD可以順利接受氣象模式的成果，任何地方均能有代表性的氣象數據(詳後述)，過去執行ISC3時，受到臺灣地區氣象站空間分布的限制，模擬範圍勉強納入測站而做不必要的擴張，這種不符合邏輯的設定將不會(必)再有了。
 
+### 圖4 濱海污染源及角落2020年CWB WRF地面風花圖
 圖4模擬濃度乃採圖3(a)污染源所在地(範圍中心點)之WRF模式做為代表性氣象值，另在範圍陸方3個角落，也同時顯示WRF之地面風全年風花圖進行比較。
  	 
 (a)污染源所在地	(b) 圖3(a)東北角
  	 
 (c) 圖3(a)西南角	(d)圖3(a)東南角
-圖4 濱海污染源及角落2020年CWB WRF地面風花圖
+
 
 由圖可以發現，濱海地區地勢平坦、地表粗略度大略相同，中心點與西南之風花圖彼此較為類似，然其東方內陸情況還是差異很大。
 盆地個案角落之風花圖如圖5所示，如以外圍較大模擬範圍，四圍風花圖與中心點有較大的差異，具有東西方向明顯的梯度，「均質」之假設條件不復存在，必須縮小模擬範圍至圖3白色框為宜。

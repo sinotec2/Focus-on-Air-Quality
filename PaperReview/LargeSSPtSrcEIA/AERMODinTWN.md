@@ -89,10 +89,8 @@ last_modified_date: 2022-05-18 15:20:06
 | ![TWN4a.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN4a.png)| ![TWN4b.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN4b.png)|
 |:--:|:--:|
 |<b>(a)污染源所在地</b>|<b>(b) 圖3(a)東北角</b>| 
-
-	(b) 圖3(a)東北角
- 	 
-(c) 圖3(a)西南角	(d)圖3(a)東南角
+| ![TWN4c.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN4c.png)| ![TWN4d.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN4d.png)|
+|<b>(c)圖3(a)西南角</b>|<b>(d)圖3(a)東南角</b>| 
 
 由圖可以發現，濱海地區地勢平坦、地表粗略度大略相同，中心點與西南之風花圖彼此較為類似，然其東方內陸情況還是差異很大。
 盆地個案角落之風花圖如圖5所示，如以外圍較大模擬範圍，四圍風花圖與中心點有較大的差異，具有東西方向明顯的梯度，「均質」之假設條件不復存在，必須縮小模擬範圍至圖3白色框為宜。

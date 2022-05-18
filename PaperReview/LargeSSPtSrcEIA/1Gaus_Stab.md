@@ -43,11 +43,16 @@ last_modified_date: 2022-05-16 09:42:56
 | <b>CALPUFF模擬結果GIF檔展示畫面([臺灣未來3天火力機組空品影響預報](https://sinotec2.github.io/cpuff_forecast/))</b>|
 
 ## 大氣垂直穩定度與煙流形狀
+1. 穩定Fanning
+  - 溫度傾率 &gt; 絕熱傾率、逆溫、等溫
+2. 中性
+  - 溫度傾率 = 絕熱傾率。是否存在高層逆溫層
+  - 存在：Fumigation
+  - 不存在：Conning
 
-plumes_1.PNG
 | ![plumes_1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/plumes_1.PNG)|
 |:-:|
-| <b></b>|
+| <b>煙流形狀與大氣穩定度：Fanning, Fumigation, and Coning。左側各圖分別為風速、溫度、擴散尺度之垂直變化、右側則為煙流之平面、垂直形狀</b>|
 
 | ![plumes_2.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/plumes_2.PNG)|
 |:-:|

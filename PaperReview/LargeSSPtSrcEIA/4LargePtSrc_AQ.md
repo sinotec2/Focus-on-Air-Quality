@@ -61,7 +61,14 @@ last_modified_date: 2022-05-16 09:42:56
 |:--:|:--:|
 |<b>2018/10/13事件日前後、林園站及鄰近其他4站之臭氧歷線</b>|<b>同時段林園站NOx及NMHC與臭氧歷線</b>|
 
-- 當日地面二維正、反軌跡之分析，可以參考[林園臭氧事件與氣流軌跡線](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#林園臭氧事件與氣流軌跡線)，作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
+- 當日地面二維正、反軌跡之分析
+  - 環保署林園站中午O<sub>3</sub>尖峰時間反軌跡(白色) vs. 當天2時北高雄某廠燃燒塔之正軌跡(紅色)
+  - 參考[林園臭氧事件與氣流軌跡線](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#林園臭氧事件與氣流軌跡線)
+  - 作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
+
+| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ1.PNG)|
+|:-:|
+| <b>中央氣象局風速風向數據繪製2018/10/13/12:00時林園測站之反軌跡(白色)與北高雄污染源正軌跡(紅色)，林園站O<sub>3</sub>=126ppb</b>|
 
 ### 三維正軌跡累積頻率分析方法
 - 三維風場來自WRF模式D4範圍模擬結果、水平解析度3公里、垂直40層。開啟FDDA。

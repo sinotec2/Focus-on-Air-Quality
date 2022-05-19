@@ -93,6 +93,15 @@ last_modified_date: 2022-05-16 09:42:56
 |:-:|
 |<b>不穩定大氣：Looping</b>|
 
+### Shoreline Internal Boundary Layer
+
+Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a-warm.png
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a-warm.png)|
+|:-:|
+|<b>海岸地區對流內部邊界層[Hsu , 1988][Hsu , 1988]</b>|
+
+[Hsu , 1988]: <https://www.biblio.com/9780123579553> "Hsu, S. A., Coastal Meteorology, 260 pp., Academic, San Diego,Calif., 1988."
+
 ### 混合層日變化與污染擴散現象
 - 混合層與地面污染
   - [Yamada and Mellor 1975][Yamada and Mellor 1975], A Simulation of the Wangara Atmospheric Boundary Layer Data, Atmos Sci, 32 2309-2329

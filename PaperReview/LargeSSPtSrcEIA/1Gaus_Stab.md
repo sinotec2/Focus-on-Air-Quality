@@ -93,9 +93,10 @@ last_modified_date: 2022-05-16 09:42:56
 |:-:|
 |<b>不穩定大氣：Looping</b>|
 
-### Shoreline Internal Boundary Layer
+### 垂直穩定度在空間中的不均勻特性
+- Shoreline Internal Boundary Layer
+  - Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a-warm.png
 
-Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a-warm.png
 | ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a-warm.png)|
 |:-:|
 |<b>海岸地區對流內部邊界層[Hsu , 1988][Hsu , 1988]</b>|
@@ -157,4 +158,5 @@ Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a
 [Cerqueira et. al 2019]: <https://www.researchgate.net/publication/328505586_Atmospheric_pollutants_modeling_with_Aermod_software> "Cerqueira, J., Albuquerque, H., and Sousa, F. (2019). Atmospheric pollutants: modeling with Aermod software. Air Quality, Atmosphere & Health 12. doi:10.1007/s11869-018-0626-9."
 
 ### AERMOD在臺灣之應用
-- 有關AERMOD在臺灣應用的實務討論，可以參考[環工技師會訊11007pp39-55](http://www.tpeea.org.tw/upload/news/files/7eea35bc4c7a4189b42566fffe2f2fee.pdf)
+- 有關AERMOD在臺灣應用的實務討論，可以參考[環工技師會訊11007pp39-55(pdf)](http://www.tpeea.org.tw/upload/news/files/7eea35bc4c7a4189b42566fffe2f2fee.pdf)
+- [Markdown format](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/AERMODinTWN/)

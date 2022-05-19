@@ -34,8 +34,7 @@ last_modified_date: 2022-05-16 09:42:56
 - 藉由WRF建立地區風場，分析林園站2018/10/13等臭氧事件日煙流三維軌跡分析，測試北、南高雄高空污染源夜間的煙流行為，以檢討林園地區臭氧污染成因。
 - 事件日前後、林園站及鄰近其他4站之臭氧歷線如下圖所示。林園站之高濃度確實有其空間的獨立性。而NOx/NMHC前驅物濃度來看，符合地區週變化的特性(週四 ~ 週日)，唯10/12及13日零時皆出現NMHC之異常高值(乙烯)。
 
-| ![3dTraj00.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/3dTraj00.PNG)|
-|:-:|![NOxO3NMHC@20181011linyuan.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NOxO3NMHC@20181011linyuan.png)|
+| ![O3@20181011fengshanxiaogangdaliaolinyuanrenwu.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/O3@20181011fengshanxiaogangdaliaolinyuanrenwu.png)|![NOxO3NMHC@20181011linyuan.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NOxO3NMHC@20181011linyuan.png)|
 |:--:|:--:|
 |<b>2018/10/13事件日前後、林園站及鄰近其他4站之臭氧歷線</b>|<b>同時段林園站NOx及NMHC與臭氧歷線</b>|
 

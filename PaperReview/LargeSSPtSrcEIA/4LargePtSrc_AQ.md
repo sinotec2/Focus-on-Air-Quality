@@ -32,9 +32,9 @@ last_modified_date: 2022-05-16 09:42:56
 ## 林園臭氧事件之北高雄污染源三維正軌跡分析
 - 林園工業區分析過程，發現多次出現非本地污染特徵之高值(如乙、丙烯同時之高值)，因此進一步分析更大範圍影響的可能性。
 - 藉由WRF建立地區風場，分析林園站2018/10/13臭氧事件日煙流三維軌跡分析，測試北、南高雄高空污染源夜間的煙流行為，以檢討林園地區臭氧污染成因。
-- 事件日之綜觀天氣
-  - 氣流線與空氣品質，可以參考[Nullschool][NS20181013]之歷史檔案。為典型鋒面通過之東北季風天氣，並沒有明顯的境外污染現象。
-  - [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到[GFS](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast)模擬這2天鋒面通過臺灣高低層虛位溫差異([KO-index](http://www.eumetrain.org/data/2/20/Content/theory_ko.htm)、等值線)及高層垂直運動(hPa/h以色塊標示)的歷程
+### 事件日之綜觀天氣
+- 氣流線與空氣品質，可以參考[Nullschool][NS20181013]之歷史檔案。為典型鋒面通過之東北季風天氣，並沒有明顯的境外污染現象。
+- [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到[GFS](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast)模擬這2天鋒面通過臺灣高低層虛位溫差異([KO-index](http://www.eumetrain.org/data/2/20/Content/theory_ko.htm)、等值線)及高層垂直運動(hPa/h以色塊標示)的歷程
   - 事件日當天KO指標0值正好通過高雄地區，海面為負值、陸地為正值，如圖所示：
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101200_10_as.gif)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101300_10_as.gif)|
@@ -43,14 +43,14 @@ last_modified_date: 2022-05-16 09:42:56
 
 [NS20181013]: <https://earth.nullschool.net/#2018/10/13/0400Z/chem/surface/level/overlay=cosc/orthographic=-238.92,24.73,2066> "https://earth.nullschool.net/#2018/10/13/0400Z/chem/surface/level/overlay=cosc/orthographic=-238.92,24.73,2066"
 
-
-- 當日地面二維正、反軌跡之分析，可以參考[林園臭氧事件與氣流軌跡線](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#林園臭氧事件與氣流軌跡線)，作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
-
-- 事件當時高屏地區環保署測站臭氧濃度之空間分布如圖所示
+### 空品與地面風速風向
+- 事件日中午高屏地區臭氧濃度之空間分布如圖所示
+  - 合併所有特工站及環保署測站尖峰臭氧濃度，以解析度1公里進行Kriging內插。Surfer繪圖。
+  - 林園特工站之間的間距約為2Km，以南方濱海的3個測站具有相同特性，而其他測站測值較低，由此可以推斷此一臭氧煙流超標範圍在本市範圍的空間尺度僅約2Km。然而對潮州站與下游大範圍，都有可能是超標的狀況。
 
 | ![20181013Surfer.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20181013Surfer.png)|
 |:-:|
-| <b>2018/10/13/12:00 高屏地區環保署測站臭氧濃度之分布</b>|
+| <b>2018/10/13 高屏地區環保署測站(白點)及特工測站(紅點)臭氧尖峰濃度之分布，林園測站測值尖峰濃度為126 ppb</b>|
 
 - 事件日前後、環保署林園站及鄰近其他4站之臭氧歷線如下圖所示。
   - 林園站之高濃度確實有其空間的獨立性
@@ -61,11 +61,16 @@ last_modified_date: 2022-05-16 09:42:56
 |:--:|:--:|
 |<b>2018/10/13事件日前後、林園站及鄰近其他4站之臭氧歷線</b>|<b>同時段林園站NOx及NMHC與臭氧歷線</b>|
 
+- 當日地面二維正、反軌跡之分析，可以參考[林園臭氧事件與氣流軌跡線](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#林園臭氧事件與氣流軌跡線)，作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
 
-
-- 軌跡線通過網格之累積頻率函數作法可以參考[林等1998][林等1998]。分析程式參考[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/traj3D/)。繪圖軟體使用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI)。
+### 三維正軌跡累積頻率分析方法
+- 三維風場來自WRF模式D4範圍模擬結果、水平解析度3公里、垂直40層。開啟FDDA。
+- 軌跡線通過網格之累積頻率函數作法可以參考[林等1998][林等1998]。
+- 分析程式參考[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/traj3D/)。
+- 繪圖軟體使用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI)。
 
 [林等1998]: <http://mopl.as.ntu.edu.tw/web/ASJ/26/26-3-3.pdf> "林能暉、彭啟明、陳進煌(1998) 東亞硫化物之長程輸送: 氣流軌跡線之應用, 大氣科學26:3, 265-280."
+
 ### 北高雄污染源三維正軌跡累積頻率
 - 正軌跡來自仁大工業區，高度125M。
 - 網格水平解析度為 3 Km、垂直為等間距 50 M 共 51 格。

@@ -32,7 +32,7 @@ last_modified_date: 2022-05-16 09:42:56
 
  <b>季節加熱差異造成的環流與空污現象([Pendergast 1984][Pendergast 1984] in [Atmospheric science and power production][Randerson 1984])，圖a為一月均溫、圖b為7月均溫，單位為華氏</b>
 
-- 臺灣地區空品不良日數逐月變化
+#### 臺灣地區空品不良日數逐月變化
   - 行向(縱)：自北到南測站
   - 列向(橫)：1~12月
   - 季節變化：冬季(9月~隔年4月)高、6~8月低

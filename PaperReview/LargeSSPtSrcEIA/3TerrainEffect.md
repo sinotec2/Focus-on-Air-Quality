@@ -44,7 +44,7 @@ last_modified_date: 2022-05-16 09:42:56
 [蔡等2019]: <https://tccip.ncdr.nat.gov.tw/km_newsletter_one.aspx?nid=20191202172107> "蔡宜君、謝佩蓉、李貞潁、許晃雄，臺灣空氣品質變化與氣候變遷, 2019/12/01 臺灣氣候變遷推估資訊與調適知識平台電子報034期"
 
 ### 日夜變化
-- 中\~小、都會區尺度
+#### 中\~小、都會區尺度海陸風、山谷風概念
 
 | ![Pendergast1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Pendergast1.PNG)|
 |:--:|
@@ -53,7 +53,7 @@ last_modified_date: 2022-05-16 09:42:56
 [Pendergast 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Malcolm M. Pendergast, 1984, Chap. 2, METEOROLOGICAL FUNDAMENTALS, in Atmospheric science and power production (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN."
 
 [Randerson 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Randerson, D. (1984). Atmospheric science and power production (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN."
-- 林園臭氧事件與氣流軌跡線
+#### 林園臭氧事件與氣流軌跡線
   - 環保署林園站中午O<sub>3</sub>尖峰時間反軌跡(白色) vs.
   - 當天2時北高雄某廠燃燒塔之正軌跡(紅色)
   - 夜間：北風\~東北風，為秋冬季盛行風、山風、陸風
@@ -100,7 +100,7 @@ last_modified_date: 2022-05-16 09:42:56
 
 [Lin et. al 1974]: <https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000XKAB.TXT> "J.-T. Lin, H.-T. Liu, and Y.-H. Pao, Laboratory Simulation of Plume Dispersion in Stably Stratified Flows over a Complex Terrain, Flow Research Report No. 29, prepared for U. S. Environmental Protection Agency, Flow Research, Inc., Kent, Wash., 1974.)"
 
-### CTDMPLUS 
+### CTDMPLUS 模式的作法
 
 | ![CTDMPLUS1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS1.PNG)|
 |:-:|
@@ -116,7 +116,7 @@ last_modified_date: 2022-05-16 09:42:56
 
 | ![CTDMPLUS3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS3.PNG)|
 |:-:|
-| <b>複雜地形逼近橢圓形模擬山嶺([Perry 1992][Perry 1992])</b>|
+| <b>以橢圓形等高線模擬山嶺之組合逼近實際複雜地形([Perry 1992][Perry 1992])</b>|
 
 [Perry 1992]: <https://www.jstor.org/stable/26186577> "Perry, S.G. (1992). CTDMPLUS: A Dispersion Model for Sources near Complex Topography. Part I: Technical Formulations. Journal of Applied Meteorology (1988-2005) 31 (7):633–645."
 

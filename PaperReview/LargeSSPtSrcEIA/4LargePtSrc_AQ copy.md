@@ -30,7 +30,7 @@ last_modified_date: 2022-05-19 16:42:34
 - 藉由WRF建立地區風場，分析林園站2018/10/13臭氧事件日煙流三維軌跡分析，測試北、南高雄高空污染源夜間的煙流行為，以檢討林園地區臭氧污染成因。
 ### 事件日之綜觀天氣與地面風速風向
 - 氣流線與空氣品質，可以參考[Nullschool][NS20181013]之歷史檔案。為典型鋒面通過之東北季風天氣，並沒有明顯的境外污染現象。
-- [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到[GFS](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast)模擬這2天鋒面通過臺灣高低層虛位溫差異([KO-index](http://www.eumetrain.org/data/2/20/Content/theory_ko.htm)、等值線)及高層垂直運動(hPa/h以色塊標示)的歷程
+- [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到[GFS](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast)模擬這2天鋒面通過臺灣高低層虛位溫差異([KO-index](http://www.eumetrain.org/data/2/20/Content/theory_ko.htm)、等值線)及高層垂直運動(hPa/h以色塊標示)的分布與變化
   - 事件日當天KO指標0值正好通過高雄地區，海面為負值、陸地為正值，如圖所示：
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101200_10_as.gif)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101300_10_as.gif)|

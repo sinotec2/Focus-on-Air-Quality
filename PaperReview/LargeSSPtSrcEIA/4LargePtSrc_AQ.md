@@ -34,12 +34,12 @@ last_modified_date: 2022-05-16 09:42:56
 - 藉由WRF建立地區風場，分析林園站2018/10/13臭氧事件日煙流三維軌跡分析，測試北、南高雄高空污染源夜間的煙流行為，以檢討林園地區臭氧污染成因。
 - 事件日之綜觀天氣
   - 氣流線與空氣品質，可以參考[Nullschool][NS20181013]之歷史檔案。為一典型之東北季風天氣，並沒有明顯的境外污染現象。
-  - [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到當天高層垂直運動(以色塊標示)如圖：
+  - [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到GFS模擬這2天鋒面通過臺灣高低層虛位溫差異([KO-index](http://www.eumetrain.org/data/2/20/Content/theory_ko.htm)、等值線)及高層垂直運動(hPa/h以色塊標示)的歷程如圖：
 
 
-| ![2018101300_10_as.gif](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101300_10_as.gif)|
-|:-:|
-| <b></b>|
+| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101300_10_as.gif)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101300_10_as.gif)|
+|:-:|:-:|
+| <b>2018101200</b>|<b>2018101300</b>|
 
 [NS20181013]: <https://earth.nullschool.net/#2018/10/13/0400Z/chem/surface/level/overlay=cosc/orthographic=-238.92,24.73,2066> "https://earth.nullschool.net/#2018/10/13/0400Z/chem/surface/level/overlay=cosc/orthographic=-238.92,24.73,2066"
 

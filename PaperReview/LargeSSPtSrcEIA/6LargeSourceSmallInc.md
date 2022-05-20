@@ -102,7 +102,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 
 | ![SteamPlume.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SteamPlume.png)|
 |:-:|
-| <b>大型煙流所排出的蒸汽在複雜地形中形成局部雲雨。</b>|
+| <b>大型煙流所排出的蒸汽在複雜地形中形成局部雲雨(Plant Storm)。</b>|
 
 []: <https://www.maxpixel.net/Power-Plant-Steam-Industry-Smog-Chimney-Pollution-4725108> ""
 

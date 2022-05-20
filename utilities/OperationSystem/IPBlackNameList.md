@@ -201,6 +201,20 @@ if mip>500:
 |103.59.156.16|1|1|Haegok|
 |14.225.253.120|1|1|Hạ Long|
 
+## 修正作法：外部黑名單
+### 精進的必要與步驟
+- 因$web之權限開放，前述pf rule 也不正確，致駭客還是來訪。作法需精進。
+  - 先關閉$web之讀取、執行權限。此舉阻擋大多數的惡意瀏覽。
+  - 新增pf.conf的規則
+    - 使用table指令讀入外部黑名單
+    - 指定需要關閉的網路卡：  `ppp0` (外部IP)
+  - 確認pfctl真的能擋住黑名單
+    - 使用手機瀏覽imac ppp0網址，由tacc找到手機IP、加入黑名單、
+    - 重新啟動pfctl，再次測試手機是否能正常瀏覽，如果不能，才是對的。
+  - 修改ana_accHr.py，將惡意IP加入外部黑名單檔案(bname)。
+
+### 新增pf.conf規則
+
 ```bash
 #kuang@114-32-164-198 ~/bin/BlockIP
 $ tail /etc/pf.conf
@@ -213,8 +227,36 @@ rdr-anchor "com.apple/*"
 dummynet-anchor "com.apple/*"
 anchor "com.apple/*"
 load anchor "com.apple" from "/etc/pf.anchors/com.apple"
-block drop from any to 35.233.62.116
+
+ext_if="{ ppp0 }"
+
+table <badips> persist file "/Users/kuang/bin/BlockIP/pf.blocked.ip.conf"
+block on $ext_if from { <badips> } to any
 ```
+
+### 外部黑名單
+- 黑名單之外部檔案：/Users/kuang/bin/BlockIP/pf.blocked.ip.conf
+  - 參考[ken](https://bbken.org/author/ken/page/3/?PageSpeed=noscript)的建議名單，大多是中國大陸的平台網站。
+
+### 修改python程式
+  - 將前述ana_accHr.py 修正成下述：
+
+```python
+kuang@114-32-164-198 ~/bin/BlockIP
+$ tail ana_accHr.py
+  bname='/Users/kuang/bin/BlockIP/pf.blocked.ip.conf'
+  msg='tell app "System Events" to display dialog "Hourly acc >500 !!,tail /etc/pf.conf"'
+  os.system("/usr/bin/osascript -e '"+msg+"'&")
+  df=DataFrame({'ip':sip,'nm':nip})
+  dfm=df.loc[df.nm>500]
+  for i in dfm.ip:
+    nline=subprocess.check_output('grep '+i+' '+bname+'|wc -l',shell=True).decode('utf8').strip('\t').split()[0]
+    if nline>0:continue
+    os.system('echo '+i+'>>'+bname)
+    
+  os.system('/sbin/pfctl -ef /etc/pf.conf')
+```
+
 ## Reference
 - 阿百, [自動透過 iptables 封鎖 IP 黑名單](http://yenpai.idis.com.tw/archives/399-教學-自動透過-iptables-封鎖-ip-黑名單), 2012 年 11 月 12 日
 - Vyshakh Babji, [Block Access to Particular IP Address on Mac](https://medium.com/ringcentral-developers/how-to-block-a-particular-ip-address-on-mac-a587805972e5), Jul 3, 2019

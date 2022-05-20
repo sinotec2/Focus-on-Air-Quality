@@ -170,11 +170,11 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 # 四、大型污染源的衍生性粒狀物增量分析
 臺灣地區高濃度PM<sub>2.5</sub>的情形近年來在大陸地區減煤趨勢獲得大幅改善。即便如此，PM<sub>2.5</sub>改善趨勢與全球心血管疾病降低、糖尿病、慢性肺阻塞等疾病改善的趨勢一致，造成正的相關性，使得PM<sub>2.5</sub>的重要性仍然受到關注，尤其是火力發電機組的日常運作。
 
-[臺灣未來3天火力機組空品影響預報](https://sinotec2.github.io/cpuff_forecast/)這個網站應用環保署公開每日發電量即時資訊、TEDS數據、以及中央氣象局開放數據中的WRF模式3公里預報檔，建立了CALPUFF每日的模擬。以近期2022/5/19/16時結果為例，因南北風場夾擊，在彰、雲、嘉、南地區造成較高濃度，其值最高約4 ~ 5 &mu; g/M<sup>3</sup>。
+[臺灣未來3天火力機組空品影響預報](https://sinotec2.github.io/cpuff_forecast/)這個網站應用環保署公開的[發電量即時資訊](https://data.gov.tw/dataset/8931)、TEDS數據、以及中央氣象局開放數據中的[WRF模式3公里預報](https://opendata.cwb.gov.tw/dataset/mathematics/M-A0064-048)檔，建立了[CALPUFF每日的模擬](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/Forecast/)。以近期2022/5/19/16時結果為例，因南北風場夾擊，在彰、雲、嘉、南地區造成較高濃度，其值最高約4 ~ 5 &mu; g/M<sup>3</sup>。
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WND_static_topoconcrec000010.jpg)|
 |:-:|
-| <b>臺灣地區附近2022/5/19/16時之氣流線及風速([earth.NullScholl](https://earth.nullschool.net/#2022/05/19/800Z/wind/surface/level/orthographic=-238.92,24.73,2066)]網站)</b>|
+| <b>臺灣地區附近2022/5/19/16時之氣流線及風速，臺灣東側及南方均為南風，臺灣海峽為強勁的東北風，在高雄台南交界處幅合([earth.NullScholl](https://earth.nullschool.net/#2022/05/19/800Z/wind/surface/level/orthographic=-238.92,24.73,2066)]網站)</b>|
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PMF_static_topoconcrec000009.jpg)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EPA_static_topoconcrec000010.jpg)|
 |:-:|:--:|
@@ -182,7 +182,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 
 由環保署[空氣品質監測網](https://airtw.epa.gov.tw/)同時間畫面來看，確實在中部 ~ 南高屏地區都有較高濃度，其值普遍在20 ~ 30 &mu; g/M<sup>3</sup>之間。
 
-由於火力發電機組是所有的粒狀物、而環保署測值是PM<sub>2.5</sub>，由此觀之並非大部分污染均由火力發電機組所貢獻。
+由於火力發電機組是所有的粒狀物、包括原生及衍生性粒狀物、結合銨鹽等(PM<sub>10</sub>)，而環保署測值是PM<sub>2.5</sub>，由此觀之並非大部分污染均由火力發電機組所貢獻。
 
 # 五、濱海大型污染源與光化煙霧的交互作用
 濱海地區經常是大型重工業集中的區域，同時也是城鎮發展的範圍，因此這些污染源是否會造成空氣品質的劣化，為環境影響評估以及空氣品質管理上重要的課題。就數量上，這些大型污染源的排放量是非常可觀，可能是地面污染源的倍數之多，然而就實際空氣品質觀測與分析的成果中，我們並沒有直接的證據說明這些污染源對空氣品質有顯著的影響或控制，例如在中部地區，台中電廠機組在持續興建營運的過程中，其硫氧化物排放量持續的增加，然而我們並沒有辦法找到空氣品質測站二氧化硫項目有持續劣化的趨勢，這一點也是我們經常遇到的迷思與困境。

@@ -166,6 +166,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 | ![acidrain.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/acidrain.png)|
 |:-:|
 | <b>大型污染源產生酸雨的重要機制</b>|
+
 # 四、大型污染源的衍生性粒狀物增量分析
 臺灣地區高濃度PM<sub>2.5</sub>的情形近年來在大陸地區減煤趨勢獲得大幅改善。即便如此，PM<sub>2.5</sub>改善趨勢與全球心血管疾病降低、糖尿病、慢性肺阻塞等疾病改善的趨勢一致，造成正的相關性，使得PM<sub>2.5</sub>的重要性仍然受到關注，尤其是火力發電機組的日常運作。
 
@@ -177,7 +178,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PMF_static_topoconcrec000009.jpg)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EPA_static_topoconcrec000010.jpg)|
 |:-:|:--:|
-| <b>CALPUFF模擬2022/5/19/16時全臺火力發電機組的粒狀物濃度分布</b>| <b>同時間環保署空氣品質監測網畫面</b>|
+| <b>CALPUFF模擬2022/5/19/16時全臺火力發電機組造成之粒狀物增量濃度分布</b>| <b>同時間環保署空氣品質監測網畫面</b>|
 
 由環保署[空氣品質監測網](https://airtw.epa.gov.tw/)同時間畫面來看，確實在中部 ~ 南高屏地區都有較高濃度，其值普遍在20 ~ 30 &mu; g/M<sup>3</sup>之間。
 

@@ -105,9 +105,19 @@ LD_LIBRARY_PATH=${P0}:${P1}:${P2}:${P3}:${P4}
   - module load biology/Python3/default
   - 為py37
 - @lgn303
-  - module purge
-  - module load pkg/Anaconda3
-  - module load pkg/Python/3.9.7
+
+```bash
+module purge
+module load pkg/Anaconda3
+module load pkg/Python/3.9.7
+
+# first time installation
+cd $Performance
+conda env create Evaluate
+
+# each time activation
+conda activate Evaluate
+```  
   - 另有py37
 - 執行時必須加註版本(python3)，否則會啟動python2 (/usr/bin/python)
 

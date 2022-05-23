@@ -687,7 +687,7 @@ fi
 #                              RUN VISUALIZATION                         #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 VERDI=/cluster/VERDI/VERDI_1.5.0
-export DISPLAY=:0.0
+export DISPLAY=:0.0 #Keep login from Console
 if [ ${runVIS} = true ]; then
   echo "### RUNNING VISUALISATION TOOLS"
 #  rm -rf ./vis/${rundate}

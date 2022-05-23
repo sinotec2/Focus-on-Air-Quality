@@ -152,7 +152,7 @@ done
 today=$(date +%Y%m%d)
 rundate=$(date -d "$today - 1 day" +%Y%m%d)
 ...
-export DISPLAY=:0.0
+export DISPLAY=:0.0 #Keep login from Console
   VERDI=/cluster/VERDI/VERDI_1.5.0/verdi.sh
 ...
   ln -sf ../../CALPUFF_OUT/CALPUFF/${rundate}/calpuff.con .
@@ -192,11 +192,14 @@ export DISPLAY=:0.0
   ln -sf ${BIN1} ${BIN2}
 ```
 ### $DISPLAY的設定
-- 當命令列狀態批次執行VERDI時，因為*putty*已經設定了DISPLAY的環境變數，所以沒有出現問題。但在*crontab*自動執行批次檔時，沒有設定DISPLAY，會造成VERDI的錯誤與終止。
-  - 事實上批次執行並沒有任何螢幕的輸出。此乃程式內設，無法更改。
-- 此處將DISPLAY設到本機
-  -但不能指定實際的機器、hostname或IP、localhost等等、且
-  - console必須保持登入狀態、使用者須與*crontab*相同
+- 當**命令列**狀態批次執行VERDI時，因為*putty*已經設定了DISPLAY的環境變數，所以沒有出現問題。
+- 但在*crontab*自動執行批次檔時，沒有設定$DISPLAY，會造成VERDI的錯誤與終止。
+  - 事實上，正常狀態下批次執行並沒有任何螢幕的輸出。
+  - 如批次檔有誤，會在$DISPLAY的X window畫面出現錯誤訊息。
+  - 此乃程式內設，無法更改。
+- 此處將$DISPLAY設到本機 [:0.0]()
+  - 但不能指定實際的機器、hostname或IP、localhost等等、且
+  - **console** 必須保持**登入**狀態、使用者須與*crontab*相同
   - 即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
 
 ### 輸入檔(.nc)的準備

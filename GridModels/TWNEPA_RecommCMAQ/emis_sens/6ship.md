@@ -98,3 +98,12 @@ nc.close()
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2SHIP_JanT.PNG)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2_JanT.PNG)|
 |:-:|:--:|
 | <b>船舶排放所造成的濃度差異(增量)</b>| <b>一月份SO2月平均濃度</b>|
+
+## Actions
+- 船舶SO2排放總量不及背景基準，模擬濃度占比更低，可能是SO2低估原因  
+  - 由全球AIS數據推估船舶排放量、參[船隻排放空間分布之重分配](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/EDGARv5/ShipDensity/)
+  - [EDGAR](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/EDGARv5/Ed2CMAQ/)
+- 人為污染源所造成SO2濃度不及雲雨洗滌效應，大多地區濃度偏低。
+  - BC及背景污染源(火山、生物源)仍有待補充
+    - [Sulfur Emission](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/sulfur-emission)
+    - [Biogenic Sulfur Emissions](https://pubs.acs.org/doi/pdf/10.1021/bk-1989-0393.ch001)

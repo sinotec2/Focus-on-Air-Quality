@@ -138,7 +138,7 @@ last_modified_date: 2022-05-16 09:42:56
 [Roger 2007]: <https://slideplayer.com/slide/10395603/> "Roger W. Brode, AERMAP Training, U.S. EPA/OAQPS/AQAD Air Quality Modeling Group, NESCAUM Permit Modeling Committee Annual Meeting, 5/31, 2007."
 
 ### 複雜地形模擬案例
-- 林口電廠
+- 林口電廠(AERMOD)
   - mmif氣象1/21\~31
   - 有建築物
 
@@ -146,12 +146,17 @@ last_modified_date: 2022-05-16 09:42:56
 |:--:|:--:|
 | <b>無地形，煙流偏西南方，為東北季風影響</b>|有地形，煙流方向偏南，擴散範圍受到限制，集中在河谷低地。受限於80\~100M等高線範圍。最大值較高51\~754&mu;/M<sup>3</sup>|
 
-- 中華紙漿
+- 中華紙漿(AERMOD)
 
-| ![3dTraj2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/3dTraj2.PNG)|
+| ![zhonghuaTer.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/zhonghuaTer.PNG)|
 |:-:|
 | <b></b>|
 
+- 和平水泥(file:///I:/home/kuang/AQMP/202201/20220401_固定污染源模式模擬技術審查研習會/02.高斯擴散模式模擬審查實務議題.pdf)
+
+| ![hepingTer.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/hepingTer.PNG)|
+|:-:|
+| <b></b>|
 
 ### 煙流模式地形前處理遠端執行
 - 因AERMOD地形前處理過程繁雜，又涉及美國地調所檔案特殊格式，解決方式：

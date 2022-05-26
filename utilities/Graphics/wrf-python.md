@@ -58,12 +58,17 @@ python setup.py config_fc --f90flags="-mtune=generic -fopenmp" build_ext --libra
 pip install .
 ```
 
-## 變數定義及內插程式
+## 變數定義
 - wrf-python最強項的功能除了繪圖之外，就屬[getvar](https://wrf-python.readthedocs.io/en/latest/user_api/generated/wrf.getvar.html)函數及其內插程式。
 
-### [getvar](https://wrf-python.readthedocs.io/en/latest/user_api/generated/wrf.getvar.html)
-
-
+### Dimensions and Terran
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Variable Name</th>
 <th class="head">Description</th>
@@ -72,11 +77,114 @@ pip install .
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>avo</td>
-<td>Absolute Vorticity</td>
-<td>10-5 s-1</td>
+<tr class="row-odd"><td>lat</td>
+<td>Latitude</td>
+<td>decimal degrees</td>
 <td>&#160;</td>
 </tr>
+<tr class="row-even"><td>lon</td>
+<td>Longitude</td>
+<td>decimal degrees</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>ter</td>
+<td>Model Terrain Height</td>
+<td><p class="first">m</p>
+<p>km</p>
+<p>dm</p>
+<p>ft</p>
+<p class="last">mi</p>
+</td>
+<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</td>
+</tr>
+<tr class="row-odd"><td>times</td>
+<td>Times in the File or Sequence</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>xtimes</td>
+<td><p class="first">XTIME Coordinate</p>
+<p class="last">(if applicable)</p>
+</td>
+<td><p class="first">minutes since</p>
+<p>start of</p>
+<p class="last">model run</p>
+</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+
+### Height
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>z/height</td>
+<td>Model Height for Mass Grid</td>
+<td><p class="first">m</p>
+<p>km</p>
+<p>dm</p>
+<p>ft</p>
+<p class="last">mi</p>
+</td>
+<td><p class="first"><strong>msl</strong> (boolean): Set to False to return AGL values. True is for MSL.  Default is <em>True</em>.</p>
+<p class="last"><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>height_agl</td>
+<td>Model Height for Mass Grid (AGL)</td>
+<td><p class="first">m</p>
+<p>km</p>
+<p>dm</p>
+<p>ft</p>
+<p class="last">mi</p>
+</td>
+<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</td>
+</tr>
+<tr class="row-odd"><td>zstag</td>
+<td>Model Height for Vertically Staggered Grid</td>
+<td><p class="first">m</p>
+<p>km</p>
+<p>dm</p>
+<p>ft</p>
+<p class="last">mi</p>
+</td>
+<td><p class="first"><strong>msl</strong> (boolean): Set to False to return AGL values. True is for MSL.  Default is <em>True</em>.</p>
+<p class="last"><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Temperatures
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
+</tr>
+</thead>
+<tbody valign="top">
 <tr class="row-odd"><td>eth/theta_e</td>
 <td>Equivalent Potential Temperature</td>
 <td><p class="first">K</p>
@@ -84,16 +192,6 @@ pip install .
 <p class="last">degF</p>
 </td>
 <td><strong>units</strong> (str) : Set to desired units. Default is <em>‘K’</em>.</td>
-</tr>
-<tr class="row-even"><td>cape_2d</td>
-<td>2D CAPE (MCAPE/MCIN/LCL/LFC)</td>
-<td>J kg-1 ; J kg-1 ; m ; m</td>
-<td><strong>missing</strong> (float): Fill value for output only</td>
-</tr>
-<tr class="row-odd"><td>cape_3d</td>
-<td>3D CAPE and CIN</td>
-<td>J kg-1</td>
-<td><strong>missing</strong> (float): Fill value for output only</td>
 </tr>
 <tr class="row-even"><td>ctt</td>
 <td>Cloud Top Temperature</td>
@@ -107,122 +205,10 @@ pip install .
 <p class="last"><strong>units</strong> (str) : Set to desired units. Default is <em>‘degC’</em>.</p>
 </td>
 </tr>
-<tr class="row-odd"><td>cloudfrac</td>
-<td>Cloud Fraction</td>
-<td>%</td>
-<td><p class="first"><strong>vert_type</strong> (str): The vertical coordinate type for the cloud thresholds. Must be ‘height_agl’, ‘height_msl’, or ‘pres’.  Default is ‘height_agl’.</p>
-<p><strong>low_thresh</strong> (float): The low cloud threshold (meters for ‘height_agl’ and ‘height_msl’, pascals for ‘pres’). Default is 300 m (97000 Pa)</p>
-<p><strong>mid_thresh</strong> (float): The mid cloud threshold (meters for ‘height_agl’ and ‘height_msl’, pascals for ‘pres’). Default is 2000 m (80000 Pa)</p>
-<p class="last"><strong>high_thresh</strong> (float): The high cloud threshold (meters for ‘height_agl’ and ‘height_msl’, pascals for ‘pres’). Default is 6000 m (45000 Pa)</p>
-</td>
-</tr>
-<tr class="row-even"><td>dbz</td>
-<td>Reflectivity</td>
-<td>dBZ</td>
-<td><p class="first"><strong>do_variant</strong> (boolean): Set to True to enable variant calculation. Default is <em>False</em>.</p>
-<p class="last"><strong>do_liqskin</strong> (boolean): Set to True to enable liquid skin calculation. Default is <em>False</em>.</p>
-</td>
-</tr>
-<tr class="row-odd"><td>mdbz</td>
-<td>Maximum Reflectivity</td>
-<td>dBZ</td>
-<td><p class="first"><strong>do_variant</strong> (boolean): Set to True to enable variant calculation. Default is <em>False</em>.</p>
-<p class="last"><strong>do_liqskin</strong> (boolean): Set to True to enable liquid skin calculation. Default is <em>False</em>.</p>
-</td>
-</tr>
-<tr class="row-even"><td>geopt/geopotential</td>
-<td>Geopotential for the Mass Grid</td>
-<td>m2 s-2</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>geopt_stag</td>
-<td>Geopotential for the Vertically Staggered Grid</td>
-<td>m2 s-2</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>helicity</td>
-<td>Storm Relative Helicity</td>
-<td>m2 s-2</td>
-<td><strong>top</strong> (float): The top level for the calculation in meters. Default is <em>3000.0</em>.</td>
-</tr>
-<tr class="row-odd"><td>lat</td>
-<td>Latitude</td>
-<td>decimal degrees</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>lon</td>
-<td>Longitude</td>
-<td>decimal degrees</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>omg/omega</td>
-<td>Omega</td>
-<td>Pa s-1</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>p/pres</td>
-<td><p class="first">Full Model Pressure</p>
-<p class="last">(in specified units)</p>
-</td>
-<td><p class="first">Pa</p>
-<p>hPa</p>
-<p>mb</p>
-<p>torr</p>
-<p>mmhg</p>
-<p class="last">atm</p>
-</td>
-<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘Pa’</em>.</td>
-</tr>
-<tr class="row-odd"><td>pressure</td>
-<td>Full Model Pressure (hPa)</td>
-<td>hPa</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>pvo</td>
-<td>Potential Vorticity</td>
-<td>PVU</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>pw</td>
-<td>Precipitable Water</td>
-<td>kg m-2</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>rh</td>
-<td>Relative Humidity</td>
-<td>%</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>rh2</td>
-<td>2m Relative Humidity</td>
-<td>%</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>slp</td>
-<td>Sea Level Pressure</td>
-<td><p class="first">hPa</p>
-<p>hPa</p>
-<p>mb</p>
-<p>torr</p>
-<p>mmhg</p>
-<p class="last">atm</p>
-</td>
-<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘hPa’</em>.</td>
-</tr>
 <tr class="row-odd"><td>T2</td>
 <td>2m Temperature</td>
 <td>K</td>
 <td>&#160;</td>
-</tr>
-<tr class="row-even"><td>ter</td>
-<td>Model Terrain Height</td>
-<td><p class="first">m</p>
-<p>km</p>
-<p>dm</p>
-<p>ft</p>
-<p class="last">mi</p>
-</td>
-<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</td>
 </tr>
 <tr class="row-odd"><td>td2</td>
 <td>2m Dew Point Temperature</td>
@@ -266,21 +252,6 @@ pip install .
 <td>K</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>times</td>
-<td>Times in the File or Sequence</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>xtimes</td>
-<td><p class="first">XTIME Coordinate</p>
-<p class="last">(if applicable)</p>
-</td>
-<td><p class="first">minutes since</p>
-<p>start of</p>
-<p class="last">model run</p>
-</td>
-<td>&#160;</td>
-</tr>
 <tr class="row-odd"><td>tv</td>
 <td>Virtual Temperature</td>
 <td><p class="first">K</p>
@@ -297,12 +268,78 @@ pip install .
 </td>
 <td><strong>units</strong> (str) : Set to desired units. Default is <em>‘K’</em>.</td>
 </tr>
-<tr class="row-odd"><td>updraft_helicity</td>
-<td>Updraft Helicity</td>
-<td>m2 s-2</td>
-<td><p class="first"><strong>bottom</strong> (float): The bottom level for the calculation in meters. Default is <em>2000.0</em>.</p>
-<p class="last"><strong>top</strong> (float): The top level for the calculation in meters. Default is <em>5000.0</em>.</p>
+</tbody>
+</table>
+
+### Pressures
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>p/pres</td>
+<td><p class="first">Full Model Pressure</p>
+<p class="last">(in specified units)</p>
 </td>
+<td><p class="first">Pa</p>
+<p>hPa</p>
+<p>mb</p>
+<p>torr</p>
+<p>mmhg</p>
+<p class="last">atm</p>
+</td>
+<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘Pa’</em>.</td>
+</tr>
+<tr class="row-odd"><td>pressure</td>
+<td>Full Model Pressure (hPa)</td>
+<td>hPa</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>slp</td>
+<td>Sea Level Pressure</td>
+<td><p class="first">hPa</p>
+<p>hPa</p>
+<p>mb</p>
+<p>torr</p>
+<p>mmhg</p>
+<p class="last">atm</p>
+</td>
+<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘hPa’</em>.</td>
+</tr>
+</tbody>
+</table>
+
+
+### Velocities
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>omg/omega</td>
+<td>Omega</td>
+<td>Pa s-1</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>ua</td>
 <td>U-component of Wind on Mass Points</td>
@@ -406,57 +443,148 @@ pip install .
 </td>
 <td><strong>units</strong> (str) : Set to desired units. Default is <em>‘m s-1’</em>.</td>
 </tr>
-<tr class="row-odd"><td>z/height</td>
-<td>Model Height for Mass Grid</td>
-<td><p class="first">m</p>
-<p>km</p>
-<p>dm</p>
-<p>ft</p>
-<p class="last">mi</p>
-</td>
-<td><p class="first"><strong>msl</strong> (boolean): Set to False to return AGL values. True is for MSL.  Default is <em>True</em>.</p>
-<p class="last"><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</p>
-</td>
+</tbody>
+</table>
+
+
+### Energy
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
 </tr>
-<tr class="row-even"><td>height_agl</td>
-<td>Model Height for Mass Grid (AGL)</td>
-<td><p class="first">m</p>
-<p>km</p>
-<p>dm</p>
-<p>ft</p>
-<p class="last">mi</p>
-</td>
-<td><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</td>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>cape_2d</td>
+<td>2D CAPE (MCAPE/MCIN/LCL/LFC)</td>
+<td>J kg-1 ; J kg-1 ; m ; m</td>
+<td><strong>missing</strong> (float): Fill value for output only</td>
 </tr>
-<tr class="row-odd"><td>zstag</td>
-<td>Model Height for Vertically Staggered Grid</td>
-<td><p class="first">m</p>
-<p>km</p>
-<p>dm</p>
-<p>ft</p>
-<p class="last">mi</p>
-</td>
-<td><p class="first"><strong>msl</strong> (boolean): Set to False to return AGL values. True is for MSL.  Default is <em>True</em>.</p>
-<p class="last"><strong>units</strong> (str) : Set to desired units. Default is <em>‘m’</em>.</p>
+<tr class="row-odd"><td>cape_3d</td>
+<td>3D CAPE and CIN</td>
+<td>J kg-1</td>
+<td><strong>missing</strong> (float): Fill value for output only</td>
+</tr>
+<tr class="row-even"><td>geopt/geopotential</td>
+<td>Geopotential for the Mass Grid</td>
+<td>m2 s-2</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>geopt_stag</td>
+<td>Geopotential for the Vertically Staggered Grid</td>
+<td>m2 s-2</td>
+<td>&#160;</td>
+</tr>
+
+</tbody>
+</table>
+
+### High Order Dynamics
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>avo</td>
+<td>Absolute Vorticity</td>
+<td>10-5 s-1</td>
+<td>&#160;</td>
+</tr>	 
+<tr class="row-even"><td>pvo</td>
+<td>Potential Vorticity</td>
+<td>PVU</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>helicity</td>
+<td>Storm Relative Helicity</td>
+<td>m2 s-2</td>
+<td><strong>top</strong> (float): The top level for the calculation in meters. Default is <em>3000.0</em>.</td>
+</tr>
+<tr class="row-odd"><td>updraft_helicity</td>
+<td>Updraft Helicity</td>
+<td>m2 s-2</td>
+<td><p class="first"><strong>bottom</strong> (float): The bottom level for the calculation in meters. Default is <em>2000.0</em>.</p>
+<p class="last"><strong>top</strong> (float): The top level for the calculation in meters. Default is <em>5000.0</em>.</p>
 </td>
 </tr>
 </tbody>
 </table>
 
-
-- Energy
-
-|Variable Name|	Description|	Available Units|	Additional Keyword| Arguments|
-|-|-|-|-|-|
-cape_2d	2D CAPE (MCAPE/MCIN/LCL/LFC)	J kg-1 ; J kg-1 ; m ; m	missing (float): Fill value for output only
-cape_3d	3D CAPE and CIN	J kg-1	missing (float): Fill value for output only
-
-- High Order Dynamics
-
-|Variable Name|	Description|	Available Units|	Additional Keyword| Arguments|
-|-|-|-|-|-|
-avo	Absolute Vorticity	10-5 s-1	 
-
+### Vapors, Cloudness and Precipitation
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="24%" />
+<col width="11%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Description</th>
+<th class="head">Available Units</th>
+<th class="head">Additional Keyword Arguments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>pw</td>
+<td>Precipitable Water</td>
+<td>kg m-2</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>rh</td>
+<td>Relative Humidity</td>
+<td>%</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>rh2</td>
+<td>2m Relative Humidity</td>
+<td>%</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even">
+<td>Cloud Fraction</td>
+<td>%</td>
+<td><p class="first"><strong>vert_type</strong> (str): The vertical coordinate type for the cloud thresholds. Must be ‘height_agl’, ‘height_msl’, or ‘pres’.  Default is ‘height_agl’.</p>
+<p><strong>low_thresh</strong> (float): The low cloud threshold (meters for ‘height_agl’ and ‘height_msl’, pascals for ‘pres’). Default is 300 m (97000 Pa)</p>
+<p><strong>mid_thresh</strong> (float): The mid cloud threshold (meters for ‘height_agl’ and ‘height_msl’, pascals for ‘pres’). Default is 2000 m (80000 Pa)</p>
+<p class="last"><strong>high_thresh</strong> (float): The high cloud threshold (meters for ‘height_agl’ and ‘height_msl’, pascals for ‘pres’). Default is 6000 m (45000 Pa)</p>
+</td>
+</tr>
+<tr class="row-even"><td>dbz</td>
+<td>Reflectivity</td>
+<td>dBZ</td>
+<td><p class="first"><strong>do_variant</strong> (boolean): Set to True to enable variant calculation. Default is <em>False</em>.</p>
+<p class="last"><strong>do_liqskin</strong> (boolean): Set to True to enable liquid skin calculation. Default is <em>False</em>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>mdbz</td>
+<td>Maximum Reflectivity</td>
+<td>dBZ</td>
+<td><p class="first"><strong>do_variant</strong> (boolean): Set to True to enable variant calculation. Default is <em>False</em>.</p>
+<p class="last"><strong>do_liqskin</strong> (boolean): Set to True to enable liquid skin calculation. Default is <em>False</em>.</p>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## 垂直剖面內插程式
 ### 引用模版及副程式

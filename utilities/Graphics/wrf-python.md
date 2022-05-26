@@ -560,7 +560,7 @@ pip install .
 <td>%</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even">
+<tr class="row-even"><td>cloudfrac</td>
 <td>Cloud Fraction</td>
 <td>%</td>
 <td><p class="first"><strong>vert_type</strong> (str): The vertical coordinate type for the cloud thresholds. Must be ‘height_agl’, ‘height_msl’, or ‘pres’.  Default is ‘height_agl’.</p>

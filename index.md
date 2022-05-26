@@ -13,11 +13,12 @@ last_modified_date: 2022-04-28 10:09:34
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[What's New](https://sinotec2.github.io/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Leave messages on GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[What's New](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 }[Leave messages on GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
+- 2022-05-26 完成了新的[文獻回顧與專討(Paper Reviews)](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/)大項，希望過去做的一些回顧性的文章、對外的公開簡報、經典的圖表，可以陸續用Markdown的格式整理起來，參考文獻、連結可以做得更好。有些不合時宜、可以有更多數據的，也都可以修正補充，還能留下修改時間，不致讓讀者用到太舊的資料。不過偏向domain的個案應用就是了。
 - 2022-05-03 51勞動節假期間回顧了ncf線性篩選的問題，雖然過去解決了很多類似的問題，但究竟是怎麼回事，還是一知半解，網友也很少討論。給它取名叫[NC檔案多維度批次篩選](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/linear_fitering_NC/)，追究起來呢這是個誤會，nc.Dataset畢竟和np.array是有不小的差異的，後者還是比較會轉彎。
 - 2022-04-19 疫情來了，有網友把每天公告的數據用leaflet寫了網頁公開在github.io。這引起我的興趣，也把一些靜態(廣播)網頁陸續搬到[https://sinotec2.github.io/](https://sinotec2.github.io/)，實則也想關閉httpd一下，好好找個防止[駭客攻擊](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/IPBlackNameList)的方法（不過這題基本上應該算是完成了@2022-04-23:）。
 - 2022-04-09 新增了[煙流模式](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/)與[軌跡模式](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/)的筆記、遠端計算網站也新增了[CALPUFF](http://114.32.164.198/CALPUFF.html)以及[CALINE](http://114.32.164.198/CALINE3.html)的功能。這2個加州開始發展的模式有著天壤之別的命運，是否開放原始碼似乎是蠻關鍵的因素，引以為戒啊。

@@ -625,13 +625,15 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 		- [https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html)(較快)
 		-	[http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
 	- 內部網址：[http://200.200.12.191/LC-GIF-Player/demo.html](http://200.200.12.191/LC-GIF-Player/demo.html)(最快)
-
+- VERDI問題
+	- 工作站主機必須保持登入狀態，以提供$DISPLAY內容
 
 ### 網站與播放器
 - 不論python網站方案、或是瀏覽器內設GIF播放器方案，不是相容性較低、要平移到不同平台的衝突較大，就是控制程度較低，不能暫停、前後微調、放大等等。都需要進一步改善。
-- 播放器修改過程及成果詳見[]()說明
+- 播放器修改過程及成果詳見[GIF播放器](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/gif_player/)說明。
+- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))
+	- 並且使用*git*指令[每日更新](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/git/#定期上載)，以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
 
-- 參考網友[sexyoung](https://medium.com/進擊的-git-git-git/從零開始-用github-pages-上傳靜態網站-fa2ae83e6276)的指引，將網站平移到github.io ([https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html))，並且使用*git*指令[每日更新](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/git/#定期上載)，可以大幅降低對家用電腦頻寬的佔用，並且開放服務時間到24-7-365。
 ## Download Run.sh
 - github: [Run.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/Run.sh)
 ## TODO
@@ -639,7 +641,8 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 1. 解決自動下載問題(Today目錄下檔案多達366MB)。
 	1. 掛網、加速網站速度流量：委託專業網址。
 	1. 降低圖檔容量：不論背景是topo或者是衛星照片，單一jpg檔案均為0.7~1.2M，如僅有縣市界線應可有效降低。
-	1. (已使用[VERDI批次檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔calpuff結果時間序列圖檔展示)解決)
+	1. (已使用[VERDI批次檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔calpuff結果時間序列圖檔展示)解決，但仍有對VERDI倚賴的問題)
+	1. 考慮是否以[wrf-python](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/)、matplotlib等完全取代VERDI
 2. 點、線、面源模擬分析
 3. 重要點污染源分析
 	1. (已採用opendata之所有火力發電機組運轉實況數據)
@@ -647,6 +650,8 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 6. 臭氧煙陣軌跡
 7. 縮小範圍、增加污染源
 8. 教學用
+9. 風速風向垂直變化之精緻化，垂直解析度有不足夠的問題。
+10. 濕度、雨量似乎沒有作用，只有大雨有現象。問題似乎在calpuff的設定，尚待解決。
 
 ## Reference
 - cemac, [UNRESPForecastingSystem on GitHub](https://github.com/cemac/UNRESPForecastingSystem), last modifed on 30 Sep 2021.

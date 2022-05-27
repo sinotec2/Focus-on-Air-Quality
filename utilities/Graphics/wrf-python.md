@@ -464,7 +464,7 @@ pip install .
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>cape_2d</td>
-<td>2D CAPE (MCAPE/MCIN/LCL/LFC)</td>
+<td>2D CAPE, Convective Available Potential Energy, Convective Inhibition, (MCAPE/MCIN/LCL/LFC)</td>
 <td>J kg-1 ; J kg-1 ; m ; m</td>
 <td><strong>missing</strong> (float): Fill value for output only</td>
 </tr>
@@ -659,10 +659,36 @@ x_labels = [pair.latlon_str() for pair in to_np(coord_pairs)]
 lab=[[round(float(i),2) for i in j.split(',')] for j in x_labels[:]]
 x_labels=[str(i[0])+','+str(i[1]) for i in lab]
 ```
-- 色標
-  - 原程式為自主設定。不但顏色沒有連續、也不具辨識能力。
-  - cmap選項有："jet"、"rainbow"、適用所有[matplotlib選項](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
-  
+### 色標
+- 原程式為自主設定。不但顏色沒有連續、也不具辨識能力。
+- cmap選項有："jet"、"rainbow"、
+- 適用所有[matplotlib選項](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
+  - plot_color_gradients('**Perceptually Uniform Sequential**',
+                    ['viridis', 'plasma', 'inferno', 'magma', 'cividis'])
+  - plot_color_gradients('**Sequential**',
+                    ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+                    'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
+                    'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn'])
+  - plot_color_gradients('**Sequential (2)**',
+                    ['binary', 'gist_yarg', 'gist_gray', 'gray', 'bone',
+                    'pink', 'spring', 'summer', 'autumn', '**winter**', 'cool',
+                    'Wistia', 'hot', 'afmhot', 'gist_heat', 'copper'])                      
+  - plot_color_gradients('**Diverging**',
+                    ['PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu', 'RdYlBu',
+                    'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic'])
+  - plot_color_gradients('**Cyclic**', ['twilight', 'twilight_shifted', 'hsv'])
+  - plot_color_gradients('**Qualitative**',
+                    ['Pastel1', 'Pastel2', 'Paired', 'Accent', 'Dark2',
+                    'Set1', 'Set2', 'Set3', 'tab10', 'tab20', 'tab20b',
+                    'tab20c'])  
+  - plot_color_gradients('**Miscellaneous**',
+                     ['flag', 'prism', 'ocean', 'gist_earth', 'terrain',
+                      'gist_stern', 'gnuplot', 'gnuplot2', 'CMRmap',
+                      'cubehelix', 'brg', 'gist_rainbow', '**rainbow**', 'jet',
+                      'turbo', 'nipy_spectral', 'gist_ncar'])
+- 反轉色標：XXX_r。
+  - rainbow -> rainbow_r
+
 ```python
 cmap="rainbow",
 ```

@@ -72,6 +72,10 @@ py37                  *  /opt/anaconda3/envs/py37
 
 ## 環保署後製工具的問題
 - 陸續發現的問題會條列於此供參。
+### 標準輸入(standard input)的問題與解決建議
+- 公版模式後製工具的引數都是以標準輸入(standard input)方式執行，引發執行時間過長tty被斷線的問題、此種長時間卦網的執行方式也是國網中心所不樂見的。
+- 解決方式
+  - 將
 
 ### 程式內設還需修改
 - cctm檔名
@@ -82,7 +86,8 @@ py37                  *  /opt/anaconda3/envs/py37
 - 雖然使用了`rainbow`，顏色豐富，但因設定為漸層色階，辨識能力太差、階層太多，無法從圖中讀出確切的數值。建議：
   - 改成如[NOAA 1-Hr Average Ozone forecasting](https://airquality.weather.gov/)、[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/2add_NewPt/#201901模擬結果差值)、[hIncremental Evaluation of New CMAQ Versions](https://www.epa.gov/cmaq/incremental-evaluation-new-cmaq-versions)
   - 減少階層至10層左右、20層以下。
-- 色階不存在上限值(`extend=Max`)。
+- SO2只有出日均值濃度分布，無法討論大型污染源的行為。
+- 增量色階不存在上限值(`extend=Max`)。
   - 超過最高色階的範圍，仍是該最高色階的顏色，
   - 這對模擬最大值的出現位置，是嚴重模糊化。
 

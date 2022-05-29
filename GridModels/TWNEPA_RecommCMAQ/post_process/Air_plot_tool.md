@@ -42,7 +42,14 @@ last_modified_date: 2022-04-22 10:28:56
 ## [Air_plot2D.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/post_process/Air_plot2D.py)
 ### Results
 - matplotlib等值圖檔的容量並不小，一個檔案約140KB
-- 2019/1月底事件的NO2及O3小時濃度變化，如[GIF]()所示
+- 2019/1月底事件的NO2及O3小時濃度變化，如[GIF](https://sinotec2.github.io/RecModResults/)所示
+
+
+| ![air_plot_result.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/air_plot_result.png) |
+|:--:|
+| <b>圖1公版模式後製工具程式庫、數據檔案目錄架構</b>|
+
+
 
 ## [Air_plotSimObs.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/post_process/Air_plotSimObs.py)
 

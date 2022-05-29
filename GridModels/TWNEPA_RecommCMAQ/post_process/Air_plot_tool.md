@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Air_plot_tool
-parent: Post Processing
+parent: 後製工具
 grand_parent: Recommend System
 nav_order: 2
 date: 2022-04-22 10:28:51
 last_modified_date: 2022-04-22 10:28:56
 ---
 
-# 空品性能評估工具(Air_Evaluate_tool)
+# 空品性能評估工具(Air_plot_tool)
 {: .no_toc }
 
 <details open markdown="block">

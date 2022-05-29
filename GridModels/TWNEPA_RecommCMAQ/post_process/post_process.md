@@ -62,11 +62,11 @@ py37                  *  /opt/anaconda3/envs/py37
 - Compare/目錄下並沒有任何檔案
 
 ## 整體架構
-- 目前只提供tar檔裏Performance目錄項下的檔案，如圖所示。
+- 目前只提供tar檔裏Performance目錄項下的檔案，如[2022年2月17日我國CMAQ公告模式教育訓練─後製工具操作教學](https://drive.google.com/drive/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX)圖所示。
 - 理論上如果使用公版模式的所有條件，應該是不需要提供模擬驗證比對的相關圖表。只需要提供增量濃度分布圖(Air_Increment_tool)
 - 此處乃就所提供的程式一一執行，以了解公版模式的定性、定量的表現，以及符合性能規範的程度。
 
-| ![post_process.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/post_process.PNG) |
+| ![post_process.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/post_process.png) |
 |:--:|
 | <b>圖1公版模式後製工具程式庫、數據檔案目錄架構</b>|
 

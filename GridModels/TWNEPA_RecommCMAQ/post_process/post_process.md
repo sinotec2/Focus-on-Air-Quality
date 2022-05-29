@@ -1,14 +1,16 @@
 ---
 layout: default
-title: 後製工具
+title: Post Processing
 parent: Recommend System
 grand_parent: CMAQ Model System
 nav_order: 4
 date: 2022-04-22 10:28:51
+has_children: true
 last_modified_date: 2022-04-22 10:28:56
+permalink: /GridModels/TWNEPA_RecommCMAQ/post_process
 ---
 
-# 後製工具(Perf_Tools)
+# 後製工具
 {: .no_toc }
 
 <details open markdown="block">
@@ -21,8 +23,20 @@ last_modified_date: 2022-04-22 10:28:56
 </details>
 ---
 
-## 空品性能評估工具
-- 程式庫安裝：將會安裝成Evaluate之環境
+## 下載及安裝
+- 下載點：國網1號/work1/simenvipub01/download/model/post_process.tar.xz
+- 解壓縮： `tar xvfJ ...`
+```bash
+scp sinotec2@twn1:/work1/simenvipub01/download/model/post_process.tar.xz .
+tar xvfJ post_process.tar.xz
+```
+- 使用者可以選擇在國網3號或本地執行
+  - 都需要安裝Evaluate環境
+  - 檔名必須是**v1**.YYYY-MM.conc.nc
+  - 檔案內容需要有地面風速(WSPD10)之輸出
+
+### Python 環境設定
+- 程式庫安裝：將會安裝成**Evaluate**之環境
 
 ```bath
 #/nas2/cmaq2019/download/model/post_process/Performance
@@ -38,6 +52,11 @@ py27                     /opt/anaconda3/envs/py27
 py37                  *  /opt/anaconda3/envs/py37
 
 ```
+- 目前環保署提供了Performance目錄下的程式，
+- Compare/目錄下並沒有任何檔案
+
+## 空品性能評估工具(Air_Evaluate_tool)
+
 ### 檔案結構
 - 整體程式庫、數據檔案目錄架構如圖1所示
 - 分別將GRIDCRO2D及combine結果連結到mcip與cctm下即可
@@ -46,7 +65,7 @@ py37                  *  /opt/anaconda3/envs/py37
 |:--:|
 | <b>圖1空品性能評估工具程式庫、數據檔案目錄架構</b>|
 
-### [AirEva_Taiwan_d4.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/AirEva_Taiwan_d4.py)
+### [AirEva_Taiwan_d4.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/post_process/AirEva_Taiwan_d4.py)
 - 此程式由環保署委託單位撰寫、提供。 
   - 對話框出現後輸入年月(ex:2019-01)
   - 按法規架構區分北、中、雲、南、東等6區分別評估
@@ -211,3 +230,4 @@ $ tree
 | ![evalEO3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/evalEO3.PNG) |
 |:--:|
 | <b>圖2空品性能評估工具執行結果範例</b>|
+

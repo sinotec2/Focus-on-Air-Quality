@@ -23,9 +23,9 @@ last_modified_date: 2022-05-29 22:30:50
 
 ## 背景
 
-| ![air_Inc.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/air_Inc.png) |
+| ![air_Inc.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/inc_plot.png) |
 |:--:|
-| <b>圖1公版模式後製工具程式庫、數據檔案目錄架構</b>|
+| <b>圖1公版模式增量分析模擬工具程式庫、數據檔案目錄架構</b>|
 
 - 執行：
   - 這2支程式的引數都是年-月，必須以標準輸入的方式鍵入

@@ -28,13 +28,22 @@ last_modified_date: 2022-04-22 10:28:56
 - 由於地面濃度分布圖是掌握模擬事件時間空間變化最重要的系列圖，對事件的說明最為重要。
 - 測站時間序列可以看出模擬是否有整體高、低估的傾向，是否正確抓住事件的高值。
 
-| ![post_process.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/post_process.png) |
+| ![air_plot.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/air_plot.png) |
 |:--:|
 | <b>圖1公版模式後製工具程式庫、數據檔案目錄架構</b>|
 
+- 執行：
+  - 這2支程式的引數都是年-月，必須以標準輸入的方式鍵入
+  - 必須在特定目錄提供檔案(或連結)，如上圖所示。
+  - cctm檔名必須是**v1.** *YYYY* **-** *MM* **.conc.nc**
+  - 檔案必須含有wspd10項目
+  - 第一次執行會連結到NatureEarth網站，因此必須保持網路對外暢通。
+
 ## [Air_plot2D.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/post_process/Air_plot2D.py)
+### Results
+- matplotlib等值圖檔的容量並不小，一個檔案約140KB
+- 2019/1月底事件的NO2及O3小時濃度變化，如[GIF]()所示
 
 ## [Air_plotSimObs.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/post_process/Air_plotSimObs.py)
 
-## Results
-- matplotlib等值圖檔的容量並不小，一個檔案約140KB
+

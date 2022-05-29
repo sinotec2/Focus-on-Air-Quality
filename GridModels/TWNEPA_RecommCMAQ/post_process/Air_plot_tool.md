@@ -162,14 +162,12 @@ $ tree
 
 
 ### 結果圖面
-- matplotlib等值圖檔的容量並不小，一個檔案約140KB
-- 2019/1月底事件的NO2及O3小時濃度變化，如[GIF](https://sinotec2.github.io/RecModResults/)所示
-
+- 2019/1月北部空品區基隆站的濃度時間變化，如圖所示
 
 | ![001基隆201901.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/001基隆201901.png) |
 |:--:|
-| <b>環保署建議公版模式2D模擬結果</b>|
+| <b>環保署建議公版模式基隆站模擬結果之時間序列</b>|
 
 | ![001基隆201901.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/001基隆201901S.png) |
 |:--:|
-| <b>環保署建議公版模式2D模擬結果</b>|
+| <b>環保署建議公版模式基隆站模擬結果與觀測值配對散布圖</b>|

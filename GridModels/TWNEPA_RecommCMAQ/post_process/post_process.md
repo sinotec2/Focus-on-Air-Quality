@@ -74,7 +74,7 @@ py37                  *  /opt/anaconda3/envs/py37
 ### 檔案管理
 - 作業目錄：在每項工具目錄(*_tool)下，會有執行檔、Data目錄、執行後也會產生Output目錄
 - 檔案連結：
-  - Data/Sim/mcip:將mcip的
+  - Data/Sim/mcip:將mcip結果中的GRIDCRO2D_Taiwan.nc連結至此
   - Data/Sim/cctm：將模式模擬結果連結至此，更名為v1...conc.nc
 
 ## 環保署後製工具的問題
@@ -101,7 +101,7 @@ py37                  *  /opt/anaconda3/envs/py37
 
   - ` colorlist = ['white','deepskyblue','forestgreen','gold','red','purple']`
   - `cmap = colors.LinearSegmentedColormap.from_list('AAA', colorlist)`
-  
+
 - 建議：
   - 改成`rainbow`，如[NOAA 1-Hr Average Ozone forecasting](https://airquality.weather.gov/)、[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/2add_NewPt/#201901模擬結果差值)、[hIncremental Evaluation of New CMAQ Versions](https://www.epa.gov/cmaq/incremental-evaluation-new-cmaq-versions)
   - 減少階層至10層左右、20層以下。

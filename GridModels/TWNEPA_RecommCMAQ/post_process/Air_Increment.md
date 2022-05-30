@@ -85,7 +85,7 @@ $ tree
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2019-01_NO2最大小時平均值增量.png) |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2019-01_SO2最大小時平均值增量.png) |
 |:--:|:--:|
-|<b>NO<sub>2</sub>月均值增量濃度分布</b>|<b>SO<sub>2</sub>月均值增量濃度分布</b>|
+|<b>NO<sub>2</sub>月最大小時值增量濃度分布</b>|<b>SO<sub>2</sub>月最大小時值增量濃度分布</b>|
 
 - 比較VERDI繪製2019年1月份月均值模擬結果如圖所示。
 

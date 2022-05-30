@@ -98,8 +98,10 @@ py37                  *  /opt/anaconda3/envs/py37
 
 ### 等值圖的問題
 - 雖然使用了6個顏色的漸層，顏色豐富，但因設定為漸層色階，辨識能力太差、階層太多，無法從圖中讀出確切的數值。
+
   - ` colorlist = ['white','deepskyblue','forestgreen','gold','red','purple']`
   - `cmap = colors.LinearSegmentedColormap.from_list('AAA', colorlist)`
+  
 - 建議：
   - 改成`rainbow`，如[NOAA 1-Hr Average Ozone forecasting](https://airquality.weather.gov/)、[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/2add_NewPt/#201901模擬結果差值)、[hIncremental Evaluation of New CMAQ Versions](https://www.epa.gov/cmaq/incremental-evaluation-new-cmaq-versions)
   - 減少階層至10層左右、20層以下。

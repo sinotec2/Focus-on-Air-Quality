@@ -13,14 +13,14 @@ from datetime import datetime, timedelta
 from pyproj import Proj
 
 wrf_file = Dataset("wrfout_d04_2019-01-29-31")
-fname='BASE3_K24.nc'
-nc=Dataset('K24TZ.nc')
-nc=Dataset('K24aTZ.nc')
+fname='BASE3_K24.nc' #24 levels run of EPA recommeded CMAQ system
+nc=Dataset('K24TZ.nc') #BASE3_K24 without Taizhong PP grid emis
+nc=Dataset('K24aTZ.nc') # BASE3_K24_w/o TZPP grids + TZPP pt_srce files(const and timvar)
 nc=Dataset(fname)
 t=int(sys.argv[1])
-v='O3'
+vn='O3'
 unitd={'PM25_TOT':'ug/M3','O3':'ppb'}
-pm=nc[v][t,:,:,:]
+pm=nc[vn][t,:,:,:]
 nc=Dataset('METDOT3D_Taiwan.nc')
 t0=35*24+t
 UWIND=nc["UWIND"][t0,:,:-1,:-1]
@@ -30,6 +30,8 @@ VWIND=nc["VWIND"][t0,:,:-1,:-1]
 cross_start = CoordPair(lat=24.453917871182558, lon=120.225062233815342)
 cross_end = CoordPair(lat=23.41214780981217, lon=121.79586963982419)
 cross_end = CoordPair(lat=22.915269693622275, lon=121.76321645608697) #Newpt
+
+# calculate the angle cosine and sine values for correcting the U and V wind vectors
 Latitude_Pole, Longitude_Pole = (cross_start.lat+cross_end.lat)/2,(cross_start.lon+cross_end.lon)/2
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=10, lat_2=40,
         lat_0=Latitude_Pole, lon_0=Longitude_Pole, x_0=0, y_0=0.0)
@@ -44,14 +46,14 @@ ht = getvar(wrf_file, "z", timeidx=t)
 ter = getvar(wrf_file, "ter", timeidx=-1)
 u = getvar(wrf_file, "ua", timeidx=t)
 v = getvar(wrf_file, "va", timeidx=t)
+#UV from mcip results
 #u[:24,8:8+131,:92-12] = UWIND[:,:,12:]
 #v[:24,8:8+131,:92-12] = VWIND[:,:,12:]
 w = getvar(wrf_file, "wa", timeidx=t)
 #U,W= 0.1**(u*cost+v*sint),0.1**(w*34)
 U,W= u*cost+v*sint,w*34
-dbz = getvar(wrf_file, "dbz", timeidx=-1)
-dbz[:11,8:8+131,:92-12] = pm[:,:,12:]
-Z = dbz # Use linear Z for interpolation np.zeros(shape=dbz.shape)#1
+Z=np.zeros(shape=U.shape)
+Z[:11,8:8+131,:92-12] = pm[:,:,12:]
 
 # Compute the vertical cross-section interpolation.  Also, include the
 # lat/lon points along the cross-section in the metadata by setting latlon
@@ -67,7 +69,7 @@ dbz_cross =z_cross
 
 # Add back the attributes that xarray dropped from the operations above
 dbz_cross.attrs.update(z_cross.attrs)
-dbz_cross.attrs["description"] = "baseline "+v
+dbz_cross.attrs["description"] = "baseline "+vn
 dbz_cross.attrs["units"] = "ug/m3"
 w_cross.attrs.update(w_cross.attrs)
 w_cross.attrs["description"] = "destaggered w-wind component"
@@ -134,9 +136,6 @@ dbz_rgb = np.array([[4,233,231],
                     [253,0,0], [212,0,0],
                     [188,0,0],[248,0,253],
                     [152,84,198]], np.float32) / 255.0
-
-
-
 # Make the cross section plot for dbz
 xs = np.arange(0, dbz_cross.shape[-1], 1)
 ys = to_np(dbz_cross.coords["vertical"])
@@ -177,9 +176,9 @@ ax_cross.set_ylabel("Height (m)", fontsize=12)
 # Add a title
 bdate=datetime(2019,1,29,8)
 sdate=(bdate+timedelta(hours=t)).strftime("%Y-%m-%d_%H:00")
-ax_cross.set_title("Cross-Section of "+v+' '+unitd[v]+'_'+sdate, {"fontsize" : 14})
+ax_cross.set_title("Cross-Section of "+vn+' '+unitd[vn]+'_'+sdate, {"fontsize" : 14})
 
 #pyplot.show()
-pyplot.savefig(v+'_'+'{:02d}'.format(t)+'.png')
+pyplot.savefig(vn+'_'+'{:02d}'.format(t)+'.png')
 
 

@@ -64,7 +64,7 @@ py37                  *  /opt/anaconda3/envs/py37
 ## 程式系統架構與執行
 ### 整體架構
 - 目前只提供tar檔裏Performance目錄項下的檔案，如[2022年2月17日我國CMAQ公告模式教育訓練─後製工具操作教學](https://drive.google.com/drive/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX)圖所示。
-- 理論上如果使用公版模式的所有條件，應該是不需要提供模擬驗證比對的相關圖表。只需要提供增量濃度分布圖(Air_Increment_tool)
+- 理論上如果使用公版模式的所有條件，應該是不需要提供模擬驗證比對的相關圖表。只需要提供增量濃度分布圖([Air_Increment_tool](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/post_process/Air_Increment/))
 - 此處乃就所提供的程式一一執行，以了解公版模式的定性、定量的表現，以及符合性能規範的程度。
 
 | ![post_process.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/post_process.png) |
@@ -74,14 +74,14 @@ py37                  *  /opt/anaconda3/envs/py37
 ### 檔案管理
 - 作業目錄：在每項工具目錄(*_tool)下，會有執行檔、Data目錄、執行後也會產生Output目錄
 - 檔案連結：
-  - Data/Sim/mcip:將mcip結果中的GRIDCRO2D_Taiwan.nc連結至此
+  - Data/Sim/mcip:將[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/)結果中的GRIDCRO2D_Taiwan.nc連結至此
   - Data/Sim/cctm：將模式模擬結果連結至此，更名為v1...conc.nc
 
 ## 環保署後製工具的問題
 - 陸續發現的問題會條列於此供參。
 
 ### 標準輸入(standard input)的問題與解決建議
-- 公版模式後製工具的引數都是以標準輸入(standard input)方式執行，引發執行時間過長tty被斷線的問題、此種長時間卦網的執行方式也是國網中心所不樂見的。
+- 公版模式後製工具的引數都是以標準輸入([standard input](https://blog.xuite.net/tzeng015/twblog/113272123-Standard+Input+and+Output))方式執行，引發執行時間過長tty被斷線的問題、此種長時間卦網的執行方式也是國網中心所不樂見的。
 - 解決方式
   - 將輸入內容寫成文字檔，以`<`輸入：`python ..py < YrMn.txt &`
   - 使用`tmux`開啟工作段。也會使作業在背景執行。
@@ -111,7 +111,7 @@ $ grep color $(findc "*.py")
 - 建議：
   - 改成`rainbow`，如[NOAA 1-Hr Average Ozone forecasting](https://airquality.weather.gov/)、[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/2add_NewPt/#201901模擬結果差值)、[hIncremental Evaluation of New CMAQ Versions](https://www.epa.gov/cmaq/incremental-evaluation-new-cmaq-versions)
   - 減少階層至10層左右、20層以下。
-- SO2只有出日均值濃度分布，無法討論大型污染源的行為。
+- SO<sub>2</sub>只有出日均值濃度分布，無法討論大型污染源的行為。
 - 增量色階不存在上限值(`extend=Max`)。
   - 超過最高色階的範圍，仍是該最高色階的顏色，
   - 這對模擬最大值的出現位置，是嚴重模糊化。

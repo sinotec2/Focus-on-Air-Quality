@@ -83,9 +83,15 @@ $ tree
 - matplotlib等值圖檔的容量並不小，一個檔案約140KB
 - 2019/1月船舶排放之增量如圖所示
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2019-01_NO2年平均值增量.png) |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2019-01_SO2年平均值增量.png) |
+| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2019-01_NO2最大小時平均值增量.png) |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2019-01_SO2最大小時平均值增量.png) |
 |:--:|:--:|
 |<b>NO<sub>2</sub>月均值增量濃度分布</b>|<b>SO<sub>2</sub>月均值增量濃度分布</b>|
+
+- 比較VERDI繪製2019年1月份月均值模擬結果如圖所示。
+
+| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2SHIP_JanT.PNG)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2_JanT.PNG)|
+|:-:|:--:|
+| <b>船舶排放所造成的濃度差異(增量)</b>| <b>一月份SO2月平均濃度</b>|
 
 - 繪圖程式的上下界是固定的，無法畫出負值。圖中系將Base與Case濃度檔互換的結果
 - 因最大值超過色標，雖在Footer位置標示有最大濃度的數值，但位置卻無法確認。

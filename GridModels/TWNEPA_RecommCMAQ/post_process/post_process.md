@@ -97,7 +97,9 @@ py37                  *  /opt/anaconda3/envs/py37
 - 沒有全國測站的符合比例，只有分區，無法對整體有所掌握
 
 ### 等值圖的問題
-- 雖然使用了6個顏色的漸層，顏色豐富，但因設定為漸層色階，辨識能力太差、階層太多，無法從圖中讀出確切的數值。
+- 雖然使用了6個顏色的漸層，顏色豐富`['white','deepskyblue','forestgreen','gold','red','purple']`。
+- 但因設定為漸層色階，辨識能力太差、階層太多(沒有設定[colors.LinearSegmentedColormap.from_list](https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.colors.LinearSegmentedColormap.html)的階層數N，內設值是256)，無法從圖中讀出確切的數值。
+- 設定白色最低，因此低值濃度界於有顏色及無顏色之間，界線無法辨識。
 
 ```bash
 kuang@centos8 /data/cmaqruns/cmaq_recommend/post_process/Performance/Perf_Tools
@@ -109,8 +111,9 @@ $ grep color $(findc "*.py")
 ```
 
 - 建議：
-  - 改成`rainbow`，如[NOAA 1-Hr Average Ozone forecasting](https://airquality.weather.gov/)、[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/2add_NewPt/#201901模擬結果差值)、[hIncremental Evaluation of New CMAQ Versions](https://www.epa.gov/cmaq/incremental-evaluation-new-cmaq-versions)
-  - 減少階層至10層左右、20層以下。
+  1. 改成`rainbow`，如[NOAA 1-Hr Average Ozone forecasting](https://airquality.weather.gov/)、[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/2add_NewPt/#201901模擬結果差值)、[hIncremental Evaluation of New CMAQ Versions](https://www.epa.gov/cmaq/incremental-evaluation-new-cmaq-versions)
+  1. 減少階層至10層左右、20層以下。
+  1. 觀察[環保署AQI](https://airtw.epa.gov.tw/)的色標color list為[是綠、黃、紅、紫、咖啡、黑]。階層數N值估計約在20~30之間，尚可以辨識其間確切的數值。
 - SO<sub>2</sub>只有出日均值濃度分布，無法討論大型污染源的行為。
 - 增量色階不存在上限值(`extend=Max`)。
   - 超過最高色階的範圍，仍是該最高色階的顏色，

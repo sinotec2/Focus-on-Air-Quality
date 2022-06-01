@@ -2,7 +2,7 @@
 layout: default
 title: Large Seaside PtSrc EIA
 parent: Paper Reviews
-nav_order: 2
+nav_order: 3
 has_children: true
 permalink: /PaperReview/LargeSSPtSrcEIA/
 ---

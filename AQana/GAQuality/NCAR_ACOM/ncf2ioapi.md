@@ -22,7 +22,7 @@ last_modified_date:   2021-12-12 16:29:14
 ---
 
 ## 背景
-- 雖然都是`netCDF`格式的檔案，但是全球社群模式（如[MOZART](https://en.wikipedia.org/wiki/MOZART_(model))、[CAM-chem](https://wiki.ucar.edu/display/camchem/Home),、[WACCM](https://www2.acom.ucar.edu/gcm/waccm)等）檔案系統的設定、與區域模式系統（如[CMAQ](https://www.epa.gov/cmaq)、[CAMx](https://www.camx.com/about/)等），有很大的出入，最主要的差異：
+- 雖然都是`netCDF`格式的檔案，但是全球社群模式（如[MOZART](https://en.wikipedia.org/wiki/MOZART_(model))、[CAM-chem][CAM-chem],、[WACCM][WACCM]等）檔案系統的設定、與區域模式系統（如[CMAQ](https://www.epa.gov/cmaq)、[CAMx](https://www.camx.com/about/)等），有很大的出入，最主要的差異：
   - 經緯度座標系統vs直角座標系統
   - 垂直軸的範圍、分隔方式
   - 時間標籤
@@ -30,6 +30,9 @@ last_modified_date:   2021-12-12 16:29:14
 - 前者的檔案格式詳見[Using MOZART-4 output](https://wiki.ucar.edu/display/mozart4/Using+MOZART-4+output)
 - 後者格式稱之為[IOAPI](https://www.cmascenter.org/ioapi/)格式
 - 此處應用**Ramboll**公司多年來提供的[NCF2IOAPI](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.26feb19_1.tgz)進行轉檔
+
+[CAM-chem]: <https://wiki.ucar.edu/display/camchem/Home> "The Community Atmosphere Model with Chemistry (CAM-chem) is a component of the NCAR Community Earth System Model (CESM) and is used for simulations of global tropospheric and stratospheric atmospheric composition."
+[WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
 
 ## 下載、準備、編譯
 

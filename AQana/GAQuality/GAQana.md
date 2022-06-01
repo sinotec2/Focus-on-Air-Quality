@@ -19,8 +19,11 @@ nav_order: 1
   1. 污染成因探討，生物燃燒(森林、農田、桔稈等)、火山現象(噴發、火山灰、火山氣體)、黃沙、霧霾、都會區光化煙霧等，
   1. 天氣系統所造成污染傳播現象(颱風、高壓出海、冷高壓與低層噴流等)
 - 美國國家大氣研究中心(NCAR)長久以來發展全球大氣模式，其中也包括大氣成分的模式模擬，其結果也應用在區域空氣品質模式的邊界與初始濃度場。
-- 目前該中心發展維護的模式是[CAM-chem](https://wiki.ucar.edu/display/camchem/Home) (Community Atmosphere Model )及WACCM (Whole-Atmosphere Community Climate Model )模式。此2模式植基於[MOZART-4](https://en.wikipedia.org/wiki/MOZART_(model))模式，MOZART模式(Model for OZone and Related chemical Tracers )雖不再維護，然其過去模擬工作之準確性有一定水準，且自2007年迄2018年初，其後由WACCM及CAM-chem等模式完全取代。
+- 目前該中心發展維護的模式是[CAM-chem][CAM-chem]及[WACCM ][WACCM]模式。此2模式植基於[MOZART-4](https://en.wikipedia.org/wiki/MOZART_(model))模式，MOZART模式(Model for OZone and Related chemical Tracers )雖不再維護，然其過去模擬工作之準確性有一定水準，且自2007年迄2018年初，其後由WACCM及CAM-chem等模式完全取代。
 - 此處介紹目前全球模式模擬(或資料同化)的作業系統、下載方式、以及資料轉換的方式。
+
+[CAM-chem]: <https://wiki.ucar.edu/display/camchem/Home> "The Community Atmosphere Model with Chemistry (CAM-chem) is a component of the NCAR Community Earth System Model (CESM) and is used for simulations of global tropospheric and stratospheric atmospheric composition."
+[WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
 
 {: .fs-6 .fw-300 }
 

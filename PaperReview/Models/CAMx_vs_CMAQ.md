@@ -28,24 +28,25 @@ last_modified_date: 2022-06-01 11:29:09
 
 ### 全球發展情況
 全球目前運作中的光化網格模式包括
-- 美國環保署發展維護的CMAQ模式(Community Model for Air Quality)、
-- 美國Rambol-Environ公司持續發展的CAMx模式(Comprehensive Airquality Model with eXtension)，
-- 大陸中科院研發之NAQPMS模式、
-- 日本研究單位發展的SPRINTARS模式、
-- 日本早期的CFORS模式(Chemical Weather Forecast System)、
-- 澳洲SCIRO機構發展的TAPM/CTM模式(The Air Pollution Model and CTM Chemical Transport Model)、以及
-- 歐洲CAMS整合維運的CHIMERE、DEHM、EMEP、EURAD-IM、GEM-AQ、LOTOS-EUROS、MATCH等7項叢集預報模式等等。
+- 美國環保署發展維護的[CMAQ模式](https://www.epa.gov/cmaq)(Community Model for Air Quality)、
+- 美國Rambol-Environ公司持續發展的[CAMx模式](https://www.camx.com/about/)(Comprehensive Airquality Model with eXtension)，
+- 大陸中科院研發之[NAQPMS模式](http://www.dqkxqk.ac.cn/qhhj/ch/html/20140203.htm)、
+- 日本研究單位發展的[SPRINTARS模式](https://sprintars.riam.kyushu-u.ac.jp/indexe.html)、
+- 日本早期的[CFORS模式](https://www-cfors.nies.go.jp/~cfors/outline.html)(Chemical Weather Forecast System)、
+- 澳洲SCIRO機構發展的[TAPM/CTM模式](https://www.cmar.csiro.au/research/tapm/docs/CSIRO-TAPM-CTM_UserManual.pdf)(The Air Pollution Model and CTM Chemical Transport Model)、以及
+- 歐洲CAMS整合維運的CHIMERE、DEHM、EMEP、EURAD-IM、GEM-AQ、LOTOS-EUROS、MATCH等7項[叢集預報模式](https://atmosphere.copernicus.eu/regional-air-quality-production-systems)等等。
+
 ### 國內發展情況
 - 依據環保署模式支援中心之模式說明(環保署模式支援中心，2014年)，該文納入的網格模式包括TAQM、Models-3 (CMAQ)、CAMx、UAM-V等網格模式。
 - 其中CMAQ與CAMx仍陸續有發展計畫，可以順利搭配新版氣象模式(Weather Research and Forecasting Model, WRF)，且持續發展氣象偶合模式。
 - 考量到模式原始碼的取得、計算資源的配合等因素，國內環評及環保單位規劃常使用的網格模式僅包括前述CMAQ及CAMx模式。 
-- 至於二模式的表現，在全球各地都有比較的研究，主要的差異評析比較如表5.1-1，說明如后。
+- 至於二模式的表現，在全球各地都有比較的研究，主要的差異評析比較如表1，說明如后。
 
-#### 表5.1-1		CAMx及CMAQ模式差異之比較
+#### 表1		CAMx及CMAQ模式差異之比較
 
 |文獻|項目|CAMx|CMAQ|評析|
 |-|-|-|-|-|
-|1997加州南灣案例模擬比較 ([Ralph et al., 2005][Ralph et al., 2005])|銨鹽|細粒銨鹽偏差0~-86% 總銨鹽-5~-53%|細粒銨鹽估計較準，但總銨鹽低估-50~-60%|各有軒輊|
+|1997加州南灣案例模擬比較 ([Ralph et al., 2005][Ralph et al., 2005])|銨鹽|細粒銨鹽偏差0~-86%總銨鹽-5 ~ -53%|細粒銨鹽估計較準，但總銨鹽低估-50 ~ -60%|各有軒輊|
 ||硝酸鹽|高估20~118%|偏差-44~ +45%|CMAQ略佳|
 ||細粒硫酸鹽|-31~21%|低估-10~44%|CAMx略佳|
 ||總硫酸鹽|-27~-45%|-45~-55%|CAMx略佳|
@@ -58,7 +59,7 @@ last_modified_date: 2022-06-01 11:29:09
 ||乾沉降機制|Wesely89|Aero_depv2|Wesely損失較小|
 ||相同條件下(PM<sub>2.5</sub>、硫酸鹽及硝酸鹽)模擬值之比較|較高(16.5、45.67、34.14%)|較低|電廠排放以SN為主，硫酸鹽及硝酸鹽為主要衍生性PM|
 |德州臭氧模擬([Byun et al. 2007a][Byun et al. 2007], [Byun et al. 2007b][Byun et al. ppt])|垂直擴散|K|K+PBL 相似律|垂直擴散對臭氧模擬具敏感性|
-|密爾瓦基都會2002年1/4/7/10月([Baker and Timin 2008][Baker and Timin 2008])|細懸浮微粒成分模擬與實測值比較(PS,PN)|偏差4~-71%、誤差1.05~1.47|偏差2~37%、誤差1.07~1.33|硫酸鹽符合度較高|
+|密爾瓦基都會2002年1/4/7/10月([Baker and Timin 2008][Baker and Timin 2008])|細懸浮微粒成分模擬與實測值比較(PS,PN)|偏差4~-71%、誤差1.05~1.47|偏差2~37%、誤差1.07~1.33|CAMx硫酸鹽符合度較高CMAQ硝酸鹽較佳|
 ||細懸浮微粒成分模擬相對結果|細粒硫酸鹽較高|細粒硝酸鹽、銨鹽、元素碳、有機碳較高|二模式相關係數r<sup>2</sup>硫酸鹽0.82、硝酸鹽0.59、銨鹽0.78、元素碳0.89、有機碳0.93|
 |珠江三角洲2004年10月([Shen et al. 2011][Shen et al. 2011])|對實測臭氧的相關係數|0.74|0.73|CAMx略佳|
 ||常化偏差|8.8%|-8.5%|CAMx略高|
@@ -67,6 +68,9 @@ last_modified_date: 2022-06-01 11:29:09
 |東北亞2016 /12比較([Itahashi et al. 2018][Itahashi et al. 2018])|硫酸鹽|較高|較低、增加金屬催化反應仍無增加氧化|CMAQ低估肇因濕沉降損失|
 ||SO<sub>2</sub>|較高|低估|CMAQ低估肇因乾沉降損失|
 ||煙流次網格模式|在線式能考慮多煙陣重疊|離線式預處理|CAMx略佳|
+|美國東南部跨境傳輸減量規劃([Odman et al. 2020][Odman et al. 2020])|總NOx和發電機組NOx排放對下游O3的貢獻|APCA通常較大|歸零較不敏感|CAMx較敏感|
+||上游州對下游未達標地點之關聯點數|較多|較少|CAMx較敏感|
+
 
 資料來源：各參考文獻。本計畫彙整
 
@@ -105,7 +109,7 @@ last_modified_date: 2022-06-01 11:29:09
   - 統計分析表明，兩個模型都滿足建議的模型性能標準。
   - CMAQ 靈敏度模擬解釋了模型性能的改進。儘管通過金屬催化途徑和 CMAQ 中的 NO<sub>2</sub> 反應增加了水氧化，但 CMAQ 模擬的 SO<SUB>4</SUB><SUP>-2</SUP> 濃度低於 CAMx。
 - 沉積解釋了這種差異。
-  - 經分析CMAQ的SO<sub>4</sub><sup>-2</sup>濃度低於 CAMx 的原因是 CMAQ 中的 SO<sub>2</sub> 濃度較低，而 SO<SUB>4</SUB><SUP>-2</SUP> 濕沉降量較高。
+  - 經分析CMAQ的SO<sub>4</sub><sup>-2</sup>濃度低於 CAMx 的原因是 CMAQ 中的SO<sub>2</sub> 濃度較低，而 SO<SUB>4</SUB><SUP>-2</SUP> 濕沉降量較高。
   - 乾沉降速度導致 SO<sub>2</sub> 濃度的差異。
   - 這些結果表明沉積在提高我們對環境濃度行為的理解方面的重要性。
 
@@ -117,7 +121,7 @@ last_modified_date: 2022-06-01 11:29:09
 - 使用 CAMx人為污染源評估工具 (Anthropogenic Precursor Culpability Assessment APCA) 結果顯示，在順風狀態下，NOx 排放量對 O3 的貢獻超過 VOC。
 - 使用 CAMx/APCA 以及 CMAQ/歸零模擬分別量化了東南各州的人為 NOx 排放總量和發電機組 (EGU) NOx 排放對下游 O3 的貢獻。
   - 從 CAMx/APCA 獲得的貢獻量通常大於從 CMAQ/歸零的結果。
-  - 因此，由 CAMx/APCA 確定認為[重大貢獻][sig]的減量，可能對 CMAQ/歸零法而言是微不足道的。   
+  - 因此，由 CAMx/APCA 確定認為[重大貢獻][sig]的減量，可能對CMAQ/歸零法而言是微不足道的。   
   - 阿拉巴馬州、肯塔基州、密西西比州、田納西州、弗吉尼亞州和西弗吉尼亞州與 CAMx/APCA 的 2、3、1、1、6 和 5 個未達標地點相關聯。
   - 而CMAQ/歸零法只分析出肯塔基州、弗吉尼亞州和西弗吉尼亞州與 2、3 和 2 個未達標地點有關聯。
   - 此外，各項減量與改善顯著關係中，以EGU NOx 貢獻佔人為 NOx 貢獻總量的 10-55%最為重要。

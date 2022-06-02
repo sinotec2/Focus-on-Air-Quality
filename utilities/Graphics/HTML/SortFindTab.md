@@ -27,6 +27,12 @@ last_modified_date: 2022-06-02 16:13:54
 - zotero也是無敵方案，無可挑剔，有需要的人一起建立群組分享這些文獻，還能動態擴充，如果有協作，zotero是首選。只是zotero還不太能適應害羞的臺灣人。
 - jQuery的[Sortable and Searchable Tables - Tablesort](https://www.jqueryscript.net/table/jQuery-Plugin-For-Sortable-Searchable-Tables-Tablesort.html)就成為好用、簡單的解決方案，唯一要做的就是把csv表格轉成html格式。這可不能用人工慢慢建吧?!還好，不少好心的網友提供了線上服務(如[Data Design Group, Inc.](https://www.convertcsv.com/csv-to-html.htm))，需要一點點程序、並且忍受廣告，但幸好這事只需要久久做一次。
 
+## 文獻內容之csv檔案
+- 國圖搜尋結果轉成csv檔案這一階段，目前還沒有另人滿意的自動方案。
+  - 但是有比較聰明的手動方案，就是用excel複製、選擇性貼上(轉置)，將國圖直排的表格貼成橫排的資料庫型式。
+- 每個系所的格調略有差異。這是沒法程式化的原因。
+  - 因為不是每天執行，目前還沒有設計爬蟲程式的意願。
+
 ## html表頭
 ### 格式
 - 直接抄下網友[SeanJM]()提供的2個css

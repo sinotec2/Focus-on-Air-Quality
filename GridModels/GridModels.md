@@ -4,10 +4,10 @@ title: CMAQ System
 nav_order: 9
 has_children: true
 permalink: /GridModels/
-last_modified_date:   2021-12-01 11:24:33
+last_modified_date:  2022-06-02 11:02:39
 ---
 
-# 網格模式
+# CMAQ模式
 
 網格模式(Grid Models)是目前集合最多學理依據、觀測數據、推估模式、消耗最大計算機資源的模式，如何有效整合、運用現有資源，提供最佳的政策建議，成為此一領域的關鍵課題。
 - 如何快速開始
@@ -17,6 +17,7 @@ last_modified_date:   2021-12-01 11:24:33
 ```bash
 git clone -b main https://github.com/USEPA/CMAQ.git CMAQ_REPO
 ```  
+- 如果覺得CMAQ太複雜，可以試看看CAMx模式([FAQ:/CAMxModelSystem](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/))。
 
 {: .fs-6 .fw-300 }
 ---

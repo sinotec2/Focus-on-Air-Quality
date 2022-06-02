@@ -9,12 +9,21 @@ last_modified_date: 2022-06-01 20:12:23
 
 # Comprehensive Air Quality Model with Extensions(CAMx)
 
-- CAMx模式系統。包括氣象前處理、BC/IC、排放檔案、後處理等。
-- 早先公開了CAMx前後處理的fortran版本，但因為期間CAMx更新太多版本、後又引入ncf的IO，fortran版本無法持續發展下去，相關程式陸續移到python平台上作業。
-## 官方網站與手冊
-### 程式碼
+- 這裡說明Ramboll公司持續發展的[CAMx](https://www.camx.com/about/)，其模式系統的運作方式，包括氣象前處理、BC/IC、排放檔案、後處理等。
+- 早先在Github公開了CAMx前後處理的fortran版本，但因為期間CAMx更新太多版本、後又引入ncf的IO，fortran版本無法持續發展下去，相關程式就陸續移到python平台上作業。
+- 雙C模式的比較可以看[CAMx vs CMAQ@FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Models/CAMx_vs_CMAQ/)這篇的回顧分析。
 
-### 官網前處理程式
+## 官方網站與手冊
+### 程式碼與作業方式
+- 相較CMAQ或WRF而言，CAMx的程式碼相對單純很多。
+- 作業平台
+  - CAMx不會讀取系統的環境變數，對記憶體、硬碟IO空間的需求也不是很大，因此從PC、macOS一直到工作站、cluster、超級電腦都可以適用。
+- 多工方案
+  - 可以使用[SMP](https://zh.wikipedia.org/wiki/对称多处理)或[DMP](https://en.wikipedia.org/wiki/Distributed_memory)多工執行，
+  - 不過經測試結果：分月在不同機器、單月以[SMP]()方式是目前執行全年專案最有效率的組合。
+- 
+
+### [官網](https://www.camx.com/download/support-software/)前處理程式
 
 |名稱|年代版本|用途|FAQ|
 |-|-|-|-|
@@ -31,7 +40,7 @@ last_modified_date: 2022-06-01 20:12:23
 |WRFCAMx|[v4.8.1.14Dec20](https://camx-wp.azurewebsites.net/getmedia/wrfcamx_v4.8.1.14Dec20.tgz)|氣象場之轉接(uamiv)|wrfcamx|
 ||[v5.2.10Jan22](https://camx-wp.azurewebsites.net/getmedia/wrfcamx_v5.2.10Jan22.tgz)|(ncf)||
 
-### 後處理程式
+### [後處理程式](https://www.camx.com/download/support-software/)
 
 |名稱|年代版本|用途|FAQ|
 |-|-|-|-|

@@ -112,4 +112,4 @@ grid_z2 = griddata(points, c, (x_g, y_g), method='linear')
 - 參考[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)之說明
 
 ## [PLT2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/OU_pathways/PLT2kml.py)下載
-- [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/OU_pathways/PLT2kml.py)  
+- [Plume Models/OU_pathway@FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/OU_pathways/PLT2kml.py)  

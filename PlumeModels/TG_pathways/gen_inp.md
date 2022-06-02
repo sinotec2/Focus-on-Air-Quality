@@ -110,7 +110,7 @@ os.system(cmd)
   - gd3.REC：此檔將輸入[AERMOD]()模式中，設定地形及特徵山高
 
 ### gen_inp.py程式下載
-- [FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/gen_inp.py)  
+- [PlumeModels/REnTG_pathwaysways@FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/gen_inp.py)  
 
 ### 修改呼叫程式之路徑
 - [gdal_translate](https://gdal.org/programs/gdal_translate.html)

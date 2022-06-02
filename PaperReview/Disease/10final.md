@@ -161,8 +161,8 @@ CMAQ的氣象前處理MCIP (5.0)模式有較高標準的限制，除了土地使
 ### 東亞地區之污染排放
 - 本評估工作採日本環境研究所公開之REAS資料庫([REAS, 2020][REAS, 2020]、[Kurokawa and Ohara 2020][Kurokawa and Ohara 2020])，除了考慮其於2019/12/4公開REAS3.1版之外，其資料年代(2015)也與本評估工作基準年2019最為接近，同時該機構對於東亞電廠逐月的排放量有較佳的掌握，與本評估工作關切項目有相同的目標。
 - 進一步分析該排放數據庫，發現具有顯著的月份差異，大體上粒狀物、硫氧化物與氮氧化物等與能源有關項目是秋冬季高、夏季低，可能與大陸與東北亞地區的冬季取暖現象有關，而氨氣(生物源指標)則以夏季較高、冬季較低。
-- 因此本評估工作乃以各網格排放量之月均值與氣溫變化的回歸關係為基準，套用wrf模擬各地逐時之氣溫，建立東亞排放量之逐時變化，以降低2015年與2019年之間的可能差異。詳[FAQ-Global/Regional Emission/ASia/地面排放檔之轉換](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/)。
-- REAS在船舶排放部分有所不足，此項目乃參考芬蘭氣象研究所之研究，該研究應用各主要港口AIS數據，配合衛星觀測反衍，推估全球2015年逐日之船舶網格排放量([Grigoriadis et. al 2020][Grigoriadis et. al 2020])，詳見[FAQ-全球船隻排放量之處理](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/FMI-STEAM/)。
+- 因此本評估工作乃以各網格排放量之月均值與氣溫變化的回歸關係為基準，套用wrf模擬各地逐時之氣溫，建立東亞排放量之逐時變化，以降低2015年與2019年之間的可能差異。詳[Global/Regional Emission/ASia/地面排放檔之轉換@FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/)。
+- REAS在船舶排放部分有所不足，此項目乃參考芬蘭氣象研究所之研究，該研究應用各主要港口AIS數據，配合衛星觀測反衍，推估全球2015年逐日之船舶網格排放量([Grigoriadis et. al 2020][Grigoriadis et. al 2020])，詳見[全球船隻排放量之處理@FAQ](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/FMI-STEAM/)。
 
 [REAS, 2020]: <https://www.nies.go.jp/REAS/index.html#REASv3.2.1> "日本國立環境研究所 Data Sets:REASv3.2.1"
 [Kurokawa and Ohara 2020]: <https://doi.org/10.5194/acp-20-12761-2020,> "Kurokawa, J. and Ohara, T.: Long-term historical trends in air pollutant emissions in Asia: Regional Emission inventory in ASia (REAS) version 3, Atmos. Chem. Phys., 20, 12761-12793, https://doi.org/10.5194/acp-20-12761-2020, 2020."

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CAMx System
+title: CAMx Model System
 nav_order: 10
 has_children: true
 permalink: /CAMx/

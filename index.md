@@ -4,7 +4,7 @@ title: Home
 nav_order: 1
 description: "Analysis tools and Simulation Experience about the Air Quality"
 permalink: /
-last_modified_date: 2022-04-28 10:09:34
+last_modified_date: 2022-06-03 17:15:36
 ---
 
 # Focus on Air Quality
@@ -13,7 +13,7 @@ last_modified_date: 2022-04-28 10:09:34
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[What's New]https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/SortFindTab/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 }[Leave messages on GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[What's New](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/SortFindTab/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Leave messages on GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 

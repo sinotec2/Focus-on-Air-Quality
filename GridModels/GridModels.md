@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CMAQ System
+title: CMAQ Model System
 nav_order: 9
 has_children: true
 permalink: /GridModels/

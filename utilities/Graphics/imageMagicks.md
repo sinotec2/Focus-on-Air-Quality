@@ -22,6 +22,7 @@ last_modified_date: 2022-06-04 10:12:36
 ## 背景
 - [imageMagicks](https://imagemagick.org/index.php)在各種作業平台都能通用的自由軟體。在圖形格式的轉換、修剪、裁切、去/加邊框等等動作，可以批次執行，非常方便。處理模式輸出圖檔，有其必要性與充分性。
 - 相關中文說明也非常多。
+- 這一題為什麼需要花時間、還寫成筆記，主要因為VERDI圖面有太多留空白的問題，需要裁切。裁切邊框也沒有問題，問題是組合成gif時，背景總又再出現，怎麼都改不了。最後還是[stackoverflow][stackoverflow]的討論比較有用。
 
 ### 安裝
 - macOS用brew指令、linux用yum指令即可安裝
@@ -61,3 +62,5 @@ convert -dispose 2 -coalesce +repage -background none  WRF_chem-*.png -size 895x
 
 ## Reference
 - fmw42, [stackoverflow:How to trim animated gif (using imagemagick)?](https://stackoverflow.com/questions/44555789/how-to-trim-animated-gif-using-imagemagick), Jun 15, 2017 at 3:34
+
+[stackoverflow]: <https://stackoverflow.com/questions/44555789/how-to-trim-animated-gif-using-imagemagick> "How to trim animated gif (using imagemagick)?"

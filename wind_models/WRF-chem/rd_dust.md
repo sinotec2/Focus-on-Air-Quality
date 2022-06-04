@@ -79,6 +79,14 @@ last_modified_date:   2021-12-28 10:20:38
 - 每個逐日檔案進行迴圈，將結果回存到整合所有日的模版`dust.nc`
   - 每個檔案的時間都是24小時，但最後檔只有1小時，因此還是以`nt`為長度，才不會出錯。
   - 加總後可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)開啟、繪圖。
+    - 使用imaginemagics `convert`一次修剪所有的png檔案、再予以組合成gif
+
+```bash
+for i in {0..54};do convert WRF_chem-$i.png -crop 950x550 a.png;mv a-0.png WRF_chemC-$i.png;done
+for i in {0..9};do mv WRF_chemC-$i.png WRF_chemC-0$i.png;done
+convert WRF_chemC*.png WRF_chem.gif
+``` 
+
 - 北臺灣測點時間序列之讀取
   - `IX,IY`為[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)圖面上讀取結果，因此換到python上時須**減1**。
   - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成(`decode`)字元，串成(`join`)字串，再讀成`datetime`，轉成所要的格式。詳情見[WRF的時間標籤](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)之說明

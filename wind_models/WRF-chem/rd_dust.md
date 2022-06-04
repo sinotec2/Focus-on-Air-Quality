@@ -79,13 +79,17 @@ last_modified_date:   2021-12-28 10:20:38
 - 每個逐日檔案進行迴圈，將結果回存到整合所有日的模版`dust.nc`
   - 每個檔案的時間都是24小時，但最後檔只有1小時，因此還是以`nt`為長度，才不會出錯。
   - 加總後可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)開啟、繪圖。
-    - 使用imaginemagics `convert`一次修剪所有的png檔案、再予以組合成gif
+    - 使用imagineMagicks `convert`一次修剪所有的png檔案、再予以組合成gif
+    - 或使用`-bordercolor white -trim` + `-bordercolor white -border 10%x10% `會比較整齊
+    - 轉換成gif時，convert會自動回復成原來的背景，`-background none`可取消。
 
 ```bash
-for i in {0..54};do convert WRF_chem-$i.png -crop 950x550 a.png;mv a-0.png WRF_chemC-$i.png;done
+for i in {0..54};do convert WRF_chem-$i.png -crop 950x550 a.png;mv a.png WRF_chemC-$i.png;done
 for i in {0..9};do mv WRF_chemC-$i.png WRF_chemC-0$i.png;done
-convert WRF_chemC*.png WRF_chem.gif
+convert -dispose 2 -coalesce +repage -background none  WRF_chem-*.png -size 895x565 WRF_chem.gif
 ``` 
+
+
 
 - 北臺灣測點時間序列之讀取
   - `IX,IY`為[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)圖面上讀取結果，因此換到python上時須**減1**。

@@ -725,7 +725,11 @@ if [ ${runVIS} = true ]; then
       done
       $VERDI/verdi.sh -b bat.cmd >> bat.log 2>&1
     done
-    /usr/bin/convert ${s}${static}??.jpg ${s}.gif
+    for i in $(ls ${s}${static}??.PNG);do
+      /usr/bin/convert ${i} -bordercolor white -trim tmp.png
+      /usr/bin/convert tmp.png -bordercolor white -border 5%x5% ${i}
+    done
+    /usr/bin/convert -dispose 2 -coalesce +repage -background none ${s}${static}??.PNG ${s}.gif
     cp ${s}.gif /var/www/html/LC-GIF-Player/example_gifs
   done
 #upload to github

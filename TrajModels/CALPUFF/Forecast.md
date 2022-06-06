@@ -4,7 +4,7 @@ title: 濃度預報系統之實現
 nav_order: 5
 parent: CALPUFF
 grand_parent: Trajectory Models
-last_modified_date: 2022-03-22 08:56:43
+last_modified_date: 2022-06-06 10:24:29
 ---
 # 本土化CALPUFF濃度預報系統之實現
 {: .no_toc }
@@ -626,7 +626,20 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 		-	[http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
 	- 內部網址：[http://200.200.12.191/LC-GIF-Player/demo.html](http://200.200.12.191/LC-GIF-Player/demo.html)(最快)
 - VERDI問題
-	- 工作站主機必須保持登入狀態，以提供$DISPLAY內容
+	- 工作站主機必須保持登入狀態，以提供$DISPLAY內容(待解決、maybe wrf-python)
+	- 留邊太多需修剪(已[解決](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/imageMagicks/))
+
+
+```bash
+...
+    for i in $(ls ${s}${static}??.PNG);do
+      /usr/bin/convert ${i} -bordercolor white -trim tmp.png
+      /usr/bin/convert tmp.png -bordercolor white -border 5%x5% ${i}
+    done
+    /usr/bin/convert -dispose 2 -coalesce +repage -background none ${s}${static}??.PNG ${s}.gif
+    cp ${s}.gif /var/www/html/LC-GIF-Player/example_gifs
+...		
+```
 
 ### 網站與播放器
 - 不論python網站方案、或是瀏覽器內設GIF播放器方案，不是相容性較低、要平移到不同平台的衝突較大，就是控制程度較低，不能暫停、前後微調、放大等等。都需要進一步改善。

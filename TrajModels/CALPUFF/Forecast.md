@@ -626,7 +626,7 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 		-	[http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
 	- 內部網址：[http://200.200.12.191/LC-GIF-Player/demo.html](http://200.200.12.191/LC-GIF-Player/demo.html)(最快)
 - VERDI問題
-	- 工作站主機必須保持登入狀態，以提供$DISPLAY內容(待解決)
+	- 工作站主機必須保持登入狀態，以提供$DISPLAY內容(待解決、maybe wrf-python)
 	- 留邊太多需修剪(已[解決](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/imageMagicks/))
 
 

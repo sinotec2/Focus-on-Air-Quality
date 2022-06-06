@@ -82,3 +82,13 @@ https://saga.pmel.noaa.gov/cache/std/dms_d8i720.dat
 - [Galí et al., 2018][Galí18]
 
 [Galí18]: <https://doi.org/10.5194/bg-15-3497-2018> "Galí, M., Levasseur, M., Devred, E., Simó, R., Babin, M. (2018). Sea-surface dimethylsulfide (DMS) concentration from satellite data at global and regional scales. Biogeosciences 15, 3497–3519. "
+
+### [Muñiz-Unamunzaga et al., 2018][Muñiz18], The influence of ocean halogen and sulfur emissions in the air quality of a coastal megacity: The case of Los Angeles.
+
+- Natural marine emissions (Cl, Br, I and DMS) included in CMAQ simulations over LA.
+- Oceanic halogens and DMS may play an important role on coastal urban areas.
+- Substantial changes in the levels of key urban atmospheric oxidants (OH, HO2 and NO3).
+- O3 and NO2 ambient levels decreased by 5 ppbv and 2.5 ppbv in Los Angeles city.
+10% increase in secondary organic aerosol (SOA) due to dimethyl sulphide (DMS).
+
+[Muñiz18]: <https://doi.org/10.1016/j.scitotenv.2017.06.098> "Muñiz-Unamunzaga, M., Borge, R., Sarwar, G., Gantt, B., de la Paz, D., Cuevas, C.A., Saiz-Lopez, A. (2018). The influence of ocean halogen and sulfur emissions in the air quality of a coastal megacity: The case of Los Angeles. Science of The Total Environment 610–611, 1536–1545. "

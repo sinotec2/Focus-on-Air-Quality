@@ -98,11 +98,14 @@ if len(pid)==0:
   """  % (rrn+ename,ename)
   sys.exit()
 ```
+## 監看程式[waitc.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/waitc_cs.txt)
+
+### 監看程式的必要性
+- 讓CGI程式可以離線
+- 由監看程式輸出結果到log.out、可以在autorefresh.html呈現出最新進度。
+- 在執行緒多的時候可以跳脫
+
 ### 監看程式之啟動
-- 監看程式的必要性
-  - 讓CGI程式可以離線
-  - 由監看程式輸出結果到log.out、可以在autorefresh.html呈現出最新進度。
-  - 在執行緒多的時候可以跳脫
 
 ```python
 # The model is running, initiate the waitc.cs to generate log.out for showing progress
@@ -110,8 +113,8 @@ cmd ='cd '+pth+';'
 cmd+='time '+WAITC+' '+pth+' '+pid+' &disown'
 os.system(cmd)
 ```
+### 監看程式之條件迴圈
 
-### 監看程式[waitc.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/waitc_cs.txt)
 - 每10s查看一次`pid`是否執行完成
   - 如是
     - 查看PLT檔案是否寫出來了
@@ -141,6 +144,16 @@ for ((i=0; i>=0;i+=1));do
 done
 ...
 ```
+### 執行[dat2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/#dat2kml)
+
+```bash
+iname=$(ls -rt|head -n1)
+...
+for pname in $(grep PLOTFILE $iname|awk "{print \$NF}");do
+  /opt/anaconda3/envs/py27/bin/python $DAT2KML -f $1/$pname
+done
+```
+
 ## 執行成果範例
 
 ```

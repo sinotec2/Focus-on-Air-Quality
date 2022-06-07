@@ -32,9 +32,9 @@ last_modified_date: 2022-06-07 12:06:02
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 0 -- Input and Output File Names
+## INPUT GROUP: 0 輸入及輸出檔案名稱
 --------------
-### Input Files
+### 指定輸入檔案名稱
 ---
 
 |File|Default File Name| settings |說明|
@@ -46,7 +46,7 @@ last_modified_date: 2022-06-07 12:06:02
 
 ---
 
-### Output Files
+### 指定輸出入檔案名稱
 
 |File|                      Default File Name|設定值|說明|
 |-|:-:|:-:|-|
@@ -61,13 +61,13 @@ last_modified_date: 2022-06-07 12:06:02
 
 1. User Character String (U) to augment default filenames (activate with exclamation points only if providing NON-BLANK character string)
 
-### Auxiliary Output Files
+### 輔助輸出入檔案名稱
 
 |File|Default File Name|設定值|說明|
 |-|:-:|:-:|-|
 |Visibility Change|DELVIS.DAT|* DVISDAT =   *||
 
-### Upper/Lower case
+### 大小寫控制
       All file names will be converted to lower case if LCFILES = T
       Otherwise, if LCFILES = F, file names will be converted to UPPER CASE
          T = lower case               ! LCFILES = T !
@@ -91,8 +91,8 @@ last_modified_date: 2022-06-07 12:06:02
 
       !END!
 
-## INPUT GROUP: 1 -- General run control parameters
---------------
+## INPUT GROUP: 1 一般控制參數
+### 是否執行所有氣象檔案內之時間
 
      Option to run all periods found
      in the met. file(s)  (METRUN)        Default: 0   ! METRUN =   1  !
@@ -129,7 +129,7 @@ last_modified_date: 2022-06-07 12:06:02
        2 = every 2nd period processed,
        5 = every 5th period processed, etc.)
 
-### Species & Concentration/Deposition Information
+### 物質種類、濃度及沉降訊息
 ----------------------------------------------
 
       Species to process (ASPEC)       -- No default   ! ASPEC = TSP  !
@@ -185,7 +185,7 @@ last_modified_date: 2022-06-07 12:06:02
          ! TNO2NOX = 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 !
 
 
-### Source information
+### 來源貢獻分析
 ------------------
 
   Option to process source contributions:
@@ -196,7 +196,7 @@ last_modified_date: 2022-06-07 12:06:02
                              (MSOURCE) -- Default: 0   ! MSOURCE =  0  !
 
 
-### Plume Model Output Processing Options
+### 靜風處理選項
 -------------------------------------
 
   Output from models other than CALPUFF and CALGRID can be written in
@@ -216,7 +216,7 @@ last_modified_date: 2022-06-07 12:06:02
                            (MET1FMT) -- Default: 1   ! MET1FMT =  1  !
 
 
-### Receptor information
+### 接受點訊息
 --------------------
 
   Gridded receptors processed?    (LG) -- Default: F   ! LG  = T  !
@@ -273,7 +273,7 @@ last_modified_date: 2022-06-07 12:06:02
 
 
 --------------
-### Subgroup (1a) -- Specific gridded receptors included/excluded
+### Subgroup (1a) 包括或排除特定接受點
 --------------
 
     Specific gridded receptors are excluded from CALPOST processing
@@ -299,7 +299,7 @@ last_modified_date: 2022-06-07 12:06:02
 
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 2 -- Visibility Parameters (ASPEC = VISIB)
+## INPUT GROUP: 2 能見度參數 (ASPEC = VISIB)
 --------------
 
     Test visibility options specified to see
@@ -354,7 +354,7 @@ last_modified_date: 2022-06-07 12:06:02
                    COARSE    (SPECPMC) -- Default: PMC ! SPECPMC = PMC !
                    FINE      (SPECPMF) -- Default: PMF ! SPECPMF = PMF !
 
-### Extinction Efficiency (1/Mm per ug/m**3)
+### 消光效率 (1/Mm per ug/m**3)
 ----------------------------------------
     MODELED particulate species:
                PM  COARSE      (EEPMC) -- Default: 0.6   ! EEPMC  = 0.6 !
@@ -377,7 +377,7 @@ last_modified_date: 2022-06-07 12:06:02
               ORGANIC CARBON   (EEOCL)    Set Internally (large)
               SEA SALT         (EESALT)   Set Internally
 
-### Background Extinction Computation
+### 背景消光計算
 ---------------------------------
 
     Method used for the 24h-average of percent change of light extinction:
@@ -581,7 +581,7 @@ last_modified_date: 2022-06-07 12:06:02
       !END!
 -------------------------------------------------------------------------------
 
-## INPUT GROUP: 3 -- Output options
+## INPUT GROUP: 3 輸出選項
 --------------
 
 ### Documentation

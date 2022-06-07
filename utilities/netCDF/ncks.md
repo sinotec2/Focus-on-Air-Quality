@@ -193,7 +193,9 @@ for v in V[3]:
 ```
 
 ## Reference
-- [NCO](https://github.com/nco/nco)
-- [ncks](https://linux.die.net/man/1/ncks)
+
+- czender, NCO NetCDF Operators, [NCO](https://github.com/nco/nco), 14 Jun 2014
+- Charlie Zender, ncks(1) - Linux man page, [ncks](https://linux.die.net/man/1/ncks), 2010.
 - lucasblog, [Software installation in CentOS 7 for scientific computation](https://wolfscie.wordpress.com/2015/04/01/software-installation-in-centos-for-scientific-computation/), April 1, 2015.
+
 ---

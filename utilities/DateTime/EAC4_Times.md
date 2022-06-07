@@ -3,7 +3,7 @@ layout: default
 title:  EAC的時間標籤
 parent: Dates and Times
 grand_parent: Utilities
-last_modified_date:   2021-12-28 21:21:21
+last_modified_date: 2022-06-07 17:06:31
 ---
 # EAC的時間標籤
 {: .no_toc }
@@ -23,7 +23,7 @@ last_modified_date:   2021-12-28 21:21:21
 - ncl_convert2nc會將EAC4檔案的時間標籤名稱命名為**initial_time0**，為一[時間、字串長]()之2維的字串陣列。
   - 字串共有**18**個字元
   - 樣式為*mm/dd/yyyy (hh:mm)*
-  - 格式為`%m/%d/%Y (%H:%M)`
+  - 目標要轉成wrf格式`%m/%d/%Y (%H:%M)`
 - 同樣先將個別**18**個byte轉成str，再連成字串、，最後再讀成datetime
 
 ```python

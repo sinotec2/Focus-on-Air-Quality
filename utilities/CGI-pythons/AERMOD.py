@@ -72,12 +72,12 @@ if len(pid)==0:
   </body></html>
   """  % (rrn+ename,ename)
   sys.exit()
+print 'pid= '+pid+'<a href="'+rrn+'prog.html" target="_blank">(check progress)</a></br>'
+
 # The model is running, initiate the waitc.cs to generate log.out for showing progress
 cmd ='cd '+pth+';'
 cmd+='time '+WAITC+' '+pth+' '+pid+' &disown'
 os.system(cmd)
-
-print 'pid= '+pid+'<a href="'+rrn+'prog.html" target="_blank">(check progress)</a></br>'
 
 fnames=[ename,oname,pth+'isc.out']+pname+sname+kname
 print """\
@@ -89,3 +89,5 @@ for fn in fnames:
   <a href="%s" target="_blank">%s</a></br>
   """  % (fname.replace(WEB,'../../..'),fname.split('/')[-1])
 print '</body></html>'
+sys.stdout.close()
+sys.exit('fine!')

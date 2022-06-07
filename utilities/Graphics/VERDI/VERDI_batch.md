@@ -203,28 +203,21 @@ export DISPLAY=:0.0 #Keep login from Console
   - 即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
 
 ## 輸入檔(.nc)的準備
+
 - *calpuff*輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
   - 程式版本為CALPOST_v7.1.0_L141010
-- 因為是連續執行，*calpuff*需要讀取初始煙陣濃度(restart)，避免煙流從新計算、濃度瞬間歸0。
-  - 而隔日執行可能遇到機組個數的差異，無法順利接續，只得放棄restart。
-  - 此處改採跨日濃度檔案漸變連接的方式([join_nc.py]())，降低*calpuff*從0啟動時的誤差，得到較合理的結果。
+- 因為是連續執行，*calpuff*需要讀取初始煙陣濃度(**restart**)，避免煙流從新計算、濃度瞬間歸0。
+  - 而隔日執行可能遇到機組個數的差異，無法順利接續，只得放棄**restart**。
+
+### [join_nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPOST/join_nc.py)
+- 此處改採跨日濃度檔案漸變連接的方式([join_nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/join_nc.py))，降低*calpuff*從0啟動時的誤差，得到較合理的結果。
   - 漸變採24小時(`nt=24`)、新、舊檔案照小時數正比線性加權方式進行
 
 ```python
 kuang@master /home/cpuff/UNRESPForecastingSystem/Python
 $ cat join_nc.py
 #!/cluster/miniconda/envs/unresp/bin/python
-import subprocess, os
-import netCDF4
-import numpy as np
-
-old_date=subprocess.check_output('date -ud "-2 day" +%Y%m%d',shell=True).decode('utf8').strip('\n')
-
-fname='../'+old_date+'/calpuff.con.S.grd02.nc'
-nc0 = netCDF4.Dataset(fname, 'r')
-V=[list(filter(lambda x:nc0.variables[x].ndim==j, [i for i in nc0.variables])) for j in [1,2,3,4]]
-fname='./calpuff.con.S.grd02.nc'
-nc = netCDF4.Dataset(fname, 'r+')
+...
 nt=24
 for v in V[3]:
   for t in range(nt):

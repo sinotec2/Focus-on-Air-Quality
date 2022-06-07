@@ -90,12 +90,10 @@ $ cat ifort_cpost
 ifort -convert big_endian -Bstatic calpost.for -o cpost710
 ```
 
+## Table of CALPOST contents
+
 {: .fs-6 .fw-300 }
 
-## Table of CALPOST contents
-{: .no_toc .text-delta }
-
-1. TOC
 {:toc}
 
 ---

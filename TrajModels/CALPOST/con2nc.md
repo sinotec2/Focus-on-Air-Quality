@@ -30,7 +30,7 @@ last_modified_date: 2022-06-07 11:56:20
  2503       call system('/usr/kbin/pnc_congrd02')
 ```
 ### pnc_congrd02
-- 詳見
+- 詳見[utilities](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#examples)的說明
 ```bash
 $ cat /usr/kbin/pnc_congrd02
 PTH=/cluster/miniconda/envs/unresp/bin

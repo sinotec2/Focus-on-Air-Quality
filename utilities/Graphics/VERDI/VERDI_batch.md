@@ -3,7 +3,7 @@ layout: default
 title:  VERDI的批次作業
 parent: VERDI
 grand_parent: Graphics
-last_modified_date: 2022-04-06 11:41:04
+last_modified_date: 2022-06-07 11:12:04
 ---
 
 # VERDI的批次作業
@@ -241,9 +241,9 @@ for v in V[3]:
   - ./data/configs/o3_10bin.cfg
   - 範例都是以Newton RGB (AVS)約10層來顯示。
   - 經證實在`<ColorMap> </ColorMap>`內指定的內容，會被後面`<Step> </Step>`覆蓋，即使ColorMap指定是線性等值區間、最大及最小值，後面的Step數字還是可以作用。
-- 因為濃度等級與nc檔中的最高濃度有關，此處參考[mxNC]()來進行修改，找到最大濃度值之後，產生各個濃度等級的值，寫在`<Step> </Step>`區段內。
+- 因為濃度等級與nc檔中的最高濃度有關，此處參考[mxNC.py]()來進行修改，找到最大濃度值之後，產生各個濃度等級的值，寫在`<Step> </Step>`區段內。
   - 最大濃度
-    - 經試誤以時間平均過後、區域內的最大值為之。可以避免圖面太偏向低濃度、訊息量太少。
+    - 經試誤取時間**75%最大值**、再取log值的等間距值，可以避免圖面太偏向低濃度、訊息量太少。
     - VERDI會自動在Footer加註各小時的最大濃度，可以提供足夠的訊息。
   - 濃度等級
     - 由於煙流濃度空間變化很大，如果採用線性等級大多數面積處於低濃度狀態而沒有差異。
@@ -258,7 +258,7 @@ for v in V[3]:
 
 ```python
 kuang@master /home/cpuff/UNRESPForecastingSystem/Python
-$ cat mxNC
+$ cat mxNC.py
 #!/usr/bin/python
 
 import numpy as np
@@ -279,7 +279,7 @@ else:
 mxv={}
 if len(V[3])>0:
   for v in V[3]:
-    mxv.update({v:np.max(np.mean(nc0[v][:,:,:,:],axis=0))})
+    mxv.update({v:np.max((np.mean(nc0[v][:,:,:,:],axis=0)+np.max(nc0[v][:,:,:,:],axis=0))/2)})
 fname='../../CALPUFF_INP/PM25.cfg'
 with open(fname,'r') as f:
   lines=[i for i in f]

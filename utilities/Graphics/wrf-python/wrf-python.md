@@ -8,7 +8,7 @@ last_modified_date: 2022-05-10 19:32:12
 permalink: /utilities/Graphics/wrf-python
 ---
 
-# wrf-python
+# Notes on wrf-python
 {: .no_toc }
 
 <details open markdown="block">

@@ -189,7 +189,6 @@ NVARS及VAR-LIST是CMAQ必讀屬性，一定要修到正確。NVARS為整數、V
 s=''
 for v in V[3]:
   s+='{:16s}'.format(v)
-
 ```
 
 ## Reference

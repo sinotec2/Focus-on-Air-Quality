@@ -2,6 +2,7 @@
 layout: default
 title: md2ipynb
 parent: Utilities
+permalink: /utilities/Markdown/
 ---
 
 # Markdown轉Jupyter筆記檔
@@ -16,7 +17,7 @@ parent: Utilities
 ---
 
 雖然Jupyter提供了轉換MyST格式的[小工具](https://jupyterbook.org/file-types/myst-notebooks.html)，但對大多數的markdown並不能適用。
-此處記錄簡易的轉檔歷程，以簡單[python程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/md2ipynb.py)下進行，有需要的讀者也許可以參考一下。
+此處記錄簡易的轉檔歷程，以簡單[python程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Markdown/md2ipynb.py)下進行，有需要的讀者也許可以參考一下。
 
 ## 基本格式定義
 
@@ -58,7 +59,7 @@ parent: Utilities
     - outputs：如有標準輸出，則會出現在此(dict)。其下也有"data"、再下層為"text/plain"(list of strings)等內容。
 
 ## 程式說明
-基本上ipynb是以命令列的程式碼為主軸，其間、前、後的文字則為markdown格式的說明。在markdown的程式碼有quotation框住，因此只要辨識quotation的位置，即可區隔各命令列的內容，將其存成codes序列，而其間、前、後，則存成marks序列的內容，另存新檔即可。分段說明如下，程式碼可自[github](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/md2ipynb.py)下載。
+基本上ipynb是以命令列的程式碼為主軸，其間、前、後的文字則為markdown格式的說明。在markdown的程式碼有quotation框住，因此只要辨識quotation的位置，即可區隔各命令列的內容，將其存成codes序列，而其間、前、後，則存成marks序列的內容，另存新檔即可。分段說明如下，程式碼可自[github](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Markdown/md2ipynb.py)下載。
 
 ### 分段說明
 - 輸入`md`檔案名稱，並準備輸出檔名
@@ -188,4 +189,4 @@ $ cat -n md2ipynb.py
 ```
 
 ### 程式下載
-- 程式碼可自[github](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/md2ipynb.py)下載。
+- 程式碼可自[github](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Markdown/md2ipynb.py)下載。

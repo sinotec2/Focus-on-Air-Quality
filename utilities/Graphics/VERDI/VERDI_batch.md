@@ -203,8 +203,8 @@ export DISPLAY=:0.0 #Keep login from Console
   - 即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
 
 ## 輸入檔(.nc)的準備
-
-- *calpuff*輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
+### [con2nc.f](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPOST/con2nc.f)
+- *calpuff*輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPOST/con2nc.f)即是以calpost.f為基底的轉接程式。
   - 程式版本為CALPOST_v7.1.0_L141010
 - 因為是連續執行，*calpuff*需要讀取初始煙陣濃度(**restart**)，避免煙流從新計算、濃度瞬間歸0。
   - 而隔日執行可能遇到機組個數的差異，無法順利接續，只得放棄**restart**。
@@ -286,6 +286,11 @@ line38=line38.replace('footer1','Based on '+date+' Operation Rate%')
   - 因此如果要更換，只能從外部將其暫時對調，待批次執行完畢再換回原來檔案。
 - bin檔案的準備可以詳見[底圖的選擇與自行增加底圖](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/#底圖的選擇與自行增加底圖)
 - 此處刻意選擇較舊的縣市界版本($BIN1)，留存舊台中及高雄市範圍，以增加圖面的解釋資訊。
+
+| ![PMF_static_topoconcrec000055.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF_static_topoconcrec000055.PNG)|
+|:-:|
+| <b>verdi批次繪圖結果範例</b>|   
+   
 
 ### 批次檔模版
 - 此處以sed指令置換模版中的特定變數

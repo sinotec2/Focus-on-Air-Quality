@@ -351,5 +351,9 @@ TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
 |:-:|
 | <b>CALPUFF模擬結果GIF檔展示畫面</b>|
 
+## 存檔格式(png OR jpg)的選擇
+- jpg的檔案會小很多，如果只考慮靜態應用，可以選擇jpg格式
+- 在合併成gif檔案時，jpg在計算時會失真很多，圖面變得模糊、縣市界出現疊影。因此還是png較保險。
+
 ## Reference
 - lizadams, [VERDI User Manual](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/README.md), 1 Oct 2019

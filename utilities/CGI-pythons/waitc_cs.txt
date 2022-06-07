@@ -1,0 +1,30 @@
+
+#$1=pth
+#$2=pid
+LST=$1/isc.out
+OUT=$1/log.out
+DAT2KML=/opt/local/bin/dat2kml.py
+touch $OUT
+for ((i=0; i>=0;i+=1));do
+  if [ -e $LST ];then 
+    grep 'Now Processing Data' $LST |tail -n1 > $OUT
+  else
+    echo 'isc3/aermod (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
+  fi
+  now=$(ps -ef|grep $2 |grep -v grep|wc -l)  
+  echo   'isc3/aermod (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
+  all=$(/opt/local/bin/cpu)
+  echo 'All '${all}' cpu are occupied' >> $OUT
+  if [ $now != 1 ]; then break;fi
+  sleep 10 
+done
+cd $1
+cp ../demo/done.html prog.html
+rand=$(echo $2|cut -d'_' -f1)
+sed -ie 's/RAND/'$rand'/g' prog.html
+sed -ie 's/PID/'$2'/g' prog.html
+iname=$(ls -rt|head -n1)
+sleep 1
+for pname in $(grep PLOTFILE $iname|awk "{print \$NF}");do
+  $DAT2KML -f $pname
+done

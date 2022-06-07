@@ -40,6 +40,11 @@ last_modified_date: 2022-06-01 11:29:09
 - 依據環保署模式支援中心之模式說明(環保署模式支援中心，2014年)，該文納入的網格模式包括TAQM、Models-3 (CMAQ)、CAMx、UAM-V等網格模式。
 - 其中CMAQ與CAMx仍陸續有發展計畫，可以順利搭配新版氣象模式(Weather Research and Forecasting Model, WRF)，且持續發展氣象偶合模式。
 - 考量到模式原始碼的取得、計算資源的配合等因素，國內環評及環保單位規劃常使用的網格模式僅包括前述CMAQ及CAMx模式。 
+
+### 科學差異
+- [CAMx v6.10 and CMAQ v5.0.2](https://views.cira.colostate.edu/wiki/wiki/1061/camx-and-cmaq-technical-summary)
+
+### 個案應用結果差異
 - 至於二模式的表現，在全球各地都有比較的研究，主要的差異評析比較如表1，說明如后。
 
 #### 表1		CAMx及CMAQ模式差異之比較

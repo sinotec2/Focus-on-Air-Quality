@@ -18,7 +18,7 @@ last_modified_date:   2021-12-10 11:31:33
 </details>
 
 ---
-### 一般
+## 一般
 - `-O` 處理結果覆蓋(**O**verwrite)既有檔案
 - `-m teds10.1612.timvar.nc` 將檔案維度、變數說明(**m**etadata)印出(類似[ncdump]() -h)
 - ncks的`-a`, `--cdl`, `-F`, `--fmt_val`, `-H`, `--hdn`, `--jsn`, `-M`, `-m`, `-P`, `--prn_fl`, `-Q`, `-q`, `-s`, `--trd`, `-u`, `-V`, `--xml` 选项可以控制输出檔案的格式。
@@ -38,7 +38,7 @@ last_modified_date:   2021-12-10 11:31:33
 - 增加變數：用以形成新的nc檔案模版。
 - `ncks -v NO,TFLAG,ETFLAG base.grd02.1909.nc NO.nc`提出特定之變數、形成新檔，程式會自帶相依座標，但不會有時間標籤。如不要座標，要多加`-C`。
 
-### 維度剪裁
+## 維度剪裁
 類似的，如果要增加、延續維度的長度是用[ncrcat]()，如果要剪裁，則為ncks的強項。尤有進者[ncrcat]()只能針對UNLIMITED維度進行延長，如果要增加其他維度，則先要更改維度的定義，也是靠ncks才能更動。
 - `-d TSTEP,0,23,3` 切割特定維度的一部分。由0開始，到底(23不像python加1)、間距(3)。(eg. [brk_day2.cs:按照日期切割m3.nc](https://boostnote.io/shared/7fd2257f-ba2b-4bd1-9e80-54be96a3bfee))
 - `--mk_rec_dmn ROW` 定義「可增加」資料筆數之維度(**m**a**k**ing **rec**ord **d**i**m**e**n**sion，**記錄軸**)
@@ -62,7 +62,7 @@ variables:
 - `--fix_rec_dmn TSTEP` 定義不可增加筆數之維度(**f**ix **rec**ord **d**i**m**e**n**sion)
 - ncks只能增減變數，如要更改變數名稱，則必須要使用[ncrename]()，如 `ncrename -O -v PM25_TOT,DIS_INCI stroke.nc stroke1.nc`
 
-### 序列之規則
+## 序列之規則
 - 維度或座標軸後接了3個數字，分別是起、迄、與間隔，以逗點隔開，如果不指定則跳過。
 - 維度的索引必須是整數，座標軸的值必須是實數
 - 如未指定(更改為Fortran習慣)，序號採0開始之C語言習慣。且含最後值，與python不同。
@@ -80,7 +80,7 @@ variables:
 ncks -H -d time,5 -d lat,,0. -d lon,330., -d band,.3,.5 -d lev,1000. in.nc out.nc
 ```
 
-### 加長一個LIMITED維度
+## 加長一個LIMITED維度
 - 一般nc檔案在空間的維度是保持LIMITED的，讓檔案不會被輕易更動而亂套。
 - 在準備不同網格系統模版的過程，會遇到情況需要較長的空間維度，除了可以重新用python來產生(nc.createDimension)之外，亦可以由既有較小的模版來延伸，但要先解除該維度LIMITED狀態。
 - 先使用ncpdq暫時改變維度的排列順序，將第一順位設成是欲加長的維度(ROW)(其後的順序不影響結果)、並且令其為筆數維度(rec_dmn)，ROW就會變成UNLIMITED：
@@ -92,11 +92,11 @@ ncks -O --mk_rec_dmn ROW a $nc
 - 再使用ncrcat或者是python程式來加長ROW的長度
 - ncpdq指令的使用可以參考[百度文庫](https://wenku.baidu.com/view/c6b2686cf56527d3240c844769eae009581ba229.html?re=view)。
 
-#### 使用ncrcat
+### 使用ncrcat
 - 重複執行ncrcat，讓UNLIMITED維度**倍數**成長，直到成長到超過所需長度
 - 再用ncks -d仔細修減到所需長度
 
-#### 使用python
+### 使用python
 - 先針對ROW維度進行加長(至395、CWB WRF_15Km d0之南北向網格數)
 
 ```python
@@ -135,7 +135,7 @@ variables:
         float ALD2(TSTEP, LAY, ROW, COL) ;
 ```
 
-### 維度刪除(ncwa)
+## 維度刪除(ncwa)
 - ncks只能將維度減到最少，但不能使維度從檔案中消失。要刪除檔案中特定的維度(delete dimension)須使用ncwa([範例](http://stackoverflow.com/questions/20215529/delete-a-dimension-in-a-netcdf-file))指令。
   - 如以下geo_em.nc檔案中的風蝕係數，其維度為[`Time`, `dust_erosion_dimension`, `south_north`, `west_east`]，其中`dust_erosion_dimension`是[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)無法辨識的，因此必須將其刪除才能檢視。
 
@@ -145,7 +145,7 @@ mv a erod.nc
 ```
 - ncwa的全名是netCDF Weighted Averager，因為針對維度進行平均，會消除該維度的變化。如果該維度長度為1，則直接將其刪除。參[Charlie Zender and Brian Mays](https://linux.die.net/man/1/ncwa)。
 
-### 維度更名(ncrename)
+## 維度更名(ncrename)
 - WRF-chem排放量檔案的垂直軸(emissions_zdim)並非真的垂直軸(bottom_top)，致使[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)無法解析，需要更名
 
 ```bash
@@ -153,7 +153,7 @@ ncrename -d emissions_zdim,bottom_top $nc
 ```
 - Charlie Zender and Brian Mays, **ncrename(1) - Linux man page**, [linux.die.net](https://linux.die.net/man/1/ncrename), 1995
 
-### 變數+維度複合變更
+## 變數+維度複合變更
 m3.nc檔案中的變數本身也是一個維度(`VAR`)，其長度為全域屬性`nc.NVARS`，變數的項目也是全域屬性`nc.VAR-LIST`的內容。雖然變更變數項目只涉及到時間標籤(`TFLAG[TSTEP,VAR,DATE-TIME]`)的長度，然CMAQ對其檢驗非常仔細，必須修剪到完全正確。如下列模版的製作過程：
 1. 先以`ncks -d`由CMAQ模式結果檔案取出時間、高度、與變數，縮減檔案大小：
 ```bash
@@ -192,7 +192,7 @@ for v in V[3]:
 
 ```
 
-### Reference
+## Reference
 - [NCO](https://github.com/nco/nco)
 - [ncks](https://linux.die.net/man/1/ncks)
 - lucasblog, [Software installation in CentOS 7 for scientific computation](https://wolfscie.wordpress.com/2015/04/01/software-installation-in-centos-for-scientific-computation/), April 1, 2015.

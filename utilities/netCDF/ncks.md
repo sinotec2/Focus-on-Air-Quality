@@ -182,7 +182,7 @@ ncatted -a NVARS,global,o,i,49 $nc
 1. 因TFLAG第1個維度是變數(`[TSTEP,VAR,DATE-TIME]`)，而VAR的維度增加了，因此也需要填入日期及時間。
 
 - tip
-NVARS及VAR-LIST是CCMS必讀屬性，一定要修到正確。NVARS為整數、VAR-LIST為A16序列(順序倒無所謂)
+NVARS及VAR-LIST是CMAQ必讀屬性，一定要修到正確。NVARS為整數、VAR-LIST為A16序列(順序倒無所謂)
   - 產生VAR-LIST的程式碼:
 
 ```python

@@ -18,7 +18,7 @@ hei=nc[v][:]
 df=DataFrame({'cp':cp_no,'he':hei})
 tzpp=df.loc[(df.cp==L)&(df.he==250)]
 l_tzpp=len(tzpp)
-# time-variant part of CCMS point source file
+# time-variant part of CMAQ point source file
 fname='teds11.1901.timvar.nc'
 ncks=subprocess.check_output('which ncks',shell=True).decode('utf8').strip('\n')
 os.system(ncks+' -O -d ROW,1,'+str(l_tzpp)+' '+root+fname+' '+fname)

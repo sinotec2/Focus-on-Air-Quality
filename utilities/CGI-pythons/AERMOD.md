@@ -76,6 +76,85 @@ iname=inames[0].split('/')[-1]
 oname=iname.replace(ext,'out')
 kname=[p+'.kml'for p in pname[:]]+[p+'.grd'for p in pname[:]]
 ```
+## 模式之執行
+## 啟動模式
+- 複製一份[會自動更新的html](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/autorefresh/)檔到工作目錄，並以`sed`進行目錄的更換，其內容將會在waitc.cs內更新。
+- 執行模式，並記錄執行緒號`pid`。
 
-## 程式之執行
-- 複製一份[會自動更新的html]()檔到工作目錄
+```python
+#execution of model
+
+cmd ='cd '+pth+';'
+#progression checking webpage
+cmd+='cp '+ WEB + '/isc_results/demo/autorefresh.html prog.html;'
+cmd+='sed -ie "s/isc3_RAND/'+ROT+'_'+ran+'/g" prog.html;'
+cmd+=RUNMDL+' '+iname+' '+oname+OUT+';'
+cmd=cmd.strip(';')
+os.system('echo "'+cmd+'"'+OUT)
+pid=subprocess.check_output(cmd+OUT+'&disown;echo $!',shell=True).decode('utf8').strip('\n')
+if len(pid)==0:
+  print """Something wrong in Model excutions, see <a href="%s" target="_blank">%s</a>
+  </body></html>
+  """  % (rrn+ename,ename)
+  sys.exit()
+```
+### 監看程式之啟動
+- 監看程式的必要性
+  - 讓CGI程式可以離線
+  - 由監看程式輸出結果到log.out、可以在autorefresh.html呈現出最新進度。
+  - 在執行緒多的時候可以跳脫
+
+```python
+# The model is running, initiate the waitc.cs to generate log.out for showing progress
+cmd ='cd '+pth+';'
+cmd+='time '+WAITC+' '+pth+' '+pid+' &disown'
+os.system(cmd)
+```
+
+### 監看程式[waitc.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/waitc_cs.txt)
+- 每10s查看一次`pid`是否執行完成
+  - 如是
+    - 查看PLT檔案是否寫出來了
+- 如果二者皆是
+  - 接續執行[dat2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/#dat2kml)
+
+```bash
+...
+for ((i=0; i>=0;i+=1));do
+  if [ -e $LST ];then 
+    grep 'Now Processing Data' $LST |tail -n1 > $OUT
+  else
+    echo 'isc3/aermod (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
+  fi
+  now=$(ps -ef|grep $2 |grep -v grep|wc -l)  
+  echo   'isc3/aermod (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
+  all=$(/opt/local/bin/cpu)
+  echo 'All '${all}' cpu are occupied' >> $OUT
+  if [ $now != 1 ]; then 
+    brk=0
+    for pname in $(grep PLOTFILE $iname|awk "{print \$NF}");do
+      if [ -s $pname ];then brk=1; fi
+    done 
+    if [ $brk == 1 ];then break;fi
+  fi
+  sleep 10 
+done
+...
+```
+## 執行成果範例
+
+```
+pid= 79669(check progress)
+
+Model_results: The Model process should be ended in 3 min. After that You may click:
+AERTEST_ERRORS.OUT
+linko_CO.out
+isc.out
+AER_CO_01H.PLT
+AER_CO_Y.PLT
+AER_CO.SUM
+AER_CO_01H.PLT.kml
+AER_CO_Y.PLT.kml
+AER_CO_01H.PLT.grd
+AER_CO_Y.PLT.grd
+```

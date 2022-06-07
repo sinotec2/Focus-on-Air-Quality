@@ -144,8 +144,8 @@ done
 - 從命令列啟動editor script file: `run.bat –b [dir][script file]`。不必指定-quit，執行完會自己跳出JAVA程式。
 - **命令列預設**和**editor script**二者無法同時作用。
 
-## 程式外批次檔(CALPUFF結果時間序列圖檔展示)
-
+## 程式外批次檔
+### 命令列執行VERDI(CALPUFF結果時間序列圖檔展示)
 - /home/cpuff/UNRESPForecastingSystem/Run.sh有關VERDI批次作業的內容
 
 ```bash
@@ -202,7 +202,7 @@ export DISPLAY=:0.0 #Keep login from Console
   - **console** 必須保持**登入**狀態、使用者須與*crontab*相同
   - 即使其他終端機未開機，至少還有console可以作為VERDI的螢幕輸出。
 
-### 輸入檔(.nc)的準備
+## 輸入檔(.nc)的準備
 - *calpuff*輸出檔案是calpuff.con檔，目前只有calpost程式可以讀取。[con2nc.f]()即是以calpost.f為基底的轉接程式。
   - 程式版本為CALPOST_v7.1.0_L141010
 - 因為是連續執行，*calpuff*需要讀取初始煙陣濃度(restart)，避免煙流從新計算、濃度瞬間歸0。
@@ -233,7 +233,7 @@ for v in V[3]:
     nc[v][t,:,:,:]=var0+var1
 ```  
 
-### 濃度等級(.cfg)之調整
+## 濃度等級(.cfg)之調整
 - 同一批次的圖面，只能有一個最大值、同一組的濃度等級，以避免gif檔圖面跳動不穩定。
 - .cfg可以參考VERDI提供的樣版檔案，如：
   - ./data/configs/modis_.5_0.cfg
@@ -241,15 +241,36 @@ for v in V[3]:
   - ./data/configs/o3_10bin.cfg
   - 範例都是以Newton RGB (AVS)約10層來顯示。
   - 經證實在`<ColorMap> </ColorMap>`內指定的內容，會被後面`<Step> </Step>`覆蓋，即使ColorMap指定是線性等值區間、最大及最小值，後面的Step數字還是可以作用。
-- 因為濃度等級與nc檔中的最高濃度有關，此處參考[mxNC.py]()來進行修改，找到最大濃度值之後，產生各個濃度等級的值，寫在`<Step> </Step>`區段內。
-  - 最大濃度
-    - 經試誤取時間**75%最大值**、再取log值的等間距值，可以避免圖面太偏向低濃度、訊息量太少。
-    - VERDI會自動在Footer加註各小時的最大濃度，可以提供足夠的訊息。
-  - 濃度等級
-    - 由於煙流濃度空間變化很大，如果採用線性等級大多數面積處於低濃度狀態而沒有差異。
-    - 此處選擇以log10方式、在最大濃度與0.01之間切割成10等分。
-    - 最後輸出到Step內容時，將其還原成正常值
-- Footer內容的設定
+
+### [mxNC.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/VERDI/mxNC.py)
+- 因為濃度等級與nc檔中的最高濃度有關，此處參考[mxNC.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/VERDI/mxNC.py)來進行修改，找到最大濃度值之後，產生各個濃度等級的值，寫在`<Step> </Step>`區段內。
+- 最大濃度(`mxv[]`)
+  - 經試誤取時間**75%最大值**、再取log值的等間距值，可以避免圖面太偏向低濃度、訊息量太少。
+  - VERDI會**自動**在Footer加註各小時的最大濃度，可以提供足夠的訊息。
+
+```python
+...
+mxv={}
+if len(V[3])>0:
+  for v in V[3]:
+    mxv.update({v:np.max((np.mean(nc0[v][:,:,:,:],axis=0)+np.max(nc0[v][:,:,:,:],axis=0))/2)})
+...
+```
+- 濃度等級(`line[10]~line[20]`內容)
+  - 由於煙流濃度空間變化很大，如果採用線性等級大多數面積處於低濃度狀態而沒有差異。
+  - 此處選擇以log10方式、在最大濃度與0.01之間切割成10等分。
+  - 最後輸出到Step內容時，將其還原成正常值
+
+```python
+...
+  #min=0.01
+  dc=(np.log10(mxv[ss])+2)/10
+  lines[10]='<Step>0</Step>\n'
+  for i in range(1,11):
+    lines[10+i]='<Step>'+str(10**(dc*i-2))+'</Step>\n'
+...    
+```
+- Footer內容的設定(`lines[38]`)
   - Footer 第1行內設會寫出nc檔案的時間標籤(UTC)，為避免干擾，此處將其關閉，替代以calpuff的模擬日期
   - 內容在cfg檔案`anl.verdi.plot.config.PlotConfiguration.footer_line_1`的value(`lines[38]`)
   - 開關在`anl.verdi.plot.config.PlotConfiguration.footer_line_1_auto_text`
@@ -257,56 +278,13 @@ for v in V[3]:
     - false則將列出前述內容。在模版中一次關閉即可。
 
 ```python
-kuang@master /home/cpuff/UNRESPForecastingSystem/Python
-$ cat mxNC.py
-#!/usr/bin/python
-
-import numpy as np
-import netCDF4
-import os,sys,subprocess
-if not sys.warnoptions:
-    import warnings
-    warnings.simplefilter("ignore")
-fname=['calpuff.con.S.grd02.nc']
-rw=['r','r+']
-nc0=netCDF4.Dataset(fname[0],rw[0])
-V=[list(filter(lambda x:nc0.variables[x].ndim==j, [i for i in nc0.variables])) for j in [1,2,3,4]]
-if len(V[3])>0:
-  tt=nc0.variables[V[3][0]].dimensions[0]
-else:
-  tt=nc0.variables[V[2][0]].dimensions[0]
-
-mxv={}
-if len(V[3])>0:
-  for v in V[3]:
-    mxv.update({v:np.max((np.mean(nc0[v][:,:,:,:],axis=0)+np.max(nc0[v][:,:,:,:],axis=0))/2)})
-fname='../../CALPUFF_INP/PM25.cfg'
-with open(fname,'r') as f:
-  lines=[i for i in f]
-line7=lines[7]
-line50=lines[50]
+...
 line38=lines[38] #footer_line_1 value
 date=subprocess.check_output('date -d "-1 day" +"%Y-%m-%d"',shell=True).decode('utf8').strip('\n')
 if 'footer1' not in line38:
   sys.exit(line38)
-line38=line38.replace('footer1','Based on Operation Rate of '+date)
-for spec in ['PMF','SO2','SO4','NOX']:
-  ss=spec
-  if spec=='PMF':ss='PM10'
-  fname=ss+'.cfg'
-  lines[7]=line7.replace('max=\"0.1\"','max=\"'+str(mxv[ss])+'\"')
-  #min=0.01
-  dc=(np.log10(mxv[ss])+2)/10
-  lines[10]='<Step>0</Step>\n'
-  for i in range(1,11):
-    lines[10+i]='<Step>'+str(10**(dc*i-2))+'</Step>\n'
-  lines[50]=line50
-  lines[38]=line38
-  if spec=='PMF':
-    lines[50]=line50.replace('PPBv','ug/M3')
-  with open(fname,'+w') as f:
-    for line in lines:
-      f.write(line)
+line38=line38.replace('footer1','Based on '+date+' Operation Rate%')
+...
 ```
 
 ### 底圖的修改與應用

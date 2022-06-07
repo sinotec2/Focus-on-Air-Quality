@@ -1,4 +1,3 @@
-# cat ./isc/rd_kmlFull.py
 #!/opt/anaconda3/envs/py37/bin/python
 
 # -*- coding: UTF-8 -*-
@@ -166,7 +165,7 @@ for ll in range(1,6):
   a=df.loc[df.LON.map(lambda s:abs(s-lonp[0])<L) & df.LAT.map(lambda s:abs(s-latp[0])<L)]
   if len(a)>0:
     df=a
-    break
+    break	
 if len(a)==0:
   print ('<p>the point source seems not existing in database.</p> </body></html>')
   sys.exit('fail')
@@ -181,9 +180,9 @@ for v in cole+hdtv+tims:
 for k in range(npnts):
   if len(hgts)==nplgs+npnts:
     hstk=hgts[nplgs+k]
-    df['dist']=[np.sqrt((i-lonp[k])**2+(j-latp[k])**2+(h-hstk)**2) for i,j,h in zip(list(df.LON),list(df.LAT),list(df.HEI))]
-  else:
-    df['dist']=[np.sqrt((i-lonp[k])**2+(j-latp[k])**2) for i,j in zip(list(df.LON),list(df.LAT))]
+    df['dist']=[np.sqrt((i-lonp[k])**2+(j-latp[k])**2+(h-hstk)**2) for i,j,h in zip(list(df.LON),list(df.LAT),list(df.HEI))] 
+  else: 
+    df['dist']=[np.sqrt((i-lonp[k])**2+(j-latp[k])**2) for i,j in zip(list(df.LON),list(df.LAT))] 
   idx=df.loc[df.dist==min(df.dist)].index
   #find the tallest stack
   print (df.dist,min(df.dist),idx)
@@ -220,7 +219,7 @@ with open(pth+'fort.10','w') as f:
   f.write(('{:2d}\n').format(nplgs))
   for i in range(nplgs):
     f.write(("'"+names[i]+"' 1"+'{:6.1f}\n').format(base[i]))
-    f.write(('4 '+'{:5.0f}\n').format(hgts[i]))
+    f.write(('4 '+'{:5.0f}\n').format(hgts[i])) 
     for j in range(4):
       f.write(('{:5.1f}  {:5.1f}\n').format(Pn[i,j,0],Pn[i,j,1]))
   f.write(('{:2d}\n').format(npnts))
@@ -231,13 +230,13 @@ with open(pth+'fort.10','w') as f:
 s=''
 for ii in range(nplgs,nplms):
   s+=names[ii]
-case=s[:8]
+case=s[:8]  
 if npnts==1 and len(names[-1])>len(case):
   names[-1]=case
 
 #excution of BPIP and read the result lines
 cmd ='cd '+pth+';'
-cmd+= BPIP+NULL+';'
+cmd+= BPIP+NULL+';' 
 cmd+= GREP+" ' SO ' fort.12 >build.txt"
 os.system(cmd)
 with open(pth+'build.txt','r') as f:
@@ -263,7 +262,7 @@ x0x,y0x=(round(P[0][i]+dx*40/2, -2) for i in range(2))
 #FLAT or COMPLEX TERRAIN
 boo=(x0n<=xg) & (xg<=x0x) & (y0n<=yg) & (yg<=y0x)
 idx=np.where(boo)
-maxBase=np.max(elv[idx[0],idx[1]])
+maxBase=np.max(elv[idx[0],idx[1]]) 
 run_aermap=False
 RECroot=''
 nx=40
@@ -297,7 +296,7 @@ else:
       boo=(HEI3<=elv) & (elv<=maxBase)
       idx=np.where(boo)
       dist=[np.sqrt((xg[i,j]-P[0][0])**2+(yg[i,j]-P[0][1])**2) for i,j in zip(idx[0],idx[1])]
-      dx=min(dist)*4/40.
+      dx=min(dist)*4/40. 	
       x0n,y0n=(round(P[0][i]-dx*25, -2) for i in range(2))
       x0x,y0x=(round(P[0][i]+dx*25, -2) for i in range(2))
       inp_txt=('{:8.0f} 40 {:4.0f} {:10.0f} 40 {:4.0f}').format(x0n,dx,y0n,dx)
@@ -307,7 +306,7 @@ else:
   if len(REC)>0:
     with open(REC,'r') as f:
       ll=[l.strip('\n') for l in f]
-  if (len(REC)>0 and rec_txt not in ll[:]) or len(REC)==0 or not os.path.exists(REC):
+  if (len(REC)>0 and rec_txt not in ll[:]) or len(REC)==0 or not os.path.exists(REC): 
     print ('<p>AERMAP must be excuted !</br></p>')
     message='<p>terr was submitted! '+cmd
     print (message+'</br></p>')
@@ -353,11 +352,11 @@ for c in cole:
       f.write(('   SRCPARAM '+names[ii]+' {:10.2f} {:6.1f} {:6.1f} {:6.1f} {:6.1f}\n').format(e[i],HEI[i],TEMP[i],VEL[i],DIA[i]))
     for l in ln:
       f.write(l+'\n')
-    f.write(  ('SO EMISUNIT {:10.3f} (GRAMS/SEC) '+unit[sp]+'\n').format(cnvt))
+    f.write(  ('SO EMISUNIT {:10.3f} (GRAMS/SEC) '+unit[sp]+'\n').format(cnvt)) 
     f.write(   'SO SRCGROUP  ALL\n')
-    f.write(   'SO FINISHED\n')
+    f.write(   'SO FINISHED\n') 
     f.write(   'RE STARTING\n')
-    if FLAT:
+    if FLAT:	
       f.write( '   GRIDCART gd2 STA\n')
       f.write(('   GRIDCART gd2 XYINC {:8.0f} 25 {:4.0f} {:10.0f} 25 {:4.0f}\n').format(x1n,dx1,y1n,dx1))
       f.write( '   GRIDCART gd2 END\n')
@@ -377,7 +376,7 @@ for c in cole:
     f.write(   '   SUMMFILE  AER_'+sp+'.SUM\n')
     f.write(   '   PLOTFILE  1  ALL  FIRST  AER_'+sp+'_01H.PLT\n')
     f.write(   '   PLOTFILE  PERIOD    ALL  AER_'+sp+'_Y.PLT\n')
-    if sp0=='NO2':
+    if sp0=='NO2':	
       f.write( '   POSTFILE  1  ALL  PLOT   AER_'+sp+'_01H.PST\n')
     f.write(   'OU FINISHED\n')
   aero=['AER_'+sp+'.SUM',inp.replace('inp','out')]
@@ -385,8 +384,8 @@ for c in cole:
     aero.append('AER_'+sp+i)
     for j in ['.kml','.grd']:
       aero.append('AER_'+sp+i+j)
-  if sp0=='NO2':
-    aero.append('AER_'+sp+'_01H.PST')
+  if sp0=='NO2':	
+    aero.append('AER_'+sp+'_01H.PST') 
   fnames.update({'AERMOD_'+sp+'_o':aero})
 
 #generate the mmif.inp file
@@ -411,7 +410,7 @@ if IJ in list(df.IJ) and year in set(list(df.YR)):
   caseold=df.loc[idx[0][0],'FNAME']
 #  print 'caseold='+caseold+' '+str(idx[0][0])
   os.system('cp '+caseold+'.sfc '+pth+case+'.sfc')
-  os.system('cp '+caseold+'.pfl '+pth+case+'.pfl')
+  os.system('cp '+caseold+'.pfl '+pth+case+'.pfl') 
   run_mmif=False
 else:
   cmd ='cd '+pth+';'
@@ -433,11 +432,11 @@ for inp in inps:
     if inp==inps[-1]:
       cmd=CHK+' '+pth+' '+pid+' & disown'
       os.system(cmd)
-
+      
 if run_mmif==False:
   m=str(int(nx*nx*25/318/318))
   print (" <p>AERMOD_results: The AERMOD process should be ended in "+m+" min(NOx/OLM will take time) for XYINC "+ \
-        inp_txt.replace('_',' ')+"</br></p> ")
+	inp_txt.replace('_',' ')+"</br></p> ")
   print (" <p>After MMIF being done, You may open the links in new pages:</br></p> ")
   if run_aermap==True:
     cmd ='cd '+pth+';'
@@ -454,23 +453,23 @@ fnames.update({'POST_o':['result.zip','AER_NOX_01H_rep.txt','isc.out']})
 
 #OUTPUT
 formats={'grd':'SURFER ascii grd file',
-         'out':'program print_out',
-         'SUM':'AERMOD/ISC summary print_out',
-         'OUT':'AERMOD/ISC error file',
-         'PLT':'AERMOD/ISC plot file in particular average time',
-         'PST':'AERMOD/ISC hourly plot file,(for OLM)',
-        'inp':'MMIF/AERMOD/ISC run stream file',
-        'sfc':'MMIF surface output file(for AERMOD)',
-        'pfl':'MMIF profile output file(for AERMOD)',
-        'txt':'SO run stream or OLM report',
-        '10':'BPIP input file',
-        '12':'BPIP processing information(for AERMOD)',
-        '14':'BPIP evaluation output file',
-        'csv':'BPIP coordinates output file',
-        'dem':'USGS Digital Elevation Models file',
-        'REC':'AERMOD receptor include file',
-        'kml':'Google Keyhole Markup Language file',
-        'zip':'resultant zip file',
+	 'out':'program print_out',
+	 'SUM':'AERMOD/ISC summary print_out',
+	 'OUT':'AERMOD/ISC error file',
+	 'PLT':'AERMOD/ISC plot file in particular average time',
+	 'PST':'AERMOD/ISC hourly plot file,(for OLM)',
+	'inp':'MMIF/AERMOD/ISC run stream file',
+	'sfc':'MMIF surface output file(for AERMOD)',
+	'pfl':'MMIF profile output file(for AERMOD)',
+	'txt':'SO run stream or OLM report',
+	'10':'BPIP input file',
+	'12':'BPIP processing information(for AERMOD)',
+	'14':'BPIP evaluation output file',
+	'csv':'BPIP coordinates output file',
+	'dem':'USGS Digital Elevation Models file',
+	'REC':'AERMOD receptor include file',
+	'kml':'Google Keyhole Markup Language file',
+	'zip':'resultant zip file',
 }
 tools={'grd':'SURFER',
 'zip':'archive openner',

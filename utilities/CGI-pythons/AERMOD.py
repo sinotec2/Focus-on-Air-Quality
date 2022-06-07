@@ -56,13 +56,13 @@ sname=subprocess.check_output('grep SUMMFILE '+inames[0]+'|awk "{print \$NF}"',s
 ext=inames[0].split('.')[-1]
 iname=inames[0].split('/')[-1]
 oname=iname.replace(ext,'out')
-kname=[p+'.kml'for p in pname[:]]
+kname=[p+'.kml'for p in pname[:]]+[p+'.grd'for p in pname[:]]
 #execution of model
 
 cmd ='cd '+pth+';'
 #progression checking webpage
 cmd+='cp '+ WEB + '/isc_results/demo/autorefresh.html prog.html;'
-cmd+='sed -ie "s/RAND/'+ran+'/g" prog.html;'
+cmd+='sed -ie "s/isc3_RAND/'+ROT+'_'+ran+'/g" prog.html;'
 cmd+=RUNMDL+' '+iname+' '+oname+OUT+';'
 cmd=cmd.strip(';')
 os.system('echo "'+cmd+'"'+OUT)

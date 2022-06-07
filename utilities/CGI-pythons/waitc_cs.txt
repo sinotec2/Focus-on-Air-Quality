@@ -1,10 +1,11 @@
-
 #$1=pth
 #$2=pid
 LST=$1/isc.out
 OUT=$1/log.out
 DAT2KML=/opt/local/bin/dat2kml.py
 touch $OUT
+cd $1
+iname=$(ls -rt|head -n1)
 for ((i=0; i>=0;i+=1));do
   if [ -e $LST ];then 
     grep 'Now Processing Data' $LST |tail -n1 > $OUT
@@ -15,16 +16,17 @@ for ((i=0; i>=0;i+=1));do
   echo   'isc3/aermod (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
   all=$(/opt/local/bin/cpu)
   echo 'All '${all}' cpu are occupied' >> $OUT
-  if [ $now != 1 ]; then break;fi
+  if [ $now != 1 ]; then 
+    brk=0
+    for pname in $(grep PLOTFILE $iname|awk "{print \$NF}");do
+      if [ -s $pname ];then brk=1; fi
+    done 
+    if [ $brk == 1 ];then break;fi
+  fi
   sleep 10 
 done
-cd $1
 cp ../demo/done.html prog.html
-rand=$(echo $2|cut -d'_' -f1)
-sed -ie 's/RAND/'$rand'/g' prog.html
 sed -ie 's/PID/'$2'/g' prog.html
-iname=$(ls -rt|head -n1)
-sleep 1
 for pname in $(grep PLOTFILE $iname|awk "{print \$NF}");do
-  $DAT2KML -f $pname
+  /opt/anaconda3/envs/py27/bin/python $DAT2KML -f $1/$pname
 done

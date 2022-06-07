@@ -219,57 +219,57 @@ last_modified_date: 2022-06-07 12:06:02
 ### 接受點訊息
 --------------------
 
-  Gridded receptors processed?    (LG) -- Default: F   ! LG  = T  !
-  Discrete receptors processed?   (LD) -- Default: F   ! LD  = F  !
-  CTSG Complex terrain receptors processed?
-                                 (LCT) -- Default: F   ! LCT = F  !
+      Gridded receptors processed?    (LG) -- Default: F   ! LG  = T  !
+      Discrete receptors processed?   (LD) -- Default: F   ! LD  = F  !
+      CTSG Complex terrain receptors processed?
+                                       (LCT) -- Default: F   ! LCT = F  !
 
---Report results by DISCRETE receptor RING?
-  (only used when LD = T)     (LDRING) -- Default: F   ! LDRING = F  !
+      --Report results by DISCRETE receptor RING?
+      (only used when LD = T)     (LDRING) -- Default: F   ! LDRING = F  !
 
---Select range of DISCRETE receptors (only used when LD = T):
+      --Select range of DISCRETE receptors (only used when LD = T):
 
-  Select ALL DISCRETE receptors by setting NDRECP flag to -1;
-                               OR
-  Select SPECIFIC DISCRETE receptors by entering a flag (0,1) for each
-     0 = discrete receptor not processed
-     1 = discrete receptor processed
-  using repeated value notation to select blocks of receptors:
-     23*1, 15*0, 12*1
-  Flag for all receptors after the last one assigned is set to 0
-  (NDRECP) -- Default: -1
-                                               ! NDRECP =  -1  !
-
-
---Select range of GRIDDED receptors (only used when LG = T):
-
-       X index of LL corner (IBGRID) -- Default: -1     ! IBGRID = -1  !
-           (-1 OR 1 <= IBGRID <= NX)
-
-       Y index of LL corner (JBGRID) -- Default: -1     ! JBGRID = -1  !
-           (-1 OR 1 <= JBGRID <= NY)
-
-       X index of UR corner (IEGRID) -- Default: -1     ! IEGRID = -1  !
-           (-1 OR 1 <= IEGRID <= NX)
-
-       Y index of UR corner (JEGRID) -- Default: -1     ! JEGRID = -1  !
-           (-1 OR 1 <= JEGRID <= NY)
-
-  Note: Entire grid is processed if IBGRID=JBGRID=IEGRID=JEGRID=-1
+      Select ALL DISCRETE receptors by setting NDRECP flag to -1;
+                                    OR
+      Select SPECIFIC DISCRETE receptors by entering a flag (0,1) for each
+         0 = discrete receptor not processed
+         1 = discrete receptor processed
+      using repeated value notation to select blocks of receptors:
+         23*1, 15*0, 12*1
+      Flag for all receptors after the last one assigned is set to 0
+      (NDRECP) -- Default: -1
+                                                   ! NDRECP =  -1  !
 
 
---Specific gridded receptors can also be excluded from CALPOST
-  processing by filling a processing grid array with 0s and 1s.  If the
-  processing flag for receptor index (i,j) is 1 (ON), that receptor
-  will be processed if it lies within the range delineated by IBGRID,
-  JBGRID,IEGRID,JEGRID and if LG=T. If it is 0 (OFF), it will not be
-  processed in the run.  By default, all array values are set to 1 (ON).
+      --Select range of GRIDDED receptors (only used when LG = T):
 
-  Number of gridded receptor rows provided in Subgroup (1a) to
-  identify specific gridded receptors to process
-                           (NGONOFF) -- Default: 0      ! NGONOFF =  0  !
+            X index of LL corner (IBGRID) -- Default: -1     ! IBGRID = -1  !
+               (-1 OR 1 <= IBGRID <= NX)
 
-!END!
+            Y index of LL corner (JBGRID) -- Default: -1     ! JBGRID = -1  !
+               (-1 OR 1 <= JBGRID <= NY)
+
+            X index of UR corner (IEGRID) -- Default: -1     ! IEGRID = -1  !
+               (-1 OR 1 <= IEGRID <= NX)
+
+            Y index of UR corner (JEGRID) -- Default: -1     ! JEGRID = -1  !
+               (-1 OR 1 <= JEGRID <= NY)
+
+      Note: Entire grid is processed if IBGRID=JBGRID=IEGRID=JEGRID=-1
+
+
+      --Specific gridded receptors can also be excluded from CALPOST
+      processing by filling a processing grid array with 0s and 1s.  If the
+      processing flag for receptor index (i,j) is 1 (ON), that receptor
+      will be processed if it lies within the range delineated by IBGRID,
+      JBGRID,IEGRID,JEGRID and if LG=T. If it is 0 (OFF), it will not be
+      processed in the run.  By default, all array values are set to 1 (ON).
+
+      Number of gridded receptor rows provided in Subgroup (1a) to
+      identify specific gridded receptors to process
+                                 (NGONOFF) -- Default: 0      ! NGONOFF =  0  !
+
+      !END!
 
 
 --------------
@@ -584,13 +584,13 @@ last_modified_date: 2022-06-07 12:06:02
 ## INPUT GROUP: 3 輸出選項
 --------------
 
-### Documentation
+### 文件
     Documentation records contained in the header of the
     CALPUFF output file may be written to the list file.
     Print documentation image?
                                 (LDOC) -- Default: F   !  LDOC = F !
 
-### Output Units
+### 輸出單位
 ------------
     Units for All Output       (IPRTU) -- Default: 1   ! IPRTU =  3   !
                      for            for
@@ -604,7 +604,7 @@ last_modified_date: 2022-06-07 12:06:02
     Visibility: extinction expressed in 1/Mega-meters (IPRTU is ignored)
 
 
-### Averaging time(s) reported
+### 平均時間
 --------------------------
 
     1-pd averages           (L1PD) -- Default: T   !   L1PD = F  !
@@ -626,7 +626,7 @@ last_modified_date: 2022-06-07 12:06:02
                            (NAVGS) -- Default: 0   !   NAVGS =  0  !
 
 
-### Types of tabulations reported
+### 報告表格
 ------------------------------
 
    1) Visibility: daily visibility tabulations are always reported
@@ -707,7 +707,7 @@ last_modified_date: 2022-06-07 12:06:02
            ! IECHO  = 366*0  !
            (366 values must be entered)
 
-### Plot output options
+### 繪圖選項
 -------------------
 
      Plot files can be created for the Top-N, Exceedance, and Echo
@@ -732,7 +732,7 @@ last_modified_date: 2022-06-07 12:06:02
                                  (LGRD) -- Default: F   ! LGRD  = T !
 
 
-### Auxiliary Output Files (for subsequent analyses)
+### 後續分析輔助輸出
 ------------------------------------------------
 
       Visibility
@@ -752,19 +752,17 @@ last_modified_date: 2022-06-07 12:06:02
            4 =  Create file of HOURLY Extinction Change (%)
 
 
-### Additional Debug Output
+### 偵錯輸出
 -----------------------
 
-   Output selected information to List file
-    for debugging?
-                               (LDEBUG) -- Default: F  ! LDEBUG  = F !
+      Output selected information to List file
+      for debugging?
+                                 (LDEBUG) -- Default: F  ! LDEBUG  = F !
 
-   Output hourly extinction information to REPORT.HRV?
-    (Visibility Method 7)
-                              (LVEXTHR) -- Default: F  ! LVEXTHR = F !
+      Output hourly extinction information to REPORT.HRV?
+      (Visibility Method 7)
+                                 (LVEXTHR) -- Default: F  ! LVEXTHR = F !
 
-!END!
+      !END!
 
-F !
-
-!END!
+      !END!

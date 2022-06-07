@@ -1,10 +1,10 @@
 ---
 layout: default
 title: 模式應用相關論文
-nav_order: 4
-parent: CALPUFF
-grand_parent: Trajectory Models
-last_modified_date: 2022-03-22 08:56:43
+parent: Models and Comparisons
+grand_parent: Paper Reviews
+nav_order: 3
+last_modified_date: 2022-06-07 16:37:56
 ---
 
 # CALPUFF 模式應用相關論文
@@ -19,6 +19,9 @@ last_modified_date: 2022-03-22 08:56:43
 {:toc}
 </details>
 ---
+
+## 國內軌跡模式學位論文
+- 按模式種類列於[sinotec2.github.io](https://sinotec2.github.io/aermod/traj_review.html)
 
 ## User Guides
 - Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (1990). [MODEL FORMULATION AND USER’S GUIDE FOR THE CALPUFF DISPERSION MODEL](https://ww2.arb.ca.gov/sites/default/files/classic/research/apr/past/a025-2a.pdf).

@@ -24,7 +24,8 @@ last_modified_date: 2022-06-08 09:21:20
 - 煙流模式主程式的[遠端計算](http://114.32.164.198/AERMOD.html)網頁。
 - 主要服務那些已經準備好各項輸入檔案的使用者，Javascripts將會讀取使用者提供的檔案存到伺服器上(至少2個檔案、最多4個檔案)，並啟動CGI_Python程式進行煙流模式的遠端計算與監看。
   - 如果需要前處理([氣象](http://114.32.164.198/mmif.html)、[地形](http://114.32.164.198/terrain.html)等)、或後處理([kml](http://114.32.164.198/Leaflet/docs/index.html)、[NCL](http://114.32.164.198/NCLonOTM.html))，可以回到[遠端模擬首頁](http://114.32.164.198/aermods.html)
-  - 監看網頁位置
+  - 監看網頁
+    - iMacKuang:[http://114.32.164.198/status.html](http://114.32.164.198/status.html)
     - aermod：[http://114.32.164.198/isc_results/arem_RAND/prog.html](http://114.32.164.198/isc_results/arem_RAND/prog.html)
     - iscst：[http://114.32.164.198/isc_results/isc3_RAND/prog.html](http://114.32.164.198/isc_results/isc3_RAND/prog.html)
   - 服務僅限模式計算，後處理部分讓使用者視需要自行下載結果檔案，再啟動其他程式進行處理、繪圖。

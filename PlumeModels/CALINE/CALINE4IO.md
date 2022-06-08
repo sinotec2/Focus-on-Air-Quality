@@ -21,9 +21,9 @@ last_modified_date: 2022-04-08 15:30:32
 
 ## 背景
 - *CALINE4*並未列在USEPA的網站中，CALtran似乎也已經下架，但[EAST Lab -  University of Michigan](http://www-personal.umich.edu/~weberg/caline4.htm)還有一份可以下載(32bit執行檔)，[此處](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/caline4.zip)為壓縮檔。
-  - 圖形界面尚可運用(64位元PC)，可用於輸入、檢視、及儲存（.dat自由格式詳下），主程式無法作動，需將.dat轉至CALINE3執行。
+  - 圖形界面尚可運用(64位元PC)，可用於輸入、檢視、及儲存（.dat自由格式詳[下](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/central_campus.dat)），主程式無法作動，需將.dat轉至CALINE3執行。
 
-## *CALINE4* 輸入檔範例
+## *CALINE4* 輸入檔[.dat](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/central_campus.dat)範例
 - 專案名稱
 - 污染物
 - z0(cm)、分子量、Vs、Vd、NR、NL、平均時間(小時)、座標轉換係數、氣象個案數、ASL(m)
@@ -164,47 +164,55 @@ python rd_dat.py central_campus.dat
 |TYP|AG,DP,FL,BR|1~4|
 |CLAS|1~6|1~7|
 
-### code listing
+### rd_dat.py code [listing](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/CALINE/rd_dat.py)
+
+### rd_dat.py 程式說明
+- 讀取z0等一般性參數、接受點數(`NR`)、線段數(`NL`)、以及氣象條件數(`NM`)
+- 讀取接受點名稱(`recp`)與座標高程(`xr,yr,zr`)
 
 ```python
-import numpy as np
-import fortranformat as ff
-import sys
-
-fnameI=sys.argv[1]
-fnameO=fnameI.replace('.dat','3.INP')
-with open(fnameI,'r') as f:
-  lines=[i.strip('\n') for i in f]
-job=lines[0].strip(' ')
+...
 z0,mw,vs,vd,NR,NL,ATIM,SCAL,NM,ASL=[float(i) for i in lines[2].split()]
 NR,NL,NM=[int(i) for i in [NR,NL,NM]]
 recp=[lines[i] for i in range(3,NR+3)]
 xr,yr,zr=np.zeros(shape=NR),np.zeros(shape=NR),np.zeros(shape=NR)
 for i in range(NR):
   xr[i],yr[i],zr[i]=[float(j) for j in lines[3+NR+i].split()]
+```
+- 讀取線段名稱(`lnks`)、線段種類等內容(`TYP,X1,Y1,X2,Y2,H,W,CBMl,CBMr,D`)
+
+```python
 lnks=[lines[i] for i in range(NR*2+3,NR*2+3+NL)]
-for var in 'X1,Y1,X2,Y2,H,W,CBMl,CBMr,D'.split(','):
-  exec(var+'=np.zeros(shape=NL)')
 istr=NR*2+3+NL
 iend=istr+NL
 for var in 'TYP,X1,Y1,X2,Y2,H,W,CBMl,CBMr,D'.split(','):
   exec(var+'=np.zeros(shape=NL)')
 for i in range(NL):
   TYP[i],X1[i],Y1[i],X2[i],Y2[i],H[i],W[i],CBMl[i],CBMr[i],D[i]=[float(j) for j in lines[istr+i].split()]
+```
+- 對照道路種類、平均時間的單位、車流量與排放係數
+
+```python  
 dtyp={1:'AG',2:'DP',3:'FL',4:'BR'}
 TYP=[dtyp[int(i)] for i in TYP] #change int to A2
 ATIM*=60. #change hour to min
 run=lines[iend]
 VPH=[float(i) for i in lines[iend+1].split()]
 EMF=[float(i) for i in lines[iend+2].split()]
-for var in 'U,BRG,CLAS,MIXH,SIGM,AMB,T'.split(','):
-  exec(var+'=np.zeros(shape=NM)')
+```
+- 讀取氣象條件相關數據
+
+```python
 istr=iend+3
 iend=istr+NM
 for i in range(NM):
   BRG[i],U[i],CLAS[i],MIXH[i],SIGM[i],AMB[i],T[i]=[float(j) for j in lines[istr+i].split()]
 CLAS=[min([6,i]) for i in CLAS]
+```
+- 應用fortranformat將內容寫成*caline3*輸入格式
+  - 重組變數，分成5組依序寫出
 
+```python
 #1:SITE VARIABLES, 2:RECEPTOR LOCATIONS, 3:RUN CASE, 4:LINK VARIABLES, 5:MET CONDITIONS
 fmt=['A40,2F4.0,2F5.0,I2,F10.0','A12,8X,3F10.0',  'A40,2I3',  'A8,12X,A2,4F7.0,F8.0,3F4.0',      'F3.0,F4.0,I1,F6.0,F4.0']
 var=[(job,ATIM,z0,vs,vd,NR,SCAL),(recp,xr,yr,zr),(run,NL,NM),(lnks,TYP,X1,Y1,X2,Y2,VPH,EMF,H,W),(U,BRG,CLAS,MIXH,AMB)]

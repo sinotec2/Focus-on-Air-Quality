@@ -109,24 +109,10 @@ bpipprm
 |:--:|
 | <b>L形建築物之BPIP輸出結果</b>|
 
-## BPIPPRM之[遠端計算服務](http://114.32.164.198/BPIPPRIM.html)範例
-- 由於[BPIPPRM]()並沒有長時間的積分計算，因此其計算對工作站而言較為容易。
-- 比較繁雜的程序是座標、夾角的量測、旋轉平移的計算。
-  - 然其描圖、座標平移則需依賴許多python模組，以及Fortran的編譯，都會需要與作業系統持續保持更新。
-- CaaS的作業方式：
-  1. 先在地圖[數位板](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述步驟1\~4.，結果詳下圖1)
-  1. 利用[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRM]()的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述步驟5\~7.，確認如下圖2。
-  1. 執行[BPIPPRM]()計算(步驟8)
-- 細部操作方式與CaaS程式設計詳見[BPIP_CaaS](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_CaaS)之說明。
-
-| ![BPIP3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP3.png)|
-|:--:|
-| <b>圖1實例廠區數位化結果，雖然數位板點選結果有些歪斜，[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式會將其均化修正</b>|
-| ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
-| <b>圖2實例廠區[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，經[ISCPARSER](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀結果</b>|
-
-- [BPIPPRM]()計算結果詳見[build.txt](http://114.32.164.198/isc_results/ZhongHuaPaper/build.txt)，貼在模式輸入檔的[範例](http://114.32.164.198/isc_results/ZhongHuaPaper/paper1pa_NOX.inp)內(步驟9.)
-
+## BPIPPRM之遠端計算服務
+- 位置: [http://114.32.164.198/BPIPPRIM.html](http://114.32.164.198/BPIPPRIM.html)
+- [架構](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_remote/)說明
+- CGI-python詳細說明見[bpipprim.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/bpipprim/)
 ## Reference and Resource
 - 有關煙流下洗的現象、原因、以及如何避免，可以參考下列網址
   - [BREEZE AERMOD 7: Gridded Plume Downwash](https://www.youtube.com/watch?v=bgoU9GTNYHs)

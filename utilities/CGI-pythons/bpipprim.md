@@ -18,3 +18,5 @@ last_modified_date: 2022-06-07 20:21:17
 </details>
 
 ---
+## 背景
+- bpip的作業相對單純很多。

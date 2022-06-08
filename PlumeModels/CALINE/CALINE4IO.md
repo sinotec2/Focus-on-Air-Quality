@@ -166,7 +166,7 @@ python rd_dat.py central_campus.dat
 
 ### rd_dat.py code [listing](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/CALINE/rd_dat.py)
 
-### rd_dat.py 程式說明
+### [rd_dat.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/CALINE/rd_dat.py) 程式說明
 - 讀取z0等一般性參數、接受點數(`NR`)、線段數(`NL`)、以及氣象條件數(`NM`)
 - 讀取接受點名稱(`recp`)與座標高程(`xr,yr,zr`)
 

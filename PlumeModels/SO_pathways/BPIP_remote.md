@@ -29,7 +29,11 @@ last_modified_date: 2022-06-08 11:33:42
   1. 先在地圖[數位板](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/digitizer)上點選煙囪及建築物頂點位置、存成[kml檔案](http://114.32.164.198/isc_results/ZhongHuaPaper/paper.kml)(大致上取代前述[步驟1-4][步驟1-4]，結果詳下圖1)
   1. 利用[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式將kml檔案旋轉成廠區座標系統，並另存[BPIPPRM]()的[輸入檔](http://114.32.164.198/isc_results/ZhongHuaPaper/fort.10)，即為前述[步驟5-7][步驟5-7]，確認如下圖2。
   1. 執行[BPIPPRM](http://114.32.164.198/BPIPPRIM.html)計算([步驟8][步驟8])
+  1. [ISCPARSER](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀器會將BPIP.INP內容讀成圖像(kml檔案)，然須在輸入檔的第一行(標題說明)找到廠區的原點位置，座標系統為TWD97，單位為m，詳見[污染源空間解讀器-建築物之設定](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/#建築物之設定)說明，範例如：
 
+```
+'BPIP input file with 1 bldg and 1 stacks,originated at [170249.3,2531503.5](TWD97m).'	
+```
 
 | ![BPIP3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP3.png)|
 |:--:|

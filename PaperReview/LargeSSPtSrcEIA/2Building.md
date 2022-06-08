@@ -118,3 +118,19 @@ last_modified_date: 2022-05-16 09:42:56
 | ![ASHRAE3.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/ASHRAE3.PNG)|
 |:--:|
 | <b>個案煙囪高度、風量與最大落地濃度([Cochran, B. 2003][Cochran, B. 2003])</b>|
+
+## Reference
+- American Society of Heating(2003), [2003 ASHRAE HANDBOOK : Heating, Ventilating, and Air-Conditioning Applications](https://www.amazon.com/s?i=stripbooks&rh=p_27%3AAmerican+Society+of+Heating+%28Compiler%29&s=relevancerank&text=American+Society+of+Heating+%28Compiler%29&ref=dp_byline_sr_book_1>) : Inch-Pound Edition (2003 ASHRAE HANDBOOK: HVAC Applications : I-P Edition)
+- Cochran, B.(2003). [A Case Study for the U.C. Davis Robert Mondavi Institute for Wine and Food Sciences. Presented at the Labs for the 21st Century Century, International Institude for Sustainable Laboratories](https://labs21.lbl.gov/DPM/Assets/H1_Cochran.pdf), Adams Mark Hotel Denver, CO, p. 19.
+- Hosker, R. (1984) [Flow and diffusion near obstacles](https://www.osti.gov/biblio/6503687-atmospheric-science-power-production) in Atmospheric Science and Power Production,  Ch. 7, DOE/TIC-27601.
+- Kukkonen, J. (1997). [A DISPERSION MODELLING SYSTEM FOR URBAN AIR POLLUTION.](https://www.researchgate.net/publication/264396988_A_DISPERSION_MODELLING_SYSTEM_FOR_URBAN_AIR_POLLUTION) Finnish Meteorological Institute, Helsinki, Finland.
+- Olesen, H.R., Berkowicz, R., Ketzel, M., Lofstrom, P. (2009). [Validation of OML, AERMOD/PRIME and MISKAM using the Thompson wind tunnel data set for simple stack-building configurations.](https://link.springer.com/article/10.1007/s10546-009-9355-9) Boundary-Layer Meteorol. 131, 73-83.
+- Perry, S.G., Heist, D.K., Brouwer, L.H., Monbureau, E.M., and L.A. Brixley (2016). [Characterization of pollutant dispersion near elongated buildings based on wind tunnel simulations](https://www.sciencedirect.com/science/article/abs/pii/S1352231016305829), Atmospheric Environment, Vol. 42, 286-295.
+- Petersen, R. L. and Guerra, S. A., (2018). PRIME2: [Development and evaluation of improved building downwash algorithms for rectangular and streamlined structures](https://www.sciencedirect.com/science/article/abs/pii/S0167610517306669). Atmospheric Environment, 173, 67-78.
+- Randerson, D. (1984). [Atmospheric science and power production](https://www.osti.gov/biblio/6503687-atmospheric-science-power-production) (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN.
+- Schulman, L.L., Strimaitis, D.G., and Scire, J.S. (2000). [Development and Evaluation of the PRIME Plume Rise and Building Downwash Model.](https://www.tandfonline.com/doi/full/10.1080/10473289.2000.10464017) Journal of the Air & Waste Management Association 50 (3):378–390. doi:10.1080/10473289.2000.10464017.
+- USEPA (2019), [Building Downwash Alpha Options in AERMOD](https://www.epa.gov/scram/aermod-modeling-system-development-documents), www.epa.gov, downwash_alpha_options_white_paper, 05-13-2019
+- USEPA(2021), [Issues Related to Building Downwash in AERMOD](https://www.epa.gov/sites/default/files/2021-01/documents/downwash_overview_white_paper.pdf), 2021,01
+
+
+

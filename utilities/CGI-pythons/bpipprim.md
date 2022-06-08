@@ -19,9 +19,14 @@ last_modified_date: 2022-06-08 14:05:20
 
 ---
 ## 背景
-- bpip的CGI作業相對單純很多。複雜的是讀圖與量測過程，詳[bpip設定與執行步驟實例示範](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定與執行步驟實例示範)。
+- bpip的CGI作業相對單純很多。
+  - 複雜的是讀圖與量測前處理過程，詳[bpip設定與執行步驟實例示範](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定與執行步驟實例示範)。
+  - 監看程式
+    - 如有錯誤，會直接寫在fort.12、fort.14，build.txt內容也會是空白
+    - 如無錯誤，程式計算很快，不需要(無從)監看。
 - CaaS整體的架構、檔案與結果範圍詳見[BPIPPRM之遠端計算服務範例](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_remote/)。
 - 此處著重說明[bpipprim.py](https://github.com/sinotec2/CGI_Pythons/blob/main/bpipprim/bpipprim.py)(CGI-PY)的程式設計細節。
+- 程式更新需求：因USEPA不再發展BPIP，轉到[PRIME2][Petersen and Guerra 2018]之應用，因此預期將不會需要更新。
 
 ## 輸入
 - 程式可以接受貼上字串與檔案上傳2種輸入方式，以方便測試階段，減少上下載、重新命名與檔案管理的麻煩。
@@ -67,3 +72,5 @@ BPIPPRIN_results: The download process should start shortly. If it doesn't, clic
 
 build.txt fort.12 fort.14
 ```
+
+[Petersen and Guerra 2018]: <https://www.sciencedirect.com/science/article/abs/pii/S0167610517306669> "Petersen, R. L. and Guerra, S. A., (2018). PRIME2: Development and evaluation of improved building downwash algorithms for rectangular and streamlined structures. Atmospheric Environment, 173, 67-78."

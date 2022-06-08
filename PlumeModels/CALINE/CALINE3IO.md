@@ -22,7 +22,7 @@ last_modified_date: 2022-04-08 15:30:32
 ## 背景
 - 執行*CALINE3*模式不必設定檔案，全部的數據都以標準輸入(standard input)方式，以 < 符號飼入程式。輸出數據也是以standard out形式，需以 > 指引到指定的檔名。
 - *CALINE3*模式沒有複雜的氣象檔案，但是對於線源的設定有別於其他煙流模式，需要進一步說明。
-- *CALINE3*有圖形界面版本([CALINE4](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/CALINE4IO/))。
+- *CALINE3*有圖形界面版本([CALINE4](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/CALINE4IO/))，但因只有執行檔，經電腦平台更新無法完整執行。
 - 使用手冊可自[官網](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/other/caline3/caline3-unabridged.pdf)下載。
 
 ## 輸入檔範例
@@ -605,27 +605,5 @@ $ cat CALINE3.LST
 
 ## caline3遠端計算服務
 - 網址[http://114.32.164.198/CALINE3.html](http://114.32.164.198/CALINE3.html)
-- 選取本地的輸入檔案、按下Run鍵即可。
-
-### KML 輸入方式
-- 輸入檔也接受.kml的形式，也算是有圖形界面的功能。約定如下：
-  - 以[數位板Digitizer](http://114.32.164.198/LeafletDigitizer/index.html)建立路段與接受點的空間及屬性資料
-  - 接受點與路段的順序不限
-  - 一條路可接受最多50個折點（49個路段）
-  - 範例如[example.kml](http://114.32.164.198/caline_results/example.kml)(如下圖)
-  - 氣象與現場條件設定如下：
-    - BRG:0, 45, 90, 135, 180, 225, 270, 315 等8個風向
-    - U, CLAS, MIXH: 1.0m/s, 6, 100m
-    - ATIM, Vs, Vd, Z0, AMB: 60min, 0, 0, 100cm, 1.0PPM
-- 物件屬性的順序（在數位板上有提示）
-  - 接受點：名稱、高度
-  - 路線(折線)：名稱、路型、交通量、排放係數、路高及路寬
-  - 屬性間的間隔可以是：`,;_/ |-(`
-
-| ![atts.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/atts.png)|
-|:--:|
-| <b>數位板提示鍵入物件名稱與屬性</b>| 
-
-| ![sanchong.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/sanchong.png)|
-|:--:|
-| <b>數位板所建立的範例檔案</b>| 
+- 選取本地的輸入檔案(也接受.kml)、按下Run鍵即可。
+- 詳[caline3遠端計算服務](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/caline_remote)之說明

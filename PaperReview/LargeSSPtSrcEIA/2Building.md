@@ -50,7 +50,7 @@ last_modified_date: 2022-05-16 09:42:56
   - [BREEZE AERMOD 7: Gridded Plume Downwash](https://www.youtube.com/watch?v=bgoU9GTNYHs)
     - 這是一家商用軟體([BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod))的介紹短片，雖然是模式輸出的結果，卻也可以略略描繪煙流受到建築物尾流影響的推估概念。  
 
-### AQ Simulation Scheme: Plume Rise Model Enhancements (PRIME)
+### AQ Simulation Scheme: Plume Rise Model Enhancements (PRIME & PRIME2)
 
 | ![PRIME1.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PRIME1.PNG)|
 |:--:|

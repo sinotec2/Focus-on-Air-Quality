@@ -20,7 +20,8 @@ last_modified_date: 2022-04-08 15:30:32
 ---
 
 ## 背景
-- CALINE3是美國環保署公告的[替代模式](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/1Gaus_Stab/#usepa-scram模式種類架構)。其設定與執行詳見[CALINE3的標準輸入輸出](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/CALINE3IO/)，此處介紹遠端執行的版本。
+- CALINE3目前仍是美國環保署公告的[替代模式](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/1Gaus_Stab/#usepa-scram模式種類架構)。其設定與執行詳見[CALINE3的標準輸入輸出](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/CALINE3IO/)，此處介紹遠端執行的版本。
+- 模式未來發展：因CALINE後續沒有發展的計畫，系統應無持續更新的需要。
 
 ### caline3遠端計算服務
 - 網址[http://114.32.164.198/CALINE3.html](http://114.32.164.198/CALINE3.html)
@@ -31,11 +32,11 @@ last_modified_date: 2022-04-08 15:30:32
 |:--:|
 | <b>CALINE[遠端計算網頁](http://114.32.164.198/CALINE3.html)畫面</b>| 
 
-### CaaS檔案結構
+### CaaS檔案結構與連結
 - HTML：$web/[CALINE3.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/CALINE3.html)
 - CGI-PY：$cgi/caline/[CALINE.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/CALINE.py)，詳[說明](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/CALINE/)
 - EXE
-  - `CLINE='/Users/1.PlumeModels/CALINE3/caline3 '`
+  - `CLINE='/Users/1.PlumeModels/CALINE3/caline3 '`，編譯自[CALINE3.FOR](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/CALINE3.FOR)，Y軸座標格式修改如下[說明](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/caline_remote/#caline3for-輸出座標格式調整)。
   - KML2INP=CGI+'[kml2inp.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/kml2inp.py)'
 - HEADER：$cgi/caline/[header.txt](https://github.com/sinotec2/CGI_Pythons/blob/main/ISCST_AERMOD/header.txt)
 - 工作目錄與結果

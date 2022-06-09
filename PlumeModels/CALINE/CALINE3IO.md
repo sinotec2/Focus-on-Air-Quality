@@ -23,7 +23,7 @@ last_modified_date: 2022-04-08 15:30:32
 - 執行*CALINE3*模式不必設定檔案，全部的數據都以標準輸入(standard input)方式，以 < 符號飼入程式。輸出數據也是以standard out形式，需以 > 指引到指定的檔名。
 - *CALINE3*模式沒有複雜的氣象檔案，但是對於線源的設定有別於其他煙流模式，需要進一步說明。
 - *CALINE3*有圖形界面版本([CALINE4](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/CALINE/CALINE4IO/))，但因只有執行檔，經電腦平台更新無法完整執行。
-- 使用手冊可自[官網](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/other/caline3/caline3-unabridged.pdf)下載。
+- 使用手冊可自[官網](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/other/caline3/caline3-unabridged.pdf)下載，時代有點久遠就是了。
 
 ## 輸入檔範例
 - *CALINE3*為舊式[fortran固定格式](http://homepage.ntu.edu.tw/~weitingc/fortran_lecture/Lecture_F_File_IO_Format.pdf)的輸入方式

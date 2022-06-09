@@ -34,8 +34,8 @@ cpuff.out
 ```
 ### 程式進度畫面
 
-| ![CALPUFF_prog.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CALPUFF_prog.PNG)|
+| ![CPUFF_prog.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CPUFF_prog.PNG)|
 |:-:|
 | <b>CPUFF721執行進度網頁畫面</b>|
-| ![CALPUFF_nc.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CALPUFF_nc.PNG)|
+| ![CPUFF_nc.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CPUFF_nc.PNG)|
 | <b>CPUFF721最終進度網頁畫面</b>|

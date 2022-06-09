@@ -45,4 +45,7 @@ last_modified_date: 2022-06-09 20:55:11
 - *v*_**NN**.png、*v*為模擬空氣品質項目，*NN*為00～99的時間序列。
 - *v*.gif：最後整併結果
 
-## [m3nc2gif.py]()
+## [m3nc2gif.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/utilities/Graphics/wrf-python/m3nc2gif.py)
+- 
+## 結果比較
+- 公版後處理工具、VERDI、m3nc2gif

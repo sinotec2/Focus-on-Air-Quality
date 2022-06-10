@@ -40,7 +40,7 @@ last_modified_date: 2022-03-22 08:56:43
     - 開啟檔案(使用者提供的[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp))
       - 使用者只能修改點源排放相關設定
     - 呼叫CGI-PY：CALPUFF.py或demo.py
-  - $web/cpuff_results/[autorefreash.html]()
+  - $web/cpuff_results/[autorefreash.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/autorefresh.html)：每10秒報告cpuff的進度。連結到工作站整體模式運作情況網頁[status.html]()
 - CGI-PY
   - $cgi/calpuff/[CALPUFF.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.py)：啟動cpuff主程式、啟動監看程式waitc.cs
   - $cgi/calpuff/[demo.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/demo.py)：檢視$web/cpuff_results/demo目錄下之文件。

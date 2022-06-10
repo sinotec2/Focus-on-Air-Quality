@@ -47,11 +47,19 @@ last_modified_date: 2022-06-11 00:15:47
 - CGI-PY
   - $cgi/calpuff/[CALPUFF.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.py)：啟動cpuff主程式、啟動監看程式waitc.cs
   - $cgi/calpuff/[demo.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/demo.py)：檢視$web/cpuff_results/demo目錄下之文件。
+  - CGI-PY設計說明詳見[CALPUFF.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/CALPUFF/)
 - EXE
   - calpuff主程式：`CPUFF='/Users/cpuff/src/CALPUFF_v7.2.1_L150618/cpuff721 &> /dev/null 2>&1'`
   - 監看程式：`WAITC=WEB+'/cpuff_results/waitc.cs'`。cpuff執行完之後會接續執行：
     - [calpuff.con轉nc檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2nc/)：`/Users/cpuff/src/CALPOST_v7.1.0_L141010/con2nc >& con2nc.out`
     - [將nc檔案讀出寫成gif檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif)：`../demo/m3nc2gif.py cpuff.nc >& con2nc.out`
+- INP
+  - $web/cpuff_results/[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp)
+  - $web/cpuff_results/demo/[calpost.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpost.inp)
+  - $web/cpuff_results/demo/wrfout_d04](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/wrfout_d04)
+
+## 監看程式$web/cpuff_results/[waitc.cs](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/waitc.cs)
+
 
 
 ## 結果畫面與連結
@@ -68,7 +76,7 @@ cpuff.out
 ```
 ### 程式進度畫面
 
-| ![CALPUFF_prog.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CPUFF_prog.PNG)|
+| ![CALPUFF_prog.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CALPUFF_prog.PNG)|
 |:-:|
 | <b>CPUFF721執行進度網頁畫面</b>|
 

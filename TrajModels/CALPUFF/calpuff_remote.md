@@ -34,6 +34,22 @@ last_modified_date: 2022-03-22 08:56:43
 |:-:|
 | <b>CPUFF721執行進度網頁畫面</b>|
 
+### 檔案系統架構
+- HTML
+  - $web/[CALPUFF.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/CALPUFF.html)
+  - 開啟檔案(使用者提供的[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp))
+    - 使用者只能修改點源排放相關設定
+  - 呼叫CGI-PY：CALPUFF.py或demo.py
+- CGI-PY
+  - $cgi/calpuff/[CALPUFF.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.py)：啟動cpuff主程式、啟動監看程式waitc.cs
+  - $cgi/calpuff/[demo.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/demo.py)：檢視$web/cpuff_results/demo目錄下之文件。
+- EXE
+  - `CPUFF='/Users/cpuff/src/CALPUFF_v7.2.1_L150618/cpuff721 &> /dev/null 2>&1'`：calpuff主程式
+  - `WAITC=WEB+'/cpuff_results/waitc.cs'`：監看程式。cpuff執行完之後會接續執行：
+    - `/Users/cpuff/src/CALPOST_v7.1.0_L141010/con2nc >& con2nc.out`：[calpuff.con轉nc檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2nc/)    
+    - `../demo/m3nc2gif.py cpuff.nc >& con2nc.out`：[將nc檔案讀出寫成gif檔案]()
+
+
 ## 結果畫面與連結
 
 ### 檔案連結

@@ -59,8 +59,67 @@ last_modified_date: 2022-06-11 00:15:47
   - $web/cpuff_results/demo/wrfout_d04](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/wrfout_d04)
 
 ## 監看程式$web/cpuff_results/[waitc.cs](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/waitc.cs)
+### 執行方式
+- 2個引數
+  - 1.CGI-PY 給定的亂數目錄cpuf_**RAND**，**RAND**為6碼亂數文字
+  - 2.PID cpuff程式的執行緒號
+### 迴圈控制
+- 每10秒檢查一次
+- 判斷標準：PID是否仍然在執行中
+  - 是：輸出執行進度之文字到檔案cpuff.out。prog.html會每10秒鐘重讀這個檔案。
+  - 否：跳脫迴圈，繼續執行後續處理
 
+```bash
+#$1=pth
+#$2=pid
+LST=$1/CALPUFF.LST
+OUT=$1/cpuff.out
+touch $OUT
+for ((i=0; i>=0;i+=1));do
+  if [ -e $LST ];then 
+    grep CONCENTRATIONS CALPUFF.LST |tail -n1 > $OUT
+  else
+    echo 'cpuff (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
+  fi
+  now=$(ps -ef|grep cpuff721|grep $2 |grep -v grep|wc -l)  
+  echo 'cpuff (pid='$2') has been executed for '${i}'0 seconds' >> $OUT
+  all=$(ps -ef|grep cpuff721 |grep -v grep|wc -l)  
+  echo 'All '${all}' cpuffs are executing' >> $OUT
+  if [ $now != 1 ]; then break;fi
+  sleep 10 
+done
+```
+### calpuff 後處理
+- 1.[calpuff.con轉nc檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2nc/)
+  - 需要正確路徑的python 
+- 2.[將nc檔案讀出寫成gif檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif)
+  - 需要減少檔名的長度（控制在10碼以下）
+  - 需要將nc檔內變數的單位予以更正
+  - 需要有GIF的播放器(LC-GIF-Player)，將GIF結果移到正確的位置。
 
+```bash
+cd $1
+cp ../demo/calpost.inp .
+export PATH=/opt/anaconda3/envs/pyn_env/bin:$PATH
+/Users/cpuff/src/CALPOST_v7.1.0_L141010/con2nc >& con2nc.out
+ln -sf calpuff.con.S.grd02.nc cpuff.nc
+/opt/local/bin/ncatted -a units,SO2,o,c,'ppbV'  -a units,NO2,o,c,'ppbV'  -a units,PM10,o,c,'ug/m3' -a units,SO4,o,c,'ug/m3' cpuff.nc
+../demo/m3nc2gif.py cpuff.nc >& con2nc.out
+cp -r /Library/WebServer/Documents/LC-GIF-Player/* .
+mv *.gif example_gifs
+```
+### 產生結束網頁
+- 複製一個模版
+- 更換PID、目錄位置以及檔案大小
+
+```bash
+cp ../demo/done.html prog.html
+sed -ie 's/PID/'$2'/g' prog.html 
+rand=$(echo $1|cut -d'_' -f3)
+sed -ie 's/RAND/'$rand'/g'  prog.html
+mb=$(ls -lh calpuff.con.S.grd02.nc|awk '{print $5}')
+sed -ie 's/MB/'$mb'/g' prog.html
+```
 
 ## 結果畫面與連結
 

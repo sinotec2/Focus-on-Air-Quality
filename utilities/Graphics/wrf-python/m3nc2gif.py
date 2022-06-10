@@ -19,7 +19,7 @@ def get_lev(N):
   if mxv/mnv>15:    
     dc=(np.log10(mxv)-np.log10(mnv))/15    
     level=[round(10**(dc*i+np.log10(mnv)),N) for i in range(15)]
-    nm=colors.LogNorm(vmin=level[3], vmax=level[-3])
+    nm=colors.LogNorm(vmin=level[0], vmax=level[-1])
   else:
     i=int('{:e}'.format(mxv)[0])
     if i==7:i=6

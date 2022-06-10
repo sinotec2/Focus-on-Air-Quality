@@ -9,7 +9,7 @@ from cartopy.feature import NaturalEarthFeature, COLORS
 from netCDF4 import Dataset
 from wrf import (getvar, to_np, get_cartopy, latlon_coords, vertcross,
                  cartopy_xlim, cartopy_ylim, interpline, CoordPair)
-import sys, os
+import sys, os, subprocess
 from datetime import datetime, timedelta
 from pyproj import Proj
 from bisect import bisect
@@ -30,8 +30,7 @@ def get_lev(N):
 nlev={i:10 for i in [1,2,4,7,8]}
 nlev.update({i:15 for i in [3,6,9]})
 
-fname='../vert_conc/K24TZ.nc' #sys.argv[1]
-fname='../vert_conc/BASE3_K24.nc' #sys.argv[1]
+fname=sys.argv[1]
 nc=Dataset(fname)
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.YCENT, lon_0=nc.XCENT, x_0=0, y_0=0.0)
 V=[list(filter(lambda x:nc[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
@@ -48,7 +47,7 @@ xlab=[str(i) for i in np.arange(119.5, 123.5,0.5)]
 ylab=[str(i) for i in np.arange(22, 25,0.5)]
 xtics=[float(i) for i in xlab]
 ytics=[float(i) for i in ylab]
-ncfile = Dataset('wrfout_d04_2019-01-29-31')
+ncfile = Dataset('wrfout_d04')
 p = getvar(ncfile, "pressure",timeidx=0)
 cart_proj = get_cartopy(p)
 for v in V[3][:]:
@@ -58,8 +57,9 @@ for v in V[3][:]:
   N=int(3-np.log10(mxv))
   level,nm=get_lev(N)    
   if len(level)!=len(set(level)):level,nm=get_lev(N+1)
+  fmt='%.'+str(N)+'f'     
   for t in range(nt):
-    fig = plt.figure(figsize=(int(9*ncol/nrow),9))
+    fig = plt.figure(figsize=(int(10*ncol/nrow),10))
     ax = plt.axes(projection=cart_proj)
     # Download and add the states and coastlines
     states = NaturalEarthFeature(
@@ -74,7 +74,7 @@ for v in V[3][:]:
                        cmap=get_cmap("rainbow"),
                        transform=crs.PlateCarree(),
                        extend='max')
-    plt.colorbar(contours, ax=ax, orientation="vertical",pad=.05)     
+    plt.colorbar(contours, ax=ax, orientation="vertical",pad=.05,format=fmt)
     ax.set_xlim(cartopy_xlim(p)+np.array([+0,-30000]))
     ax.set_ylim(cartopy_ylim(p)+np.array([+30000,-20000]))
     ax.gridlines()
@@ -103,6 +103,8 @@ for v in V[3][:]:
 #    plt.show()
     png=v+'_'+'{:02d}'.format(t)+'.png'
     plt.savefig(png)
+    plt.close()
     os.system('convert -bordercolor white -trim '+png+' tmp.png')
     os.system('convert -bordercolor white -border 5%x5% tmp.png '+png)
-  os.system('convert  -dispose 2 -coalesce +repage -background none '+v+'_*.png -size 607x774 '+v+'.gif')
+  size=subprocess.check_output('convert '+v+'_00.png -format "%wx%h" info:',shell=True).decode('utf8').strip('\n')
+  os.system('convert  -dispose 2 -coalesce +repage -background none '+v+'_*.png -size '+size+' '+v+'.gif')

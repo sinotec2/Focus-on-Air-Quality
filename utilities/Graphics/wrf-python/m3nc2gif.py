@@ -109,5 +109,6 @@ for v in V[3][:]:
     plt.close()
     os.system('convert -bordercolor white -trim '+png+' tmp.png')
     os.system('convert -bordercolor white -border 5%x5% tmp.png '+png)
+  if nt<6:continue #too short for GIF
   size=subprocess.check_output('convert '+v+'_00.png -format "%wx%h" info:',shell=True).decode('utf8').strip('\n')
   os.system('convert  -dispose 2 -coalesce +repage -background none '+v+'_*.png -size '+size+' '+v+'.gif')

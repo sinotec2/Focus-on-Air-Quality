@@ -62,6 +62,7 @@ for v in V[3][:]:
   #格式必須在時間迴圈外設定好，避免有偏差，GIF會跳動
   fmt='%.'+str(N)+'f'     
   for t in range(nt):
+    if np.max(nc[v][t,0,:,:])<mnv:continue
     fig = plt.figure(figsize=(int(10*ncol/nrow),10))
     ax = plt.axes(projection=cart_proj)
     # Download and add the states and coastlines
@@ -110,5 +111,7 @@ for v in V[3][:]:
     os.system('convert -bordercolor white -trim '+png+' tmp.png')
     os.system('convert -bordercolor white -border 5%x5% tmp.png '+png)
   if nt<6:continue #too short for GIF
-  size=subprocess.check_output('convert '+v+'_00.png -format "%wx%h" info:',shell=True).decode('utf8').strip('\n')
+  pngl=subprocess.check_output('ls -rt '+v+'*.png|tail -n1',shell=True).decode('utf8').strip('\n')
+  if len(pngl)==0:continue
+  size=subprocess.check_output('convert '+pngl+' -format "%wx%h" info:',shell=True).decode('utf8').strip('\n')
   os.system('convert  -dispose 2 -coalesce +repage -background none '+v+'_*.png -size '+size+' '+v+'.gif')

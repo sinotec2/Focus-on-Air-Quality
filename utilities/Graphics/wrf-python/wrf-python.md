@@ -20,3 +20,5 @@ permalink: /utilities/Graphics/wrf-python
 {:toc}
 </details>
 ---
+
+作為NCL的替代程式，近年來UCAR積極發展wrf-python，除了針對wrfout的解讀應用之外，也大量運用xarray、平行運算、以及matplotlib的功能。

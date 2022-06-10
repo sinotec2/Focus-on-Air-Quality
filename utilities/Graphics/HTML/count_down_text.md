@@ -81,12 +81,27 @@ clearInterval(interval);
 - 範例位址：[https://sinotec2.github.io/cpuff_forecast/](https://sinotec2.github.io/cpuff_forecast/)
 
 ```html
+<script src="js/jquery.js" type="text/javascript"></script><!--注意一定要加载jq文件-->
+<script type="text/javascript">
+$(function(){
+var time = $('#sec').html();
+var interval = setInterval(function () {
+--time;
+$('#sec').html(time);
+if (time <= 0) {
+$('#text').hide();
+clearInterval(interval);
+}
+}, 1000);
+});
+</script>
 ...
 <h4><a href="https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/Forecast/" target="_blank">CALPUFF Forecasting</a> Results</h4>            
 <div id="text1">downloading PMF.gif, need about 10s, please wait... <span id="sec">10</span> </div>
 ...
+
 ```
-| ![count_down.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/count_down.PNG)|
+| ![count_down.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/count_down.png)|
 |:-:|
 | <b>CALPUFF[預測網頁](https://sinotec2.github.io/cpuff_forecast/)倒數計時畫面</b>|
 

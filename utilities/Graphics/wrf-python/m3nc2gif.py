@@ -36,7 +36,7 @@ pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.Y
 V=[list(filter(lambda x:nc[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
 nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
 yj=nc['TFLAG'][0,0,0]
-t0=nc['TFLAG'][0,0,1]
+t0=nc['TFLAG'][0,0,1]//10000
 bdate=datetime(yj//1000,1,1,t0)+timedelta(days=int(yj%1000-1))
 
 x1d=[nc.XORIG+nc.XCELL*i for i in range(ncol)]

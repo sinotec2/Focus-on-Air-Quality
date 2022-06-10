@@ -40,7 +40,10 @@ last_modified_date: 2022-03-22 08:56:43
     - 開啟檔案(使用者提供的[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp))
       - 使用者只能修改點源排放相關設定
     - 呼叫CGI-PY：CALPUFF.py或demo.py
-  - $web/cpuff_results/[autorefreash.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/autorefresh.html)：每10秒報告cpuff的進度。連結到工作站整體模式運作情況網頁[status.html]()
+  - $web/cpuff_results/demo/[autorefreash.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/autorefresh.html)：每10秒報告cpuff、或m3nc2gif.py的執行進度、連結到工作站整體模式運作情況網頁[status.html](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/status/)
+  - $web/cpuff_results/demo/[done.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/done.html)：執行停止的結果畫面
+  - [$web/cpuff_results/demo/cpuff_gifs.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/cpuff_gifs.html)：模擬結果之gif檔案。
+
 - CGI-PY
   - $cgi/calpuff/[CALPUFF.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.py)：啟動cpuff主程式、啟動監看程式waitc.cs
   - $cgi/calpuff/[demo.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/demo.py)：檢視$web/cpuff_results/demo目錄下之文件。
@@ -68,5 +71,14 @@ cpuff.out
 | ![CALPUFF_prog.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CPUFF_prog.PNG)|
 |:-:|
 | <b>CPUFF721執行進度網頁畫面</b>|
+
 | ![CALPUFF_nc.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CPUFF_nc.PNG)|
+|:-:|
+| <b>CPUFF721最終進度網頁畫面</b>|
+
+### [cpuff_gifs.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/cpuff_gifs.html)
+
+
+| ![cpuff_gifs.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_gifs.png)|
+|:-:|
 | <b>CPUFF721最終進度網頁畫面</b>|

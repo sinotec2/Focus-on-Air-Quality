@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from pyproj import Proj
 from bisect import bisect
 
+#判斷線性或對數濃度色階
 def get_lev(N):
   if mxv/mnv>15:    
     dc=(np.log10(mxv)-np.log10(mnv))/15    
@@ -26,7 +27,7 @@ def get_lev(N):
     level=[round(dc*i,N) for i in range(nlev[i])]
     nm=colors.Normalize(vmin=mnv, vmax=mxv)
   return level,nm
-
+#2種線性間隔數
 nlev={i:10 for i in [1,2,4,8]}
 nlev.update({i:15 for i in [3,6,9]})
 
@@ -51,12 +52,14 @@ ncfile = Dataset('wrfout_d04')
 p = getvar(ncfile, "pressure",timeidx=0)
 cart_proj = get_cartopy(p)
 for v in V[3][:]:
+  #極值只考慮正值範圍
   a=np.where(nc[v][:,0,:,:]>0,nc[v][:,0,:,:],0)  
   mxv=np.percentile(a,99.99)
   mnv=np.max([np.percentile(a,0.01),mxv/100])
   N=int(3-np.log10(mxv))
   level,nm=get_lev(N)    
   if len(level)!=len(set(level)):level,nm=get_lev(N+1)
+  #格式必須在時間迴圈外設定好，避免有偏差，GIF會跳動
   fmt='%.'+str(N)+'f'     
   for t in range(nt):
     fig = plt.figure(figsize=(int(10*ncol/nrow),10))

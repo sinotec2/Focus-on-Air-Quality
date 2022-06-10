@@ -27,7 +27,7 @@ def get_lev(N):
     nm=colors.Normalize(vmin=mnv, vmax=mxv)
   return level,nm
 
-nlev={i:10 for i in [1,2,4,7,8]}
+nlev={i:10 for i in [1,2,4,8]}
 nlev.update({i:15 for i in [3,6,9]})
 
 fname=sys.argv[1]

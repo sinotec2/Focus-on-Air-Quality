@@ -1,0 +1,8 @@
+d=~/Documents/jtd
+line=$(grep "\[What\'s New\]" $d/index.md)
+lastMD=$(echo $line|cut -d'(' -f2|cut -d')' -f1)
+newsMD=https://sinotec2.github.io$(ls -rt $(findc "*.md")|grep -v $d/index|tail -n1|cut -c 2-)
+if [ $lastMD != $newsMD ]; then
+  sed -ie 's#'${lastMD}'#'${newsMD}'#' $d/index.md
+fi
+if [ -e $d/index.mde ];then rm $d/index.mde;fi

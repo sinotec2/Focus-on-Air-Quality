@@ -38,11 +38,12 @@ last_modified_date: 2022-06-11 00:15:47
 - HTML
   - $web/[CALPUFF.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/CALPUFF.html)
     - 開啟檔案(使用者提供的[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp))
-      - 使用者只能修改點源排放相關設定
+      - 使用者只能修改不涉及其他檔案的設定
+      - 範例說明如後。
     - 呼叫CGI-PY：CALPUFF.py或demo.py
   - $web/cpuff_results/demo/[autorefreash.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/autorefresh.html)：每10秒報告cpuff、或m3nc2gif.py的執行進度、連結到工作站整體模式運作情況網頁[status.html](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/status/)
   - $web/cpuff_results/demo/[done.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/done.html)：執行停止的結果畫面
-  - [$web/cpuff_results/demo/cpuff_gifs.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/cpuff_gifs.html)：模擬結果之gif檔案。
+  - $web/cpuff_results/demo/[cpuff_gifs.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/cpuff_gifs.html)：模擬結果之gif檔案，以[LC-GIF-Player](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/gif_player/#html播放器方案)進行播放。
 
 - CGI-PY
   - $cgi/calpuff/[CALPUFF.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.py)：啟動cpuff主程式、啟動監看程式waitc.cs
@@ -56,7 +57,20 @@ last_modified_date: 2022-06-11 00:15:47
 - INP
   - $web/cpuff_results/[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp)
   - $web/cpuff_results/demo/[calpost.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpost.inp)
-  - $web/cpuff_results/demo/wrfout_d04](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/wrfout_d04)
+  - $web/cpuff_results/demo/[wrfout_d04](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/wrfout_d04)(4.3M)：為[m3nc2gif.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif)所需要檔案。
+
+### CALPUFF.INP 目前開放功能
+- 常數之排放源相關設定、位置、排放量、排放條件
+  - [INPUT GROUPS: 13 – Point source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-13--point-source-parameters)
+  - [INPUT GROUPS: 14 – Area source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-14--area-source-parameters)
+  - [INPUT GROUPS: 15 – Line source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-15--line-source-parameters)
+  - [INPUT GROUPS: 16 – Volume source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-16--volume-source-parameters)
+- 化學設定
+
+### 座標系統說明
+- 座標原點：（23.61N，120.99E）、[TWD97](http://ts01.gi-tech.com.tw/waterAbnormal/trancoor/trancoor.aspx?WGS84_E=121&WGS84_N=24&TWD97_X=&TWD97_Y)（248979.464031498，2610725.45369074）
+- 輸入單位為公里
+- 詳細設定詳 [INPUT GROUP: 4 – Map Projection and Grid control parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-4--map-projection-and-grid-control-parameters)
 
 ## 監看程式$web/cpuff_results/[waitc.cs](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/waitc.cs)
 ### 執行方式
@@ -67,7 +81,7 @@ last_modified_date: 2022-06-11 00:15:47
 - 每10秒檢查一次
 - 判斷標準：PID是否仍然在執行中
   - 是：輸出執行進度之文字到檔案cpuff.out。prog.html會每10秒鐘重讀這個檔案。
-  - 否：跳脫迴圈，繼續執行後續處理
+  - 否：跳脫迴圈，執行calpuff後處理
 
 ```bash
 #$1=pth
@@ -90,12 +104,12 @@ for ((i=0; i>=0;i+=1));do
 done
 ```
 ### calpuff 後處理
-- 1.[calpuff.con轉nc檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2nc/)
+1. [calpuff.con轉nc檔案](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2nc/)
   - 需要正確路徑的python 
-- 2.[將nc檔案讀出寫成gif檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif)
-  - 需要減少檔名的長度（控制在10碼以下）
-  - 需要將nc檔內變數的單位予以更正
-  - 需要有GIF的播放器(LC-GIF-Player)，將GIF結果移到正確的位置。
+2. [將nc檔案讀出寫成gif檔案](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif)，略作調整：
+  - 減少檔名的長度（控制在10碼以下）
+  - 將nc檔內變數的單位予以更正
+  - 複製一份GIF的播放器([LC-GIF-Player](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/gif_player/#html播放器方案))，將GIF結果移到正確的位置。
 
 ```bash
 cd $1

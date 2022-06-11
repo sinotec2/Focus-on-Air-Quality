@@ -65,10 +65,12 @@ last_modified_date: 2022-06-11 00:15:47
   - [INPUT GROUPS: 14 – Area source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-14--area-source-parameters)
   - [INPUT GROUPS: 15 – Line source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-15--line-source-parameters)
   - [INPUT GROUPS: 16 – Volume source parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-groups-16--volume-source-parameters)
-- 化學設定
-
+- 化學相關設定
+  - [INPUT GROUP: 3 – Species list](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-3--species-list)
+  - [INPUT GROUP: 11 – Chemistry Parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-11--chemistry-parameters)
+- [INPUT GROUP: 12 – Misc. Dispersion and Computational Parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-12--misc-dispersion-and-computational-parameters)
 ### 座標系統說明
-- 座標原點：（23.61N，120.99E）、[TWD97](http://ts01.gi-tech.com.tw/waterAbnormal/trancoor/trancoor.aspx?WGS84_E=121&WGS84_N=24&TWD97_X=&TWD97_Y)（248979.464031498，2610725.45369074）
+- 座標原點：（23.61N，120.99E）、[TWD97](http://ts01.gi-tech.com.tw/waterAbnormal/trancoor/trancoor.aspx?WGS84_E=121&WGS84_N=24&TWD97_X=&TWD97_Y2)（248979.464031498，2610725.45369074）
 - 輸入單位為公里
 - 詳細設定詳 [INPUT GROUP: 4 – Map Projection and Grid control parameters](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/calpuff_inp/#input-group-4--map-projection-and-grid-control-parameters)
 
@@ -163,3 +165,9 @@ cpuff.out
 | ![cpuff_gifs.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_gifs.png)|
 |:-:|
 | <b>CPUFF721最終進度網頁畫面</b>|
+
+
+## 後續發展
+- 氣象個案的準備與選擇
+- 沉降量之轉檔
+- HRA物質的擴散及沉降

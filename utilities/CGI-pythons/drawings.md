@@ -33,6 +33,6 @@ last_modified_date: 2022-06-11 21:21:57
 - 工作目錄
   - `pth=WEB+'isc_results/kmls_'+ran+'/'`、ran是6碼亂數文字。
 ### 檢視
-- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://114.32.164.198/Leaflet/docs/index.html)服務
-- 事實上 Visual Code也提供了預覽KML檔案的插件，效果也還不錯。
+- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://114.32.164.198/Leaflet/docs/index.html)服務(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
+- 事實上 Visual Code也提供了預覽KML檔案的[插件](https://marketplace.visualstudio.com/items?itemName=jumpinjackie.vscode-map-preview)，效果也還不錯。
 

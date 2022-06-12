@@ -130,6 +130,33 @@ if [ $HM -le 800 ] || [ $HM -ge 1730 ];then
 fi
 ```
 
+## 不定期上載
+### [update_whnew](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/update_whnew)
+- 每次更新FAQ之後，會需要更改首頁的What's New連結，這個bash的批次檔就是幫助這個過程。
+- 因為macOS鎖住~/Documents讓終端機進入的權限（無關使用者權限），必須在Finder的目錄點選【新增位於檔案夾位置的終端機視窗】、或在VisualCode的目錄點選【在整合式終端機中開啟】
+- 進入命令列狀態後，將工作目錄移到Focus-on-Air-Quality.git所在根目錄
+- 直接執行批次檔`update_whnew`
+
+```bash
+#kuang@114-32-164-198 ~/Documents/jtd
+#cat update_whnew 
+d=~/Documents/jtd
+line=$(grep "\[What\'s New\]" $d/index.md)
+lastMD=$(echo $line|cut -d'(' -f2|cut -d')' -f1)
+newsMD=https://sinotec2.github.io/Focus-on-Air-Quality$(ls -rt $(findc "*.md")|grep -v index|tail -n1|cut -c 2-)
+newsMD=${newsMD/.md//}
+if [ $lastMD != $newsMD ]; then
+  sed -ie 's#'${lastMD}'#'${newsMD}'#' $d/index.md
+  TOKEN=$(cat ~/bin/git.token)
+  git add index.md
+  git commit -m "revised index.md"
+  git push https://sinotec2:$TOKEN@github.com/sinotec2/Focus-on-Air-Quality.git
+fi
+if [ -e $d/index.mde ];then rm $d/index.mde;fi
+```
+- What'sNew 的hyperlink 不是指定到.md檔，.md檔案在另外的github位置，github.io已經將其內容編譯成github.io的index.html，成為該.md檔案專屬特定的目錄。
+- index.md單獨上載，比較單純，前提是要將所有的上下載都已經完成。
+- dos系統不能適用
 
 ## Reference
 - wiki, [git](https://zh.wikipedia.org/wiki/Git), 页面最后修订于2022年3月23日 (星期三) 22:58。

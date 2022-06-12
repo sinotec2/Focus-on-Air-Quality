@@ -173,20 +173,20 @@ $ cat -n js/main.js
 一個好的地圖貼板、壁貼、是科學家、建築師、工程師、企業主、甚至軍事、偵察工作時必備的工具。在現代資訊工具的輔助下，貼板具備了縮放的功能、也提供許多地圖的細節資訊，在模式領域成為檢核過程的必要程序之一。
 ### 既有方案與比較
 * Google map
-    * google提供了KML格式，讓使用者可以在google 地圖上、貼上自己的資訊，最後發展成商業APP。
+    * google提供了[KML](https://developers.google.com/kml/documentation/kml_tut)格式，讓使用者可以在google 地圖上、貼上自己的資訊，最後發展成商業APP。
     * 因為Google地圖（街道、地形、衛星）資訊豐富、對KML有最充分的支援，因此也有最高的品質效果（色階、圖像）。
     * 缺點：除了版權的問題之外、界面略嫌繁瑣、速度不佳服務不穩定、對其他格式封閉、**資料筆數**限制
-* Leaflet open street map（OSM）
+* Leaflet open street map（[OSM](https://wiki.openstreetmap.org/wiki/Zh-hant:Main_Page)）
     * 程式碼開放、支援KML、json等許多格式、無版權問題、程式可客製化，資源需求較低，快速、穩定。
     * 缺點：對KML僅粗淺支援、品質未臻完全。
 ### 方案檢討
 * Google和OSM的最大公約數是KML格式，因此發展以KML為主的輸入、輸出格式為最合理的方向。
 * 雖然Google品質較佳、然而因為版權限制只能放棄，OSM雖然品質有限，然卻能快速、穩定提供檢核功能
 * TODO
-    * 出圖問題只能另外尋求方案（如NCL）。
+    * 出圖問題只能另外尋求方案（如[NCL](https://www.ncl.ucar.edu/)）。
     * KML之色階、圖像可列為遠期發展項目。
 ### 模版與工作
-參考網友公開之filelayer 與marker成果。
+參考網友公開之[filelayer](https://makinacorpus.github.io/Leaflet.FileLayer/) 與[marker](https://leafletjs.com/)成果。
 
 須修改項目：
 1. Headlines and footlines
@@ -194,7 +194,13 @@ $ cat -n js/main.js
 3. 圓點顏色（原版為紅色、鑑別度較低）、透明度（原版為不透明、遮蔽底圖）
 4. 合併標示第一點位置與訊息之標記
 ## CaaS
-位置：http://114.32.164.198/Leaflet/docs/index.html
+- 位置：http://114.32.164.198/Leaflet/docs/index.html
+- 貼圖成果
+
+| ![leaflet_demo.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/leaflet_demo.png)|
+|:--:|
+| <b>[http://114.32.164.198/Leaflet/docs/index.html](http://114.32.164.198/Leaflet/docs/index.html)畫面</b>|
+
 
 ## JS
 有關地圖的設定是在docs/index.js內
@@ -278,6 +284,10 @@ $ cat -n index.js
 * 再從左側點選適合的背景圖層
 * 勾掉Digitizations即暫時關閉使用者檔案圖層，只出現底圖。可作為比較、參照。
 * 如要永久關閉檔案，重新調整網頁即可。
+
+| ![leaflet_demo3.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/leaflet_demo3.png)|![leaflet_demo4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/leaflet_demo4.png)|
+|:--:|:--:|
+| <b></b>|<b></b>|
 
 ## Links
 - 開啟檔案圖層：https://makinacorpus.github.io/Leaflet.FileLayer/

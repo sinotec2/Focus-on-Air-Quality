@@ -4,5 +4,9 @@ lastMD=$(echo $line|cut -d'(' -f2|cut -d')' -f1)
 newsMD=https://sinotec2.github.io$(ls -rt $(findc "*.md")|grep -v index|tail -n1|cut -c 2-)
 if [ $lastMD != $newsMD ]; then
   sed -ie 's#'${lastMD}'#'${newsMD}'#' $d/index.md
+  TOKEN=$(cat ~/bin/git.token)
+  git add index.md
+  git commit -m "revised index.md"
+  git push https://sinotec2:$TOKEN@github.com/sinotec2/Focus-on-Air-Quality.git
 fi
 if [ -e $d/index.mde ];then rm $d/index.mde;fi

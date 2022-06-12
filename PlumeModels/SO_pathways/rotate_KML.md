@@ -50,6 +50,15 @@ last_modified_date: 2022-03-08 10:16:34
 ## CGI_Python程式設計
 ### 旋轉平移
 - 對某一點旋轉座標：參考[網友](https://math.stackexchange.com/questions/384186/calculate-new-positon-of-rectangle-corners-based-on-angle)之程式碼
+  - 同一副程式應用在[isc_parser.py](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/isc_parser/isc_parser.py)系列、[rd_kmlFull.py]()系列。
+
+```python
+    10    def rotate_about_a_point(target_point,center_point,angle_rs):
+    11      cp=np.subtract(target_point,center_point)
+    12      px=cp[0]*math.cos(math.radians(angle_rs))+cp[1]*-math.sin(math.radians(angle_rs))
+    13      py=cp[0]*math.sin(math.radians(angle_rs))+cp[1]*math.cos(math.radians(angle_rs))
+    14      return(np.add([px,py],center_point))
+```
 - 先審視是否太過偏斜：
   - 絕大工廠的廠房都是矩形，此處設定偏斜的標準為各建築物4面之角度的標準偏差>10度 (第75行)
 

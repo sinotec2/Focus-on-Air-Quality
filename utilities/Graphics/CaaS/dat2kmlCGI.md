@@ -39,5 +39,11 @@ last_modified_date: 2022-06-11 22:00:06
 - $web/[dat2kml.html]()
   - 使用[filepicker](https://github.com/sinotec2/CGI_Pythons/tree/main/utils/filepicker)開啟使用者指定上傳的檔案
   - 啟動CGI-python程式
-  - 提供[isc_results/case_SOX_Y.PLT]()範例檔案
+  - 提供[isc_results/case_SOX_Y.PLT](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/dat2kml/case_SOX_Y.PLT)AERMOD模擬結果範例檔案
+
 ### CGI-python
+- $cgi/isc/[dat2kmlCGI.py](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/dat2kml/dat2kmlCGI.py)，詳見[有關繪圖的CGI-pythons](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/drawings/#dat2kmlcgipy)的說明
+
+### EXE
+- `DAT2KML='/opt/local/bin/dat2kml.py'`，詳見[等值圖KML檔之撰寫](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
+- ``

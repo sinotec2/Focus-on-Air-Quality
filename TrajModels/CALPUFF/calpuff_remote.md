@@ -37,6 +37,7 @@ last_modified_date: 2022-06-11 19:58:12
 ### 檔案系統架構
 - HTML
   - $web/[CALPUFF.html](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/CALPUFF.html)
+    - 使用[filepicker](https://github.com/sinotec2/CGI_Pythons/tree/main/utils/filepicker)開啟使用者指定上傳的檔案
     - 開啟檔案(使用者提供的[calpuff.inp](https://github.com/sinotec2/CGI_Pythons/blob/main/CALPUFF/calpuff.inp))
       - 使用者只能修改不涉及其他檔案的設定
       - 範例說明如後。

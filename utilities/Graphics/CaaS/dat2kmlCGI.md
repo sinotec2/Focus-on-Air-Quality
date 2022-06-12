@@ -36,4 +36,8 @@ last_modified_date: 2022-06-11 22:00:06
 
 ## 檔案結構
 ### HTML
-- $web/dat2kml.html
+- $web/[dat2kml.html]()
+  - 使用[filepicker](https://github.com/sinotec2/CGI_Pythons/tree/main/utils/filepicker)開啟使用者指定上傳的檔案
+  - 啟動CGI-python程式
+  - 提供[isc_results/case_SOX_Y.PLT]()範例檔案
+### CGI-python

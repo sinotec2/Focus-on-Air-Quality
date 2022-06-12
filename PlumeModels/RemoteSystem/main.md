@@ -81,6 +81,8 @@ AER_CO_Y.PLT.kml
 AER_CO_01H.PLT.grd
 AER_CO_Y.PLT.grd
 ```
+- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://114.32.164.198/Leaflet/docs/index.html)服務進行檢視(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
+- 事實上 Visual Code也提供了預覽KML檔案的[插件](https://marketplace.visualstudio.com/items?itemName=jumpinjackie.vscode-map-preview)，效果也還不錯。
 
 ### Coding
 - [AERMOD.html](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/AERMOD.html)

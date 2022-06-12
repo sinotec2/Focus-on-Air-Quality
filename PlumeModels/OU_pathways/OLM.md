@@ -313,8 +313,8 @@ group ALL
 csv2kml.py -f NOx-Y.DAT -d ALL (*)
 ```
 
-http://200.200.12.191/Leaflet.FileLayer/docs/index.html
-http://200.200.31.47/iscParser.html
+- KML檢視，可以使用[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板)：http://114.32.164.198/Leaflet.FileLayer/docs/index.html
+- http://114.32.164.198/iscParser.html
 
 - AERMOD
 ```bash

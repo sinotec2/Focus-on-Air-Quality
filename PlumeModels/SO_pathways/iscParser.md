@@ -46,14 +46,18 @@ last_modified_date: 2022-03-08 17:46:18
     - 無法接受twd97系統座標，與工程圖有落差。
     - 工作底圖仍以google map有資訊體軟版權限制。
     - 不能每一台機器使用
-- 顧問機構提供的免費計算服務-排放源之立體空間解析([AEREarth](https://aerearth.airsci.com/))
+- 顧問機構[Air Sciences Inc](https://airsci.com/about/)提供的免費計算服務-排放源之立體空間解析([AEREarth Processor][ASI])
   - 提供KMZ檔、供Google Earth貼圖
   - 沒有UTM 51N之解析、無法符合TWD97座標系統
 - kml檔案之編撰
-  - 已有csv2kml.py、dat2kml.py為基礎，稍加整理運用即可、
-  - 無版權問題
+  - 已有[csv2kml.py][0]、[dat2kml.py][1]為基礎，稍加整理運用即可、
+  - 無版權問題、kml檔案已有許多顯示軟體、界面、插件
   - 輕量作業，不損失資源
   - 可與前述作業平行不影響原來作業方式
+
+[ASI]: <https://aerearth.airsci.com/> "Upload input files to receive 3D renderings of your model setup to view in Google Earth"
+[0]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/> "詳見【點狀資訊KML檔之撰寫(csv2kml.py)】"
+[1]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/#dat2kml> "詳見【等值圖KML檔之撰寫】、【dat2kml遠端計算服務】"
 
 ## 服務網頁
 - CaaS位置：[ISC/AERMOD 座標點位之KML轉檔系統](http://114.32.164.198/iscParser.html)

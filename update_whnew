@@ -13,4 +13,4 @@ if [ $lastMD != $newsMD ]; then
   git commit -m "revised index.md"
   git push https://sinotec2:$TOKEN@github.com/sinotec2/Focus-on-Air-Quality.git
 fi
-if [ -e $d/index.mde ];then rm $d/index.mde;fi
+if [ -e $d/index.mde ];then rm -f $d/index.mde;fi

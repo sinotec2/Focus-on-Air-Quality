@@ -1,10 +1,13 @@
 d=~/Documents/jtd
-line=$(grep "\[What\'s New\]" $d/index.md)
+line=$(grep News $d/index.md)
+oldDate=$(echo $line|cut -c10-19)
+newDate=$(date "+%Y-%m-%d")
 lastMD=$(echo $line|cut -d'(' -f2|cut -d')' -f1)
 newsMD=https://sinotec2.github.io/Focus-on-Air-Quality$(ls -rt $(findc "*.md")|grep -v index|tail -n1|cut -c 2-)
 newsMD=${newsMD/.md//}
 if [ $lastMD != $newsMD ]; then
   sed -ie 's#'${lastMD}'#'${newsMD}'#' $d/index.md
+  sed -ie '/News/s#'${oldDate}'#'${newDate}'#' $d/index.md
   TOKEN=$(cat ~/bin/git.token)
   git add index.md
   git commit -m "revised index.md"

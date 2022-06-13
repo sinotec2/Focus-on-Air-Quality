@@ -122,78 +122,22 @@ end
 cd /nas1/CAM-chem
 ```
 - mz2camxN3.job內容，注意化學物質的對照版本(CB6r4_CF__WACCM)
+- 座標及網格系統參照檔：`1709d4`([uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式))
+- 檔案管理
+  - 輸入檔即為前述m3.nc檔
+  - 因逐6小時處理，結果檔案會很多，放在output目錄下
 
 ```bash
 #kuang@master /nas1/CAM-chem
 #$ cat  mz2camxN3.job
-#!/bin/csh -f
-setenv PROMPTFLAG N
-setenv IOAPI_ISPH 20
-setenv LD_LIBRARY_PATH /opt/netcdf4/lib:/opt/hdf5/lib
+...
 set EXE = /nas1/camxruns/src/mozart2camx_v3.2.1/src/mozart2camx_CB6r4_CF__WACCM
-
-set YYMM = $1
-set MM = `echo $YYMM|cut -c 3-4`
-set YY = `echo $YYMM|cut -c 1-2`
-if ( $MM == 12) then
-        @ YN   = $YY + 1
-        @ YYMN = $YN * 100 + 1
-else
-        @ YYMN = $YYMM + 1
-endif
-if ( $MM == 01 ) then
-        @ YP = $YY - 1
-        @ YYMP = $YP * 100 + 12
-else
-        @ YYMP = $YYMM - 1
-endif
+...
 set MET = /nas1/camxruns/2017/met/mm09/1709d4
-
-# DEFINE OUTPUT FILE NAMES
-setenv EXECUTION_ID mz2camx.job
-setenv OUTFILEBC ./$YYMM"d4.bc"
-mkdir -p ./output
-foreach i ( 0 1 2 3 )
-foreach j ( 0 1 2 3 4 5 6 7 8 9 )
-if ( $i == '3' && $j > '1' ) goto BYPASS
-set k = $i$j
-if ( $k == '00' ) goto BYPASS
-set DATE = "20"$YYMM$k
-set NINFILE = 1
-
-foreach t ( 00 06 12 18 )
+...
 setenv OUTFILEIC ./output/$DATE$t"d4.ic"
-foreach INFILE ($YYMM.m3.nc)# m3/$2 m3/$3 m3/$4 m3/$5 m3/$6 )
-setenv INFILE1 $INFILE
-#if ( -e $OUTFILEIC ) goto BYPASS2
-set fs = `ls -l "$OUTFILEIC"|awk '{print $5}'`
-if ( $fs > '10000000' ) goto BYPASS2
-echo $OUTFILEIC
-rm -f $OUTFILEBC $OUTFILEIC
-
-echo $DATE$t
-set YYYYMMDD = $DATE
-$EXE << IEOF
-CAMx5,CAMx6,CMAQ   |CAMx 6
-ProcessDateYYYYMMDD|$YYYYMMDD
-Output BC file?    |.true.
-Output IC file?    |.true.
-If IC, starting hr |$t
-Output TC file?    |.false.
-Max num MZRT files |$NINFILE
-CAMx 3D met file   |$MET.3d
-CAMx 2D met file   |$MET.2d
-IEOF
-mv OUTFILEIC $OUTFILEIC
-mv OUTFILEBC $OUTFILEBC
-echo $INFILE1
-BYPASS2:
-end
-end
-BYPASS:
-end
-end
-exit 0
+foreach INFILE ($YYMM.m3.nc)
+...
 ```
 
 ### CAM-chem的成分
@@ -202,7 +146,10 @@ CAM模式與CMAQ模式成分對照如下表：
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM-chemSpec.png)
 
 ### 整併與轉換結果
-- 利用[shrink]()進行[uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案的污染物質(PM2.5、PM10及VOC)
+- 利用[shrink](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/PostProcess/shrink)進行[uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案的污染物質壓縮，以產生PM2.5、PM10及VOC項目。
+- 逐日結果[合併][cbin]成為逐月檔
+- 進行月均值之計算([tmavrg](https://github.com/sinotec2/CAMx_utility/wiki/tmavrg))
+
 ```bash
 $ cat ic2grd04.cs
 for m in {01..12};do 
@@ -216,6 +163,7 @@ for m in {01..12};do
   cd ../../
 done
 ```
+[cbin]: <https://github.com/sinotec2/CAMx_utility/wiki/cbin_avrg(cn)> "cbin_all 為傳統uamiv檔案的連接程式，功能與ncrcat之基本功能相同，詳見 https://github.com/sinotec2/CAMx_utility/blob/master/cbin_avrg.par.f"
 
 ## Reference
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021

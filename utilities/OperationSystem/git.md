@@ -3,7 +3,7 @@ layout: default
 title: git and github
 parent:   Operation System
 grand_parent: Utilities
-last_modified_date: 2022-03-11 15:46:30
+last_modified_date: 2022-06-13 09:02:53
 ---
 
 {: .no_toc }
@@ -132,21 +132,24 @@ fi
 
 ## 不定期上載
 ### [update_whnew](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/update_whnew)
-- 每次更新FAQ之後，會需要更改首頁的What's New連結，這個bash的批次檔就是幫助這個過程。
+- 每次更新FAQ之後，會需要更改首頁的`News at`連結，這個bash的批次檔就是幫助這個過程。
 - 因為macOS鎖住~/Documents讓終端機進入的權限（無關使用者權限），必須在Finder的目錄點選【新增位於檔案夾位置的終端機視窗】、或在VisualCode的目錄點選【在整合式終端機中開啟】
 - 進入命令列狀態後，將工作目錄移到Focus-on-Air-Quality.git所在根目錄
-- 直接執行批次檔`update_whnew`
+- 直接執行批次檔`update_whnew`，不需引數。
 
 ```bash
 #kuang@114-32-164-198 ~/Documents/jtd
 #cat update_whnew 
 d=~/Documents/jtd
-line=$(grep "\[What\'s New\]" $d/index.md)
+line=$(grep News $d/index.md)
+oldDate=$(echo $line|cut -c10-19)
+newDate=$(date "+%Y-%m-%d")
 lastMD=$(echo $line|cut -d'(' -f2|cut -d')' -f1)
 newsMD=https://sinotec2.github.io/Focus-on-Air-Quality$(ls -rt $(findc "*.md")|grep -v index|tail -n1|cut -c 2-)
 newsMD=${newsMD/.md//}
 if [ $lastMD != $newsMD ]; then
   sed -ie 's#'${lastMD}'#'${newsMD}'#' $d/index.md
+  sed -ie '/News/s#'${oldDate}'#'${newDate}'#' $d/index.md
   TOKEN=$(cat ~/bin/git.token)
   git add index.md
   git commit -m "revised index.md"
@@ -157,6 +160,9 @@ if [ -e $d/index.mde ];then rm $d/index.mde;fi
 - What'sNew 的hyperlink 不是指定到.md檔，.md檔案在另外的github位置，github.io已經將其內容編譯成github.io的index.html，成為該.md檔案專屬特定的目錄。
 - index.md單獨上載，比較單純，前提是要將所有的上下載都已經完成。
 - dos系統不能適用
+- `sed`如果要置換含有`/`(slash)的字串，可以將deliminator轉成其他(任何接在s指令之後的字元，如此處的`#`)，詳見[Unix & Linux：find and replace with sed with slash in find and replace string][1]
+
+[1]: <https://unix.stackexchange.com/questions/378990/find-and-replace-with-sed-with-slash-in-find-and-replace-string> "Not sure if you know, but sed has a great feature where you do not need to use a / as the separator. So, your example could be written as: sed -i 's#/var/www#/home/lokesh/www#g' lks.php It does not need to be a # either, it could be any single character. For example, using a 3 as the separator: echo 'foo' | sed 's3foo3bar3g' bar"
 
 ## Reference
 - wiki, [git](https://zh.wikipedia.org/wiki/Git), 页面最后修订于2022年3月23日 (星期三) 22:58。

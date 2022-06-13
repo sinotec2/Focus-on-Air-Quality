@@ -21,7 +21,7 @@ grand_parent: Utilities
 
 |alias|usage|full command|arguments|
 |----|----|----|----|
-|lst|list and sort by **time**察看最新檔案|`ls $1 --show-control-chars -hF --color=tty -lrt\|tail`|目錄、檔案群組(需double quotes)|
+|lst|list and sort by **time**察看最新檔案|`ls $1 --time-style=long-iso --show-control-chars -hF --color=tty -lrt\|tail`|目錄、檔案群組(需double quotes)|
 |lsS|list and sort by **size**察看最大檔案-自小到大|`ls $1 --show-control-chars -hF --color=tty -lrS\|tail`|目錄、檔案群組(需double quotes)|
 |lS|list and sort by **size**察看最大檔案-自大至小|`ls -alhS --color|head`|無引數|
 |lsd|list the directories察看目錄|`ls $1 --show-control-chars -hF --color=tty -l|grep "^d"`|目錄、檔案群組(需double quotes)|

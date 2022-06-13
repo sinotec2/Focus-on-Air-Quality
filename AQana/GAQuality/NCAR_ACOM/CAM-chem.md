@@ -235,15 +235,22 @@ nc.close
 ## 模擬結果之鄉鎮區平均與校正
 - Annual目錄下除彙整各年度年均值結果，其分析程式的用途與連結如下表。
 
-|檔案時間|程式名稱與連結|用圖|輸入檔|輸出檔|
+|檔案時間|程式名稱與連結|用途|輸入檔|輸出檔|
 |-|-|-|-|-|
-|2020-08-14 15:53|[dfpm.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm.py)|將歷年PM2.5測值寫成[binary檔案][obs]備用，並對縣市範圍繪製逐年核鬚圖以供趨勢確認|環保署歷年PM2.5測值[逐時檔][mxhr]、[縣市][cnty]、鄉鎮碼對照表|[binary檔][obs]、png圖檔|
-|2020-08-17 11:45|[grd04.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04.py)||||
+|2020-08-14 15:53|[dfpm.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm.py)|將歷年PM2.5測值寫成[binary檔案][obs]備用，並對縣市範圍繪製逐年核鬚圖以供趨勢確認|環保署歷年PM2.5測值[逐時檔][mxhr]、[縣市][cnty]、[鄉鎮碼][town]對照表|[binary檔][obs]、./pngs/png圖檔|
+|2020-08-18 17:03|[dfpm_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm_yd.py)|逐2年北中南空品區環保署測站逐時觀測結果之盒鬚圖|(同上)|./pngs/box_AQD.png|
+|2020-08-17 11:45|[grd04.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04.py)|類似dfpm.py但對象是針對CAM逐6小時模擬結果|各月份目錄下逐6小時avrg檔、[TWN_CNTY_3X3.nc][mask](mask)、[縣市][cnty]、[鄉鎮碼][town]對照表|[binary檔][sim]、png圖檔|
+|2020-08-17 13:25|[grd04_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04_yd.py)|逐2年北中南空品區CAM模擬結果之盒鬚圖|(同上)|box_AQD.png|
+|2020-08-25 16:32|[join_yc.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/join_yc.py)|合併觀測及模擬(校正)，並繪製空品區之盒鬚圖|前述2個binary檔案、縣市鄉鎮碼對照表、mask檔|box_AQD.png|
+|2020-09-07 13:08|[join_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/join_yd.py)|同上，但逐年進行分析，將鄉鎮區平均值分析結果輸出成csv檔|(同上)|鄉鎮區平均值ymd_s_vYY.csv(如[範例](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/ymd_s_v08.csv))|
+|2020-09-04 13:30|[ymd2nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/ymd2nc.py)|||
 
-[cnty]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/cnty2.csv> "no,cnty\n 1.0,taibeishi \n 2.0,gaoxiongshi"
+[mask]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/TWN_CNTY_3X3.nc> "臺灣地區D4範圍解析度3公里縣市網格之遮蔽(mask)nc檔，縣市代碼2碼，檔案大小1.4M"
+[cnty]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/cnty2.csv> "縣市代碼(2碼)、名稱(漢語拼音)"
+[town]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/town_aqstEnew.csv> "code舊4瑪,code1縣市,code2鄉鎮區,Name漢音,aq_st測站代碼逗號分開,new_code新8碼,TOWNENG通用拼音"
 [obs]: <> "檔名為PMf21_13_32_24_608.bin，各維度分別為21年、13月份、32日、24小時與608鄉鎮區"
 [mxhr]: <> "路徑名稱/home/backup/data/epa/pys/PM2.5_mxhr.csv，為/home/backup/data/epa/pys/specMaxHr.py處理結果"
-[sim]: <> "檔名為PMf13_12_124_137_83.bin，"
+[sim]: <> "檔名為PMf13_12_124_137_83.bin，各維度分別為13年、12月份、124筆逐6小時與Y、X網格"
 ## Reference
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021
 - wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021

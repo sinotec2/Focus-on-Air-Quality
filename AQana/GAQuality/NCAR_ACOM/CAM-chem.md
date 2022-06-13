@@ -121,11 +121,12 @@ foreach mm (`seq 1 12`)
 end
 cd /nas1/CAM-chem
 ```
-- mz2camxN3.job內容，注意化學物質的對照版本(CB6r4_CF__WACCM)
-- 座標及網格系統參照檔：`1709d4`([uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式))
-- 檔案管理
-  - 輸入檔即為前述m3.nc檔
-  - 因逐6小時處理，結果檔案會很多，放在output目錄下
+- [mz2camxN3.job](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/mz2camxN3.job)之內容重點如下，注意
+  - 化學物質的對照版本(CB6r4_CF__WACCM)
+  - 座標及網格系統參照檔：`1709d4`([uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式))
+  - 檔案管理
+    - 輸入檔即為前述m3.nc檔
+    - 因逐6小時處理，結果檔案會很多，放在output目錄下
 
 ```bash
 #kuang@master /nas1/CAM-chem

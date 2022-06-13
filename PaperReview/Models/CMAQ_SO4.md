@@ -59,7 +59,7 @@ DMS emissions with the Liss and Merlivat parametrization increase atmospheric su
 
 ### [Li et al., 2020][Li20b],  Regional and Urban-Scale Environmental Influences of Oceanic DMS Emissions over Coastal China Seas.
 
-At the urban scale, the addition of DMS emissions increase the SO2 and SO42− levels by 2% and 5%, respectively, and reduce ozone (O3) in the air of Shanghai by 1.5%~2.5%. DMS emissions increase fine-mode ammonium particle concentration distribution by 4% and 5%, and fine-mode nss-SO42− concentration distributions by 4% and 9% in the urban and marine air, respectively. 
+At the urban scale, the addition of DMS emissions increase the SO2 and SO42− levels by 2% and 5%, respectively, and reduce ozone (O<sub>3</sub>) in the air of Shanghai by 1.5%~2.5%. DMS emissions increase fine-mode ammonium particle concentration distribution by 4% and 5%, and fine-mode nss-SO42− concentration distributions by 4% and 9% in the urban and marine air, respectively. 
 
 [Li20b]: <https://doi.org/10.3390/atmos11080849> "Li, S., Zhang, Y., Zhao, J., Sarwar, G., Zhou, S., Chen, Y., Yang, G., Saiz-Lopez, A. (2020). Regional and Urban-Scale Environmental Influences of Oceanic DMS Emissions over Coastal China Seas. Atmosphere 11, 849. "
 
@@ -87,8 +87,8 @@ https://saga.pmel.noaa.gov/cache/std/dms_d8i720.dat
 
 - Natural marine emissions (Cl, Br, I and DMS) included in CMAQ simulations over LA.
 - Oceanic halogens and DMS may play an important role on coastal urban areas.
-- Substantial changes in the levels of key urban atmospheric oxidants (OH, HO2 and NO3).
-- O3 and NO2 ambient levels decreased by 5 ppbv and 2.5 ppbv in Los Angeles city.
+- Substantial changes in the levels of key urban atmospheric oxidants (OH, HO2 and NO<sub>3</sub>).
+- O<sub>3</sub> and NO2 ambient levels decreased by 5 ppbv and 2.5 ppbv in Los Angeles city.
 10% increase in secondary organic aerosol (SOA) due to dimethyl sulphide (DMS).
 
 [Muñiz18]: <https://doi.org/10.1016/j.scitotenv.2017.06.098> "Muñiz-Unamunzaga, M., Borge, R., Sarwar, G., Gantt, B., de la Paz, D., Cuevas, C.A., Saiz-Lopez, A. (2018). The influence of ocean halogen and sulfur emissions in the air quality of a coastal megacity: The case of Los Angeles. Science of The Total Environment 610–611, 1536–1545. "

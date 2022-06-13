@@ -120,11 +120,11 @@ last_modified_date: 2022-06-01 11:29:09
 
 ### 美國東南部跨境傳輸減量規劃([Odman et al. 2020][Odman et al. 2020])
 - 該研究以CAMx/CB6r2及CMAQ/CB05模式分析東南部10州（阿拉巴馬州、佛羅里達州、喬治亞州、肯塔基州、密西西比州、北卡羅來納州、南卡羅來納州、田納西州、弗吉尼亞州和西弗吉尼亞州）對臭氧 (O3) 的貢獻，以符合該國法規要求。
-- 由於 2017 年O3設計值(DVF)已經公佈，因此該研究也檢討了EPA推薦的建模方法(CMAQ/CB05)的準確性。
+- 由於 2017 年O<sub>3</sub>設計值(DVF)已經公佈，因此該研究也檢討了EPA推薦的建模方法(CMAQ/CB05)的準確性。
 - 一般來說，CAMx/CB6r2 模擬的 DVF 比 CMAQ/CB05 更高，平均差異為 0.5 ppb。因此，本研究確認美國東部的 24 個地點為 CAMx/CB6r2 未達標（DVF ≥76 ppb），而 CMAQ/CB05 只有 16 個地點。
 - 使用監測站網格點的 ( relative response factors RRF) 而不是 附近3×3矩陣最大 RRF（EPA 提議的跨州空氣污染規則 (CSAPR) 建模中使用的方法）（EPA，2015a），後者會導致某些監測站的 DVF 更高，並且降低其他站的 DVF。
-- 使用 CAMx人為污染源評估工具 (Anthropogenic Precursor Culpability Assessment APCA) 結果顯示，在順風狀態下，NOx 排放量對 O3 的貢獻超過 VOC。
-- 使用 CAMx/APCA 以及 CMAQ/歸零模擬分別量化了東南各州的人為 NOx 排放總量和發電機組 (EGU) NOx 排放對下游 O3 的貢獻。
+- 使用 CAMx人為污染源評估工具 (Anthropogenic Precursor Culpability Assessment APCA) 結果顯示，在順風狀態下，NOx 排放量對 O<sub>3</sub> 的貢獻超過 VOC。
+- 使用 CAMx/APCA 以及 CMAQ/歸零模擬分別量化了東南各州的人為 NOx 排放總量和發電機組 (EGU) NOx 排放對下游 O<sub>3</sub> 的貢獻。
   - 從 CAMx/APCA 獲得的貢獻量通常大於從 CMAQ/歸零的結果。
   - 因此，由 CAMx/APCA 確定認為[重大貢獻][sig]的減量，可能對CMAQ/歸零法而言是微不足道的。   
   - 阿拉巴馬州、肯塔基州、密西西比州、田納西州、弗吉尼亞州和西弗吉尼亞州與 CAMx/APCA 的 2、3、1、1、6 和 5 個未達標地點相關聯。
@@ -149,4 +149,4 @@ last_modified_date: 2022-06-01 11:29:09
 [Itahashi et al. 2018]: <https://www.mdpi.com/2073-4433/9/12/488> "Itahashi, S., Yamaji, K., Chatani, S., Hisatsune, K., Saito, S., and Hayami, H. (2018). Model Performance Differences in Sulfate Aerosol in Winter over Japan Based on Regional Chemical Transport Models of CMAQ and CAMx. Atmosphere 9 (12):488. doi:10.3390/atmos9120488."
 
 [Odman et al. 2020]: <https://www.researchgate.net/publication/341613008_Interstate_transport_of_ozone_in_eastern_United_States_An_analysis_of_the_impact_of_southeastern_states'_emissions_in_2017> "Odman, M., Qin, M., Hu, Y., Russell, A., and Boylan, J. (2020). Interstate transport of ozone in eastern United States: An analysis of the impact of southeastern states’ emissions in 2017. Atmospheric Environment 236:117628. doi:10.1016/j.atmosenv.2020.117628."
-[sig]: <> "「顯著貢獻」為影響大於 2008 年 O3 NAAQS 的 1%（即≥0.76 ppb）"
+[sig]: <> "「顯著貢獻」為影響大於 2008 年 O<sub>3</sub> NAAQS 的 1%（即≥0.76 ppb）"

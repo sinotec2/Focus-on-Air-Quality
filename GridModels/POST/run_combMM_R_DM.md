@@ -74,7 +74,7 @@ VOC             ,ppbC      ,1000.0* (PAR[1] +2.0*ETHA[1] +3.0*PRPA[1] +MEOH[1]\
                            +5.0*ISOP[1] + 10.0*TERP[1]+ 10.0*NAPH[1] +10.*APIN[1])
 ```
 
-- PM2.5的定義
+- PM<sub>2.5</sub>的定義
   - PM25AT[3]、PM25AC[3]、PM25CO[3]三個值即為CCTM_APMDIAG檔案內之[Aitken](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) 、[accumulation](https://glossary.ametsoc.org/wiki/Accumulation_mode)及 [coarse](https://ec.europa.eu/health/scientific_committees/opinions_layman/en/indoor-air-pollution/glossary/abc/coarse-particles.htm) mode。
   - ATOTI[0]、ATOTJ[0]、ATOTK[0]為CCTM_APMDIAG檔案內之3個mode之粒狀物濃度加總結果。
 
@@ -210,7 +210,7 @@ $ cat -n ~/GitHub/cmaq_relatives/combine/run_combMM_R_DM.csh
     88	 
 ```
 - 物質名稱之定義
-  - VOC、PM2.5、PM<sub>10</sub>之開啟與其詳細計算公式
+  - VOC、PM<sub>2.5</sub>、PM<sub>10</sub>之開啟與其詳細計算公式
   - 「輸出檔的層數」也在此檔案內修改
   - 濃度與沉降量2大類
 

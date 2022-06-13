@@ -237,7 +237,7 @@ nc.close
 
 |檔案時間|程式名稱與連結|用途|輸入檔|輸出檔|
 |-|-|-|-|-|
-|2020-08-14 15:53|[dfpm.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm.py)|將歷年PM2.5測值寫成[binary檔案][obs]備用，並對縣市範圍繪製逐年核鬚圖以供趨勢確認|環保署歷年PM2.5測值[逐時檔][mxhr]、[縣市][cnty]、[鄉鎮碼][town]對照表|[binary檔][obs]、./pngs/png圖檔|
+|2020-08-14 15:53|[dfpm.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm.py)|將歷年PM<sub>2.5</sub>測值寫成[binary檔案][obs]備用，並對縣市範圍繪製逐年核鬚圖以供趨勢確認|環保署歷年PM<sub>2.5</sub>測值[逐時檔][mxhr]、[縣市][cnty]、[鄉鎮碼][town]對照表|[binary檔][obs]、./pngs/png圖檔|
 |2020-08-18 17:03|[dfpm_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm_yd.py)|逐2年北中南空品區環保署測站逐時觀測結果之盒鬚圖|(同上)|./pngs/box_AQD.png|
 |2020-08-17 11:45|[grd04.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04.py)|類似dfpm.py但對象是針對CAM逐6小時模擬結果|各月份目錄下逐6小時avrg檔、[TWN_CNTY_3X3.nc][mask](mask)、[縣市][cnty]、[鄉鎮碼][town]對照表|[binary檔][sim]、png圖檔|
 |2020-08-17 13:25|[grd04_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04_yd.py)|逐2年北中南空品區CAM模擬結果之盒鬚圖|(同上)|box_AQD.png|

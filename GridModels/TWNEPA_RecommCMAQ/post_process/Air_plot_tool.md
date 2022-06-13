@@ -99,7 +99,7 @@ $ tree
 
 ### 結果圖面
 - matplotlib等值圖檔的容量並不小，一個檔案約140KB
-- 2019/1月底事件的NO2及O3小時濃度變化，如[GIF](https://sinotec2.github.io/RecModResults/)所示
+- 2019/1月底事件的NO2及O<sub>3</sub>小時濃度變化，如[GIF](https://sinotec2.github.io/RecModResults/)所示
 
 
 | ![air_plot_result.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/air_plot_result.png) |

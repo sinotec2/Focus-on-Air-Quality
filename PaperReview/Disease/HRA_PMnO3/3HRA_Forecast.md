@@ -1,7 +1,7 @@
 ---
 layout: default
-title: PM&O<sub>3</sub> HRA
-parent: HRA for PM & O<sub>3</sub> 
+title: PM&O3 HRA for XinDa Project
+parent: HRA for PM & O3 
 grand_parent: Disease and Air Pollution
 nav_order: 3
 last_modified_date: 2022-06-13 09:29:35

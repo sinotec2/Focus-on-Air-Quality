@@ -22,7 +22,7 @@ grand_parent: Utilities
   - Command（或 Cmd）鍵 ⌘
   - Shift 鍵 ⇧
   - Option（或 Alt）鍵 ⌥
-  - Control（或 Ctrl）鍵 ⌃
+  - Control（或 <kbd>Ctrl</kbd>）鍵 ⌃
   - Caps Lock 鍵 ⇪
   - Fn 鍵
 

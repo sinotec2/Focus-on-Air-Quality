@@ -243,8 +243,11 @@ nc.close
 |2020-08-17 13:25|[grd04_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04_yd.py)|逐2年北中南空品區CAM模擬結果之盒鬚圖|(同上)|box_AQD.png|
 |2020-08-25 16:32|[join_yc.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/join_yc.py)|合併觀測及模擬(校正)，並繪製空品區之盒鬚圖|前述2個binary檔案、縣市鄉鎮碼對照表、mask檔|box_AQD.png|
 |2020-09-07 13:08|[join_yd.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/join_yd.py)|同上，但逐年進行分析，將鄉鎮區平均值分析結果輸出成csv檔|(同上)|鄉鎮區平均值ymd_s_vYY.csv(如[範例](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/ymd_s_v08.csv))|
-|2020-09-04 13:30|[ymd2nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/ymd2nc.py)|||
+|2020-09-04 13:30|[ymd2nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/ymd2nc.py)|結合各年度校正後的鄉鎮平均濃度，將其寫成m3.nc檔案格式，以利VERDI檢視繪圖|[20160101.ncT][T]、前述各鄉鎮區平均濃度校正值csv檔|[PM25_TOT.nc][P]|
+|2020-09-04 13:53|[y2nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/y2nc.py)|同上，整併所有年度在同一個檔案|同上|同上|
 
+[T]: <> "為mk_townNew.py所製作，為新8碼鄉鎮區之網格佔比"
+[P]: <> "只有單一污染項目PM25_TOT，只有用到前12個值記錄各年度平均值"
 [mask]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/TWN_CNTY_3X3.nc> "臺灣地區D4範圍解析度3公里縣市網格之遮蔽(mask)nc檔，縣市代碼2碼，檔案大小1.4M"
 [cnty]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/cnty2.csv> "縣市代碼(2碼)、名稱(漢語拼音)"
 [town]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/town_aqstEnew.csv> "code舊4瑪,code1縣市,code2鄉鎮區,Name漢音,aq_st測站代碼逗號分開,new_code新8碼,TOWNENG通用拼音"

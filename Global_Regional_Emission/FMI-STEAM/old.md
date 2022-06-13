@@ -29,7 +29,7 @@ last_modified_date: 2022-02-05 10:26:11
   - nc2m3、以及
   - 後處理程式slim、cbin等，
   - 最後應用python程式加進CMAQ面排放源裏。
-- mozart2camx程式中會將mozart的濃度單位(重量混合比)轉camx的濃度單位(ppm)，公式 VMR = 28.9644 / mw * 1e6 * MMR 可以參考ecmwf網站。(詳下述)
+- [mozart2camx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)程式中會將mozart的濃度單位(重量混合比)轉camx的濃度單位(ppm)，公式 VMR = 28.9644 / mw * 1e6 * MMR 可以參考ecmwf網站。(詳下述)
 
 ## Sources
 - Data
@@ -325,7 +325,7 @@ done
 - 同時也必須限定最多同時執行的個數否則電腦CPU也不夠這麼多job同時計算
 - d1搭配_9(約81k)、d2搭配_3(約27k)、d3、d4則為原解析度
 - mz2camx.job的內容另外說明如下
-- mozart2camx 會將輸入內容按成分進行MMR->VMR(ppm)轉換
+- [mozart2camx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz) 會將輸入內容按成分進行MMR->VMR(ppm)轉換
 
 ```bash
 kuang@114-32-164-198 /Users/TEDS/MACMIP/RadioForce8.5/ships

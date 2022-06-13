@@ -29,7 +29,7 @@ last_modified_date:   2021-12-12 16:29:14
   - 空氣品質濃度的名稱、意義、及單位
 - 前者的檔案格式詳見[Using MOZART-4 output](https://wiki.ucar.edu/display/mozart4/Using+MOZART-4+output)
 - 後者格式稱之為[IOAPI](https://www.cmascenter.org/ioapi/)格式
-- 此處應用**Ramboll**公司多年來提供的[NCF2IOAPI](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.26feb19_1.tgz)進行轉檔
+- 此處應用**Ramboll**公司多年來提供的[NCF2IOAPI](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)進行轉檔
 
 [CAM-chem]: <https://wiki.ucar.edu/display/camchem/Home> "The Community Atmosphere Model with Chemistry (CAM-chem) is a component of the NCAR Community Earth System Model (CESM) and is used for simulations of global tropospheric and stratospheric atmospheric composition."
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
@@ -37,7 +37,7 @@ last_modified_date:   2021-12-12 16:29:14
 ## 下載、準備、編譯
 
 ### 下載
-- NCF2IOAPI為`mozart2camx`壓縮包裡的一支程式，目前最新版本是`v3.2.1`。
+- NCF2IOAPI為[mozart2camx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)壓縮包裡的一支程式，目前最新版本是`v3.2.1`。
 
 ### netCDF及IOAPI的編譯
 - netCDF需要有libnetcdf.a（`C`） 及libnetcdff.a（`fortran`、似乎只能自行編譯）、以及相應包括檔

@@ -60,7 +60,7 @@ last_modified_date:   2021-12-12 16:29:36
 1. Submit之後，等待系統寄來下載網址，約<1~2小時之久。雖然網址只在48小時內有效，此一期間已足夠下載全年數據。 
 - 網址內容之萃取
   - 全選系統寄來信件之內容、貼在工作站系統成為一文字檔(如`EMAIL.TXT`)
-  - 使用GREP指令：g`rep http EMAIL.TXT >http.txt`
+  - 使用GREP指令：`grep http EMAIL.TXT >http.txt`
   - `wget`指令。範例如下：
 
 ```bash
@@ -116,5 +116,5 @@ done
 
 ## Reference
 - wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021
-- Ramboll, **mozart2camx.26feb19.tgz**, [CAMx](https://www.camx.com/download/support-software/), 2/26/2019
+- Ramboll, **mozart2camx**,  |[6apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz), 4/6/2022
 - acom.ucar, **Mozart Download**, [ucar.edu](http://www.acom.ucar.edu/wrf-chem/mozart.shtml), 2013-08-30.

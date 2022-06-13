@@ -1,6 +1,6 @@
 d=~/Documents/jtd
 line=$(grep News $d/index.md)
-oldDate=$(echo $line|cut -c10-19)
+oldDate=$(echo $line|cut -d' ' -f3|cut -c1-10)
 newDate=$(date "+%Y-%m-%d")
 lastMD=$(echo $line|cut -d'(' -f2|cut -d')' -f1)
 newsMD=https://sinotec2.github.io/Focus-on-Air-Quality$(ls -rt $(findc "*.md")|grep -v index|tail -n1|cut -c 2-)

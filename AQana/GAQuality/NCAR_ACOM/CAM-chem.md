@@ -84,6 +84,28 @@ done
 - 其餘等候ucar網站寄來email與信件內網址之處理、更名等過程，詳見[mozart模擬結果之下載](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/#mozart模擬結果之下載)。
 
 ## 檔案處理
+### 檔案管理
+- 下載檔案名稱不含有時間資訊，需自nc檔內之歷史訊息(如下)中，將其讀出
+- `"Thu Aug  6 20:02:09 2020: /usr/local/nco-4.7.9/bin/ncks -d lat,-2.0,47.0 -d lon,80.0,160.0 /data14a/CAM-Chem/2010/fmerra
+.2.1003.FCSD.f09.qfedcmip.56L.001.cam.h1.2010-01-31-00000.nc /net/web3/webt/cam-chem/temp-test/20200806200209164866-20100131.nc" ;`
+
+```bash
+kuang@master /nas1/CAM-chem
+$ cat mvv.cs
+for nc in $(ls cam*nc);do i=$(ncdump -h $nc|grep ncks|cut -d/ -f10|cut -d . -f11|cut -c -10);mv $nc $i.nc;done
+```
+
+- 將下載檔案放在指定月份之目錄，方便後續逐月處理。
+
+```bash
+kuang@master /nas1/CAM-chem
+$ cat ln_yy.cs
+
+for y in 200{0..6};do for m in {01..12};do mkdir -p $y/$y$m;done;done
+for y in 200{0..6};do for m in {01..12};do cd $y/$y$m;ln -s ../${y}-${m}-[12]1.nc .;cd ../..;done;done
+for y in 200{0..6};do for m in {01..12};do cd $y/$y$m;yy=$(date -d "${y}-${m}-01 -1 days" +%Y);mm=$(date -d "${y}-${m}-01 -1 days" +%m);dd=$(date -d "${y}-${m}-01 -1 days" +%d);ln -sf ../../$yy/${yy}-${mm}-${dd}.nc .;cd ../..;done;done
+```
+
 ### 下載檔案轉成ioapi之nc檔(nc2m3)
 - 使用Ramboll公司提供的[ncf2ioapi](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)，詳[全球模式結果檔案的轉換(nc2m3)](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/ncf2ioapi/)，轉換結果為ioapi之nc檔(`$jj.m3.nc`、不必保留)。 
 - 主要進行nc檔案的格式轉換，座標、網格、化學物質種類等內容並無差異。
@@ -166,6 +188,62 @@ done
 ```
 [cbin]: <https://github.com/sinotec2/CAMx_utility/wiki/cbin_avrg(cn)> "cbin_all 為傳統uamiv檔案的連接程式，功能與ncrcat之基本功能相同，詳見 https://github.com/sinotec2/CAMx_utility/blob/master/cbin_avrg.par.f"
 
+### 逐月檔案整併成全年
+- 因每月檔案並不小，使用cbin_all策略雖然簡單卻不是很有效益，改採python進行。
+- 執行批次檔腳本如下
+
+```bash
+kuang@master /nas1/CAM-chem
+$ cat cb.cs
+for y in {07..13};do cd 20$y;for m in {01..12};do cd *$m/output;python ../../../cbin.py $y${m};cd ../../;done;cd ..;done &
+```
+- cbin.py引用PseudoNetCDF的uamiv模組存取檔案
+
+```python
+#kuang@master /nas1/CAM-chem
+#$ cat cbin.py
+import sys,os,datetime
+from PseudoNetCDF.camxfiles.Memmaps import uamiv
+
+fname=sys.argv[1]+'IC.S.grd04L'
+nc=uamiv(fname,'r+')
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
+delH=6
+nc.TSTEP=delH*10000
+nn=24/delH
+yr=2000+int(sys.argv[1][0:2])
+mn=int(sys.argv[1][2:4])
+date0=datetime.datetime(yr,1,1)
+bdate=datetime.datetime(yr,mn,1)
+nc.STIME=0
+nc.SDATE=yr*1000+(bdate-date0).days+1
+for v in ['PM10','PM25']:
+  nc.variables[v].units='ug/m**3'
+for t in range(nt):
+  nc.variables['TFLAG'][t,:,1]=[ t%nn*nc.TSTEP for i in range(len(V[3]))] #utc
+  tdate=bdate+datetime.timedelta(days=t*delH/24)
+  if tdate.month != mn:continue
+  fn_t=tdate.strftime("%Y%m%d%H")+'d4.ic.S.grd04'
+  nc_t=uamiv(fn_t,'r')
+  for v in V[3]:
+    nc.variables[v][t,0,:,:]=nc_t.variables[v][0,0,:,:]
+  nc_t.close
+nc.close
+```
+
+## 模擬結果之鄉鎮區平均與校正
+- Annual目錄下除彙整各年度年均值結果，其分析程式的用途與連結如下表。
+
+|檔案時間|程式名稱與連結|用圖|輸入檔|輸出檔|
+|-|-|-|-|-|
+|2020-08-14 15:53|[dfpm.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/dfpm.py)|將歷年PM2.5測值寫成[binary檔案][obs]備用，並對縣市範圍繪製逐年核鬚圖以供趨勢確認|環保署歷年PM2.5測值[逐時檔][mxhr]、[縣市][cnty]、鄉鎮碼對照表|[binary檔][obs]、png圖檔|
+|2020-08-17 11:45|[grd04.py](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/grd04.py)||||
+
+[cnty]: <https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/cnty2.csv> "no,cnty\n 1.0,taibeishi \n 2.0,gaoxiongshi"
+[obs]: <> "檔名為PMf21_13_32_24_608.bin，各維度分別為21年、13月份、32日、24小時與608鄉鎮區"
+[mxhr]: <> "路徑名稱/home/backup/data/epa/pys/PM2.5_mxhr.csv，為/home/backup/data/epa/pys/specMaxHr.py處理結果"
+[sim]: <> "檔名為PMf13_12_124_137_83.bin，"
 ## Reference
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021
 - wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021

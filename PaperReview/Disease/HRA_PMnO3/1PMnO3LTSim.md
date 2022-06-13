@@ -213,10 +213,19 @@ CMAQ的氣象前處理MCIP (5.0)模式有較高標準的限制，除了土地使
 ## 長期鄉鎮平均之PM與O3空氣品質
 分析臺南市、高雄市及屏東縣等3縣市108個鄉鎮區，年度含蓋2007~2017年共11年，PM2.5及O3濃度乃讀自CAM-chem ([Community Atmosphere Model][CAM-chem]) 模式模擬結果，並以環保署在縣市測站之年平均值進行校正，作為相關性分析之依據。
 
-數據下載、處理分析、與校正之方法與過程，詳見[CAM-chem模式結果之讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/CAM-chem/)。
+由於歷年之空品模擬已經在NCAR系統架構中持續進行，全球數據下載、處理分析、與校正之方法與過程，詳見[CAM-chem模式結果之讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/CAM-chem/)。
 
 ### 時間趨勢
+- CAM-chem模擬結果經校正調整後臺灣各空品區的歷年平均值
+
+| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDobs.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDsim.png)|
+|:--:|:--:|
+| <b>環保署測值</b>|<b>CAM-chem模擬校正調整後</b>|
 
 ### 空間分布
+- 臺灣各鄉鎮區之平均值
 
+| ![recm_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/recm_byTown.PNG)|![CAM_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM_byTown.PNG)|
+|:--:|:--:|
+|<b>環保署模擬2019平均值</b>|<b>CAM-chem模擬結果經校正調整後的歷年平均值</b>|
 

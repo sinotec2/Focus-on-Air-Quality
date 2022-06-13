@@ -23,15 +23,9 @@ last_modified_date: 2022-06-13 09:29:35
 本章建立衍生性空氣品質項目(衍生性PM<sub>2.5</sub>、PM10、O<sub>3</sub>等)之光化模式，應用在大範圍之健康風險計算，建立以疾病發生率(而不是死亡率)為指標的健康風險模型。本評估工作不考慮軌跡、箱型模式等其他選項，檢討現行應用中與發展中的模式，選擇合適的模式進行評估；其次依據目前可取得最完整的原始資料以建立模式所需要的排放、氣象、邊界、初始以及地理檔案。
 
 本評估工作探討興達電廠鄰近區域，其與空氣污染物暴露相關之慢性疾病發生率在時間與空間上之變異與分佈，以評估電廠污染物減量所對應之疾病負擔。方法及步驟依序為：
-<div  class="thi-step"><div class="step"><div class="step-number"></div><div class="step-content" markdown="1">
 1.	解析興達發電廠週遭鄉鎮市區，其主要慢性疾病發生率之空間分佈。
-</div></div>
-<div  class="thi-step"><div class="step"><div class="step-number"></div><div class="step-content" markdown="1">
 2.	以單一年份為時間解析度，探討興達發電廠週遭鄉鎮市區，其主要慢性疾病發生率之時間趨勢。
-</div></div>
-<div  class="thi-step"><div class="step"><div class="step-number"></div><div class="step-content" markdown="1">
 3.	利用次級健康資料庫(secondary health database)，透過合適流行病學調查方法設計，如生態研究法(ecological study)或世代追蹤法(cohort study)，並結合空氣污染模式推估結果，評估衍生性空氣污染物暴露與主要慢性疾病發生率之相關性研究。
-</div></div>
 
 根據美國健康影響研究所(Health Effects Institute, HEI)公布2019年全球空氣品質報告(State of Global Air Report)，與PM<sub>2.5</sub>長期暴露有較高相關性的5種疾病為缺血性心臟病、中風、下呼吸道感染、慢性阻塞性肺疾病及第二型糖尿病，本評估工作分析上述5種疾病近幾年發生率之時間與空間分佈結果後，再以基底為臺南市、高雄市及屏東縣各行政區之模擬年平均PM<sub>2.5</sub>濃度，建立臺灣地區本土化之疾病發生機率風險係數，評估單位污染物濃度增減，衍生疾病發生率之變化。
 

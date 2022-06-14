@@ -40,7 +40,7 @@ last_modified_date: 2022-06-13 09:29:35
 | ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/flowchart.PNG){:height="360px" width="360px"}| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/flowchart2.PNG){:height="360px" width="360px"}|
 |:-:|:-:|
 | <b>(a)看診紀錄篩選流程</b>| <b>(b)就醫承保紀錄篩選流程</b>|
- 
+
 - 首先排除看診者為20歲以下的看診資料，根據每一筆看診紀錄的疾病分類代碼(ICD9、ICD10)來找出當年度研究疾病的看診紀錄，各疾病分類代碼如表1所示。
 - 由於一年中同一人可能會因同一疾病看診多次，在此依照ID欄位去除同一人重複看診的資料後，同一個人只會留下一筆資料，即為當年度研究疾病的看診人數。
 - 再依據資料庫中地區欄位篩選出研究區域之看診紀錄。

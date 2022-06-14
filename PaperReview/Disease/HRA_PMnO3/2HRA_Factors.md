@@ -37,17 +37,15 @@ last_modified_date: 2022-06-13 09:29:35
 
 #### 圖1	鄉鎮市區民眾就醫看診紀錄與就醫承保紀錄篩選流程圖
 
-| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/flowchart.PNG){:height="36px" width="36px"}| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/flowchart2.PNG){:height="36px" width="36px"}|
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/flowchart.PNG){:height="360px" width="360px"}| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/flowchart2.PNG){:height="360px" width="360px"}|
 |:-:|:-:|
-| <b>看診紀錄篩選流程</b>| <b>就醫承保紀錄篩選流程</b>|
-
+| <b>(a)看診紀錄篩選流程</b>| <b>(b)就醫承保紀錄篩選流程</b>|
  
 - 首先排除看診者為20歲以下的看診資料，根據每一筆看診紀錄的疾病分類代碼(ICD9、ICD10)來找出當年度研究疾病的看診紀錄，各疾病分類代碼如表1所示。
 - 由於一年中同一人可能會因同一疾病看診多次，在此依照ID欄位去除同一人重複看診的資料後，同一個人只會留下一筆資料，即為當年度研究疾病的看診人數。
 - 再依據資料庫中地區欄位篩選出研究區域之看診紀錄。
 - 完成以上篩選流程後依照年齡分為五個區間，20歲至29歲為第1組、30歲至39歲為第2組、40歲至49歲為第3組、50歲至59歲為第4組、60歲以上為第5組，
 - 依照前述年齡分組以及性別計算當年度各種疾病在研究區域各個組別的看診人數。
-
 
 #### 表1	5種主要疾病對應之ICD-9/10編碼
 
@@ -60,8 +58,7 @@ last_modified_date: 2022-06-13 09:29:35
 |第二型糖尿病|(Diabetes mellitus type 2)|E11-E11.1,E11.3-E11.9|250.00-250.93|
 
 ### 計算地區人口數
-由全民健康保險研究資料庫的200萬人抽樣檔中之「全民健保處方及治療明細檔_門急診」檔案，來篩選研究疾病2005~2017年在臺南市、高雄市及屏東縣的看診紀錄，並計算得病人數。研究疾病為缺血性心臟病、中風、下呼吸道感染、慢性阻塞性肺疾病及第二型糖尿病等5種，篩選流程如圖2。
-#### 圖2	鄉鎮市區民眾篩選流程圖
+由全民健康保險研究資料庫的200萬人抽樣檔中之「全民健保處方及治療明細檔_門急診」檔案，來篩選研究疾病2005~2017年在臺南市、高雄市及屏東縣的看診紀錄，並計算得病人數。研究疾病為缺血性心臟病、中風、下呼吸道感染、慢性阻塞性肺疾病及第二型糖尿病等5種，篩選流程如圖1(b)。
 
 ### 串接承保檔資料與門診資訊
 取得上述兩個步驟的資料集後，便可依據臺南市、高雄市及屏東縣各個鄉鎮市區、5個年齡分組以及男女性別後，串接各分組之罹病人數及總人口數，最後形成一個以地區、年齡與性別分組的資料表。此資訊也會使用於後續分析目標區與對照區疾病之發生差異，以及了解空氣污染暴露與疾病相關性分析。
@@ -69,10 +66,11 @@ last_modified_date: 2022-06-13 09:29:35
 ### 計算地區疾病粗發生率及標準化發生率
 疾病粗發生率(crude incidence)之計算方法為一地區各組得病人數總和除以該地區各組人口數，而針對年齡及性別校正之標準化發生率(standardized incidence)之計算方法，為利用該組得病人數除以該組人口數，再乘上全國該組人口數除以全國總人口數之總和，兩者公式如下：
 
+$$粗發生率 = \sum_{i=1}^{i=5} {N_i \over P_i} $$
         
-
+$$標準化發生率 = \sum_{i=1}^{i=5} {N_i \over P_i} \times {Pop_i \over Pop_{total}} $$ 
         
-$N_i$︰單一分組得病人數、$P_i$︰單一分組人口數、$Pop_i$︰全國單一分組人口數、$Pop_{total}$︰全國總人口數。
+$N_i$︰單一分組的病人數、$P_i$︰單一分組人口數、$Pop_i$︰全國單一分組人口數、$Pop_{total}$︰全國總人口數。
 
 最後分析出3縣市各鄉鎮市區的5種疾病標準化疾病發生率之時間與空間分佈，作為後續以疾病發生率為指標的健康風險模型輸入參數之用。
 
@@ -84,7 +82,7 @@ $N_i$︰單一分組得病人數、$P_i$︰單一分組人口數、$Pop_i$︰全
 
 |疾病名稱|南部地區平均斜率||相關係數(r2)|正相關鄉鎮區數占3縣市比例|
 |:-:|:-:|:-:|:-:|:-:|
-||絕對發生率(1/yr/(10 &mu;g/m<sup>3</sup>))|常態化發生率%/yr/(10 &mu;g/m<sup>3</sup>)||%|
+||絕對發生率(%/yr/(10 &mu;g/m<sup>3</sup>))|常態化發生率%/(10 &mu;g/m<sup>3</sup>)||%|
 |慢性阻塞性肺疾病(COPD)|0.61|31.6194|0.27|63.89|
 |下呼吸道感染(LRTI)|3.24|-11.5037|0.32|53.7|
 |缺血性心臟病(IHD)|0.32|-4.0296|0.30|48.15|
@@ -105,10 +103,12 @@ $N_i$︰單一分組得病人數、$P_i$︰單一分組人口數、$Pop_i$︰全
 就常態化後之發生率而言，圖5.6.2-1(b)中斜率大多在±5%/(10 &mu;g/m<sup>3</sup>)之間，最大值389%/(10 &mu;g/m<sup>3</sup>)發生在高雄市桃源區，可能係背景PM<sub>2.5</sub>濃度差異不大導致較為敏感。其他地區斜率並不高，因而區域平均值約在0.03 (1/&mu;g/m<sup>3</sup>)左右。正值較大地區以內陸、偏鄉居多，屏東縣有較多行政區是正值。
 
 圖中也顯示負值較大之行政區周邊似搭配有正值較大之行政區，如屏東縣南端的滿州鄉負值大，然周邊的牡丹與車城鄉則顯示較大的正值，臺南市東南邊界的南化區有較大的負值，而周邊的左鎮區及龍崎區則有較大的正值，似與偏鄉醫療資源不足與跨區就醫情形有關。即使取鄰近行政區的平均，這2區似仍能維持正值。
+LungDiseasePar2.csv.png
+#### 圖2	南部地區各鄉鎮區COPD發生率與PM<sub>2.5</sub>回歸分析之斜率
 
- 	 
-(a) 發生率絕對值(unit=1/yr/(&mu;g/m<sup>3</sup>))	(b) 常態化發生率 (unit=1/(&mu;g/m<sup>3</sup>))
-圖5.6.2-1	南部地區各鄉鎮區COPD發生率與PM<sub>2.5</sub>回歸分析之斜率
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/LungDiseasePar2.csv.png)| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/LungDiseaseParN2.csv.png)|
+|:-:|:-:|
+| <b>(a) 發生率絕對值(unit=1/yr/(&mu;g/m<sup>3</sup>))</b>| <b>(b)常態化發生率 (unit=1/(&mu;g/m<sup>3</sup>))</b>|
 
 ##	疾病發生率與O<sub>3</sub>年均值之相關性分析
 ### 所有疾病結果
@@ -140,9 +140,13 @@ $N_i$︰單一分組得病人數、$P_i$︰單一分組人口數、$Pop_i$︰全
 [120]: <https://diabetes.diabetesjournals.org/content/diabetes/61/12/3037.full.pdf> " Rajagopalan, S. and Brook, R.D. (2012). Air pollution and type 2 diabetes: mechanistic insights. Diabetes 61 (12):3037–3045. doi:10.2337/db12-0190.[pdf]"
 
 以下就糖尿病發生率對O<sub>3</sub>斜率之分析結果空間分布(圖5.6.3-1)進一步討論。
- 	 
-(a) 發生率絕對值(unit=1/yr/ppb)	(b) 常態化發生率 (unit=1/ppb)
-#### 圖5.6.3-1	南部地區各鄉鎮區糖尿病發生率與O<sub>3</sub>回歸分析之斜率
+
+#### 圖3	南部地區各鄉鎮區糖尿病發生率與O<sub>3</sub>回歸分析之斜率
+
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/diabetesOzn.csv.png)| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/diabetesOznN.csv.png)|
+|:-:|:-:|
+| <b>(a) 發生率絕對值(unit=1/yr/ppb)</b>| <b>(b)常態化發生率 (unit=1/ppb)</b>|
+
 
 就發生率的絕對值而言，圖5.6.3-1 (a)顯示南部地區普遍都有正值，最大值則發生在山地屏東縣之霧臺鄉，其值達0.03/yr/ppb。其次為高雄市燕巢區其值約0.025/yr/ppb。
 

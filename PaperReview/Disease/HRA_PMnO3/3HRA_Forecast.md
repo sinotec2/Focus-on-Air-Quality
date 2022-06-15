@@ -36,8 +36,7 @@ last_modified_date: 2022-06-13 09:29:35
 興達電廠新增3部燃氣機組PM<sub>2.5</sub>增量年均值如圖1所示。
 
 #### 圖1 興達電廠新3氣機組PM<sub>2.5</sub>增量年均值(單位=&mu;g/m<sup>3</sup>)
-TOT_G-X.ncDT.csv
-| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TOT_G-X.ncDT.csv.png)| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/O3_G-X.ncT.csv.png)|
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TOT_G-X.ncDT.csv.png){:width="360px"}| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/O3_G-X.ncT.csv.png){:width="360px"}|
 |:-:|:-:|
 | <b>(a)PM<sub>2.5</sub>(&mu;g/m<sup>3</sup>)</b>| <b>(b)O<sub>3</sub>(ppb)</b>|
 
@@ -50,7 +49,7 @@ $鄉鎮區年度發生疾病之風險 = 鄉鎮區PM_{2.5}增量年均值(\mu g/m
 
 #### 圖 2	興達電廠新增燃氣機組造成南部地區各鄉鎮區COPD之發生風險(單位=1/yr)
 
-| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TOT_G-X.ncDT_LungDiseasePar2.csv.png)| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TOT_G-X.ncDT_LungDiseaseParN2.csv.png)|
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TOT_G-X.ncDT_LungDiseasePar2.csv.png){:width="360px"}| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TOT_G-X.ncDT_LungDiseaseParN2.csv.png){:width="360px"}|
 |:-:|:-:|
 | <b>(a)COPD發生率之增量(1/yr)</b>| <b>(b)COPD發生率之相對變動(無單位)</b>|
 
@@ -103,7 +102,7 @@ $鄉鎮區年度發生疾病之風險 = 鄉鎮區O_3增量年均值(ppb) \times 
 
 #### 圖5	興達電廠新增燃氣機組造成南部地區各鄉鎮區糖尿病之發生風險
 
-| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/O3_G-X.ncT_diabetesOzn0.csv.png)| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/O3_G-X.ncT_diabetesOznN0.csv.png)|
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/O3_G-X.ncT_diabetesOzn0.csv.png){:width="360px"}| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/O3_G-X.ncT_diabetesOznN0.csv.png){:width="360px"}|
 |:-:|:-:|
 | <b>(a)糖尿病發生率之增量(1/yr)</b>| <b>(b)糖尿病發生率之相對變動(無單位)</b>|
 

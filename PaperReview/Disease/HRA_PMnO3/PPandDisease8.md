@@ -77,8 +77,12 @@ HRA的評估程序大致上可以區分為3階段：(1)開發計畫增量之模�
 第2型糖尿病發病機制中空氣污染物的參與過程，目前還處於假說階段。大致上當吸入氧化性的空氣污染物時，身體會產生一連串發炎反應，生成活性氧化物(reactive oxygen species, ROS)，導致肝臟糖質新生(gluconeogenesis)增加升高血糖、白色脂肪組織(white adipose tissue)發炎、棕色脂肪組織(brown adipose tissue)的粒線體失能、肌肉利用糖分的效率下降、而造成胰臟過度勞累之典型第2型糖尿病。(Rajagopalan, S. and Brook, R.D., 2012)。
 以下就糖尿病發生率對O3斜率之分析結果空間分布(圖3)進一步討論。
  	 
-(a) 發生率絕對值(1/yr/ppb)	(b)常態化發生率 (1/ppb)
-圖3 南部地區各鄉鎮區糖尿病發生率與O3回歸分析之斜率
+#### 圖3	南部地區各鄉鎮區糖尿病發生率與O<sub>3</sub>回歸分析之斜率
+
+| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/diabetesOzn.csv.png)| ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/diabetesOznN.csv.png)|
+|:-:|:-:|
+| <b>(a) 發生率絕對值斜率(unit=1/yr/ppb)</b>| <b>(b)常態化發生率斜率(unit=1/ppb)</b>|
+
 
 就發生率的絕對值而言，圖3(a)顯示南部地區普遍都有正值，最大值則發生在山地屏東縣之霧臺鄉，其值達3%/yr/ppb。其次為高雄市燕巢區其值約2.5%/yr/ppb。最普遍情況落在0.07%/yr/ppb ~ 0.5%/yr/ppb之間，以致平均值為0.19%/yr/ppb。
 就常態化後之發生率而言，圖3(b)中斜率大多在±5%/ppb之間，最大值24.7%/ppb也是發生在屏東縣之霧臺鄉。然其他高值與前述絕對值有較大的差異，次高與第三高分別為臺南市龍崎區與屏東縣新埤鄉，這是因為考慮偏鄉罹病後有可能到都會區就診，經該鄉鎮區本身所有年度平均值常態化後，年度間相對變動的比例隨之放大。

@@ -216,24 +216,28 @@ CMAQ的氣象前處理MCIP (5.0)模式有較高標準的限制，除了土地使
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDobs.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDsim.png)|
 |:--:|:--:|
-| <b>環保署測值</b>|<b></b>|
+| <b>環保署測值</b>|<b>CAM-chem結果</b>|
 
 由於歷年之空品模擬已經在NCAR系統架構中持續進行，全球數據下載、處理分析、與校正之方法與過程，詳見[CAM-chem模式結果之讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/CAM-chem/)。
 
 ### 時間趨勢
 - CAM-chem模擬結果經校正調整後臺灣各空品區的歷年平均值
 
-| ![recm_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/recm_byTown.PNG){:width="360px"}|![CAM_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cmaqPMfT.png){:width="360px"}|
-|:--:|:--:|
-|<b>環保署模擬2019平均值</b>|<b>CAM-chem模擬結果經校正調整後的歷年平均值</b>|
-
 ### 空間分布
-- 臺灣各鄉鎮區之平均值
+- 臺灣各鄉鎮區之PM25平均值
+
+| ![recm_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/recm_byTown.PNG){:width="360px"}|![cmaqPMfT.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cmaqPMfT.png){:width="360px"}|
+|:--:|:--:|
+|<b>環保署模擬結果</b>|<b>本文模擬結果</b>|
+
+- 臺灣各鄉鎮區之O3平均值
 
 | ![recm_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/recmO3T.png){:width="360px"}|![cmaqPMfT](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cmaqO3T.png){:width="360px"}|
 |:--:|:--:|
-|<b>環保署模擬2019平均值</b>|<b>CAM-chem模擬結果經校正調整後的歷年平均值</b>|
+|<b>環保署模擬結果</b>|<b>本文模擬結果</b>|
 
-| ![CAM_byTown.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM_byTown.PNG){:width="360px"}|![CAM_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/y_s_vO3T.csv.png){:width="360px"}|
+#### 圖4經調整後CAM-chem平均值之空間分布
+
+| ![CAM_byTown.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM_byTown.PNG){:width="360px"}|![y_s_vO3T.csv.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/y_s_vO3T.csv.png){:width="360px"}|
 |:--:|:--:|
-|<b>環保署模擬2019平均值</b>|<b>CAM-chem模擬結果經校正調整後的歷年平均值</b>|
+|<b>PM<sub>2.5</sub> (μg/m<sup>3</sup>)</b>|<b>O<sub>3</sub></b>|

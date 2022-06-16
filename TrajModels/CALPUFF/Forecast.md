@@ -305,6 +305,51 @@ df.to_csv(fname+'.csv')
 >     filenames.append(filePrefix+'{:02d}'.format((i)*6)+fileSuffix)
 ```
 
+### 累積降雨之轉接
+- 變數名稱索引：WRF_3KM GRIB檔有3個unknown，無法辨識，必須按其序號來讀取([62])
+- 單位轉換：CWB WRF_3KM GRIB檔是mm(與WRF一樣)，CALMET是cm
+- 格點座標值：與前述相同
+- 時間：
+	- 因WRF_3KM是06Z(檔案編號000)開始，因此程式內需自前一日的018檔案開始，使整體時間自00Z開始
+	- 累積降雨量是自檔案000開始積分。因此需要自前一日012檔案(18Z)開始起算。將018和012之間的雨量差異，算成是018的，才符合00Z*過去小時的降雨量*定義。
+- 主程式修改
+
+```python
+...
+import pygrib
+...
+filenames = [filePrefix+'18'+fileSuffix]
+filePaths = [os.path.join(oldDir,filenames[0])]
+...
+# intialize rain by kuang
+Ni = 1158
+Nj = 673
+fname=filePaths[0].replace('018','012')
+rain_old=pygrib.open(filePaths[0])[62].values-pygrib.open(fname)[62].values
+```	
+- def writeRec9():
+	- 初始值設成前述00Z與18Z時間差值，爾後逐一加上
+	- 座標及單位轉換
+
+```python
+    RNgrd = np.zeros(shape=(Nj, Ni)) #by kuang
+    for t in range(nfiles):
+...
+        #by kuang
+        if t==0:
+            RNgrd[:]=rain_old[:]
+        else:
+            RNgrd[:]+=pygrib.open(filePaths[t])[62].values[:]
+...
+        for j in range(NY):
+            JX = j+1  # J-index of grid cell
+            for i in range(NX):
+                IX = i+1  # i-index of grid cell
+...
+                RAIN=int(RNgrd[iLatMinGRIB+j,iLonMinGRIB+i]) /10. #mm to cm
+                fout.write(('{:4d}'+'{:02d}'*3+'{:3d}'*2+'{:7.1f}{:5.2f}{:2d}'+'{:8.1f}'*2+'\n').format(MYR,MMO,MDAY,MHR,IX,JX,PRES,RAIN,SC,RADSW,RADLW))
+```
+
 ## 即時排放數據
 ### 數據來源及處理
 - 臺灣地區最大型的點污染源非火力發電機組莫屬。由於臺灣天然資源缺乏，又因地狹人稠不適發展核能發電，因此火力發電佔了發電量的大宗。目前即時運轉與排放等相關訊息包括：

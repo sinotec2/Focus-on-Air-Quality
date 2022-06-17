@@ -29,12 +29,12 @@ last_modified_date: 2022-06-17 11:32:47
 
 
 ```html
-<script src="//busuanzi.ibruce.info/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://busuanzi.ibruce.info/jquery/1.11.2/jquery.min.js"></script>
 <!--<script src="//busuanzi.ibruce.info/jquery/2.1.3/jquery.min.js"></script>-->
 
-<script src="//busuanzi.ibruce.info/pintuer/1.0/pintuer.mini.js"></script>
-<script src="//busuanzi.ibruce.info/respond/1.4.2/respond.min.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://busuanzi.ibruce.info/pintuer/1.0/pintuer.mini.js"></script>
+<script src="https://busuanzi.ibruce.info/respond/1.4.2/respond.min.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 ```
 - 編輯FOCUS-ON-AIR_QUALITY/_includes/footer_custom.html
@@ -85,4 +85,9 @@ last_modified_date: 2022-06-17 11:32:47
 ```
 ## 結果
 
-![ReadVisitCounts](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ReadVisitCounts.PNG)
+![ReadVisitCount](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ReadVisitCount.PNG)
+
+- 計數會連到[busuanzi.ibruce.info]()網站，計數結果顯示速度會有些慢。
+- 因計數自github.io重新編譯起算，因此數字會經常歸0，因應策略：
+  - 穩定不更新部分文章另闢Repository儲存
+  - 經常修改單獨切出另存。

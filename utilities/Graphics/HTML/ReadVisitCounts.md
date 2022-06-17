@@ -88,4 +88,5 @@ last_modified_date: 2022-06-17 11:32:47
 ![ReadVisitCount](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ReadVisitCount.PNG)
 
 - 計數會連到[busuanzi.ibruce.info]()網站，計數結果顯示速度會有些慢。
+- Github如果正在執行workflow，js會算不出來結果。
 - 因計數自github.io重新編譯起算，因此數字會經常歸0

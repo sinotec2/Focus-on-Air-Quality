@@ -15,8 +15,6 @@ last_modified_date: 2022-06-03 17:15:36
 
 [News at 2022-06-13](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Disease/HRA_PMnO3/3HRA_Forecast/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Leave messages at GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<span id="busuanzi_container_site_pv">visit Since 2022/06/17<span id="busuanzi_value_site_pv"></span>次</span>
 ---
 
 ## What's New

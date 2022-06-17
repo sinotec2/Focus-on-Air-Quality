@@ -66,7 +66,9 @@ last_modified_date: 2022-06-17 11:32:47
 </div>
 ```
 - 修正版本
-
+  - `{{ ... }}`內容為Jekyll指令
+  - `id=...`會連結到header呼叫的js程式
+  - `&emsp;`會[空4格](https://www.geeksforgeeks.org/how-to-insert-spaces-tabs-in-text-using-html-css/)
 ```html
 {%- if site.footer_content -%}
   <p class="text-small text-grey-dk-100 mb-0">{{ site.footer_content }}</p>
@@ -74,11 +76,13 @@ last_modified_date: 2022-06-17 11:32:47
 
 <p class="text-small text-grey-dk-100 mb-0">
 <span id="busuanzi_container_page_pv">
-    reads:<span id="busuanzi_value_page_pv"></span>times, </span>
+    reads:<span id="busuanzi_value_page_pv"></span>times, &emsp;</span>
   <span id="busuanzi_container_site_pv">
-    visits:<span id="busuanzi_value_site_pv"></span>,   </span>
+          visits:<span id="busuanzi_value_site_pv"></span>, &emsp;</span>
 <span id="busuanzi_container_site_uv">
-  visitors:<span id="busuanzi_value_site_uv"></span>.
-</span>
+       visitors:<span id="busuanzi_value_site_uv"></span>.</span>
 </p>
 ```
+## 結果
+
+![ReadVisitCounts](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ReadVisitCounts.PNG)

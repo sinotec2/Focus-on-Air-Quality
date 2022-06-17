@@ -48,6 +48,7 @@ xlab=[str(i) for i in np.arange(119.5, 123.5,0.5)]
 ylab=[str(i) for i in np.arange(22, 25,0.5)]
 xtics=[float(i) for i in xlab]
 ytics=[float(i) for i in ylab]
+im_ratio=nrow/ncol
 ncfile = Dataset('wrfout_d04')
 p = getvar(ncfile, "pressure",timeidx=0)
 cart_proj = get_cartopy(p)
@@ -78,7 +79,7 @@ for v in V[3][:]:
                        cmap=get_cmap("rainbow"),
                        transform=crs.PlateCarree(),
                        extend='max')
-    plt.colorbar(contours, ax=ax, orientation="vertical",pad=.05,format=fmt)
+    plt.colorbar(contours, ax=ax, orientation="vertical",pad=.05,format=fmt,fraction=0.047*im_ratio)
     ax.set_xlim(cartopy_xlim(p)+np.array([+0,-30000]))
     ax.set_ylim(cartopy_ylim(p)+np.array([+30000,-20000]))
     ax.gridlines()

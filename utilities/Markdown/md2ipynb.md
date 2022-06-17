@@ -1,8 +1,9 @@
 ---
 layout: default
 title: md2ipynb
-parent: Utilities
-permalink: /utilities/Markdown/
+parent: Markdown
+grand_parent: Utilities
+last_modified_date: 2022-06-17 10:21:23
 ---
 
 # Markdown轉Jupyter筆記檔

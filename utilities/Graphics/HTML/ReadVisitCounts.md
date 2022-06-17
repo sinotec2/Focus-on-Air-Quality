@@ -22,11 +22,11 @@ last_modified_date: 2022-06-17 11:32:47
 
 ## 背景與資源方案
 
-- []
+- 參考[浮云的博客](https://last2win.com/2020/01/19/GitHub-jekyll-view-counter/)
 - 最後使用[不蒜子](https://cloud.tencent.com/developer/article/1669144)的2行js版本。
+
 ### 需要修正
 - 編輯FOCUS-ON-AIR_QUALITY/_includes/header_custom.html
-
 
 ```html
 <script src="https://busuanzi.ibruce.info/jquery/1.11.2/jquery.min.js"></script>

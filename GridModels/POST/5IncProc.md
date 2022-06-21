@@ -78,7 +78,7 @@ for v in V[3]:
 ### 計算程序比較
 
 |順序|傳統作法|新計算程序建議|比較說明|
-|-|-|-|-|
+|:-:|-|-|-|
 |1|進行[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)|營運前後CCTM_ACONC相減|後者檔案較大、需要較大磁碟空間進行作業、妥善檔案管理、平行運作|
 |2|營運前後CCTM_COMBINE檔案再進一步篩減項目([shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs))|連結營運後之CCTM_APMDIAG檔案到同一目錄|前者可以再進一步縮小檔案容量|
 |3|營運前後[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs)結果相減、分析、繪圖|進行[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)|前者完工|

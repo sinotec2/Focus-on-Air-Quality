@@ -63,7 +63,7 @@ last_modified_date:   2021-12-19 14:12:15
 !#end     YYYYJJJ  230000
 #layer    1
 ```
-- VOC之定義
+### VOC之定義
 
 ```fortran
 VOC             ,ppbC      ,1000.0* (PAR[1] +2.0*ETHA[1] +3.0*PRPA[1] +MEOH[1]\
@@ -73,13 +73,45 @@ VOC             ,ppbC      ,1000.0* (PAR[1] +2.0*ETHA[1] +3.0*PRPA[1] +MEOH[1]\
                            +2.0*ALD2[1] + 2.0*ETHA[1] + 4.0*IOLE[1] + 2.0*ALDX[1]  \
                            +5.0*ISOP[1] + 10.0*TERP[1]+ 10.0*NAPH[1] +10.*APIN[1])
 ```
-
-- PM<sub>2.5</sub>的定義
-  - PM25AT[3]、PM25AC[3]、PM25CO[3]三個值即為CCTM_APMDIAG檔案內之[Aitken](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei) 、[accumulation](https://glossary.ametsoc.org/wiki/Accumulation_mode)及 [coarse](https://ec.europa.eu/health/scientific_committees/opinions_layman/en/indoor-air-pollution/glossary/abc/coarse-particles.htm) mode。
-  - ATOTI[0]、ATOTJ[0]、ATOTK[0]為CCTM_APMDIAG檔案內之3個mode之粒狀物濃度加總結果。
+### 粒狀物之定義
+- total ions in particulate ATOT
+  - ATOTI[0]、ATOTJ[0]、ATOTK[0]為i,j,k 3個mode之粒狀物濃度加總結果。
 
 ```fortran
+!! Total PM Aggregates
+ATOTI           ,ug m-3     ,ASO4I[1]+ANO3I[1]+ANH4I[1]+ANAI[1]+ACLI[1] \
+                           +AECI[1]+AOMI[0]+AOTHRI[1]
+ATOTJ           ,ug m-3     ,ASO4J[1]+ANO3J[1]+ANH4J[1]+ANAJ[1]+ACLJ[1] \
+                           +AECJ[1]+AOMJ[0]+AOTHRJ[1]+AFEJ[1]+ASIJ[1]  \
+                           +ATIJ[1]+ACAJ[1]+AMGJ[1]+AMNJ[1]+AALJ[1]+AKJ[1]
+ATOTK           ,ug m-3     ,ASOIL[1]+ACORS[1]+ASEACAT[1]+ACLK[1]+ASO4K[1] \
+                           +ANO3K[1]+ANH4K[1]
+```
+- i,j,k分別為
+  - [Aitken][Aitken] mode、
+  - [accumulation][acm] mode、及 
+  - [coarse][crs] mode。
+
+[Aitken]: <https://www.sciencedirect.com/topics/earth-and-planetary-sciences/aitken-nuclei> "The Aitken nuclei, with 0.01 < D < 0.08 μm, arise from ambient-temperature gas-to-particle conversion as well as combustion processes in which hot, supersaturated vapors are formed and subsequently undergo condensation.(From: Chemistry of the Upper and Lower Atmosphere, 2000)"
+[acm]:<https://glossary.ametsoc.org/wiki/Accumulation_mode> "Aerosol particles in the size range 0.5–2 μm in diameter. The name arises from the fact that particles in this size range are aerodynamically stable and do not settle out, nor do they agglomerate to form larger particles; thus they tend to accumulate in the atmosphere."
+[crs]: <https://ec.europa.eu/health/scientific_committees/opinions_layman/en/indoor-air-pollution/glossary/abc/coarse-particles.htm> "Coarse particles are the relatively large airborne particles mainly produced by the mechanical break-up of even larger solid particles. Examples of coarse particles include dust, pollen, spores, fly ash, and plant and insect parts. Coarse particles have an aerodynamic diameter ranging from 2.5 to 10µm (PM10-2.5), which distinguishes them from the smaller airborne particulate matter referred to as fine (PM2.5) and ultrafine particles (PM0.1)."
+
+- PM<sub>2.5</sub>的定義
+  - 為前述i,j,k各集成濃度、與其PM<sub>2.5</sub>粒徑所佔重量比例之sumproduct，公式如下
+
+```fortran
+!! PM 2.5
 PM25_TOT        ,ug m-3     ,ATOTI[0]*PM25AT[3]+ATOTJ[0]*PM25AC[3]+ATOTK[0]*PM25CO[3]
+```
+- PM25AT[3]、PM25AC[3]、PM25CO[3]三個值對應到i,j,k mode濃度在PM2.5粒徑之貢獻比例
+  - 為CCTM_APMDIAG檔案之內容
+  - 這些比例值隨時間、空間、以及**排放個案**而異。
+
+- PM<sub>10</sub>的定義，類似PM25_TOT的計算方式，只是改成對應到PM<sub>10</sub>的重量比例。
+
+```fortran
+!     PM10.0 and Coarse-Sized Species
+PM10            ,ug m-3     ,ATOTI[0]*PM10AT[3]+ATOTJ[0]*PM10AC[3]+ATOTK[0]*PM10CO[3]
 ```
 
 ### 分段說明

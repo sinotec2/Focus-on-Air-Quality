@@ -34,5 +34,5 @@ last_modified_date: 2022-06-21 15:16:03
 | <b>圖1a 2019/01/01/00Z 興達新3氣機組PM<sub>2.5</sub>中NO3濃度值之增量。空白處為無法取log值之負值增量區域</b>|<b>圖1b 同左但為月平均值</b>|
 | ![圖2a-N3GPMdiff.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GPMdiff.png) |![圖2b-N3GPMdiffT.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GPMdiffT.png) |
 | <b>圖2a 同上時間PM<sub>2.5</sub>與PM<sub>10</sub>增量之差值</b>|<b>圖2b 同左但為月平均值</b>|
-| ![圖3a-N3GPMdiff.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GPMdiff.png) |![圖3b-N3GPMdiffT.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GPMdiffT.png) |
+| ![圖3a-PM25ACdiffT.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM25ACdiffT.png) |![圖3b-PM10ACdiffT.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM10ACdiffT.png) |
 | <b>圖3a 計畫營運前後Aitken mode濃度在PM<sub>2.5</sub>部分之比例(PM25AC)之月均值增加率</b>|<b>圖2b 同左但為PM<sub>10</sub>部分比例(PM10AC)</b>|

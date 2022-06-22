@@ -55,7 +55,7 @@ last_modified_date: 2022-06-21 15:16:03
 - 此二者同時作用：PM<sub>2.5</sub>增量大於PM<sub>10</sub>雖不合理，但其乃為必然之數學結果。
 
 ## 因應策略方案
-### 負值增量必須濾掉
+### 先相減再過濾
 - 雖然負值增量是合理與必然的結果，但是在法規應用上為trivial solution。
 - 且在時間平均過程中負值會造成干擾、降低平均結果而不保守。
 - 建議在[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之前就將其排除。
@@ -69,8 +69,18 @@ for i in {01..31};do dNC $d1/CCTM_ACONC$i.nc $d2/CCTM_ACONC$i.nc CCTM_ACONC$i.nc
 - 使用簡單的np.where即可完成過濾的動作。
 
 ```python
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
 for v in V[3]:
   var=np.where(nc[v][:]>0,nc[v][:],0)
+  nc[v][:]=var[:]
+```
+### 先過濾再相減
+- 如果在相減前要進行過濾(nc為營運後、nc0為營運前之背景)，條件需改成「營運後濃度是否大於背景」
+
+```python
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+for v in V[3]:
+  var=np.where(nc[v][:]>nc0[v][:],nc[v][:],nc0[v][:])
   nc[v][:]=var[:]
 ```
 
@@ -92,7 +102,8 @@ ln -s ../../cctm.XindaN3G/daily/APDIAG_b_n3g/* .
 
 ## 結果及討論
 - PM<sub>2.5</sub>：最大值變動不大，但臺灣本島中北部、東部的增量變多了。海面上、電廠附近的負值增量消失了。
--PM<sub>10</sub>：
+- PM<sub>10</sub>：山區低濃度範圍更擴大一些
+- PM<sub>2.5</sub>/PM<sub>10</sub>：月均值的比例，未過濾前的振盪很大、包括在外海、北部地區及山區，電廠附近也有負值之振盪。經過濾後模擬範圍的比例在0.35~0.95之間，山區約在0.7上下，平地範圍較高約在0.8~0.9，越遠越高。電廠附近與煙流也較高。
 
 | ![圖4a-N3G_PM25.png.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3G_PM25.png){:width="360px"} |![圖4b-cctm.XindaN3G-BASE.nc_Filtered_PM25.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cctm.XindaN3G-BASE.nc_Filtered_PM25.png){:width="360px"}
 |:--:|:--:|

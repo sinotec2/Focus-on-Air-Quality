@@ -48,17 +48,19 @@ last_modified_date: 2022-06-21 15:16:03
 
 ### 檢討
 - 影響結果的2項因素
-  - 增量中含有之負值、且/或
-    - 即使使用同一組CCTM_APDIAG（不論營運前或營運後），因一般NO<sub>3</sub><sup>-</sup>在粗顆粒佔比較大，負值則將造成粗顆粒的減少，因此造成PM<sub>10</sub>增量小於PM<sub>2.5</sub>。
+  - 增量中含有之負值、且/或    
   - PM25AC、PM10AC之增加
-    - 即便ATOT<sub>i</sub>為正值，營運後乘上較大的PM25AC比例得到較高的PM<sub>2.5</sub>，是有可能大於乘上增加比例不太多的PM10AC的結果。
-- 此二者同時作用：PM<sub>2.5</sub>增量大於PM<sub>10</sub>雖不合理，但其乃為必然之數學結果。
+- 2因素的相依性檢討  
+  - 即使使用同一組CCTM_APDIAG（不論營運前或營運後），因一般NO<sub>3</sub><sup>-</sup>在粗顆粒佔比較大，負值則將造成粗顆粒的減少，因此造成PM<sub>10</sub>增量小於PM<sub>2.5</sub>。
+  - 即便ATOT<sub>i</sub>為正值，營運後乘上較大的PM25AC比例得到較高的PM<sub>2.5</sub>，是有可能大於乘上增加比例不太多的PM10AC的結果。
+- 此二者同時作用
+  - PM<sub>2.5</sub>增量大於PM<sub>10</sub>雖不合理，但其乃為必然之數學結果。
 
 ## 因應策略方案
 ### 先相減再過濾
 - 雖然負值增量是合理與必然的結果，但是在法規應用上為trivial solution。
 - 且在時間平均過程中負值會造成干擾、降低平均結果而不保守。
-- 建議在[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之前就將其排除。
+- 建議在[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之前就將其排除，以避免粒徑分率的干擾。
 
 ```bash
 #kuang@DEVP /nas2/cmaqruns/2019force/output/2019-01/grid03/cctm.XindaN3G-BASE_withFilter0
@@ -75,7 +77,8 @@ for v in V[3]:
   nc[v][:]=var[:]
 ```
 ### 先過濾再相減
-- 如果在相減前要進行過濾(nc為營運後、nc0為營運前之背景)，條件需改成「營運後濃度是否大於背景」
+- 如果為符合公版模式現行作業程序(未提供背景CCTM_ACONC檔案)，在相減前要進行過濾
+- 設若nc為營運後、nc0為營運前之背景濃度，前述np.where條件需改成「營運後濃度是否大於背景」
 
 ```python
 V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
@@ -91,6 +94,7 @@ for v in V[3]:
 #kuang@DEVP /nas2/cmaqruns/2019force/output/2019-01/grid03/cctm.XindaN3G-BASE_withFilter0
 ln -s ../../cctm.XindaN3G/daily/APDIAG_b_n3g/* .
 ```
+
 ### 計算程序比較
 
 |順序|傳統作法|新計算程序建議|比較說明|

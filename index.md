@@ -13,11 +13,12 @@ last_modified_date: 2022-06-03 17:15:36
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[News at 2022-06-21](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Leave messages at GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[News at 2022-06-22](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Leave messages at GitHub](https://sinotec2.github.io/Focus-on-Air-Quality/discussions/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
+- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是景丰做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
 - 2022-06-04 把[2018/3/31~4/8 東亞地區解析度15Km之沙塵暴模擬分析](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)整理在一起，也用[imageMagicks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/imageMagicks)改善了VERDI圖檔留太多空白、背景重現的問題。
 - 2022-06-02 更新了[AERMOD review](https://sinotec2.github.io/aermod/AERMOD_review.html)及[trajectory models](https://sinotec2.github.io/aermod/traj_review.html)2個學位論文搜尋結果，以及[可排序搜尋之表格](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/HTML/SortFindTab/)的作法。回顧了CMAQ低估SO<sub>2</sub>和硫酸鹽的問題、看到公版模式對此也是束手無策，還是回頭開始慢慢更新[CAMx的工作方法](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/)比較實際一點。
 - 2022-05-26 完成了新的[文獻回顧與專討(Paper Reviews)](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/)大項，希望過去做的一些回顧性的文章、對外的公開簡報、經典的圖表，可以陸續用Markdown的格式整理起來，參考文獻、連結可以做得更好。有些不合時宜、可以有更多數據的，也都可以修正補充，還能留下修改時間，不致讓讀者用到太舊的資料。不過偏向domain的個案應用就是了。

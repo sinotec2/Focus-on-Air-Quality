@@ -61,8 +61,9 @@ last_modified_date: 2022-06-21 15:16:03
 - 建議在[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)之前就將其排除。
 
 ```bash
-d1=
-d2=
+#kuang@DEVP /nas2/cmaqruns/2019force/output/2019-01/grid03/cctm.XindaN3G-BASE_withFilter0
+d1=../../cctm.BASE/daily
+d2=../../cctm.XindaN3G/daily
 for i in {01..31};do dNC $d1/CCTM_ACONC$i.nc $d2/CCTM_ACONC$i.nc CCTM_ACONC$i.nc ;done
 ```
 - 使用簡單的np.where即可完成過濾的動作。
@@ -76,6 +77,10 @@ for v in V[3]:
 ### 必須使用同一組粒徑分率(CCTM_APMDIAG)進行[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)
 - 如果在[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)前先進行濃度差值的計算，增加的濃度應該適用營運後的CCTM_APMDIAG比較合理。
 
+```bash
+#kuang@DEVP /nas2/cmaqruns/2019force/output/2019-01/grid03/cctm.XindaN3G-BASE_withFilter0
+ln -s ../../cctm.XindaN3G/daily/APDIAG_b_n3g/* .
+```
 ### 計算程序比較
 
 |順序|傳統作法|新計算程序建議|比較說明|
@@ -86,9 +91,13 @@ for v in V[3]:
 |4|(無)|進行[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs)、分析、繪圖|後者完工|
 
 ## 結果及討論
+- PM<sub>2.5</sub>：最大值變動不大，但臺灣本島中北部、東部的增量變多了。海面上、電廠附近的負值增量消失了。
+-PM<sub>10</sub>：
 
-| ![圖4a-N3G_PM25.png.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3G_PM25.png.png){:width="360px"} |![圖4b-cctm.XindaN3G-BASE.nc_Filtered_PM25.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cctm.XindaN3G-BASE.nc_Filtered_PM25.png){:width="360px"}
+| ![圖4a-N3G_PM25.png.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3G_PM25.png){:width="360px"} |![圖4b-cctm.XindaN3G-BASE.nc_Filtered_PM25.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cctm.XindaN3G-BASE.nc_Filtered_PM25.png){:width="360px"}
 |:--:|:--:|
 | <b>圖4a 2019年1月份平均PM<sub>2.5</sub>增量濃度 </b>|<b>圖4b 同左但為新計算程序</b>|
 | ![圖5a-N3G_PM10.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3G_PM10.png){:width="360px"} |![圖5b-cctm.XindaN3G-BASE.nc_Filtered_PM10.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cctm.XindaN3G-BASE.nc_Filtered_PM10.png){:width="360px"}｜
 | <b>圖5a 2019年1月份平均PM<sub>10</sub>增量濃度 </b>|<b>圖5b 同左但為新計算程序</b>|
+| ![圖6a-N3G_rat.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3G_rat.png){:width="360px"} |![圖6b-cctm.XindaN3G-BASE.nc_Filtered_rat.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cctm.XindaN3G-BASE.nc_Filtered_rat.png){:width="360px"}｜
+| <b>圖6a 2019年1月份平均PM<sub>2.5</sub>增量濃度與PM<sub>10</sub>之比值 </b>|<b>圖6b 同左但為新計算程序</b>|

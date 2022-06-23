@@ -54,6 +54,7 @@ last_modified_date: 2022-06-03 17:15:36
 ### 2022-01 重作REAS
 - 2022-01-30 東亞範圍15Km解析度的CMAQ模擬一直是個挑戰，除了資料的準備外，工作站是不是負荷得了也是關鍵。初步成果看來還好，因為是用手機操作，先貼上[結果](http://114.32.164.198/soong/pm10.gif)，過程與細節再慢慢補上囉。(2022-02-11已補上[東亞地區解析度15Km之CMAQ模擬分析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/Abundant_NoG_Runs))
 - 2022-01-05 日本國立環境研究所[REAS](https://www.nies.go.jp/REAS/)排放量有簡單的處理方式了。解析度15~27公里採內插、81公里採加總，結果如[圖](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#結果檢視)。
+{% if site.back_to_top %}<p><a href="#top" id="back-to-top">{{ site.back_to_top_text }}</a></p>{% endif %}
 
 ## 2021
 ### 2021-12
@@ -74,6 +75,7 @@ last_modified_date: 2022-06-03 17:15:36
 - 2021-11-25 上載[dowps.md](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/)之上載、新成立wind_models之parent層級
 - 2021-11-24 前一天熬夜執行2018春季個案，處理了海溫數據，順便寫了[sst.md](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)
 - 2021-11-23 貼上ncks.md做為測試jtd系統的範例
+{% if site.back_to_top %}<p><a href="#top" id="back-to-top">{{ site.back_to_top_text }}</a></p>{% endif %}
 
 ## About the project
 

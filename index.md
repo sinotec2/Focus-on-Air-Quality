@@ -18,7 +18,7 @@ last_modified_date: 2022-06-03 17:15:36
 ---
 
 ## What's New
-- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是景丰做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
+- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
 
 {: .no_toc }
 
@@ -34,7 +34,6 @@ last_modified_date: 2022-06-03 17:15:36
 
 ## 2022
 ### 2022-06 
-- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是景丰做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
 - 2022-06-13 第一次用markdown來寫Jurnal paper，心得是...七零八落，套用先師名言：腦子裏整理清楚比整潔的桌面更容易。使用這麼多的工具還不如用腦子先想清楚。對環境議題有興趣的可以[點進去](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Disease/HRA_PMnO3/page8/)參考。
 - 2022-06-10 這一題算是遲到了很久。一直都想簡化濃度檔作圖的程序，至少傳檔案可以省些時間。請參考[m3nc檔案轉GIF](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif/#結果比較)
 - 2022-06-04 把[2018/3/31~4/8 東亞地區解析度15Km之沙塵暴模擬分析](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)整理在一起，也用[imageMagicks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/imageMagicks)改善了VERDI圖檔留太多空白、背景重現的問題。

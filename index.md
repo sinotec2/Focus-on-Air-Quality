@@ -4,7 +4,7 @@ title: Home
 nav_order: 1
 description: "Analysis tools and Simulation Experience about the Air Quality"
 permalink: /
-last_modified_date: 2022-06-03 17:15:36
+last_modified_date: 2022-06-25 20:37:55
 ---
 
 # Focus on Air Quality
@@ -13,12 +13,12 @@ last_modified_date: 2022-06-03 17:15:36
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[News at 2022-06-22](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Bloggs](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[News at 2022-06-25](https://sinotec2.github.io/FAQ/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
-- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
+- 2022-06-25 `What's New` 功能一直沒有很好的解決方案。原因在於[JTD][JTD]主題的文件功能特性，並不適合太常、或太瑣碎的更新。總之、選擇了另闢一個部落格的平台（[TeXt主題]([TeXt](https://tianqi.name/jekyll-TeXt-theme/)）來放最新、暫存、發展中的文章，取名叫[Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/)。可以有標籤系統、有檔案的時間順序。如果存夠多可以有結構出來，再放到[JTD][JTD]的文件架構下，這樣能有比較有效的檔案管理、搜尋功能、目錄瀏覽也比較強。算是經過半年的摸索、在管理面的一項進步吧。在首頁置換了討論區的按鍵成為[部落格的入口](https://sinotec2.github.io/FAQ/)。(部落格也有回到FAQHome的按鍵)
 
 {: .no_toc }
 
@@ -34,6 +34,7 @@ last_modified_date: 2022-06-03 17:15:36
 
 ## 2022
 ### 2022-06 
+- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
 - 2022-06-13 第一次用markdown來寫Jurnal paper，心得是...七零八落，套用先師名言：腦子裏整理清楚比整潔的桌面更容易。使用這麼多的工具還不如用腦子先想清楚。對環境議題有興趣的可以[點進去](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Disease/HRA_PMnO3/page8/)參考。
 - 2022-06-10 這一題算是遲到了很久。一直都想簡化濃度檔作圖的程序，至少傳檔案可以省些時間。請參考[m3nc檔案轉GIF](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif/#結果比較)
 - 2022-06-04 把[2018/3/31~4/8 東亞地區解析度15Km之沙塵暴模擬分析](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)整理在一起，也用[imageMagicks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/imageMagicks)改善了VERDI圖檔留太多空白、背景重現的問題。
@@ -67,13 +68,13 @@ last_modified_date: 2022-06-03 17:15:36
 - 2021-11-30 一篇[evernote筆記](https://www.evernote.com/shard/s125/sh/b3f7003a-fd1d-4918-b617-1acb90b45219/25b5cbe6b72feca8dc5f0cec636eee78)拆成4篇[github.io](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/)，應該可以把CWB數值預報的下載轉檔過程講解得清楚啦。慶幸的是這一題也有[網友](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085)在作，可能我們做得比較「硬斗」一點，我個人覺得內容比較豐富。
 - 2021-11-29 與github-page經過一番奮戰，陸續完成了WPS、OBSGRID、REAL & WRF的架構，what's learned與圖片再慢慢加，應該有點參考價值啦。
 - 2021-11-27 雖然程式有點舊，但還是忠實的進行著[NCEP](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/)檔案自動下載與排程。
-- 2021-11-26 陸續將過去CWB相關筆記上載到jtd，花了一些時間測試建立grand_children層級
+- 2021-11-26 陸續將過去CWB相關筆記改成[JTD][JTD]樣式，花了一些時間測試建立grand_children層級
   - CODiS網站[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/cwb_daily_download/)、
   - [軌跡程式](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)、
   - [little_r轉檔程式](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/add_srfFF/)
 - 2021-11-25 上載[dowps.md](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/)之上載、新成立wind_models之parent層級
 - 2021-11-24 前一天熬夜執行2018春季個案，處理了海溫數據，順便寫了[sst.md](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)
-- 2021-11-23 貼上ncks.md做為測試jtd系統的範例
+- 2021-11-23 貼上ncks.md做為測試[JTD][JTD]系統的範例
 
 ## About the project
 
@@ -97,3 +98,5 @@ email, or any other method with the owners of this repository before making a ch
   </li>
 {% endfor %}
 </ul>
+
+[JTD]: <https://just-the-docs.github.io/just-the-docs> "Focus on writing good documentation. Just the Docs gives your documentation a jumpstart with a responsive Jekyll theme that is easily customizable and hosted on GitHub Pages."

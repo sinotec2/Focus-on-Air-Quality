@@ -100,7 +100,8 @@ if nlay1==40:
 - 
 
 ## 程式下載
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)
+
+{% include download.html content="[grb2bc.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)" %}
 
 ## Reference
 - ECMWF, **EAC4 (ECMWF Atmospheric Composition Reanalysis 4)**, [copernicus](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview),record updated 2021-12-07 16:10:05 UTC

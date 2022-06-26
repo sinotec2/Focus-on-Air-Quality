@@ -114,7 +114,7 @@ variables:
   nc.close()
 ```
 ### [EDGAR2cmaqD6.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD6.py)
-- 此一程式與[EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)很接近，但使用合併方式將0.005度小網格內之排放量予以平均，存到目標網格系統(HUADON_3k)網格內
+- 此一程式與[EDGAR2cmaqD2.py](https://raw.githubusercontent.com/sinotec2/cmaq_relatives/master/emis/EDGAR/EDGAR2cmaqD2.py)很接近，但使用合併方式將0.005度小網格內之排放量予以平均，存到目標網格系統(HUADON_3k)網格內
 - 與[reas2cmaqD1.py](/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)一樣使用使用[np.searchsorted](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)找到新網格點在EDGAR座標系統的位置起迄點lat_ss及lon_ss。
 - 使用np.mean而不是np.sum，是因為EDGAR排放量是intensive quantity.
 

@@ -411,7 +411,8 @@ $ cat -n prep_json.py
    149
 ```
 ## 檔案下載
-- 環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/week.csv)
-- `python`程式：[prep_dfAdmw.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_df.py)、[prep_json.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/prep_json.py)
+- 
+
+{% include download.html content="環保署**時變係數檔案**:[day.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/day.csv)、[mon.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/mon.csv)、[week.csv](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/week.csv)、`python`程式：[prep_dfAdmw.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/prep_dfAdmw.py)、[prep_df.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/prep_df.py)、[prep_json.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/prep_json.py)" %}
 
 ## Reference

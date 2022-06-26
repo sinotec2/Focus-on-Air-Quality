@@ -126,9 +126,9 @@ last_modified_date:   2021-11-30 10:43:16
 ```
 
 ## 下載程式碼
-- 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/gen_D4bin.py_txt)找到原始碼。
+- 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/gen_D4bin.py)找到原始碼。
 
-{% include download.html content="[gen_D4bin.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/gen_D4bin.py_txt)" %}
+{% include download.html content="[gen_D4bin.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/cwbWRF_3Km/gen_D4bin.py)" %}
 
 ## 檢核
 

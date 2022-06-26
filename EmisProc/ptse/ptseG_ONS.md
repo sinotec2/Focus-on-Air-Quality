@@ -80,7 +80,8 @@ for spe in NMHC SNCP;do python ptseG_ONS.py $spe;done
 ```
 
 ## 檔案下載
-- `python`程式：[ptseG_ONS.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptseG_ONS.py)。
+
+{% include download.html content="python程式：[ptseG_ONS.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseG_ONS.py)" %}
 
 
 ## Reference

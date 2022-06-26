@@ -123,6 +123,7 @@ $ cat -n prep_linegridLL.py
 ```
 
 ## 檔案下載
-- `python`程式：[prep_linegridLL.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/line/prep_linegridLL.py)。
+
+{% include download.html content="python程式：[prep_linegridLL.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/line/prep_linegridLL.py)" %}
 
 ## Reference

@@ -93,7 +93,7 @@ done
   - 緯度：-89.5 (1800點)
 
 ## 內插程式說明
-### [EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)
+### [EDGAR2cmaqD2.py](https://raw.githubusercontent.com/sinotec2/cmaq_relatives/master/emis/EDGAR/EDGAR2cmaqD2.py)
 - 採用與[reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)類似的方式進行內插。
 - 由於EDGAR已經是網格化的nc檔案了，因此讀取較為單純。
 ### 調用模組
@@ -235,7 +235,9 @@ for v in VOCs:
 nc.close()
 ```
 ### 程式下載
-- [EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR2cmaqD2.py)
+
+{% include download.html content="python程式：[EDGAR2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/EDGAR/EDGAR2cmaqD2.py)" %}
+
 
 ## Results
 

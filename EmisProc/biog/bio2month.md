@@ -123,6 +123,7 @@ df.set_index('UTME').to_csv('biogrid2019.csv')
 ```
 
 ## 檔案下載
-- `fortran`程式：[bio2month-teds11.f](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/biog/bio2month-teds11.f)。
+
+{% include download.html content="fortran程式：[bio2month-teds11.f](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/biog/bio2month-teds11.f)" %}
 
 ## Reference

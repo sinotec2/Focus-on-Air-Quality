@@ -267,6 +267,7 @@ $ cat -n bioginc.py
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds11-10biog.PNG)
 
 ## 檔案下載
-- `python`程式：[bioginc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/biog/bioginc.py)。
+
+{% include download.html content="python程式：[bioginc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/biog/bioginc.py)" %}
 
 ## Reference

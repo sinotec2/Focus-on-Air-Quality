@@ -249,6 +249,7 @@ def mostfreq10word(list_of_w):
 ```
 
 ## 檔案下載
-- `python`程式：[include2.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/include2.py)、[include3.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/area/include3.py)。
+
+{% include download.html content="python程式：[include2.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/include2.py)" %}
 
 ## Reference

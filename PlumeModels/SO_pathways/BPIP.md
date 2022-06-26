@@ -122,11 +122,11 @@ bpipprm
 - BPIP/BPIPPRM美國環保署[官方網址](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#bpip)
 - 原始碼
 
-{% include download.html content="[BIPI原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)、[BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip" %}
+{% include downloadFL.html content="[BIPI原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)、[BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip" %}
 
 - 使用手冊
 
-{% include download.html content="[bpipd.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipd.pdf)、[bpipdup.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipdup.pdf)" %}
+{% include downloadFL.html content="[bpipd.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipd.pdf)、[bpipdup.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipdup.pdf)" %}
 
 - 工作站（cybee@114.32.164.198 PW=cybee123）
   - 執行檔 

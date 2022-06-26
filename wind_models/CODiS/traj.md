@@ -426,6 +426,8 @@ sed 1d $1 >> $1.bln
 可以在github找到:
 - `python`[程式](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/traj2kml.py)
 
+{% include download.html content="[traj2kml.py](https://raw.githubusercontent.com/sinotec2/cwb_Wind_Traj/master/traj2kml.py)" %}
+
 ## Reference
 - MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式
 - NOAA, [HYSPLIT](https://www.arl.noaa.gov/hysplit/hysplit/)

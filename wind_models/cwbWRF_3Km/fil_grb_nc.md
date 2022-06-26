@@ -182,6 +182,8 @@ diff fil_grb_nc.py rd_grbCubicA.py
 ## 下載程式碼
 - 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)找到原始碼。
 
+{% include download.html content="[fil_grb_nc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)" %}
+
 ## 檢核
 - 靜態檢核：可以使用[MeteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)
 - [動態檢核](http://114.32.164.198/traj2.html)：使用WRF_3Km`grb2`轉檔預報之反軌跡線 vs windy 動態風場

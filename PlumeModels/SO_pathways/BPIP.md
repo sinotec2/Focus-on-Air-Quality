@@ -121,11 +121,13 @@ bpipprm
   - [www.cppwind.com：Building Downwash – Problems, Solutions and Next Generation](ftp://newftp.epa.gov/Air/aqmg/SCRAM/conferences/2015_11th_Conference_On_Air_Quality_Modeling/Presentations/3-6_Building_Downwash-CPP-11thMC.pdf)
 - BPIP/BPIPPRM美國環保署[官方網址](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#bpip)
 - 原始碼
-  - [BIPI原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)
-  - [BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip)
+
+{% include download.html content="[BIPI原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)、[BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip" %}
+
 - 使用手冊
-  - [bpipd.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipd.pdf)
-  - [bpipdup.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipdup.pdf)
+
+{% include download.html content="[bpipd.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipd.pdf)、[bpipdup.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipdup.pdf)" %}
+
 - 工作站（cybee@114.32.164.198 PW=cybee123）
   - 執行檔 
     - /Users/1.PlumeModels/ISC/Building_Profile_Input_Program/src/ Bpip.exe

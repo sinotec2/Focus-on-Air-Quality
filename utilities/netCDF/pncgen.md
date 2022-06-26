@@ -3,7 +3,7 @@ layout: default
 title:  ncgen & pncgen
 parent: NetCDF Relatives
 grand_parent: Utilities
-last_modified_date: 2022-06-07 13:24:54
+last_modified_date: 2022-06-26 19:20:18
 ---
 
 # ncgen & pncgen
@@ -20,13 +20,16 @@ last_modified_date: 2022-06-07 13:24:54
 
 ---
 ## 背景
-- 雖然改變nc的程式已經非常多了，netCDF的原創單位Unidata還是提供了ncgen做為格式轉換(主要功能)的工具。
-  - 按照[官網](https://www.unidata.ucar.edu/software/netcdf/workshops/2011/utilities/NcgenExamples.html)說明，ncgen的功能至少有：
-  - 確認CDL(Common Data Language)格式檔案的內容
-  - 反轉ncdump輸出的結果，成為nc檔案。這項功能可以將txt檔案(寫成ncdump輸出之CDL格式)，轉成nc檔案。如範例[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)
-  - 目的同上，但是是由ncgen讀取cdl檔案來產生C, Fortran, or Java的程式碼再編譯執行，以產生nc檔案
-- 在此架構下，PseudoNetCDF也提供了pncgen，目的希望[uamiv][uamiv]等格式也能有像nc格式一樣，有充分的軟體工具可以支援。
-
+- nc格式的檔案處理起來很快速、有效，但是如何不藉著模版、從零開始形成一個新的nc檔案呢？
+  - 從python程式的nc.createDimension、nc.createVariable開始
+  - 從fortran程式連結libioapi.a程式庫，write3()寫一個新的nc檔案
+  - 或是此處要介紹的ncgen程式
+- 雖然改變nc的程式已經非常多了，netCDF的原創單位Unidata還是提供了以格式轉換為主要功能的工具ncgen。
+- 按照[官網](https://www.unidata.ucar.edu/software/netcdf/workshops/2011/utilities/NcgenExamples.html)說明，ncgen的功能至少有：
+  1. 確認CDL(Common Data Language)格式檔案的內容
+  1. 反轉ncdump輸出的結果，成為nc檔案。這項功能可以將txt檔案(ncdump輸出之CDL格式文字檔)，轉成nc檔案。如範例[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)
+  1. 目的同2.，但是是由ncgen讀取cdl檔案來產生C, Fortran, or Java的程式碼、再編譯執行，以產生nc檔案。這樣可以留下處理過程，或用來產生類似、序列的檔案。
+- 在此架構下，[PseudoNetCDF]也提供了pncgen，目的希望整合所有地球科學模式的IO格式，也都能有像nc格式一樣，有充分的軟體工具可以支援。
 
 [uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
@@ -250,9 +253,9 @@ netcdf library version 4.4.0 of Feb 18 2016 16:50:31
        options, use --sep to separate groups of files and options to be evaluated
        before any global operations.
 
-### examples
+### example：pnc_congrd02
 - `-f uamiv`指定輸入格式是[uamiv][uamiv]
-- `a TSTEP,global,o,i,$NSTEP`指定TSTEP屬性的內容，是整數其值為$NSTEP
+- `-a TSTEP,global,o,i,$NSTEP`指定TSTEP屬性的內容，是整數其值為$NSTEP
        - 再將其轉回[uamiv][uamiv]檔案才會正確
 - `--from-conv=ioapi`、`--to-conv=cf`指定協訂內容是ioapi或者是[CF](http://cfconventions.org/latest.html)(Climate and Forecast (CF) Metadata Conventions)。
 
@@ -266,6 +269,9 @@ $PTH/pncgen --out-format=uamiv -O calpuff.con.S.grd02.nc  calpuff.con.S.grd02
 #rm calpuff.con.S.grd02.nc
 $PTH/pncgen -f uamiv -O calpuff.con.S.grd02 calpuff.con.S.grd02.nc
 ```
+
+{% include warning.html content="pncgen的結果檔案是接著-O選項之後，與一般NCO指令是在最後的習慣不同！" %}
+
 
 ## pncgen/pncdump 所有可接受的格式
 ### 一般格式

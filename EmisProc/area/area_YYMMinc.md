@@ -80,8 +80,10 @@ $ cat -n area_YYMMinc.py
 ### `nc`模版之準備
 - `nc`模版如何形成？
   - 修改CAMx提供的範例檔案
-  - 使用`pncgen`轉換一個既有的`uamiv`檔案
+  - 使用`pncgen`轉換一個既有的[uamiv][uamiv]檔案
   - 從CMAQ排放量檔案轉換而來
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ```python
     37	#prepare the template
@@ -349,7 +351,7 @@ $ cat -n area_YYMMinc.py
 ## 程式之執行
 - 依月份呼叫即可
 - machine-dependancy
-  - 如要改寫成`uamiv`檔案，系統必須要有`pncgen`程式
+  - 如要改寫成[uamiv][uamiv]檔案，系統必須要有`pncgen`程式
   - 因pandas及no.tensordot會自己啟動多工運作，同時執行3個月份node01~03尚能消化(CPU~4500%)，如太多月份同時運作，系統資源將會耗盡。不但拖慢速度，結果也不正確
 
 ```bash

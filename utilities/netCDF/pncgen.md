@@ -25,7 +25,10 @@ last_modified_date: 2022-06-07 13:24:54
   - 確認CDL(Common Data Language)格式檔案的內容
   - 反轉ncdump輸出的結果，成為nc檔案。這項功能可以將txt檔案(寫成ncdump輸出之CDL格式)，轉成nc檔案。如範例[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)
   - 目的同上，但是是由ncgen讀取cdl檔案來產生C, Fortran, or Java的程式碼再編譯執行，以產生nc檔案
-- 在此架構下，PseudoNetCDF也提供了pncgen，目的希望uamiv等格式也能有像nc格式一樣，有充分的軟體工具可以支援。
+- 在此架構下，PseudoNetCDF也提供了pncgen，目的希望[uamiv][uamiv]等格式也能有像nc格式一樣，有充分的軟體工具可以支援。
+
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ## ncgen
 
@@ -248,9 +251,9 @@ netcdf library version 4.4.0 of Feb 18 2016 16:50:31
        before any global operations.
 
 ### examples
-- `-f uamiv`指定輸入格式是[uamiv]()
+- `-f uamiv`指定輸入格式是[uamiv][uamiv]
 - `a TSTEP,global,o,i,$NSTEP`指定TSTEP屬性的內容，是整數其值為$NSTEP
-       - 再將其轉回uamiv檔案才會正確
+       - 再將其轉回[uamiv][uamiv]檔案才會正確
 - `--from-conv=ioapi`、`--to-conv=cf`指定協訂內容是ioapi或者是[CF](http://cfconventions.org/latest.html)(Climate and Forecast (CF) Metadata Conventions)。
 
 ```bash

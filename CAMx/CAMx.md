@@ -27,7 +27,7 @@ last_modified_date: 2022-06-01 20:12:23
 
 |名稱|年代版本|用途|FAQ|
 |-|-|-|-|
-|BNDEXTR|[20sep16](https://camx-wp.azurewebsites.net/getmedia/bndextr.20sep16.tgz)|從空品濃度檔案(uamiv)切割出下層網格之邊界濃度檔案|BC|
+|BNDEXTR|[20sep16](https://camx-wp.azurewebsites.net/getmedia/bndextr.20sep16.tgz)|從空品濃度檔案([uamiv][uamiv]格式)切割出下層網格之邊界濃度檔案|BC|
 |GEOS2CAMx|[30apr22](https://camx-wp.azurewebsites.net/getmedia/geos2camx.30apr22.tgz)|[GEOS]()模式之轉接|IC/BC|
 |MOZART2CAMx |[6apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)|[MOZART]()模式之轉接(for CAMx or CMAQ)|IC/BC|
 ||[30apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.30apr22.tgz)|(for CAMx v7+)||
@@ -37,14 +37,14 @@ last_modified_date: 2022-06-01 20:12:23
 ||[31may20](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx7.00.31may20.tgz)|(for CAMx v7.00)||
 ||[15dec20](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx7.10.15dec20.tgz)|(for CAMx v7.10)||
 ||[30apr22](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx7.20.30apr22.tgz)|(for CAMx v7.10)||
-|WRFCAMx|[v4.8.1.14Dec20](https://camx-wp.azurewebsites.net/getmedia/wrfcamx_v4.8.1.14Dec20.tgz)|氣象場之轉接(uamiv)|wrfcamx|
+|WRFCAMx|[v4.8.1.14Dec20](https://camx-wp.azurewebsites.net/getmedia/wrfcamx_v4.8.1.14Dec20.tgz)|氣象場之轉接([uamiv][uamiv]格式)|wrfcamx|
 ||[v5.2.10Jan22](https://camx-wp.azurewebsites.net/getmedia/wrfcamx_v5.2.10Jan22.tgz)|(ncf)||
 
 ### [後處理程式](https://www.camx.com/download/support-software/)
 
 |名稱|年代版本|用途|FAQ|
 |-|-|-|-|
-|CAMx2IOAPI |[camx2ioapi.8apr16.tgz](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)|uamiv avrg/dep to ncf||
+|CAMx2IOAPI |[camx2ioapi.8apr16.tgz](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)|[uamiv][uamiv] avrg/dep to ncf||
 
 ### 手冊
 - [CAMxUsersGude_v7.20.pdf](http://camx-wp.azurewebsites.net/Files/CAMxUsersGuide_v7.20.pdf)
@@ -53,4 +53,4 @@ last_modified_date: 2022-06-01 20:12:23
 {: .fs-6 .fw-300 }
 ---
 
-
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"

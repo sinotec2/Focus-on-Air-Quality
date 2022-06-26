@@ -29,7 +29,10 @@ last_modified_date: 2022-01-05 09:30:08
   - 如新網格網格間為相當或小於0.25度(如CWB WRF_15Km 或d2 27Km)，則採REAS網格之內插，可能總量會略有差異。
 - 過去曾經作法
   - MM5時代使用網格經緯度為格線，切割REAS排放量，累積各網格排放量。  
-  - CAMx系統有bandex程式，可以切割Mozart等間距經緯度之濃度檔，成為直角座標系統。因此先將REAS 文字檔轉成mozart檔案，再循[程序](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之uamiv檔案。
+  - CAMx系統有bandex程式，可以切割Mozart等間距經緯度之濃度檔，成為直角座標系統。因此先將REAS 文字檔轉成mozart檔案，再循[程序](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之[uamiv][uamiv]檔案。
+
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ## [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
 

@@ -50,7 +50,7 @@ last_modified_date:   2021-12-02 11:08:53
 
 ### 程式說明
 #### 輸入檔格式
-- 範例為uamiv [point_source]()格式之CAMx逐月檔案，因此需要PseudoNetCDF來解讀
+- 範例為uamiv [point_source](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/)格式之CAMx逐月檔案，因此需要PseudoNetCDF來解讀
   - 如為nc檔案，則以netCDF4.Dataset讀取。
 ```python
 import PseudoNetCDF as pnc

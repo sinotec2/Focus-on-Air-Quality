@@ -101,9 +101,11 @@ $ verdi.sh&
   - 因此如要修正，要從nc檔案的內容著手，在VERDI本身或其他外部檔案都沒有可以調整的。
 - UTM系統之設定
   - nc.XCENT、nc.YCENT、nc.ALP、nc.BET、nc.GAM、nc.XORIG、nc.YORIG、nc.XCELL、nc.YCELL 等等由於模式內設為美國本土地區，模式輸出檔中的座標系統若使用UTM，將無法順利貼上其內設的底圖。
-- CAMx [uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案
+- CAMx [uamiv格式][uamiv](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案
   - 須在「與濃度檔同一目錄下」之camxproj.txt檔內予以指定。範例如下
   - 相關設定方式可以詳見[CMAS網站](https://www.cmascenter.org/ioapi/documentation/3.1/html/BINIO.html)說明 。
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ```bash
 kuang@master /home/camxruns/2019/outputs/con09

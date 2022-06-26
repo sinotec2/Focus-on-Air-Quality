@@ -288,11 +288,13 @@ $ cat -n reso.py
 ```
 
 ## 後處理
-- (nc->m3->uamiv->cmaq_emis)
+- (nc->m3->[uamiv][uamiv]->cmaq_emis)
 - nc:等間距經緯度座標系統
 - m3:model3 IOAPI直角座標系統
-- uamiv: for CAMx simulation
+- [uamiv][uamiv]: for CAMx simulation
 - cmaq_emis: for CMAQ simulation
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ### nc2m3.cs
 - 此步驟將等間距經緯度座標系統，轉換成m3io之直角座標系統
@@ -467,8 +469,9 @@ done
 ```
 
 ### cbl.cs
-- 將逐日、地面檔案組合成月檔案。結果會是2015${m}.emis.grd0${d}，uamiv檔案，可以直接加入CAMx模擬、或經camx2cmaq轉換後加到CMAQ排放量檔案裏。
+- 將逐日、地面檔案組合成月檔案。結果會是2015${m}.emis.grd0${d}，[uamiv][uamiv]檔案，可以直接加入CAMx模擬、或經camx2cmaq轉換後加到CMAQ排放量檔案裏。
 - 有暫存檔，「不能」在同一目錄平行運作
+
 
 ```bash
 for d in 1 2 3 4;do
@@ -477,7 +480,7 @@ for d in 1 2 3 4;do
   done
 done
 ```
-cbin_all 為傳統uamiv檔案的連接程式，功能與ncrcat之基本功能相同，詳見 https://github.com/sinotec2/CAMx_utility/blob/master/cbin_avrg.par.f
+cbin_all 為傳統[uamiv][uamiv]檔案的連接程式，功能與ncrcat之基本功能相同，詳見 https://github.com/sinotec2/CAMx_utility/blob/master/cbin_avrg.par.f
 
 ### add_Ship.py
 - 加入既有的area.nc 檔案
@@ -678,3 +681,5 @@ for MM in 0{1..2};do # 151{0..2};do
   done
 done
 ```
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"

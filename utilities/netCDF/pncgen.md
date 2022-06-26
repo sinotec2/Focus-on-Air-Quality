@@ -266,3 +266,110 @@ $PTH/pncgen --out-format=uamiv -O calpuff.con.S.grd02.nc  calpuff.con.S.grd02
 #rm calpuff.con.S.grd02.nc
 $PTH/pncgen -f uamiv -O calpuff.con.S.grd02 calpuff.con.S.grd02.nc
 ```
+
+## pncgen/pncdump 所有可接受的格式
+### 一般格式
+
+|類別|-f 格式名稱|method名稱|說明|
+|:-:|:-|:-|-|
+||Dataset
+||MetaNetCDF|MetaNetCDF.MetaNetCDF
+||WrapPNC
+||add_derived|MetaNetCDF.add_derived
+||aqsraw|epafiles.aqsraw
+||ceilometerl2|ceilometerfiles.ceilometerl2
+||csv|textfiles.csv
+||ffi1001|icarttfiles.ffi1001.ffi1001
+||nc
+||ncf
+||netcdf
+||newresolution|MetaNetCDF.newresolution
+||reader|aermodfiles.reader
+||time_avg_new_unit|MetaNetCDF.time_avg_new_unit
+||window|MetaNetCDF.window
+||woudcsonde|woudcfiles.woudcsonde
+
+### WRF模式
+
+|類別|-f 格式名稱|method名稱|說明|
+|:-:|:-|:-|-|
+||wrf|wrffiles.wrf
+||wrf_base|wrffiles.wrf_base
+
+### CMAQ模式
+
+|類別|-f 格式名稱|method名稱|說明|
+|:-:|:-:|:-|-|
+|OMI數據檔|cmaqomidat|cmaqfiles.cmaqomidat||
+|網格定義檔|griddesc|cmaqfiles.griddesc||
+|濃度|ioapi|cmaqfiles.ioapi||
+||ioapi_base|cmaqfiles.ioapi_base||
+|光解係數|jtable|cmaqfiles.jtable||
+|剖面邊界場|bcon_profile|cmaqfiles.profile.bcon_profile||
+|剖面初始場|icon_profile|cmaqfiles.profile.icon_profile||
+
+### GeoChem模式
+
+|類別|-f 格式名稱|method名稱|說明|
+|:-:|:-:|:-|-|
+|診斷檔|_diag_group|geoschemfiles._diag_group||
+|二進位診斷場|bpch|geoschemfiles.bpch||
+||bpch1|geoschemfiles.bpch1||
+||bpch2|geoschemfiles.bpch2||
+||bpch_base|geoschemfiles.bpch_base||
+|飛行紀錄|flightlogs|geoschemfiles.flightlogs||
+|geoschem NC|gcnc|geoschemfiles.gcnc||
+||gcnc_base|geoschemfiles.gcnc_base||
+|濃度|geos|geoschemfiles.geos||
+
+### NOAA檔案
+
+|類別|-f 格式名稱|method名稱|說明|
+|:-:|:-:|:-|-|
+|濃度|arlconcdump|noaafiles.arlconcdump
+|壓縮|arlpackedbit|noaafiles.arlpackedbit
+|顆粒|arlpardump|noaafiles.arlpardump
+|軌跡|arltrajdump|noaafiles.arltrajdump
+|l100|l100|noaafiles.l100
+
+### CAMx 
+
+|類別|-f 格式名稱|method名稱|說明|
+|:-:|:-|:-|-|
+|雲雨|cloud_rain|camxfiles.cloud_rain.Memmap.cloud_rain||
+||cloud_rain_center_time|camxfiles.cloud_rain.Transforms.cloud_rain_center_time||
+||cloud_rain_center_time_plus|camxfiles.cloud_rain.Transforms.cloud_rain_center_time_plus||
+||cloud_rain_plus|camxfiles.cloud_rain.Transforms.cloud_rain_plus||
+|垂直擴散係數|vertical_diffusivity|camxfiles.vertical_diffusivity.Memmap.vertical_diffusivity||
+|||camxfiles.vertical_diffusivity.Read.vertical_diffusivity||
+||vertical_diffusivity_center_time|camxfiles.vertical_diffusivity.Transforms.vertical_diffusivity_center_time||
+|高度壓力|height_pressure|camxfiles.height_pressure.Memmap.height_pressure||
+|||camxfiles.height_pressure.Read.height_pressure||
+||height_pressure_center_time|camxfiles.height_pressure.Transforms.height_pressure_center_time||
+||height_pressure_center_time_plus|camxfiles.height_pressure.Transforms.height_pressure_center_time_plus||
+||height_pressure_plus|camxfiles.height_pressure.Transforms.height_pressure_plus||
+|濕度|humidity,|camxfiles.humidity.Memmap.humidity||
+|||camxfiles.humidity.Read.humidity||
+||humidity_center_time|camxfiles.humidity.Transforms.humidity_center_time||
+|溫度|temperature|camxfiles.temperature.Memmap.temperature||
+|||camxfiles.temperature.Read.temperature||
+||temperature_center_time|camxfiles.temperature.Transforms.temperature_center_time||
+|風|wind|camxfiles.wind.Memmap.wind||
+|||camxfiles.wind.Read.wind||
+||wind_center_time_cell|camxfiles.wind.Transforms.wind_center_time_cell||
+|總臭氧|tomsl3|toms.level3.tomsl3||
+|土地使用|landuse|camxfiles.landuse.Memmap.landuse||
+|邊界濃度|lateral_boundary|camxfiles.lateral_boundary.Memmap.lateral_boundary||
+|常數|one3d|camxfiles.one3d.Memmap.one3d||
+|||camxfiles.one3d.Read.one3d||
+|點源|point_source|camxfiles.point_source.Memmap.point_source
+|||camxfiles.point_source.Read.point_source
+|初始值/濃度/面源/瞬間值|uamiv|camxfiles.uamiv.Memmap.uamiv
+|||camxfiles.uamiv.Read.uamiv
+|細網格瞬間值|finst|camxfiles.finst.Memmap.finst
+|臭氧來源|osat|camxfiles.uamiv.Transforms.osat||
+|程序分析|ipr|camxfiles.ipr.Memmap.ipr||
+||ipr|camxfiles.ipr.Read.ipr||
+||irr|camxfiles.irr.Memmap.irr||
+||irr|camxfiles.irr.Read.irr||
+

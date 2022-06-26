@@ -199,7 +199,7 @@ kuang@master /nas1/CAM-chem
 $ cat cb.cs
 for y in {07..13};do cd 20$y;for m in {01..12};do cd *$m/output;python ../../../cbin.py $y${m};cd ../../;done;cd ..;done &
 ```
-- cbin.py引用PseudoNetCDF的[uamiv][uamiv]模組存取檔案
+- cbin.py引用[PseudoNetCDF][pseudonetcdf]的[uamiv][uamiv]模組存取檔案
 
 ```python
 #kuang@master /nas1/CAM-chem
@@ -260,3 +260,5 @@ nc.close
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021
 - wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021
 - acom.ucar, **Mozart Download**, [ucar.edu](http://www.acom.ucar.edu/wrf-chem/mozart.shtml), 2013-08-30.
+
+[pseudonetcdf]: <https://github.com/barronh/pseudonetcdf/blob/master/scripts/pncgen> "PseudoNetCDF provides read, plot, and sometimes write capabilities for atmospheric science data formats including: CAMx (www.camx.org), RACM2 box-model outputs, Kinetic Pre-Processor outputs, ICARTT Data files (ffi1001), CMAQ Files, GEOS-Chem Binary Punch/NetCDF files, etc. visit  barronh /pseudonetcdf @GitHub."

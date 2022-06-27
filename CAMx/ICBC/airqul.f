@@ -1,126 +1,308 @@
-c this routine calculate maximun of average of fields, and OP AS A ARG FILE
-       INCLUDE  'PARAMS.CMD'
-       INCLUDE  'CHPARM.CMD'
-       INCLUDE  'CNTROL.CMD'
-       INCLUDE  'FILCON.CMD'
-       INCLUDE  'SEGTAB.CMD'
-       INCLUDE  'NETDEP.CMD'
-       INCLUDE  'BALANC.CMD'
-       INCLUDE  'LOCPTR.CMD'
-       INCLUDE  'MSCAL.CMD'
-      integer,parameter::fmax=300
-      integer,parameter::MXSPEC=40
-      integer itmp(4),nti(2)
-      character*4,allocatable:: SPNAME(:,:)
-      CHARACTER*60 NAM0(fmax) ! input/output file names
-      character*4 fname(10)
-      character*4 note(60)
-      integer,allocatable::ndate2(:),ndlast2(:)
-      integer SDATE,EDATE
-      real,allocatable::ttime2(:),ttlast2(:)
-      real,allocatable:: A1(:,:,:,:),tm(:,:,:)
+C
+C     *** READ PTSOURCE PACKETS AND CREATE THE FILE
+C
+      DIMENSION MAQU(10), MFID(60), MRUNID(60),
+     $          MCON(10), MEND(10), MFIELD(10),
+     $          MSIM(10)
+      CHARACTER*80 IPATH
+      PARAMETER (NI=200,NJ=200,MXSP=50)
+      dimension A1(NI,NJ,MXSP,MXSP)
+C
+C     COMDECK.CNTROL
+C------------------------------------------------------------------------
+C
+C     *** /CNTROL/ CONTAINS MANY CONTROL PARAMETERS OF GLOBAL INTEREST
+C
+C--DIMENSIONS AND REGION DESCRIPTORS USED A LOT
+C
 
-      NUAV=41
-      narg=iARGc ()
-      if(narg.ne.1)stop  'input avrg_file '
-      do i=1,narg
-        call getarg(i,nam0(i))
-      enddo
-      narg=2
-      nam0(2)=trim(nam0(1))//'M'
-      do i=1,narg
-          open(i+10,file=trim(nam0(i)),
-     +      form='unformatted',convert='BIG_ENDIAN',STATUS='unknown')
-        print*,trim(nam0(i))
-      enddo
-      nfile=narg-1
-      iout=narg+10
+      COMMON /CNTROL/ NOZ   , NOZP1 , NOZM1 , NOSEG , NOSPEC, NORS  ,
+     $                NREACT, NCOEF ,
+     $                KBEG  , KBUP  ,
+     $                DELTAX, DELTAY, DZSURF
+C
+C--LOGICAL CONTROL FLAGS
 
-      allocate(ndate2(nfile))
-      allocate(ndlast2(nfile))
-      allocate(ttime2(nfile))
-      allocate(ttlast2(nfile))
-      DO IRD=1,nfile
-        READ (IRD+10) fname, note, NOSEG, NOSPEC,
-     +    NDATE2(ird), TTIME2(ird),
-     $    NDLAST2(ird), TTLAST2(ird)
-       enddo
-      allocate(SPNAME(10,NOSPEC))
-       ndate=minval(ndate2)
-       ndlast=maxval(ndlast2)
-       ttime=minval(ttime2)
-       ttlast=maxval(ttlast2)
-       do ird=1,nfile
 C
-C--REGION DESCRIPTION HEADER
-        READ (IRD+10) XUTM, YUTM, NZONE, XORG, YORG, DELTAX, DELTAY,
-     $    NOXG, NOYG, NOZ, NVLOW, NVUP, DZSURF, DZMINL, DZMINU
-!      print*, XUTM, YUTM, NZONE, XORG, YORG, DELTAX, DELTAY,
-!    $      NOXG, NOYG, NOZ, NVLOW, NVUP, DZSURF, DZMINL, DZMINU
+      COMMON /CNTROL/ LCHEM , LANYPH, LANYTD, LANYSI, LANYSB,
+     $                LPHFAC, LREST , LSINK , LPTS  , LRWY  ,
+     $                LTEMP , LTERR , LCVAR
+C
+      LOGICAL LCHEM , LANYPH, LANYTD, LANYSI, LANYSB,
+     $        LPHFAC, LREST , LSINK , LPTS  , LRWY  ,
+     $        LTEMP , LTERR , LCVAR
+C
+C--TIME CONTROLS
+C
+C--INTEGRATION CONTROLS AND HANDY VARIABLES
+C
+C
+      LOGICAL  LPSNOW
+C
+C--TRACE AND INTERNAL FILE UNIT NUMBERS
 
-!       if(ird.eq.1)then
-!         write(*,*) XUTM, YUTM, NZONE, XORG, YORG, DELTAX, DELTAY,
-!    $      NOXG, NOYG, NOZ, NVLOW, NVUP, DZSURF, DZMINL, DZMINU
-!       endif
 C
-C--SEGMENT DESCRIPTION HEADER
-        READ (IRD+10) (Itmp(j), J=1,4)
-!       print*, (Itmp(j), J=1,4)
+
+      COMMON /CNTROL/ NUTRC , NUII  ,
+
+     $                NUBONR, NUBONW, NUCONR, NUCONW,
+
+     $                NUCUMR, NUCUMW, NUSEGR, NUSEGW
+
 C
-C--SPECIES DESCRIPTION HEADER
-      READ (IRD+10) ((SPNAME(I,J), I=1,10), J=1,NOSPEC)
-!       print*, ((SPNAME(I,J), I=1,10), J=1,NOSPEC)
-        nt=0
-      do
-        READ (ird+10,END=30,err=30)i1,t1,i2,t2
-!       print*,i1,t1,i2,t2
-        DO  L=1,NOSPEC
-          DO  K=1,NOZ
-            READ(10+ird,err=30)
-          enddo !k
-        enddo !l
-        nt=nt+1
-      enddo !it
+
+C--TRACE OPTIONS AND CURRENT LOCATION INDICATORS
 C
-C         FIRST, WRITE TIME INTERVAL
+      COMMON /CNTROL/ IISEG, ISTEP, ICELL, JCELL, KCELL, LCELL,
+     $                IPRINT(6)
 C
-30    rewind(IRD+10)
-      do i=1,4
-        read(IRD+10)
+C--DESCRIPTIVE STUFF
+C
+      COMMON /CNTROL/ MRUNID,     XUTM  , YUTM  , NZONE ,
+     $                XORG  , YORG  , NOXG  , NOYG  , NOZG  ,
+     $                NVLOW , NVUP  , DZMINL, DZMINU, NDTREF
+C
+C         MRUNID    A  RUN ID
+C         XUTM      R  REFERENCE ORIGIN
+C         YUTM      R  REFERENCE ORIGIN
+C
+      COMMON /BIGV/SPNAM(10,MXSP)
+      CHARACTER SPNAM*4
+      dimension PM(4),OBxy(200,200),CB(MXSP)
+
+      DATA MAQU /1HA, 1HI, 1HR, 1HQ, 1HU, 1HA, 1HL, 1HI, 1HT, 1HY /
+        character*4 MSPEC(10,50),ifile(10),MRUNID
+      DATA ifile /1HA, 1HI, 1HR, 1HQ, 1HU, 1HA, 1HL, 1HI, 1HT, 1HY /
+      DATA MCON / 1HC, 1HO, 1HN, 1HT, 1HR, 1HO, 1HL, 1H , 1H , 1H /
+      DATA MEND / 1HE, 1HN, 1HD, 1H , 1H , 1H , 1H , 1H , 1H , 1H /
+      DATA  MBLANK /1H  /
+C
+      DATA NIN /2/
+      DATA NOU /3/
+      DATA NUAQ /10/
+C***********************************************************************
+C
+C
+C  OPEN INPUT AND OUTPUT FILES
+C
+C***********************************************************************
+C
+C     *** NOW WRITE THE AIRQUALTY FILE
+C
+
+C--FILE DESCRIPTION HEADER RECORD
+C
+      OPEN(NIN,FILE='AIRQUL.INP',STATUS='OLD')
+      OPEN(NOU,FILE='AIRQUL.CHK',STATUS='UNKNOWN')
+      WRITE (NOU,6000)
+C
+C     *** READ CONTROL PACKET
+C
+C--CARD 1--PACKET HEADER
+      READ (NIN,5100) MFIELD
+CRS   READ (*,5100) MFIELD
+      WRITE (NOU,6100) MFIELD
+      DO 110 I=1,10
+         IF (MFIELD(I).EQ.MCON(I)) GO TO 110
+            WRITE (NOU,6110) MCON
+            WRITE (*,6110) MCON
+            GO TO 900
+  110    CONTINUE
+C
+C--CARD 2--FILE NAME
+      READ (NIN,5100) MFIELD
+CRS   READ (*,5100) MFIELD
+      WRITE (NOU,6100) MFIELD
+c      DO 120 I=1,10
+c         IF (MFIELD(I).EQ.MBDY(I)) GO TO 120
+c            WRITE (NOU,6110) MBDY
+c            GO TO 900
+c  120    CONTINUE
+C
+C
+C--CARD 3--FILE IDENTIFIER
+      READ (NIN,5130) MFID
+CRS   READ (*,5130) MFID
+      WRITE (NOU,6130) MFID
+C
+C--CARD 4--SEGMENT
+      READ(NIN,5330)NOSPEC,IZERO,LINES,I1
+      DO 10 I=1,4
+10    READ(NIN,5330)
+C
+C--CARD 5--SPECIES NAME
+      DO 11 J=1,NOSPEC
+!11    READ(NIN,5100)(MSPEC(I,J),I=1,10)
+11    READ(NIN,'(10A1)')(MSPEC(I,J),I=1,10)
+C
+C--CARD 6-- LIMIT OF TIME
+      READ (NIN,5330) NBD, NBT, NED, NET
+      WRITE (NOU,6330) NBD, NBT, NED, NET
+      TBEG = FLOAT(NBT/100) + FLOAT(MOD(NBT,100))/60.
+      TEND = FLOAT(NET/100) + FLOAT(MOD(NET,100))/60.
+C
+C--CARD 7--END
+      READ (NIN,5100) MFIELD
+      WRITE (NOU,6100) MFIELD
+      DO 170 I=1,10
+         IF (MFIELD(I).EQ.MEND(I)) GO TO 170
+            WRITE (NOU,6110) MEND
+            GO TO 900
+  170    CONTINUE
+C
+C--CARD 8--"REGION"
+      READ(NIN,5100)MFIELD
+      READ(NIN,*)XUTM, YUTM, NZONE
+      READ(NIN,*) XORG, YORG
+      READ(NIN,*) DELTAX, DELTAY
+      READ(NIN,*) NOXG, NOYG, NOZ
+      READ(NIN,*) NVLOW, NVUP, DZSURF, DZMINL, DZMINU
+C
+C--CARD 9--END
+      READ (NIN,5100) MFIELD
+      WRITE (NOU,6100) MFIELD
+      DO 180 I=1,10
+         IF (MFIELD(I).EQ.MEND(I)) GO TO 180
+            WRITE (NOU,6110) MEND
+            GO TO 900
+  180    CONTINUE
+
+C--CARD 10--"BOUNDARIES"
+      READ (NIN,5100) MFIELD
+      DO 12 I=1,LINES
+12    READ (NIN,*)
+
+C--CARD 11--END
+      READ (NIN,5100) MFIELD
+      WRITE (NOU,6100) MFIELD
+      DO 190 I=1,10
+         IF (MFIELD(I).EQ.MEND(I)) GO TO 190
+            WRITE (NOU,6110) MEND
+            GO TO 900
+  190    CONTINUE
+
+C--CARD 12--"TIME INTERVAL"
+      READ(NIN,5100)MFIELD
+C--CARD 13 -- TIME LIMIT
+      READ (NIN,5330) NDATE, NBT, NED, NET
+      TBEG = FLOAT(NBT/100) + FLOAT(MOD(NBT,100))/60.
+      TEND = FLOAT(NET/100) + FLOAT(MOD(NET,100))/60.
+      NINTERV=(NED-NBD)*24+(TEND-TBEG)+1
+C--CARD 14 -- METHOD AND VERTICAL METHOD
+      DO 200 I=1,7
+200     READ(NIN,*)
+C--CARD 15-- BOUNDARY READINGS
+      DO 210 I=1,NOSPEC
+210    READ(NIN,1000)CB(I)
+1000  FORMAT(20X,F10.0)
+C
+C
+      TTIME=NBT
+      NDLAST=NED
+      TTLAST=NET
+      do i=1,10
+        MRUNID(i)=ifile(i)
       enddo
-      ENDDO ! next IRD input file
-      NXY=NOXG*NOYG
-      allocate(tm(NXY,NOZ,NOSPEC))
-      allocate(A1(NXY,NOZ,NOSPEC,NT))
-      ird=1
-      do it=1,nt
-        READ (ird+10,END=31,err=31)i1,t1,i2,t2
-        DO  L=1,NOSPEC
-          DO  K=1,NOZ
-            READ(10+ird,err=31)ISEG,(SPNAME(I,L),I=1,10),A1(:,k,l,it)
-          ENDDO
-        ENDDO
-      ENDDO
-      print*,'normal end'
-      goto 32
-31    print*,'wrong NT'
-32    continue
-      NOZ=11
-      SDATE=19365
-      EDATE=21001
-      TTIME=TTIME2(1)
-      print*,NDATE2(1),NDLAST2(1),SDATE,EDATE
-      write(iout) fname, note, NOSEG, NOSPEC, SDATE, TTIME,
-     $ EDATE, TTIME
-      print*,NDATE2(1),NDLAST2(1),SDATE,EDATE
-      write(narg+10) XUTM, YUTM, NZONE, XORG, YORG, DELTAX, DELTAY,
-     $  NOXG, NOYG, NOZ, NVLOW, NVUP, DZSURF, DZMINL, DZMINU
-      write(iout)1,1,NOXG,NOYG
-      write(iout)((SPNAME(I,J), I=1,10), J=1,NOSPEC)
-      write(iout) SDATE, TTIME, EDATE, TTIME
-      DO  L=1,NOSPEC
-       DO  K=1,NOZ
-        write(iout)ISEG,(SPNAME(I,L),I=1,10),(A1(I,k,l,1),I=1,NXY)
-       enddo !k
-      enddo !l
-      end
+      WRITE (NUAQ)    ifile, MRUNID, NOSEG, NOSPEC, NDATE, TTIME,
+     $  NDLAST, TTLAST
+      WRITE (NOU,6510) MAQU, MRUNID,  NOSEG, NOSPEC, NDATE, TTIME,
+     $  NDLAST, TTLAST
+
+C     *** WRITE BOUNDARY REGION HEADER
+C
+      WRITE (NUAQ) XUTM, YUTM, NZONE, XORG, YORG, DELTAX, DELTAY,
+     $         NOXG, NOYG, NOZ, NVLOW, NVUP, DZSURF, DZMINL, DZMINU
+      WRITE(NOU,*) XUTM, YUTM, NZONE, XORG, YORG, DELTAX, DELTAY,
+     $         NOXG, NOYG, NOZ, NVLOW, NVUP, DZSURF, DZMINL, DZMINU
+      NOZG=NOZ
+      IF(DZSURF.NE.0) NOZ=NOZ+1
+C
+C     *** WRITE SEGMENT DEFN RECORD FROM BOUNDARY AND CALC MAXDIM
+C
+      WRITE (NUAQ) !1,1,NOXG,NOYG
+C
+C     *** NOW WRITE THE SPECIES DEFN RECORD ON BOUNDARY
+C
+      WRITE (NUAQ) ((MSPEC(I,J),I=1,10),J=1,NOSPEC)
+C
+C     *** WRITE TIME VARIANT PACKET
+C     (1) TIME INTERVAL RECORD
+      WRITE (NUAQ) NDATE, TBEG, NDLAST, TTLAST
+      WRITE (*,* ) NDATE, TBEG, NDLAST, TTLAST
+C     (2) FOR EACH SPECEICES
+         DO 500 L=1,NOSPEC
+                DO K=1,NOZ
+          WRITE (NUAQ) NSG, (MSPEC(J,L),J=1,10),
+     +          ((CB(L),I=1,NOXG),J=1,NOYG)
+                ENDDO
+500    CONTINUE
+C
+C     *** THATS IT -- REWIND AND LEAVE
+C
+      close(NUAQ)
+      GO TO 999
+C
+C     *** COME HERE IF THERE HAS BEEN AN ERROR
+C
+  900 WRITE (NOU,6900)
+      GO TO 999
+C
+C
+  999 CONTINUE
+      stop
+C***********************************************************************
+ 5100 FORMAT (10A1)
+ 5200 FORMAT (10A1,F10.0)
+ 5130 FORMAT (60A1)
+ 5230 FORMAT (2F10.0)
+ 5330 FORMAT (4I10)
+ 5350 FORMAT(6L10)
+ 5360 FORMAT (2F10.0, I10, F10.0)
+ 5370 FORMAT (F10.0, I10, 2F10.0)
+ 5390 FORMAT (6I10)
+ 6000 FORMAT (1H1)
+ 6100 FORMAT (1X, 10A1)
+ 6110 FORMAT (43H **ERROR ON ABOVE CARD -- SHOULD HAVE BEEN , 10A1)
+ 6130 FORMAT (1X, 60A1)
+ 6230 FORMAT (1X, 1P2E15.4)
+ 6330 FORMAT (1X, 4I10)
+ 6350 FORMAT (1X, 6L10)
+ 6360 FORMAT (1X, 1P2E15.4, I10, E15.4)
+ 6370 FORMAT (1X, 1PE15.4, I10, 2E15.4)
+ 6375 FORMAT (46H **ERROR -- ALL VALUES ABOVE MUST BE POSITIVE )
+ 6390 FORMAT (1X, 6I10)
+ 6500 FORMAT (54H1************** SIMCONTROL FILE **********************)
+ 6510 FORMAT (32H0FILE DESCRIPTION HEADER RECORD /
+     $  5X, 17HFILE TYPE      = , 10A1 /
+     $  5X, 17HFILE ID        = , 60A1 /
+     $  5X, 17HNO OF SEGMENTS = , I2   /
+     $  5X, 17HNO OF SPECIES  = , I2   /
+     $  5X, 17HBEG DATE       = , I5   /
+     $  5X, 17HBEG TIME       = , F3.0 /
+     $  5X, 17HEND DATE       = , I5   /
+     $  5X, 17HEND TIME       = , F3.0 )
+ 6530 FORMAT (28H0SIMULATION CONTROLS RECORD /
+     $  5X, 16HRUN ID        = , 60A1 //
+     $  5X, 16HBEG DATE      = , I10  /
+     $  5X, 16HBEG TIME      = , F10.2/
+     $  5X, 16HEND DATE      = , I10  /
+     $  5X, 16HEND TIME      = , F10.2//
+     $  5X, 16HRESTART FLAG  = , L10  /  5X, 16HSINK FLAG     = , L10/
+     $  5X, 16HPTS  FLAG     = , L10  /  5X, 16HRWY  FLAG     = , L10/
+     $  5X, 16HTEMP FLAG     = , L10  /  5X, 16HTERR FLAG     = , L10//
+     $  5X, 16HCONC VAR FLAG = , L10//
+     $  5X, 16HDEF ROUGHNESS = , F10.4/
+     $  5X, 16HDEF VEGETAT'N = , F10.4//
+     $  5X, 16HMAX TIME SLICE= , F10.4/  5X, 16HMAX STEPS     = , I10 //
+     $  5X, 16HMIN STEP SIZE = , F10.4/
+     $  5X, 16HMAX ITERS     = , I10  /
+     $  5X, 16HERR TOL       = , F10.6/
+     $  5X, 16HDARK CRITERION= , F10.4//
+     $  5X, 16HINST INTERVAL = , F10.2/
+     $  5X, 16HAVG  INTERVAL = , F10.2//
+     $  5X, 16HPRINT OPTIONS = ,  I10 / (21X, I10))
+ 6900 FORMAT (43H0PROGRAM TERMINATING DUE TO ABOVE ERROR(S)/
+     $  5X, 27H -FIX CARD(S) AND RESUBMIT )
+C
+C
+      END

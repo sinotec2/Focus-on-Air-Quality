@@ -1,0 +1,31 @@
+#kuang@114-32-164-198 /Users/camxruns/2016_v7/ICBC/bndextr_d2
+#$ cat bndex-d2.job 
+export EXE="/cluster/src/CAMx/bndextr/src/bndextr"
+export INP="/nas1/camxruns/2016_v7/ICBC/bndextr_d2"
+#for INPF in $(ls $INP/*.avrgIP|grep 16);do
+for INPF in $(ls $INP/*.avrg.grd02|grep 1611);do
+export dy=`echo $INPF|cut -d'/' -f7|cut -c 1-4`
+export jul=`pick $INPF|grep jules|awk '{print $5}'`
+echo $dy $jul
+#YYNN JJJ
+rm base.grd01.$dy.bc
+rm base.grd01.$dy.ic
+rm camx.nest.$dy.diag1
+rm camx.nest.$dy.diag2
+
+$EXE << EOF
+Input average file |$INPF
+Output BC file     |base.grd02.$dy.bc
+Make IC file?      |T
+Hour/date for IC   |20  $jul
+Output IC file     |base.grd02.$dy.ic
+Output projection  |LAMBERT
+UTM zone           |0
+Center/Pole lat/lon|120.9900,23.61000
+True lats          |10.000,40.000,
+Grid definition    |-124.500, -205.500, 3., 3.,83,137,15
+diagnostic file #1 |camx.nest.$dy.diag1
+diagnostic file #2 |camx.nest.$dy.diag2
+EOF
+
+done

@@ -2,7 +2,7 @@
 layout: default
 title: 從空品檔案切割邊界濃度 BNDEXTR
 parent: ICBC for CAMx
-grand_parent: CAMx
+grand_parent: CAMx Model System
 nav_order: 1
 date: 2022-06-27 13:44:29
 last_modified_date: 2022-06-27 13:44:33

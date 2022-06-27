@@ -1,7 +1,7 @@
 ---
 layout: default
 title: ICBC for CAMx
-parent: CAMx
+parent: CAMx Model System
 has_children: true
 permalink: /CAMx/ICBC
 nav_order: 99

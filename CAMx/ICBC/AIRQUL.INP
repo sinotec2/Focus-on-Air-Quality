@@ -1,0 +1,98 @@
+CONTROL
+AIRQUL
+CAMx6.00 DOMAIN1
+        31         0         6         1         1
+        20         1         1         1         1
+         1         1         1         1         1
+         0         0         1         1
+         0         0         0
+NO
+NO2
+O3
+ETH
+OLE
+PAR
+TOL
+XYL
+FORM
+ALD2
+CRES
+MGLY
+OPEN
+PNA
+NXOY
+PAN
+MEOH
+ETOH
+ISOP
+CO
+HONO
+H2O2
+HNO3
+SO2
+SULF
+NH3
+NITR
+AERO
+AN
+AS
+NTR
+     00001      0000     99365      2400
+END
+REGION
+0.0       0.0       14
+-124500.  -205500.
+ 3000.0    3000.0
+83        137       15
+6         2          0.       50.0      100.0
+END
+BOUNDARIES
+A1           234000.  2594000.   167000.  2547000.
+A2           167000.  2547000.   167000.  2480000.
+A3           167000.  2480000.   194000.  2480000.
+A4           194000.  2480000.   251000.  2527000.
+A5           251000.  2527000.   251000.  2594000.
+A6           251000.  2594000.   234000.  2594000.
+END
+TIME INTERVAL
+     01001      0000     99365      2400
+METHOD
+ALL       ALL       BOUNDVALUE  0.000000     1000.         0
+END
+VERTICAL METHOD
+ALL       ALL       CONSTANT    0.000000     1000.         0
+END
+BOUNDARY READINGS
+ALL       NO        1.000E-3
+ALL       NO2       2.000E-3
+ALL       O3        20.00E-3
+ALL       ETH       0.100E-3
+ALL       OLE       0.100E-3
+ALL       PAR       0.100E-3
+ALL       TOL       1.000E-9
+ALL       XYL       1.000E-9
+ALL       FORM      0.100E-3
+ALL       ALD2      0.100E-4
+ALL       CRES      1.000E-9
+ALL       MGLY      1.000E-9
+ALL       OPEN      1.000E-9
+ALL       PNA       1.000E-9
+ALL       NXOY      1.000E-3
+ALL       PAN       1.000E-9
+ALL       MEOH      1.000E-9
+ALL       ETOH      1.000E-9
+ALL       ISOP      0.100E-3
+ALL       CO        0.100000
+ALL       HONO      1.000E-9
+ALL       H2O2      1.000E-9
+ALL       HNO3      1.100E-9
+ALL       SO2       3.000E-3
+ALL       SULF      3.000E-3
+ALL       NH3       1.000E-3
+ALL       NITR      1.000E-9
+ALL       NA        1.000E-3
+ALL       PNO3      1.000E-3
+ALL       PSO4      1.000E-3
+ALL       PNH4      1.000E-3
+END
+ENDTIME

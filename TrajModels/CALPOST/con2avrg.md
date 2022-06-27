@@ -21,9 +21,11 @@ last_modified_date: 2022-06-07 11:56:20
 ---
 
 ## 背景
-- [uamiv](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)格式可以適用CAMx、UAM等模式之IO與處理軟體([如VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/))
+- [uamiv][uamiv]格式可以適用CAMx、UAM等模式之IO與處理軟體([如VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/))
 - [con2avrg.f](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPOST/con2avrg.f)基本上就是CALPOST.FOR加上CAMx的寫出副程式(`wrtcamx`)
 
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ## 程式修改
 ### 開啟輸出檔案

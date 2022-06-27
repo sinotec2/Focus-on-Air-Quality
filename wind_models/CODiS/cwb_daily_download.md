@@ -80,6 +80,8 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 - 執行批次：執行date指令以驅動python程式，詳[get_cwb.sh](https://github.com/sinotec2/rd_cwbDay.py/blob/main/get_cwb.sh)
 - 自動執行排程：每天中午執行
 
+{% include download.html content="[rd_cwbDay.py](https://github.com/sinotec2/rd_cwbDay.py/blob/main/rd_cwbDay.py)、[stats_tab.csv](https://raw.githubusercontent.com/sinotec2/rd_cwbDay.py/main/stats_tab.csv)、[get_cwb.sh](https://github.com/sinotec2/rd_cwbDay.py/blob/main/get_cwb.sh)" %}
+
 ```bash
 grep cwb /etc/crontab
   0 12  *  *  * kuang /home/backup/data/cwb/e-service/get_cwb.sh >& /home/backup/data/cwb/e-service/get_cwb.out

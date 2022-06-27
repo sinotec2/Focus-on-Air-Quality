@@ -50,8 +50,11 @@ last_modified_date:   2021-12-02 11:08:53
 
 ### 程式說明
 #### 輸入檔格式
-- 範例為uamiv [point_source]()格式之CAMx逐月檔案，因此需要PseudoNetCDF來解讀
+- 範例為uamiv [point_source](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/)格式之CAMx逐月檔案，因此需要[PseudoNetCDF][pseudonetcdf]來解讀
   - 如為nc檔案，則以netCDF4.Dataset讀取。
+
+[pseudonetcdf]: <https://github.com/barronh/pseudonetcdf/blob/master/scripts/pncgen> "PseudoNetCDF provides read, plot, and sometimes write capabilities for atmospheric science data formats including: CAMx (www.camx.org), RACM2 box-model outputs, Kinetic Pre-Processor outputs, ICARTT Data files (ffi1001), CMAQ Files, GEOS-Chem Binary Punch/NetCDF files, etc. visit  barronh /pseudonetcdf @GitHub."
+
 ```python
 import PseudoNetCDF as pnc
 ...

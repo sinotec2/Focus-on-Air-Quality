@@ -18,7 +18,9 @@ last_modified_date:   2021-12-01 13:06:16
 - 讀取TEDS之dbf檔案(環保署提供的`.dbf`檔案過於龐大，超過一般資料庫軟體可以處理，詳見[dbf2csv.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/dbf2csv.py/))
 - 轉換到直角座標系統([prep_areagridLL.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/prep_areagridLL/))
 - 進行**時變係數**的展開([prep_dfAdmw.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/prep_TimVar/))
-- 併入NH3檔案、進行VOCs及PM的展開、整合成nc(uamiv)檔案([area_YYMM.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/))
+- 併入NH3檔案、進行VOCs及PM的展開、整合成nc([uamiv][uamiv])檔案([area_YYMM.py](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/))
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ## 後續處理
 - CAMx面源檔案可以使用VERDI或MeteoInfo開啟、繪圖，如[下圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11CCRS.PNG)所示。

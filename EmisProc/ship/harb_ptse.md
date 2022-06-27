@@ -111,7 +111,8 @@ last_modified_date:   2021-12-11 20:06:24
 ```
 
 ## 檔案下載
-- `python`程式：[harb_ptse.py](https://github.com/sinotec2/TEDS_ship/blob/main/harb_ptse.py)。
+
+{% include download.html content="python程式：[harb_ptse.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ship/harb_ptse.py)" %}
 
 ## Reference
 - 行政院環保署, **空氣污染排放清冊**, [air.epa.gov](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx), 網站更新日期：2021-12-1

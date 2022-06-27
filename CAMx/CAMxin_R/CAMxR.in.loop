@@ -1,0 +1,144 @@
+ &CAMx_Control
+
+ Run_Message      = 'CAMx 7.00 Test Problem -- CB6R4 CF SOAP 20160610',
+
+!--- Model clock control ---
+
+ Time_Zone        = -8,                 ! (0=UTC,5=EST,6=CST,7=MST,8=PST)
+ Restart          = .RESTART.,
+ Start_Date_Hour  = 20BY,BM,BD,BT00,   !
+ End_Date_Hour    = 20YY,MM,DD,TT00,   !
+
+ Maximum_Timestep    = 15.,            ! minutes
+ Met_Input_Frequency = 60.,            ! minutes
+ Ems_Input_Frequency = 60.,            ! minutes
+ Output_Frequency    = 60.,            ! minutes
+
+!--- Map projection parameters ---
+
+ Map_Projection = 'LAMBERT',  ! (LAMBERT,POLAR,RPOLAR,MERCATOR,LATLON,UTM)
+ UTM_Zone       = 0,
+ Longitude_Pole = 120.9900,      ! deg (west<0,south<0)
+ Latitude_Pole  = 23.61000,      ! deg (west<0,south<0)
+ True_Latitude1 =  10.,      ! deg (west<0,south<0)
+ True_Latitude2 =  40.,      ! deg (west<0,south<0, can = True_Latitude1)
+
+!--- Parameters for the master (first) grid ---
+
+ Number_of_Grids      = 1,
+ Master_SW_XCoord     = -124.500,      ! km or deg, SW corner of cell(1,1)
+ Master_SW_YCoord     = -205.500,      ! km or deg, SW corner of cell (1,1)
+ Master_Cell_XSize    =  3.,           ! km or deg
+ Master_Cell_YSize    =  3.,           ! km or deg
+ Master_Grid_Columns  = 83,
+ Master_Grid_Rows     =137,
+ Number_of_Layers     = 15,
+
+!--- Parameters for the second grid ---
+
+ Nest_Meshing_Factor(2) = 3,           ! Cell size relative to master grid
+ Nest_Beg_I_Index(2)    = 20,          ! Relative to master grid
+ Nest_End_I_Index(2)    = 40,          ! Relative to master grid
+ Nest_Beg_J_Index(2)    = 20,          ! Relative to master grid
+ Nest_End_J_Index(2)    = 40,          ! Relative to master grid
+
+ Nest_Meshing_Factor(3) = 27,          ! Cell size relative to master grid
+ Nest_Beg_I_Index(3)    = 29,          ! Relative to master grid
+ Nest_End_I_Index(3)    = 31,          ! Relative to master grid
+ Nest_Beg_J_Index(3)    = 28,          ! Relative to master grid
+ Nest_End_J_Index(3)    = 32,          ! Relative to master grid
+
+
+!--- Model options ---
+
+ Diagnostic_Error_Check = .false.,      ! True = will stop after 1st timestep
+ Flexi_Nest             = .true.,       ! True = expect flexi-nested inputs
+ Advection_Solver       = 'PPM',        ! (PPM,BOTT)
+ Chemistry_Solver       = 'EBI',        ! (EBI,LSODE)
+ PiG_Submodel           = 'None',       ! (None,GREASD,IRON)
+ Probing_Tool           = 'None',       ! (None,SA,DDM,HDDM,PA,IPR,IRR,RTRAC,RTCMC)
+ Chemistry              = .true.,
+ Drydep_Model           = 'ZHANG03',   ! (None,WESELY89,ZHANG03)
+ Bidi_NH3_Drydep        = .false.,
+ Wet_Deposition         = .true.,
+ ACM2_Diffusion         = .false.,
+ Surface_Model          = .false.,
+ Inline_Ix_Emissions    = .true.,
+ Super_Stepping         = .true.,
+ Gridded_Emissions      = .true.,
+ Point_Emissions        = .true.,
+ Ignore_Emission_Dates  = .false.,
+
+!--- Output specifications ---
+
+ Root_Output_Name         = 'outputs/conMM/YYMMbaseB',
+ Average_Output_3D        = .false.,
+ NetCDF_Format_Output     = .false.,
+ NetCDF_Use_Compression   = .false.,
+ Output_Species_Names(1)   = 'NO',
+ Output_Species_Names(2)   = 'NO2',
+ Output_Species_Names(3)   = 'O3',
+ Output_Species_Names(4)   = 'SO2',
+ Output_Species_Names(5)   = 'NH3',
+ Output_Species_Names(6)   = 'PNO3',
+ Output_Species_Names(7)   = 'PSO4',
+ Output_Species_Names(8)   = 'PNH4',
+ Output_Species_Names(9)   = 'POA',
+ Output_Species_Names(10)  = 'PEC',
+ Output_Species_Names(11)  = 'FPRM',
+ Output_Species_Names(12)  = 'CPRM',
+ Output_Species_Names(13)  = 'CCRS',
+ Output_Species_Names(14)  = 'FCRS',
+ Output_Species_Names(15)  = 'SOA1',
+ Output_Species_Names(16)  = 'SOA2',
+ Output_Species_Names(17)  = 'SOA3',
+ Output_Species_Names(18)  = 'SOA4',
+ Output_Species_Names(19)  = 'NA',
+ Output_Species_Names(20)  = 'PCL',
+ Output_Species_Names(21)  = 'PAR',
+ Output_Species_Names(22)  = 'ETHA',
+ Output_Species_Names(23)  = 'MEOH',
+ Output_Species_Names(24)  = 'ETOH',
+ Output_Species_Names(25)  = 'ETH',
+ Output_Species_Names(26)  = 'OLE',
+ Output_Species_Names(27)  = 'IOLE',
+ Output_Species_Names(28)  = 'ISOP',
+ Output_Species_Names(29)  = 'TERP',
+ Output_Species_Names(30)  = 'FORM',
+ Output_Species_Names(31)  = 'ALD2',
+ Output_Species_Names(32)  = 'ALDX',
+ Output_Species_Names(33)  = 'TOL',
+ Output_Species_Names(34)  = 'XYL',
+ Output_Species_Names(35)  = 'PRPA',
+ Output_Species_Names(36)  = 'BENZ',
+ Output_Species_Names(37)  = 'ETHY',
+ Output_Species_Names(38)  = 'ACET',
+ Output_Species_Names(39)  = 'KET',
+ Output_Species_Names(40)  = 'N2O5',
+ Output_Species_Names(41)  = 'HNO3',
+ Output_Species_Names(42)  = 'CO',
+
+!--- Input files ---
+
+ Chemistry_Parameters = './inputs/chem/CAMx7.0.chemparam.CB6r4_CF2',
+ Photolyis_Rates      = './inputs/tuv/tuv4.8.camx7.00/tuv.do_CB6.YYMM01.d4',
+ Ozone_Column         = './inputs/toms/o3map.20YYMM01.d4',
+ Initial_Conditions   = './ICBC/bndextr_d2/base.grd02.YYMM.ic',
+ Boundary_Conditions  = './ICBC/bndextr_d2/base.grd02.YYMM.bc',
+ Point_Sources(1)     = '/data/TEDS/teds10_camx/HourlyWeighted/ptse/fortBE.413_teds10.ptsEMM.nc',
+ Master_Grid_Restart  = 'outputs/conBM/BYBMbaseB.inst',
+ Nested_Grid_Restart  = 'outputs/conBM/BYBMbaseB.finst',
+ PiG_Restart          = 'outputs/conBM/BYBMbaseB.pig',
+
+ Surface_Grid(1) = 'met/YYMMd4.lu',
+ Met3D_Grid(1)   = 'met/YYMMd4.3d',
+ Met2D_Grid(1)   = 'met/YYMMd4.2d',
+ Vdiff_Grid(1)   = 'met/YYMMd4.kv.CMAQ',
+ Cloud_Grid(1)   = 'met/YYMMd4.cr',
+ Emiss_Grid(1,1) = '/data/TEDS/teds10_camx/HourlyWeighted/area/fortBE.413_teds10.areaMM.nc',
+ Emiss_Grid(1,2) = '/data/TEDS/teds10_camx/HourlyWeighted/line/fortBE.413_teds10.lineMM.nc',
+ Emiss_Grid(1,3) = '/data/TEDS/teds10_camx/HourlyWeighted/ship/fortBE.413_teds10.51A_MM.nc',
+ Emiss_Grid(1,4) = '/data/TEDS/teds10_camx/HourlyWeighted/biog/fortBE.413_teds10.biogMM.nc',
+ Emiss_Grid(1,5) = '/data/TEDS/teds10_camx/HourlyWeighted/ptse/fortBE.413_teds10.ptsGMM.nc',
+
+ /

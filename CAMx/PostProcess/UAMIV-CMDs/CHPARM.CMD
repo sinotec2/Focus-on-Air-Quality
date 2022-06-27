@@ -1,0 +1,20 @@
+C     COMDECK.CHPARM
+C-----------------------------------------------------------------------
+C
+C     ***  /CHPARM/ CONTAINS CHEMISTRY PARAMETERS
+C
+      PARAMETER (MXSP=90,MXRX=200)
+      COMMON /CHPARM/ NSMAX,
+     $  MSPEC(10,MXSP), LREAC(MXSP), LSSIC(MXSP), LSSBC(MXSP),
+     $     BDSL (MXSP), BDSU (MXSP), BDNL (MXSP), BDNU (MXSP), DVRES(MXSP)
+C
+      COMMON /CHPARM/ NRMAX,
+     $  RKN  (MXRX), RK   (MXRX), LPHOT(MXRX), LTDEP(MXRX),
+     $  ACTEN(MXRX), TREF (MXRX), TRINV(MXRX), LATDEP(MXRX)
+C
+      COMMON /CHPARM/ NCMAX,
+     $  MCOEF(10,10), CVAL(10)
+C
+      LOGICAL  LREAC, LSSIC, LSSBC
+      LOGICAL LPHOT, LTDEP
+C

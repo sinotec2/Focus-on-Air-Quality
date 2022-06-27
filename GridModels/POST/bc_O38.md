@@ -45,9 +45,13 @@ last_modified_date: 2022-02-13 21:05:14
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bnd-in.py)
 
 ### 讀取海陸遮罩、邊界位置
-- 引用`PseudoNetCDF.camxfiles.Memmaps.uamiv`以讀取CAMx模式模擬結果檔案(avrg格式)
+- 引用`PseudoNetCDF.camxfiles.Memmaps.uamiv`([pseudonetcdf][pseudonetcdf])以讀取CAMx模式模擬結果檔案([avrg格式][uamiv])
 - 讀取縣市代碼檔(`TWN_CNTY_3X3.nc`)，以辨識陸地及海域，mask儲存在`idx`矩陣裏。
 - 定義邊界點位置的index備用
+
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
+[pseudonetcdf]: <https://github.com/barronh/pseudonetcdf/blob/master/scripts/pncgen> "PseudoNetCDF provides read, plot, and sometimes write capabilities for atmospheric science data formats including: CAMx (www.camx.org), RACM2 box-model outputs, Kinetic Pre-Processor outputs, ICARTT Data files (ffi1001), CMAQ Files, GEOS-Chem Binary Punch/NetCDF files, etc. visit  barronh /pseudonetcdf @GitHub."
 
 ```python
 kuang@master /nas1/camxruns/2016_v7/outputs

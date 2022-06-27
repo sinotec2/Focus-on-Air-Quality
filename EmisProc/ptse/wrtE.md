@@ -246,7 +246,8 @@ $ cat -n wrtE.py
 ```
 
 ## 檔案下載
-- `python`程式：[wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)。
+
+{% include download.html content="python程式：[wrtE.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/wrtE.py)" %}
 
 
 ## Reference

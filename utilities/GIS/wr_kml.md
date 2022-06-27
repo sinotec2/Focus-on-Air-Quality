@@ -23,7 +23,7 @@ last_modified_date: 2022-02-11 13:39:55
 - 製作簡易的等值圖是模式模擬後處理必須的程序，讓使用者可以快速檢視模擬結果、容易調整範圍，最好是輕量化、容易、方便的套件。
   - [SURFER](https://www.goldensoftware.com/products/surfer)：雖然可以做到報告品質，但目前只在ms win平台，linux/macOS無法作動。底圖須另取得，且4點georeferencing太麻煩(適用大範圍非直角座標系統之底圖)。
   - [QGIS](https://zh.wikipedia.org/wiki/QGIS)：是相當完整、輕量化、公眾領域的GIS程式，雖然可以有完整解析度的地圖作為底圖，但同樣沒有regrid內插，只有色塊(tile)形式。
-  - [VERDI](https://www.evernote.com/shard/s125/sh/e57ae550-4ee0-4417-b56b-b340f50bc43e/21f7f90a91e5ede50f228b557de1f347)：篩檢品質。沒有regrid內插。只有向量底圖(行政區界)，對小範圍缺少資訊。只能輸入nc、uamiv格式檔案。
+  - [VERDI](https://www.evernote.com/shard/s125/sh/e57ae550-4ee0-4417-b56b-b340f50bc43e/21f7f90a91e5ede50f228b557de1f347)：篩檢品質。沒有regrid內插。只有向量底圖(行政區界)，對小範圍缺少資訊。只能輸入nc、[uamiv][uamiv]格式檔案。
   - [MeteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)：可以接受ASCII GRD檔案。但也是只有向量底圖。
   - 商業套裝軟體(如[BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod)、[AERMOD View™](https://www.weblakes.com/products/aermod/index.html)、[AERMOD Cloud<sup>R</sup>](https://www.envitrans.com/software-aermod-cloud.php)、[BEEST Suite](https://www.providenceoris.com/product/beest-suite/))：無法接受TWD97座標系統。沒有中文街道底圖。
 - [KML](https://zh.wikipedia.org/wiki/KML)檔案現已經被很多網路地圖所接受成為圖層，包括[Google Map]()、OpenStreet Map([OSM](https://www.openstreetmap.org/#map=8/23.611/120.768))等等網路地圖界面。
@@ -175,3 +175,6 @@ for level in levels[:]:
 
 ## Reference
 - wiki, **Keyhole標記語言**, [wiki](https://zh.wikipedia.org/wiki/KML), 2021年2月7日.
+
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"

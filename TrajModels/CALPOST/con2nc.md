@@ -21,7 +21,10 @@ last_modified_date: 2022-06-07 11:56:20
 ---
 
 ## 背景
-- 基本上，本程式是在[con2avrg](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2avrg/)之後，再進一步呼叫[pncgen](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#pncgen)將[uamiv](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案轉成nc檔案。
+- 基本上，本程式是在[con2avrg](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2avrg/)之後，再進一步呼叫[pncgen](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#pncgen)將[uamiv][uamiv]檔案轉成nc檔案。
+
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ## 呼叫pncgen
 - 使用`system`內函數

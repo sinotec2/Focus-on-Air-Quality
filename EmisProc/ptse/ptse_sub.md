@@ -441,6 +441,7 @@ $ cat -n ptse_sub.py
 ```
 
 ## 檔案下載
-- `python`程式：[ptse_sub.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/ptse_sub.py)。
+
+{% include download.html content="python程式：[ptse_sub.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/ptse_sub.py)" %}
 
 ## Reference

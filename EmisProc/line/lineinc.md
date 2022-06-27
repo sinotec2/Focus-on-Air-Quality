@@ -358,6 +358,7 @@ $ cat -n lineinc.py
 ```
 
 ## 檔案下載
-- `python`程式：[lineinc.py](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/line/lineinc.py)。
+
+{% include download.html content="python程式：[lineinc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/line/lineinc.py)" %}
 
 ## Reference

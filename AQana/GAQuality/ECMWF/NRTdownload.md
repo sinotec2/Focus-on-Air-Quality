@@ -31,7 +31,8 @@ last_modified_date: 2022-01-11 19:52:29
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180405eac4V.PNG)
 
 ## 程式下載
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)
+
+{% include download.html content="[grb2D1m3.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)" %}
 
 ## Reference
 - ECMWF, **EAC4 (ECMWF Atmospheric Composition Reanalysis 4)**, [copernicus](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview),record updated 2021-12-07 16:10:05 UTC

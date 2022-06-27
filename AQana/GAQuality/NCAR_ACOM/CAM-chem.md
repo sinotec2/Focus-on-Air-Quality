@@ -130,7 +130,9 @@ done
   1. 座標與網格系統成為直角座標系統
   2. 化學物質之對照
   3. 單位轉換
-- 逐月執行之批次檔如下。處理結果為[uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案
+- 逐月執行之批次檔如下。處理結果為[uamiv格式][uamiv]檔案
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 
 ```bash
 #kuang@master /nas1/CAM-chem
@@ -145,7 +147,7 @@ cd /nas1/CAM-chem
 ```
 - [mz2camxN3.job](https://github.com/sinotec2/Focus-on-Air-Quality/tree/main/AQana/GAQuality/NCAR_ACOM/mz2camxN3.job)之內容重點如下，注意
   - 化學物質的對照版本(CB6r4_CF__WACCM)
-  - 座標及網格系統參照檔：`1709d4`([uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式))
+  - 座標及網格系統參照檔：`1709d4`([uamiv格式][uamiv])
   - 檔案管理
     - 輸入檔即為前述m3.nc檔
     - 因逐6小時處理，結果檔案會很多，放在output目錄下
@@ -169,7 +171,7 @@ CAM模式與CMAQ模式成分對照如下表：
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM-chemSpec.png)
 
 ### 整併與轉換結果
-- 利用[shrink](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/PostProcess/shrink)進行[uamiv格式](https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式)檔案的污染物質壓縮，以產生PM2.5、PM10及VOC項目。
+- 利用[shrink](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/PostProcess/shrink)進行[uamiv格式][uamiv]檔案的污染物質壓縮，以產生PM2.5、PM10及VOC項目。
 - 逐日結果[合併][cbin]成為逐月檔
 - 進行月均值之計算([tmavrg](https://github.com/sinotec2/CAMx_utility/wiki/tmavrg))
 
@@ -197,7 +199,7 @@ kuang@master /nas1/CAM-chem
 $ cat cb.cs
 for y in {07..13};do cd 20$y;for m in {01..12};do cd *$m/output;python ../../../cbin.py $y${m};cd ../../;done;cd ..;done &
 ```
-- cbin.py引用PseudoNetCDF的uamiv模組存取檔案
+- cbin.py引用[PseudoNetCDF][pseudonetcdf]的[uamiv][uamiv]模組存取檔案
 
 ```python
 #kuang@master /nas1/CAM-chem
@@ -258,3 +260,5 @@ nc.close
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021
 - wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021
 - acom.ucar, **Mozart Download**, [ucar.edu](http://www.acom.ucar.edu/wrf-chem/mozart.shtml), 2013-08-30.
+
+[pseudonetcdf]: <https://github.com/barronh/pseudonetcdf/blob/master/scripts/pncgen> "PseudoNetCDF provides read, plot, and sometimes write capabilities for atmospheric science data formats including: CAMx (www.camx.org), RACM2 box-model outputs, Kinetic Pre-Processor outputs, ICARTT Data files (ffi1001), CMAQ Files, GEOS-Chem Binary Punch/NetCDF files, etc. visit  barronh /pseudonetcdf @GitHub."

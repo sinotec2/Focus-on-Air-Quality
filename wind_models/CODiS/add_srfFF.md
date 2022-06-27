@@ -196,8 +196,8 @@ $ cat -n add_srfFF.py
 
 ## 程式原始碼
 可以在公司內部網站找到:
-- `fortran`[程式](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/little_r_srf_v2.f)
-- `python`[程式](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/add_srfFF.py)
+
+{% include downloadFL.html content="[little_r_srf_v2.f](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/little_r_srf_v2.f)、[add_srfFF.py](http://200.200.31.47/home/backup/data/NOAA/NCEP/cwb_data/cwbsrf/add_srfFF.py)" %}
 
 ## Reference
 - MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式

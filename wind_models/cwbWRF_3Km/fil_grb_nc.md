@@ -180,7 +180,9 @@ diff fil_grb_nc.py rd_grbCubicA.py
 
 
 ## 下載程式碼
-- 可以由[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/cwbWRF_3Km/fil_grb_nc.py_txt)找到原始碼。
+- 可以由[github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/cwbWRF_3Km/fil_grb_nc.py)找到原始碼。
+
+{% include download.html content="[fil_grb_nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/cwbWRF_3Km/fil_grb_nc.py)" %}
 
 ## 檢核
 - 靜態檢核：可以使用[MeteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/)或[CWB網站](https://npd.cwb.gov.tw/NPD/products_display/product?menu_index=1)

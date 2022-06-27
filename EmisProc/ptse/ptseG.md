@@ -217,7 +217,7 @@ $ diff ptseG.py ptseE.py
 - [排放量時間變化](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
 ## 檔案下載
-- `python`程式：[ptseG.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/ptseG.py)。
 
+{% include download.html content="python程式：[ptseG.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseG.py)" %}
 
 ## Reference

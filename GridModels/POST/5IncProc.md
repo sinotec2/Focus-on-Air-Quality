@@ -65,6 +65,15 @@ last_modified_date: 2022-06-21 15:16:03
 - 此3者同時作用
   - PM<sub>2.5</sub>增量大於PM<sub>10</sub>雖不合理，但其乃為必然之數學結果。
 
+|項目|公版模式指定內容及計算公式|出現負值增量與PM10小於PM2.5可能的原因|此次修正作法|
+|-|-|-|-|
+|合併程序|combine.sh|公版只提供combine後之背景濃度，未提供base之ACONC及APMDIAG檔，因此傳統先進行combine，結果再進行差異分析|先進行濃度篩選、再進行combine與差異分析|
+|物種定義檔|SpecDef_cb6r3_ae7_aq.txt||(未修正)
+|PM10物種組成|ATOTI[0]&times;PM10AT[3]+ATOTJ[0]&times;PM10AC[3]+ATOTK[0]&times;PM10CO[3]|負值可能來自相乘的元素及加總過程|(未修正)
+|PM25_TOT物種組成|ATOTI[0]&times;PM25AT[3]+ATOTJ[0]&times;PM25AC[3]+ATOTK[0]&times;PM25CO[3]|負值可能來自相乘的元素及加總過程|(未修正)
+|重做base之小時平均濃度輸出檔CCTM_ACONC_v532_intel_Taiwan_yyyymmdd.nc|提供前述公式中各I,I,K各mode成份之總合ATOTI, ATOTJ, ATOTK|因化學反應case營運後部分逐時濃度結果反而低於base個案，PM10成分累積更多負值造成低於PM2.5之結果|過濾營運後逐時濃度低於背景之結果(設為背景值)。|
+|網格點上各粒徑比例之小時平均值CCTM_APMDIAG_v532_intel_Taiwan_yyyymmdd.nc|提供前述公式中之PM10AT, PM10AC, PM10CO，以及PM25AT, PM25AC, PM25CO|營運前後部分地區時間的粒徑比例發生差異，增量煙流之細粒比例有所增加。如該處出現負值增量，則會對該處平均值放大扣減效果。|只選擇營運後之粒徑比例進行combine計算，避免不一致。|
+
 ## 因應策略方案
 ### 先相減再過濾
 - 雖然就化學反應而論，負值增量是合理與必然的結果，但是在法規應用上為trivial solution，無法討論。

@@ -352,6 +352,6 @@ $ cat -n ptseE_ONS.py
 ## 檔案下載
 
 {% include download.html content="python程式：[ptseE_ONS.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE_ONS.py)" %}
-{% include downloadFL.html content="ipynb：[ptseE_ONS.ipynb](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/EmisProc/ptse/ptseE_ONS.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE_ONS.ipynb)" %}
+{% include downloadFL.html content="ipynb：[ptseE_ONS.ipynb](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE_ONS.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE_ONS.ipynb)" %}
 
 ## Reference

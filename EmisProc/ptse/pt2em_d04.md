@@ -214,7 +214,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
 ## 檔案下載
 
-{% include download.html content="python程式：[pt2em_d04.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.py)、ipynb：[pt2em_d04.ipynb](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.ipynb)" %}
+{% include download.html content="python程式：[pt2em_d04.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.py)、ipynb：[pt2em_d04.ipynb](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/pt2em_d04.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/pt2em_d04.ipynb)" %}
 
 ## Reference
 - lizadams, **Visualization Environment for Rich Data Interpretation (VERDI): User’s Manual**, [github](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md), August 03, 2021

@@ -1,0 +1,95 @@
+---
+layout: default
+title: 從空品檔案切割邊界濃度 BNDEXTR
+parent: ICBC for CAMx
+grand_parent: CAMx
+nav_order: 1
+date: 2022-06-27 13:44:29
+last_modified_date: 2022-06-27 13:44:33
+---
+
+## 背景
+- 空品模式需要的邊界濃度，通常是更大範圍(全球模式、上層網格、粗網格)的模擬、或再分析結果，因此會需要從空氣品質檔案中切割出邊界上的濃度，除了座標系統的對照、切割之外，還需要進行內插。
+- CMAQ系統有[bcon][bcon]可以進行切割、也有[python][hd_bc.py]的版本。CAMx則需要[BNDEXTR][BNDEXTR]。執行則需要有c-shell 的腳本。
+- [PseudoNetCDF][pseudonetcdf]也有提供CAMx邊界濃度檔案格式(-f bndary)的讀取及輸出，因此也可以在python平台來處理。
+
+## [BNDEXTR][BNDEXTR]程式
+
+### 程式下載
+- [BNDEXTR][BNDEXTR]可以從官網下載。
+
+### 編譯
+- 使用makefile
+- 3個編譯器可以選擇：pgf90/ifort/gfortran
+- 因以IO為主，計算並沒有平行化。
+
+## bndex.job範例
+### 輸入
+- standard input：共12項設定參數或檔名
+- 檔案($INPF)：.avrg.grd02檔案（[uamiv格式][uamiv]，需要完整所有高度的數據、涵蓋所有模擬時間）
+### 呼叫程式
+- [pick]()讀取初始日期。現在這支程式的功能完全可以被[pncdump][pseudonetcdf]取代。
+
+### 結果檔案
+- base.grd02.$dy.bc (bndary格式)
+- base.grd02.$dy.ic ([uamiv格式][uamiv])
+
+```bash
+#kuang@114-32-164-198 /Users/camxruns/2016_v7/ICBC/bndextr_d2
+#$ cat bndex-d2.job 
+export EXE="/cluster/src/CAMx/bndextr/src/bndextr"
+export INP="/nas1/camxruns/2016_v7/ICBC/bndextr_d2"
+#for INPF in $(ls $INP/*.avrgIP|grep 16);do
+for INPF in $(ls $INP/*.avrg.grd02|grep 1611);do
+export dy=`echo $INPF|cut -d'/' -f7|cut -c 1-4`
+export jul=`pick $INPF|grep jules|awk '{print $5}'`
+echo $dy $jul
+#YYNN JJJ
+rm base.grd01.$dy.bc
+rm base.grd01.$dy.ic
+rm camx.nest.$dy.diag1
+rm camx.nest.$dy.diag2
+
+$EXE << EOF
+Input average file |$INPF
+Output BC file     |base.grd02.$dy.bc
+Make IC file?      |T
+Hour/date for IC   |20  $jul
+Output IC file     |base.grd02.$dy.ic
+Output projection  |LAMBERT
+UTM zone           |0
+Center/Pole lat/lon|120.9900,23.61000
+True lats          |10.000,40.000,
+Grid definition    |-124.500, -205.500, 3., 3.,83,137,15
+diagnostic file #1 |camx.nest.$dy.diag1
+diagnostic file #2 |camx.nest.$dy.diag2
+EOF
+
+done
+```
+
+### 設定說明
+
+|輸入設定項目|範例|說明|
+|-|-|-|
+|Input average file|$INPF|完整的CAMx或其他模式逐時(逐6時也無妨)輸出結果、解析度不能高於以下之設定條件，不可經shrink或其他後處理、必須包括所有高度數據、[uamiv格式][uamiv]|
+|Output BC file|base.grd02.$dy.bc|BC結果檔案名稱，因不同個案共用同一目錄，因此還是以月份辨示。同上層avrg內所有時間都會讀進bc檔內，因此日期並無意義。|
+|Make IC file?|T|是否需要IC，其實也可以用restart檔，CAMx程式以讀取後者為優先|
+|Hour/date for IC|20  $jul|時間(LST)與日期(yyjjj,可以由.out中讀取|
+|Output IC file|base.grd02.$dy.ic|IC檔名|
+|Output projection|LAMBERT|地圖投影方式，可與上層模式設定不同，程式會自行內插|
+|UTM zone|0|若為LAMBERT則無作用。範圍超過2度不建議投影方式選用UTM(或TWD97)|
+|Center/Pole lat/lon|120.9900,23.61000|須與CAMx.in內之設定完全相同到小數4位|
+|True lats|10.000,40.000,|割線緯度|
+|Grid definition|-124.500, -205.500,3.,3.,83,137, |在wrf2camx或mm5camx設定檔可以得知原點、間距與格數|
+|diagnostic file #1 |camx.nest.$dy.diag1|BC診斷檔|
+|diagnostic file #2 |camx.nest.$dy.diag2|IC診斷檔|
+
+{% include warning.html content="Grid definition 原點座標、網格間距單位為公里" %}
+
+[pseudonetcdf]: <https://github.com/barronh/pseudonetcdf/blob/master/scripts/pncgen> "PseudoNetCDF provides read, plot, and sometimes write capabilities for atmospheric science data formats including: CAMx (www.camx.org), RACM2 box-model outputs, Kinetic Pre-Processor outputs, ICARTT Data files (ffi1001), CMAQ Files, GEOS-Chem Binary Punch/NetCDF files, etc. visit  barronh /pseudonetcdf @GitHub."
+
+[bcon]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/> "CMAQ邊界條件輸入檔案之產生:run_bconMM_RR_DM.csh"
+[hd_bc.py]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/hd_bc/> "大型網格系統切割邊界濃度、在ncrcat連結母網格CCTM_ACONC檔案時，不但耗時、耗費磁碟機空間，非常不經濟，必須另行處理，無法使用腳本或bcon.exe程式，可以python來執行。"
+[BNDEXTR]: <https://www.camx.com/download/support-software/> "BNDEXTR generates boundary condition input files for a 1-way nested grid from a parent grid 3-D output file."
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"

@@ -40,6 +40,7 @@ for t in range(nt0):#elongate the time axis
   for v in ['TFLAG','ETFLAG']:
     for dt in range(2):
       nc1[v][t,:,dt]=nc0.variables[v][t,0,dt]
+nc1.SDATE,nc1.STIME=nc1['TFLAG'][0,0,:]
 
 #mapping the faces
 sides={0:'WEST',1:'EAST',2:'SOUTH',3:'NORTH'}

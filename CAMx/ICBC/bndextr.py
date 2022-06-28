@@ -3,7 +3,7 @@
 import numpy as np
 from PseudoNetCDF.camxfiles.Memmaps import uamiv, lateral_boundary
 import netCDF4
-import sys, os
+import sys, os, subprocess
 from bisect import bisect
 from scipy.interpolate import CubicSpline
 
@@ -47,14 +47,20 @@ mni={0:minx,  1:maxx,  2:minx,  3:minx}
 mxi={0:minx+1,1:maxx+1,2:maxx,  3:maxx}
 mnj={0:miny,  1:miny,  2:miny,  3:maxy}
 mxj={0:maxy,  1:maxy,  2:miny+1,3:maxy+1}
-X={0:np.array([y1d0[i] for i in range(min_j,max_j)]), 2:np.array([x1d0[i] for i in range(min_i,max_i)])}
+X={0:np.array([y1d0[i] for i in range(miny,maxy)]), 2:np.array([x1d0[i] for i in range(minx,maxx)])}
 X.update({1:X[0],3:X[2]})
 xy1d1={0:y1d1,1:y1d1,2:x1d1,3:x1d1}
 #cubicspline interpolation of coarse grid along x and y directions(axis=2)
 for face in range(4):
   for v in V0[3]:
     var=nc0.variables[v][:,:,mnj[face]:mxj[face],mni[face]:mxi[face]]
-    var=var.flatten().reshape(nt0,nlay,np.prod(var.shape)//nt0//nlay) #reshape for dropping dimension of 1
+    var=var.flatten().reshape(nt0,nlay0,np.prod(var.shape)//nt0//nlay0) #reshape for dropping dimension of 1
     cs=CubicSpline(X[face],var,axis=2)
     nc1[sides[face]+'_'+v][:,:,:]=np.transpose(cs(xy1d1[face][:]),axes=(0,2,1))#shape in [NSTEPS,NCOLS/NROWS,NLAYS]
-nc.close()
+nc0.close()
+nc1.close()
+pncg=subprocess.check_output('which pncgen',shell=True).decode('utf8').strip('\n')
+if len(pncg)>0:
+  os.system(pncg+' -f netcdf --out-format=lateral_boundary '+pathO+' '+pathO.replace('.nc','.bc'))
+else:
+  sys.exit('pncgen not found')

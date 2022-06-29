@@ -19,7 +19,3 @@ git clone -b main https://github.com/USEPA/CMAQ.git CMAQ_REPO
 ```  
 - 如果覺得CMAQ太複雜，可以試看看CAMx模式([FAQ:/CAMxModelSystem](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/))。
 
-{: .fs-6 .fw-300 }
----
-
-

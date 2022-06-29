@@ -34,6 +34,8 @@ last_modified_date: 2022-02-13 21:05:14
 - 如果只是要有一個數量級的概念，這些方法似乎也太過繁瑣。
 
 ## 程式設計重點
+- 目前程式是為讀取CAMx結果設計。CMAQ結果亦可以適用，只需將uamiv()改成netCDF4.dataset()即可。
+
 ### D2切出做為D4邊界濃度的位置index
 
     讀取並產生D2之X及Y座標值
@@ -168,5 +170,6 @@ In [159]: run bc_PMmean.py
 ```
 
 ## bc_PMmean.py程式下載
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bc_PMmean.py)
+
+{% include download.html content="[bc_PMmean.py](https://github.com/sinotec2/cmaq_relatives/blob/master/post/bc_PMmean.py)" %}
 

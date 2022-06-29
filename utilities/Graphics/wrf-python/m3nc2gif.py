@@ -1,4 +1,4 @@
-#!/opt/miniconda3/envs/geocat/bin/python
+#!/opt/anaconda3/envs/pyn_env/bin/python
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
@@ -9,17 +9,18 @@ from cartopy.feature import NaturalEarthFeature, COLORS
 from netCDF4 import Dataset
 from wrf import (getvar, to_np, get_cartopy, latlon_coords, vertcross,
                  cartopy_xlim, cartopy_ylim, interpline, CoordPair)
-import sys, os, subprocess
+import sys, os
 from datetime import datetime, timedelta
 from pyproj import Proj
 from bisect import bisect
+import subprocess
 
 #判斷線性或對數濃度色階
 def get_lev(N):
   if mxv/mnv>15:    
     dc=(np.log10(mxv)-np.log10(mnv))/15    
     level=[round(10**(dc*i+np.log10(mnv)),N) for i in range(15)]
-    nm=colors.LogNorm(vmin=level[0], vmax=level[-1])
+    nm=colors.LogNorm(vmin=level[3], vmax=level[-3])
   else:
     i=int('{:e}'.format(mxv)[0])
     if i==7:i=6
@@ -27,8 +28,10 @@ def get_lev(N):
     level=[round(dc*i,N) for i in range(nlev[i])]
     nm=colors.Normalize(vmin=mnv, vmax=mxv)
   return level,nm
+
+CVT=subprocess.check_output('which convert',shell=True).decode('utf8').strip('\n')
 #2種線性間隔數
-nlev={i:10 for i in [1,2,4,8]}
+nlev={i:10 for i in [1,2,4,7,8]}
 nlev.update({i:15 for i in [3,6,9]})
 
 fname=sys.argv[1]
@@ -37,7 +40,7 @@ pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc.P_ALP, lat_2=nc.P_BET,lat_0=nc.Y
 V=[list(filter(lambda x:nc[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
 nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
 yj=nc['TFLAG'][0,0,0]
-t0=nc['TFLAG'][0,0,1]//10000
+t0=nc['TFLAG'][0,0,1]
 bdate=datetime(yj//1000,1,1,t0)+timedelta(days=int(yj%1000-1))
 
 x1d=[nc.XORIG+nc.XCELL*i for i in range(ncol)]
@@ -61,10 +64,9 @@ for v in V[3][:]:
   level,nm=get_lev(N)    
   if len(level)!=len(set(level)):level,nm=get_lev(N+1)
   #格式必須在時間迴圈外設定好，避免有偏差，GIF會跳動
-  fmt='%.'+str(N)+'f'     
+  fmt='%.'+str(N)+'f' 
   for t in range(nt):
-    if np.max(nc[v][t,0,:,:])<mnv:continue
-    fig = plt.figure(figsize=(int(10*ncol/nrow),10))
+    fig = plt.figure(figsize=(int(9*ncol/nrow),9))
     ax = plt.axes(projection=cart_proj)
     # Download and add the states and coastlines
     states = NaturalEarthFeature(
@@ -73,7 +75,8 @@ for v in V[3][:]:
         name="admin_1_states_provinces")
     ax.add_feature(states, linewidth=0.5, edgecolor="black")
     ax.coastlines('10m', linewidth=0.8)
-    contours = plt.contourf(lons, lats, nc[v][t,0,:,:] ,
+    if np.max(nc[v][t,0,:,:]) >  level[0]:
+      contours = plt.contourf(lons, lats, nc[v][t,0,:,:] ,
                        levels=level, #colors="rainbow",#"black",
                        norm=nm,
                        cmap=get_cmap("rainbow"),
@@ -95,24 +98,17 @@ for v in V[3][:]:
     ax.set_ylabel("meter", fontsize=12)
 
     sdate=(bdate+timedelta(hours=t)).strftime("%Y-%m-%d_%H:00Z")
-    plt.title(fname.split('/')[-1]+" "+v+"("+nc[v].units.strip()+") @"+sdate)
+    plt.title(v+"("+nc[v].units.strip()+") @"+sdate)
     mxv=np.max(nc[v][t,0,:,:])
     N=int(3-np.log10(mxv))
     mxv=round(mxv,N)
-    ax.annotate('max='+str(mxv),
-            xy = (1.0, -0.1),
-            xycoords='axes fraction',
-            ha='right',
-            va="center",
-            fontsize=10)
+    ax.annotate('max='+str(mxv), xy = (1.0, -0.1), xycoords='axes fraction', ha='right', va="center", fontsize=10)
+    ax.annotate('cpuff run at '+fname.split('/')[-1], xy = (0, -0.1), xycoords='axes fraction', ha='left', va="center", fontsize=10)
 #    plt.show()
     png=v+'_'+'{:02d}'.format(t)+'.png'
     plt.savefig(png)
     plt.close()
-    os.system('convert -bordercolor white -trim '+png+' tmp.png')
-    os.system('convert -bordercolor white -border 5%x5% tmp.png '+png)
-  if nt<6:continue #too short for GIF
-  pngl=subprocess.check_output('ls -rt '+v+'*.png|tail -n1',shell=True).decode('utf8').strip('\n')
-  if len(pngl)==0:continue
-  size=subprocess.check_output('convert '+pngl+' -format "%wx%h" info:',shell=True).decode('utf8').strip('\n')
-  os.system('convert  -dispose 2 -coalesce +repage -background none '+v+'_*.png -size '+size+' '+v+'.gif')
+    os.system(CVT+' -bordercolor white -trim '+png+' tmp.png')
+    os.system(CVT+' -bordercolor white -border 5%x5% tmp.png '+png)
+  size=subprocess.check_output(CVT+' '+v+'_00.png -format "%wx%h" info:',shell=True).decode('utf8').strip('\n')
+  os.system(CVT+' -dispose 2 -coalesce +repage -background none '+v+'_*.png -size '+size+' '+v+'.gif')

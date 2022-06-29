@@ -64,7 +64,8 @@ for v in V[3][:]:
   level,nm=get_lev(N)    
   if len(level)!=len(set(level)):level,nm=get_lev(N+1)
   #格式必須在時間迴圈外設定好，避免有偏差，GIF會跳動
-  fmt='%.'+str(N)+'f' 
+  fmt='%.'+str(N)+'f'
+  contours='initial'
   for t in range(nt):
     fig = plt.figure(figsize=(int(9*ncol/nrow),9))
     ax = plt.axes(projection=cart_proj)
@@ -76,6 +77,7 @@ for v in V[3][:]:
     ax.add_feature(states, linewidth=0.5, edgecolor="black")
     ax.coastlines('10m', linewidth=0.8)
     if np.max(nc[v][t,0,:,:]) >  level[0]:
+      if contours=='initial':continue #contours must be generated at least one time
       contours = plt.contourf(lons, lats, nc[v][t,0,:,:] ,
                        levels=level, #colors="rainbow",#"black",
                        norm=nm,

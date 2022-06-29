@@ -1,0 +1,16 @@
+echo '1:nc filename 2:emis/ic/aver'
+nc=$1
+test $2 == 'emis' && ch='EMISSIONS I/O API formatted CAMx EMIS output'
+test $2 == 'ic'   && ch='AIRQUALITY INITIAL CONDITIONS'
+test $2 == 'aver' && ch='AVERAGE   CAMx 6.40 CMU CB05 RUN'
+echo $ch
+ ncatted -a name,global,o,c,"$ch" $nc
+ ncatted -a NOTE,global,o,c,'                                                            ' $nc
+ ncatted -a ITZON,global,o,i,-8 $nc
+ ncatted -a IUTM,global,o,i,51 $nc
+ ncatted -a CPROJ,global,o,i,2 $nc
+ ncatted -a TLAT1,global,o,f,10 $nc
+ ncatted -a TLAT2,global,o,f,10 $nc
+ ncatted -a PLON,global,o,f,120.9900 $nc
+ ncatted -a PLAT,global,o,f,23.61000 $nc
+ ncatted -a ISTAG,global,o,i,0  $nc

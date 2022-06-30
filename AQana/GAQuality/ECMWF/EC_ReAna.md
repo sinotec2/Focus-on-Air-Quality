@@ -23,7 +23,7 @@ last_modified_date:   2021-12-23 14:03:54
 
 ## 背景
 - 歐洲中期天氣預報中心(ECMWF)之[EAC4 (ECMWF Atmospheric Composition Reanalysis 4)](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview)長期蒐集、分析、重組全球的大氣成分數據，並以目前所理解的物化方程式予以同化，行成所謂「再分析」數據庫，並且對外提供。
-- 其數據目前為已建有與WRF-chem間的應用平台，以進行空氣品質的預報系統。也經常用在區域性的空氣品質解析(如[Galmarini et al. 2021](https://acp.copernicus.org/preprints/acp-2021-313/acp-2021-313.pdf)、[Jeong and Hong 2021](https://www.mdpi.com/2072-4292/13/10/1877))。
+- 其數據目前已建有與WRF-chem間的應用平台，以進行空氣品質的預報系統。也經常用在區域性的空氣品質解析(如[Galmarini et al. 2021](https://acp.copernicus.org/preprints/acp-2021-313/acp-2021-313.pdf)、[Jeong and Hong 2021](https://www.mdpi.com/2072-4292/13/10/1877))。
 
 ### 作業流程
 - 須先在ECMWF[哥白尼倉庫](https://ads.atmosphere.copernicus.eu/user/login?destination=/)註冊帳密(免費)。在User Profile處取得將API Key，將其寫進電腦的${HOME}/.cdsapirc檔案內，範例如下：

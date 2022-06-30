@@ -5,7 +5,7 @@ parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
 nav_order: 1
 date: 2021-12-12 16:29:31              
-last_modified_date:   2021-12-12 16:29:36
+last_modified_date:  2022-06-30 11:18:35
 ---
 
 # MOZART模式結果之讀取及應用
@@ -25,8 +25,9 @@ last_modified_date:   2021-12-12 16:29:36
 - MOZART模式全名為臭氧及相關化學成分模式([Model for OZone and Related chemical Tracers](https://en.wikipedia.org/wiki/MOZART_(model)))。
 - MOZART模式為NCAR、NOAA轄下 Geophysical Fluid Dynamics Laboratory (GFDL)與德國漢堡大學 Max Planck Institute for Meteorology (MPI-Met)多年來合作發展應用的全球3維大氣化學成分模式，除了應用在對流層之外，平流層及中氣層範圍亦涵括在內。 
   - 氣象場部分，MOZART可以接受包括NWS的NCEP (National Centers for Environmental Prediction)、歐洲的ECMWF(European Centre for Medium-Range Weather Forecasts)、NASA GMAO(Global Modeling and Assimilation Office ) 的GCM等模式輸出。
-  - 其空品模擬結果多年來也用在WRF-CHEM、[CAMx](https://www.camx.com/download/support-software/)等模式的邊界與初始條件。
-- MOZART數值產品過去也經常應用在地區模擬之邊界與初始條件，詳如下述。
+  - 其空品模擬結果多年來也用在WRF-CHEM、CMAQ、[CAMx](https://www.camx.com/download/support-software/)等模式的邊界與初始條件。
+- MOZART數值產品過去也經常應用在地區模擬之邊界與初始條件，詳如下述(歷史)。
+- MOZART程式版本目前為第4版，已無繼續更新的計畫。原本對外提供執行結果的服務也在2022年3月[正式停止][mz_stop]，目前提供全球作業化模式模擬結果的模式是[CAM-chem](https://www.acom.ucar.edu/cam-chem/cam-chem.shtml)(2001~2020再分析)及[WACCM](https://www.acom.ucar.edu/waccm/download.shtml)(近實時再分析及預報)。
 
 ### MOZART結果之解析度
 - MOZART 的水平空間解析度視不同機器平台略有差異，一般而言介於2.5~2.8度之間，
@@ -36,7 +37,7 @@ last_modified_date:   2021-12-12 16:29:36
   - 標準的MOZART-4有85個氣態污染物，12個氣膠成分，39條光化反應以及157條氣態反應，
   - 碳鍵機制採lump法，VOCs包括3個烯烴與烷烴類物質，以及4個碳以上與芳香烴類物質(BIGALK, BIGENE及TOLUENE)。
 
-### MOZART模擬結果之下載
+## MOZART模擬結果之下載(deprecated)
 **MOZART**針對空氣品質模式使用者設有提供資料之[下載網站](http://www.acom.ucar.edu/wrf-chem/mozart.shtml)(`http://www.acom.ucar.edu/wrf-chem/mozart.shtml`) ，給定內容：
 ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/mozart_download.png)
 1. 基本資料。用做通訊用。
@@ -44,7 +45,9 @@ last_modified_date:   2021-12-12 16:29:36
 如下列`ncdump`內容
   - 南北-2~47度、東西80~160度，
   - 須涵蓋氣象檔東亞d1範圍)，每個檔案「必須」有相同的範圍，以便進行檔案的合併
-1. 指定之年月日(每日以0600UTC開始以隔日0000UTC結束，共4筆，間隔6小時)，即會將下載連結寄到指定**電子郵件地址**，另行以`wget`或其他方式下載檔案。 日數擷取策略： 
+1. 指定之年月日(每日以0600UTC開始以隔日0000UTC結束，共4筆，間隔6小時)，即會將下載連結寄到指定**電子郵件地址**，另行以`wget`或其他方式下載檔案。 
+
+### 日數擷取策略
 - **5個檔案**方案，每個檔案約為**10日**： 
   - 前月最後10~11天、本月3個檔、下個月1~10日。
   - 檔案**沒有重疊**，`ncrcat`可以自由搭配
@@ -57,7 +60,9 @@ last_modified_date:   2021-12-12 16:29:36
   - 選單順序：因為日的選單比較難選(有31日)，建議按照file1(每一月)→file2(每一月) →file3進行(每一月)，以加快速度。
   - file1要注意大、小月、注意潤年檔案會重疊，只能針對同一月份進行`ncrcat`
   - 這樣做法雖然前後檔案會大一些，日期也不具規律性，但在後續處理時3個檔案合併總是比較小，可以減省讀取的時間。
-1. Submit之後，等待系統寄來下載網址，約<1~2小時之久。雖然網址只在48小時內有效，此一期間已足夠下載全年數據。 
+
+### 下載全年數據
+- Submit之後，等待系統寄來下載網址，約<1~2小時之久。雖然網址只在48小時內有效，此一期間已足夠下載全年數據。 
 - 網址內容之萃取
   - 全選系統寄來信件之內容、貼在工作站系統成為一文字檔(如`EMAIL.TXT`)
   - 使用GREP指令：`grep http EMAIL.TXT >http.txt`
@@ -116,5 +121,7 @@ done
 
 ## Reference
 - wiki, **MOZART (model)**, [wikipedia](https://en.wikipedia.org/wiki/MOZART_(model)),last edited on 6 May 2021
-- Ramboll, **mozart2camx**,  |[6apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz), 4/6/2022
+- Ramboll, **mozart2camx**,  [6apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz), 4/6/2022
 - acom.ucar, **Mozart Download**, [ucar.edu](http://www.acom.ucar.edu/wrf-chem/mozart.shtml), 2013-08-30.
+
+[mz_stop]: <https://www.acom.ucar.edu/wrf-chem/mozart.shtml> "MOZART-4 results are no longer available as of March 18, 2022. We are no longer running MOZART-4, so please use CAM-chem output instead, which is available for 2001 to present: https://www2.acom.ucar.edu/gcm/cam-chem-output"

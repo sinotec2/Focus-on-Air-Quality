@@ -36,7 +36,7 @@ last_modified_date: 2022-06-29 15:47:38
 |IUTM|0|-|UTM zone。如非UTM系統給0即可|
 |CPROJ|2|-|投影類別、即[GDTYP][GDTYP]|
 |ISTAG|0|-|是否差格(風速)|
-|PLON, PLAT, TLAT1, TLAT2|120.99, 23.61, 10.0, 40.0|-|蘭伯投影參數|
+|PLON, PLAT, TLAT1, TLAT2|120.99, 23.61, 10.0, 40.0|-|蘭伯特投影參數|
 
 
 ## 有關全域屬性NAME或CAMx_NAME

@@ -22,7 +22,7 @@ last_modified_date: 2022-06-29 15:47:38
 ## 背景
 - CAMx過去很長一段時間是沿用[uamiv][uamiv]格式做為主要格式，其內容與CAMx程式之變數已有良好對應，特別是常數部分，前4筆表頭更是所有檔案(包括邊界[lateral_boundary][bnd]、點源[point_source][ptse]等格式)所通用。
 - 其後CAMx增加了nc檔案讀寫的功能，過去這些常數則需以nc檔案的全域屬性方式進入程式。
-- 因此必須在執行程式前進行確認，如有不足，則將其增添，以避免程式停擺。
+- 因此必須在執行程式前進行確認，如有不足，則需予增添，以避免程式停擺。
 - 由於這些屬性名稱在其他(如CMAQ)並未使用，因此也不致構成錯誤。
 
 ## 項目、範例及意義
@@ -31,20 +31,21 @@ last_modified_date: 2022-06-29 15:47:38
 |:-:|:-:|:-:|:-:|
 |pncgen 格式名稱|[lateral_boundary][bnd], [uamiv][uamiv], [point_source][ptse]|[ioapi][ioapi]|pncgen格式詳[ncgen & pncgen][Xncgen]|
 |FTYPE|-|1或2|CMAQ以此辨識檔案性質1為一般4維檔、2為邊界3維檔|
-|**NAME**或**CAMx_NAME**<sup>*</sup>|"BOUNDARY", "EMISSION", "AIRQUALITY", "PTSOURCE" "AVERAGE" |-|CAMx以此辨識檔案性質|
+|**NAME**或**CAMx_NAME**10字元|"BOUNDARY", "EMISSION", "AIRQUALITY", "PTSOURCE" "AVERAGE" |-|CAMx以此辨識檔案性質|
 |ITZON|-8|-|CAMx以此計算太陽天頂角|
-|IUTM|0|-|UTM zone|
-|CPROJ|2|-|投影類別|
-|ISTAG|0|-|是否差格|
+|IUTM|0|-|UTM zone。如非UTM系統給0即可|
+|CPROJ|2|-|投影類別、即[GDTYP][GDTYP]|
+|ISTAG|0|-|是否差格(風速)|
 |PLON, PLAT, TLAT1, TLAT2|120.99, 23.61, 10.0, 40.0|-|蘭伯投影參數|
 
 
 ## 有關全域屬性NAME或CAMx_NAME
-- 7.10(不含7.10)以前舊版的CAMx模式在讀取nc檔案時，會嚴格檢查**NAME**全域屬性，以識別檔案的時間及屬性，需特別留意。
-- 因應netCDF v4.6.2的進版，nc檔內不再能新增NAME的全域屬性
+- 7.10以前(不含7.10)舊版的CAMx模式在讀取nc檔案時，會嚴格檢查**NAME**全域屬性，以識別檔案的時間及屬性，需特別留意。
+- 因應netCDF v4.6.2的進版，nc檔內不再能新增**NAME**(大寫)的全域屬性
+  - 修改相關fortran程式碼，將大寫的**NAME**改成小寫*name*。
   - 使用舊版的netCDF與相依套件。RAMBOL公司[建議][oldnc]netCDF 4.6.1版
-  - 升級到CAMx7.1以上，屬性名稱改成**CAMx_NAME**
-  - 修改相關fortran程式碼，將大寫的**NAME**改成小寫name。
+  - 將CAMx升級到7.10以上版本，屬性名稱**NAME**全數改成**CAMx_NAME**
+  
 - 修改程式或升級方案影響到的程式如下
 
 ```bash
@@ -88,3 +89,4 @@ RTRAC/ncf_rdpthdr_rt.f:92:      this_var = 'CAMx_NAME'
 [ioapi]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ioapi/> "I/O API(Input/Output Applications Programming Interface)是美國環保署發展Models-3/EDSS時順帶產生的程式庫(cmascenter, I/O API concept)，用來快速存取NetCDF格式檔案，尤其對Fortran等高階語言而言，是非常必須之簡化程序。"
 [Xncgen]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#camx> "ncgen & pncgen"
 [oldnc]: <https://camx-wp.azurewebsites.net/download/netcdf/> "Build netCDF v4.6.1 from Source"
+[GDTYP]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/#map-projection-type> "Map projection type"

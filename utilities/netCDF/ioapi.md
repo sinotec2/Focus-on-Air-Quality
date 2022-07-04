@@ -28,7 +28,7 @@ last_modified_date:   2022-04-14 16:21:45
   - 使用新的fortran compiler、mpi system、HDF或netCDF版本、任何一項更新都須重新編譯
 
 ## EXT檔案的原始碼格式
-- 涉及檔案：ioapi目錄下的STATE3.EXT、IODECL3.EXT及FDESC3.EXT等個包括檔
+- 涉及檔案：ioapi目錄下的STATE3.EXT、IODECL3.EXT及FDESC3.EXT等個內含文件
 - 由於Fortran原始碼長度的定義，編譯時可能啟動了自由格式，因此原本72格的F77格式失效了，須在行尾加上&符號將下一行連起來(gfortran)。
 ```
 <         COMMON  / BSTATE3 /

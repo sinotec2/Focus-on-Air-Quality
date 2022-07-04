@@ -40,9 +40,9 @@ last_modified_date:   2021-12-12 16:29:14
 - NCF2IOAPI為[mozart2camx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)壓縮包裡的一支程式，目前最新版本是`v3.2.1`。
 
 ### netCDF及IOAPI的編譯
-- netCDF需要有libnetcdf.a（`C`） 及libnetcdff.a（`fortran`、似乎只能自行編譯）、以及相應包括檔
+- netCDF需要有libnetcdf.a（`C`） 及libnetcdff.a（`fortran`、似乎只能自行編譯）、以及相應內含文件
 - IOAPI
-  - 需連結前述netCDF程式庫、以及相應電腦系統硬體的程式庫`libioapi.a`、以及相應包括檔。
+  - 需連結前述netCDF程式庫、以及相應電腦系統硬體的程式庫`libioapi.a`、以及相應內含文件。
   - 目前IOAPI的程式庫只能自行編譯。
   - CMAQ**5.3**版之後可接受IOAPI**3.1**版本程式庫
 

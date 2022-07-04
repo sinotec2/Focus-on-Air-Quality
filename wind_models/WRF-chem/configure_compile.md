@@ -23,7 +23,7 @@ last_modified_date: 2021-12-27 16:53:42
 ---
 
 ## 背景
-- 基本上**WRF-chem**的配置與**WRF**沒有差異，需要netCDF、HD5、JASPER、Z等程式庫及包括檔。
+- 基本上**WRF-chem**的配置與**WRF**沒有差異，需要netCDF、HD5、JASPER、Z等程式庫及內含文件。
 - 唯一差異是必須開啟**chem**相關的環境變數
 
 ```bash

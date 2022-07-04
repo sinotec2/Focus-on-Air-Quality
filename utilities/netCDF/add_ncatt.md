@@ -30,7 +30,7 @@ last_modified_date: 2022-06-29 15:47:38
 |項目|CAMx|CMAQ|說明|
 |:-:|:-:|:-:|:-:|
 |pncgen 格式名稱|[lateral_boundary][bnd], [uamiv][uamiv], [point_source][ptse]|[ioapi][ioapi]|pncgen格式詳[ncgen & pncgen][Xncgen]|
-|FTYPE|-|1或2|CMAQ以此辨識檔案性質1為一般4維檔、2為邊界3維檔|
+|FTYPE|1(uamiv)|1或2|CMAQ以此辨識檔案性質1為一般4維檔、2為邊界3維檔|
 |**NAME**或**CAMx_NAME**10字元|"BOUNDARY", "EMISSION", "AIRQUALITY", "PTSOURCE" "AVERAGE" |-|CAMx以此辨識檔案性質|
 |ITZON|-8|-|CAMx以此計算太陽天頂角|
 |IUTM|0|-|UTM zone。如非UTM系統給0即可|

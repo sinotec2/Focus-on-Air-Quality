@@ -1,0 +1,94 @@
+#!/bin/csh -f
+
+#
+#   This is a sample runscript to convert CMAQ 3-D emissions files to
+#   CAMx area-/point-source emissions files.
+#   Set the following file names and run the script:
+#
+#   INPUT_CMAQ_EMIS  - CMAQ 3-D emissions file name (input)
+#   OUTPUT_CAMx_AREA - CAMx area-source emissions file name (output)
+#   OUTPUT_CAMx_PNT  - CAMx point-source emissions file name (output)
+#   SPECIES_MAPPING  - Species Mapping Table file name (input)
+#   CAMx_HEIGHT      - CAMx height input file name (input)
+#   OUTPUT_N_LAYERS  - Number of CAMx vertical layers
+#   OUTPUT_TIMEZONE  - Timezone for output (8 for PST, etc.)
+#
+
+set INPUT_CMAQ_EMIS  = ./test_sample/smoke_v20.egts.v02_aaa.2002ft4.cbiv.ag.vista36.20020101
+set OUTPUT_CAMx_AREA = ./test_sample/area.camx.20020101.bin
+set OUTPUT_CAMx_PNT  = ./test_sample/point.camx.20020101.bin
+set SPECIES_MAPPING  = ./Species_Mapping_Tables/MAPTBL.CAMx4.5_CB05_CF.CMAQ_CB05_AE3_EMIS
+set CAMx_HEIGHT      = ./test_sample/camx.zp.20020101.bin
+set OUTPUT_N_LAYERS  = 19
+set OUTPUT_TIMEZONE  = 0
+
+######################################################################
+#
+#   SPCMAP creates a new I/O-API file with new variables each of which
+#   is a linear combination of variables from the input I/O-API file.
+#   Units of the new variables are user-defined.
+#
+#   INFILE    - file name for input file
+#   OUTFILE   - file name for output file
+#   MAPTBL    - file name for species mapping table
+#
+######################################################################
+setenv INFILE  $INPUT_CMAQ_EMIS
+setenv OUTFILE tmp_emis
+setenv MAPTBL  $SPECIES_MAPPING
+rm -f $OUTFILE
+
+./src/spcmap
+
+######################################################################
+#
+#   CMAQ2UAM converts CMAQ input files (I/O-API) into corresponding
+#   CAMx input files (UAM-IV format). It only converts file formats
+#   and units if needed. No species mapping.
+#
+#   CMAQICON        - file name for CMAQ IC input
+#   CMAQBCON        - file name for CMAQ BC input
+#   CMAQEMIS        - file name for CMAQ Emissions input
+#
+#   File Type       - input file type (ICON, BCON, or EMIS)
+#   OutFile1        - first output file name (CAMx IC, BC, or AR)
+#   OutFile2        - second output file name (CAMx TopC or PT)
+#   Output Timezone - timezone for output (8 for PST, etc.)
+#
+######################################################################
+setenv CMAQEMIS tmp_emis
+rm -f $OUTPUT_CAMx_AREA tmp_pnt
+
+./src/cmaq2uam << EOF
+File Type          |EMIS
+OutFile1 (IC,BC,AR)|$OUTPUT_CAMx_AREA
+OutFile2 (TopC,PT) |tmp_pnt
+Output Timezone    |$OUTPUT_TIMEZONE
+EOF
+
+######################################################################
+#
+#   PTHT adds "effective plume height" to a CAMx elevated point source
+#   emissions file (CAMx PT) that was created by CMAQ2UAM processor.
+#
+#   Input CAMx PT   - Input CAMx point-source emissions file name
+#   Input CAMx Z    - Input CAMx height file name
+#                     (old height/pressure file or new 3-D met file)
+#   Output CAMx PT  - Output CAMx point-source emissions file name
+#   No. of MET layers - Number of layers in the CAMx height file
+#                       If left blank, the number of layers in the
+#                       input emissions file will be used.
+#                       (Not needed when 3-D met file is provided.)
+#
+######################################################################
+rm -f $OUTPUT_CAMx_PNT
+
+./src/ptht << EOF
+Input CAMx PT      |tmp_pnt
+Input CAMx Z       |$CAMx_HEIGHT
+Output CAMx PT     |$OUTPUT_CAMx_PNT
+No. of MET layers  |$OUTPUT_N_LAYERS
+EOF
+
+rm -f tmp_emis tmp_pnt
+

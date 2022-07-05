@@ -1,0 +1,64 @@
+#!/bin/csh -f
+
+#
+#   This is a sample runscript to convert CMAQ ICON files to CAMx IC
+#   and TopC files.
+#   Set the following file names and run the script:
+#
+#   INPUT_CMAQ_ICON  - CMAQ ICON file name (input)
+#   OUTPUT_CAMx_IC   - CAMx IC file name (output)
+#   OUTPUT_CAMx_TopC - CAMx Top Concentration file name (output)
+#   SPECIES_MAPPING  - Species Mapping Table file name (input)
+#
+
+set INPUT_CMAQ_ICON  = ./test_sample/ICON_cb05_US_36_19L_profile
+set OUTPUT_CAMx_IC   = ./test_sample/ic.camx.bin
+set OUTPUT_CAMx_TopC = ./test_sample/topc.camx.ascii
+set SPECIES_MAPPING  = ./Species_Mapping_Tables/MAPTBL.CAMx4.5_CB05_CF.CMAQ_CB05_AE3_ICBC
+
+######################################################################
+#
+#   SPCMAP creates a new I/O-API file with new variables each of which
+#   is a linear combination of variables from the input I/O-API file.
+#   Units of the new variables are user-defined.
+#
+#   INFILE    - file name for input file
+#   OUTFILE   - file name for output file
+#   MAPTBL    - file name for species mapping table
+#
+######################################################################
+setenv INFILE  $INPUT_CMAQ_ICON
+setenv OUTFILE tmp_icon
+setenv MAPTBL  $SPECIES_MAPPING
+rm -f $OUTFILE
+
+./src/spcmap
+
+######################################################################
+#
+#   CMAQ2UAM converts CMAQ input files (I/O-API) into corresponding
+#   CAMx input files (UAM-IV format). It only converts file formats
+#   and units if needed. No species mapping.
+#
+#   CMAQICON        - file name for CMAQ IC input
+#   CMAQBCON        - file name for CMAQ BC input
+#   CMAQEMIS        - file name for CMAQ Emissions input
+#
+#   File Type       - input file type (ICON, BCON, or EMIS)
+#   OutFile1        - first output file name (CAMx IC, BC, or AR)
+#   OutFile2        - second output file name (CAMx TopC or PT)
+#   Output Timezone - timezone for output (8 for PST, etc.)
+#
+######################################################################
+setenv CMAQICON tmp_icon
+rm -f $OUTPUT_CAMx_IC $OUTPUT_CAMx_TopC
+
+./src/cmaq2uam << EOF
+File Type          |ICON
+OutFile1 (IC,BC,AR)|$OUTPUT_CAMx_IC
+OutFile2 (TopC,PT) |$OUTPUT_CAMx_TopC
+Output Timezone    |0
+EOF
+
+rm -f tmp_icon
+

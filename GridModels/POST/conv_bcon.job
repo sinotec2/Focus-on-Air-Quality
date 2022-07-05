@@ -1,0 +1,71 @@
+#!/bin/csh -f
+
+#
+#   This is a sample runscript to convert CMAQ BCON files to CAMx BC
+#   files.
+#   Set the following file names and run the script:
+#
+#   INPUT_CMAQ_BCON  - CMAQ BCON file name (input)
+#   OUTPUT_CAMx_BC   - CAMx BC file name (output)
+#   SPECIES_MAPPING  - Species Mapping Table file name (input)
+#   OUTPUT_TIMEZONE  - Timezone for output (8 for PST, etc.)
+#
+
+set INPUT_CMAQ_BCON  = ./test_sample/BCON.VISTAS36_CCTM_cb05.2002001.ncf
+set OUTPUT_CAMx_BC   = ./test_sample/bc.camx.2002001.bin
+set SPECIES_MAPPING  = ./Species_Mapping_Tables/MAPTBL.CAMx4.5_CB05_CF.CMAQ_CB05_AE3_ICBC
+set OUTPUT_TIMEZONE  = 0
+
+######################################################################
+#
+#   SPCMAP creates a new I/O-API file with new variables each of which
+#   is a linear combination of variables from the input I/O-API file.
+#   Units of the new variables are user-defined.
+#
+#   INFILE    - file name for input file
+#   OUTFILE   - file name for output file
+#   MAPTBL    - file name for species mapping table
+#
+######################################################################
+setenv INFILE  $INPUT_CMAQ_BCON
+setenv OUTFILE tmp_bcon
+setenv MAPTBL  $SPECIES_MAPPING
+rm -f $OUTFILE
+
+./src/spcmap
+
+######################################################################
+#
+#   CMAQ2UAM converts CMAQ input files (I/O-API) into corresponding
+#   CAMx input files (UAM-IV format). It only converts file formats
+#   and units if needed. No species mapping.
+#
+#   CMAQICON        - file name for CMAQ IC input
+#   CMAQBCON        - file name for CMAQ BC input
+#   CMAQEMIS        - file name for CMAQ Emissions input
+#
+#   BCON_INTRP      - flag to generate hourly BC from X-hourly BC
+#                     T or Y to interpolate BC; otherwise, F or N
+#                     default value is FALSE
+#                     ignored if File Type is not BCON
+#
+#   File Type       - input file type (ICON, BCON, or EMIS)
+#   OutFile1        - first output file name (CAMx IC, BC, or AR)
+#   OutFile2        - second output file name (CAMx TopC or PT)
+#   Output Timezone - timezone for output (8 for PST, etc.)
+#
+######################################################################
+setenv CMAQBCON tmp_bcon
+rm -f $OUTPUT_CAMx_BC
+
+###setenv BCON_INTRP T
+
+./src/cmaq2uam << EOF
+File Type          |BCON
+OutFile1 (IC,BC,AR)|$OUTPUT_CAMx_BC
+OutFile2 (TopC,PT) |
+Output Timezone    |$OUTPUT_TIMEZONE
+EOF
+
+rm -f tmp_bcon
+

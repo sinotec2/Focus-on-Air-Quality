@@ -1,0 +1,70 @@
+#!/bin/csh -f
+
+#
+#   This is a sample runscript to convert CMAQ in-line point-source
+#   emissions files to CAMx point-source emissions files.
+#   Set the following file names and run the script:
+#
+#   INPUT_CMAQ_EMIS  - CMAQ in-line point-source emissions file name (input)
+#   INPUT_STACK_GRP  - CMAQ stack group file name (input)
+#   OUTPUT_CAMx_PNT  - CAMx point-source emissions file name (output)
+#   SPECIES_MAPPING  - Species Mapping Table file name (input)
+#   OUTPUT_TIMEZONE  - Timezone for output (8 for PST, etc.)
+#
+
+set INPUT_CMAQ_EMIS  = ./test_sample/inln_mole_ptipm_20020101_12US1_cmaq_cb05.ncf
+set INPUT_STACK_GRP  = ./test_sample/stack_groups_ptipm_12US1_cmaq.ncf
+set OUTPUT_CAMx_PNT  = ./test_sample/point.camx.20020101.bin
+set SPECIES_MAPPING  = ./Species_Mapping_Tables/MAPTBL.CAMx5.2_CB05_CF.CMAQ_CB05_AE5_EMIS
+set OUTPUT_TIMEZONE  = 0
+
+######################################################################
+#
+#   SPCMAP creates a new I/O-API file with new variables each of which
+#   is a linear combination of variables from the input I/O-API file.
+#   Units of the new variables are user-defined.
+#
+#   INFILE    - file name for input file
+#   OUTFILE   - file name for output file
+#   MAPTBL    - file name for species mapping table
+#
+######################################################################
+setenv INFILE  $INPUT_CMAQ_EMIS
+setenv OUTFILE tmp_emis
+setenv MAPTBL  $SPECIES_MAPPING
+rm -f $OUTFILE
+
+./src/spcmap
+
+######################################################################
+#
+#   CMAQ2UAM converts CMAQ input files (I/O-API) into corresponding
+#   CAMx input files (UAM-IV format). It only converts file formats
+#   and units if needed. No species mapping.
+#
+#   CMAQICON        - file name for CMAQ IC input
+#   CMAQBCON        - file name for CMAQ BC input
+#   CMAQEMIS        - file name for CMAQ Emissions input
+#   STKGROUP        - file name for CMAQ stack group file
+#                     (required only if CMAQEMIS is CMAQ in-line
+#                      point source emission file)
+#
+#   File Type       - input file type (ICON, BCON, EMIS or IPNT)
+#   OutFile1        - first output file name (CAMx IC, BC, or AR)
+#   OutFile2        - second output file name (CAMx TopC or PT)
+#   Output Timezone - timezone for output (8 for PST, etc.)
+#
+######################################################################
+setenv CMAQEMIS tmp_emis
+setenv STKGROUP $INPUT_STACK_GRP
+rm -f $OUTPUT_CAMx_PNT
+
+./src/cmaq2uam << EOF
+File Type          |IPNT
+OutFile1 (IC,BC,AR)|
+OutFile2 (TopC,PT) |$OUTPUT_CAMx_PNT
+Output Timezone    |$OUTPUT_TIMEZONE
+EOF
+
+rm -f tmp_emis
+

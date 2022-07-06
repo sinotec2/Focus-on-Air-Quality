@@ -23,18 +23,22 @@ last_modified_date: 2022-01-05 09:30:08
 ---
 
 ## 背景
-- REAS (Regional Emission inventory in ASia)是日本國立環境研究所公開的亞洲地區空氣污染及溫室氣體排放量資料庫，詳見[官網](https://www.nies.go.jp/REAS/)之說明。REAS雖然不是最新、但也是持續發展、更新的資料庫系統。除電廠等主要污染源外，其地面污染源解析度為0.25度，在台灣地區約為25~27公里正好為d02的網格解析度。
+- REAS (Regional Emission inventory in ASia)是日本國立環境研究所公開的亞洲地區空氣污染及溫室氣體排放量資料庫，詳見[官網](https://www.nies.go.jp/REAS/)之說明。
+  - REAS數據雖然不是最新、但也是持續發展、更新的資料庫系統，目前官網提供的是2021年的REAS3.2.1版。
+  - 除電廠等主要污染源外，其地面污染源解析度為0.25度，在台灣地區約為25~27公里，正好為d02的網格解析度。
 - 座標系統轉換程式的困難點在於如何在過程中保持質量守恆。策略上：
-  - 如果新網格網格間距大於0.25度(如d1 81Km)，則採加總方式，將新網格內的REAS排放量予以加總成該網格排放量，能夠維持總量守恆。
-  - 如新網格網格間為相當或小於0.25度(如CWB WRF_15Km 或d2 27Km)，則採REAS網格之內插，可能總量會略有差異。
+  - 如果新網格網格間距大於0.25度(如d1 81Km)，則採加總方式，將新網格內的REAS排放量予以加總成該網格排放量，能夠維持總量守恆，對於空間變化較大的類別如交通及工業，有可能位置會有些失焦。見[reas2cmaqD1.py程式說明](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)
+  - 如新網格網格間為相當或小於0.25度(如CWB WRF_15Km 或d2 27Km)，則採REAS網格之內插，可能總量會略有差異(因平滑處理後會較為低一些)，但分布特徵應能維持。詳見[reas2cmaqD1.py程式說明](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)
 - 過去曾經作法
-  - MM5時代使用網格經緯度為格線，切割REAS排放量，累積各網格排放量。  
-  - CAMx系統有bandex程式，可以切割Mozart等間距經緯度之濃度檔，成為直角座標系統。因此先將REAS 文字檔轉成mozart檔案，再循[程序](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之[uamiv][uamiv]檔案。
-
-
-[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
+  - MM5及REASv1時代曾經使用MM5正交網格之經緯度為格線，切割REAS排放量，累積各網格排放量。
+    - 廢棄不繼續執行的理由：Fortran程式散失、網格系統無法更新。
+  - REASv2~REASv3.1時代曾使用CAMx系統的bndextr程式系統來進行切割及整併。該程式設計成可以從Mozart等間距經緯度之濃度檔，切割出直角座標系統之ic與bc，而該ic檔即為uamiv格式之檔案，只需正確轉換單位即可成為排放量檔案。
+    - 按bndextr作業程序，先將REAS文字檔轉寫成mozart檔案，再循[程序](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之[uamiv][uamiv]檔案。
+    - 廢棄理由：過程太過繁雜、中間檔案太多佔據空間、難以確保執行品質，也難以技術傳承。
 
 ## [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
+
+2個間距相近的不同網格系統進行空間內插，程式設計較為單純，優先予以說明。
 
 ### 程式執行
 - 需要引數：domain_name(`D0`、`D2`)、category_number(0~10)
@@ -44,7 +48,7 @@ sub python reas2cmaqD2.py D0 $icat
 done
 ```
 - [sub](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#執行程式)=`$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} &`
-- 各排放類別處理完後，可就欲研究的主題進行合併，可以使用addNC工具將同樣規格的nc檔案予以相加，如下例即將11類之nc檔合併成為2015_D0.nc：
+- 各排放類別處理完後，可就欲研究的主題進行合併，可以使用[addNC工具][addNC]將同樣規格的nc檔案予以相加，如下例即將11類之nc檔合併成為2015_D0.nc：
 
 ```python
 addNC FERTILIZER_D0.nc MISC_D0.nc ROAD_TRANSPORT_D0.nc DOMESTIC_D0.nc INDUSTRY_D0.nc OTHER_TRANSPORT_D0.nc SOLVENTS_D0.nc WASTE_D0.nc EXTRACTION_D0.nc MANURE_MANAGEMENT_D0.nc POWER_PLANTS_NON-POINT_D0.nc 2015_D0.nc
@@ -62,8 +66,8 @@ from pandas import *
 from pyproj import Proj
 from scipy.interpolate import griddata
 ```
-- 因壓縮檔內的目錄結構參差不齊，使用[findc](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#尋找檔案)來確定檔案位置，將結果存成fnames.txt備用
-  - 讀取檔案。有`/mon`該行，行前有污染物質名稱，將其與檔名一起輸出，形成dict的內容
+- 因REAS壓縮檔內的目錄結構參差不齊，使用[findc](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/unix_tools/#尋找檔案)來確定檔案位置，將路徑結果存成文字檔fnames.txt備用
+  - 讀取檔案。REAS文件檔中有`/mon`該行，行前有污染物質名稱，將其與檔名一起輸出，以形成dict(`specn`)的內容
 
 ```python
 os.system('~/bin/findc "REASv*" >fnames.txt')
@@ -233,11 +237,19 @@ nc.close()
 ```
 
 
-## [reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
-- 如[前](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaqD2/#背景)所述，D1網格間距81Km，將會有3~4格REAS排放量，如用內插作法將會嚴重失真，此處乃以加總之策略進行座標系統轉換。
+## [reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD1.py)程式說明
+- 如[前所述](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#背景)，D1網格間距81Km，將會有3~4格REAS排放量，如用內插作法將會嚴重失真，此處乃以加總之策略進行座標系統轉換。
+  - 在網格線附近的排放量，會因為歸併在特定某一格而造成略有偏差，對於排放量空間變化較大之污染類別，如交通、工業等，可能會造成較大的偏差。
 
 ### 執行
-- reas2cmaqD1.py沒有引數、所有類別都在程式內部執行
+- reas2cmaqD1.py沒有引數、所有排放類別都在程式內部依序執行
+- 此一作法雖然無法同步或平行化，然因程序較為單純，花費時間反而較REAS2時代的bndextr法更加快速、有效。
+- 使用np.sum函數，也會較fortran更加快速。
+
+### 結果
+- REAS 類別：`cate=['DOMESTIC', 'EXTRACTION', 'FERTILIZER', 'INDUSTRY', 'MISC', 'SOLVENTS', 'WASTE',
+'ROAD_TRANSPORT', 'OTHER_TRANSPORT', 'POWER_PLANTS_NON-POINT',  'MANURE_MANAGEMENT']`共11類
+- 結果檔名：`fname=cate[icat]+'_D1.nc'`
 
 ### 程式差異
 - 使用np.searchsorted找到新網格座標在REAS座標系統的位置(`lat_ss`,`lon_ss`)
@@ -274,10 +286,13 @@ nc.close()
 ```
 
 ## 程式下載
-- [reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD1.py)
-- [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)
+
+{% include download.html content="[reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD1.py)" %}
+
+{% include download.html content="[reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)" %}
 
 ## 結果檢視
+
 - m3.nc檔案可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視，如以下：
 
 | ![REAS_roadTransBenz.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_roadTransBenz.PNG) |
@@ -288,3 +303,6 @@ nc.close()
 | <b>圖 d01範圍REAS 2015年1月肥料NH3排放量之分布</b>|
 
 ## Reference
+
+[uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
+[addNC]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/addNC/> "相同規格NC檔案序列之加總"

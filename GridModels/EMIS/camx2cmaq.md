@@ -29,11 +29,11 @@ last_modified_date: 2022-01-11 19:52:24
 
 |範圍|格式|類別|
 |----|----|----|
-|東亞範圍|nc|[面排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)|
-|||[植物源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/)|
-|||[陸上交通排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/)|
-|||[船舶排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)|
-|||[地面點源排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptseG/)|
+|東亞範圍|nc|[面排放源](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/)含生物源、
+|||[航空排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)|
+|||[工業排放](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)|
+|||[陸上交通排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/)|
+|||[船舶排放](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/FMI-STEAM)|
 |臺灣範圍|nc|[面排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/area/area_YYMMinc/)|
 |||[植物源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/biog/bioginc/)|
 |||[陸上交通排放源](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/)|

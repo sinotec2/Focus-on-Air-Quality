@@ -47,4 +47,13 @@ for v in v4:
 nc[nf-1].close()
 ```
 
+## 應用
+- 不同排放類別nc檔案之加總。如[REAS結果][reas_addNC]之加總
+- [ISAM分析結果][isam_addNC]不同來源別(GR1、GR2、PTA等貢獻較低的類別)加總
+
 ## Reference
+
+
+[reas_addNC]: <https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#程式執行> "addNC FERTILIZER_D0.nc MISC_D0.nc ... 2015_D0.nc"
+
+[isam_addNC]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ISAM/SA_PM25_IONS/#執行腳本proccs> "ncs='';for nc in $(ls PM25_IONS${z}_2018040${d}_[GP]*.nc);do ncs=${ncs} $nc;done;python ~/bin/addNC $ncs PM25_IONS${z}_2018040${d}.nc"

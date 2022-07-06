@@ -28,7 +28,7 @@ last_modified_date: 2022-01-05 09:30:08
   - 除電廠等主要污染源外，其地面污染源解析度為0.25度，在台灣地區約為25~27公里，正好為d02的網格解析度。
 - 座標系統轉換程式的困難點在於如何在過程中保持質量守恆。策略上：
   - 如果新網格網格間距大於0.25度(如d1 81Km)，則採加總方式，將新網格內的REAS排放量予以加總成該網格排放量，能夠維持總量守恆，對於空間變化較大的類別如交通及工業，有可能位置會有些失焦。見[reas2cmaqD1.py程式說明](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)
-  - 如新網格網格間為相當或小於0.25度(如CWB WRF_15Km 或d2 27Km)，則採REAS網格之內插，可能總量會略有差異(因平滑處理後會較為低一些)，但分布特徵應能維持。詳見[reas2cmaqD1.py程式說明](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)
+  - 如新網格網格間為相當或小於0.25度(如d0 CWB WRF_15Km 或d2 27Km)，則採REAS網格之內插，可能總量會略有差異(因平滑處理後會較為低一些)，但分布特徵應能維持。詳見[reas2cmaqD1.py程式說明](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#reas2cmaqd1py程式說明)
 - 過去曾經作法
   - MM5及REASv1時代曾經使用MM5正交網格之經緯度為格線，切割REAS排放量，累積各網格排放量。
     - 廢棄不繼續執行的理由：Fortran程式散失、網格系統無法更新。
@@ -287,9 +287,9 @@ nc.close()
 
 ## 程式下載
 
-{% include download.html content="[reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD1.py)" %}
+{% include download.html content="加總方式：[reas2cmaqD1.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD1.py)" %}
 
-{% include download.html content="[reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)" %}
+{% include download.html content="內插方式：[reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)" %}
 
 ## 結果檢視
 
@@ -301,6 +301,55 @@ nc.close()
 | ![REAS_FertNH3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_FertNH3.PNG) |
 |:--:|
 | <b>圖 d01範圍REAS 2015年1月肥料NH3排放量之分布</b>|
+
+## 其他作業
+### 其他網格系統之排放量檔案
+- D5 (cwbWRF_3Km)以cubicspline方法進行內插，範圍因靠近跨日線，經度會出現負值，需小心取範圍。
+
+```bash
+#kuang@master /nas1/TEDS/REAS3.2/origins
+#$ diff reas2cmaqD2.py reas2cmaqD5.py
+53c53
+< boo=(x<=maxx+nc.XCELL*10) & (x>=minx-nc.XCELL*10) & (y<=maxy+nc.YCELL*10) & (y>=miny-nc.YCELL*10)
+---
+> boo=(abs(x) <= (maxx - minx) /2+nc.XCELL*10) & (abs(y) <= (maxy - miny) /2+nc.YCELL*10)
+115c115
+<     zz[t,:,: ] = griddata(xyc, c[:], (x1, y1), method='linear')
+---
+>     zz[t,:,: ] = griddata(xyc, c[:], (x1, y1), method='cubic')
+```
+
+- D6 ([HUADON_3k]<https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/Abundant_NoG_Runs/HUADON_3k/>)範圍之排放量準備，也是以內插方式(reas2cmaqD2.py)求取。
+
+### 2015年12個月份排放量之應用
+- 直接以ncks -d，將4月份值從2015_d?.nc取出在2018年4月的模擬案例中應用
+- 以gen_emis.py修改TFLAG，並將月均值複製，以產生CMAQ所需的逐時檔：
+
+```python
+#kuang@master /nas1/cmaqruns/2018base/data/emis/EDGAR_HUADON_3k
+#$ cat gen_emis.py
+import netCDF4
+import numpy as np
+import datetime
+from dtconvertor import dt2jul, jul2dt
+bdate=datetime.datetime(2018,3,30)
+sdate=[bdate+datetime.timedelta(days=i) for i in range(10)]
+ib=0
+for t in range(ib,10):
+    ymd=sdate[t].strftime('%Y%m%d')
+    fname='1804/area_HUADON_3k.'+ymd+'.nc'
+    nc = netCDF4.Dataset(fname,'r+')
+    if t==ib:V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+    nc.SDATE,nc.STIME=dt2jul(sdate[t])
+    for h in range(25):
+        nc['TFLAG'][h,:,0],nc['TFLAG'][h,:,1]=dt2jul(sdate[t]+datetime.timedelta(hours=h))
+        for v in V[3]:
+            nc[v][h,0,:,:]=nc[v][0,0,:,:]
+        nox=nc['NO'][:]+nc['NO2'][:]
+        nc['NO'][:]  = 0.9*nox[:]
+        nc['NO2'][:] = 0.1*nox[:]
+    nc.close()
+```
 
 ## Reference
 

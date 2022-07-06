@@ -5,7 +5,7 @@ parent: Regional Emission inventory in ASia
 grand_parent: Global/Regional Emission
 nav_order: 2
 date: 2022-01-05 09:30:02
-last_modified_date: 2022-01-05 09:30:08
+last_modified_date: 2022-07-06 14:04:23
 ---
 
 # 地面排放檔之轉換(CMAQ)
@@ -23,7 +23,7 @@ last_modified_date: 2022-01-05 09:30:08
 ---
 
 ## 背景
-- REAS (Regional Emission inventory in ASia)是日本國立環境研究所公開的亞洲地區空氣污染及溫室氣體排放量資料庫，詳見[官網](https://www.nies.go.jp/REAS/)之說明。
+- REAS (Regional Emission inventory in ASia)是日本國立環境研究所公開的亞洲地區空氣污染及溫室氣體排放量資料庫，詳見[官網][REAS]之說明。
   - REAS數據雖然不是最新、但也是持續發展、更新的資料庫系統，目前官網提供的是2021年的REAS3.2.1版。
   - 除電廠等主要污染源外，其地面污染源解析度為0.25度，在台灣地區約為25~27公里，正好為d02的網格解析度。
 - 座標系統轉換程式的困難點在於如何在過程中保持質量守恆。策略上：
@@ -33,7 +33,7 @@ last_modified_date: 2022-01-05 09:30:08
   - MM5及REASv1時代曾經使用MM5正交網格之經緯度為格線，切割REAS排放量，累積各網格排放量。
     - 廢棄不繼續執行的理由：Fortran程式散失、網格系統無法更新。
   - REASv2~REASv3.1時代曾使用CAMx系統的bndextr程式系統來進行切割及整併。該程式設計成可以從Mozart等間距經緯度之濃度檔，切割出直角座標系統之ic與bc，而該ic檔即為uamiv格式之檔案，只需正確轉換單位即可成為排放量檔案。
-    - 按bndextr作業程序，先將REAS文字檔轉寫成mozart檔案，再循[程序](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/)進行解讀，將m3.nc檔案轉成CAMx之[uamiv][uamiv]檔案。
+    - 按bndextr作業程序，先將REAS文字檔轉寫成mozart檔案，再循[程序][MOZART])進行解讀，將m3.nc檔案轉成CAMx之[uamiv][uamiv]檔案。
     - 廢棄理由：過程太過繁雜、中間檔案太多佔據空間、難以確保執行品質，也難以技術傳承。
 
 ## [reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)程式說明
@@ -164,7 +164,7 @@ for fname in fnames:
   print(fname)
 ```
 - REAS2CMAQ對照表
-  - 參考cb6r3_ae7_aq之物質[名稱](https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/mechanism_information/cb6r3_ae7_aq/cb6r3_ae7_aq_species_table.md)定義
+  - 參考cb6r3_ae7_aq之物質[名稱][epa]定義
   - 部分分成PAR、ETH、OLE等碳鍵(`c_dup`)，會有重復(`r_dup`)，須乘上乘數(`r_mole`)並且累加。
   - 對照表REAS2CMAQ.csv詳[github](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/REAS2CMAQ.csv)
 
@@ -304,7 +304,7 @@ nc.close()
 
 ## 其他作業
 ### 其他網格系統之排放量檔案
-- D5 (cwbWRF_3Km)以cubicspline方法進行內插，範圍因靠近跨日線，經度會出現負值，需小心取範圍。
+- D5 ([cwbWRF_3Km](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/))以cubicspline方法進行內插，範圍因靠近跨日線，經度會出現負值，座標轉換會出錯，需小心取範圍。
 
 ```bash
 #kuang@master /nas1/TEDS/REAS3.2/origins
@@ -319,11 +319,12 @@ nc.close()
 >     zz[t,:,: ] = griddata(xyc, c[:], (x1, y1), method='cubic')
 ```
 
-- D6 ([HUADON_3k]<https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/Abundant_NoG_Runs/HUADON_3k/>)範圍之排放量準備，也是以內插方式(reas2cmaqD2.py)求取。
+- D6 ([HUADON_3k])範圍之排放量準備，也是以內插方式(reas2cmaqD2.py)求取。
 
-### 2015年12個月份排放量之應用
+### 2018年4月案例之應用
 - 直接以ncks -d，將4月份值從2015_d?.nc取出在2018年4月的模擬案例中應用
-- 以gen_emis.py修改TFLAG，並將月均值複製，以產生CMAQ所需的逐時檔：
+- 以gen_emis.py修改TFLAG，並將月均值複製，以產生CMAQ所需的逐時檔
+  - 並未做年度間與日變化的調整
 
 ```python
 #kuang@master /nas1/cmaqruns/2018base/data/emis/EDGAR_HUADON_3k
@@ -350,8 +351,27 @@ for t in range(ib,10):
         nc['NO2'][:] = 0.1*nox[:]
     nc.close()
 ```
+### 以氣溫進行年度校正
+REASv3.1時代曾以WRF模擬之地面氣溫(T2)月均值，與2015年月均排放量進行回歸，並將斜率應用在目標年逐時排放的推估。雖然當時的排放檔案格式為[uamiv][uamiv]，其邏輯應可以應用在此處2015_d?.nc的展開。
+
+- 程式名稱：mkMon3.py
+- 引數：程式需要2個引數，月份與粗網格層數("d1"或"d2")
+- 需要檔案
+  - 2015及目標年WRF氣溫檔案
+  - 月均排放量檔案
+- 產生檔案：全月逐時排放量
+
+{% include download.html content="氣溫年度校正：[mkMon3.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/mkMon3.py)" %}
 
 ## Reference
 
+- USEPA(2019), [ GC namelist for cb6r3_ae7_aq][epa], Latest commit on 29 May 2019.
+- National Institute for Environmental Studies(2021), [Regional Emission inventory in ASia (REAS) Data Download Site][REAS], 23-December-2021.
+-  純淨天空, **Python numpy.searchsorted()用法及代碼示例** [vimsky](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)
+
+[HUADON_3k]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/Abundant_NoG_Runs/HUADON_3k/> "華東地區解析度3Km之CMAQ模擬分析"
+[epa]: <https://github.com/USEPA/CMAQ/blob/main/CCTM/src/MECHS/mechanism_information/cb6r3_ae7_aq/cb6r3_ae7_aq_species_table.md> " GC namelist for cb6r3_ae7_aq"
+[MOZART]: <https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/> "FAQ -> AQ Data Analysis -> Global AQ Data Analysis -> MOZART模式結果之讀取及應用"
 [uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 [addNC]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/addNC/> "相同規格NC檔案序列之加總"
+[REAS]: <https://www.nies.go.jp/REAS/> "Regional Emission inventory in ASia (REAS) Data Download Site"

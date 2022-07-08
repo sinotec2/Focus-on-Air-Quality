@@ -1,6 +1,9 @@
 !kuang@DEVP /opt/CMAQ_Project/CCTM/src/MECHS/cb6r3_ae7_aq
 !$ cat EmissCtrl_cb6r3_ae7_aq.nml|grep -v \!
 &GeneralSpecs
+ Guard_BiogenicVOC   = .FALSE.  !If True, then using 'ALL' to identify all of the available
+ Guard_MarineGas     = .FALSE.  !  streams will not apply to these streams. They will, in
+ Guard_LightningNO   = .FALSE.  !  effect, be 'guarded' from the scaling operation.
  Guard_WindBlownDust = .FALSE.
  Guard_SeaSpray      = .FALSE.
 /

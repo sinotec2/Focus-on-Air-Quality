@@ -9,7 +9,10 @@
 /
 
 &EmissionScalingRules
- EM_NML=
+EM_NML=
+ ! Region      | Stream Label  |Emission | CMAQ-        |Phase/|Scale |Basis |Op
+ !  Label      |               |Surrogate| Species      |Mode  |Factor|      |
+ ! Default Gases
    'EVERYWHERE', 'ALL'         ,'NO2'    ,'NO2'         ,'GAS'  ,1.  ,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'NO'     ,'NO'          ,'GAS'  ,1.  ,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'HONO'   ,'HONO'        ,'GAS'  ,1.  ,'UNIT','a',
@@ -51,6 +54,7 @@
    'EVERYWHERE', 'ALL'     ,'BUTADIENE13','BUTADIENE13' ,'GAS'  ,1.  ,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'SULF'   ,'SULF'        ,'GAS'  ,0.  ,'UNIT','a',
 
+   ! Default Aerosols
    'EVERYWHERE', 'ALL'         ,'SULF'   ,'ASO4'        ,'FINE' ,1.  ,'MASS','a',
    'EVERYWHERE', 'ALL'         ,'PSO4'   ,'ASO4'        ,'FINE' ,1.  ,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'PNH4'   ,'ANH4'        ,'FINE' ,1.  ,'UNIT','a',
@@ -69,14 +73,17 @@
    'EVERYWHERE', 'ALL'         ,'PMN'    ,'AMN'         ,'FINE' ,1.  ,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'PH2O'   ,'AH2O'        ,'FINE' ,1.  ,'UNIT','a',
 
+   ! Coarse-Mode Inorganic Ions Scaling
    'EVERYWHERE', 'ALL'         ,'PMC'    ,'ACORS'   ,'COARSE',0.99675,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'PMC'    ,'ASO4'    ,'COARSE',0.001  ,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'PMC'    ,'ANO3'    ,'COARSE',0.00048,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'PMC'    ,'ACL'     ,'COARSE',0.00145,'UNIT','a',
    'EVERYWHERE', 'ALL'         ,'PMC'    ,'AH2O'    ,'COARSE',0.00032,'UNIT','a',
 
+   ! --> Nonvolatile POA
     'EVERYWHERE', 'ALL'         ,'POC'    ,'APOC'       ,'FINE',0.   ,'MASS','a',
     'EVERYWHERE', 'ALL'         ,'PNCOM'  ,'APNCOM'     ,'FINE',0.   ,'MASS','a',
+   ! --> Semivolatile POA
     'EVERYWHERE', 'ALL'         ,'POC'    ,'VLVPO1'     ,'GAS' ,0.   ,'MASS','a',
     'EVERYWHERE', 'ALL'         ,'PNCOM'  ,'VLVPO1'     ,'GAS' ,0.   ,'MASS','a',
     'EVERYWHERE', 'ALL'         ,'POC'    ,'VSVPO1'     ,'GAS' ,0.045,'MASS','a',
@@ -98,8 +105,15 @@
     'EVERYWHERE', 'ALL'         ,'POC'    ,'AIVPO1'     ,'FINE',0.   ,'MASS','a',
     'EVERYWHERE', 'ALL'         ,'PNCOM'  ,'AIVPO1'     ,'FINE',0.   ,'MASS','a',
 
+   ! pcSOA is a CMAQ species introduced to account for missing pathways for SOA
+   ! formation from combustion sources. It includes IVOC oxidation as well as other
+   ! phenomena (Murphy et al., ACP, 2017). It was parameterized primarily in LA,
+   ! where vehicle exhaust continues to dominate.
     'EVERYWHERE', 'ALL'          ,'PNCOM' ,'PCVOC'      ,'GAS' ,6.579,'MASS','a',
     'EVERYWHERE', 'ALL'          ,'POC'   ,'PCVOC'      ,'GAS' ,6.579,'MASS','a',
+   ! However, the added pcSOA is probably inappropriate for Fire sources, especially
+   ! in its current configuration. This pathway should be zeroed out for all fire
+   ! and wood-burning related sources.
     'EVERYWHERE', 'PT_FIRES'     ,'ALL'   ,'PCVOC'      ,'GAS' ,0.0  ,'MASS','o',
     'EVERYWHERE', 'PT_RXFIRES'   ,'ALL'   ,'PCVOC'      ,'GAS' ,0.0  ,'MASS','o',
     'EVERYWHERE', 'PT_AGFIRES'   ,'ALL'   ,'PCVOC'      ,'GAS' ,0.0  ,'MASS','o',
@@ -107,6 +121,8 @@
     'EVERYWHERE', 'PT_FIRES_MXCA','ALL'   ,'PCVOC'      ,'GAS' ,0.0  ,'MASS','o',
     'EVERYWHERE', 'GR_RES_FIRES' ,'ALL'   ,'PCVOC'      ,'GAS' ,0.0  ,'MASS','o',
 
+   ! Wind-Blown Dust and Sea Spray Scaling
+   ! Fine Components
    'EVERYWHERE', 'ALL'    ,'PMFINE_SO4'  ,'ASO4'        ,'FINE',1.   ,'UNIT','a',
    'EVERYWHERE', 'ALL'    ,'PMFINE_NO3'  ,'ANO3'        ,'FINE',1.   ,'UNIT','a',
    'EVERYWHERE', 'ALL'    ,'PMFINE_CL'   ,'ACL'         ,'FINE',1.   ,'UNIT','a',
@@ -136,6 +152,9 @@
 
 &SizeDistributions
  SD_NML    =
+ !         | Stream Label   | Surr. Mode   | Ref. Mode
+ !<Default>  'ALL'          ,'FINE'        ,'FINE_REF',
+ !<Default>  'ALL'          ,'COARSE'      ,'COARSE_REF',
              'WBDUST'       ,'FINE'        ,'FINE_WBDUST',
              'WBDUST'       ,'COARSE'      ,'COARSE_WBDUST',
              'SEASPRAY'     ,'FINE'        ,'FINE_SEASPRAY',
@@ -145,4 +164,8 @@
 
 &RegionsRegistry
  RGN_NML  =
+ !          | Region Label   | File_Label  | Variable on File
+ !<Default>    'EVERYWHERE'  ,'N/A'        ,'N/A',
+ !<Example>    'WATER'       ,'CMAQ_MASKS' ,'OPEN',
+ !<Example>    'ALL'         ,'CMAQ_MASKS' ,'ALL',
 /

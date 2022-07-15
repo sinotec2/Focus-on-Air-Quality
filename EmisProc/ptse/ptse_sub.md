@@ -442,6 +442,6 @@ $ cat -n ptse_sub.py
 
 ## 檔案下載
 
-{% include download.html content="python程式：[ptse_sub.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/ptse_sub.py)" %}
+{% include download.html content="python程式：[ptse_sub.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptse_sub.py)" %}
 
 ## Reference

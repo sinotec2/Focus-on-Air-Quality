@@ -27,7 +27,7 @@ last_modified_date:   2021-12-08 15:49:19
 ## 程式說明
 
 ### 程式執行
-- [pt2em_d04.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.py)只需要一個引數，就是CAMx點源排放量檔案。
+- [pt2em_d04.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/CAMx/ptse/pt2em_d04.py)只需要一個引數，就是CAMx點源排放量檔案。
 - 程式會以`template_d4.nc`為模版，將點源排放量予以網格化填入模版相對應位置。
 - 時間標籤則與輸入檔案一致。
 
@@ -214,7 +214,7 @@ pt2em_d04.py fortBE.413_teds10.ptsE01.nc
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pt2em_d04DemoTimVar.PNG)
 ## 檔案下載
 
-{% include download.html content="python程式：[pt2em_d04.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/pt2em_d04.py)、ipynb：[pt2em_d04.ipynb](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/pt2em_d04.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/pt2em_d04.ipynb)" %}
+{% include download.html content="python程式：[pt2em_d04.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/CAMx/ptse/pt2em_d04.py)、ipynb：[pt2em_d04.ipynb](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/pt2em_d04.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/pt2em_d04.ipynb)" %}
 
 ## Reference
 - lizadams, **Visualization Environment for Rich Data Interpretation (VERDI): User’s Manual**, [github](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md), August 03, 2021

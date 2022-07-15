@@ -33,13 +33,13 @@ last_modified_date:   2021-12-11 20:06:24
 - 排放量變動
   - 新增點源：`原3公里網格 - 臨近9格平均值`
   - 面源修正為：`臨近9格平均值`
-- 船舶總排放量之CAMx格式檔案：由[area_YYMM_NSC.py](https://github.com/sinotec2/TEDS_ship/blob/main/area_YYMM_NSC.py)產生
+- 船舶總排放量之CAMx格式檔案：由[area_YYMM_NSC.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ship/area_YYMM_NSC.py)產生
 - 船舶面源～點源處理考量的理由：[船舶排放之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship)
-- [CAMx高空點源排放檔案之轉寫](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)及[wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)
+- [CAMx高空點源排放檔案之轉寫](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)及[wrtE.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/wrtE.py)
 
 
 ## 程式執行
-- 程式名稱：[harb_ptse.py](https://github.com/sinotec2/TEDS_ship/blob/main/harb_ptse.py)
+- 程式名稱：[harb_ptse.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ship/harb_ptse.py)
 - 1個引數
   - 4碼年月
 - 如`python harb_ptse.py 1901 `
@@ -60,7 +60,7 @@ last_modified_date:   2021-12-11 20:06:24
     16	IYX=[(j-1,i-1) for (i,j) in IXYfromVerdi]
     17	nhb=len(IYX)
 ```
-- 讀取[area_YYMM_NSC.py](https://github.com/sinotec2/TEDS_ship/blob/main/area_YYMM_NSC.py)的結果檔案
+- 讀取[area_YYMM_NSC.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ship/area_YYMM_NSC.py)的結果檔案
 
 ```python
     25	fname='fortBE.413_teds11.51A_'+mm+'.nc'
@@ -95,7 +95,7 @@ last_modified_date:   2021-12-11 20:06:24
     68	nc.close()
 ```
 - 產生煙囪參數之資料表`pv`
-  - 引用[wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)寫出CAMx高空點源排放量檔案
+  - 引用[wrtE.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/wrtE.py)寫出CAMx高空點源排放量檔案
 
 ```python
    139	pv=DataFrame({
@@ -121,4 +121,4 @@ last_modified_date:   2021-12-11 20:06:24
   - [船舶排放之處理](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship)
   - [特定面源類別之CAMx排放檔](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ship/area_YYMM_NSC/)
   - [CAMx高空點源排放檔案之轉寫](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/wrtE/)
-  - [wrtE.py](https://github.com/sinotec2/TEDS_PTSE/blob/main/wrtE.py)
+  - [wrtE.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/wrtE.py)

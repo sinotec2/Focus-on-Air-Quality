@@ -42,7 +42,7 @@ last_modified_date:  2022-06-30 11:18:35
 ![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/mozart_download.png)
 1. 基本資料。用做通訊用。
 1. 模擬範圍大致的座標 
-如下列`ncdump`內容
+如下列[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)內容
   - 南北-2~47度、東西80~160度，
   - 須涵蓋氣象檔東亞d1範圍)，每個檔案「必須」有相同的範圍，以便進行檔案的合併
 1. 指定之年月日(每日以0600UTC開始以隔日0000UTC結束，共4筆，間隔6小時)，即會將下載連結寄到指定**電子郵件地址**，另行以`wget`或其他方式下載檔案。 

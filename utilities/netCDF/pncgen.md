@@ -27,7 +27,7 @@ last_modified_date: 2022-06-26 19:20:18
 - 雖然改變nc的程式已經非常多了，netCDF的原創單位Unidata還是提供了以格式轉換為主要功能的工具ncgen。
 - 按照[官網](https://www.unidata.ucar.edu/software/netcdf/workshops/2011/utilities/NcgenExamples.html)說明，ncgen的功能至少有：
   1. 確認CDL(Common Data Language)格式檔案的內容
-  1. 反轉ncdump輸出的結果，成為nc檔案。這項功能可以將txt檔案(ncdump輸出之CDL格式文字檔)，轉成nc檔案。如範例[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)
+  1. 反轉[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)輸出的結果，成為nc檔案。這項功能可以將txt檔案([ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)輸出之CDL格式文字檔)，轉成nc檔案。如範例[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)
   1. 目的同2.，但是是由ncgen讀取cdl檔案來產生C, Fortran, or Java的程式碼、再編譯執行，以產生nc檔案。這樣可以留下處理過程，或用來產生類似、序列的檔案。
 - 在此架構下，[PseudoNetCDF]也提供了pncgen，目的希望整合所有地球科學模式的IO格式，也都能有像nc格式一樣，有充分的軟體工具可以支援。
 

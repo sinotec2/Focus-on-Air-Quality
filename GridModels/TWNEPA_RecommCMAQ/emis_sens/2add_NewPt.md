@@ -196,7 +196,7 @@ nc.close()
 ```
 
 ## 點源增量成果檢核
-- 因2點源檔案沒有空間顯示軟體可供檢核，只能以ncdump直接打開檢查內容數字。
+- 因2點源檔案沒有空間顯示軟體可供檢核，只能以[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)直接打開檢查內容數字。
 - 也可使用下列程式讀成json檔案
 
 ### pt2json.py

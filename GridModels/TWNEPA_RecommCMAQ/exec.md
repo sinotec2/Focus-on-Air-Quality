@@ -159,12 +159,12 @@ echo $LD_LIBRARY_PATH
 - 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下(作者為鳥哥)
 - 讀取GRIDCRO2D_Taiwan.nc檔案內的地形高度HT輸出成暫存檔land.ht.txt
 - 將網格等數據寫成fortran檔案、編譯(gfortran)、並將高度大於1m之網格視為陸地、將數據輸出成文字檔。
-- 經整理後將文字檔整理成ncdump順利之文字檔(ocean.cdl)，以ncgen將文字檔轉成ioapi之nc檔。
+- 經整理後將文字檔整理成[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)順利之文字檔(ocean.cdl)，以ncgen將文字檔轉成ioapi之nc檔。
 
 ```bash
 ncgen -o $outfile ocean.cdl
 ```
-- 原腳本200多行、運用gfortran、ncdump、ncgen等似無需如此複雜、可行改法
+- 原腳本200多行、運用gfortran、[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)、ncgen等似無需如此複雜、可行改法
   - 以土地使用檔案中LUFRAC_CRO_Taiwan.nc第17種水體、扣除第21種湖河沼澤即可、或(及)
   - 以python nc.createVariable創新的變數名稱、或
   - 以GRIDCRO2D做為模版，python處理好後以ncrename更名即可
@@ -322,7 +322,7 @@ done
 
 ### SpecDef_cb6r3_ae7_aq.txt
 - 公版模式並未提供其定義檔(SpecDef_cb6r3_ae7_aq.txt.epa)
-- 相較USEPA之[原始設定檔](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)，公版模式的濃度結果(ncdump結果)多輸出6項氣象數據
+- 相較USEPA之[原始設定檔](https://raw.githubusercontent.com/USEPA/CMAQ/main/CCTM/src/MECHS/cb6r3_ae7_aq/SpecDef_cb6r3_ae7_aq.txt)，公版模式的濃度結果([ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)結果)多輸出6項氣象數據
   - 雲量(CLD)、雲底(CLDB)、雲頂高(CLDT)、2m(TEMP2)及地表溫度(TEMPG)、以及平均雲中水含量(WBAR)
 - 打開VOC(此處以[USEPA的設定方式](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/#species_def檔案之設定)計算)
 - 另創8種PM顆粒之組合，應為學術論文比較所需。

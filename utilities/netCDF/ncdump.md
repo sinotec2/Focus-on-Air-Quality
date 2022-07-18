@@ -3,7 +3,7 @@ layout: default
 title:  ncdump應用範例
 parent: NetCDF Relatives
 grand_parent: Utilities
-last_modified_date: 2022-07-15 14:11:52
+last_modified_date: 2022-07-18 15:23:00
 ---
 # ncdump應用範例
 {: .no_toc }
@@ -56,10 +56,10 @@ last_modified_date: 2022-07-15 14:11:52
 
 項次|功能|ncdump|pncdump|說明
 -|-|:-:|:-:|-
-1|只看表頭|-h, -c|-H, --head|-h在後者是help
+1|只看表頭|-h, -c|-H, \-\-head|-h在後者是help
 2|部分變數|-v|-v|(same)
 3|dump與gen功能|互斥|互用|pncdump也可用於修改檔案
-4|指定IO格式|只有nc to text|可以接受-f --out-format|後者非常多樣化
+4|指定IO格式|只有nc to text|可以接受-f \-\-out-format|後者非常多樣化
 
 ## Reference
 - unidata.ucar(2011), [ncdump](https://www.unidata.ucar.edu/software/netcdf/workshops/2011/utilities/Ncdump.html)

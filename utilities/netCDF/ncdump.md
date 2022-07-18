@@ -21,9 +21,9 @@ last_modified_date: 2022-07-15 14:11:52
 ## 背景
 - netCDF是地球科學領域重要的檔案格式。然而因其二進位檔案格式的限制，不方便以文字檔案方式檢閱，[官網](https://www.unidata.ucar.edu/software/netcdf/workshops/2011/utilities/Ncdump.html)提供了ncdump讓使用者可以輕鬆讀取其內容。
 - 由於netCDF檔案使用了階層的資訊技術，除了ncdump，使用python或其他高階的軟體(或程式庫)，可以直接讀取其內容，不必再以文字檔模式循序讀取。
-- 以下以[ioapi][ioapi]協定之內容說明CDF(common data format)的內容順序如下表所示。
+- 以下以[ioapi][ioapi]協定之內容說明CDL(common data format language)的內容順序如下表所示。
 
-### CDF的內容順序
+### CDL的內容順序
 
 項次|名稱|內容|說明
 -|-|-|-
@@ -35,7 +35,7 @@ last_modified_date: 2022-07-15 14:11:52
 ### ncdump的應用原則
 - 將表頭顯示於螢幕或檔案進行確認
   - 使用`ncdump -h $nc`指令
-- 將整個檔案連data數據內容輸出成CDF文字檔案進行後續處理，再以[ncgen](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#ncgen)轉成nc檔案。
+- 將整個檔案連data數據內容輸出成CDL文字檔案進行後續處理，再以[ncgen](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#ncgen)轉成nc檔案。
   - 範例可以詳見鳥哥為公版模式所寫的[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)
 
 ## 應用範例
@@ -49,9 +49,22 @@ last_modified_date: 2022-07-15 14:11:52
   - `v=$(ncdump -h $nc|grep PM25|wc -l);a=$(ncdump -h $nc|grep AVERAGE|wc -l)`
   - 參見[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs)
 
+## pncdump
+- [pseudonetcdf][pseudonetcdf]套件中也有類似ncdump的程式pncdump，提供更多輸入/輸出格式的選項。有關pncdump支援的格式，可以參考[pncgen][pncgen]。
+- 此處著眼ncdump及pncdump程式的差異說明。
+
+
+項次|功能|ncdump|pncdump|說明
+-|-|:-:|:-:|-
+1|只看表頭|-h, -c|-H, --head|-h在後者是help
+2|部分變數|-v|-v|(same)
+3|dump與gen功能|互斥|互用|pncdump也可用於修改檔案
+4|指定IO格式|只有nc to text|可以接受-f --out-format|後者非常多樣化
 
 ## Reference
 - unidata.ucar(2011), [ncdump](https://www.unidata.ucar.edu/software/netcdf/workshops/2011/utilities/Ncdump.html)
 - 國家實驗研究院台灣颱風洪水研究中心(2016), NCAR command language workshop, [NetCDF格式介紹](http://u.camdemy.com/media/8487)
 
 [ioapi]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ioapi/> "I/O API(Input/Output Applications Programming Interface)是美國環保署發展Models-3/EDSS時順帶產生的程式庫(cmascenter, I/O API concept)，用來快速存取NetCDF格式檔案，尤其對Fortran等高階語言而言，是非常必須之簡化程序。"
+[pseudonetcdf]: <https://github.com/barronh/pseudonetcdf/blob/master/scripts/pncgen> "PseudoNetCDF provides read, plot, and sometimes write capabilities for atmospheric science data formats including: CAMx (www.camx.org), RACM2 box-model outputs, Kinetic Pre-Processor outputs, ICARTT Data files (ffi1001), CMAQ Files, GEOS-Chem Binary Punch/NetCDF files, etc. visit  barronh /pseudonetcdf @GitHub."
+[pncgen]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#pncgenpncdump-所有可接受的格式> "FAQ -> Utilitie -> NetCDF Relatives -> ncgen & pncgen -> pncgen/pncdump 所有可接受的格式"

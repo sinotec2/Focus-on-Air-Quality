@@ -34,6 +34,8 @@ last_modified_date: 2022-06-07 11:56:20
 ```
 ### pnc_congrd02
 - 詳見[utilities](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pncgen/#examples)的說明
+- pncdump用法可以參考[utility->ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump/)
+
 ```bash
 $ cat /usr/kbin/pnc_congrd02
 PTH=/cluster/miniconda/envs/unresp/bin

@@ -28,7 +28,7 @@ last_modified_date: 2022-06-27 13:44:33
 - standard input：共12項設定參數或檔名
 - 檔案($INPF)：.avrg.grd02檔案（[uamiv格式][uamiv]，需要完整所有高度的數據、涵蓋所有模擬時間）
 ### 呼叫程式
-- [pick]()讀取初始日期。現在這支程式的功能完全可以被[pncdump][pseudonetcdf]取代。
+- [pick]()讀取初始日期。現在這支程式的功能完全可以被[pncdump][pseudonetcdf]取代，詳細用法可以參考[utility->ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump/)。
 
 ### 結果檔案
 - base.grd02.$dy.bc (bndary格式)

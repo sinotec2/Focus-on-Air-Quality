@@ -1,0 +1,23 @@
+dset ^stn2grads.dat
+dtype station 
+stnmap ^taiwan.map
+undef 99.99 
+tdef TIM linear HNZDNMON20YN frqhr 
+vars 16
+SO2o 0 99 SO2 (ppb)
+SO2m 0 99 SO2 (ppb)
+CMOo 0 99 CO (ppm)
+CMOm 0 99 CO (ppm)
+OZNo 0 99 Ozone (ppb)
+OZNm 0 99 Ozone (ppb)
+PMTo 0 99 PM10 (ug/M3)
+PMTm 0 99 PM10 (ug/M3)
+NOxo 0 99 NOx (ppb)
+NOxm 0 99 NOx (ppb)
+P25o 0 99 PM2.5 (ug/M3)
+P25m 0 99 PM2.5 (ug/M3)
+NO2o 0 99 NO2 (ppb)
+NO2m 0 99 NO2 (ppb)
+VOCo 0 99 VOCs (ppb)
+VOCm 0 99 VOCs (ppb)
+endvars 

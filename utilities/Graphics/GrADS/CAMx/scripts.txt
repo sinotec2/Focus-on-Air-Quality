@@ -1,0 +1,69 @@
+avrg2grads: (see evernote)
+     由5階網格數據轉成grads格˙式(one spec one file) and generate the gridded data plots
+arguments: 
+1. avrg file name
+2. species sequence number(S.grd: 1O3   2NO2   3SO2   4VOC   5PM25   6PM10   7PNO3   8PSO4)
+3. number of interval hours (1 for O3, 24 for PM's 720/744 for month average)
+Output
+     ROOTspecnam.ga (big_endian binary gridded data file)
+     ROOTspecnam.ctl (grads control file)
+excution:
+逐時地面臭氧濃度分布
+ for i in $(ls *S.grd01);do avrg2grads $i 1 1;done
+grads -p -b -c 'run avrg2grads_o3.gs 1012_bs.S.grd01 O3 1 2'
+for i in $(ls *S.grd01);do grads -p -b -c 'run avrg2grads_o3.gs '$i' O3 1 32';done
+for i in $(ls 11L*png);do d=`echo $i|cut -c 4-12`; montage -geometry +4+4 $(ls ??L$d*.png) O3_$d".png";done
+     (第一個ls得到所有日期)
+日平均地面濃度分布
+     1. slim / shk / dmavrg / tmavrg  ... etc preparation
+     2. for i in 3 5 6;do avrg2grads 1309_Hs.S.grd02LD $i 24;done (for PM2.5 and PM10)
+     3. grads -p -b -c 'run avrg2grads.gs 1309_Hs.S.grd02LD PM25D 1' (generate the png's)
+for s in SO2 PM25 PM10;do for m in {01..12};do for i in {1..32};do grads -p -b -c 'run avrg2grads.gs 10'$m'_bs.S.grd01D '$s'D '$i ;done;done;done
+for i in $(ls *SO2D.png);do d=`echo $i|cut -c 1-9`; montage -geometry +3+3 $(ls $d*.png) PMS_$d".pdf";done
+     4. ~/bin/monpm.cs amn (amn=jan~dec) montage 4 in one page and merge into multipage pdf_file, OR
+     5. for i in {01..31};do montage -geometry +4+4 ??L$i"DEC2010.png" $i.pdf;done; pdf_all ?? dec_O3
+     6. the resultant files: amn_spec.pdf  (amn=jan~dec) (spec=O3,PM2.5, PM10 ...)
+
+月平均地面濃度分布
+for i in $(ls *S.grd01);do tmavrg $i;done&
+for i in $(ls *S.grd01T);do for j in {1..8};do avrg2grads $i $j 1;done;done
+for s in NO2 O3 PNO3 PSO4 VOC SO2 PM25 PM10;do for m in {01..12};do for i in 28 30 31;do grads -p -b -c 'run avrg2grads.gs 10'$m'_bs.S.grd01T '$s' '$i ;done;done;done
+for i in {01..12};do m=`NAME_of_month $i`;ln ../??$m* ByMon/$m;done
+
+Other files needed:
+     1. color.gs cbar.gs
+     2. TWN_COUNTY.dbf  TWN_COUNTY.prj  TWN_COUNTY.shp  TWN_COUNTY.shx
+Relative scripts
+monpm.cs
+[kuang@master con09]$ cat ~/bin/monpm.cs
+for sp in PM10 PM25;do
+for n in {1..8};do
+m=$(( n*4 ))
+montage -geometry +4+4 $(ls -rt *$sp".png" |head -n$m|tail -n4) $n".pdf"
+done
+pdf_all ? $1_$sp
+done
+pdf_all
+[kuang@master con09]$ cat ~/bin/pdf_all
+#note! the argument must be quoted as "$1"
+first=1
+for i in $(ls $1".pdf"|cut -d'.' -f 1) ;do
+if [ "$first" == "1" ]; then
+        cp -f $i".pdf" result.pdf
+        first=0
+else
+     gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=tmp.pdf result.pdf $i".pdf"
+     mv tmp.pdf result.pdf
+fi
+echo $first"  "$i
+done
+mv result.pdf $2.pdf
+ovm2grads
+grads -p -b -c 'run XX.gs' (generate the png's)
+for i in {01..12};do m=`name_of_month $i`; M=`NAME_of_month $i`;ln ../../$m*.pdf $M;done
+for i in $(ls);do s=`echo $i |tr A-Z a-z`;ln ../../*$s.pdf $i;done
+[kuang@master con09]$ tail -n3 abi_1309_Hs_d.txt
+101 all   0.18   0.11*  0.25* -0.18*  0.35*  0.12*  0.34*  0.16*  0.44*   NaN    NaN  -0.20*  0.56*
+Attainment MB_O3 OB_O3  GE_O3 OB_PMT GE_PMT OB_PMf GE_PMf OB_NO2 GE_NO2 OB_HC  GE_HC  OB_SO2  GE_SO2
+   63.4%  29.3%  56.9%  93.1%  84.5%  91.4%  84.5%  98.3%  87.9%  96.6%   0.0%   0.0%  77.6%  87.9%
+

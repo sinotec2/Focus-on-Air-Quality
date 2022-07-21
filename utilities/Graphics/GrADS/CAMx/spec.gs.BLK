@@ -1,0 +1,194 @@
+'reinit'
+'clear'
+SPE=spe
+"open epa.ctl"
+"q file 1"
+rec = sublin(result,5)
+HHH = subwrd(rec,3)
+i=1
+while(i<=8)
+ii=(i*2-1)+6
+rec = sublin(result,ii)
+sso = subwrd(rec,1)
+sss = substr(sso,1,3)
+if(sss=SPE)
+spnm=subwrd(rec,4)
+spun=subwrd(rec,5)
+endif
+i=i+1
+endwhile
+'set string 1 bc'
+'set strsiz 0.15'
+'set csmooth on'
+'set grads off'
+'set ccolor 2'
+"set x 1"
+"set y 1"
+"set t 1 "HHH
+ipage=1
+while (ipage <=6)
+is=(ipage-1)*10+1
+isb=is
+isend=isb+9
+if (isend > 53) ;isend=53;endif
+while (is <= isend)
+"set digsiz 0.05"
+iss=is-isb+1
+ast=nam_of_st(is)
+vv=10-iss*1
+tt=vv+2.0
+*"set parea 0 8.5 0 11"
+"set vpage 0. 8 "vv" "tt
+"set grads off"
+'set gxout stat'
+"d "SPE"o(stid="ast")"
+data = sublin(result,8)
+ymx = subwrd(data,5)
+ymn = subwrd(data,4)
+"d "SPE"m(stid="ast")"
+data = sublin(result,8)
+zmx = subwrd(data,5)
+zmn = subwrd(data,4)
+if (zmx > ymx) ; ymx = zmx ; endif
+if (zmn < ymn) ; ymn = zmn ; endif
+"set gxout line"
+di1=(ymx-ymn)/4/10
+di2=int(di1)
+if (di2 < 1) ; di2 = 1 ; endif
+div=di2*10
+"set ylint "div
+"set xlint 24"
+'set vrange 'ymn' 'ymx
+'set line 1 1 6'
+'set strsiz 0.03 0.03'
+"set cthick 15"
+"d "SPE"o(stid="ast")"
+'set line 1 2 3'
+"d "SPE"m(stid="ast")"
+'set strsiz 0.1 0.08'
+"draw string 1.4 1 " ast
+is=is+1
+endwhile
+ast0=nam_of_st(isb)
+ast1=nam_of_st(isend)
+'set strsiz 0.15 0.1'
+"draw string 4.5 0.2 "spnm" "spun" of Station " ast0 " to " ast1 "(o for obs)"
+*pull dummy
+"printim "ipage".png x1700 y2200 white"
+clear
+ipage=ipage+1
+endwhile
+quit
+return
+end
+*'close 1'
+function nam_of_st(is)
+nst.1=001
+nst.2=002
+nst.3=003
+nst.4=004
+nst.5=005
+nst.6=006
+nst.7=007
+nst.8=008
+nst.9=009
+nst.10=011
+nst.11=012
+nst.12=013
+nst.13=014
+nst.14=015
+nst.15=017
+nst.16=018
+nst.17=020
+nst.18=021
+nst.19=022
+nst.20=023
+nst.21=024
+nst.22=026
+nst.23=027
+nst.24=028
+nst.25=029
+nst.26=030
+nst.27=031
+nst.28=032
+nst.29=033
+nst.30=035
+nst.31=036
+nst.32=037
+nst.33=038
+nst.34=039
+nst.35=040
+nst.36=043
+nst.37=044
+nst.38=045
+nst.39=049
+nst.40=051
+nst.41=052
+nst.42=053
+nst.43=054
+nst.44=056
+nst.45=058
+nst.46=059
+nst.47=060
+nst.48=061
+nst.49=062
+nst.50=063
+nst.51=065
+nst.52=066
+nst.53=069
+nst.54=688
+nst.55=690
+nst.56=691
+nst.57=692
+nst.58=693
+nst.59=694
+nst.60=695
+nst.61=699
+nst.62=706
+nst.63=708
+nst.64=730
+nst.65=735
+nst.66=741
+nst.67=742
+nst.68=744
+nst.69=748
+nst.70=749
+nst.71=753
+nst.72=754
+nst.73=755
+nst.74=757
+nst.75=759
+nst.76=761
+nst.77=762
+nst.78=765
+nst.79=766
+nst.80=777
+ast=nst.is
+return ast
+function frme(v)
+"set gxout line"
+"set vrange 0 1"
+"set ylab off"
+"set cmark 1"
+"set grads off"
+"set xlopts 1 4 0.1"
+"set xlint 48"
+"set ylint 20"
+"set xlpos 0 b"
+return
+* Take a floating-point (decimal) number as a parameter and returns a truncated integer (with no decimal point)
+function int(num)
+  outnum = ''
+  i = 1
+  while(i <= strlen(num))
+    char = substr(num,i,1)
+    if(char = ".")
+      break
+    else
+      outnum = outnum%char
+      i = i+1
+    endif
+  endwhile
+
+return outnum
+

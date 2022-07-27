@@ -53,6 +53,9 @@ Usage: grib2json [options] FILE
 17|Skin_temperature|1
 
 ```bash
+# --fp wind: convert both U and V-component of wind
+grib2json -n -d --fp wind --fs 103 --fv 10.0 -o current-wind-surface-level-cwb-3K.json $grb
+
 $ for i in {1..10};do echo $i $(grib2json --names --fp $i  $gb |grep "parameterNumberName");done
 1 "parameterNumberName":"Relative_humidity", 
 ...

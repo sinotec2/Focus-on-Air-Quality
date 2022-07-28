@@ -30,8 +30,34 @@ last_modified_date: 2022-06-07 17:06:31
 SDATE=[datetime.datetime.strptime(''.join([str(i, encoding='utf-8') for i in list(nc.variables[V[1][0]][t, :])]),\
  '%m/%d/%Y (%H:%M)') for t in range(nt)]
 ```
+- 參考：[pr_GrbTime.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/DateTime/pr_GrbTime.py)
 
 ## datetime to nc bytes
 - 目前尚未有應用之需求
+
+## 直接開啟grib2檔案
+- 使用pygrib模組來開啟：`grbs = pygrib.open(fname)`
+- grib2檔案可能只有單一個timeframe(如CWB_WRF之結果檔)，要讀取所有內容才能決定。
+  - grib2的record number序號是由1開始排序，長度為`grbs.messages`
+  - 如每個record是不同時間框架(EAC4檔案)，validDate會有所不同。
+- 檔案內有2個時間資訊
+  - `grbs[1].anaDate`：為批次作業的啟始時間。
+  - `grbs[1].validDate`：為該grib2檔案的時間框架。
+  - 類型為datetime.datetime
+  -  格式如：`2022-07-29 12:00:00`
+
+```python
+#!/cluster/miniconda/envs/gribby/bin/python
+import sys
+import pygrib
+fname=sys.argv[1]
+grbs = pygrib.open(fname)
+dates=list(set([grbs[i].validDate for i in range(1,grbs.messages+1)]))
+n=len(dates)
+if n>1:
+  dates.sort()
+for i in range(n):
+  print(i,dates[i])
+```
 
 ## Reference

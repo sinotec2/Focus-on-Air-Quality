@@ -21,7 +21,8 @@ y=nc.variables['XLAT'][0,:,:]
 lat_min=y[0,ncol//2]
 lat_max=np.min([y[-1,-1],y[-1,0]])
 jmx=bisect(y[:,ncol//2],lat_max)
-dy=(y[jmx,ncol//2]-lat_min)/jmx
+lat_max=y[jmx,ncol//2]
+dy=(lat_max-lat_min)/jmx
 dx=dy
 
 lon_min=np.max(x[:,0])

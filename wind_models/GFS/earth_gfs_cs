@@ -1,0 +1,49 @@
+#kuang@master /nas1/Data/javascripts/D3js/earth/public/data/weather
+#$ cat current/earth_gfs.cs
+weather=/nas1/Data/javascripts/D3js/earth/public/data/weather
+grib2json=/home/kuang/MyPrograms/grib2json-0.8.0-SNAPSHOT/bin/grib2json
+cd $weather/current
+cdate=$(LC_ALL='en_US.UTF-8' date -d now +%c)
+bdate=$(date -d "$cdate -14hours" +%s)
+YMD=$(date -d @$bdate +%Y%m%d)
+BH=$(date -d @$bdate +%H)
+
+OK=0
+H=$((10#$BH));if [ $H -eq 0 ] || [ $H -eq 6 ] || [ $H -eq 12 ] || [ $H -eq 18 ];then OK=1;fi
+if [ $OK -eq 0 ];then echo 'no need to update';exit;fi
+
+ROOT=https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_1p00.pl?file=gfs.t${BH}z.pgrb2.1p00
+cdate=$(LC_ALL='en_US.UTF-8' date -d @$bdate +%c)
+cd $weather
+for ((i=0; i<=180; i=i+3)); do
+  iii=`printf "%03d" $i`
+  sdate=$(date -d "$cdate +${i}hours" +%s)
+  YYYY=$(date -d @$sdate +%Y)
+  MM=$(date -d @$sdate +%m)
+  DD=$(date -d @$sdate +%d)
+  HH=$(date -d @$sdate +%H)
+  path=$YYYY/$MM/$DD
+  mkdir -p $path
+#surface
+  curl -s "${ROOT}.f${iii}&lev_10_m_above_ground=on&var_UGRD=on&var_VGRD=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d --fp wind --fs 103 --fv 10.0 -o ${path}/${HH}00-wind-surface-level-gfs-1.0.json gfs.tmp
+  curl -s "${ROOT}.f${iii}&lev_surface=on&var_TMP=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-temp-surface-level-gfs-1.0.json gfs.tmp
+  curl -s "${ROOT}.f${iii}&lev_surface=on&var_PRES=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-pres-surface-level-gfs-1.0.json gfs.tmp
+
+  curl -s "${ROOT}.f${iii}&var_PRMSL=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-mean_sea_level_pressure-gfs-1.0.json gfs.tmp
+
+#1000mb
+  curl -s "${ROOT}.f${iii}&lev_1000_mb=on&var_UGRD=on&var_VGRD=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-wind-isobaric-1000hPa-gfs-1.0.json gfs.tmp
+  curl -s "${ROOT}.f${iii}&lev_1000_mb=on&var_TMP=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-temp-isobaric-1000hPa-gfs-1.0.json gfs.tmp
+  curl -s "${ROOT}.f${iii}&lev_1000_mb=on&var_PRES=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-pres-isobaric-1000hPa-gfs-1.0.json gfs.tmp
+  curl -s "${ROOT}.f${iii}&lev_1000_mb=on&var_O3MR=on&dir=%2Fgfs.${YMD}%2F${BH}%2Fatmos"  -o gfs.tmp
+  $grib2json -n -d  -o ${path}/${HH}00-ozone-isobaric-1000hPa-gfs-1.0.json gfs.tmp
+
+  ./current/earth_dens.py  ${path}/${HH}
+done

@@ -25,6 +25,21 @@ last_modified_date:   2021-12-23 14:03:54
 - 歐洲中期天氣預報中心(ECMWF)之[EAC4 (ECMWF Atmospheric Composition Reanalysis 4)](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview)長期蒐集、分析、重組全球的大氣成分數據，並以目前所理解的物化方程式予以同化，行成所謂「再分析」數據庫，並且對外提供。
 - 其數據目前已建有與WRF-chem間的應用平台，以進行空氣品質的預報系統。也經常用在區域性的空氣品質解析(如[Galmarini et al. 2021](https://acp.copernicus.org/preprints/acp-2021-313/acp-2021-313.pdf)、[Jeong and Hong 2021](https://www.mdpi.com/2072-4292/13/10/1877))。
 
+### EAC4 數據庫基本資訊
+
+item|content
+-|-
+Data type|Gridded
+Horizontal coverage|Global
+Horizontal resolution|0.75°x0.75°
+Vertical coverage|Surface, total column, model levels and pressure levels.
+Vertical resolution|60 model levels. Pressure levels: 1000, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 20, 10, 7, 5, 3, 2, 1 hPa
+Temporal coverage|2003 to 2021
+Temporal resolution|3-hourly
+File format|GRIB (optional conversion to netCDF)
+Versions|Only one version
+Update frequency|Twice a year with 4-6 month delay
+
 ### 作業流程
 - 須先在ECMWF[哥白尼倉庫](https://ads.atmosphere.copernicus.eu/user/login?destination=/)註冊帳密(免費)。在User Profile處取得將API Key，將其寫進電腦的${HOME}/.cdsapirc檔案內，範例如下：
 

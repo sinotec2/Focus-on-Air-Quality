@@ -3,6 +3,8 @@ layout: default
 title:  NCL Programs
 parent: Graphics
 grand_parent: Utilities
+has_children: true
+permalink: /utilities/Graphics/NCL
 last_modified_date: 2022-02-05 09:43:40
 ---
 

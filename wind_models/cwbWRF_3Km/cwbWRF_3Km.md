@@ -31,3 +31,4 @@ last_modified_date: 2021-11-28 15:52:50
 - [evernote](https://www.evernote.com/shard/s125/sh/b3f7003a-fd1d-4918-b617-1acb90b45219/25b5cbe6b72feca8dc5f0cec636eee78)
 - 劉正欽, **[Pygrib]第一章**, [medium.com](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085), Sep 10, 2020
 - 陳依涵、戴俐卉、賴曉薇、陳怡儒、林伯勳、黃小玲、江琇瑛、江晉孝、陳白榆、洪景山、馮欽賜（2017）[中央氣象局區域模式2017 年更新 (OP41)](https://conf.cwb.gov.tw/media/cwb_past_conferences/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf)，中央氣象局氣象資訊中心
+- CWB, [CWB WRF模式](https://opendata.cwb.gov.tw/opendatadoc/MIC/A0061.pdf) @opendata.cwb.gov.tw

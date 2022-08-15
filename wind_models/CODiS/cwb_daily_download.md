@@ -281,7 +281,7 @@ grep cwb /etc/crontab
 ## Further Application
 - [cwbsrf to littleR](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/add_srfFF/)
 - [反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤
-- [traj2_CAAS](http://114.32.164.198/traj2.html)
+- [traj2_CAAS](http://125.229.149.182/traj2.html)
 
 ## Reference
 - disscusion on **About Convert csv data file format to little_r format** [WRF & MPAS-A Support Forum](https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?t=483), Mon Dec 03, 2018 6:23 am.

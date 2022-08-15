@@ -25,7 +25,7 @@ last_modified_date: 2022-06-10 23:38:03
 - 這裏提供一個結合crontab、ps、以及html 3者之合作，將特定程式在遠端工作的情形做一輪播（每分鐘更新）。
 
 ### instance
-- [http://114.32.164.198/status.html](http://114.32.164.198/status.html)
+- [http://125.229.149.182/status.html](http://125.229.149.182/status.html)
 - 不使用github.io的理由(...還沒時間完成。)
 
 | ![status.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/status.png)|

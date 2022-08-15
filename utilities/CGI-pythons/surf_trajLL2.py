@@ -46,7 +46,7 @@ if os.path.isfile(WEB+message[6:]):
   <p>The assigned KML file has been created and maybe downloaded in your Downloads directory.</p>
   <p>You may re-download by clicking this <a href="%s">link</a>, or...</p>
   <p> submit the KML file at Google Maps or OpenStreet interface at the
-  <a href=http://114.32.164.198/Leaflet/docs/index.html>Leaflet</a>.</p>
+  <a href=http://125.229.149.182/Leaflet/docs/index.html>Leaflet</a>.</p>
   <p> return to the previous page and redefine the trajectory.</p>
   </body>
   </html>
@@ -79,7 +79,7 @@ else:
   <p>Or you may downnload the KML and draw the plot by yourself, please click
   <a data-auto-download href="%s">here</a>.</p>
   <p>The KML may be posted on google map or OpenStreet interface: 
-  <a href=http://114.32.164.198/Leaflet/docs/index.html>Leaflet</a>.</p>
+  <a href=http://125.229.149.182/Leaflet/docs/index.html>Leaflet</a>.</p>
   </body>
   </html>
   """  % (message+'.png' ,message+'.kml')

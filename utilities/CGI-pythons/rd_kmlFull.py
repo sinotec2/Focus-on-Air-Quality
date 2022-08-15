@@ -473,8 +473,8 @@ formats={'grd':'SURFER ascii grd file',
 }
 tools={'grd':'SURFER',
 'zip':'archive openner',
-'kml':'<a href=\"http://114.32.164.198/LeafletDigitizer/index.html" target="_blank">Digitizer</a>',
-'PLT':'text editors, gridded by SURFER or <a href=\"http://114.32.164.198/dat2kml.html" target="_blank">dat2kml</a>',
+'kml':'<a href=\"http://125.229.149.182/LeafletDigitizer/index.html" target="_blank">Digitizer</a>',
+'PLT':'text editors, gridded by SURFER or <a href=\"http://125.229.149.182/dat2kml.html" target="_blank">dat2kml</a>',
 'PST':'text editors, huge, do not open',
 }
 tools.update({i:'text editors' for i in [ '10', '12', '14', 'csv', 'out', 'OUT', 'inp', 'dem', 'REC', 'txt', 'pfl', 'sfc', 'SUM'] })

@@ -343,7 +343,7 @@ TSMP=$(date -d "${rundate} +${i8}hours" +"%Y-%m-%d_%H:00_LST")
   - 如果工作站核心數較多，可以考慮同步進行VERDI，以節省時間。
 
 ### demo gif
-- [http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)
+- [http://125.229.149.182/LC-GIF-Player/demo.html](http://125.229.149.182/LC-GIF-Player/demo.html)
 - [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)
 - [github.io](https://sinotec2.github.io/cpuff_forecast/index.html)
 

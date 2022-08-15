@@ -139,7 +139,7 @@ if ( $DM == 'd01' ) then
 - 進行[NCL等值圖繪製](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL/)
 ### Results
 - Gifs
-  - [GIF_file@iMacKuang](http://114.32.164.198/soong/pm10.gif)
+  - [GIF_file@iMacKuang](http://125.229.149.182/soong/pm10.gif)
   - [GifPlayer@sinotec2.github.io](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)
 
 | ![pm10_ncl.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pm10_ncl.PNG) |

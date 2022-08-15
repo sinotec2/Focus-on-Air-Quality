@@ -81,7 +81,7 @@ runmodel=true
 
 ### 成果比較
 - https://homepages.see.leeds.ac.uk/~earunres/
-- http://114.32.164.198:8000/UNRESP_VIZ/index.html?v=1
+- http://125.229.149.182:8000/UNRESP_VIZ/index.html?v=1
 
 | ![unresp1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/unresp1.png)|
 | <b>leed大學火山SO<sub>2</sub>預報結果畫面</b>|
@@ -668,7 +668,7 @@ cd /home/cpuff/UNRESPForecastingSystem/VIZ_SITE_CODE/public_html
 	- [PMF.gif](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/PMF.gif)，檔案大小約6\~7MB
 	- 外部網址
 		- [https://sinotec2.github.io/cpuff_forecast](https://sinotec2.github.io/cpuff_forecast/index.html)(較快)
-		-	[http://114.32.164.198/LC-GIF-Player/demo.html](http://114.32.164.198/LC-GIF-Player/demo.html)(較慢)
+		-	[http://125.229.149.182/LC-GIF-Player/demo.html](http://125.229.149.182/LC-GIF-Player/demo.html)(較慢)
 	- 內部網址：[http://200.200.12.191/LC-GIF-Player/demo.html](http://200.200.12.191/LC-GIF-Player/demo.html)(最快)
 - VERDI問題
 	- 工作站主機必須保持登入狀態，以提供$DISPLAY內容(待解決、maybe wrf-python)

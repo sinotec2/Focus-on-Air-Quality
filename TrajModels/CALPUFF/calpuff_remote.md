@@ -26,8 +26,8 @@ last_modified_date: 2022-06-11 19:58:12
   - 氣象檔非常龐大，該如何提供？
   - 結果檔案即使以[con2nc](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPOST/con2nc/)處理成nc檔案，可以用VERDI開啟，依然不是馬上可以檢視結果。後處理還有待提升。
 
-### [CPUFF721遠端計算服務](http://114.32.164.198/CALPUFF.html)
-- 位置:[http://114.32.164.198/CALPUFF.html](http://114.32.164.198/CALPUFF.html)
+### [CPUFF721遠端計算服務](http://125.229.149.182/CALPUFF.html)
+- 位置:[http://125.229.149.182/CALPUFF.html](http://125.229.149.182/CALPUFF.html)
 - 畫面
 
 | ![CALPUFF_remote.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CPUFF_remote.PNG)|

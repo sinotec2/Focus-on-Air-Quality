@@ -166,7 +166,7 @@ sudo killall httpd
 ...
 </IfModule>
 ```
-- `Listen 114.32.164.198:80`
+- `Listen 125.229.149.182:80`
 ## 啟動方式
 - [前述](https://www.796t.com/article.php?id=453663)建議用`brew services restart httpd`無法連上，還是需要`sudo apachectl start`
 - `sudo chmod +a "_www allow execute" /Library/WebServer/CGI-Executables` also `/Library/WebServer/Documents`

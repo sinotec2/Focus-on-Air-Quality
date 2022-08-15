@@ -51,7 +51,7 @@ last_modified_date: 2022-03-15 10:41:25
   - 只有開啟Polygon、還需要[開啟Marks功能](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#啟動marks點選)，以利選取個別點位之座標。
 
 ## 成果應用說明
-- CaaS成果位置：[http://114.32.164.198/LeafletDigitizer/](http://114.32.164.198/LeafletDigitizer/)
+- CaaS成果位置：[http://125.229.149.182/LeafletDigitizer/](http://125.229.149.182/LeafletDigitizer/)
 - 圖層：
   - 為加速網頁的服務速度，並未內設圖層。使用者必須在左側面版中自選圖層
   - openstreet 街道圖、中文顯示
@@ -194,12 +194,12 @@ $ cat -n js/main.js
 3. 圓點顏色（原版為紅色、鑑別度較低）、透明度（原版為不透明、遮蔽底圖）
 4. 合併標示第一點位置與訊息之標記
 ## CaaS
-- 位置：http://114.32.164.198/Leaflet/docs/index.html
+- 位置：http://125.229.149.182/Leaflet/docs/index.html
 - 貼圖成果
 
 | ![leaflet_demo.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/leaflet_demo.png)|
 |:--:|
-| <b>[http://114.32.164.198/Leaflet/docs/index.html](http://114.32.164.198/Leaflet/docs/index.html)畫面</b>|
+| <b>[http://125.229.149.182/Leaflet/docs/index.html](http://125.229.149.182/Leaflet/docs/index.html)畫面</b>|
 
 
 ## JS

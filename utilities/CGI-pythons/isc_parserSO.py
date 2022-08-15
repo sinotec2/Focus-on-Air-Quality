@@ -132,7 +132,7 @@ for fname in fnames:
   """  % (fname.replace(WEB,'../../')+'.kml',fname.split('/')[-1])
 print """\
   </p><p>The KML may be posted on google map or OpenStreet interface: 
-  <a href=http://114.32.164.198/Leaflet.FileLayer/docs/index.html>Leaflet.FileLayer</a>.</p>
+  <a href=http://125.229.149.182/Leaflet.FileLayer/docs/index.html>Leaflet.FileLayer</a>.</p>
   </body>
   </html>
   """

@@ -122,7 +122,7 @@ import os
 pth='/Users/1.PlumeModels/AERMOD/mmif/TWN_3X3/'
 df=read_csv(pth+'point_ij.csv')
 A=[]
-a='http://114.32.164.198/mmif_results/'
+a='http://125.229.149.182/mmif_results/'
 for ij in df.IJ:
     i=str(ij)
     s=''
@@ -146,16 +146,16 @@ $ head mmifTWN_3X3.csv.kml
 <Document><name>mmifTWN_3X3.csv</name><description>mmifTWN_3X3.csv</description>
 <Style id="normalPlacemark"><IconStyle><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href> </Icon> </IconStyle></Style>
 <Placemark><name>IJ7152</name><description>
-http://114.32.164.198/mmif_results/2016/7152/IJ7152.sfc 
-http://114.32.164.198/mmif_results/2016/7152/IJ7152.pfl 
-http://114.32.164.198/mmif_results/2017/7152/IJ7152.sfc 
-http://114.32.164.198/mmif_results/2017/7152/IJ7152.pfl 
-http://114.32.164.198/mmif_results/2018/7152/IJ7152.sfc 
-http://114.32.164.198/mmif_results/2018/7152/IJ7152.pfl 
-http://114.32.164.198/mmif_results/2019/7152/IJ7152.sfc 
-http://114.32.164.198/mmif_results/2019/7152/IJ7152.pfl 
-http://114.32.164.198/mmif_results/2020/7152/IJ7152.sfc 
-http://114.32.164.198/mmif_results/2020/7152/IJ7152.pfl 
+http://125.229.149.182/mmif_results/2016/7152/IJ7152.sfc 
+http://125.229.149.182/mmif_results/2016/7152/IJ7152.pfl 
+http://125.229.149.182/mmif_results/2017/7152/IJ7152.sfc 
+http://125.229.149.182/mmif_results/2017/7152/IJ7152.pfl 
+http://125.229.149.182/mmif_results/2018/7152/IJ7152.sfc 
+http://125.229.149.182/mmif_results/2018/7152/IJ7152.pfl 
+http://125.229.149.182/mmif_results/2019/7152/IJ7152.sfc 
+http://125.229.149.182/mmif_results/2019/7152/IJ7152.pfl 
+http://125.229.149.182/mmif_results/2020/7152/IJ7152.sfc 
+http://125.229.149.182/mmif_results/2020/7152/IJ7152.pfl 
 </description><styleUrl>#normalPlacemark</styleUrl>
 <Point><coordinates>
 119.936,25.961,0</coordinates></Point></Placemark>

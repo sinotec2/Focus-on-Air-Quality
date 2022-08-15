@@ -29,14 +29,14 @@ last_modified_date: 2022-06-11 21:21:57
 - 煙流模式模擬結果(PLOTFILE)，轉成kml形式的等值線。計算與檔案處理都還算單純。沒有需要監看的必要。
 ### 程式呼叫與檔案儲存
 - CaaS
-  - 位置：[http://114.32.164.198/dat2kml.html](http://114.32.164.198/dat2kml.html)
+  - 位置：[http://125.229.149.182/dat2kml.html](http://125.229.149.182/dat2kml.html)
   - 說明：[dat2kml遠端計算服務](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/CaaS/dat2kmlCGI/)
 - EXE
   - `DAT2KML='/opt/local/bin/dat2kml.py'`
 - 工作目錄
   - `pth=WEB+'isc_results/kmls_'+ran+'/'`、ran是6碼亂數文字。
 ### 檢視
-- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://114.32.164.198/Leaflet/docs/index.html)服務(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
+- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://125.229.149.182/Leaflet/docs/index.html)服務(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
 - 事實上 Visual Code也提供了預覽KML檔案的[插件](https://marketplace.visualstudio.com/items?itemName=jumpinjackie.vscode-map-preview)，效果也還不錯。
 
 ## [isc_parser.py](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/isc_parser/isc_parser.py)程式
@@ -44,12 +44,12 @@ last_modified_date: 2022-06-11 21:21:57
 - 詳見[污染源空間解讀器](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/)的說明
 ### 程式呼叫與檔案儲存
 - CaaS
-  - 位置：[http://114.32.164.198/dat2kml.html](http://114.32.164.198/dat2kml.html)
+  - 位置：[http://125.229.149.182/dat2kml.html](http://125.229.149.182/dat2kml.html)
   - 系統說明：[污染源空間解讀器](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/)
 - EXE
   - `CSV2KML='/opt/local/bin/csv2kml.py -g TWD97 -f '`
 - 工作目錄
   - `pth=WEB+'prsr_results/kmls_'+ran+'/'`、ran是6碼亂數文字。
 ### 檢視
-- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://114.32.164.198/Leaflet/docs/index.html)服務(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
+- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://125.229.149.182/Leaflet/docs/index.html)服務(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
 - Visual Code[插件](https://marketplace.visualstudio.com/items?itemName=jumpinjackie.vscode-map-preview)，也可以考慮。

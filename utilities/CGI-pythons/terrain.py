@@ -62,7 +62,7 @@ for i in range(len(ext)):
 print """\
 <h3><p>Your request of terrain pre-processing is done (setting as "%s") </p></h3>
 <p>The resultant ZIP will be automatically downloaded shortly. If it doesn't, click <a href="%s">%s</a></p>
-<p>The KML may be posted on google map or OpenStreet interface: <a href=http://114.32.164.198/Leaflet/docs/index.html>Leaflet</a>.</p>
+<p>The KML may be posted on google map or OpenStreet interface: <a href=http://125.229.149.182/Leaflet/docs/index.html>Leaflet</a>.</p>
 </body>
 </html>
 """ % (STR,fn2,fn2.split('/')[-1])

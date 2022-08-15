@@ -146,7 +146,7 @@ nc.close()
 ## 結果檢核
 - 2018/4/5~4/7東亞沙塵暴傳播之模擬結果
   - [Youtube](https://youtu.be/kvF1gLMlE0Q)
-  - [GIF](http://114.32.164.198/soong/20180405WRFchem.gif)
+  - [GIF](http://125.229.149.182/soong/20180405WRFchem.gif)
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018040616.PNG)
 - 比較EC再分析、WRF-chem模擬以及萬里實測PM<sub>10</sub>數據(時間軸為UTC)
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
@@ -155,7 +155,7 @@ nc.close()
   - 環保署官方[說明](https://drive.google.com/file/d/1cTQhDlfEl8w8ikw2SwdmPKJngayCZKy5/view)(https://airtw.epa.gov.tw/CHT/Forecast/Sand.aspx)
 
 - 2019/10/24~11/3東亞沙塵暴傳播之模擬結果  
-  - [GIF](http://114.32.164.198/soong/20191029D1PM10.gif)
+  - [GIF](http://125.229.149.182/soong/20191029D1PM10.gif)
   - 環保署官方[說明](https://drive.google.com/file/d/1Vy7Ca4Pz_P5zc3e6-206UDjvxYEneFBx/view)
   
 ## Reference

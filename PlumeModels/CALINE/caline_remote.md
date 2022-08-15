@@ -24,13 +24,13 @@ last_modified_date: 2022-04-08 15:30:32
 - 模式未來發展：因CALINE後續沒有發展的計畫，系統應無持續更新的需要。
 
 ### caline3遠端計算服務
-- 網址[http://114.32.164.198/CALINE3.html](http://114.32.164.198/CALINE3.html)
+- 網址[http://125.229.149.182/CALINE3.html](http://125.229.149.182/CALINE3.html)
 - 選取本地的[輸入檔案](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/caline.inp)、按下Run鍵即可。
 - 同一位置也可以選擇.kml檔案，內容約定如後所述。氣象條件為8風向。
 
 | ![CALINE_remote.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/CALINE_remote.PNG)|
 |:--:|
-| <b>CALINE[遠端計算網頁](http://114.32.164.198/CALINE3.html)畫面</b>| 
+| <b>CALINE[遠端計算網頁](http://125.229.149.182/CALINE3.html)畫面</b>| 
 
 ### CaaS檔案結構與連結
 - HTML
@@ -49,10 +49,10 @@ last_modified_date: 2022-04-08 15:30:32
 ## KML 輸入與轉檔
 ### 輸入方式
 - 輸入檔也接受.kml的形式，也算是有圖形界面的功能。約定如下：
-  - 以[數位板Digitizer](http://114.32.164.198/LeafletDigitizer/index.html)建立路段與接受點的空間及屬性資料
+  - 以[數位板Digitizer](http://125.229.149.182/LeafletDigitizer/index.html)建立路段與接受點的空間及屬性資料
   - 接受點與路段的順序不限
   - 一條路可接受最多50個折點（49個路段）
-  - 範例如[example.kml](http://114.32.164.198/caline_results/example.kml)(如下圖)
+  - 範例如[example.kml](http://125.229.149.182/caline_results/example.kml)(如下圖)
   - 氣象與現場條件設定如下：
     - BRG:0, 45, 90, 135, 180, 225, 270, 315 等8個風向
     - U, CLAS, MIXH: 1.0m/s, 6, 100m
@@ -64,11 +64,11 @@ last_modified_date: 2022-04-08 15:30:32
 
 | ![atts.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/atts.png)|
 |:--:|
-| <b>[數位板](http://114.32.164.198/LeafletDigitizer/index.html)提示鍵入物件名稱與屬性</b>| 
+| <b>[數位板](http://125.229.149.182/LeafletDigitizer/index.html)提示鍵入物件名稱與屬性</b>| 
 
 | ![sanchong.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/sanchong.png)|
 |:--:|
-| <b>[數位板](http://114.32.164.198/LeafletDigitizer/index.html)所建立的範例檔案</b>| 
+| <b>[數位板](http://125.229.149.182/LeafletDigitizer/index.html)所建立的範例檔案</b>| 
 
 ### kml轉成輸入檔案caline.inp([kml2inp.py](https://github.com/sinotec2/CGI_Pythons/blob/main/CALINE/kml2inp.py))
 - 這支內部程式的用意就是當使用者輸入kml檔時，由[CGI-PY](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/CALINE/)啟動轉檔，以利繼續執行CALINE3。

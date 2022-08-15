@@ -31,7 +31,7 @@ last_modified_date: 2022-03-28 11:04:39
 2. 直接在cgi_python內啟動背景執行，由使用者自行上網確認結果
 3. 預先以工作站完成各年度WRF在各網格之MMIF轉檔，再由網頁或(及)CaaS系統提供
 
-CaaS網址為：[http://114.32.164.198/mmif.html](http://114.32.164.198/mmif.html)
+CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.html)
 
 ## 自動執行搭配版本
 
@@ -39,7 +39,7 @@ CaaS網址為：[http://114.32.164.198/mmif.html](http://114.32.164.198/mmif.htm
 
 ### 系統元件
 
-1. 網址為：http://114.32.164.198/mmif.html，屬於個人負責營運維護的伺服器系統。
+1. 網址為：http://125.229.149.182/mmif.html，屬於個人負責營運維護的伺服器系統。
 	- select a file:選擇要執行的mmif.inp檔案。檔名必須是小寫、名字完全相符，不接受壓縮檔。設定方式詳下述。
 	- EMAIL:輸入回函email 信箱。系統不會寄發檢核信件。
 	- Upload and Run mmif remotely:上傳檔案到伺服器上、並等候crontab來執行mmif。
@@ -111,7 +111,7 @@ CaaS網址為：[http://114.32.164.198/mmif.html](http://114.32.164.198/mmif.htm
 29	    	/opt/local/bin/mmif>mmif.out
 30	    	/usr/bin/zip result.zip *
 31		emailadd=$(cat $dir/mmif.email)
-32	    	echo "Hello MMIF user:\n Your mmif result was at http://114.32.164.198$dir/result.zip\n \
+32	    	echo "Hello MMIF user:\n Your mmif result was at http://125.229.149.182$dir/result.zip\n \
 33			Please fetch the file as soon as possible,\n \
 34		    	The file will be erased after 24 hrs!\n \
 35			(sent by machine do not reply)" | mail -s "MMIF RESULT" $emailadd

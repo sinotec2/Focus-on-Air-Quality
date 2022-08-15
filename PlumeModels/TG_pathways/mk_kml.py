@@ -11,7 +11,7 @@ twn=read_csv('TWN_1X1REC.csv')
 twn['nx_dx']=[i*j for i,j in zip(list(twn.nx),list(twn.dx))]
 twn=twn.sort_values('nx_dx',ascending=False).reset_index(drop=True)
 pts=read_csv('point_ij.csv')
-url='http://114.32.164.198/terr_results/'
+url='http://125.229.149.182/terr_results/'
 ext=['.tiff','.dem','.kml','_aermap.inp','_aermap.out','.REC','_re.dat','_TG.txt']
 col=['lon','lat','name','desc']
 

@@ -47,7 +47,7 @@ last_modified_date: 2022-02-21 10:25:20
 	- 解決方案就是將所有stdout/err都導向檔案、或者是/dev/null，讓html保持乾淨。
 - 由於本系統的外部批次檔內容較為複雜，此一經驗將可以作為未來發展的重要參考。
 
-- [煙流模式的地形處理](http://114.32.164.198/terrain.html)入口畫面
+- [煙流模式的地形處理](http://125.229.149.182/terrain.html)入口畫面
 
 | ![terrain_caas.PNG](https://sinotec2.github.io/Focus-on-Air-Quality/assets/images/terrain_caas.PNG)|
 |:--:|

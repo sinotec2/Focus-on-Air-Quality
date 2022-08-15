@@ -19,7 +19,7 @@ last_modified_date: 2021-11-28 15:52:50
   - `nlay,nrow,ncol= (11, 673, 1158)|3km;  (11, 385, 661)|15Km`，皆為東西長、南北短(landscape)之地區範圍。
 - CWB WRF預報的作業方式、演進與評估，可以參考其[發表](https://conf.cwb.gov.tw/media/cwb_past_conferences/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf)內容。
 - 唯該檔案格式為WMO約定的`GRIB2`[格式](https://perillaroc.github.io/eccodes-tutorial-cn/01-introduction/)(下略`grb2`)，並非`wrfout.nc`格式(下略`wrfout`)，因此在應用上須另外建置應用軟體。
-- 目前已經發展完成該產品應用在`CALPUFF`模式之逐日預報、地面風之軌跡線([臺灣地區高解析度軌跡產生/自動分析系統](http://114.32.164.198/traj2.html)、以及即期`AERMOD`之模式模擬作業之中。前者應用`python gribapi`直接讀取，後2者則應用[pygrib](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085)，程式設計較為單純。
+- 目前已經發展完成該產品應用在`CALPUFF`模式之逐日預報、地面風之軌跡線([臺灣地區高解析度軌跡產生/自動分析系統](http://125.229.149.182/traj2.html)、以及即期`AERMOD`之模式模擬作業之中。前者應用`python gribapi`直接讀取，後2者則應用[pygrib](https://medium.com/%E6%9F%BF%E7%94%9C%E8%8C%B6%E9%A6%99/pygrib-%E7%AC%AC%E4%B8%80%E7%AB%A0-6b47e54f9085)，程式設計較為單純。
 - 中央氣象局WRF預報3公里解析度之模式模擬範圍
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_3Km.PNG)
 {: .no_toc }

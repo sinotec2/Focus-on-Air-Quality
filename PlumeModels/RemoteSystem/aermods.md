@@ -65,7 +65,7 @@ last_modified_date: 2022-03-07 13:29:39
   - 須建立程序管控程式，管理幕前、幕後工作之分配與同步化。
 
 ## Compute as a Service (CaaS)
-- 服務窗口網頁位置：[http://114.32.164.198/aermods.html](http://114.32.164.198/aermods.html)
+- 服務窗口網頁位置：[http://125.229.149.182/aermods.html](http://125.229.149.182/aermods.html)
 - Web site working hours:07:00\~19:00, Mon\~Fri
 
 ### 輸入範例：
@@ -131,10 +131,10 @@ last_modified_date: 2022-03-07 13:29:39
 - 煙囪如有高度跟在名稱之後，將會優先使用，否則會從TEDS資料庫中選取位置最接近的煙囪。
 
 ### 數位板之使用
-- 可以使用[數位板](http://114.32.164.198/LeafletDigitizer/index.html)點取座標值（另存成KML檔案）。
+- 可以使用[數位板](http://125.229.149.182/LeafletDigitizer/index.html)點取座標值（另存成KML檔案）。
 - 檢核：
-  - [rotate_kml](http://114.32.164.198/rotate_kml.html)→旋轉角度，輸出成bpip輸入檔格式（詳見[Rotate_KML](https://www.evernote.com/l/AH2hvNqCSJlDq6SZOOYYMx4zimV-4cdbfQY)）
-  - [iscParser](http://114.32.164.198/iscParser.html)→解讀bpip輸入檔，輸出成kml格式(反解)
+  - [rotate_kml](http://125.229.149.182/rotate_kml.html)→旋轉角度，輸出成bpip輸入檔格式（詳見[Rotate_KML](https://www.evernote.com/l/AH2hvNqCSJlDq6SZOOYYMx4zimV-4cdbfQY)）
+  - [iscParser](http://125.229.149.182/iscParser.html)→解讀bpip輸入檔，輸出成kml格式(反解)
 ### email
 - 非必要項目。
   - 如不輸入，離開網頁後暫存訊息即消失
@@ -197,7 +197,7 @@ m=$(ps -ef|grep mmif|wc -l)
 n=$(( $n + $m - 1 ))
 
 web=/Library/WebServer/Documents
-http=http://114.32.164.198
+http=http://125.229.149.182
 opth=${pth/$web/$http}
 
 msg="Hello AERMOD user:\n Your aermod submit was accepted, please wait and check this email.\

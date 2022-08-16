@@ -19,6 +19,7 @@ last_modified_date: 2022-06-07 17:06:31
 
 ---
 ## nc bytes to datetime
+### reanalysis data
 - [EAC4]()檔案基本上是個grib2檔案，即使經[ncl_convert2nc]()轉換了之後，雖為nc檔，然其架構內涵與WRF或者是IOAPI-m3.nc皆完全不同，需要特別處理。
 - ncl_convert2nc會將EAC4檔案的時間標籤名稱命名為**initial_time0**，為一[時間、字串長]()之2維的字串陣列。
   - 字串共有**18**個字元
@@ -31,6 +32,12 @@ SDATE=[datetime.datetime.strptime(''.join([str(i, encoding='utf-8') for i in lis
  '%m/%d/%Y (%H:%M)') for t in range(nt)]
 ```
 - 參考：[pr_GrbTime.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/DateTime/pr_GrbTime.py)
+
+### forecast data
+- CAMS預報場經ncl_conver2nc轉換後，並沒有initial_time的變數項，而是存在於每項污染濃度的屬性:`nc.variables[V[3][0]].initial_time`
+- 因為該時間標籤已經是個string了，不需要再encoding 與join，直接進行轉換即可。指令：`bdate=datetime.datetime.strptime(''.join(nc.variables[V[3][0]].initial_time),'%m/%d/%Y (%H:%M)')`
+- 該時間只是模式啟始時間，如要計算每個time frame的時間，另有變數(V[0])`forecast_time0`，為0 \~ 120的整數(單位為小時)，可供使用：`SDATE=[bdate+datetime.timedelta(hours=int(i)) for i in  nc['forecast_time0'][:].data]`
+
 
 ## datetime to nc bytes
 - 目前尚未有應用之需求

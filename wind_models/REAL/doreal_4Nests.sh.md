@@ -90,7 +90,7 @@ done
     19	    ln -sf $PATH2/20$ym/run$j/OBS_DOMAIN$d"01p" OBS_DOMAIN$d"01"
     20	  done
 ```
-- 複製模版、使用[sed](https://terryl.in/zh/linux-sed-command/)指令置換起訖日期
+- 複製[namelist.input.loop模版](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/REAL/namelist.input.loop)、使用[sed](https://terryl.in/zh/linux-sed-command/)指令置換起訖日期
   - 一般`sed`指令使用`-i`(Edit files in-place)選項即可，`macOS`需要用`-ie`(editing commands)
 ```bash
     21	  cp -f $PATH1/20$ym/namelist.input.loop namelist.input

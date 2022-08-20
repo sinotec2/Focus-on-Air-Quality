@@ -80,7 +80,7 @@ ignore_iofields_warning = .true.,
 
 
 ## 下載`namelist.input.loop`
-點選[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/real/namelist.input.loop)
+點選[github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/REAL/namelist.input.loop)
 
 ## Reference
 - Brian Reen, **A Brief Guide to Observation Nudging in WRF**, [github](https://raw.githubusercontent.com/wrf-model/OBSGRID/master/ObsNudgingGuide.pdf),February 2016.

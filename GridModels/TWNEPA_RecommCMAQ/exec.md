@@ -154,9 +154,9 @@ echo $LD_LIBRARY_PATH
 /opt/ohpc/Taiwania3/libs/Iimpi-2021/hdf5-1.12/lib:/opt/ohpc/Taiwania3/libs/Iimpi-2021/szip-2.1.1/lib
 ```
 ## run.ocean.sh
-- 這支簡單的腳本是用來產生海洋飛沫模擬所需的海陸遮罩檔案
+- 這支簡單的腳本作者為鳥哥，是用來產生海洋飛沫模擬所需的海陸遮罩檔案
 - 只需執行一次。每執行批次複製(連結)即可
-- 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下(作者為鳥哥)
+- 腳本內容如[run.ocean.sh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.ocean.sh.TXT)，說明如下
 - 讀取GRIDCRO2D_Taiwan.nc檔案內的地形高度HT輸出成暫存檔land.ht.txt
 - 將網格等數據寫成fortran檔案、編譯(gfortran)、並將高度大於1m之網格視為陸地、將數據輸出成文字檔。
 - 經整理後將文字檔整理成[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump)順利之文字檔(ocean.cdl)，以ncgen將文字檔轉成ioapi之nc檔。
@@ -168,6 +168,34 @@ ncgen -o $outfile ocean.cdl
   - 以土地使用檔案中LUFRAC_CRO_Taiwan.nc第17種水體、扣除第21種湖河沼澤即可、或(及)
   - 以python nc.createVariable創新的變數名稱、或
   - 以GRIDCRO2D做為模版，python處理好後以ncrename更名即可
+- 應用在不同範圍時之修改重點
+  1. 腳本會抓專案位置(`cmaqproject=$(grep cmaqproject ../../project.config | cut -d '=' -f 2| sed 's/ //g')/grid03`)，視實際需要修改，如`cmaqproject=..`。
+  1. 有關來源檔案的檔名，腳本將其寫死`metfile="$cmaqproject"/mcip/GRIDCRO2D_Taiwan.nc`，如果換模擬範圍，還是要將其寫得比較彈性一點，如`metfile=$(ls $cmaqproject/mcip/GRIDCRO2D*.nc)`
+  1. fortran麻煩之處就是變數需宣告其維度大小，格式也是固定，這在不同範圍之應用時也會遇到困擾。需要將其維度範圍擴大到含蓋所有的格點數。
+
+```fortran
+	real		ht(120,140)		! 由氣象資料檔案讀出來的地面高度
+	integer		mask1(120,140)		! 底下三個為我們的 ocean 所需要的資料啦！
+	real		surf1(120,140)
+	real		open1(120,140)
+...
+	do 100 j = 1, row
+	  read ( 1, \"(120F10.5)\") (ht(i,j),i=1,col)
+100	continue  
+```
+- 修改成
+
+```fortran
+        real            ht(300,300)             ! 由氣象資料檔案讀出來的地面高度
+        integer         mask1(300,300)          ! 底下三個為我們的 ocean 所需要的資料啦！
+        real            surf1(300,300)
+        real            open1(300,300)
+...
+        do 100 j = 1, row
+          read ( 1, \"(300F10.5)\") (ht(i,j),i=1,col)
+100     continue
+```
+
 
 ## CCTM run scripts
 - 公版模式將原來USEPA提供的[run_cctm.csh](https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts)腳本拆分成主程式、案例時間設定以及科學設定等**3**個部分。

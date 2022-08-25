@@ -39,11 +39,28 @@ last_modified_date: 2022-04-25 12:20:36
   - `iptables -L -n`
 
 ## 啟動與設置iptables
-
+### 所有輸入都允許
 - 設定防火牆開機啟動：`systemctl enable iptables.service`
 - 允許所有輸入：`iptables -P INPUT ACCEPT`
   - 其他詳細的iptables設定，也可以參考[阿新這篇](https://www.796t.com/content/1548640287.html)。
   - 不過目前保持全開、讓工作站之間保持完全暢通是對mpirun最有利的方案。
+- 將規則列在最前面` sudo iptables -I INPUT -p all -j ACCEPT`  
+- 記得要save and restart  
+
+### 允許特定port
+```bash
+新增规则：允许所有ip能访问本机的65005端口
+
+复制代码
+# 新增规则（-I表示插入在链的第一位置，-A 表示追加到链的末尾位置，防火墙规则是从上往下读取）
+[root@data ~]# iptables -I INPUT -p tcp --dport 65005 -j ACCEPT
+
+# 保存规则到默认文件/etc/sysconfig/iptables
+
+[root@data ~]# service iptables save
+# 重启
+[root@data ~]# service iptables restart
+```
 
 ## Reference
 - G. T. Wang, [CentOS Linux 7 以 firewalld 指令設定防火牆規則教學](https://blog.gtwang.org/linux/centos-7-firewalld-command-setup-tutorial/), 2017/12/26

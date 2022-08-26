@@ -63,46 +63,84 @@ set NDAYS = 1
 - 最後用ncrcat將其連成一個大檔，還要加上最後一個小時值的bc就完成了。
 
 ```bash
-root=/nas2/cmaqruns/2022fcst/grid45/cctm.fcst/daily/CCTM_ACONC_v532_intel_Taiwan_2022082
-for i in {4..8};do
- nc=$root${i}.nc
- csh ./run_bconMM_RR_DM.csh $nc
+dates=()
+for id in {0..4};do
+  dates=( ${dates[@]} $(date -d "$BEGD +${id}days" +%Y%m%d) )
 done
-nc=BCON_v53_2208_run8_regrid_today_SECN_9k
-/usr/bin/ncrcat -O  BCON_2022*SECN_9k $nc
-~/bin/add_lastHr.py $nc
+for i in 0 1 2;do
+  ii=$(echo ${GRD[$i]}|cut -c5-)
+  cd $fcst/grid$ii/smoke
+  ../../mk_emis.py $BEGD
+  cd $fcst
+  csh ./run.cctm.${ii}.csh >&/dev/null
+
+  # nest down BCON and ICON
+  test $i -eq 2 && continue
+  for id in {0..4};do
+    nc=$fcst/grid$ii/cctm.fcst/daily/CCTM_ACONC_v532_intel_${DOM[$i]}_${dates[$id]}.nc
+    csh ./run_bcon_NC.csh $nc >&/dev/null
+  done
+  cd $fcst/grid$ii/bcon #(same bcon pool)
+  j=$(( $i + 1))
+  f=()
+  for id in {0..4};do
+    f=( ${f[@]} BCON_${dates[id]}_${DOM[$j]} )
+  done
+  ncrcat -O  ${f[@]} BCON_today_${DOM[$j]}
+  cd $fcst
+  csh ./run_icon_NC.csh $fcst/grid$ii/icon/ICON_yesterday_${DOM[$i]} >&/dev/null
+done
 ```
 
 ### 腳本內容
 
 ```bash
-kuang@DEVP /home/cmaqruns/2022fcst/data/bcon
-$ cat run_bconMM_RR_DM.csh
+#kuang@DEVP /nas2/cmaqruns/2022fcst
+#$ cat run_bcon_NC.csh
 #!/bin/csh -f
 
+# ======================= BCONv5.3 Run Script ========================
+# Usage: run.bcon.csh >&! bcon_v53.log &
+#
+# To report problems or request help with this script/program:
+#             http://www.cmascenter.org
+# ====================================================================
+
+# ==================================================================
+#> Runtime Environment Options
+# ==================================================================
+
+#> Choose compiler and set up CMAQ environment with correct
+#> libraries using config.cmaq. Options: intel | gcc | pgi
  setenv compiler gcc
 
 #> Source the config_cmaq file to set the run environment
- setenv CMAQ_HOME /home/cmaqruns/2022fcst
+ setenv CMAQ_HOME /nas2/cmaqruns/2022fcst
  source /opt/CMAQ_Project/config_cmaq.csh $compiler
+
+# popd
 
 #> Set General Parameters for Configuring the Simulation
 set nc         = $argv[1]
 set DM         = `echo $nc|cut -d'/' -f5`
- set VRSN      = v53                     #> Code Version
- set APPL      = 2208_run8
+
+set VRSN      = v53                     #> Code Version
 #> Horizontal grid definition
 set BCTYPE   = regrid             #> Initial conditions type [profile|regrid]
 if ( $DM == 'grid45' ) then
   setenv GRID_NAMEC CWBWRF_45k    # 16-character maximum
   setenv GRID_NAME  SECN_9k       # 16-character maximum
+  set DMF = grid09
 else if ( $DM == 'grid09' ) then
   setenv GRID_NAMEC  SECN_9k       # 16-character maximum
   setenv GRID_NAME  TWEPA_3k      # 16-character maximum
+  set DMF = grid03
 else
   echo "Error input nc, must with grid??"
   exit 1
 endif
+set CMAQ_DATA = ${CMAQ_HOME}/${DMF}
+
 
 #> Set the build directory:
  set BLD      = /opt/CMAQ_Project/PREP/bcon/scripts/BLD_BCON_${VRSN}_${compilerString}
@@ -111,7 +149,7 @@ endif
  cat $BLD/BCON_${VRSN}.cfg; echo " "; set echo
 
 #> Horizontal grid definition
- setenv GRIDDESC $CMAQ_DATA/mcip/$APPL/$GRID_NAME/GRIDDESC.bak #> grid description file
+ setenv GRIDDESC $CMAQ_DATA/mcip/GRIDDESC #> grid description file
  setenv IOAPI_ISPH 20                     #> GCTP spheroid, use 20 for WRF-based modeling
 
 #> I/O Controls
@@ -119,12 +157,23 @@ endif
  setenv IOAPI_OFFSET_64 YES   #> support large timestep records (>2GB/timestep record) [ options: YES | NO ]
  setenv EXECUTION_ID $EXEC    #> define the model execution id
 
+# =====================================================================
+#> BCON Configuration Options
+#
+# BCON can be run in one of two modes:
+#     1) regrids CMAQ CTM concentration files (BC type = regrid)
+#     2) use default profile inputs (BC type = profile)
+# =====================================================================
+
  setenv BCON_TYPE ` echo $BCTYPE | tr "[A-Z]" "[a-z]" `
 
+# =====================================================================
 #> Input/Output Directories
- setenv OUTDIR  $CMAQ_HOME/data/bcon       #> output file directory
+# =====================================================================
 
-set DATE  = `ncdump -h $nc|grep SDATE|awk '{print $3}'`
+ setenv OUTDIR  $CMAQ_HOME/$DMF/bcon       #> output file directory
+
+set DATE  = `/usr/bin/ncdump -h $nc|grep SDATE|awk '{print $3}'`
 set y = `echo $DATE|cut -c1-4`
 set j = `echo $DATE|cut -c5-`
 set NDAYS = 1
@@ -133,16 +182,17 @@ set NDAYS = 1
     set YYYYMMDD = `date -d "${y}-01-01 +${j}days -1days" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYMMDD
     set YYMMDD   = `echo $YYYYMMDD|cut -c3-` #> Convert YYYY-MM-DD to YYMMDD
 
-#   setenv SDATE           ${YYYYJJJ}
-#   setenv STIME           000000
-#   setenv RUNLEN          240000
-
  setenv CTM_CONC_1 $nc
- setenv MET_CRO_3D_CRS $CMAQ_DATA/mcip/$APPL/${GRID_NAMEC}/METCRO3D_$APPL.nc
- setenv MET_BDY_3D_FIN $CMAQ_DATA/mcip/$APPL/${GRID_NAME}/nc/METBDY3D_$APPL.${YYYYMMDD}
+ setenv MET_CRO_3D_CRS $CMAQ_HOME/$DM/mcip/METCRO3D.nc
+ setenv MET_BDY_3D_FIN $CMAQ_DATA/mcip/nc/METBDY3D.${YYYYMMDD}
  setenv BNDY_CONC_1    "$OUTDIR/BCON_${YYYYMMDD}_${GRID_NAME} -v"
 
+# =====================================================================
 #> Output File
+# =====================================================================
+
+#>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
  if ( ! -d "$OUTDIR" ) mkdir -p $OUTDIR
  if ( -e "$BNDY_CONC_1" ) rm $BNDY_CONC_1
 
@@ -154,4 +204,6 @@ set NDAYS = 1
  time $BLD/$EXEC
 
  exit()
+(pyn_env)
+
 ```

@@ -1,5 +1,6 @@
-#kuang@master /nas1/ecmwf/CAMS/CAMS_global_atmospheric_composition_forecasts/2022
-#$ cat grb2bcon.py
+#kuang@node03 /nas1/ecmwf/CAMS/CAMS_global_atmospheric_composition_forecasts/2022
+#$ cat ./grb2bcon.py
+#!/opt/miniconda3/envs/py37/bin/python
 import numpy as np
 import json
 import netCDF4
@@ -41,8 +42,7 @@ for fn in '123':
   nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
   if fn=='1':
     var=np.zeros(shape=(nv,nt,nlay,nrow,ncol))
-    bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')
-    bdate=datetime.datetime(2022,8,11)
+    bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')+datetime.timedelta(hours=60)
   for v in V[3]:
     iv=(gas+par).index(dic[v])
     var[iv,:,:,:,:]=nc.variables[v][:,:,:,:]
@@ -55,8 +55,8 @@ varbc[:]=var[:,:,:,df['J'],df['I']]
 varbc=np.flip(varbc,axis=2)
 fnameO='var_{:d}_{:d}_{:d}_{:d}'.format(nv, nt, nlay,nbnd)
 
-with FortranFile(fnameO,'w') as f:
-    f.write_record(varbc)
+#with FortranFile(fnameO,'w') as f:
+#    f.write_record(varbc)
 
 #read a BC file as rate base
 fname='/nas1/cmaqruns/2019base/data/bcon/BCON_v53_1912_run5_regrid_20191201_TWN_3X3'
@@ -77,7 +77,7 @@ for v in nms_gas:
 nc.close()
 
 #read density of air
-fname='/nas1/cmaqruns/2022fcst/data/mcip/2208_run8/CWBWRF_45k/METCRO3D_2208_run8.nc'
+fname='/nas1/cmaqruns/2022fcst/data/mcip/2208_run8/CWBWRF_45k/METCRO3D.nc'
 nc = netCDF4.Dataset(fname,'r')
 nt1,nlay1,nrow1,ncol1=nc.variables['DENS'].shape
 i0,j0=0,0
@@ -97,8 +97,10 @@ dens1d=np.zeros(shape=(nlay,nbnd))
 dens1d[:,:]=dens[:,idxo[0],idxo[1]]
 
 
-fname='/nas1/cmaqruns/2022fcst/data/bcon/BCON_v53_2208_run8_regrid_20220811_CWBWRF_45k'
-nc1 = netCDF4.Dataset(fname,'r+')
+fname='/nas1/cmaqruns/2022fcst/data/bcon/BCON_template_CWBWRF_45k'
+fnameO=fname.replace('template','today')
+os.system('cp '+fname+' '+fnameO)
+nc1 = netCDF4.Dataset(fnameO,'r+')
 V1=[list(filter(lambda x:nc1.variables[x].ndim==j, [i for i in nc1.variables])) for j in [1,2,3,4]]
 nv1=len(V1[2])
 nt1,nlay1,nbnd1=nc1.variables[V1[2][0]].shape
@@ -113,8 +115,10 @@ nt1=(nt-1)*3+1
 SDATE=[bdate+datetime.timedelta(hours=int(i)) for i in range(nt1)]
 for t in range(nt1):
   nc1.variables['TFLAG'][t,0,:]=dt2jul(SDATE[t])
-var=nc1.variables['TFLAG'][:,0,:]
-nc1.variables['TFLAG'][:,:,:]=var[:,None,:]
+var=np.array(nc1.variables['TFLAG'][:,0,:])
+var3=np.zeros(shape=nc1.variables['TFLAG'].shape)
+var3[:,:,:]=var[:,None,:]
+nc1.variables['TFLAG'][:]=var3[:]
 nc1.TSTEP=10000
 
 for v in V1[2]:

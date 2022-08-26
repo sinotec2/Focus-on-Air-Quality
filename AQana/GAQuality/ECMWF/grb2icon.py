@@ -1,5 +1,3 @@
-#kuang@master /nas1/ecmwf/CAMS/CAMS_global_atmospheric_composition_forecasts/2022
-#$ cat grb2icon.py
 import numpy as np
 import json
 import netCDF4
@@ -42,8 +40,7 @@ xlat=np.flip(nc['lat_0'])
 xlon=nc['lon_0']
 lonm, latm = np.meshgrid(xlon, xlat)
 
-bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')
-bdate=datetime.datetime(2022,8,11)
+bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')+datetime.timedelta(hours=60)
 for v in V[3]:
   iv=(gas+par).index(dic[v])
   var[iv,:,:,:,:]=nc.variables[v][:,:,:,:]
@@ -68,41 +65,53 @@ for v in nms_gas:
 nc.close()
 
 #read density of air
-fname='/nas1/cmaqruns/2022fcst/data/mcip/2208_run8/CWBWRF_45k/METCRO3D_2208_run8.nc'
+fname='/nas1/cmaqruns/2022fcst/data/mcip/2208_run8/CWBWRF_45k/METCRO3D.nc'
 nc = netCDF4.Dataset(fname,'r')
 nt1,nlay1,nrow1,ncol1=nc.variables['DENS'].shape
 dens=np.zeros(shape=(nlay1,nrow1,ncol1))
 dens[:]=np.mean(nc.variables['DENS'][:,:,:,:],axis=0) *1E9 #(kg to microgram)
 nc.close()
 
-fname='/nas1/cmaqruns/2022fcst/data/output_CCTM_v53_gcc_2208_run7/CCTM_CGRID_v53_gcc_2208_run7_20220810_CWBWRF_45k_11.nc'
-nc1 = netCDF4.Dataset(fname,'r+')
+fname='/nas1/cmaqruns/2022fcst/data/icon/ICON_template_CWBWRF_45k'
+fnameO=fname.replace('template','yesterday')
+os.system('cp '+fname+' '+fnameO)
+nc1 = netCDF4.Dataset(fnameO,'r+')
 pnyc = Proj(proj='lcc', datum='NAD83', lat_1=nc1.P_ALP, lat_2=nc1.P_BET, lat_0=nc1.YCENT, lon_0=nc1.XCENT, x_0=0, y_0=0.0)
-x,y=pnyc(lonm,latm, inverse=False)
+x0,y0=pnyc(lonm,latm, inverse=False)
 V1=[list(filter(lambda x:nc1.variables[x].ndim==j, [i for i in nc1.variables])) for j in [1,2,3,4]]
 nt1,nlay1,nrow1,ncol1=nc1.variables[V1[3][0]].shape
 ##interpolation indexing
 x1d=[nc1.XORIG+nc1.XCELL*i for i in range(ncol1)]
 y1d=[nc1.YORIG+nc1.YCELL*i for i in range(nrow1)]
 x1,y1=np.meshgrid(x1d, y1d)
-maxx,maxy=x1[-1,-1],y1[-1,-1]
-minx,miny=x1[0,0],y1[0,0]
-boo=(abs(x) <= (maxx - minx) /2+nc1.XCELL*10) & (abs(y) <= (maxy - miny) /2+nc1.YCELL*10)
-idx = np.where(boo)
-mp=len(idx[0])
-xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
+
+for i in 'xy':
+  for j in '01':
+    exec(i+j+'='+i+j+'.flatten()')
+
+n,w=[],[]
+for i in range(ncol1*nrow1):
+  dist=(x0-x1[i])**2+(y0-y1[i])**2
+  boo=(dist<=(nc1.XCELL*5)**2) & (dist>0)
+  idx=np.where(boo)[0]
+  if len(idx)==0:sys.exit('distance too short')
+  wgt=1./dist[idx]
+  swgt=np.sum(wgt)
+  wgt[:]/=swgt
+  n.append(idx)
+  w.append(wgt)
+
 
 #buildup the timeflags
 nc1.SDATE,nc1.STIME=dt2jul(bdate)
 nc1.variables['TFLAG'][0,:,:]=np.array(dt2jul(bdate))[None,:]
 
-var1=np.zeros(shape=(nv,nt1,nlay1,nrow1,ncol1))
-for v in range(nv):
-  for t in range(nt1):
-    for k in range(nlay1):
-      c = [var[v,t,k,idx[0][i], idx[1][i]] for i in range(mp)]
-      var1[v,t,k,:, :] = griddata(xyc, c, (x1, y1), method='linear')
-var1[:,:,:,0,0]=(var1[:,:,:,1,1]+var1[:,:,:,0,1]*2+var1[:,:,:,1,0]*2)/5
+var1=np.zeros(shape=(nv,nt1,nlay1,nrow1*ncol1))
+for i in range(nrow1*ncol1):
+  c = var[:,:,:,n[i]//ncol, n[i]%ncol]
+  var1[:,:,:,i]=np.sum(c*w[i],axis=3)
+var1=var1.flatten().reshape(nv,nt1,nlay1,nrow1,ncol1)
+
 for v in gas_nm+par_nms:
   if v in V1[3]:nc1[v][:]=0.
 

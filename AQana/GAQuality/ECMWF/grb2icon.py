@@ -40,7 +40,9 @@ xlat=np.flip(nc['lat_0'])
 xlon=nc['lon_0']
 lonm, latm = np.meshgrid(xlon, xlat)
 
-bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')+datetime.timedelta(hours=60)
+#date=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')+datetime.timedelta(hours=12)
+td=datetime.datetime.today()
+bdate=datetime.datetime(td.year,td.month,td.day)
 for v in V[3]:
   iv=(gas+par).index(dic[v])
   var[iv,:,:,:,:]=nc.variables[v][:,:,:,:]

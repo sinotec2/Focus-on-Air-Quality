@@ -42,10 +42,21 @@ for fn in '123':
   nt,nlay,nrow,ncol=nc.variables[V[3][0]].shape
   if fn=='1':
     var=np.zeros(shape=(nv,nt,nlay,nrow,ncol))
-    bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')+datetime.timedelta(hours=60)
+#    bdate=datetime.datetime.strptime(nc.variables[V[3][0]].initial_time,'%m/%d/%Y (%H:%M)')+datetime.timedelta(hours=12)
+    td=datetime.datetime.today()
+    bdate=datetime.datetime(td.year,td.month,td.day)
   for v in V[3]:
     iv=(gas+par).index(dic[v])
     var[iv,:,:,:,:]=nc.variables[v][:,:,:,:]
+#shift time frame for 1 day; last 24 hrs(8 frames) are mirrored to previous day
+tmp=np.zeros(shape=var.shape)
+tmp[:,:-8,:,:,:]=var[:,8:,:,:,:]
+for t in range(8):
+  t1=(nt-8)+t
+  t2=(nt-8)-t
+  tmp[:,t1,:,:,:]=var[:,t2,:,:,:]
+var=tmp[:]
+
 df=read_csv('BconInGrb.csv')
 df['I']=df['JIseqInGrb']%1000
 df['J']=df['JIseqInGrb']//1000

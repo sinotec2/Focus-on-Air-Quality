@@ -68,6 +68,7 @@ for k in ['o','g']:
     jsn[k][i]['header']['la2']=np.float64(lat_min)
     jsn[k][i]['header']['la1']=np.float64(lat_max)
     jsn[k][i]['header']['center']=0
+    jsn[k][i]['header']["forecastTime"]=0
     jsn[k][i]['header']['centerName']="WRF and CMAQ Forecastings"
     jsn[k][i]['data']=[0 for v in range(nx*ny)]
 
@@ -93,7 +94,6 @@ for day in range(5):
     hh=bdate.strftime("%H00")
     for i in range(ngfs):
       gfs[i]['header']['refTime']=dt
-      gfs[i]['header']["forecastTime"]=t
     for ir in range(ngfs):
       exec('var='+uv[ir]+'[t,:,:]')
       c = np.array([var[idx[0][i], idx[1][i]] for i in range(mp)])
@@ -119,7 +119,6 @@ for day in range(5):
 
     for i in range(nozn):
       ozn[i]['header']['refTime']=dt
-      ozn[i]['header']["forecastTime"]=t
     for ir in range(nozn):
       var=o3[t,:,:]*1000
       c = np.array([var[idx[0][i], idx[1][i]] for i in range(mp)])

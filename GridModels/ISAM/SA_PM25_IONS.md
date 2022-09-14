@@ -119,7 +119,7 @@ import netCDF4
 import sys, os
 ```
 - 讀取引數(`fname`)
-  - 由`fname`中讀取分區路徑(`path`)
+  - 由`fname`中讀取分區路徑(`path`)、小時(`ymdh`)
 
 ```python
 fname=sys.argv[1]

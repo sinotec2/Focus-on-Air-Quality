@@ -1,0 +1,157 @@
+kuang@master /nas2/cmaqruns/2022fcst
+$ cat $gfs/fcst.cs
+wget=/usr/bin/wget
+root=https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.
+today=$(date -d -0day +%Y%m%d)
+yestd=$(date -d -1day +%Y%m%d)
+BH=12
+dir=$yestd/$BH/atmos/
+gfs=/nas1/backup/data/NOAA/NCEP/GFS/YYYY
+cmaq=/home/cmaqruns/2022fcst
+fcst=/nas2/cmaqruns/2022fcst
+BEGD=$(date -d "$today -0days" +%Y-%m-%d)
+ENDD=$(date -d "$BEGD  +5days" +%Y-%m-%d)
+sub=~/bin/sub
+DOM=( 'CWBWRF_45k' 'SECN_9k' 'TWEPA_3k' )
+GRD=( 'grid45'     'grid09'  'grid03' )
+MPI=( '-f machinefile -np 200' '-f machinefile -np 196' '-f machinefile -np 140')
+CMB=/nas1/cmaqruns/CMAQ_Project/POST/combine/scripts/BLD_combine_v53_gcc/combine_v53.exe
+W45=Data/javascripts/D3js/earthFcst45/public/data/weather
+cd $gfs
+
+# 執行gfs檔案下載
+for ((i=0;i <= 171; i+=3));do
+  iii=$(printf "%03d" $i)
+  file=gfs.t${BH}z.pgrb2.1p00.f$iii
+  if [ -e $file ];then rm $file;fi
+  $wget --no-check-certificate -q $root$dir$file
+  if [ $i -eq 120 ];then sleep 60;fi
+done
+
+# WPS中的ungrib及metgrid
+./link_grib.csh gfs*
+## 置換模版中的起迄日期
+cp namelist.wps_loop namelist.wps
+for cmd in 's/BEGD/'$BEGD'/g' 's/ENDD/'$ENDD'/g';do
+  sed -ie $cmd namelist.wps
+done
+## ungrib
+LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin /nas1/WRF4.0/WRF_chem/WPS/ungrib/src/ungrib.exe >& /dev/null
+## metgrid
+LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin /nas1/WRF4.0/WRF_chem/WPS2/metgrid.exe >& /dev/null
+
+# 依序執行3個domain的real及wrf
+## 起迄年 、 月 、 日B
+yea1=$(echo $BEGD|cut -d'-' -f1);mon1=$(echo $BEGD|cut -d'-' -f2);day1=$(echo $BEGD|cut -d'-' -f3)
+yea2=$(echo $ENDD|cut -d'-' -f1);mon2=$(echo $ENDD|cut -d'-' -f2);day2=$(echo $ENDD|cut -d'-' -f3)
+dates=()
+for id in {0..5};do
+  dates=( ${dates[@]} $(date -d "$BEGD +${id}days" +%Y-%m-%d) )
+done
+for i in 0 1 2;do
+  cd $gfs/${DOM[$i]}
+  ## 置換模版中的起迄日期
+  cp namelist.input_loop namelist.input
+  for cmd in "s/SYEA/$yea1/g" "s/SMON/$mon1/g" "s/SDAY/$day1/g" \
+             "s/EYEA/$yea2/g" "s/EMON/$mon2/g" "s/EDAY/$day2/g" ;do
+    sed -i $cmd namelist.input
+  done
+  rm met_em* metoa_em*
+  ## 連結met_em檔案
+  d=$(( $i + 1 ))
+  for j in $(ls ../met_em.d0${d}*);do k=${j/d0${d}/d01};l=${k/..\//};ln -s $j $l;done
+  if [ $i -eq 0 ] || [ $i -eq 1 ];then
+    ## 連結metoa_em檔案
+    for j in $(ls ../met_em.d0${d}*);do k=${j/d0${d}/d01};l=${k/..\//};m=${l/met_/metoa_};ln -s $j $m;done
+  else
+    ## 執行CWBWRF結果的內插
+    EXE=./mk_metoaT.py
+    for j in {0..48};do $sub $EXE $j;sleep 10s;done
+    ## 等候所有的程序都完成，才執行下一動作。
+    while true;do
+      n=$(ps -ef|grep ${EXE}|wc -l)
+      if [ $n -lt 2 ];then
+        break
+      else
+        sleep 60
+      fi
+    done
+  fi
+
+  # real
+  LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/mpich/mpich-3.4.2-icc/lib /opt/mpich/mpich-3.4.2-icc/bin/mpirun ${MPI[$i]} /nas1/WRF4.0/WRFv4.3/WRFV4/main/real.exe >& /dev/null
+  # wrf
+  LD_LIBRARY_PATH=/opt/netcdf/netcdf4_gcc/lib /opt/mpich/mpich3_gcc/bin/mpirun ${MPI[$i]} /opt/WRF4/WRFv4.2/main/wrf.exe >& /dev/null
+
+  # mcip
+  cd $cmaq/data/wrfout
+  for f in {0..5};do nc=$gfs/${DOM[$i]}/wrfout_d01_${dates[$f]}_00:00:00;ln -sf $nc wrfout_d0${d}_$f;done
+  cd $fcst
+  csh run_mcip_DM.csh ${GRD[$i]} >&/dev/null
+  cd $fcst/${GRD[$i]}/mcip
+  /bin/bash ~/bin/add_firstHr.sh >&/dev/null
+  /bin/bash ~/bin/brk_day2.cs METBDY3D.nc >&/dev/null
+done
+
+#CMAQ stream
+cd $fcst
+YYYYJJJ=$(date -d ${BEGD} +%Y%j)
+mcip_start=$BEGD
+mcip_end=$(date -d ${BEGD}+4days +%Y-%m-%d)
+cp project.config_loop project.config
+for cmd in 's/YYYYJJJ/'$YYYYJJJ'/g' \
+           's/mcip_start/'$mcip_start'/g' \
+           's/mcip_end/'$mcip_end'/g';do
+  sed -ie $cmd project.config
+done
+
+dates=()
+for id in {0..4};do
+  dates=( ${dates[@]} $(date -d "$BEGD +${id}days" +%Y%m%d) )
+done
+for i in 0 1 2;do
+  ii=$(echo ${GRD[$i]}|cut -c5-)
+  cd $fcst/grid$ii/smoke
+  ../../mk_emis.py $BEGD
+  if [[ $i -eq 2 ]];then
+    /usr/bin/ncks -O -d LAY,0 TEDS.ncf TEDS0.ncf
+    /usr/bin/ncatted -a NLAYS,global,o,i,1 TEDS0.ncf
+    ./mk_ptse.py $BEGD
+  fi
+  cd $fcst
+  csh ./run.cctm.${ii}.csh
+
+  # nest down BCON and ICON
+  j=$(( $i + 1))
+  f=()
+  for id in {0..4};do
+    nc=$fcst/grid$ii/bcon/BCON_${dates[id]}_${DOM[$j]}
+    f=( ${f[@]} $nc )
+    if [[ -e $nc ]];then rm $nc;fi
+  done
+  for id in {0..4};do
+    nc=$fcst/grid$ii/cctm.fcst/daily/CCTM_ACONC_v532_intel_${DOM[$i]}_${dates[$id]}.nc
+    # combine PM's
+    $fcst/combine.sh $nc
+    # generate bcon for next nest
+    test $i -eq 2 && continue
+    csh $fcst/run_bcon_NC.csh $nc >&/dev/null
+  done
+
+  test $i -eq 2 && continue
+  nc=$fcst/grid$ii/bcon/BCON_today_${DOM[$j]}
+  /usr/bin/ncrcat -O ${f[0]} ${f[1]} ${f[2]} ${f[3]} ${f[4]} $nc
+  # expand the last hour to next day
+  ~/bin/add_lastHr.py $nc
+  cd $fcst
+  csh $fcst/run_icon_NC.csh $fcst/grid$ii/icon/ICON_yesterday_${DOM[$i]} >&/dev/null
+done
+
+# prepare earth json files and backup to imackuang
+for r in 45 09 03;do cd /nas1/Data/javascripts/D3js/earthFcst$r/public/data/weather/current;./cmaq_json3.py $BEGD;done
+if ! [ -e /home/kuang/mac/do_not_delete ];then /usr/bin/fusermount -u /home/kuang/mac;/usr/bin/sshfs kuang@IMacKuang:/Users ~/mac -o nonempty -o password_stdin < ~/bin/PW;fi
+for id in {0..4};do
+  y=$(echo ${dates[$id]}|cut -c1-4);m=$(echo ${dates[$id]}|cut -c5-6);d=$(echo ${dates[$id]}|cut -c7-8)
+  mkdir -p  ~/mac/$W45/$y/$m/$d
+  cp /nas1/$W45/$y/$m/$d/[01]*.json ~/mac/$W45/$y/$m/$d/
+done

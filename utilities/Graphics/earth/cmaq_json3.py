@@ -1,6 +1,6 @@
 #kuang@node03 /nas1/Data/javascripts/D3js/earthFcst45/public/data/weather/current
 #$ cat cmaq_json3.py
-#!/opt/anaconda3/envs/gribby/bin/python
+#!/opt/anaconda3/envs/py37/bin/python
 import numpy as np
 import json
 import sys, os
@@ -16,6 +16,16 @@ def moving_average(a, n=8):
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
+def wrtjson(day,t,fnameO,jsn):
+  if day==0 and t in [0,3] and os.path.isfile(fnameO):
+    with open(fnameO,'r+') as f:
+      bkp=json.load(f)
+    for i in range(len(bkp)):
+      data=np.array(bkp[i]['data'])*(6-t)/6+np.array(jsn[i]['data'])*(t)/6
+      jsn[i]['data']=list(data)
+  with open(fnameO,'w') as f:
+    json.dump(jsn,f)
+  return 'OK'
 
 grds=subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[5].replace('earthFcst','')
 #the json template
@@ -129,8 +139,7 @@ for day in range(5):
       gfs[ir]['data']=list(np.flip(np.where(var!=var,0,var),axis=0).flatten())
 
     fnameO=pwd+dir+hh+'-wind-surface-level-fcst-'+grds+'.json'
-    with open(fnameO,'w') as f:
-      json.dump(gfs,f)
+    rst=wrtjson(day,t,fnameO,gfs)
 
 o38=np.zeros(shape=(24*5,ny,nx))
 for day in range(5):
@@ -164,8 +173,7 @@ for day in range(5):
       ozn[i]['data']=list(np.flip(np.where(var!=var,0,var),axis=0).flatten())
 
     fnameO=pwd+dir+hh+'-ozone-surface-level-fcst-'+grds+'.json'
-    with open(fnameO,'w') as f:
-      json.dump(ozn,f)
+    rst=wrtjson(day,t,fnameO,ozn)
 
 var=moving_average(o38)
 o38=np.zeros(shape=(5*24,ny,nx))
@@ -189,8 +197,7 @@ for day in range(5):
       ozn[i]['data']=list(np.flip(np.where(var!=var,0,var),axis=0).flatten())
 
     fnameO=pwd+dir+hh+'-ozone8-surface-level-fcst-'+grds+'.json'
-    with open(fnameO,'w') as f:
-      json.dump(ozn,f)
+    rst=wrtjson(day,t,fnameO,ozn)
 
 #PMs reading and output
 PMst='/nas2/cmaqruns/2022fcst/grid'+grds+'/cctm.fcst/daily/PMsYYYYMMDD.nc'
@@ -225,5 +232,5 @@ for day in range(5):
         ozn[i]['data']=list(np.flip(np.where(var!=var,0,var),axis=0).flatten())
 
       fnameO=pwd+dir+hh+'-'+names[v]+'-surface-level-fcst-'+grds+'.json'
-      with open(fnameO,'w') as f:
-        json.dump(ozn,f)
+      rst=wrtjson(day,t,fnameO,ozn)
+

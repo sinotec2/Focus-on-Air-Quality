@@ -210,7 +210,7 @@ export DISPLAY=:0.0 #Keep login from Console
   - 而隔日執行可能遇到機組個數的差異，無法順利接續，只得放棄**restart**。
 
 ### [join_nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPOST/join_nc.py)
-- 此處改採跨日濃度檔案漸變連接的方式([join_nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPUFF/join_nc.py))，降低*calpuff*從0啟動時的誤差，得到較合理的結果。
+- 此處改採跨日濃度檔案漸變連接的方式([join_nc.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/CALPOST/join_nc.py))，降低*calpuff*從0啟動時的誤差，得到較合理的結果。
   - 漸變採24小時(`nt=24`)、新、舊檔案照小時數正比線性加權方式進行
 
 ```python

@@ -66,6 +66,71 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
 - Output
   - *YYMM*D1.m3.nc
 
+### dic.json
+
+```java
+{ 
+  "VAR_192_210_123_P0_L105_GLL0":"carbon_monoxide", 
+  "VAR_192_217_45_P0_L105_GLL0":"ethane", 
+  "VAR_192_210_124_P0_L105_GLL0":"formaldehyde", 
+  "VAR_192_217_16_P0_L105_GLL0":"isoprene", 
+  "VAR_192_210_121_P0_L105_GLL0":"nitrogen_dioxide", 
+  "VAR_192_217_27_P0_L105_GLL0":"nitrogen_monoxide", 
+  "VAR_192_217_11_P0_L105_GLL0":"olefins", 
+  "VAR_192_217_6_P0_L105_GLL0":"nitric_acid", 
+  "VAR_192_217_15_P0_L105_GLL0":"organic_nitrates", 
+  "VAR_192_210_203_P0_L105_GLL0":"ozone", 
+  "VAR_192_217_9_P0_L105_GLL0":"paraffins", 
+  "VAR_192_217_13_P0_L105_GLL0":"peroxyacetyl_nitrate", 
+  "VAR_192_217_47_P0_L105_GLL0":"propane", 
+  "VAR_192_210_122_P0_L105_GLL0":"sulphur_dioxide"
+  "MASSMR_P40_L105_GLL0_A0":"ozone",
+  "MASSMR_P40_L105_GLL0_A4":"carbon_monoxide",
+  "MASSMR_P40_L105_GLL0_A5":"nitrogen_dioxide",
+  "MASSMR_P40_L105_GLL0_A8":"sulphur_dioxide",
+  "MASSMR_P40_L105_GLL0_A11":"nitrogen_monoxide",
+
+  "VAR_192_217_21_P0_L105_GLL0":"ammonium", 
+  "VAR_192_210_4_P0_L105_GLL0":"dust_aerosol_0.03-0.55um_mixing_ratio", 
+  "VAR_192_210_5_P0_L105_GLL0":"dust_aerosol_0.55-0.9um_mixing_ratio", 
+  "VAR_192_210_6_P0_L105_GLL0":"dust_aerosol_0.9-20um_mixing_ratio", 
+  "VAR_192_210_9_P0_L105_GLL0":"hydrophilic_black_carbon_aerosol_mixing_ratio", 
+  "VAR_192_210_7_P0_L105_GLL0":"hydrophilic_organic_matter_aerosol_mixing_ratio", 
+  "VAR_192_210_10_P0_L105_GLL0":"hydrophobic_black_carbon_aerosol_mixing_ratio", 
+  "VAR_192_210_8_P0_L105_GLL0":"hydrophobic_organic_matter_aerosol_mixing_ratio", 
+  "VAR_192_217_51_P0_L105_GLL0":"nitrate", 
+  "VAR_192_210_1_P0_L105_GLL0":"sea_salt_aerosol_0.03-0.5um_mixing_ratio", 
+  "VAR_192_210_2_P0_L105_GLL0":"sea_salt_aerosol_0.5-5um_mixing_ratio", 
+  "VAR_192_210_3_P0_L105_GLL0":"sea_salt_aerosol_5-20um_mixing_ratio", 
+  "VAR_192_210_11_P0_L105_GLL0":"sulphate_aerosol_mixing_ratio", 
+  "MASSMR_P48_L105_GLL0_A62003":"ammonium_aerosol_mass_mixing_ratio",
+  "MASSMR_P48_L105_GLL0_A65533":"nitrate_coarse_mode_aerosol_mass_mixing_ratio",
+  "MASSMR_P48_L105_GLL0_A65534":"nitrate_fine_mode_aerosol_mass_mixing_ratio",
+  }
+```
+### nms_part.json
+- dust_aerosol_0.03-0.55um為塵土中的PM<sub>1</sub>，但是CMAQ並沒有處理這一塊，為求質量守恆，將其併入PM<sub>2.5</sub>之中(J類別)
+
+```java
+{
+"VAR_192_217_21_P0_L105_GLL0": ["ANH4I", "ANH4J", "ANH4K"], 
+"VAR_192_210_4_P0_L105_GLL0": ["AFEJ", "AALJ", "ASIJ", "ACAJ", "AMGJ", "AKJ", "AMNJ"], 
+"VAR_192_210_5_P0_L105_GLL0": ["AFEJ", "AALJ", "ASIJ", "ACAJ", "AMGJ", "AKJ", "AMNJ"], 
+"VAR_192_210_6_P0_L105_GLL0": ["ACORS", "ASOIL"], 
+"VAR_192_210_9_P0_L105_GLL0": ["AECI", "AECJ"], 
+"VAR_192_210_7_P0_L105_GLL0": ["APOCI", "APNCOMI", "APOCJ", "AOTHRJ", "AISO3J", "ASQTJ", "AORGCJ", "AOLGBJ", "AOLGAJ"], 
+"VAR_192_210_10_P0_L105_GLL0": ["AECI", "AECJ"], 
+"VAR_192_210_8_P0_L105_GLL0": ["APOCI", "APNCOMI", "APOCJ", "AOTHRJ", "AISO3J", "ASQTJ", "AORGCJ", "AOLGBJ", "AOLGAJ"], 
+"VAR_192_217_51_P0_L105_GLL0": ["ANO3I", "ANO3J", "ANO3K"], 
+"VAR_192_210_1_P0_L105_GLL0": ["ANAI", "ACLI"], 
+"VAR_192_210_2_P0_L105_GLL0": ["ANAJ", "ACLJ"], 
+"VAR_192_210_3_P0_L105_GLL0": ["ACLK", "ASEACAT"], 
+"VAR_192_210_11_P0_L105_GLL0": ["ASO4I", "ASO4J", "ASO4K"],
+"MASSMR_P48_L105_GLL0_A62003": ["ANH4I", "ANH4J", "ANH4K"],
+"MASSMR_P48_L105_GLL0_A65533": ["ANO3K"],
+"MASSMR_P48_L105_GLL0_A65534": ["ANO3I", "ANO3J"],
+}
+```
 ### 分段說明
 - 使用scipy的[griddata](http://liao.cpython.org/scipytutorial11.html)進行水平的內插
 - 將dt2jul、jul2dt寫成副程式[dtconvertor](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times)，簡化程式版面

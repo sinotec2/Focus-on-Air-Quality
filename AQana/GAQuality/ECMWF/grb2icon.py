@@ -1,3 +1,6 @@
+#kuang@node03 /nas1/ecmwf/CAMS/CAMS_global_atmospheric_composition_forecasts/2022
+#$ cat ./grb2icon.py
+#!/opt/miniconda3/envs/py37/bin/python
 import numpy as np
 import json
 import netCDF4

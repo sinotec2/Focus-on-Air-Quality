@@ -87,6 +87,7 @@ last_modified_date: 2022-03-28 11:04:39
    - 修改屬性(change mode) `chmod -R og+w *`
 3. 更改別人擁有之唯讀檔案，須由原擁有者、或管理者才能做。
 
+![entry5.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry5.png)
 
 ### 檔案管理(命令列)
 1. ls (list) 
@@ -127,6 +128,9 @@ last_modified_date: 2022-03-28 11:04:39
 1. mobaXterm 
   - 點選Session後連到遠端工作站，隨即在左側出現遠端的目錄與檔案瀏覽器，如果沒有，可以選擇sftp頁面或按下綠色微笑小圓點重新整理。   
   - 雙擊黃色檔案夾可以進入目錄、雙擊檔案可以開啟檔案。如果要使用Moba內設的編輯軟體(有行號)，可以點選檔案後按右鍵選單(第二個Open with default editor)
+
+![entry6.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry6.png)
+
 2. FileZilla
 
 ### pipeline(|) and substitude($)
@@ -149,18 +153,27 @@ last_modified_date: 2022-03-28 11:04:39
 1. linux上可以執行的指令文字檔，稱之為批次檔(scripts) 
    為直譯式的程式，語法跟OS環境是哪一個shell(C shell, Bourn Again shell, Tshell Bean shell)有關。以下bash為例必須能通過分段測試
 2. 判別 
-   if [...]; then; else; fi; 
-   注意空格數字和文字不能混用條件式(case VAR in ; var1) done;;... esac;
+  - if [...]; then; else; fi; 
+    - 注意空格數字和文字不能混用
+  - 條件式(case VAR in ; var1) done;;... esac;
 3. 迴圈 
-   for VAR in RANGE ;do ...;done
-   VAR會按照RANGE的內容依序疊代RANGE可以明列各項次、數字範圍{01..99}、英文字母範圍{Z..a}=Z , [ , ] , ^ , _ , ` , a 或混合
-   while COND;done (要搭配if指令) 
-   COND可以是 true (永不停止執行)、或者是判別式[...]中斷迴圈用break(搭配if指令)跳開不執行迴圈剩下指令用continue(搭配if指令)
-4. 批次檔暫時停止執行 
-   sleep 
+  - for VAR in RANGE ;do ...;done
+    - VAR會按照RANGE的內容依序疊代
+    - RANGE可以明列各項次、數字範圍{01..99}、英文字母範圍{Z..a}=Z , [ , ] , ^ , _ , ` , a 或混合
+  - while COND;done (要搭配if指令) 
+    - COND可以是 true (永不停止執行)、或者是
+    - 判別式[...]
+  - 中斷迴圈用break(搭配if指令)
+  - 跳開不執行迴圈剩下指令用continue(搭配if指令)
+4. 批次檔暫時停止執行： sleep 
 5. 變數序列 
-   定義VAR=(var0,var1 var2 ... varn)呼叫var=${VAR[$i]}   (其中的$i=0,1,...n)
+  - 定義VAR=(var0,var1 var2 ... varn)呼叫var=${VAR[$i]}
+  - 其中的$i=0,1,...n)
 
 範例：在node01~03同時執行高雄市CEMS固定源逐月的calpuff模式模擬
 kuang@master /home/cpuff/2018
+
+![entry7.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry7.png)
+
+![entry8.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry8.png)
 

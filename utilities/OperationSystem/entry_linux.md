@@ -92,7 +92,7 @@ last_modified_date: 2022-10-11 16:02:10
 ### 命令列指令
 1. ls (list) 
   - `ll` (=`ls -alh --color|more`, list in lengthy and more_mode),
-  - `lst` (=l`s $1 --show-control-chars -hF --color=tty -lrt|tail`, list and sorted by time-the tail part),
+  - `lst` (=`ls $1 --show-control-chars -hF --color=tty -lrt|tail`, list and sorted by time-the tail part),
   - `lsh` (=`ls $1 --show-control-chars -hF --color=tty -lrt|head` , list and sorted by time-the head part),  
   - `lsd`(=`ls $1 --show-control-chars -hF --color=tty -l|grep "^d"`, list dir. names),
   - `lsS`(=`ls $1 --show-control-chars -hF --color=tty -lrS|tail` , list and sorted by filesize),
@@ -102,8 +102,8 @@ last_modified_date: 2022-10-11 16:02:10
   - `du` (disk usage)
 3. 尋找檔案 
   - `which` (環境路徑中哪一個執行檔)
-  - `find` (在某個目錄下找符合名稱的檔案 
-    - `findc`=find . -name "$1")
+  - `find` (在某個目錄下找符合名稱的檔案)
+    - `findc`=`find . -name "$1"`(find current directory)
   - `locate` (資料庫中尋找，太新的檔案還來不及更新可能找不到)
 4. `cp` (copy), `mv` (move), `rm` (remove) 
   - 前2者必須(只能)有2個檔案名稱，後者可以有很多檔名。

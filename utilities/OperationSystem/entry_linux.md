@@ -3,7 +3,7 @@ layout: default
 title: linux entry
 parent:   Operation System
 grand_parent: Utilities
-last_modified_date: 2022-03-28 11:04:39
+last_modified_date: 2022-10-11 16:02:10
 ---
 # linux快速入門
 {: .no_toc }
@@ -16,24 +16,22 @@ last_modified_date: 2022-03-28 11:04:39
 
 ---
 
-## LINUX快速入門
-
-### 工作站的優點與必要性
+## 工作站的優點與必要性
 1. 降低平台作業的相容性問題：多人、多機、多工、平行作業。
 1. 資料參考與比較。考核容易。
 1. 方便應用fortran/python/java/C等進行平行計算、大量數據資料處理、繪圖Linux, bash, python … 
 1. 為進入資訊領域的重要門檻，有利未來職涯發展。
 
-### 認識環境
-- 硬體 
-  - 伺服器機器的位置
-    - 公司內部
-      1. 主機(console: master、DEVP)、
-      1. 局部網路計算節點(node: node01~node03)、
-      1. NAS(nas1、nas2)、
-      1. 寬頻控制器、UPS等設備
-    - 外部測試機(IMacKuang@125.229.149.182)
-- 遠端登入(ssh)軟體 
+## 認識環境
+### 硬體 
+- 伺服器機器的位置是在公司內部
+  1. 主機(console: master、DEVP)、
+  1. 局部網路計算節點(node: node01~node03)、
+  1. NAS(nas1、nas2)、
+  1. 寬頻控制器、UPS等設備
+- 外部測試機(IMacKuang@125.229.149.182)
+
+### 遠端登入(ssh)軟體 
   - [putty](https://www.putty.org)(文字界面)
   - [mobaXterm](https://mobaxterm.mobatek.net)(文字界面、X window圖形界面)
 - 軟體提供之好用工具 
@@ -41,28 +39,30 @@ last_modified_date: 2022-03-28 11:04:39
   - tab鍵補滿檔名或
   - 指令PageUP(或↑)補滿上個指令
   - 顏色區別工作環境
-- 檔案交換軟體(目錄) 
-  - samba網路磁碟機 
-    1. 登入(\\200.200.12.191\LX1)權限(與master上相同、nas1目前只開放進入讀取)
-  - 使用filezilla(sftp)
-  - sshfs
-- 作業環境指令
-  - OS版本 `uname -a`
-  - 磁碟機檔案系統 `df -h`
-  - 目前有誰在線上 `who`, `finger`
-  - 最近有誰登入 `last`
-  - 目前有哪些程式在執行 
-    - `top` (table of process),  
-    - `ps` (process), 
-      - `psg`(=ps -ef|grep $1, ps and grep)
-  - 最近1000個打過的指令 
-    - `history` 
-    - `his`(=history |grep -i "$1" |grep -i "$2" |grep -i "$3
-  - 離開或關閉ssh連線 `exit`
+
+### 檔案交換軟體(目錄) 
+- samba網路磁碟機 
+  1. 登入(\\200.200.12.191\LX1)權限(與master上相同、nas1目前只開放進入讀取)
+  2. 使用filezilla(sftp)
+- sshfs
+
+### 作業環境指令
+- OS版本 `uname -a`
+- 磁碟機檔案系統 `df -h`
+- 目前有誰在線上 `who`, `finger`
+- 最近有誰登入 `last`
+- 目前有哪些程式在執行 
+  - `top` (table of process),  
+  - `ps` (process), 
+    - `psg`(=ps -ef|grep $1, ps and grep)
+- 最近1000個打過的指令 
+  - `history` 
+  - `his`(=history |grep -i "$1" |grep -i "$2" |grep -i "$3
+- 離開或關閉ssh連線 `exit`
 - 背景執行程式
-  - 執行程式時，最後面加上 `&` 
-  - 即使登出程式也不會中斷`nohup` CMD & (no hang up)
-  - 在批次檔迴圈內執行背景工作 `sub` (=$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ...${20} &)
+- 執行程式時，最後面加上 `&` 
+- 即使登出程式也不會中斷`nohup` CMD & (no hang up)
+- 在批次檔迴圈內執行背景工作 `sub` (=$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ...${20} &)
 
 ![entry1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry1.png)
 
@@ -74,8 +74,7 @@ last_modified_date: 2022-03-28 11:04:39
 
 {% include download.html content="[登入工作站與下載全球任何範圍的數值地型高程數據之作業方式.doc](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/OperationSystem/登入工作站與下載全球任何範圍的數值地型高程數據之作業方式.doc)" %}
 
-
-### 權限管理
+## 權限管理
 1. 三層權限管理圈 
   - user:擁有者、用`chown` (change ownner)指令修改 
   - group:群組、用`chgrp` (change group)指令修改
@@ -89,7 +88,8 @@ last_modified_date: 2022-03-28 11:04:39
 
 ![entry5.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry5.png)
 
-### 檔案管理(命令列)
+## 檔案管理
+### 命令列指令
 1. ls (list) 
   - `ll` (='ls -alh --color|more', list in lengthy and more_mode),
   - `lst` (=ls $1 --show-control-chars -hF --color=tty -lrt|tail, list and sorted by time-the tail part),
@@ -124,7 +124,7 @@ last_modified_date: 2022-03-28 11:04:39
   - 單一字元的萬用卡 `?`
   - 輪轉使用單一字元A~C `[ABC]`
 
-### 檔案管理(軟體介面)
+### 軟體介面
 1. mobaXterm 
   - 點選Session後連到遠端工作站，隨即在左側出現遠端的目錄與檔案瀏覽器，如果沒有，可以選擇sftp頁面或按下綠色微笑小圓點重新整理。   
   - 雙擊黃色檔案夾可以進入目錄、雙擊檔案可以開啟檔案。如果要使用Moba內設的編輯軟體(有行號)，可以點選檔案後按右鍵選單(第二個Open with default editor)
@@ -133,6 +133,7 @@ last_modified_date: 2022-03-28 11:04:39
 
 2. FileZilla
 
+## 指令串接
 ### pipeline(|) and substitude($)
 1. pipeline(|) 
   - 將pipeline(|) 左邊指令的結果傳到右邊，進一步處理。
@@ -145,7 +146,7 @@ last_modified_date: 2022-03-28 11:04:39
   - 如果後面接(cmd)，是代表執行cmd的結果
   - 如果指令不能使用pipeline(|) 可以考慮使用substitude($)
 
-### 其他指令-
+### 其他指令
 - Gong Yong, 2014, [50個最常用的Unix/Linux命令](https://gywbd.github.io/posts/2014/8/50-linux-commands.html)
 - UNIX 常見指令教學 - 交大資工資訊中心 - [交通大學](https://cscc.cs.nctu.edu.tw/unix-basic-commands)
 

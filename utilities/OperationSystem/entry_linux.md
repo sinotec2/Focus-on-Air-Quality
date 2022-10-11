@@ -54,10 +54,10 @@ last_modified_date: 2022-10-11 16:02:10
 - 目前有哪些程式在執行 
   - `top` (table of process),  
   - `ps` (process), 
-    - `psg`(=ps -ef|grep $1, ps and grep)
+    - `psg`(=`ps -ef|grep $1`, ps and grep)
 - 最近1000個打過的指令 
   - `history` 
-  - `his`(=history |grep -i "$1" |grep -i "$2" |grep -i "$3
+  - `his`(=`history |grep -i "$1" |grep -i "$2" |grep -i "$3`
 - 離開或關閉ssh連線 `exit`
 - 背景執行程式
 - 執行程式時，最後面加上 `&` 
@@ -91,12 +91,12 @@ last_modified_date: 2022-10-11 16:02:10
 ## 檔案管理
 ### 命令列指令
 1. ls (list) 
-  - `ll` (='ls -alh --color|more', list in lengthy and more_mode),
-  - `lst` (=ls $1 --show-control-chars -hF --color=tty -lrt|tail, list and sorted by time-the tail part),
-  - `lsh` (=ls $1 --show-control-chars -hF --color=tty -lrt|head , list and sorted by time-the head part),  
-  - `lsd`(=ls $1 --show-control-chars -hF --color=tty -l|grep "^d", list dir. names),
-  - `lsS`(=ls $1 --show-control-chars -hF --color=tty -lrS|tail , list and sorted by filesize),
-  - `lsr`(=ls --show-control-chars -hF --color=tty -lrtd $(findc $1), list $1 recursively),
+  - `ll` (=`ls -alh --color|more`, list in lengthy and more_mode),
+  - `lst` (=l`s $1 --show-control-chars -hF --color=tty -lrt|tail`, list and sorted by time-the tail part),
+  - `lsh` (=`ls $1 --show-control-chars -hF --color=tty -lrt|head` , list and sorted by time-the head part),  
+  - `lsd`(=`ls $1 --show-control-chars -hF --color=tty -l|grep "^d"`, list dir. names),
+  - `lsS`(=`ls $1 --show-control-chars -hF --color=tty -lrS|tail` , list and sorted by filesize),
+  - `lsr`(=`ls --show-control-chars -hF --color=tty -lrtd $(findc $1)`, list $1 recursively),
 2. 檔案行數與目錄總容量 
   - `wc` (word count)
   - `du` (disk usage)
@@ -134,17 +134,17 @@ last_modified_date: 2022-10-11 16:02:10
 2. FileZilla
 
 ## 指令串接
-### pipeline(|) and substitude($)
-1. pipeline(|) 
-  - 將pipeline(|) 左邊指令的結果傳到右邊，進一步處理。
+### pipeline(\|) and substitude($)
+1. pipeline(\|) 
+  - 將pipeline(\|) 左邊指令的結果傳到右邊，進一步處理。
   - 必須分段也可以執行、
-  - 並不是每一個指令都可以做為pipeline(|) 
-  - (|)右邊指令，有一定範圍，常用包括more, tail, head, grep, wc, awk, cut, sort
+  - 並不是每一個指令都可以做為pipeline(\|) 
+  - (\|)右邊指令，有一定範圍，常用包括more, tail, head, grep, wc, awk, cut, sort
 2. substitude($) 
   - $接環境變數名稱，是呼叫出環境變數的引數
   - 後面如果接數字，是輸入批次檔的引數
   - 如果後面接(cmd)，是代表執行cmd的結果
-  - 如果指令不能使用pipeline(|) 可以考慮使用substitude($)
+  - 如果指令不能使用pipeline(\|) 可以考慮使用substitude($)
 
 ### 其他指令
 - Gong Yong, 2014, [50個最常用的Unix/Linux命令](https://gywbd.github.io/posts/2014/8/50-linux-commands.html)

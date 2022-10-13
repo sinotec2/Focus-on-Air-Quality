@@ -18,7 +18,7 @@ last_modified_date: 2022-06-25 20:37:55
 ---
 
 ## What's New
-- 2022-10-13 6月底到10月這期間主要完成了[東亞](http://125.229.149.182:8084/)、[中國東南](http://125.229.149.182:8085/)與[臺灣](http://125.229.149.182:8086/)3個範圍未來5天[空氣品質預報系統](https://sinotec2.github.io/FAQ/2022/08/20/CMAQ_fcst.html)，建立了[earth顯示系統](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/earth)，也陸續將過去做的[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/)做一個整理與更新。
+- 2022-10-13 6月底到10月這期間主要完成了[東亞](http://125.229.149.182:8084/)、[中國東南](http://125.229.149.182:8085/)與[臺灣](http://125.229.149.182:8086/)3個範圍、未來5天之[空氣品質預報系統](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/)，建立了[earth顯示系統](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/earth)，也陸續將過去做的[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/)做一個整理與更新。
 
 {: .no_toc }
 

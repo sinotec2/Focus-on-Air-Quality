@@ -1,9 +1,9 @@
 ---
 layout: default
 title: EAC4檔案直接寫成邊界濃度
-parent: Global AQ Data Analysis
-grand_parent: AQ Data Analysis
-nav_order: 6
+parent: ECMWF ReAnalysis
+grand_parent: Global AQ Data Analysis
+nav_order: 2
 date: 2021-12-23 14:04:02
 last_modified_date:   2021-12-23 14:03:54
 ---

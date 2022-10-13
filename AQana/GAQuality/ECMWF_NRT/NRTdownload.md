@@ -1,11 +1,13 @@
 ---
 layout: default
-title: 近實時空品數據之下載
+title: ECMWF Near Realtime
 parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
+has_children: true
 nav_order: 99
 date: 
 last_modified_date: 2022-01-11 19:52:29
+permalink: /AQana/GAQuality/ECMWF_NRT
 ---
 
 # 近實時空品數據之下載（建構中）

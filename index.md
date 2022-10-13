@@ -19,7 +19,6 @@ last_modified_date: 2022-06-25 20:37:55
 
 ## What's New
 - 2022-10-13 6月底到10月這期間主要完成了[東亞](http://125.229.149.182:8084/)、[中國東南](http://125.229.149.182:8085/)與[臺灣](http://125.229.149.182:8086/)3個範圍未來5天[空氣品質預報系統](https://sinotec2.github.io/FAQ/2022/08/20/CMAQ_fcst.html)，建立了[earth顯示系統](https://sinotec2.github.io/FAQ/2022/08/31/cmaq_json.html)，也陸續將過去做的[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/)做一個整理與更新。
-- 2022-06-25 `What's New` 功能一直沒有很好的解決方案。原因在於[JTD][JTD]主題的文件功能特性，並不適合太常、或太瑣碎的更新。總之、選擇了另闢一個部落格的平台（[TeXt主題]([TeXt](https://tianqi.name/jekyll-TeXt-theme/)）來放最新、暫存、發展中的文章，取名叫[Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/)。可以有標籤系統、有檔案的時間順序。如果存夠多可以有結構出來，再放到[JTD][JTD]的文件架構下，這樣能有比較有效的檔案管理、搜尋功能、目錄瀏覽也比較強。算是經過半年的摸索、在管理面的一項進步吧。在首頁置換了討論區的按鍵成為[部落格的入口](https://sinotec2.github.io/FAQ/)。(部落格也有回到FAQHome的按鍵)
 
 {: .no_toc }
 
@@ -35,6 +34,7 @@ last_modified_date: 2022-06-25 20:37:55
 
 ## 2022
 ### 2022-06 
+- 2022-06-25 `What's New` 功能一直沒有很好的解決方案。原因在於[JTD][JTD]主題的文件功能特性，並不適合太常、或太瑣碎的更新。總之、選擇了另闢一個部落格的平台（[TeXt主題]([TeXt](https://tianqi.name/jekyll-TeXt-theme/)）來放最新、暫存、發展中的文章，取名叫[Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/)。可以有標籤系統、有檔案的時間順序。如果存夠多可以有結構出來，再放到[JTD][JTD]的文件架構下，這樣能有比較有效的檔案管理、搜尋功能、目錄瀏覽也比較強。算是經過半年的摸索、在管理面的一項進步吧。在首頁置換了討論區的按鍵成為[部落格的入口](https://sinotec2.github.io/FAQ/)。(部落格也有回到FAQHome的按鍵)
 - 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
 - 2022-06-13 第一次用markdown來寫Jurnal paper，心得是...七零八落，套用先師名言：腦子裏整理清楚比整潔的桌面更容易。使用這麼多的工具還不如用腦子先想清楚。對環境議題有興趣的可以[點進去](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Disease/HRA_PMnO3/page8/)參考。
 - 2022-06-10 這一題算是遲到了很久。一直都想簡化濃度檔作圖的程序，至少傳檔案可以省些時間。請參考[m3nc檔案轉GIF](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif/#結果比較)

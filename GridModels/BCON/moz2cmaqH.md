@@ -31,7 +31,7 @@ last_modified_date:   2021-12-16 10:59:04
 - 後續作業
   - 邊界濃度的製作，包括時間的內插、邊界框濃度的解析等，將在[bcon](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/)程式內進行。
   - 直接以初始濃度引用：在`run_cctm.csh`內指定即可
-- 有鑒於全球空品模擬結果越來越多，且Mozart模式不再維護，有更多直接轉換之程式與作業方式(如ecmwf之[EAC4](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/))，可以簡化程序。
+- 有鑒於全球空品模擬結果越來越多，且Mozart模式不再維護，有更多直接轉換之程式與作業方式(如ecmwf之[EAC4](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2bc/))，可以簡化程序。
 
 ## [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)說明
 

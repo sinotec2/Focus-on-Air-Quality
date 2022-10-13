@@ -100,7 +100,7 @@ wrfout_d06_7 -> wrfout_dHUADON_3k_7
 
 ## BCON之準備
 - 因為模擬範圍大、解析度高，如果準備區內所有時間、3維的空品數據，檔案會非常大(>1T)，難以操作，且run_bcon.csh只運用到空品檔案周圍一圈的數據，非常沒有效率。
-- 改以讀取EAC4數據、內插後直接寫進BCON檔案方式處理，[grb2bc](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)與詳細處理過程詳見[EAC4檔案轉成4階邊界檔案](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/grb2bc/)。
+- 改以讀取EAC4數據、內插後直接寫進BCON檔案方式處理，[grb2bc](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)與詳細處理過程詳見[EAC4檔案轉成4階邊界檔案](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2bc/)。
   - CCTM可以接受邊界條件僅指定部分空氣品質項目，因此檔案容量可以減至最小。
   - 配合MCIP的起迄時間，共10天數據。
   - 檔名約定(`BCON_v53_1804_run5_regrid_20180331_CWBWRF_15k`)除了批次序之外，還需要有模擬起始日。因此如果進行restart模擬，需給予正確的日期

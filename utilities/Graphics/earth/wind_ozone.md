@@ -98,7 +98,7 @@ kk=[bisect(h137,zz[k])-1 for k in range(24)]
 `kk= ['137', '135', '133', '129', '125', '122', '120', '117', '114', '112', '110', '107', '105',  '101', '96', '92', '87', '83', '78', '73', '67', '61', '56', '51']`
 
 ### 數據轉換
-- [grb2json.py@github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/GAQuality/ECMWF/grb2json.py)
+- [grb2json.py@github](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/GAQuality/ECMWF_CAMS/grb2json.py)
 
 - [CAMS][CAMS]檔案內容之讀取
   - [CAMS][CAMS]grib2檔案之y軸順序：自北向南(與[GFS][GFS]相同)

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "CAMS全球空品預報"
+title: "CAMS Global Forecast"
 parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
 has_children: true

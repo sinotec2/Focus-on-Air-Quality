@@ -1,0 +1,19 @@
+---
+layout: default
+title: WRFOUT
+parent: "WRF"
+has_children: true
+nav_order: 5
+date: 2022-10-13 13:23:56
+last_modified_date:  2022-10-13 13:24:00
+permalink: /wind_models/WRFOUT/
+---
+
+# WRFOUT
+
+- WRF的輸出檔為wrfout，可為其他模式(CMAQ/[MCIP](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/)、CAMx/[wrfcamx](https://sinotec2.github.io/FAQ/2022/07/01/wrfcamx.html)、CALPUFF/calwrf、AERMOD/[MMIF](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/ME_pathways/mmif/)等)直接讀取，也可以輸入繪圖程式進行處理分析(如[wrf-python](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python)、[NCL](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL)、[GrADs](https://sinotec2.github.io/FAQ/2022/07/21/grads.html)及[MeteoInfo](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/MeteoInfo/))，詳細說明見於個別模式與繪圖程式。
+- 大多數WRFOUT的處理作業，都可以用[ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)及ncrcat等NCO程式完成，
+- 此處所要說明的是此二者以外、或之間的處理程式。
+
+
+{: .fs-6 .fw-300 }

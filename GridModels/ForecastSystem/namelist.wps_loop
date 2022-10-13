@@ -1,0 +1,53 @@
+&share
+ wrf_core = 'ARW',
+ max_dom = 3,
+ start_date = 'BEGD_00:00:00','BEGD_00:00:00','BEGD_00:00:00','2020-06-15_00:00:00'
+ end_date   = 'ENDD_00:00:00','ENDD_00:00:00','ENDD_00:00:00','2020-08-05_00:00:00'
+ interval_seconds = 10800
+ io_form_geogrid = 2,
+/
+
+&geogrid
+ parent_id         =   1,    1,    2,  3, 
+ Parent_grid_ratio =   1,    5,   3,
+ i_parent_start    =   1,   90,  96,
+ j_parent_start    =   1,   43,  71,
+ e_we              = 221,  206, 103,
+ e_sn              = 129,  206, 142,
+ !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!! I06ORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ ! The default datasets used to produce the HGT_M, GREENFRAC, 
+ ! and LU_INDEX/LANDUSEF fields have changed in WPS v3.8. The HGT_M field
+ ! is now interpolated from 30-arc-second USGS GMTED2010, the GREENFRAC 
+ ! field is interpolated from MODIS FPAR, and the LU_INDEX/LANDUSEF fields 
+ ! are interpolated from 21-class MODIS.
+ !
+ ! To match the output given by the default namelist.wps in WPS v3.7.1, 
+ ! the following setting for geog_data_res may be used:
+ !
+ ! geog_data_res = 'gtopo_10m+usgs_10m+nesdis_greenfrac+10m','gtopo_2m+usgs_2m+nesdis_greenfrac+2m',
+ !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!! I06ORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ !
+ geog_data_res = 'default','default','default','default'
+ dx =45000,
+ dy =45000,
+ ! pmin = 5000
+ map_proj = 'lambert',
+ ref_lat   =25,
+ ref_lon   =120,
+ truelat1  =  10.0,
+ truelat2  =  40.0,
+ stand_lon = 120,
+ geog_data_path = '/nas1/WRF4.0/WPS_GEOG/WPS_GEOG',
+/
+
+&ungrib
+ out_format = 'WPS',
+ prefix = 'FILE',
+/
+
+&metgrid
+ fg_name = 'FILE','SST'
+ io_form_metgrid = 2, 
+/

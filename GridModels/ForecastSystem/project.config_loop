@@ -1,0 +1,21 @@
+#!/bin/csh -f
+
+#for total settings:
+ set cmaqproject = /nas2/cmaqruns/2022fcst
+ set startdate = YYYYJJJ	# YYYYDDD
+ set runlen    = 1210000	# HHH0000
+
+#for MCIP start and end time
+ set MCIP_START = mcip_start-00:00:00.0000  # [UTC]
+ set MCIP_END   = mcip_end-23:00:00.0000  # [UTC]
+
+#for BC startdate
+ set cmaqbcdate = ${startdate}
+
+#for IC startdate
+ set cmaqicdate = ${startdate}
+
+#for CCTM 請配合 MCIP 的時間即可！
+ set START_DATE   = "mcip_start" 
+ set END_DATE     = "mcip_end" 
+

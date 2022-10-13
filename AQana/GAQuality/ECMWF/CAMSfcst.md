@@ -3,9 +3,11 @@ layout: default
 title: "CAMS全球空品預報"
 parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
+has_children: true
 nav_order: 5
 date: 2022-08-02 14:19:20
 last_modified_date:   2022-08-02 14:19:24
+permalink: /AQana/GAQuality/ECMWF
 ---
 
 # 歐洲中期天氣預報中心CAMS全球空品預報場之下載

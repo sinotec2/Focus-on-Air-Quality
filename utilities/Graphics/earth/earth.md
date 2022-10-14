@@ -27,3 +27,4 @@ permalink: /utilities/Graphics/earth
 
 [ens]: <https://earth.nullschool.net/> "earth, a visualization of global weather conditions, forecast by supercomputers, updated every three hours"
 [tkw]: <https://air.nullschool.net/> "東京都環境局環境改善部大気保全課, 東京都風速"
+[陈晖2016]: <https://m.fx361.com/news/2016/1119/9135816.html> "陈晖, 范玉鑫, 陈杨,及 吴天亭(2016), 吉林省WRF模式数值预报可视化系统设计, 现代农业科技2016年4期."

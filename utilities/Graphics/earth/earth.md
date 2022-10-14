@@ -22,12 +22,31 @@ permalink: /utilities/Graphics/earth
 ---
 
 ## [earth][ens]的發展與應用
+
 - [earth][ens]套件是Cameron Beccario(cambecc)早期為[東京都環境局環境改善部][tkw]撰寫的套件，後來發展成全球的服務網站，同時也被大陸地方選擇做為[氣象預報可視化系統的設計項目][陈晖2016]。
 - [ESRI][esri] 2017年也將其繼續發展成類似[油畫質感](http://esri.github.io/wind-js/)的動畫版本。
 - 持續的商業版本除了[windy][windy]之外，[ventusky](https://www.ventusky.com/)也有類似的應用。
 - [WebGL][webgl]控制方案與3D繪圖效果([webgl-wind](https://mapbox.github.io/webgl-wind/demo/) by [XXHolic, 2022][XXHolic])。
 
+## 本地[earth][ens]預報系統的建置實例
 
+範圍|解析度|公司內|公司外
+:-:|:-:|:-:|:-:
+全球|1度|[GFS/CAMS](http://200.200.31.47:8080)|[GFS/CAMS](http://125.229.149.182:8080)
+東南中國|3Km|[CWBWRF/CAMS](http://200.200.31.47:8083)|[CWBWRF/CAMS](http://125.229.149.182:8083)
+東亞|45Km|[WRF/CMAQ](http://200.200.31.47:8084)|[WRF/CMAQ](http://125.229.149.182:8084)
+東南中國|9Km|[WRF/CMAQ](http://200.200.31.47:8085)|[WRF/CMAQ](http://125.229.149.182:8085)
+臺灣|3Km|[WRF/CMAQ](http://200.200.31.47:8086)|[WRF/CMAQ](http://125.229.149.182:8086)
+
+- GFS
+  - 全球預報系統 (GFS) 是一個全球數值天氣預報系統，包含由美國國家氣象局 (NWS) 運行的全球尺度氣象數值預報模式和變分分析。
+  - [current weather map over CONUS ](http://www.wpc.ncep.noaa.gov/noaa/noaa.gif)
+- CAMS
+  - 哥白尼大氣監測服務是由2014年11月11日啟動的歐洲中程天氣預報中心提供的一項服務，提供有關大氣成分的連續數據和信息。CAMS是哥白尼計劃的一部分， 它描述了當前情況，對未來幾天的情況進行了預測，並持續分析了近年來的回顧性數據記錄。 维基百科
+  - [Ozone Forecasts Charts](https://atmosphere.copernicus.eu/charts/cams/ozone-forecasts?facets=undefined&time=2022083000,102,2022090306&projection=classical_south_east_asia_and_indonesia&layer_name=composition_o3_surface)
+- CWBWRF：中央氣象局WRF數值預報產品
+- WRF：逐日氣象重置結果  
+- CMAQ：空氣品質預報結果
 
 [ens]: <https://earth.nullschool.net/> "earth, a visualization of global weather conditions, forecast by supercomputers, updated every three hours"
 [tkw]: <https://air.nullschool.net/> "東京都環境局環境改善部大気保全課, 東京都風速"

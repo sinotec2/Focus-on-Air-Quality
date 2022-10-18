@@ -54,7 +54,7 @@ last_modified_date: 2022-06-08 09:21:20
   - **RAND**為隨機產生之6碼文字
 ## HTML
 ### 設計
-- 使用[filepicker](https://github.com/sinotec2/CGI_Pythons/tree/main/utils/filepicker)開啟使用者指定上傳的檔案
+- 使用[filepicker](https://github.com/benignware/jquery-filepicker)開啟使用者指定上傳的檔案
 - 以表格方式整理模擬過程、各程序之程式版本、內容、IO及範例、檢核方式以及筆記。
 - 提交CGI_python物件
   - `4個檔案`：**依序**為run stream、氣象檔(AERMOD會需要獨立的高空數據檔)、以及(或)複雜地型時需要的地形檔。

@@ -54,7 +54,7 @@ last_modified_date: 2022-06-08 11:33:42
 - EXE：`BPIP='/Users/1.PlumeModels/ISC/BPIPPRM/bpipprm'`
 - HTML
   - $web/[BPIPPRIM.html](https://github.com/sinotec2/CGI_Pythons/blob/main/bpipprim/BPIPPRIM.html)
-  - 使用[filepicker](https://github.com/sinotec2/CGI_Pythons/tree/main/utils/filepicker)開啟使用者指定上傳的檔案
+  - 使用[filepicker](https://github.com/benignware/jquery-filepicker)開啟使用者指定上傳的檔案
 - CGI-PY：$cgi/isc/[bpipprim.py](https://github.com/sinotec2/CGI_Pythons/blob/main/bpipprim/bpipprim.py)、詳[說明](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/bpipprim/)。
 - 輸入檔
   - BPIP input file：BPIP.INP (from html, filename not limited)

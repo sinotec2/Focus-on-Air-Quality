@@ -333,7 +333,7 @@ group ALL
 ```
 ## Coding
 ### OLM.html
-- 除了說明文字圖像之外，就只有一個jquery的filepicker物件。
+- 除了說明文字圖像之外，就只有一個jquery的[filepicker](https://github.com/benignware/jquery-filepicker)物件。
 
 ### OLM.py
 - 與前述程式最大的不同，除了CGI部分的IO之外，為減少客戶重複的選項，程式內部會先行研判是否已經有下載過、如果沒有，由程式研判測站及時間，以執行specHrSlider.py*程式。

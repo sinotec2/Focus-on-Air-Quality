@@ -89,7 +89,7 @@ RE DISCCART 294911 2762966
 
 ### HTML
 - $web/[iscParser.html](https://github.com/sinotec2/CGI_Pythons/tree/main/drawings/isc_parser)
-  - 使用[filepicker](https://github.com/sinotec2/CGI_Pythons/tree/main/utils/filepicker)開啟使用者指定上傳的檔案
+  - 使用[filepicker](https://github.com/benignware/jquery-filepicker)開啟使用者指定上傳的檔案
   - 以POST方式呼叫$cgi/isc/[isc_parser.py](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/isc_parser/isc_parser.py)，傳送變數：iscinp（或）filename
 
 

@@ -29,7 +29,7 @@ last_modified_date: 2022-05-05 14:21:12
 5.1	模式選用與考量
 光化網格模式是目前最能完整反映大氣中衍生性空品項目之模式類型，模擬範圍可以到數百~千公里，解析度可以自數百公尺到數十公里，時間尺度由逐時到全年的模擬，均能在單一模式內完成。
 化學反應包括光化反應、有機物反應、氣固態異相反應、液相反應，乾、濕沉降及雨、雪去除機制。次模式包括在線生物源、在線揚沙模式、在線海洋飛沫模式、重大點源次網格模式等等，可模擬大型點源可能造成都市及區域性之衍生性污染(環保署模式支援中心，2020年)，為重要的模式工具之一。
-全球目前運作中的光化網格模式包括美國環保署發展維護的CMAQ模式(Community Model for Air Quality)、美國Rambol-Environ公司持續發展的CAMx模式(Comprehensive Airquality Model with eXtension)，大陸中科院研發之NAQPMS模式、日本研究單位發展的SPRINTARS模式、日本早期的CFORS模式(Chemical Weather Forecast System)、澳洲SCIRO機構發展的TAPM/CTM模式(The Air Pollution Model and CTM Chemical Transport Model)、以及歐洲CAMS整合維運的CHIMERE/ DEHM/ EMEP/ EURAD-IM/ GEM-AQ/ LOTOS-EUROS/ MATCH等7項叢集預報模式等等。
+全球目前運作中的光化網格模式包括美國環保署發展維護的CMAQ模式(Community Model for Air Quality)、美國Rambol-Environ公司持續發展的CAMx模式(Comprehensive Airquality Model with eXtension)，大陸中科院研發之NAQPMS模式、日本研究單位發展的SPRINTARS模式、日本早期的CFORS模式(Chemical Weather Forecast System)、澳洲SCIRO機構發展的TAPM/CTM模式(The Air Pollution Model and CTM Chemical Transport Model)、以及歐洲[CAMS][CAMS_desc]整合維運的CHIMERE/ DEHM/ EMEP/ EURAD-IM/ GEM-AQ/ LOTOS-EUROS/ MATCH等7項叢集預報模式等等。
 依據環保署模式支援中心之模式說明(環保署模式支援中心，2014年)，該文納入的網格模式包括TAQM、Models-3(CMAQ)、CAMx、UAM-V等網格模式，其中CMAQ與CAMx仍陸續有發展計畫，可以順利搭配新版氣象模式WRF，且持續發展氣象偶合模式。考量到模式原始碼的取得、計算資源的配合等因素，國內環評及環保單位規劃常使用的網格模式僅包括前述CMAQ及CAMx模式。至於二模式的表現，在全球各地都有比較的研究，主要的差異評析比較如表5.1-1，說明如后。
 
 5.1.1	一般性模式表現之比較
@@ -303,3 +303,4 @@ E11.3-E11.9
 圖5.6.2-1	網格模式模擬2016年PM<sub>2.5</sub>濃度之縣市平均值
 
  
+[CAMS_desc]: <https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-atmospheric-composition-forecasts?tab=overview> "CAMS每天2次進行全球大氣成分的5天預報，包括50多種氣狀物和7種顆粒物(沙漠塵埃、海鹽、有機物、黑碳、硫酸鹽、硝酸鹽和銨氣溶膠)。初始條件為衛星及地面觀測數據同化分析結果，允許在地面觀測數據覆蓋率低、或無法直接觀測到的大氣污染物進行估計，除此之外，它還使用到基於調查清單或觀測反衍的排放估計，以作為表面的邊界條件。"

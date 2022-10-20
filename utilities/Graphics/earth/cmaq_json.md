@@ -20,7 +20,7 @@ last_modified_date: 2022-09-02 14:33:16
 ---
 
 ## 背景
-- [earth][eth]應用來展示gfs預報、CWBWRF預報、CAMS預報等等結果數據，有其便捷性、高品質、跨平台等等強項。
+- [earth][eth]應用來展示gfs預報、CWBWRF預報、[CAMS][CAMS_desc]預報等等結果數據，有其便捷性、高品質、跨平台等等強項。
 - 此處之[cmaq_json.py][cmaq_json.py]乃應用來讀取並展示自行模擬WRF與CMAQ的結果。
 
 ## 執行方式
@@ -222,3 +222,4 @@ $ grep -n DEFA public/libs/earth/1.0.0/micro.js
 [near_wgt]: <https://sinotec2.github.io/FAQ/2022/08/20/NearstWeight.html> "這個內插機制主要針對2維griddata速度太慢所因應的修改方案。同時也需要規避griddata結果會有NaN內插錯誤的結果。主要因為空氣品質或排放量的內插會與距離的遠近有關，太遠的數據對內插影響也較低，還是適用距離相關的內插機制較為合理。同時摒除遙遠的數據對提升計算速度有非常重要的貢獻。"
 [cmaq_json2.py]: <https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/earth/cmaq_json2.py> "搜尋半徑版本cmaq_json2.py"
 [js1]: <https://github.com/cambecc/earth/blob/master/public/libs/earth/1.0.0/products.js> "cambecc/earth/public/libs/earth/1.0.0/products.js"
+[CAMS_desc]: <https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-atmospheric-composition-forecasts?tab=overview> "CAMS每天2次進行全球大氣成分的5天預報，包括50多種氣狀物和7種顆粒物(沙漠塵埃、海鹽、有機物、黑碳、硫酸鹽、硝酸鹽和銨氣溶膠)。初始條件為衛星及地面觀測數據同化分析結果，允許在地面觀測數據覆蓋率低、或無法直接觀測到的大氣污染物進行估計，除此之外，它還使用到基於調查清單或觀測反衍的排放估計，以作為表面的邊界條件。"

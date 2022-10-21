@@ -106,7 +106,7 @@ ${BASE}/shk.cs $OUTFILE ${cctmout}/PMs$ymd.nc
 - METCRO2D、METCRO3D，如非即期mcip處理結果，需先執行[metcro.py](https://sinotec2.github.io/FAQ/2022/09/14/PM_earth.html#metcro檔案之準備)。
 - 使用10個核心進行平行運算
 
-### [shk.cs][shk]之修改
+### [shk.cs][shks]之修改
 - 因為其他SNO等項目可以由CCTM_ACONC檔案直接讀取，不必重複儲存，因此只由combine結果中抽出PM及VOC另存。
 - 在IOAPI_nc檔案中，變數個數(NVARS)也是一個維度(VAR，僅發生在時間標籤TFLAG一項)，因此也需要做`ncks -d`，以避免檔案儲存奇異值。
 

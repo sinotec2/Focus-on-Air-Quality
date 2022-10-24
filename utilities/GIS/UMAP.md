@@ -3,7 +3,7 @@ layout: default
 title:  鏈結資訊之地圖展現(uMap)
 parent: GIS Relatives
 grand_parent: Utilities
-last_modified_date: 2022-03-11 15:46:30
+last_modified_date: 2022-10-24 10:48:43
 ---
 
 # 鏈結資訊之地圖展現(uMap)
@@ -21,7 +21,7 @@ last_modified_date: 2022-03-11 15:46:30
 ---
 ## 背景
 - 點狀資訊之地圖展現，即按照地圖上地標來尋找標的物，是最接近直覺的互動體驗。除了提供地圖上的參考物件之外，所欲提供的物件（Points Of Interest POI's）也必須清楚有效的呈現，以便使用者點選、下載、或其他進一步動作。
-- POI應用實例有2種，包括簡單的點狀資訊、以及格狀之鏈結資訊。此處介紹後者，應用在MMIF與AERMAP結果的提供。
+- POI應用實例有2種，包括簡單的點狀資訊、以及格狀之**鏈結資訊**。此處介紹後者，應用在MMIF與AERMAP結果的提供。
 
 ### 方案比較
 - 傳統做法
@@ -191,6 +191,26 @@ $ cat -n point_ijP.py
 ```
 - 說明：多邊形與點狀資料進入csv2kml.py需要給定重要識別引數，即-n選項。多邊形為-n P。
 
+### 鏈結之準備
+- ip：需要一組固定ip，如未登記domain_name亦無妨，但可能受到使用者側的防火牆阻檔。
+- 工作站端的管理
+  - http服務：需保持開啟，否則使用者無法訪問。
+  - 防寫設定：建議除了管理者外，其餘rwx皆將其關閉，以避免無謂的訪問甚至竄改。
+  - http公開服務區以下之目錄管理
+    1. 第1層區分資料類別(mmif結果、aermap結果等)，以下目錄即為模擬(處理)之個案
+    1. 第2層按照年代區分(如果具有年代特性、如氣象數據)
+    1. 第3層即為地區(網格編號)
+
+### 上載kml檔案
+- 經前述python準備好的kml，即可上載至uamp(選擇↑符號)
+
+類別|型態|檔案名稱|內容
+:-:|:-:|:-:|:-:
+氣象前處理結果檔|WRF模式之網格範圍Polygon|mmifTWN_3X3P.csv.kml|網格內.sfc .pfl檔案連結網址
+地形前處理結果檔|AERMAP中心點|terrTWN_1X1.csv.kml|AERMAP處理結果壓縮檔
+地形前處理結果檔|AERMAP模擬範圍之Polygon|terrTWN_1X1P.csv.kml|(同上)
+
+
 ## uMap的設定
 - 為鼓勵應用，uMap貼圖並不需要登記/登入會員，只要擁有編輯頁面網址的人，都可以進行編輯。
 - 目前還找不到中文的操作說明
@@ -213,7 +233,7 @@ $ cat -n point_ijP.py
 * 點選鑰匙符號，會出現編輯網址token，複製儲存，以備下次編修。
 * 點選連結：
     * 瀏覽器會另開分頁展示檔案內容。
-    * 成果如圖示
+    * 成果如[圖](https://umap.openstreetmap.fr/zh/map/3km_590688#11/22.6676/120.5557)所示
 ### 中文
 - uMap介面可以接受中文輸入與顯示，但無法批次上載具有中文字形的檔案(包括kml或csv檔案)，原因不明。
 
@@ -227,3 +247,6 @@ $ cat -n point_ijP.py
   - [teds11個別廠位置、各廠最高煙囪高度](https://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)
 
 ## Reference
+
+[token1]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8"
+[token2]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"

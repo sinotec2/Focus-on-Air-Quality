@@ -249,4 +249,6 @@ $ cat -n point_ijP.py
 ## Reference
 
 [token1]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8"
-[token2]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"
+[token2]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08"
+[token3]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg"
+[token4]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"

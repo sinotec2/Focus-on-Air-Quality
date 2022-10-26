@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "GFS"
+title: 全球模式GFS
 parent: "wind models"
 nav_order: 99
 has_children: true

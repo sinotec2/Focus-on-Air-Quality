@@ -40,7 +40,6 @@ for i in range(4):
   for v in V1[3]:
     nc1[v][:]=0.
     if v not in Vb[2]:sys.exit(v+' not in BCON file')
-    nc1v=np.zeros(shape=nc1[v].shape)
     nc1[v][:,0,1::3,i1s[i]:i2s[i]]=nc[v][:,:,ibnd[i][0]:ibnd[i][1]:drn[i]]
     nc1[v][:,0,0,:] =nc1[v][:,0,1,:]
     nc1[v][:,0,-1,:]=nc1[v][:,0,-2,:]

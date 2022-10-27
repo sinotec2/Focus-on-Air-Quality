@@ -6,7 +6,7 @@ import sys, os, subprocess
 import datetime
 
 tpl={0:'SN',1:'WE',2:'SN',3:'WE'}
-out={0:'S',1:'E',2:'N',3:'E'}
+out={0:'S',1:'E',2:'N',3:'W'}
 drn={0:1,1:1,2:-1,3:-1}
 
 #read a BC file as rate base

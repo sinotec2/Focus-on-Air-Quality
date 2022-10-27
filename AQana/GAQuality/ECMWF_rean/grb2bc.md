@@ -26,7 +26,7 @@ last_modified_date:   2021-12-23 14:03:54
 - 使用[EAC4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview)逐3小時檔案做為空品模式的邊界條件，除了先將其轉成5階空品檔案、使用[bcon](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/)進行轉檔之外，考量到大多數範圍內部的空品數值是沒有作用的，此舉會儲存大量無用之檔案，不甚合理(如檔案太大也不可行、單一檔案可能上TB)，採直接轉寫較為合理。
 - 程式大略類似[EAC4檔案轉成5階m3.nc](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2D1m3/)，維須建立邊界線上的座標，並將5階之空氣密度也轉成最靠近邊界的4階檔案。
 - 此處以CWBWRF_15Km範圍為例。
-  - 其邊界位置為D0範圍之一圈:
+  - 其邊界水平位置為D0範圍之外、循逆時針方向，自西南角起始向東(南邊界)、東南角向北(東邊界)、東北角向西(北邊界)、西北角向南(西邊界)之一圈:
 
 ```python
 nrow1,ncol1=nc1.NROWS,nc1.NCOLS

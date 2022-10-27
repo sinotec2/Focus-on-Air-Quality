@@ -58,7 +58,7 @@ for i in range(2):
   nc.variables[v][nt,:,i]=[SDATE[i] for j in range(nvars)]
 
 V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
-if fname[:4]=='BCON':
+if 'BCON' in fname:
   for x in V[2]:
     if x==v:continue
     nc.variables[x][nt,:,:]=nc.variables[x][nt-24,:,:]

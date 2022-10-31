@@ -1,9 +1,9 @@
 ---
 layout: default
-title:  可排序搜尋之表格
+title:  可排序搜尋之表格(csv2html)
 parent: HTML
 grand_parent: Graphics
-last_modified_date: 2022-06-02 16:13:54
+last_modified_date: 2022-10-31 15:37:52
 ---
 
 # 可排序搜尋之表格
@@ -24,14 +24,15 @@ last_modified_date: 2022-06-02 16:13:54
 - 不必懷疑，國家圖書館[博碩士論文知識加值系統](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=d)已經提供非常完整的排序、搜尋功能，夫復何求？只差儲存分享的功能，總得將搜索的結果存在一個平台，不能每次都上國圖把諸多條件再打搜一遍吧?
 - 早期用excel來做這事，還可以把摘要放在表格中，自動產生參考文獻標準寫法，真的很方便。但excel程式太大、也不是跨平台，手機也想能看，excel方案也投降了。
 - markdown雖然可以跨平台，但不能重排。(還有待發展吧)
-- zotero也是無敵方案，無可挑剔，有需要的人一起建立群組分享這些文獻，還能動態擴充，如果有協作，zotero是首選。只是zotero還不太能適應害羞的臺灣人。
+- [Zotero][z]也是無敵方案，無可挑剔，有需要的人一起建立群組分享這些文獻，還能動態擴充，如果有協作，[Zotero][z]是首選。只是[Zotero][z]還不太能適應害羞的臺灣人。
 - jQuery的[Sortable and Searchable Tables - Tablesort](https://www.jqueryscript.net/table/jQuery-Plugin-For-Sortable-Searchable-Tables-Tablesort.html)就成為好用、簡單的解決方案，唯一要做的就是把csv表格轉成html格式。這可不能用人工慢慢建吧?!還好，不少好心的網友提供了線上服務(如[Data Design Group, Inc.](https://www.convertcsv.com/csv-to-html.htm))，需要一點點程序、並且忍受廣告，但幸好這事只需要久久做一次。
 
 ## 文獻內容之csv檔案
 - 國圖搜尋結果轉成csv檔案這一階段，目前還沒有另人滿意的自動方案。
-  - 但是有比較聰明的手動方案，就是用excel複製、選擇性貼上(轉置)，將國圖直排的表格貼成橫排的資料庫型式。
+  - 但是有比較聰明的手動方案，就是用excel複製、選擇性貼上(轉置)在[模版檔案](https://github.com/sinotec2/sinotec2.github.io/blob/main/aermod/ref.xlsx)之工作表，將國圖直排的表格貼成橫排的資料庫型式。
 - 每個系所的格調略有差異。這是沒法程式化的原因。
   - 因為不是每天執行，目前還沒有設計爬蟲程式的意願。
+- [Zotero][z]也可以輸出成csv檔，但是沒有所謂「指導教授」這一欄，還必須自行再對照整理。  
 
 ## html表頭
 ### 格式
@@ -69,7 +70,6 @@ last_modified_date: 2022-06-02 16:13:54
 ### 表頭
 - 表頭與傳統的表格有些不太一樣，呼叫js程式`table-sort`、`table-sort-search`、以及`table-sort-show-search-count`等3支程式
 
-
 ```html
 <body>
 <table class="table-sort table-sort-search table-sort-show-search-count">
@@ -88,6 +88,7 @@ last_modified_date: 2022-06-02 16:13:54
 ```
 ### 表內容
 - 與傳統表格無異
+
 ```html
 <tbody><tr>
 <td>HRA</td>
@@ -110,3 +111,5 @@ last_modified_date: 2022-06-02 16:13:54
 
 ## Reference
 - SeanJM, 2013, [jQuery Plugin For Sortable and Searchable Tables - Tablesort](https://www.jqueryscript.net/table/jQuery-Plugin-For-Sortable-Searchable-Tables-Tablesort.html), 2013-07-01
+
+[z]: <https://www.zotero.org/> "Your personal research assistant Zotero is a free, easy-to-use tool to help you collect, organize, annotate, cite, and share research."

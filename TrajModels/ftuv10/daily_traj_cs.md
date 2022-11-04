@@ -21,7 +21,7 @@ last_modified_date: 2022-11-04 14:43:02
 ---
 
 ## 背景
-- 這支程式每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)網頁畫面。
+- 這支程式(腳本)每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)網頁畫面。
 
 ### 發展歷程
 - 2維反軌跡程式由來已久，自張老師研究室時代即發展了變分分析風場與動力風場模式所推動的軌跡模式。張老師過世後，繼續發展成以[CODiS](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/)高密度觀測數據之反軌跡程式(2019/06)。
@@ -44,6 +44,10 @@ last_modified_date: 2022-11-04 14:43:02
   - 此處僅使用到地面風場、最多用到行星邊界層，其餘風場模式預報的物理量，在此並未使用到，這點也降低重新模擬的動機。
   - 使用wrfout格式有其方便性，可以彈性接受自行執行wrf或接收CWBWRF轉檔結果。
   - 由於GFS有10天的預報，以其結果做為wrf之邊界與FDDA數據，將可以得到10天高密度的地面風場，屆時不必修改主要軌跡程式，只需修改數據來源即可順利接收。
+- 程式執行者的設定
+  - 在2022/04之前，網頁是直接設在imac的httpd服務範圍，為避免遭到駭客的修改、讀取等等不當行為攻擊，會將$web目錄的所有人設成root，限制其他人的讀取。
+  - 因此每日程式的讀取、計算及儲存，必須由root執行。
+  - 這項設定雖然也讓程式、腳本等等的修改增加不少困擾，但似乎也沒有更好的方式可選擇。
    
 ### 程式分段重點
   1. 接收[get_M-A0064.cs][get_M-A0064]之下載與轉檔結果。
@@ -122,6 +126,9 @@ for dir in 00 m1 m2 p1 p2;do
 done
 ```
 ### git更新上傳
+- git過程會需要有一致的檔案屬性。如前所示，程式是root在執行，因此複製到repo目錄下的檔案會需要改變其屬性或所有權人。
+- 每天更新軌跡線之後，還會有8：00更新的calpuff預報結果（from DEVP），因此會需要在imac複製更新部份(`git pull`)
+- 其餘運作方式按照一般git的作業：add、commit、push 
 
 ```bash
 cd /Users/kuang/GitHub/sinotec2.github.io/traj/trj_results

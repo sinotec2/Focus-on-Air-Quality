@@ -1,0 +1,77 @@
+#!/bin/bash
+yesd=$(date -v-1d +%Y%m%d)
+for i in 0 1 2 3;do
+  ymd=$(date -v+${i}d -j -f "%Y%m%d" "${yesd}" +%Y%m%d)
+  y=$(date -v+${i}d -j -f "%Y%m%d" "${yesd}" +%Y)
+  ddd=$(date -v+${i}d -j -f "%Y%m%d" "${yesd}" +%Y-%m-%d)
+  for d in 1 3;do
+    fn=U10V10_d0${d}_${ddd}_06:00:00
+#   if ! [ -e /Users/Data/cwb/e-service/btraj_WRFnests/CWB_forecast/$fn ];then
+      cp /Users/Data/cwb/WRF_3Km/${y}/${ymd}/$fn /Users/Data/cwb/e-service/btraj_WRFnests/CWB_forecast/$fn
+#   fi
+  done
+done
+
+#routines
+PY=/Users/Data/cwb/e-service/btraj_WRFnests/ftuv10_5d.py
+CJ=/opt/anaconda3/bin/csv_to_geojson
+VI=/Users/kuang/bin/addVI.py
+GT=/usr/local/bin/git
+
+#generatate b_traj for each station
+
+today=$(date +%Y%m%d)
+Tomorr=$(date -v+1d +%Y%m%d)
+AftTmw=$(date -v+2d +%Y%m%d)
+
+cd /Library/WebServer/Documents/trj_results
+if [ -e m1/today_marks.csv ];then mv m1/today_marks.csv m1/today_marksV.geojson m2;fi
+if [ -e 00/today_marks.csv ];then mv 00/today_marks.csv 00/today_marksV.geojson m1;fi
+
+for d in $today $Tomorr $AftTmw;do
+cd /Library/WebServer/Documents
+for t in zhongshan zhongming jiayi qianjin;do
+  $PY -t $t -d ${d}12 -b True
+  fn=trj_results/btrj${t}${d}12_mark.csv
+  rm -f trj_results/today_$t.csv
+  if [ -e $fn ];then cp $fn trj_results/today_$t.csv;fi
+done
+
+#add num column
+cd /Library/WebServer/Documents/trj_results
+for t in zhongshan zhongming jiayi qianjin;do
+c=0;for i in $(cat today_$t.csv);do echo $i,$c;c=$(( $c + 1 ));if [ $c -gt 120 ];then break;fi;done >todayM_$t.csv
+done
+
+#join the trajectories
+cat todayM_[jqz]*.csv > today.csv
+
+#marks for NCL plots
+test $d == $today && dir=00
+test $d == $Tomorr && dir=p1
+test $d == $AftTmw && dir=p2
+cat header.txt today.csv > $dir/today_marks.csv
+done
+
+
+#geojson for leaflet-ajax
+cat headLL2.txt today.csv > today${today}12.csv
+$CJ today${today}12.csv
+
+for dir in 00 m1 m2 p1 p2;do
+  cd $dir
+  $VI today_marks.csv
+  cd ..
+done
+
+cd /Users/kuang/GitHub/sinotec2.github.io/traj/trj_results
+for i in 00 m1 m2 p1 p2;do cp -r /Library/WebServer/Documents/trj_results/$i .;done
+chmod -R o+r ??
+cd /Users/kuang/GitHub/sinotec2.github.io
+su kuang
+GT=/usr/local/bin/git
+$GT pull origin main
+$GT add traj
+$GT commit -m "update traj"
+TOKEN=$(cat /Users/kuang/bin/git.token)
+$GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git main

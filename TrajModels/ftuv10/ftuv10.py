@@ -1,31 +1,5 @@
----
-layout: default
-title: 地面二維軌跡分析
-nav_order: 5
-parent: Trajectory Models
-last_modified_date: 2022-03-31 15:20:02
----
-
-# 地面二維軌跡分析
-{: .no_toc }
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-- TOC
-{:toc}
-</details>
----
-
-ftuv10.py
-一、前言
-(一) Using UV10 as wind fields to generate trajectories
-Python：
-
-```python
 #!/opt/anaconda3/envs/py37/bin/python
+#/Users/Data/cwb/e-service/btraj_WRFnests/ftuv10.py
 import bisect
 from datetime import datetime, timedelta
 import netCDF4
@@ -401,14 +375,3 @@ dir='NL'
 if not BACK:dir='NL'
 os.system('/opt/local/bin/csv2kml.py -f '+name+' -n '+dir+' -g TWD97')
 os.system('/opt/local/bin/csv2bln.cs '+name)
-```
-
-## Usage
-
-```bash
-PY=/Users/Data/cwb/e-service/btraj_WRFnests/ftuv10_5d.py
-cd /Library/WebServer/Documents
-today=$(date +%Y%m%d)
-for t in zhongshan zhongming jiayi qianjin;do
-  $PY -t $t -d ${today}12 -b True
-```

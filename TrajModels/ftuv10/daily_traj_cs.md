@@ -45,11 +45,11 @@ last_modified_date: 2022-11-04 14:43:02
   - 使用wrfout格式有其方便性，可以彈性接受自行執行wrf或接收CWBWRF轉檔結果。
   - 由於GFS有10天的預報，以其結果做為wrf之邊界與FDDA數據，將可以得到10天高密度的地面風場，屆時不必修改主要軌跡程式，只需修改數據來源即可順利接收。
    
-### 程式分段
+### 程式分段重點
   1. 接收[get_M-A0064.cs][get_M-A0064]之下載與轉檔結果。
-  1. 執行[ftuv10.py][ftuv10]
-  1. 執行[csv_to_geojson]()
-  1. 執行[addVI.py]()
+  1. 執行軌跡模式[ftuv10.py][ftuv10]
+  1. 執行檔案轉換[csv_to_geojson][cj]
+  1. 執行通風指數程式[addVI.py][VI]
   1. git更新上傳
 
 ## 程式說明
@@ -73,7 +73,9 @@ done
 ```
 
 ### 執行[ftuv10.py][ftuv10]
-
+- 4個空品測站：北部(中山站)、中部(忠明站)、南部(嘉義及前金站)
+- 時間：今日、明日、後日之中午12時
+  - 每天的today_*.csv經處理後會儲存在對應之目錄下
 
 ```bash
 for d in $today $Tomorr $AftTmw;do
@@ -84,8 +86,59 @@ for t in zhongshan zhongming jiayi qianjin;do
   rm -f trj_results/today_$t.csv
   if [ -e $fn ];then cp $fn trj_results/today_$t.csv;fi
 done
+...
+test $d == $today && dir=00
+test $d == $Tomorr && dir=p1
+test $d == $AftTmw && dir=p2
+cat header.txt today.csv > $dir/today_marks.csv
 done
+```
+
+### 執行[csv_to_geojson][cj]
+- csv_to_geojson是網友[miquel-vv][cj]提供的套件，可以將csv檔案中的經緯度位置，轉成[geojson檔案格式][geojson]的線格式，以順利讓leaflet地圖可以讀取。
+
+```bash
+CJ=/opt/anaconda3/bin/csv_to_geojson
+...
+#geojson for leaflet-ajax
+cat headLL2.txt today.csv > today${today}12.csv
+$CJ today${today}12.csv
+```
+
+### 執行[addVI.py][VI]
+- [通風指數(Ventilation Index, VI)](https://www2.gov.bc.ca/gov/content/environment/air-land-water/air/air-pollution/smoke-burning/ventilation-index#:~:text=The%20Ventilation%20Index%20is%20a,will%20mix%20into%20the%20air.)：系指一個地區的平均風速、與其混合層高度之乘積。
+  - 一般用在與空氣污染有關的行為管制，VI值多少時，不能從事特定的污染行為。
+  - 也是一項重要的預報參數。
+- 此處將軌跡線上的地面風速與行星邊界層高度相乘後，列在csv中，在繪圖時可以引用。
+- 程式內自行呼叫$CJ，不另行呼叫。
+
+```bash
+VI=/Users/kuang/bin/addVI.py
+...
+for dir in 00 m1 m2 p1 p2;do
+  cd $dir
+  $VI today_marks.csv
+  cd ..
+done
+```
+### git更新上傳
+
+```bash
+cd /Users/kuang/GitHub/sinotec2.github.io/traj/trj_results
+for i in 00 m1 m2 p1 p2;do cp -r /Library/WebServer/Documents/trj_results/$i .;done
+chmod -R o+r ??
+cd /Users/kuang/GitHub/sinotec2.github.io
+su kuang
+GT=/usr/local/bin/git
+$GT pull origin main
+$GT add traj
+$GT commit -m "update traj"
+TOKEN=$(cat /Users/kuang/bin/git.token)
+$GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git main
 ```
 
 [get_M-A0064]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064/> "中央氣象局WRF_3Km數值預報產品之下載、空間內插與轉檔"
 [ftuv10]: <> ""
+[cj]: <https://github.com/miquel-vv/csv-to-geojson> "Takes a csv which contains at least the columns named 'lat' and 'lng', and converts it to geojson points. The additional columns are passed as attributes of the points."
+[geojson]: <https://zh.wikipedia.org/wiki/GeoJSON> "GeoJSON是一種基於JSON的地理空間數據交換格式，它定義了幾種類型JSON對象以及它們組合在一起的方法，以表示有關地理要素、屬性和它們的空間範圍的數據。2015年，網際網路工程任務組（IETF）與原始規範作者組建了一個GeoJSON工作組，一起規範GeoJSON標準。在2016年8月，推出了最新的GeoJSON數據格式標準規範(RFC 7946)。GeoJSON使用唯一地理坐標參考系統WGS1984和十進位度單位，一個GeoJSON對象可以是Geometry, Feature或者FeatureCollection.其幾何對象包括有點（表示地理位置）、線（表示街道、公路、邊界）、多邊形（表示國家、省、領土），以及由以上類型組合成的複合幾何圖形。TopoJSON基於GeoJSON作了擴展，使得文件更小。"
+[VI]: <> ""

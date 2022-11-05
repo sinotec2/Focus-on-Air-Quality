@@ -21,6 +21,8 @@ last_modified_date: 2022-11-04 14:43:02
 ---
 
 ## 背景
+- 2021/6 在做完反軌跡的CGI程式之後，思考應該再增加軌跡線上的屬性，找到了可以控制標籤大小的js程式，如此便可以在軌跡線滯留的情況，可以有另外的資訊判斷會不會出現嚴重空氣污染。
+- 判斷是否會發生空氣污染的氣象要素，教科書上曾經提到「通風指數」，
 
 ## 程式設計
 ### 確定反軌跡時間及檔案目錄
@@ -28,7 +30,7 @@ last_modified_date: 2022-11-04 14:43:02
   - 如果檔案名稱中有日期，則
     1. 將其讀成`bdate`
     1. 如果檔名中有`ftrj`，則將BF值設成1(否則內設為-1)
-  - 檔名中沒有日期，如在[daily_trj.cs][]中為`today_marks.csv`
+  - 檔名中沒有日期，如在[daily_trj.cs](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/daily_traj_cs/)中為`today_marks.csv`
     - 設計成每日預報的情況，由`pwd`及`datetime`指令中得到時間的資訊
 
 ```python
@@ -180,4 +182,4 @@ os.system('/opt/anaconda3/bin/csv_to_geojson '+fnameO)
 
 ### 程式下載
 
-- {% include download.html content="軌跡線上通風指數之計算[addVi.py]()" %}
+- {% include download.html content="軌跡線上通風指數之計算[addVi.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/ftuv10/addVI.py)" %}

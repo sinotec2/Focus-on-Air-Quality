@@ -8,7 +8,7 @@ permalink: /TrajModels/ftuv10
 last_modified_date: 2022-03-31 15:20:02
 ---
 
-# 地面二維軌跡分析
+# 地面二維軌跡分析(ftuv10.py)
 {: .no_toc }
 
 <details open markdown="block">

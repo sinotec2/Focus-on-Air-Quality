@@ -405,13 +405,15 @@ last_modified_date:   2021-11-28 22:04:52
    248	os.system('/opt/local/bin/csv2kml.py -f '+name+' -n '+dir+' -g TWD97')
    249	os.system('/opt/local/bin/csv2bln.cs '+name)
 ```
+
+#### csv2bln
 - csv2bln.cs為下列腳本。
-  - `alias awkk=awk '{print $'$1'}'`
 
 ```bash
 echo $(( $(wc -l $1|/opt/local/bin/awkk 1) - 1 )) > $1.bln
 sed 1d $1 >> $1.bln
 ```
+- `alias awkk=awk '{print $'$1'}'`
 
 ## 成果檢討
 - 2018/10/27 12時林園vs當天2時北高雄某廠燃燒塔之正軌跡(紅色)及林園測站反軌跡(白色)

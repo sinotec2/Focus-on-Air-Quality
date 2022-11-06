@@ -21,8 +21,10 @@ last_modified_date: 2022-11-04 14:43:02
 ---
 
 ## 背景
-- 2021/6 在做完反軌跡的CGI程式之後，思考應該再增加軌跡線上的屬性，找到了可以控制標籤大小的js程式，如此便可以在軌跡線滯留的情況，可以有另外的資訊判斷會不會出現嚴重空氣污染。
-- 判斷是否會發生空氣污染的氣象要素，教科書上曾經提到「通風指數」，
+- 2021/6 在做完反軌跡的CGI程式之後，思考應該可以再增加軌跡線上的屬性，找到了[可以控制標籤大小的js程式]()，如此便可以在軌跡線滯留的情況，可以有另外的資訊判斷會不會出現嚴重空氣污染。
+- 判斷是否會發生空氣污染的氣象要素，教科書上曾經提到「[通風指數][VI]」，嘗試了由CWBWRF數據計算混合層高度，但因其垂直解析度太低而作罷，最後選擇以行星邊界層作為高度的指標，至少可以清楚呈現內陸與海上的差異。
+- 這支程式很單純，就是對每一個軌跡線上的時間、空間點，從wrfout檔案中找到行星邊界層與地面風速值，計算該處的[通風指數][VI]，精確說是先以矩陣統一計算，再內插指定時間位置之數值。
+- 最後結果轉換成geojson格式，以利leaflet套件之讀取。
 
 ## 程式設計
 ### 確定反軌跡時間及檔案目錄
@@ -183,3 +185,5 @@ os.system('/opt/anaconda3/bin/csv_to_geojson '+fnameO)
 ### 程式下載
 
 - {% include download.html content="軌跡線上通風指數之計算[addVi.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/ftuv10/addVI.py)" %}
+
+[VI]: <https://www2.gov.bc.ca/gov/content/environment/air-land-water/air/air-pollution/smoke-burning/ventilation-index#:~:text=The%20Ventilation%20Index%20is%20a,will%20mix%20into%20the%20air.> "通風指數(Ventilation Index, VI)：系指一個地區的平均風速、與其混合層高度之乘積。"

@@ -21,7 +21,7 @@ last_modified_date: 2022-11-04 14:43:02
 ---
 
 ## 背景
-- 這支程式(腳本)每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)網頁畫面。
+- 這支[程式(腳本)][daily_traj]每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)網頁畫面。
 
 ### 發展歷程
 - 2維反軌跡程式由來已久，自張老師研究室時代即發展了變分分析風場與動力風場模式所推動的軌跡模式。張老師過世後，繼續發展成以[CODiS](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/)高密度觀測數據之反軌跡程式(2019/06)。
@@ -49,7 +49,7 @@ last_modified_date: 2022-11-04 14:43:02
   - 因此每日程式的讀取、計算及儲存，必須由root執行。
   - 這項設定雖然也讓程式、腳本等等的修改增加不少困擾，但似乎也沒有更好的方式可選擇。
    
-### 程式分段重點
+### [daily_traj.cs][daily_traj]程式分段重點
   1. 接收[get_M-A0064.cs][get_M-A0064]之下載與轉檔結果。
   1. 執行軌跡模式[ftuv10.py][ftuv10]
   1. 執行檔案轉換[csv_to_geojson][cj]
@@ -59,6 +59,7 @@ last_modified_date: 2022-11-04 14:43:02
 ## 程式說明
 ### [get_M-A0064.cs][get_M-A0064]結果之接收
 - 即使有舊檔(昨日、前日的預報結果)，也將其覆蓋。
+- 此處為macOS版本之`date`指令
 
 ```bash
 #!/bin/bash
@@ -143,6 +144,18 @@ $GT commit -m "update traj"
 TOKEN=$(cat /Users/kuang/bin/git.token)
 $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git main
 ```
+### 自動執行
+
+```bash
+## trajectories update
+#MIN HOUR DOM MON DOW CMD
+0    4    *   *   *   /Library/WebServer/Documents/trj_results/daily_traj.cs >& /Library/WebServer/Documents/trj_results/daily_traj.out
+```
+
+## 程式下載
+
+- {% include download.html content="軌跡線上通風指數之計算[daily_traj.cs][daily_traj]" %}
+
 
 [get_M-A0064]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064/> "中央氣象局WRF_3Km數值預報產品之下載、空間內插與轉檔"
 [ftuv10]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/ftuv10/> "ftuv10.py程式說明"
@@ -150,3 +163,4 @@ $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git main
 [geojson]: <https://zh.wikipedia.org/wiki/GeoJSON> "GeoJSON是一種基於JSON的地理空間數據交換格式，它定義了幾種類型JSON對象以及它們組合在一起的方法，以表示有關地理要素、屬性和它們的空間範圍的數據。2015年，網際網路工程任務組（IETF）與原始規範作者組建了一個GeoJSON工作組，一起規範GeoJSON標準。在2016年8月，推出了最新的GeoJSON數據格式標準規範(RFC 7946)。GeoJSON使用唯一地理坐標參考系統WGS1984和十進位度單位，一個GeoJSON對象可以是Geometry, Feature或者FeatureCollection.其幾何對象包括有點（表示地理位置）、線（表示街道、公路、邊界）、多邊形（表示國家、省、領土），以及由以上類型組合成的複合幾何圖形。TopoJSON基於GeoJSON作了擴展，使得文件更小。"
 [VI]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/addVI/> "addVI.py程式說明"
 [git]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/OperationSystem/git/#git-and-github> "Utilities -> Operation System -> git and github"
+[daily_traj]: <https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/ftuv10/daily_traj_csMac.txt> "MacOS版本每日執行3日軌跡預報之腳本程式"

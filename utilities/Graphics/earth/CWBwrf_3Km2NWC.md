@@ -235,7 +235,7 @@ var DEFAULT_CONFIG = "current/wind/surface/level/orthographic=-238.80,23.73,7500
     1. 將結果傳遞到mac的指定目錄
 
 ```bash
-#kuang@node03 /nas1/Data/javascripts/D3js/earth/public/data/weather/current
+#kuang@node03 /nas1/Data/javascripts/D3js/earthCWB/public/data/weather/current
 #$ cat earth_cwbwrf.cs
 weather=/nas1/Data/javascripts/D3js/earth/public/data/weather
 cd $weather/current
@@ -254,7 +254,7 @@ done
 ```bash
 crontab -l|grep earth
 # earth CWB_WRF
-55 2,8,14,20 * * * /nas1/Data/javascripts/D3js/earth/public/data/weather/current/earth_cwbwrf.cs
+55 2,8,14,20 * * * /nas1/Data/javascripts/D3js/earthCWB/public/data/weather/current/earth_cwbwrf.cs
 ```
 ### mac上的任務
 #### lnk_curr.cs腳本
@@ -263,10 +263,17 @@ crontab -l|grep earth
   - `UTC = LST - 8H`
   - 因為不是每小時都有模擬結果。需要進行計算，將LST逐時對照到UTC逐6小時。
   - 文字的數字改成10進位計算：`#10$h`，計算完後再轉成2碼數字
+- 因應伺服器重啟時並不會自動重啟node設定，將node執行情況納入每小時確認項目，如沒有在運作，則予以重啟。(2022-11-08 07:14:27)
 
 ```bash
-#kuang@114-32-164-198 /Users/Data/javascripts/D3js/earth/public/data/weather/current
+#kuang@114-32-164-198 /Users/Data/javascripts/D3js/earthCWB/public/data/weather/current
 #$ cat lnk_curr.cs
+# confirm the node is running 
+n=$(ps -ef|grep node|grep 8083|wc -l) 
+if ! [ $n -eq 1 ];then
+  cd /Users/Data/javascripts/D3js/earthCWB
+  node dev-server.js 8083
+fi
 now=$(date -v-8H -j  +%Y%m%d%H)
 y=$(date -j -f "%Y%m%d%H" "${now}" +%Y)
 m=$(date -j -f "%Y%m%d%H" "${now}" +%m)
@@ -274,7 +281,7 @@ d=$(date -j -f "%Y%m%d%H" "${now}" +%d)
 h=$(date -j -f "%Y%m%d%H" "${now}" +%H)
 h=$(( 10#$h / 6 * 6|bc -l ))
 h=$(printf "%02d" $h)
-weather=/Users/Data/javascripts/D3js/earth/public/data/weather
+weather=/Users/Data/javascripts/D3js/earthCWB/public/data/weather
 fn=$weather/$y/$m/$d/${h}00-wind-surface-level-cwb-3K.json
 if [ -e $fn ]; then
   ln -sf $fn $weather/current/current-wind-surface-level-cwb-3K.json
@@ -285,7 +292,7 @@ fi
 
 #### crontab
 ```bash
-0 * * * * /Users/Data/javascripts/D3js/earth/public/data/weather/current/lnk_curr.cs
+0 * * * * /Users/Data/javascripts/D3js/earthCWB/public/data/weather/current/lnk_curr.cs
 ```
 
 ## 成果檢討

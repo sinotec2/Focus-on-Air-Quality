@@ -1,10 +1,9 @@
 ---
 layout: default
 title: 三維軌跡分析
-nav_order: 6
-parent: Trajectory Models
-has_children: true
-permalink: /TrajModels/btraj_WRFnests
+nav_order: 1
+parent: btraj_WRFnests
+grand_parent: Trajectory Models
 last_modified_date: 2022-03-31 15:20:02
 ---
 

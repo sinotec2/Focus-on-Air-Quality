@@ -22,6 +22,10 @@ last_modified_date: 2022-03-31 15:20:02
 ---
 
 ## 背景
+- [HYSPLIT][HYSPLIT]可以選擇產生三維軌跡線，來呈現長程輸送的垂直運動，這2維軌跡模式的發展及應用遭受諸多質疑。基本上這是一個誤會。
+  - 大氣在數千公里範圍內確實有顯著的氣流下層現象，但在都會尺度，大氣紊流垂直混合的現象對污染物質對高度的重新分配，會比垂直速度更加有效。
+  - 一般大氣之動力模式的垂直速度，是在假設質量守恆的前提下由水平速度梯度的平衡計算而得，並非實際垂直渦流的速度、或氣層整體的垂直升降運動。
+  
 
 ## WRFOUT三維軌跡主程式
 ### wrfout檔案之彙整、連結
@@ -152,3 +156,4 @@ $ cat n_clusters6/path.txt
 
 [csv2kml]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/> "點狀資訊KML檔之撰寫(csv2kml.py)"
 [bt2]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests#bt2_dvppy> "3維軌跡程式"
+[HYSPLIT]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/HYSPLIT/> "Hybrid Single Particle Lagrangian Integrated Trajectory Model 美國海洋與大氣總署空氣資源研究室(NOAA ARL)所發展的模式。"

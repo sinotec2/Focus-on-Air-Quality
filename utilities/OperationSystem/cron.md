@@ -57,3 +57,4 @@ auth       include    password-auth
 ## crontab的設定
 
 - G. T. Wang, **Linux 設定 crontab 例行性工作排程教學與範例**,[G. T. Wang](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/), 2019/06/28
+[emoji]: <https://www.webfx.com/tools/emoji-cheat-sheet/> "emoji"

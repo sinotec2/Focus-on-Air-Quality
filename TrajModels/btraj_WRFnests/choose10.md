@@ -70,7 +70,8 @@ df['JI']=[j*tex+i for i,j in zip(ix,iy)]
 
 ### 軌跡點的網格化
 
-- 
+- 基本上叢集分析的對象是類別性質的物件，座標值的有效數字太多，幾乎沒有重疊的可能，因此要定義類別並不容易，計算上也會需要整併。
+- 此處以3公里作為網格化的解析度，不但可以簡化計算，也可以拉近軌跡線之間的距離。
 
 ```python
 x_mesh=[nc.XORIG+nc.XCELL*i for i in range(nc.NCOLS)]
@@ -80,6 +81,28 @@ y_mesh=[nc.YORIG+nc.YCELL*i for i in range(nc.NROWS)]
   y=np.array(df.TWD97_y)-Ycent
   ix=[max(0,min(nc.NCOLS-1, bisect.bisect_left(x_mesh,xx)-1)) for xx in x]
   iy=[max(0,min(nc.NROWS-1, bisect.bisect_left(y_mesh,yy)-1)) for yy in y]
+  df['JI']=[j*tex+i for i,j in zip(ix,iy)]  
+```
+
+- 整併
+
+```python
+...
+  reduced_ji=[]
+  for i in range(1,len(df)):
+    if df.JI[i-1]!=df.JI[i]:
+      reduced_ji.append(df.JI[i-1])
+  df=DataFrame({'JI3':reduced_ji})
+...
+```
+
+### 每10取1
+
+```python
+  if len(df)<10:continue
+  ji10=[df.JI3[i] for i in range(0,len(df),int(len(df)/10))]
+  df=DataFrame({'JI3':ji10[:10]})
+  df.set_index('JI3').to_csv(fname+'10.csv')
 ```
 
 ## 程式下載

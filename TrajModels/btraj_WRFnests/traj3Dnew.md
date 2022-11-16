@@ -98,7 +98,9 @@ done
 ```
 
 ## 叢集分析
-### choose10 .py(前處理)
+
+### choose10(前處理)
+
 - 從前述[bt2.py](#bt2_DVP_py)所得之軌跡點L.csv檔案，選取其中10個點，將20個維度之矩陣進行k_means分析
 - 輸入檔案：
   - tmplateD1_3km.nc：讀取網格設定，以簡化軌跡點
@@ -106,10 +108,14 @@ done
 - 輸出檔案：
   - *10.csv
 
-## km.py
+- 程式說明：詳見[choose10.py程式說明](#choose10前處理)
+
+### km.py
+
 - 這支程式讀取choose10.py結果，以K-means方式取其代表性叢集。
 
-### 程式IO
+#### 程式IO
+
 - arguments:
   - *10.csv檔案路徑名稱之文字檔
   - nclt: number of clusters
@@ -123,7 +129,7 @@ done
   - 由csv產生kml檔案
   - 可以google map、leaflet套件等等進行繪圖
 
-### download km.py
+#### download km.py
 
 - {% include download.html content="三維軌跡線之k-means叢集分析程式：[km.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/btraj_WRFnests/km.py)" %}
 
@@ -152,6 +158,15 @@ $ cat n_clusters6/path.txt
   - 單位：crossing time/total time
 
 - {% include download.html content="三維軌跡線之網格通過機率分析程式：[acc_prob.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/btraj_WRFnests/acc_prob.py)" %}
+
+
+## 成果
+
+![]()
+
+| ![HYSPLIT11.png](https://www.evernote.com/shard/s125/res/7f55203a-04c9-4cc9-8f37-3544f9373392.png)|
+|:-:|
+| <b>Output Checking List</b>|
 
 [csv2kml]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/> "點狀資訊KML檔之撰寫(csv2kml.py)"
 [bt2]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests#bt2_dvppy> "3維軌跡程式"

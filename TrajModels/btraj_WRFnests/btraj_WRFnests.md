@@ -1,6 +1,6 @@
 ---
 layout: default
-title: btraj_WRFnests
+title: WRF三維軌跡分析
 nav_order: 6
 parent: Trajectory Models
 has_children: true

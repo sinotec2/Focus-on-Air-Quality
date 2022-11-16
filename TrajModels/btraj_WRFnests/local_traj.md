@@ -26,7 +26,7 @@ last_modified_date: 2022-11-16 15:15:48
 - 過去曾經針對高雄地區南北工業區燃燒塔排放進行WRF三維正軌跡通過[機率分析](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/4Linyuan3Dtraj/#林園臭氧事件污染源三維正軌跡分析)。
   - 唯該分析系針對汙染事件個案。
   - 且地區呈現明顯的日夜垂直運動差異
-- 此處則北部測站局部反軌跡為討論焦點
+- 此處則以北部測站局部反軌跡為討論焦點
   - 排除境外軌跡
   - 時間不限、跨年度、只有季節區別
   - 其餘分析過程詳前述說明([三維反軌跡線之計算](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/bt2_DVP/)、[choose10.py](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/choose10/)、[km.py](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/km/)、以及[acc_prob.py程式說明](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/acc_prob/))

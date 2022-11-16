@@ -113,6 +113,7 @@ done
 ### km.py
 
 - 這支程式讀取choose10.py結果，以K-means方式取其代表性叢集。
+- 程式說明，詳見[km.py說明](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/km/)
 
 #### 程式IO
 

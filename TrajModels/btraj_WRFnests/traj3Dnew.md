@@ -2,12 +2,12 @@
 layout: default
 title: 三維軌跡分析
 nav_order: 1
-parent: btraj_WRFnests
+parent: WRF三維軌跡分析
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-31 15:20:02
 ---
 
-# WRF三維軌跡分析
+# 三維軌跡分析整體作業
 {: .no_toc }
 
 <details open markdown="block">
@@ -108,7 +108,7 @@ done
 - 輸出檔案：
   - *10.csv
 
-- 程式說明：詳見[choose10.py程式說明](#choose10前處理)
+- 程式說明：詳見[choose10.py程式說明](#choose10前處理)與[下載](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/btraj_WRFnests/choose10.py)。
 
 ### km.py
 

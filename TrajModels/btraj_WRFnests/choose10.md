@@ -2,7 +2,7 @@
 layout: default
 title: choose10.py程式說明
 nav_order: 3
-parent: btraj_WRFnests
+parent: WRF三維軌跡分析
 grand_parent: Trajectory Models
 last_modified_date: 2022-11-16 10:30:54
 ---

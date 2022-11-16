@@ -2,12 +2,12 @@
 layout: default
 title: 三維反軌跡線之計算
 nav_order: 2
-parent: btraj_WRFnests
+parent: WRF三維軌跡分析
 grand_parent: Trajectory Models
 last_modified_date: 2022-11-07 09:29:13
 ---
 
-# WRF三維軌跡分析
+# 三維反軌跡線之計算
 {: .no_toc }
 
 <details open markdown="block">

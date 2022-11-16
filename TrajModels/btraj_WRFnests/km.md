@@ -28,7 +28,7 @@ last_modified_date: 2022-11-16 10:33:28
   - 機率分析
   - 天氣類型分析
   - 典型事件分析
-- 此處選擇以叢結分析，將空間中的位置組合當成對象，進行統計上的客觀分類，以了解軌跡的大致走向。
+- 此處選擇以[叢結分析](https://www.ibm.com/docs/zh-tw/spss-statistics/saas?topic=analysis-hierarchical-cluster-method)，將空間中的位置組合當成分析對象，進行統計上的客觀分類，以了解軌跡的大致走向。
 - 這支程式讀取[choose10.py](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/choose10/)結果，以[K-means][kms]方法取其代表性叢集。
 
 ## [km.py][km]程式說明
@@ -112,6 +112,10 @@ os.system('for i in {0..1};do csv2kml.py -f res$i.csv -g TWD97 -n NL;done')
 ## 程式下載
 
 {% include download.html content="[軌跡叢集分析前處理程式choose10.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/btraj_WRFnests/choose10.py)" %}
+
+## 叢集數與分析結果
+
+
 
 [kms]: <https://zh.wikipedia.org/wiki/K-平均算法> "k-平均演算法（英文：k-means clustering）源於訊號處理中的一種向量量化方法，現在則更多地作為一種聚類分析方法流行於資料探勘領域。k-平均聚類的目的是：把n個點（可以是樣本的一次觀察或一個實例）劃分到k個聚類中，使得每個點都屬於離他最近的均值（此即聚類中心）對應的聚類，以之作為聚類的標準。這個問題將歸結為一個把資料空間劃分為Voronoi cells的問題。"
 [csv2kml]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/> "點狀資訊KML檔之撰寫(csv2kml.py)"

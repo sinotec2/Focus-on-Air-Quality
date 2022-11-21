@@ -59,7 +59,7 @@ last_modified_date:  2022-11-21 10:04:12
 
 - 與載分析數據一樣，預報數據也是全球數據都在同一個檔案內，可以：
   1. 使用[ACOM][ACOM]提供的切割介面，指定所要的範圍、日期、以及接收的電郵，按照系統給定的網址下載檔案。然此法不能應用在自動化作業系統。
-  2. 下載全球檔案，再行切割。此法會浪費頻寬及時間。一天的檔案(~8G)需要約20~30min，10天需4個小時(node03負責下載)。
+  2. 下載全球檔案，再行切割。此法會浪費頻寬及下載時間。一天的檔案(~8G)需要約20~30min，10天需4個小時(node03負責下載)。
   3. 倘若一天執行一次，尚能以不同機器同步運作第2方案。
 
 ### 批次檔腳本
@@ -115,14 +115,18 @@ done
 
 ### 網格系統的轉換
 
+#### 策略考量
+
 - 包括垂直及經緯度系統的轉換
 - 策略有二
   1. 以Ramboll公司持續更新發展的[MOZART2CAMx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)程式轉接成CAMx模式初始檔(如[CAM-chem模式結果之應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM))，再以[camx2ioapi](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)轉成CMAQ初始檔。
   2. 執行[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照]、及[水平內插與污染項目對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)。好處是可以平行作業、壞處是程式碼需要更新。
   - 似以官網提供程式為宜
-- CAMx 氣象檔案之準備
-  - 此處仍以wrfcamx4.6版執行轉換
-  - 座標參數取自d01 mcip之GRIDDESC結果。  
+
+#### CAMx 氣象檔案(模版)之準備
+- 此處仍以wrfcamx4.6版執行轉換
+- 因僅為模版，隨機選取任意日期進行轉換。
+- 座標參數取自d01 mcip之GRIDDESC結果。  
 
 ```bash
 kuang@master /nas1/WACCM/d01_met
@@ -176,10 +180,14 @@ ieof
 end
 ```
 
-- mz2camx.job
+#### mz2camx.job
+
 - 注意事項
   - 執行檔有個工作站版本
   - cshell的變數置換方式與bash略有不同(bash：`YMD=${YMD1//-}`)
+  - 全球檔案如未經切割，會發生問題
+    - mz2camx不允許含有南北極，需先去除
+    - 處理速度會很慢
 
 ```bash
 kuang@master /nas1/WACCM

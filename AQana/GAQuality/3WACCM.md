@@ -229,6 +229,49 @@ CAMx 2D met file   |$MET.2d
 IEOF
 ```
 
+#### cmaq.job
+
+```bash
+kuang@master /nas1/WACCM
+$ cat cmaq.job
+#!/bin/csh -f
+setenv PROMPTFLAG N
+setenv IOAPI_ISPH 20
+setenv LD_LIBRARY_PATH /opt/netcdf4/lib:/opt/hdf5/lib:/cluster/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64_lin
+set EXE = /nas1/camxruns/src/mozart2camx_v3.2.1/src/mozart2camx_CB6r4_CF__WACCM #devp version
+set EXE = /cluster/src/CAMx/mozart2camx_v3.2.1/src/mozart2camx_CB6r4_CF__WACCM
+
+set YMD1 = `echo $1|cut -c1-10`
+set t    = `echo $1|cut -c11-12`
+set YMD = $YMD1:as/-//
+set MET = /nas2/cmaqruns/2022fcst/grid45/mcip/METCRO
+setenv INFILEMET3D ${MET}3D.nc
+setenv INFILEMET2D ${MET}2D.nc
+# DEFINE OUTPUT FILE NAMES
+setenv EXECUTION_ID mz2camx.job
+setenv OUTFILEBC ${YMD}${t}".bc"
+set NINFILE = 1
+
+setenv OUTFILEIC ${YMD}${t}".ic"
+setenv INFILE today_mz.m3.nc
+setenv INFILE1 today_mz.m3.nc
+echo $OUTFILEIC $t $YMD
+set BCFLAG = .false.
+if ( $t == "00" ) then
+  set BCFLAG = .true.
+endif
+
+$EXE << IEOF
+CAMx5,CAMx6,CMAQ   |CMAQ
+ProcessDateYYYYMMDD|$YMD
+Output BC file?    |$BCFLAG
+Output IC file?    |.true.
+If IC, starting hr |$t
+Output TC file?    |.false.
+Max num MZRT files |$NINFILE
+IEOF
+```
+
 #### camx2ioapi
 
 - 這支程式較為舊版，2016迄今尚未更新。然經過測試，轉檔結果進入CCTM執行並無問題。
@@ -255,6 +298,53 @@ EOF
 - [fil_rean.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/BCON/fil_rean.py)有類似的功能，可以從此點開始。
 
 
+```bash
+kuang@master /nas1/WACCM
+$ cat dl_tdy.cs
+wget=/usr/bin/wget
+ncks=/usr/bin/ncks
+ncatted=/usr/bin/ncatted
+root=https://www.acom.ucar.edu/waccm/DATA/
+fnroot=f.e22.beta02.FWSD.f09_f09_mg17.cesm2_2_beta02.forecast.002.cam.h3.
+fntail='-00000.nc'
+
+export EXECUTION_ID=CAM-chem2m3.job
+export PROMPTFLAG=N
+export IOAPI_ISPH=20
+export LD_LIBRARY_PATH=/cluster/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64_lin
+export EXE=/cluster/src/CAMx/mozart2camx_v3.2.1/ncf2ioapi_waccm/NCF2IOAPI
+ts=( 00 06 12 18 )
+st=( 0 60000 120000 180000 )
+
+cd /nas1/WACCM
+for i in {-3..7};do
+  YMD=$(date -d "today +${i}days" +%Y-%m-%d)
+  nc=${fnroot}${YMD}${fntail}
+  $wget -q ${root}$nc
+  test ! -e $nc && continue
+  $ncks -O -d lon,44,146 -d lat,87,150 $nc $YMD
+  test -e $YMD && rm -f $nc
+  export INFILE=$YMD
+  export OUTFILE3D=${YMD}.m3.nc
+  $EXE
+  test -e ${YMD}.m3.nc && mv ${YMD}.m3.nc $YMD
+  YMD0=${YMD//-}
+  for it in {0..3};do
+    t=${ts[$it]}
+    s=${st[$it]}
+    mkdir -p ${YMD0}/$t
+    cd ${YMD0}/$t
+    if [ $it -eq 00 ];then
+      ln -sf ../../$YMD today_mz.m3.nc
+    else
+      $ncks -O -d TSTEP,$it ../../$YMD today_mz.m3.nc
+      $ncatted -a STIME,global,o,i,$s today_mz.m3.nc
+    fi
+    ~/bin/sub csh ../../cmaq.job $YMD$t >& out
+    cd ../../
+  done
+done
+```
 
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
 [Marsh(2013)]: <https://opensky.ucar.edu/islandora/object/articles%3A12836> "Marsh, D., Mills, M., Kinnison, D. E., & Lamarque, J. -F. (2013). Climate change from 1850 to 2005 simulated in CESM1(WACCM). Journal Of Climate, 26, 7372-7391. doi:10.1175/JCLI-D-12-00558.1"

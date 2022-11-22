@@ -3,7 +3,7 @@ layout: default
 title: 大型網格系統切割邊界濃度
 parent: Boundary Condition
 grand_parent: CMAQ Model System
-nav_order: 5
+nav_order: 6
 date: 2022-03-03 15:50:20
 last_modified_date: 2022-03-03 15:50:24
 ---

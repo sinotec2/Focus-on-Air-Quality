@@ -252,7 +252,9 @@ EOF
 ## BCON之產生
 
 - 此處無法使用run_bcon.csh(bcon.exe)將ICON之外圍切割出邊界濃度，因為BCON的實質位置還較ICON大一圈。
-- 
+- [fil_rean.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/BCON/fil_rean.py)有類似的功能，可以從此點開始。
+
+
 
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
 [Marsh(2013)]: <https://opensky.ucar.edu/islandora/object/articles%3A12836> "Marsh, D., Mills, M., Kinnison, D. E., & Lamarque, J. -F. (2013). Climate change from 1850 to 2005 simulated in CESM1(WACCM). Journal Of Climate, 26, 7372-7391. doi:10.1175/JCLI-D-12-00558.1"

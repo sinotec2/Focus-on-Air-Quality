@@ -9,6 +9,7 @@ last_modified_date:  2022-11-21 10:04:12
 ---
 
 # WACCM模式結果之下載、讀取及應用
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -79,7 +80,7 @@ for i in {-3..7};do
   nc=${fnroot}${YMD}${fntail}
   $wget -q ${root}$nc
   test ! -e $nc && continue
-  $ncks -O -d lon,44,144 -d lat,79,138 $nc $YMD
+  $ncks -O -d lon,44,146 -d lat,87,150 $nc $YMD
   test -e $YMD && rm -f $nc
 done
 ```
@@ -120,10 +121,11 @@ done
 - 包括垂直及經緯度系統的轉換
 - 策略有二
   1. 以Ramboll公司持續更新發展的[MOZART2CAMx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)程式轉接成CAMx模式初始檔(如[CAM-chem模式結果之應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM))，再以[camx2ioapi](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)轉成CMAQ初始檔。
-  2. 執行[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照]、及[水平內插與污染項目對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)。好處是可以平行作業、壞處是程式碼需要更新。
-  - 似以官網提供程式為宜
+  2. 執行[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)、及[水平內插與污染項目對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)。好處是可以平行作業、壞處是程式碼需要更新。
+  - 似以官網提供程式為宜。速度較慢問題則以下載時間平行處理，避免延時太久。
 
 #### CAMx 氣象檔案(模版)之準備
+
 - 此處仍以wrfcamx4.6版執行轉換
 - 因僅為模版(只執行一次)，隨機選取任意日期進行轉換。
 - 座標參數取自d01 mcip之GRIDDESC結果。  
@@ -183,11 +185,11 @@ end
 #### mz2camx.job
 
 - 注意事項
-  - 執行檔有個工作站版本
-  - cshell的變數置換方式與bash略有不同(bash：`YMD=${YMD1//-}`)
+  - 執行檔有2個工作站版本，要注意選取。
+  - cshell的變數置換方式與bash略有不同(bash：`YMD=${YMD1//-}`、csh：`YMD = $YMD1:as/-//`)
   - 全球檔案如未經切割，會發生問題
     - mz2camx不允許含有南北極，需先去除
-    - 處理速度會很慢
+    - 處理速度會很慢(全球1個小時的數據約需2個小時處理、經ncks裁減後可降為20分鐘)
 
 ```bash
 kuang@master /nas1/WACCM
@@ -195,34 +197,29 @@ $ cat mz2camx.job
 #!/bin/csh -f
 setenv PROMPTFLAG N
 setenv IOAPI_ISPH 20
-setenv LD_LIBRARY_PATH /opt/netcdf4/lib:/opt/hdf5/lib
-set EXE = /nas1/camxruns/src/mozart2camx_v3.2.1/src/mozart2camx_CB6r4_CF__WACCM #devp version
+setenv LD_LIBRARY_PATH /opt/netcdf4/lib:/opt/hdf5/lib:/cluster/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64_lin
+#set EXE = /nas1/camxruns/src/mozart2camx_v3.2.1/src/mozart2camx_CB6r4_CF__WACCM #devp version
 set EXE = /cluster/src/CAMx/mozart2camx_v3.2.1/src/mozart2camx_CB6r4_CF__WACCM
 
-set YMD1 = $1
+set YMD1 = `echo $1|cut -c1-10`
+set t    = `echo $1|cut -c11-12`
 set YMD = $YMD1:as/-//
 set MET = /nas1/WACCM/d01_met/2211d1
 
 # DEFINE OUTPUT FILE NAMES
 setenv EXECUTION_ID mz2camx.job
 echo $1
-mkdir -p ./output
 set NINFILE = 1
-
-foreach t ( 00 06 12 18 )
-mkdir -p ./output
-setenv OUTFILEIC ./output/${YMD}${t}".ic"
-setenv INFILE $1
+setenv OUTFILEIC ${YMD}${t}".ic"
+setenv OUTFILEBC ${YMD}${t}".bc"
+setenv INFILE ../../$YMD1
+setenv INFILE1 ../../$YMD1
 echo $OUTFILEIC
-if ( -e $OUTFILEIC ); then
-  rm -f $OUTFILEIC
-endif  
 
-set YYYYMMDD = $YMD
 $EXE << IEOF
 CAMx5,CAMx6,CMAQ   |CAMx 6
-ProcessDateYYYYMMDD|$YYYYMMDD
-Output BC file?    |.false.
+ProcessDateYYYYMMDD|$YMD
+Output BC file?    |.true.
 Output IC file?    |.true.
 If IC, starting hr |$t
 Output TC file?    |.false.
@@ -230,12 +227,32 @@ Max num MZRT files |$NINFILE
 CAMx 3D met file   |$MET.3d
 CAMx 2D met file   |$MET.2d
 IEOF
-mv OUTFILEIC $OUTFILEIC
-mv OUTFILEBC $OUTFILEBC
-echo $INFILE1
-end
-exit 0
 ```
+
+#### camx2ioapi
+
+- 這支程式較為舊版，2016迄今尚未更新。然經過測試，轉檔結果進入CCTM執行並無問題。
+- job檔較單純，併入前述mz2camx.job之後執行
+- 注意事項
+  1. Sigma Levels可以由WRF之namelist.input檔案(NLAYS+1)、抑或由一個標準ICON檔案的全域屬性(NLAYS)中讀取。
+  2. 不同工作站執行檔與程式庫路徑各有不同，要注意設定。
+  3. 產生之ICON結果需真正進行CCTM以測試其內容與格式完全正確。
+
+```bash
+setenv IOAPI_OUT ICON
+rm -f $IOAPI_OUT
+
+$EXE << EOF
+Input CAMx filename|OUTFILEIC
+Data Type          |AVRG
+Sigma Levels       |0.995,0.990,0.980,0.960,0.930,0.910,0.890,0.850,0.816,0.783,0.751,0.693,0.637,0.537,0.449,0.372,0.304,0.245,0.194,0.131,0.082,0.046,0.019,0.000,
+EOF
+```
+
+## BCON之產生
+
+- 此處無法使用run_bcon.csh(bcon.exe)將ICON之外圍切割出邊界濃度，因為BCON的實質位置還較ICON大一圈。
+- 
 
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
 [Marsh(2013)]: <https://opensky.ucar.edu/islandora/object/articles%3A12836> "Marsh, D., Mills, M., Kinnison, D. E., & Lamarque, J. -F. (2013). Climate change from 1850 to 2005 simulated in CESM1(WACCM). Journal Of Climate, 26, 7372-7391. doi:10.1175/JCLI-D-12-00558.1"

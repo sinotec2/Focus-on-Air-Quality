@@ -24,6 +24,8 @@ last_modified_date:  2022-11-22 22:37:55
 
 ## 背景
 
+### WACCM的介紹
+
 - [官網][WACCM]敘述
   - 大氣社區氣候模型(Whole Atmosphere Community Climate Model, WACCM) 是一個NCAR社群綜合數值模型，涵蓋從地球表面到熱氣層的高度範圍。
   - WACCM 的開發是一項部門間合作，包括
@@ -53,6 +55,16 @@ last_modified_date:  2022-11-22 22:37:55
   - 美國本土森林火災WRF-chem空品10天逐3小時預報[WRF-CHEM FORECAST MAPS](https://www.acom.ucar.edu/firex-aq/forecast.shtml)，運作中。
   - 2019/7~9美國本土森林火災[FLEXPART模式分析](https://www.acom.ucar.edu/firex-aq/flexpart/forecast.shtml)，[FLEXPART](https://www.flexpart.eu/)是個拉氏模式。運作2個月後後續似乎取消了作業化系統。
   - CAM-chem只有[資料同化結果](https://www.acom.ucar.edu/cam-chem/cam-chem.shtml)，沒有預報。
+
+### WACCM與ECMWF空品預報的比較
+
+項目|ECMWF([CAMS][CAMS_desc])|NCAR [WACCM][WACCM]|說明|選擇
+:-:|:-:|:-:|:-:|:-:|
+立場|官方作業單位。服務會員國|學術單位|前者會較謹慎些|
+預報時間|5天|10天||
+模式|IFS叢集預報|學界整合模式||
+delT|3Hr|6Hr|||
+dx,dy|0.4度X0.4度|1.25度X0.94度||
 
 ## [WACCM][WACCM]預報數據之下載
 
@@ -388,3 +400,4 @@ cat mz2cmaq.job
 [ACOM]: <https://www2.acom.ucar.edu/> "ATMOSPHERIC CHEMISTRY OBSERVATIONS & MODELING"
 [mz2]: <ttps://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz> "mozart2camx"
 [camx2ioapi]: <https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz> "camx2ioapi"
+[CAMS_desc]: <https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-atmospheric-composition-forecasts?tab=overview> "CAMS每天2次進行全球大氣成分的5天預報，包括50多種氣狀物和7種顆粒物(沙漠塵埃、海鹽、有機物、黑碳、硫酸鹽、硝酸鹽和銨氣溶膠)。初始條件為衛星及地面觀測數據同化分析結果，允許在地面觀測數據覆蓋率低、或無法直接觀測到的大氣污染物進行估計，除此之外，它還使用到基於調查清單或觀測反衍的排放估計，以作為表面的邊界條件。"

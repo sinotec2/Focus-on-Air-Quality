@@ -5,7 +5,7 @@ parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
 nav_order: 3
 date: 2022-11-21 10:04:08              
-last_modified_date:  2022-11-21 10:04:12
+last_modified_date:  2022-11-22 22:37:55
 ---
 
 # WACCM模式結果之下載、讀取及應用
@@ -63,6 +63,15 @@ last_modified_date:  2022-11-21 10:04:12
   2. 下載全球檔案，再行切割。此法會浪費頻寬及下載時間。一天的檔案(~8G)需要約20~30min，10天需4個小時(node03負責下載)。
   3. 倘若一天執行一次，尚能以不同機器同步運作第2方案。
 
+### 切割範圍之決定
+
+- WACCM或是MOZART模式輸出檔案都是經緯度系統，要裁切出足夠的範圍、同時又能有效降低檔案大小，會需要反覆試誤來達到最佳條件。
+- 可以先在ipython內以bisect模組挑出足以涵蓋CCTM模式之水平範圍
+- 執行[mozart2camx][mz2]
+  - 如果範圍不足，程式會跳停。
+  - 有超過換日線的部分，雖然[mozart2camx][mz2]會顯示出-179等類的低值，但基本上程式還是會解析其為東邊界線，直接調整lon指標的上限值即可。
+- 結果：`$ncks -O -d lon,44,146 -d lat,87,150 $nc $YMD`
+
 ### 批次檔腳本
 
 ```bash
@@ -114,21 +123,22 @@ for i in {-3..7};do
 done
 ```
 
-### 網格系統的轉換
-
-#### 策略考量
+### 網格、污染物系統轉換的策略考量
 
 - 包括垂直及經緯度系統的轉換
-- 策略有二
-  1. 以Ramboll公司持續更新發展的[MOZART2CAMx](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)程式轉接成CAMx模式初始檔(如[CAM-chem模式結果之應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM))，再以[camx2ioapi](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)轉成CMAQ初始檔。
-  2. 執行[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)、及[水平內插與污染項目對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)。好處是可以平行作業、壞處是程式碼需要更新。
+- 策略有三
+  1. 以Ramboll公司持續更新發展的[MOZART2CAMx][mz2]程式轉接成CAMx模式初始檔(如[CAM-chem模式結果之應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM))，再以[camx2ioapi][camx2ioapi]轉成CMAQ初始檔。好處是同時產生CAMx以及CCTM的IC/BC檔案。
+  2. 類似前述，新版官網[MOZART2CAMx][mz2]程式轉接不單可以指定轉成CAMx5/6格式、也提供直接轉成cmaq BC/IC檔案的選項。此選項不必再執行[camx2ioapi][camx2ioapi]程式。
+  3. 執行[MOZARD/WACCM模式輸出轉成CMAQ初始條件_垂直對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqH/)、及[水平內插與污染項目對照](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)。好處是可以平行作業、壞處是程式碼需要更新。
   - 似以官網提供程式為宜。速度較慢問題則以下載時間平行處理，避免延時太久。
 
-#### CAMx 氣象檔案(模版)之準備
+### 氣象檔案(模版)之準備
+
+#### CAMx 方案
 
 - 此處仍以wrfcamx4.6版執行轉換
 - 因僅為模版(只執行一次)，隨機選取任意日期進行轉換。
-- 座標參數取自d01 mcip之GRIDDESC結果。  
+- 座標參數取自d01 mcip之GRIDDESC結果。
 
 ```bash
 kuang@master /nas1/WACCM/d01_met
@@ -181,6 +191,14 @@ ieof
 
 end
 ```
+
+#### mcip 方案
+
+- [MOZART2CAMx][mz2]的cmaq選項需要將mcip結果檔案設定成環境變數，而不是std input
+- 需要2格檔案，分別是METCRO3D與METCRO2D
+- 同樣地，程式並不是真的讀取變數，而是讀取與網格系統有關的氣象項目。
+
+### CAMx方案之執行腳本
 
 #### mz2camx.job
 
@@ -292,61 +310,44 @@ Sigma Levels       |0.995,0.990,0.980,0.960,0.930,0.910,0.890,0.850,0.816,0.783,
 EOF
 ```
 
-## BCON之產生
+#### BCON之產生
 
+- 策略上
 - 此處無法使用run_bcon.csh(bcon.exe)將ICON之外圍切割出邊界濃度，因為BCON的實質位置還較ICON大一圈。
-- [fil_rean.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/BCON/fil_rean.py)有類似的功能，可以從此點開始。
+- [fil_rean.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/BCON/fil_rean.py)有類似的功能，可以從此點開始（待發展）。
 
+### 直接轉成cmaq方案之執行腳本
+
+#### mz2cmaq.job
+
+- 此處同樣顧及Fortran的執行效率，需要按照bc/ic，區分成各日期、各個小時分別進行轉檔。
+- 策略上
+  - BCON：每日產生一個BCON（4個timeframe）即可，不需要拆成4筆BCON檔案->工作目錄設定在日期/00。每批次最後一小時需要延長，可以待所有檔案都轉檔完成、經ncrcat連成11天的大檔案後再延長。
+  - ICON：
+    - 每批次產生一個ICON已經足夠執行CCTM。
+    - 逐6小時轉成ICON檔案，可以用本地的earth套件將WACCM數據予以展現。工作目錄設定在日期/06、12、18等3個目錄。這項工作應該與$fcst/grid45/cctm.ic相同。（待發展）
+- 注意事項
+  1. BCON一定是從0時開始，不會隨著初始時間而變動。（因此在00目錄下執行）
+  2. ICON可以接受非0的STIME，因此可以將逐日檔案按小時予以切割（修改STIME值）、平行計算，以爭取時效。
 
 ```bash
-kuang@master /nas1/WACCM
-$ cat dl_tdy.cs
-wget=/usr/bin/wget
-ncks=/usr/bin/ncks
-ncatted=/usr/bin/ncatted
-root=https://www.acom.ucar.edu/waccm/DATA/
-fnroot=f.e22.beta02.FWSD.f09_f09_mg17.cesm2_2_beta02.forecast.002.cam.h3.
-fntail='-00000.nc'
+cat mz2cmaq.job
+```
 
-export EXECUTION_ID=CAM-chem2m3.job
-export PROMPTFLAG=N
-export IOAPI_ISPH=20
-export LD_LIBRARY_PATH=/cluster/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64_lin
-export EXE=/cluster/src/CAMx/mozart2camx_v3.2.1/ncf2ioapi_waccm/NCF2IOAPI
-ts=( 00 06 12 18 )
-st=( 0 60000 120000 180000 )
+#### cmaq方案之自動執行腳本
 
-cd /nas1/WACCM
-for i in {-3..7};do
-  YMD=$(date -d "today +${i}days" +%Y-%m-%d)
-  nc=${fnroot}${YMD}${fntail}
-  $wget -q ${root}$nc
-  test ! -e $nc && continue
-  $ncks -O -d lon,44,146 -d lat,87,150 $nc $YMD
-  test -e $YMD && rm -f $nc
-  export INFILE=$YMD
-  export OUTFILE3D=${YMD}.m3.nc
-  $EXE
-  test -e ${YMD}.m3.nc && mv ${YMD}.m3.nc $YMD
-  YMD0=${YMD//-}
-  for it in {0..3};do
-    t=${ts[$it]}
-    s=${st[$it]}
-    mkdir -p ${YMD0}/$t
-    cd ${YMD0}/$t
-    if [ $it -eq 00 ];then
-      ln -sf ../../$YMD today_mz.m3.nc
-    else
-      $ncks -O -d TSTEP,$it ../../$YMD today_mz.m3.nc
-      $ncatted -a STIME,global,o,i,$s today_mz.m3.nc
-    fi
-    ~/bin/sub csh ../../cmaq.job $YMD$t >& out
-    cd ../../
-  done
-done
+- 與前述CAMx方案差異
+  - 4個timeframe差異處理
+    - 00：執行全日之轉檔（BCON and ICON）
+    - 06～18：只執行該小時內容之轉檔(ICON only)
+
+```bash
+cat dl_tdy.cs
 ```
 
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"
 [Marsh(2013)]: <https://opensky.ucar.edu/islandora/object/articles%3A12836> "Marsh, D., Mills, M., Kinnison, D. E., & Lamarque, J. -F. (2013). Climate change from 1850 to 2005 simulated in CESM1(WACCM). Journal Of Climate, 26, 7372-7391. doi:10.1175/JCLI-D-12-00558.1"
 [GMAO]: <https://gmao.gsfc.nasa.gov/> "National Aeronautics and Space Administration GMAO - Global Modeling and Assimilation Office"
 [ACOM]: <https://www2.acom.ucar.edu/> "ATMOSPHERIC CHEMISTRY OBSERVATIONS & MODELING"
+[mz2]: <ttps://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz> "mozart2camx"
+[camx2ioapi]: <https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz> "camx2ioapi"

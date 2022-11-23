@@ -84,7 +84,7 @@ fnroot=f.e22.beta02.FWSD.f09_f09_mg17.cesm2_2_beta02.forecast.002.cam.h3.
 fntail='-00000.nc'
 
 cd /nas1/WACCM
-for i in {-3..7};do
+for i in {-1..9};do
   YMD=$(date -d "today +${i}days" +%Y-%m-%d)
   nc=${fnroot}${YMD}${fntail}
   $wget -q ${root}$nc
@@ -316,6 +316,28 @@ EOF
 - 此處無法使用run_bcon.csh(bcon.exe)將ICON之外圍切割出邊界濃度，因為BCON的實質位置還較ICON大一圈。
 - [fil_rean.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/BCON/fil_rean.py)有類似的功能，可以從此點開始（待發展）。
 
+#### CAMx方案之自動執行腳本(dl_tdy.cs)
+
+
+```bash
+...
+  for it in {0..3};do
+    t=${ts[$it]}
+    s=${st[$it]}
+    mkdir -p ${YMD0}/$t
+    cd ${YMD0}/$t
+    if [ $it -eq 00 ];then
+      ln -sf ../../$YMD today_mz.m3.nc
+    else
+      $ncks -O -d TSTEP,$it ../../$YMD today_mz.m3.nc
+      $ncatted -a STIME,global,o,i,$s today_mz.m3.nc
+    fi
+    ~/bin/sub csh ../../mz2camx.job $YMD$t >& out
+    cd ../../
+  done
+...
+```
+
 ### 直接轉成cmaq方案之執行腳本
 
 #### mz2cmaq.job
@@ -334,7 +356,7 @@ EOF
 cat mz2cmaq.job
 ```
 
-#### cmaq方案之自動執行腳本
+#### cmaq方案之dl_tdy.cs
 
 - 與前述CAMx方案差異
   - 4個timeframe差異處理
@@ -342,7 +364,22 @@ cat mz2cmaq.job
     - 06～18：只執行該小時內容之轉檔(ICON only)
 
 ```bash
-cat dl_tdy.cs
+...
+  for it in {0..3};do
+    t=${ts[$it]}
+    s=${st[$it]}
+    mkdir -p ${YMD0}/$t
+    cd ${YMD0}/$t
+    if [ $it -eq 00 ];then
+      ln -sf ../../$YMD today_mz.m3.nc
+    else
+      $ncks -O -d TSTEP,$it ../../$YMD today_mz.m3.nc
+      $ncatted -a STIME,global,o,i,$s today_mz.m3.nc
+    fi
+    ~/bin/sub csh ../../mz2cmaq.job $YMD$t >& out
+    cd ../../
+  done
+...
 ```
 
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"

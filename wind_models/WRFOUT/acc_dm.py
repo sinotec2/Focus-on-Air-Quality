@@ -33,7 +33,10 @@ strT=[''.join([i.decode('utf-8') for i in nc[v][t,:]]) for t in range(nt)]
 checkOK=True
 for DM in range(1,nd+1):
   fname=fnames[DM]
-  nc1 = netCDF4.Dataset(fname,'r')
+  try:
+    nc1 = netCDF4.Dataset(fname,'r')
+  except:
+    sys.exit('file '+fname+' is NOT OK!')
   if nc1.SIMULATION_START_DATE!=strT[0]: checkOK=False
 if checkOK :sys.exit('check OK!')
 

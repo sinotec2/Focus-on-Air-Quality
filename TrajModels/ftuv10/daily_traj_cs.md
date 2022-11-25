@@ -21,9 +21,11 @@ last_modified_date: 2022-11-04 14:43:02
 ---
 
 ## 背景
+
 - 這支[程式(腳本)][daily_traj]每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)網頁畫面。
 
 ### 發展歷程
+
 - 2維反軌跡程式由來已久，自張老師研究室時代即發展了變分分析風場與動力風場模式所推動的軌跡模式。張老師過世後，繼續發展成以[CODiS](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/)高密度觀測數據之反軌跡程式(2019/06)。
 - 2019/11因發展逐日預報之calpuff系統，使用到中央氣象局的[WRF預報結果][get_M-A0064]。經穩定使用後，將其繼續加值轉成wrfout形式，也應用在mmif與aermod的模擬(2020.02)。
 - 2020.08發展了自wrfout讀取3維風場的[反軌跡模式](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/traj3D/)，其網格套疊的概念也延續到2維軌跡之計算。
@@ -32,6 +34,7 @@ last_modified_date: 2022-11-04 14:43:02
 - 2022/04仿照疫情數據公開也使用github.io的平台，乃將在imac上的html自動分析的成果部分放在gitjub pages上，使用者自行產生部分仍然留在imac上。營運迄今。
 
 ### 重要選項考量與未來可能發展
+
 - python或fortran的選擇
   - 早期張老師研究室的程式都是fortran撰寫，主要因為當時並沒有python的背景，而fortran也是為風場模式與光化模式所需要，軌跡模式為順便發展，所以就用了fortran。
   - 由於軌跡模式只有簡單的位置計算，並沒有太多浮點運算，因此似沒有必要再以fortran來撰寫。
@@ -50,6 +53,7 @@ last_modified_date: 2022-11-04 14:43:02
   - 這項設定雖然也讓程式、腳本等等的修改增加不少困擾，但似乎也沒有更好的方式可選擇。
    
 ### [daily_traj.cs][daily_traj]程式分段重點
+
   1. 接收[get_M-A0064.cs][get_M-A0064]之下載與轉檔結果。
   1. 執行軌跡模式[ftuv10.py][ftuv10]
   1. 執行檔案轉換[csv_to_geojson][cj]
@@ -57,7 +61,9 @@ last_modified_date: 2022-11-04 14:43:02
   1. [git][git]更新上傳
 
 ## 程式說明
+
 ### [get_M-A0064.cs][get_M-A0064]結果之接收
+
 - 即使有舊檔(昨日、前日的預報結果)，也將其覆蓋。
 - 此處為macOS版本之`date`指令
 
@@ -78,6 +84,7 @@ done
 ```
 
 ### 執行[ftuv10.py][ftuv10]
+
 - 4個空品測站：北部(中山站)、中部(忠明站)、南部(嘉義及前金站)
 - 時間：今日、明日、後日之中午12時
   - 每天的today_*.csv經處理後會儲存在對應之目錄下
@@ -100,6 +107,7 @@ done
 ```
 
 ### 執行[csv_to_geojson][cj]
+
 - csv_to_geojson是網友[miquel-vv][cj]提供的套件，可以將csv檔案中的經緯度位置，轉成[geojson檔案格式][geojson]的線格式，以順利讓leaflet地圖可以讀取。
 
 ```bash
@@ -111,6 +119,7 @@ $CJ today${today}12.csv
 ```
 
 ### 執行[addVI.py][VI]
+
 - [通風指數(Ventilation Index, VI)](https://www2.gov.bc.ca/gov/content/environment/air-land-water/air/air-pollution/smoke-burning/ventilation-index#:~:text=The%20Ventilation%20Index%20is%20a,will%20mix%20into%20the%20air.)：系指一個地區的平均風速、與其混合層高度之乘積。
   - 一般用在與空氣污染有關的行為管制，VI值多少時，不能從事特定的污染行為。
   - 也是一項重要的預報參數。
@@ -126,7 +135,9 @@ for dir in 00 m1 m2 p1 p2;do
   cd ..
 done
 ```
+
 ### git更新上傳
+
 - git過程會需要有一致的檔案屬性。如前所示，程式是root在執行，因此複製到repo目錄下的檔案會需要改變其屬性或所有權人。
 - 每天更新軌跡線之後，還會有8：00更新的calpuff預報結果（from DEVP），因此會需要在imac複製更新部份(`git pull`)
 - 其餘運作方式按照一般git的作業：add、commit、push 
@@ -144,6 +155,7 @@ $GT commit -m "update traj"
 TOKEN=$(cat /Users/kuang/bin/git.token)
 $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git main
 ```
+
 ### 自動執行
 
 ```bash

@@ -44,9 +44,7 @@ for t in zhongshan zhongming jiayi qianjin;do
   $PY -t $t -d ${today}12 -b True
 ```
 
-## 程式設計
-
-### 程式碼差異
+## 程式碼差異
 
 項目|3維版本[bt2_DVP.py][bt2_DVP]|2維版本[ftuv10.py][ftuv10]|說明
 :-:|:-:|:-:|:-:|
@@ -55,7 +53,6 @@ nc檔案個數(層數)|4|2|
 
 ```python
 $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-service/btraj_WRFnests/ftuv10.py
-
 19,20c17,18
 <   (ncf,t1)=ncft[:]
 <   t=abs(t1-t0)
@@ -205,6 +202,11 @@ $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-ser
 > #    zh_n[:,k+1,:,:]=ph[:,k+1,:,:]-ph[:,0,:,:]
 > #  zh_n=np.clip(zh_n,0.,np.max(zh_n))
 > #  zh.append(zh_n)
+```
+
+### 時間迴圈
+
+```python
 231,232c250,251
 < while not beyond(xp[s], yp[s], zp[s]):
 <   print ('run beyond days' + str(ymdh))
@@ -233,10 +235,6 @@ $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-ser
 >       t1=t1+nt[0]
 >     else:
 >       t1=0
-242c271
-<   uvwg=np.zeros(shape=(3,2,nlay[4],nrow[4],ncol[4],))
----
->   uvwg=np.zeros(shape=(3,2,nlay[2],nrow[2],ncol[2],))
 244,245c273,276
 <     boo = beyond(xp[s], yp[s], zp[s])
 <     if boo: break
@@ -256,6 +254,14 @@ $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-ser
 >       if type(nc0)==int:break
 >       nc1=nc0
 >     if nt[0]<24:break
+```
+
+### 後處理部分
+
+- 增加了經緯度座標的軌跡點，以配合geojson程式的應用
+- 因為每日預報乃由crontab來執行程式，外掛執行檔都需要寫完整的路徑
+
+```python
 271a306,309
 >   #geodetic LL
 >   lon, lat = pnyc(np.array(o_xp)-Xcent,np.array(o_yp)-Ycent, inverse=True)
@@ -292,7 +298,7 @@ $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-ser
 > os.system('/opt/local/bin/csv2bln.cs '+name)
 ```
 
-### 程式下載
+## 程式下載
 
 {% include download.html content="[地面uv10二維軌跡分析程式ftuv10.py][ftuv10]" %}
 

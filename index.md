@@ -4,7 +4,7 @@ title: Home
 nav_order: 1
 description: "Analysis tools and Simulation Experience about the Air Quality"
 permalink: /
-last_modified_date: 2022-06-25 20:37:55
+last_modified_date: 2022-11-25 10:27:48
 ---
 
 # Focus on Air Quality
@@ -13,11 +13,14 @@ last_modified_date: 2022-06-25 20:37:55
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[News at 2022-10-13](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[News at 2022-11-25](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/3WACCM/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
+
+- 2022-11-25 5天的CMAQ空品預報持續運作中，雖然還是做不到無縫接軌，但也許延長預報時間(leading time)，也可以算是一點貢獻。這需要花更多的時間下載NCAR的[WACCM](https://www2.acom.ucar.edu/gcm/waccm)全球空品預報結果，詳見[WACCM模式結果之下載、讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/3WACCM/)。這期間也嘗試了mcip的gfs版本[NACC](https://github.com/noaa-oar-arl/NACC)，可惜目前還沒有找到NOAA公開gfs-FV3的全球預報結果，編譯與腳本的測試經驗可以參考[解讀GFS之MCIP版本(NACC)](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/NACC/)，真希望國內能有人自己來做gfs的預報。
+- 2022-11-16 補寫過去的新聞似乎不是件好事，比起補寫過去該寫的程式筆記應該算還好。[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests)這篇本來想投稿的，時間一久、反省越多、問題就越多，自己都覺得不好意思投稿了。[2017~2020年冬、春季臺灣北部近域氣團路徑](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/local_traj/#結果討論)這圖還有點意思，有興趣的讀者也許可以用更多年期的數據、更高的解析度自己來做看看。
 - 2022-10-13 6月底到10月這期間主要完成了[東亞](http://125.229.149.182:8084/)、[中國東南](http://125.229.149.182:8085/)與[臺灣](http://125.229.149.182:8086/)3個範圍、未來5天之[空氣品質預報系統](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/)，建立了[earth顯示系統](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/earth)，也陸續將過去做的[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/)做一個整理與更新。
 
 {: .no_toc }

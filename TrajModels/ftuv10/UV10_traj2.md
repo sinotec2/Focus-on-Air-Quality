@@ -8,7 +8,7 @@ permalink: /TrajModels/ftuv10
 last_modified_date: 2022-03-31 15:20:02
 ---
 
-# 地面二維軌跡分析(ftuv10.py)
+# 地面uv10二維軌跡分析
 {: .no_toc }
 
 <details open markdown="block">
@@ -21,18 +21,12 @@ last_modified_date: 2022-03-31 15:20:02
 </details>
 ---
 
-## 原理
-- 讀取地面10m高度之風場(wrfout格式)
-- 自測站開始進行2維反軌跡計算
-- 超過3公里解析度範圍，則繼續讀取15公里解析度檔案。
-- 輸出結果(csv檔案)可以轉成geojson檔案，貼在[GitHub Pages](https://sinotec2.github.io/traj/)畫面
+## 背景
 
-## Usage
+- 有別於觀測站地面風速之軌跡分析([由CWB數據計算軌跡][traj])，[ftuv10.py][ftuv10]乃讀取wrfout中的地面10m風速(U10)變數，來進行正/反軌跡計算。
+- 因其格式的特性，可以讀取過去分析或未來預報之風場，更能靈活應用。
+- 讀取的是模式結果，在外海、山區等地，會比內(外)插風場有較為合理的結果。然而在測站代表性較高的地方，模式模擬不見得會比觀測來得準。
+- 假設空氣質點沒有高度的位移，可以顯示整體地面風場的平移效果，因此使用在風速較為顯著的天候。對於靜風、垂直擴散強烈之天候，會有過於保守的評估。3維軌跡線的分析可以詳見[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests)系列筆記的說明。
 
-```bash
-PY=/Users/Data/cwb/e-service/btraj_WRFnests/ftuv10_5d.py
-cd /Library/WebServer/Documents
-today=$(date +%Y%m%d)
-for t in zhongshan zhongming jiayi qianjin;do
-  $PY -t $t -d ${today}12 -b True
-```
+[ftuv10]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/ftuv10/> "地面uv10二維軌跡分析程式"
+[traj]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/> "由CWB數據計算軌跡"

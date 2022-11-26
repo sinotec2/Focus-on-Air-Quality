@@ -56,7 +56,7 @@ last_modified_date: 2021-12-18 20:50:01
 
 ### brk_day2.cs腳本程式內容
 
-{% include download.html content="[brk_day2.cs](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)" %}
+{% include download.html content="[brk_day2.cs](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/netCDF/brk_day2.cs)" %}
 
 
 ### 平行運作

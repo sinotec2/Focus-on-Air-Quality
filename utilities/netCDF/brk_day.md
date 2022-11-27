@@ -78,22 +78,84 @@ last_modified_date: 2021-12-18 20:50:01
 - 列印m3.nc的時間標籤[pr_tflag.py][pr_tflag]
 - NCO程式：ncks、ncatted、ncrcat
 
-### 陣列語法之應用
+### 各個工作站NCO目錄定義
 
-- 記錄所有[pr_tflag.py][pr_tflag]的結果：雙數為yyyyjjj、單數為hh0000
-- 將前述結果陣列改成ymd(YYYYMMDD)、hrs(HH)、以及yms(yymm)，分別用作逐日標籤、timeframe辨識、以及月份目錄。
+- 改用陣列形式較為簡潔
+- 簡單的if可以用test來優化
+
+```bash
+HOSTs=( '125-229-149-182.hinet-ip.hinet.net' 'master' 'centos8' 'node03' )
+NCOs=( '/opt/anaconda3/bin' '/cluster/netcdf/bin' '/opt/anaconda3/envs/py37/bin' '/opt/miniconda3/bin' )
+NCO='/usr/bin'
+for i in {0..3};do test $HOSTNAME == ${HOSTs[$i]} && NCO=${NCOs[$i]};done
+NCKS=${NCO}/ncks
+NCATTED=${NCO}/ncatted
+NCRCAT=${NCO}/ncrcat
+```
+
+### 序列語法之應用
+
+- `f`序列
+  - 記錄所有[pr_tflag.py][pr_tflag]的結果
+  - 雙數為yyyyjjj、單數為hh0000
+
+```bash
+f=();for i in $(python ~/bin/pr_tflag.py $fn);do j=${i/[/};k=${j/]/};f=( ${f[@]} $k); done
+```
+
+- 時間標籤序列，將前述結果陣列改成
+  - ymd(YYYYMMDD)：用作逐日標籤
+  - hrs(HH)：timeframe辨識、以及
+  - yms(yymm)：月份目錄。
+
+```bash
+for ((h=0;h < $nt; h+=2));do
+  yj=$(echo ${f[$h]})
+  ymdi=$(~/bin/j2c $yj)
+  yrmn=$(echo ${ymdi}|cut -c 3-6)
+  hh=$(echo ${f[$(( $h + 1 ))]});hh=$(( 10#$hh / 10000 ));hh=$(printf "%02d" ${hh})
+  yjs=( ${yjs[@]} $yj )
+  ymd=( ${ymd[@]} $ymdi )
+  hrs=( ${hrs[@]} $hh )
+  yms=( ${yms[@]} $yrmn )
+  mkdir -p $yrmn
+done
+```
 
 ### ncks及ncatted
 
 - 將檔案切割成一個個timeframe檔案，將時間標籤記錄在檔案名稱規則之中。
-- 因每日檔案長度可能不同，全域屬性SDATE及STIME不知要加在哪一個檔案。因此最保險的做法就是每個檔案都將SDATE及STIMEdou用ncatted改成正確，如此怎麼串連都會是正確的結果。
+- 因每日檔案長度可能不同，全域屬性SDATE及STIME不知要加在哪一個檔案。因此最保險的做法就是每個檔案都將SDATE及STIME都用ncatted改成正確，如此不論怎麼串連、覆蓋都會是正確的結果。
+
+```bash
+for ((h=0;h < $nt; h+=1));do
+  newfn=${fn}_${ymd[$h]}${hrs[$h]}
+  $NCKS -O -d TSTEP,$h $fn ${yms[$h]}/$newfn
+  $NCATTED -O  -a SDATE,global,o,i,${yjs[$h]} ${yms[$h]}/$newfn
+...
+done
+```
 
 ### ncrcat之啟動
 
 - 整併迴圈可以就檔案的日數、或timeframe個數(換日則處理前日檔案)等等2種方式
   - 每日檔案可能有不同時間，也不見得從0時開始，因此按日數迴圈的程式設計會太複雜。
-  - 換日時執行：此方案雖然可行，但最後日需特別處理
+  - 換日時執行：此方案較為單純，只需特別處理最後日
 - ncrcat執行完畢後，每個timeframe暫存檔案即可刪除
+
+```bash
+...
+nt=$(echo ${#ymd[@]});nt1=$(( $nt - 1 ))
+ymdold=${ymd[0]};yrmn=${yms[0]}
+for ((h=0;h < $nt; h+=1));do
+...
+  if [[ ${ymd[$h]} != $ymdold ]] || [[ $h == $nt1 ]];then
+    if [[ $h == $nt1 ]];then ymdold=${ymd[$h]};yrmn=${yms[$h]};fi
+    $NCRCAT -O $yrmn/${fn}_${ymdold}?? $yrmn/${fn}_$ymdold
+    rm -f $yrmn/${fn}_${ymdold}??
+    ymdold=${ymd[$h]};yrmn=${yms[$h]}
+  fi
+```
 
 ### 目錄之創建與管理
 
@@ -101,6 +163,9 @@ last_modified_date: 2021-12-18 20:50:01
 - 如果逐月執行需要前後月檔案，再另行連結即可。
 - 最直覺的創建目錄方式，是從每個timeframe時間標籤中讀取年月時，就一併創建。(mkdir -p會略過已經存在的目錄)
 
+### brk_day3.cs腳本程式內容
+
+{% include download.html content="[brk_day2.cs](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/netCDF/brk_day3.cs)" %}
 
 [pr_tflag]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/> "列印m3.nc的時間標籤"
 [ln_run12cs]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/PTSE/3.pt_timvarWork/#ln_run12cs> "ln_run12.cs"

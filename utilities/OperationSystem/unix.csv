@@ -1,0 +1,362 @@
+▒▒O,▒γ~,▒Բӿﶵ
+#,length of variable,"myvar=""some string"";echo ${#myvar}  ->11
+i=asdfa.nc
+l=$(echo ${#i}); m=$(( $l - 3 ));j=$(echo $i|cut -c 1-$m);echo $j;->asdfa"
+"${VAR/old/new}
+${VAR//old/new}","▒m▒▒▒▒▒▒ܼƪ▒▒▒▒e
+(/▒m▒▒▒Ĥ@▒ӡB//▒▒▒m▒▒)","a=COMBINE_ACONC_v53_gcc_1601_run12_20160131_TWN_3X3_10X.nc;b=${a/10X/10F}
+$ echo $b
+COMBINE_ACONC_v53_gcc_1601_run12_20160131_TWN_3X3_10F.nc
+"
+%,▒▒r▒▒-▒R▒r▒▒▒▒▒k,"url=http://163.29.251.188/botedata/%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F/105%E5%B9%B4%E5%BA%A6/105%E5%B9%B4%E5%BA%A6%E8%87%BA%E5%8C%97%E5%B8%82%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F%E5%8F%8A%E7%89%B9%E6%80%A7%E8%AA%BF%E6%9F%A5.files/sheet001.htm
+strA=$url
+ strB=`echo ${strA%/*}`
+strC=`echo ${strB%/*}`
+echo $strC
+http://163.29.251.188/botedata/%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F/105%E5%B9%B4%E5%BA%A6"
+[▒K],"1.▒}▒C▒▒▒I▒s
+2.▒▒▒W▒R▒W▒▒▒i▒▒N▒ܼ▒","for i in {1..3};do ABC[$(( $i - 1 ))]=$i.S.grd02; done
+2.rm fortBE.[01234]13"
+{▒K},loop domain,
+10#,▒H10▒▒▒򩳪▒▒p▒▒,"Value too great for base (error token is ▒▒08▒▒)
+if [[ $((10#$vara)) -lt $((10#$varb)) ]] (▒@▒w▒nvar?)"
+ARRAY USAGE,,"$ more MONTH.cs
+#Bbrate=(1.55 1.18 1.15 1.18 0.73 0.63 0.58 0.56 0.44 1.07 1.35 1.60)
+#B2 brate=(1.76 1.39 1.36 1.39 0.24 0.21 0.19 0.19 0.65 1.28 1.55 1.80)
+#B3 brate=(1.83 1.46 1.43 1.46 0.24 0.21 0.19 0.19 0.15 1.35 1.63 1.87 )
+       1    2    3    4    5    6    7    8    9    10   11   12
+brate=(2.06 1.35 1.40 1.50 1.30 0.39 0.25 0.24 0.6  1.24 1.60 1.63)
+srate=(1.05 1.15 1.15 1.05 1.05 1.20 1.20 1.20 1.20 1.20 1.05 1.05)
+vrate=(1.00 1.00 1.00 1.00 0.90 0.90 0.90 0.90 0.90 1.00 1.00 1.10)
+prate=(1.00 1.00 1.00 0.80 1.00 1.00 1.00 1.00 1.00 1.00 0.75 1.00)
+orate=(1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.80 1.00 0.75 1.00)
+#for m in 1 5 9 2 6 10 3 7 11 4 8 12;do
+for m in 9;do
+n=$(( m - 1 ))
+test $m -lt 10 && m='0'$m
+rm -f emteds.inp
+cp teds90-0/emteds.inp.BLK emteds.inp
+for cmd in ""s/MM/""$m/ ""s/nox/""${brate[$n]}/  ""s/sox/""${srate[$n]}/ \
+ ""s/voc/""${vrate[$n]}/ ""s/tsp/""${prate[$n]}/ ""s/ole/""${orate[$n]}/ ;do
+sed -i $cmd emteds.inp
+done
+em-cnty-teds9M
+rm -f olds/fortBE.013
+mv fortBE.T13 olds/fortBE.013
+ems1-4-pM
+for j in 1 2 3 4;do
+mv fortBE.$j""13"" teds90-0/fortBE$m.$j""13""
+done
+done
+----
+all of array: echo ${a[@]} |wc
+"
+at,"(batch, jobs)",
+atq,▒߰▒At▒▒▒p,
+atrm,Remove a job,
+awk,▒▒▒▒▒▒,"$ ls -l |grep '>' |sed 's/-.*$//g' | sed 's/lrwxrwxrwx/rm/g'|awk '{print $1 ""\t"" $9}' >rmm
+$ cat ~/bin/awkk
+awk '{print $'$1'}' (awkk n, n=1,2,▒K▒C▒X▒▒n▒椺▒e)"
+bc, An arbitrary precision calculator language,"mod=$(echo ""$mod*(-1)"" |bc -l)
+'-l, --mathlib
+       In /bin/sh,  the following will assign the value of ""pi"" to the shell variable pi.
+
+              pi=$(echo ""scale=10; 4*a(1)"" | bc -l)
+
+       The following is the definition of the exponential function used in  the  math  library.   This
+       function is written in POSIX bc.
+
+              scale = 20
+
+              /* Uses the fact that e^x = (e^(x/2))^2
+                 When x is small enough, we use the series:
+                   e^x = 1 + x + x^2/2! + x^3/3! + ...
+              */
+
+              define e(x) {
+                auto  a, d, e, f, i, m, v, z
+
+                /* Check the sign of x. */
+                if (x<0) {
+                  m = 1
+                  x = -x
+                }
+
+                /* Precondition x. */
+                z = scale;
+                scale = 4 + z + .44*x;
+                while (x > 1) {
+                  f += 1;
+                  x /= 2;
+                }
+
+                /* Initialize the variables. */
+                v = 1+x
+                a = x
+                d = 1
+
+                for (i=2; 1; i++) {
+                  e = (a *= x) / (d *= i)
+                  if (e == 0) {
+                    if (f>0) while (f--)  v = v*v;
+                    scale = z
+                    if (m) return (1/v);
+                    return (v/1);
+                  }
+                  v += e
+                }
+              }
+       The  following  is code that uses the extended features of bc to implement a simple program for
+       calculating checkbook balances.  This program is best kept in a file so that  it  can  be  used
+       many times without having to retype it at every use.
+
+              scale=2
+              print ""\nCheck book program!\n""
+              print ""  Remember, deposits are negative transactions.\n""
+              print ""  Exit by a 0 transaction.\n\n""
+
+              print ""Initial balance? ""; bal = read()
+              bal /= 1
+              print ""\n""
+              while (1) {
+                ""current balance = ""; bal
+                ""transaction? ""; trans = read()
+                if (trans == 0) break;
+                bal -= trans
+                bal /= 1
+              }
+              quit
+
+       The following is the definition of the recursive factorial function.
+
+              define f (x) {
+                if (x <= 1) return (1);
+                return (f(x-1) * x);
+              }
+"
+break,▒▒▒▒▒▒loop,break n▒▒▒▒▒▒▒n▒Ӱj▒▒
+c++,C compiler,
+cal,▒▒▒,
+cat,▒▒ܤ▒r▒▒,
+cd,Change dir,
+chgrp,change group,chgrp -R newgroup file/directory
+chmod,▒▒▒▒ɮ▒▒ݩ▒,
+chown,▒▒▒Ҧ▒▒v,
+clear,▒M▒▒▒ù▒,
+cmp,compare,"cmp --silent file1 file2 && echo '### SUCCESS: Files Are Identical! ###' || echo '### WARNING: Files Are Different! ###'
+for i in {03..12};do head 106$i▒▒{* -n1>b;cmp --silent a b || echo ""files are different"";done
+"
+continue,do loop▒▒▒▒}▒▒▒~▒▒▒▒A▒▒▒U▒@▒▒index(like fortran cycle),if [ $i == 100 ];then continue 3;fi (▒▒▒3▒hloop)
+cp,copy,
+cut,▒N▒@▒q▒T▒▒▒▒▒Y▒@▒q▒▒▒L▒y▒▒z▒X▒ӡ▒ ▒B▒z▒▒▒T▒▒▒O▒H▒y▒▒z▒▒▒▒▒,"echo ${PATH} | cut -d ':' -f 5▒▒▒Ÿ▒:,▒▒5▒▒field
+cut -c 1-2(▒ťX▒▒1-2▒Ӧr▒▒)"
+date,▒▒ܤ▒▒ɶ▒," set START_DATE = ""2010-05-02""     #> beginning date (May 1, 2010)
+set TODAYJ = `date -ud ""${START_DATE}"" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
+while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
+  set YYYYMMDD = `date -ud ""${TODAYG}"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYMMDD
+  set YYYYMM = `date -ud ""${TODAYG}"" +%Y%m`     #> Convert YYYY-MM-DD to YYYYMM
+  set YYMMDD = `date -ud ""${TODAYG}"" +%y%m%d`   #> Convert YYYY-MM-DD to YYMMDD
+  set YESTERDAY = `date -ud ""${TODAYG}-1days"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYJJJ
+   set TODAYG = `date -ud ""${TODAYG}+1days"" +%Y-%m-%d` #> Add a day for tomorrow
+  set TODAYJ = `date -ud ""${TODAYG}"" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
+    set day = `date -ud ""${day}+1days"" +%Y-%m-%d`
+OSX▒▒date▒@▒k▒▒▒▒▒▒▒P▒G
+set STD_YMD = `date -j -f ""%Y-%m-%d"" ""${START_DATE}"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYMMDD
+setenv EXECUTION_ID ""CMAQ_CCTM${VRSN}_`id -u -n`_`date -u +%Y%m%d_%H%M%S_%N`""    #> Inform IO/API of the Execution ID
+set TODAYJ = `date -j -f ""%Y-%m-%d""  ""${START_DATE}"" ""+%Y%j""` #> Convert YYYY-MM-DD to YYYYJJJ
+set STOP_DAY = `date -j -f ""%Y-%m-%d""  ""${END_DATE}"" ""+%Y%j""` #> Convert YYYY-MM-DD to YYYYJJJ
+while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
+  set YYYYMMDD = `date -j -f ""%Y-%m-%d"" ""${TODAYG}"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYMMDD
+  set YYYYMM = `date -j -f ""%Y-%m-%d""  ""${TODAYG}"" +%Y%m`     #> Convert YYYY-MM-DD to YYYYMM
+  set YYMMDD = `date -j -f ""%Y-%m-%d""  ""${TODAYG}"" +%y%m%d`   #> Convert YYYY-MM-DD to YYMMDD
+  set YESTERDAY = `date -v-1d -j -f ""%Y-%m-%d""  ""${TODAYG}"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYJJJ
+  set TODAYG = `date -v+1d -j -f ""%Y-%m-%d""  ""${TODAYG}"" ""+%Y-%m-%d""` #> Add a day for tomorrow
+  set TODAYJ = `date -j -f ""%Y-%m-%d""  ""${TODAYG}"" ""+%Y%j""` #> Convert YYYY-MM-DD to YYYYJJJ
+    set day = `date -v+1d -j -f ""%Y-%m-%d"" ""${day}"" +%Y-%m-%d`
+Julian Date▒▒▒d▒▒
+$ cat ~/bin/shk_Days_DM.cs
+#$1:first mmdd
+#$2:last  mmdd
+#$3:domain d01~d04
+
+if [ $HOSTNAME == '114-32-164-198.HINET-IP.hinet.net' ];then NCO='/opt/anaconda3/bin'
+elif [ $HOSTNAME == 'master' ];then NCO='/cluster/netcdf/bin'
+elif [ $HOSTNAME == 'centos8' ];then NCO='/opt/anaconda3/envs/py37/bin'
+elif [ $HOSTNAME == 'node03' ];then NCO='/opt/miniconda3/bin'
+else NCO='/usr/bin'
+fi
+NCKS=${NCO}/ncks
+NCRCAT=${NCO}/ncrcat
+
+VAR='TFLAG,CO,NO2,SO2,O3,PM25_NO3,PM25_SO4,PM25_TOT,PM10,VOC'
+
+CASE=10
+ROOT=$3
+test $ROOT == 'd04' && GRID='TWN_3X3'
+test $ROOT == 'd01' && GRID='EAsia_81K'
+test $ROOT == 'd02' && GRID='sChina_27k'
+
+yymm=$(echo $PWD|cut -d'_' -f5|cut -d'/' -f1)
+bdate=`echo $(ls -rt COMBINE_ACONC*${GRID}_${CASE}.nc|head -n1)|cut -d'_' -f7`
+bjul=$(date -d ""$bdate"" +%Y%j)
+fjul=$(date -d ""2016$1"" +%Y%j)
+ljul=$(date -d ""2016$2"" +%Y%j)
+bi=$(( $fjul - $bjul + 1))
+ei=$(( $ljul - $bjul + 1))
+for ((i=$bi;i<=$ei;i+=1));do
+  j=$(( 10#$i - 1 ))
+  r=$( echo $j/4+5|bc )
+  cdate=$(date -d ""$bdate +${j} day"" +%Y%m%d)
+  file=COMBINE_ACONC_v53_gcc_${yymm}_run${r}_${cdate}_${GRID}_${CASE}.nc
+  echo $file
+  $NCKS -O -v $VAR -d LAY,0,0 $file ${cdate}_$ROOT.nc
+done
+$NCRCAT -O 20*_$ROOT.nc $ROOT.nc
+"
+declare,change certain variable in lower(-l) or upper(-u) case,"$ declare -l i;for c in $(ls *);do i=$c;mv $c $i;done  ->▒N▒ؿ▒U▒Ҧ▒▒j▒g▒▒▒ɮצW▒ٳ▒▒令▒p▒g
+(macOS can not declare lower case)
+"
+df,Disk information,-h(human read)
+diff,▒▒▒ɮת▒▒t▒▒,
+dos2unix,▒t▒ή榡▒ഫ,
+du,Disk usage,"-h(human read)
+du -ach  ->sum up the files"
+echo,Script▒▒,echo ${HOSTNAME: -1} show the last character of $HOSTNAME
+"echo ""${string}"" | awk -F""${char}"" '{print NF-1}'", count the number of occurrences of a char in a string using Bash," string=test.dat.old
+char=\.
+ echo ""${string}"" | awk -F""${char}"" '{print NF-1}'
+2
+"
+env,▒▒▒▒▒ҳ]▒w,
+eval(▒▒r▒ܫ▒O),"The args are read and concatenated together into a single command.  This command is then
+              read and executed by the shell, and its exit status is returned as the  value  of  eval.
+              If there are no args, or only null arguments, eval returns 0.","#!/bin/bash
+START=1
+END=5
+for i in $(eval echo ""{$START..$END}"")
+do
+ echo ""$i""
+done
+for i in {1..3};do eval ""fn$i=$dir/$root""v""$n${ABC[$(( $i - 1 ))]}.S.grd02""; done"
+export,▒▒ҳ]▒w,
+fdisk -l, List  the  partition  tables," List  the  partition  tables  for  the  specified devices and then exit.  If no devices are given, those mentioned in /proc/partitions  (if  that  exists)  are used. List  the  partition  tables  for  the  specified devices and then exit.  If no devices are given, those mentioned in /proc/partitions  (if  that  exists)  are used."
+find,▒▒▒ɮ▒,"findc: find . -name ""$1""; echo ""total: "";find . -name ""$1""|wc -l
+-samefile (▒▒hard link▒▒▒ӷ▒▒ΰƥ▒)-inum NUM(ls -i▒▒NUM)"
+for,do loop,"for i in {01..12};do tail -n3 Out$i/*met|head -n1;done
+for i in $(ls d*BLK);do cp $i $i.seq;done"
+ftp,▒▒▒▒▒▒,▒{▒h▒Q▒▒A▒▒Hsftp▒▒N
+g++,C compiler,
+gcc,C compiler,
+gdb,Debugger,
+grep,Match pattern,"-i(▒▒▒▒j▒p▒g)-A1(▒▒1▒▒)-B5(▒e5▒▒)-n(▒▒w▒ɮצW▒▒)-color(▒C▒▒▒▒▒)
+▒▒grep▒]▒▒A▒n▒▒▒upipeline1▒▒▒A▒▒▒▒▒ echo 'maps.google.com' | grep -o '[^.]*$' grep -o▒▒▒N▒▒O▒u▒L▒X▒ӲŦXquote▒▒▒▒▒▒A▒▒quote▒O▒H.▒▒▒_▒▒(^.)▒A▒@▒▒▒▒▒▒($)▒▒▒▒▒▒▒▒▒r▒▒(*)▒A▒]▒▒▒▒▒״N▒Ocom▒F▒C"
+gzip,▒▒Y▒ɳB▒z,
+head,▒u▒▒ܫe10▒▒,"num=`ncdump $1|head -n3|tail -n1|sed 's/^.*(//g'|awk '{print $1}'`
+▒Nwrfout.nc▒▒3▒檺▒Ʀr(Time = UNLIMITED ; // (** currently))▒g▒X"
+history,history,
+host,▒▒▒whostname,
+if,,"(▒@) bash script▒ɮ▒
+Do loop▒Gfor I in 1 2 3;do ▒K;done
+IF▒Gif [ ▒▒$I▒▒ = ▒▒1▒▒ ];then▒Kelif [▒K]; then▒Kfi
+Assign▒GYear=2010
+Argument▒GYear=▒▒$1▒▒
+(▒G) C-shell script▒ɮ▒
+Do loop▒Gset I = 1;while ($I <= 12)▒K;set I = `expr $I + 1`;end
+IF▒Gif ($I == ▒▒1▒▒ );then▒Kelse if (▒K); then▒Kendif
+Assign▒Gset Year = 2010
+Argument▒GYear=▒▒$1▒▒
+▒`▒N▒bset▒ܼƩM▒▒▒▒▒Τ▒▒e▒▒▒e▒A▒▒▒n▒▒▒Ů▒A▒~▒|▒▒{▒C"
+if [ -e filename];,▒ɮצs▒b(▒O),symlink exist and not broken: if [ -L ${my_link} ] && [ -e ${my_link} ]▒K
+"if [ -z ""$var"" ];",▒▒▒▒ܼ▒var▒▒▒w▒q(▒O),
+ifconfig,net configure,"▒▒▒▒]▒w▒ɩ▒b/etc/sysconfig/network-scripts/ifcfg-NAM
+▒▒d Inet addr Bcast Mask gateway
+sino1
+em1 200.200.121.71 200.200.255.255 255.255.0.0 200.200.18.1
+lo 127.0.0.1 127.255.255.255 255.0.0.0
+sino4 (localhost)
+eth0 59.124.9.104 60.250.150.255 255.255.255.0
+eth3 200.200.121.74 200.200.121.255 255.255.0.0 200.200.18.1
+lo 127.0.0.1 127.255.255.255 255.0.0.0
+virbro 192.168.122.1 192.168.122.255 255.255.255.0
+"
+kill,▒屼▒@▒~▒{▒▒,"kill -9 $(ps -ef|grep $1|grep -v grep|awk '{print $2}') (kil camx:▒|▒N▒Ҧ▒▒I▒▒▒▒▒▒檺camx▒▒▒▒▒U▒▒)
+for i in $(ps -ef|grep $1 |awkk 2);do sudo kill -9 $i;done (kill_all▒P▒W)"
+ln,▒▒▒ɮ׳s▒▒,"▒▒▒▒ Linux ▒p▒е▒(2009),▒▒▒▒s▒▒▒P▒Ÿ▒▒s▒▒▒G ln, http://linux.vbird.org/linux_basic/0230filesystem.php#link"
+locate,locations of file,
+ls,List,"lsd: ls ▒Vl $1|grep ""^d""▒Blst: ls $1 -lrt|tail▒Blsr: ls --show-control-chars -hF --color=tty -ltd $(findc $1)"
+lscpu,▒ݦ▒▒h▒▒CPU,(▒D▒зǫ▒O▒A▒i▒▒ݭn▒w▒▒)
+make,▒sĳ▒{▒▒,
+man,manual,
+mc,Midnight comm(DOS▒▒▒▒▒▒▒ɮ▒▒`▒▒),
+mintty,Min-tty,
+mkdir,▒}▒s▒ؿ▒,
+mmv,Multiple mv,"Multiple mv, ▒ëDunix▒▒▒зǫ▒O▒Acygwin▒▒▒▒▒▒▒t▒▒U▒▒Ammv ""met_em.d04.2013-0?-0?_*_00_00.nc"" ""met_em.d01.2013-0#1-0#2_#3_00_00.nc"""
+more,▒▒▒,
+mv,Move,
+"MyVar=""${DEPLOY_ENV:-default_value}""",chech values exist,"if [[ -z ""${DEPLOY_ENV}"" ]]; then
+  MY_SCRIPT_VARIABLE=""Some default value because DEPLOY_ENV is undefined""
+else
+  MY_SCRIPT_VARIABLE=""${DEPLOY_ENV}""
+fi
+
+[[ -z ""${DEPLOY_ENV}"" ]] && MyVar='default' || MyVar=""${DEPLOY_ENV}"""
+newgrp,linux - how to login as a member of specific group,chgrp specificgrp
+nice / renice,▒վ▒▒▒{▒▒▒▒▒u▒▒▒,"renice 19 2343 (20 is lowest priority,2343▒K is the PID)
+renice +1 2343 -u seal (seal is the user name)
+renice +1 987 -u daemon root -p 32 (-p = process)"
+nohup,No hang up,
+objdump,▒ˬd▒▒▒▒ɳs▒▒▒▒▒▒ǵ{▒▒▒w,objdump -x CCTM_v532.exe |grep NEEDED
+oclock,▒▒▒▒,
+pdsh,issue commands to groups of hosts in parallel,pdsh -w node0[1-3] uptime
+ping,▒▒▒q▒_,
+printenv,p. env.,▒Penv
+printf,integer to string,A=$( printf '%04d' $A ); A=5 ->0005
+ps,▒ݧ@▒~(▒@▒▒),"-ef, -aurx"
+pwd,P. work dir,
+rev,reverse of word,▒▒!▒▒ڧ▒▒o▒▒O▒F:rev=reverse▒A-f1|rev▒▒1▒▒N▒ܦ▒▒̥▒▒▒F▒A▒N▒▒▒n▒A-f4▒ƨ쩳▒藍▒▒Ctry this... echo 'maps.google.com' | rev | cut -d'.' -f 1 | rev
+rm,remove,
+rmdir,Rm-dir,
+scp,secure cp,"scp username@tohostname:/remotefile /newlocalfile
+scp sino1:.bash_profile a
+scp -r dir1 destiny (▒ƻs▒▒ӥؿ▒)"
+sed,"Stream Editor
+http://wanggen.myweb.hinet.net/ach3/ach3.html?MywebPageId=2017161497573157030#sed_basic","$ ls -l |grep '>' |sed 's/^.*->/ln /g' >lnn
+test $1 -eq 1 && `sed -i '9s/LRST/true/'  CAMx.in`
+for cmd in ""s/YY/""$2/ ""s/MM/""$3/ ""s/MM/""$3/ ""s/ROOT/""$4/ ""s/YB/""$YB/ ;do
+sed -i $cmd CAMx.in;done
+▒R▒▒▒▒1▒▒for i in $(ls -l con??/ovm.dat1|awk8);do sed -i '1d' $i;done
+▒R▒▒problem.lin▒ɮפ▒▒Ҧ▒▒渹(▒▒ۤ϶▒▒▒)for i in $(cat problem.lin |sort -n -r);do export b=$i'd'; sed -i $b $a;done
+!sed -i '23169,23296s/$/;""VOC"";;;;;;;! Added by YCKuang/'  someTXTfile
+sed -o 's/AAA/BBB/5' file ->change AAA to BBB at line #5 of file
+sed -i -E 's/^(.{5})\""/\1/g' gspro.add (change from  ""0277"";""VOC"" ... -> ""0277;""VOC""......
+sed -i '/Root_Output_Name/s/_M/_2/g' CAMx.in? (▒▒▒▒ɮפ▒▒▒Root...▒r▒ꪺ▒▒▒@▒▒A▒A▒N▒Ӧ▒Ҧ▒▒▒_M▒m▒▒▒▒▒▒_2)
+sed -i '34s/AAA/BBB/' file_name(▒u▒▒▒▒▒34▒檺AAA)
+▒u▒L▒X▒S▒w▒渹▒▒▒▒椺▒e(2019_hua_dong)
+cp header.txt a.dat;for ((y=1;y<=1209;y+=1));do ln=$(sed -n -e ${y}p 062238.dat);IX=$(echo $ln|awkk 1);IY=$(echo $ln|awkk 2); echo $IX, $IY, name$y, desc$y >>a.dat;done
+cp header.txt b.dat;for ((y=1;y<=503;y+=1));do ln=$(sed -n -e ${y}p 062340.dat);IX=$(echo $ln|awkk 1);IY=$(echo $ln|awkk 2); echo $IX, $IY, name$y, desc$y >>b.dat;done
+
+"
+sfdisk -l,▒˵▒t▒▒partition▒▒▒A,▒]▒A▒w▒g▒▒▒▒P▒▒▒▒▒▒Ϻо▒B▒▒Щ▒usb▒j▒▒СA▒▒▒df▒˵▒O▒_▒w▒g▒▒▒▒▒A▒i▒H▒~▒▒▒汾▒▒Ψ▒▒
+showmount,▒d▒߶}▒񱡪p,
+sleep,sleep,sleep 5s;sleep 3m (mac ▒▒▒A▒▒)
+sort,▒Ƨ▒,
+source,▒}▒▒▒▒ҳ]▒w,
+ssh,Secure sh,"ssh target ""nohup ./test.sh >/dev/null 2>&1 &"".
+ssh -t target top"
+sshfs,ssh and mount as dir,"mkdir ~/destination_path; sshfs username@remote:/source_dir ~/destination_path
+(may be checked by df -h)
+(close with fusermount -u ~/destination_path )"
+tail,▒u▒▒ܥ▒10▒▒,"grep ""clock current time"" nohup.out |tail
+tail -n 20 -f  --sleep-interval=10 nohup.out | grep ""clock current time"""
+tar,▒B▒z▒]▒▒▒▒,▒▒▒▒(▒▒)▒▒Y▒▒▒▒O▒▒▒ܦh▒A▒i▒H▒ѦҺ▒;▒z▒▒▒▒O▒▒C(▒p) ▒᤯▒▒▒▒▒O(2008) GNU / Linux ▒U▒▒▒▒Y▒P▒▒▒▒Y▒▒Ohttp://note.drx.tw/2008/04/command.html
+top,▒ݧ@▒~,"▒▒O,h▒▒help▒Af▒▒format▒Aq▒▒quit▒BW▒▒write▒CVIRT▒▒virtual image▒ARES▒▒Resident Size"
+tree,▒ݥؿ▒,
+unzip,Un-zip,
+uptime,Tell how long the system has been running.,
+vi,Txt editor,vi▒▒O▒▒▒▒(▒▒▒㪩)http://www2.nsysu.edu.tw/csmlab/unix/vi_command.htm
+wc,line count,"while ! [ $(wc -c <""$fn1"") -eq $SIZE -a $(wc -c <""$fn2"") -eq $SIZE -a $(wc -c <""$fn3"") -eq $SIZE ];do sleep 65s;done ($fn1~3▒▒▒ɮפj▒p▒▒▒▒▒▒▒▒▒▒$SIZE▒A▒~▒|▒~▒▒A▒_▒h▒{▒▒▒N▒▒▒▒▒v▒C"
+whereis,▒ɮצb▒▒▒▒,
+which,▒ɮצb▒▒▒Ӹ▒|,
+while,read file line by line in Bash,while read line; do echo $line; done < company.txt
+who,▒▒▒▒,
+xclock,▒▒▒▒,

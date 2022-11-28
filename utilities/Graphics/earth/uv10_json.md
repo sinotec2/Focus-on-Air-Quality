@@ -203,4 +203,4 @@ with open(fnameO,'w') as f:
 [diff_tab]: <https://sinotec2.github.io/FAQ/2022/07/26/CWBwrf_3Km2NWC.html> "earth套件讀取CWB_WRF數據-> diff of first paramter in gfs and cwbwrf_15Km files"
 [ens]: <https://earth.nullschool.net/> "earth, a visualization of global weather conditions, forecast by supercomputers, updated every three hours"
 [wrf_3km]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/> "中央氣象局WRF_3Km數值預報產品"
-[fil_grb_nc]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/fil_grb_nc/> "cwb WRF_3Km->相同網格系統之grb2轉檔"
+[fil_grb_nc]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/4.fil_grb_nc/> "cwb WRF_3Km->相同網格系統之grb2轉檔"

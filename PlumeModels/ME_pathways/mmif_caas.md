@@ -409,7 +409,7 @@ $ cat -n do_mmif2.cs
 - 放在$web/mmif_results/20yy下，以供使用者在[uMap下載](https://umap.openstreetmap.fr/zh-tw/map/mmif-resultstwn_3x3_grids_588696#9/24.2983/121.8186)(詳[地圖上貼連結](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/UMAP/))、及(或)其他應用調用(主要是aermods.html或AERMOD.html)。
 - 降雨量：
 	- 降雨量是HRA評估必須要有的項目
-	- 一般wrfout有降雨量，但在CWB_WRF須注意另外讀取([rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/3.rd_grbCubicA/#rd_grbcubicapy分段說明)、[fil_grb_nc.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/fil_grb_nc/))。
+	- 一般wrfout有降雨量，但在CWB_WRF須注意另外讀取([rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/3.rd_grbCubicA/#rd_grbcubicapy分段說明)、[fil_grb_nc.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/4.fil_grb_nc/))。
 - CWB_WRF資料缺漏補遺(mod_Times.py)
 
 ### 點位選取方式

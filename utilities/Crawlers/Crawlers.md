@@ -35,7 +35,7 @@ last_modified_date:   2022-10-13 09:06:38
   1. 中央氣象局(CWB)每天公開其自動站觀測結果在[CODiS(CWB Observation Data Inquire System)網站](https://e-service.cwb.gov.tw/HistoryDataQuery/)，此處每日12時執行全國昨日監測結果的下載，詳[CODiS筆記](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/)。
   1. 美國[NCEP數據之每日下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/)：為氣象模式起始與邊界、同化等等所需要之觀測(或再分析)數據檔案，包括[再分析結果](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/ff.py/)、[地面](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/ss.py/)及[高空](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/uu.py/)觀測、以及[海溫](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/SST/)。
 - 氣象模式產品
-  1. 中央氣象局數[值預報產品之下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064/)：每日逐6小時下載，應用在[軌跡模式預報](https://sinotec2.github.io/cpuff_forecast/)、[網格空品模式預報][fcst]等等即時性的需求、同時也因應[MMIF](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/ME_pathways/mmif_caas/)、[歷史軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/traj3D/)等等年度分析。  
+  1. 中央氣象局數[值預報產品之下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/1.get_M-A0064/)：每日逐6小時下載，應用在[軌跡模式預報](https://sinotec2.github.io/cpuff_forecast/)、[網格空品模式預報][fcst]等等即時性的需求、同時也因應[MMIF](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/ME_pathways/mmif_caas/)、[歷史軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/traj3D/)等等年度分析。  
   1. 美國國家氣象局(NWS)全球尺度氣象數值預報模式和變分分析([GFS](https://en.wikipedia.org/wiki/Global_Forecast_System))逐日預報檔案之[自動下載](https://sinotec2.github.io/FAQ/2022/08/10/GFStoWRF.html)：用在驅動每日的東亞、南中國等地區氣象場的模式模擬，用以進行[網格空品模式預報][fcst]
 - 天氣報告與天氣圖
   1. 中央氣象局逐6小時天氣預報(文字稿)及天氣圖

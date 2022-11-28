@@ -25,7 +25,7 @@ last_modified_date:   2022-10-26 13:31:34
   - NCEP之檔案如
     - 再分析數據[FNL](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/NCEP/ff.py/)檔與
     - 全球氣象預報模式[GFS](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/GFS/)之輸出檔案
-  - CWB之WRF模擬結果，詳[中央氣象局WRF_3Km數值預報產品之下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/get_M-A0064)
+  - CWB之WRF模擬結果，詳[中央氣象局WRF_3Km數值預報產品之下載](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/1.get_M-A0064)
   - ECMWF之
     - [EAC4](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean)及
     - [CAMS][CAMS]空品預報數據檔格式、

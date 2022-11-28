@@ -1,25 +1,25 @@
-▒▒O,▒γ~,▒Բӿﶵ
+指令,用途,詳細選項
 #,length of variable,"myvar=""some string"";echo ${#myvar}  ->11
 i=asdfa.nc
 l=$(echo ${#i}); m=$(( $l - 3 ));j=$(echo $i|cut -c 1-$m);echo $j;->asdfa"
 "${VAR/old/new}
-${VAR//old/new}","▒m▒▒▒▒▒▒ܼƪ▒▒▒▒e
-(/▒m▒▒▒Ĥ@▒ӡB//▒▒▒m▒▒)","a=COMBINE_ACONC_v53_gcc_1601_run12_20160131_TWN_3X3_10X.nc;b=${a/10X/10F}
+${VAR//old/new}","置換環境變數的內容
+(/置換第一個、//全置換)","a=COMBINE_ACONC_v53_gcc_1601_run12_20160131_TWN_3X3_10X.nc;b=${a/10X/10F}
 $ echo $b
 COMBINE_ACONC_v53_gcc_1601_run12_20160131_TWN_3X3_10F.nc
 "
-%,▒▒r▒▒-▒R▒r▒▒▒▒▒k,"url=http://163.29.251.188/botedata/%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F/105%E5%B9%B4%E5%BA%A6/105%E5%B9%B4%E5%BA%A6%E8%87%BA%E5%8C%97%E5%B8%82%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F%E5%8F%8A%E7%89%B9%E6%80%A7%E8%AA%BF%E6%9F%A5.files/sheet001.htm
+%,切字串-刪字元之右,"url=http://163.29.251.188/botedata/%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F/105%E5%B9%B4%E5%BA%A6/105%E5%B9%B4%E5%BA%A6%E8%87%BA%E5%8C%97%E5%B8%82%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F%E5%8F%8A%E7%89%B9%E6%80%A7%E8%AA%BF%E6%9F%A5.files/sheet001.htm
 strA=$url
  strB=`echo ${strA%/*}`
 strC=`echo ${strB%/*}`
 echo $strC
 http://163.29.251.188/botedata/%E4%BA%A4%E9%80%9A%E6%B5%81%E9%87%8F/105%E5%B9%B4%E5%BA%A6"
-[▒K],"1.▒}▒C▒▒▒I▒s
-2.▒▒▒W▒R▒W▒▒▒i▒▒N▒ܼ▒","for i in {1..3};do ABC[$(( $i - 1 ))]=$i.S.grd02; done
+[…],"1.陣列之呼叫
+2.正規命名之可替代變數","for i in {1..3};do ABC[$(( $i - 1 ))]=$i.S.grd02; done
 2.rm fortBE.[01234]13"
-{▒K},loop domain,
-10#,▒H10▒▒▒򩳪▒▒p▒▒,"Value too great for base (error token is ▒▒08▒▒)
-if [[ $((10#$vara)) -lt $((10#$varb)) ]] (▒@▒w▒nvar?)"
+{…},loop domain,
+10#,以10為基底的計算,"Value too great for base (error token is “08”) 
+if [[ $((10#$vara)) -lt $((10#$varb)) ]] (一定要var?)"
 ARRAY USAGE,,"$ more MONTH.cs
 #Bbrate=(1.55 1.18 1.15 1.18 0.73 0.63 0.58 0.56 0.44 1.07 1.35 1.60)
 #B2 brate=(1.76 1.39 1.36 1.39 0.24 0.21 0.19 0.19 0.65 1.28 1.55 1.80)
@@ -52,11 +52,11 @@ done
 all of array: echo ${a[@]} |wc
 "
 at,"(batch, jobs)",
-atq,▒߰▒At▒▒▒p,
+atq,詢問At狀況,
 atrm,Remove a job,
-awk,▒▒▒▒▒▒,"$ ls -l |grep '>' |sed 's/-.*$//g' | sed 's/lrwxrwxrwx/rm/g'|awk '{print $1 ""\t"" $9}' >rmm
+awk,選取欄位,"$ ls -l |grep '>' |sed 's/-.*$//g' | sed 's/lrwxrwxrwx/rm/g'|awk '{print $1 ""\t"" $9}' >rmm
 $ cat ~/bin/awkk
-awk '{print $'$1'}' (awkk n, n=1,2,▒K▒C▒X▒▒n▒椺▒e)"
+awk '{print $'$1'}' (awkk n, n=1,2,…列出第n行內容)"
 bc, An arbitrary precision calculator language,"mod=$(echo ""$mod*(-1)"" |bc -l)
 '-l, --mathlib
        In /bin/sh,  the following will assign the value of ""pi"" to the shell variable pi.
@@ -134,23 +134,23 @@ bc, An arbitrary precision calculator language,"mod=$(echo ""$mod*(-1)"" |bc -l)
                 return (f(x-1) * x);
               }
 "
-break,▒▒▒▒▒▒loop,break n▒▒▒▒▒▒▒n▒Ӱj▒▒
+break,停止執行loop,break n停止執行第n個迴圈
 c++,C compiler,
-cal,▒▒▒,
-cat,▒▒ܤ▒r▒▒,
+cal,月曆,
+cat,顯示文字檔,
 cd,Change dir,
 chgrp,change group,chgrp -R newgroup file/directory
-chmod,▒▒▒▒ɮ▒▒ݩ▒,
-chown,▒▒▒Ҧ▒▒v,
-clear,▒M▒▒▒ù▒,
+chmod,更改檔案屬性,
+chown,更改所有權,
+clear,清掃螢幕,
 cmp,compare,"cmp --silent file1 file2 && echo '### SUCCESS: Files Are Identical! ###' || echo '### WARNING: Files Are Different! ###'
-for i in {03..12};do head 106$i▒▒{* -n1>b;cmp --silent a b || echo ""files are different"";done
+for i in {03..12};do head 106$i潮州* -n1>b;cmp --silent a b || echo ""files are different"";done
 "
-continue,do loop▒▒▒▒}▒▒▒~▒▒▒▒A▒▒▒U▒@▒▒index(like fortran cycle),if [ $i == 100 ];then continue 3;fi (▒▒▒3▒hloop)
+continue,do loop中跳開不繼續執行，執行下一個index(like fortran cycle),if [ $i == 100 ];then continue 3;fi (指第3層loop)
 cp,copy,
-cut,▒N▒@▒q▒T▒▒▒▒▒Y▒@▒q▒▒▒L▒y▒▒z▒X▒ӡ▒ ▒B▒z▒▒▒T▒▒▒O▒H▒y▒▒z▒▒▒▒▒,"echo ${PATH} | cut -d ':' -f 5▒▒▒Ÿ▒:,▒▒5▒▒field
-cut -c 1-2(▒ťX▒▒1-2▒Ӧr▒▒)"
-date,▒▒ܤ▒▒ɶ▒," set START_DATE = ""2010-05-02""     #> beginning date (May 1, 2010)
+cut,將一段訊息的某一段給他『切』出來～ 處理的訊息是以『行』為單位,"echo ${PATH} | cut -d ':' -f 5分格符號:,第5個field
+cut -c 1-2(剪出第1-2個字元)"
+date,顯示日期時間," set START_DATE = ""2010-05-02""     #> beginning date (May 1, 2010)
 set TODAYJ = `date -ud ""${START_DATE}"" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
 while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
   set YYYYMMDD = `date -ud ""${TODAYG}"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYMMDD
@@ -160,7 +160,7 @@ while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
    set TODAYG = `date -ud ""${TODAYG}+1days"" +%Y-%m-%d` #> Add a day for tomorrow
   set TODAYJ = `date -ud ""${TODAYG}"" +%Y%j` #> Convert YYYY-MM-DD to YYYYJJJ
     set day = `date -ud ""${day}+1days"" +%Y-%m-%d`
-OSX▒▒date▒@▒k▒▒▒▒▒▒▒P▒G
+OSX的date作法略有不同：
 set STD_YMD = `date -j -f ""%Y-%m-%d"" ""${START_DATE}"" +%Y%m%d` #> Convert YYYY-MM-DD to YYYYMMDD
 setenv EXECUTION_ID ""CMAQ_CCTM${VRSN}_`id -u -n`_`date -u +%Y%m%d_%H%M%S_%N`""    #> Inform IO/API of the Execution ID
 set TODAYJ = `date -j -f ""%Y-%m-%d""  ""${START_DATE}"" ""+%Y%j""` #> Convert YYYY-MM-DD to YYYYJJJ
@@ -173,7 +173,7 @@ while ($TODAYJ <= $STOP_DAY )  #>Compare dates in terms of YYYYJJJ
   set TODAYG = `date -v+1d -j -f ""%Y-%m-%d""  ""${TODAYG}"" ""+%Y-%m-%d""` #> Add a day for tomorrow
   set TODAYJ = `date -j -f ""%Y-%m-%d""  ""${TODAYG}"" ""+%Y%j""` #> Convert YYYY-MM-DD to YYYYJJJ
     set day = `date -v+1d -j -f ""%Y-%m-%d"" ""${day}"" +%Y-%m-%d`
-Julian Date▒▒▒d▒▒
+Julian Date的範例
 $ cat ~/bin/shk_Days_DM.cs
 #$1:first mmdd
 #$2:last  mmdd
@@ -213,22 +213,22 @@ for ((i=$bi;i<=$ei;i+=1));do
 done
 $NCRCAT -O 20*_$ROOT.nc $ROOT.nc
 "
-declare,change certain variable in lower(-l) or upper(-u) case,"$ declare -l i;for c in $(ls *);do i=$c;mv $c $i;done  ->▒N▒ؿ▒U▒Ҧ▒▒j▒g▒▒▒ɮצW▒ٳ▒▒令▒p▒g
+declare,change certain variable in lower(-l) or upper(-u) case,"$ declare -l i;for c in $(ls *);do i=$c;mv $c $i;done  ->將目錄下所有大寫的檔案名稱都改成小寫
 (macOS can not declare lower case)
 "
 df,Disk information,-h(human read)
-diff,▒▒▒ɮת▒▒t▒▒,
-dos2unix,▒t▒ή榡▒ഫ,
+diff,兩檔案的差異,
+dos2unix,系統格式轉換,
 du,Disk usage,"-h(human read)
 du -ach  ->sum up the files"
-echo,Script▒▒,echo ${HOSTNAME: -1} show the last character of $HOSTNAME
+echo,Script用,echo ${HOSTNAME: -1} show the last character of $HOSTNAME
 "echo ""${string}"" | awk -F""${char}"" '{print NF-1}'", count the number of occurrences of a char in a string using Bash," string=test.dat.old
 char=\.
  echo ""${string}"" | awk -F""${char}"" '{print NF-1}'
 2
 "
-env,▒▒▒▒▒ҳ]▒w,
-eval(▒▒r▒ܫ▒O),"The args are read and concatenated together into a single command.  This command is then
+env,顯示環境設定,
+eval(文字變指令),"The args are read and concatenated together into a single command.  This command is then
               read and executed by the shell, and its exit status is returned as the  value  of  eval.
               If there are no args, or only null arguments, eval returns 0.","#!/bin/bash
 START=1
@@ -238,60 +238,60 @@ do
  echo ""$i""
 done
 for i in {1..3};do eval ""fn$i=$dir/$root""v""$n${ABC[$(( $i - 1 ))]}.S.grd02""; done"
-export,▒▒ҳ]▒w,
+export,環境設定,
 fdisk -l, List  the  partition  tables," List  the  partition  tables  for  the  specified devices and then exit.  If no devices are given, those mentioned in /proc/partitions  (if  that  exists)  are used. List  the  partition  tables  for  the  specified devices and then exit.  If no devices are given, those mentioned in /proc/partitions  (if  that  exists)  are used."
-find,▒▒▒ɮ▒,"findc: find . -name ""$1""; echo ""total: "";find . -name ""$1""|wc -l
--samefile (▒▒hard link▒▒▒ӷ▒▒ΰƥ▒)-inum NUM(ls -i▒▒NUM)"
+find,找檔案,"findc: find . -name ""$1""; echo ""total: "";find . -name ""$1""|wc -l
+-samefile (找hard link的來源及副本)-inum NUM(ls -i之NUM)"
 for,do loop,"for i in {01..12};do tail -n3 Out$i/*met|head -n1;done
 for i in $(ls d*BLK);do cp $i $i.seq;done"
-ftp,▒▒▒▒▒▒,▒{▒h▒Q▒▒A▒▒Hsftp▒▒N
+ftp,跨網傳檔,現多被關閉，改以sftp取代
 g++,C compiler,
 gcc,C compiler,
 gdb,Debugger,
-grep,Match pattern,"-i(▒▒▒▒j▒p▒g)-A1(▒▒1▒▒)-B5(▒e5▒▒)-n(▒▒w▒ɮצW▒▒)-color(▒C▒▒▒▒▒)
-▒▒grep▒]▒▒A▒n▒▒▒upipeline1▒▒▒A▒▒▒▒▒ echo 'maps.google.com' | grep -o '[^.]*$' grep -o▒▒▒N▒▒O▒u▒L▒X▒ӲŦXquote▒▒▒▒▒▒A▒▒quote▒O▒H.▒▒▒_▒▒(^.)▒A▒@▒▒▒▒▒▒($)▒▒▒▒▒▒▒▒▒r▒▒(*)▒A▒]▒▒▒▒▒״N▒Ocom▒F▒C"
-gzip,▒▒Y▒ɳB▒z,
-head,▒u▒▒ܫe10▒▒,"num=`ncdump $1|head -n3|tail -n1|sed 's/^.*(//g'|awk '{print $1}'`
-▒Nwrfout.nc▒▒3▒檺▒Ʀr(Time = UNLIMITED ; // (** currently))▒g▒X"
+grep,Match pattern,"-i(不分大小寫)-A1(後1行)-B5(前5行)-n(指定檔案名稱)-color(顏色顯示)
+用grep也行，好像只pipeline1次，比較單純 echo 'maps.google.com' | grep -o '[^.]*$' grep -o的意思是只印出來符合quote的部分，而quote是以.為起首(^.)，一直到行尾($)中間的任何字串(*)，因此答案就是com了。"
+gzip,壓縮檔處理,
+head,只顯示前10行,"num=`ncdump $1|head -n3|tail -n1|sed 's/^.*(//g'|awk '{print $1}'`
+將wrfout.nc第3行的數字(Time = UNLIMITED ; // (** currently))寫出"
 history,history,
-host,▒▒▒whostname,
-if,,"(▒@) bash script▒ɮ▒
-Do loop▒Gfor I in 1 2 3;do ▒K;done
-IF▒Gif [ ▒▒$I▒▒ = ▒▒1▒▒ ];then▒Kelif [▒K]; then▒Kfi
-Assign▒GYear=2010
-Argument▒GYear=▒▒$1▒▒
-(▒G) C-shell script▒ɮ▒
-Do loop▒Gset I = 1;while ($I <= 12)▒K;set I = `expr $I + 1`;end
-IF▒Gif ($I == ▒▒1▒▒ );then▒Kelse if (▒K); then▒Kendif
-Assign▒Gset Year = 2010
-Argument▒GYear=▒▒$1▒▒
-▒`▒N▒bset▒ܼƩM▒▒▒▒▒Τ▒▒e▒▒▒e▒A▒▒▒n▒▒▒Ů▒A▒~▒|▒▒{▒C"
-if [ -e filename];,▒ɮצs▒b(▒O),symlink exist and not broken: if [ -L ${my_link} ] && [ -e ${my_link} ]▒K
-"if [ -z ""$var"" ];",▒▒▒▒ܼ▒var▒▒▒w▒q(▒O),
-ifconfig,net configure,"▒▒▒▒]▒w▒ɩ▒b/etc/sysconfig/network-scripts/ifcfg-NAM
-▒▒d Inet addr Bcast Mask gateway
+host,給定hostname,
+if,,"(一) bash script檔案
+Do loop：for I in 1 2 3;do …;done
+IF：if [ “$I” = “1” ];then…elif […]; then…fi
+Assign：Year=2010
+Argument：Year=”$1”
+(二) C-shell script檔案
+Do loop：set I = 1;while ($I <= 12)…;set I = `expr $I + 1`;end
+IF：if ($I == “1” );then…else if (…); then…endif
+Assign：set Year = 2010
+Argument：Year=”$1”
+注意在set變數和等號及內容之前，都要有空格，才會辨認。"
+if [ -e filename];,檔案存在(是),symlink exist and not broken: if [ -L ${my_link} ] && [ -e ${my_link} ]…
+"if [ -z ""$var"" ];",環境變數var未定義(是),
+ifconfig,net configure,"相關設定檔放在/etc/sysconfig/network-scripts/ifcfg-NAM
+網卡 Inet addr Bcast Mask gateway
 sino1
 em1 200.200.121.71 200.200.255.255 255.255.0.0 200.200.18.1
-lo 127.0.0.1 127.255.255.255 255.0.0.0
+lo 127.0.0.1 127.255.255.255 255.0.0.0 
 sino4 (localhost)
-eth0 59.124.9.104 60.250.150.255 255.255.255.0
+eth0 59.124.9.104 60.250.150.255 255.255.255.0 
 eth3 200.200.121.74 200.200.121.255 255.255.0.0 200.200.18.1
-lo 127.0.0.1 127.255.255.255 255.0.0.0
-virbro 192.168.122.1 192.168.122.255 255.255.255.0
+lo 127.0.0.1 127.255.255.255 255.0.0.0 
+virbro 192.168.122.1 192.168.122.255 255.255.255.0 
 "
-kill,▒屼▒@▒~▒{▒▒,"kill -9 $(ps -ef|grep $1|grep -v grep|awk '{print $2}') (kil camx:▒|▒N▒Ҧ▒▒I▒▒▒▒▒▒檺camx▒▒▒▒▒U▒▒)
-for i in $(ps -ef|grep $1 |awkk 2);do sudo kill -9 $i;done (kill_all▒P▒W)"
-ln,▒▒▒ɮ׳s▒▒,"▒▒▒▒ Linux ▒p▒е▒(2009),▒▒▒▒s▒▒▒P▒Ÿ▒▒s▒▒▒G ln, http://linux.vbird.org/linux_basic/0230filesystem.php#link"
+kill,砍掉作業程序,"kill -9 $(ps -ef|grep $1|grep -v grep|awk '{print $2}') (kil camx:會將所有背景中執行的camx都停下來)
+for i in $(ps -ef|grep $1 |awkk 2);do sudo kill -9 $i;done (kill_all同上)"
+ln,做檔案連結,"鳥哥的 Linux 私房菜(2009),實體連結與符號連結： ln, http://linux.vbird.org/linux_basic/0230filesystem.php#link"
 locate,locations of file,
-ls,List,"lsd: ls ▒Vl $1|grep ""^d""▒Blst: ls $1 -lrt|tail▒Blsr: ls --show-control-chars -hF --color=tty -ltd $(findc $1)"
-lscpu,▒ݦ▒▒h▒▒CPU,(▒D▒зǫ▒O▒A▒i▒▒ݭn▒w▒▒)
-make,▒sĳ▒{▒▒,
+ls,List,"lsd: ls –l $1|grep ""^d""、lst: ls $1 -lrt|tail、lsr: ls --show-control-chars -hF --color=tty -ltd $(findc $1)"
+lscpu,看有多少CPU,(非標準指令，可能需要安裝)
+make,編議程式,
 man,manual,
-mc,Midnight comm(DOS▒▒▒▒▒▒▒ɮ▒▒`▒▒),
+mc,Midnight comm(DOS版本的檔案總管),
 mintty,Min-tty,
-mkdir,▒}▒s▒ؿ▒,
-mmv,Multiple mv,"Multiple mv, ▒ëDunix▒▒▒зǫ▒O▒Acygwin▒▒▒▒▒▒▒t▒▒U▒▒Ammv ""met_em.d04.2013-0?-0?_*_00_00.nc"" ""met_em.d01.2013-0#1-0#2_#3_00_00.nc"""
-more,▒▒▒,
+mkdir,開新目錄,
+mmv,Multiple mv,"Multiple mv, 並非unix的標準指令，cygwin版本須另行下載，mmv ""met_em.d04.2013-0?-0?_*_00_00.nc"" ""met_em.d01.2013-0#1-0#2_#3_00_00.nc"""
+more,分頁,
 mv,Move,
 "MyVar=""${DEPLOY_ENV:-default_value}""",chech values exist,"if [[ -z ""${DEPLOY_ENV}"" ]]; then
   MY_SCRIPT_VARIABLE=""Some default value because DEPLOY_ENV is undefined""
@@ -301,62 +301,62 @@ fi
 
 [[ -z ""${DEPLOY_ENV}"" ]] && MyVar='default' || MyVar=""${DEPLOY_ENV}"""
 newgrp,linux - how to login as a member of specific group,chgrp specificgrp
-nice / renice,▒վ▒▒▒{▒▒▒▒▒u▒▒▒,"renice 19 2343 (20 is lowest priority,2343▒K is the PID)
+nice / renice,調整執行程式的優先性,"renice 19 2343 (20 is lowest priority,2343… is the PID)
 renice +1 2343 -u seal (seal is the user name)
 renice +1 987 -u daemon root -p 32 (-p = process)"
 nohup,No hang up,
-objdump,▒ˬd▒▒▒▒ɳs▒▒▒▒▒▒ǵ{▒▒▒w,objdump -x CCTM_v532.exe |grep NEEDED
-oclock,▒▒▒▒,
+objdump,檢查執行檔連結到哪些程式庫,objdump -x CCTM_v532.exe |grep NEEDED
+oclock,時鐘,
 pdsh,issue commands to groups of hosts in parallel,pdsh -w node0[1-3] uptime
-ping,▒▒▒q▒_,
-printenv,p. env.,▒Penv
+ping,網路通否,
+printenv,p. env.,同env
 printf,integer to string,A=$( printf '%04d' $A ); A=5 ->0005
-ps,▒ݧ@▒~(▒@▒▒),"-ef, -aurx"
+ps,看作業(一次),"-ef, -aurx"
 pwd,P. work dir,
-rev,reverse of word,▒▒!▒▒ڧ▒▒o▒▒O▒F:rev=reverse▒A-f1|rev▒▒1▒▒N▒ܦ▒▒̥▒▒▒F▒A▒N▒▒▒n▒A-f4▒ƨ쩳▒藍▒▒Ctry this... echo 'maps.google.com' | rev | cut -d'.' -f 1 | rev
+rev,reverse of word,哈!讓我找到這指令了:rev=reverse，-f1|rev第1欄就變成最末欄了，就不要再-f4數到底對不對。try this... echo 'maps.google.com' | rev | cut -d'.' -f 1 | rev
 rm,remove,
 rmdir,Rm-dir,
 scp,secure cp,"scp username@tohostname:/remotefile /newlocalfile
 scp sino1:.bash_profile a
-scp -r dir1 destiny (▒ƻs▒▒ӥؿ▒)"
+scp -r dir1 destiny (複製整個目錄)"
 sed,"Stream Editor
 http://wanggen.myweb.hinet.net/ach3/ach3.html?MywebPageId=2017161497573157030#sed_basic","$ ls -l |grep '>' |sed 's/^.*->/ln /g' >lnn
 test $1 -eq 1 && `sed -i '9s/LRST/true/'  CAMx.in`
 for cmd in ""s/YY/""$2/ ""s/MM/""$3/ ""s/MM/""$3/ ""s/ROOT/""$4/ ""s/YB/""$YB/ ;do
 sed -i $cmd CAMx.in;done
-▒R▒▒▒▒1▒▒for i in $(ls -l con??/ovm.dat1|awk8);do sed -i '1d' $i;done
-▒R▒▒problem.lin▒ɮפ▒▒Ҧ▒▒渹(▒▒ۤ϶▒▒▒)for i in $(cat problem.lin |sort -n -r);do export b=$i'd'; sed -i $b $a;done
+刪除第1行for i in $(ls -l con??/ovm.dat1|awk8);do sed -i '1d' $i;done
+刪除problem.lin檔案內所有行號(按相反順序)for i in $(cat problem.lin |sort -n -r);do export b=$i'd'; sed -i $b $a;done
 !sed -i '23169,23296s/$/;""VOC"";;;;;;;! Added by YCKuang/'  someTXTfile
 sed -o 's/AAA/BBB/5' file ->change AAA to BBB at line #5 of file
 sed -i -E 's/^(.{5})\""/\1/g' gspro.add (change from  ""0277"";""VOC"" ... -> ""0277;""VOC""......
-sed -i '/Root_Output_Name/s/_M/_2/g' CAMx.in? (▒▒▒▒ɮפ▒▒▒Root...▒r▒ꪺ▒▒▒@▒▒A▒A▒N▒Ӧ▒Ҧ▒▒▒_M▒m▒▒▒▒▒▒_2)
-sed -i '34s/AAA/BBB/' file_name(▒u▒▒▒▒▒34▒檺AAA)
-▒u▒L▒X▒S▒w▒渹▒▒▒▒椺▒e(2019_hua_dong)
+sed -i '/Root_Output_Name/s/_M/_2/g' CAMx.in? (找到檔案中有Root...字串的那一行，再將該行所有的_M置都換成_2)
+sed -i '34s/AAA/BBB/' file_name(只替換第34行的AAA)
+只印出特定行號的單行內容(2019_hua_dong)
 cp header.txt a.dat;for ((y=1;y<=1209;y+=1));do ln=$(sed -n -e ${y}p 062238.dat);IX=$(echo $ln|awkk 1);IY=$(echo $ln|awkk 2); echo $IX, $IY, name$y, desc$y >>a.dat;done
 cp header.txt b.dat;for ((y=1;y<=503;y+=1));do ln=$(sed -n -e ${y}p 062340.dat);IX=$(echo $ln|awkk 1);IY=$(echo $ln|awkk 2); echo $IX, $IY, name$y, desc$y >>b.dat;done
 
 "
-sfdisk -l,▒˵▒t▒▒partition▒▒▒A,▒]▒A▒w▒g▒▒▒▒P▒▒▒▒▒▒Ϻо▒B▒▒Щ▒usb▒j▒▒СA▒▒▒df▒˵▒O▒_▒w▒g▒▒▒▒▒A▒i▒H▒~▒▒▒汾▒▒Ψ▒▒
-showmount,▒d▒߶}▒񱡪p,
-sleep,sleep,sleep 5s;sleep 3m (mac ▒▒▒A▒▒)
-sort,▒Ƨ▒,
-source,▒}▒▒▒▒ҳ]▒w,
+sfdisk -l,檢視系統partition狀態,包括已經掛載與未掛載磁碟機、光碟或usb大拇碟，對照df檢視是否已經掛載後，可以繼續執行掛載或卸載
+showmount,查詢開放情況,
+sleep,sleep,sleep 5s;sleep 3m (mac 不適用)
+sort,排序,
+source,開啟環境設定,
 ssh,Secure sh,"ssh target ""nohup ./test.sh >/dev/null 2>&1 &"".
 ssh -t target top"
 sshfs,ssh and mount as dir,"mkdir ~/destination_path; sshfs username@remote:/source_dir ~/destination_path
 (may be checked by df -h)
 (close with fusermount -u ~/destination_path )"
-tail,▒u▒▒ܥ▒10▒▒,"grep ""clock current time"" nohup.out |tail
+tail,只顯示末10行,"grep ""clock current time"" nohup.out |tail
 tail -n 20 -f  --sleep-interval=10 nohup.out | grep ""clock current time"""
-tar,▒B▒z▒]▒▒▒▒,▒▒▒▒(▒▒)▒▒Y▒▒▒▒O▒▒▒ܦh▒A▒i▒H▒ѦҺ▒;▒z▒▒▒▒O▒▒C(▒p) ▒᤯▒▒▒▒▒O(2008) GNU / Linux ▒U▒▒▒▒Y▒P▒▒▒▒Y▒▒Ohttp://note.drx.tw/2008/04/command.html
-top,▒ݧ@▒~,"▒▒O,h▒▒help▒Af▒▒format▒Aq▒▒quit▒BW▒▒write▒CVIRT▒▒virtual image▒ARES▒▒Resident Size"
-tree,▒ݥؿ▒,
+tar,處理包裝檔,有關(解)壓縮的指令有很多，可以參考網友整理的指令表。(如) 凍仁的筆記(2008) GNU / Linux 各種壓縮與解壓縮指令http://note.drx.tw/2008/04/command.html
+top,看作業,"指令,h→help，f→format，q→quit、W→write。VIRT→virtual image，RES→Resident Size"
+tree,看目錄,
 unzip,Un-zip,
 uptime,Tell how long the system has been running.,
-vi,Txt editor,vi▒▒O▒▒▒▒(▒▒▒㪩)http://www2.nsysu.edu.tw/csmlab/unix/vi_command.htm
-wc,line count,"while ! [ $(wc -c <""$fn1"") -eq $SIZE -a $(wc -c <""$fn2"") -eq $SIZE -a $(wc -c <""$fn3"") -eq $SIZE ];do sleep 65s;done ($fn1~3▒▒▒ɮפj▒p▒▒▒▒▒▒▒▒▒▒$SIZE▒A▒~▒|▒~▒▒A▒_▒h▒{▒▒▒N▒▒▒▒▒v▒C"
-whereis,▒ɮצb▒▒▒▒,
-which,▒ɮצb▒▒▒Ӹ▒|,
+vi,Txt editor,vi指令說明(完整版)http://www2.nsysu.edu.tw/csmlab/unix/vi_command.htm
+wc,line count,"while ! [ $(wc -c <""$fn1"") -eq $SIZE -a $(wc -c <""$fn2"") -eq $SIZE -a $(wc -c <""$fn3"") -eq $SIZE ];do sleep 65s;done ($fn1~3的檔案大小都必須等於$SIZE，才會繼續，否則程式將持續休眠。"
+whereis,檔案在哪裡,
+which,檔案在哪個路徑,
 while,read file line by line in Bash,while read line; do echo $line; done < company.txt
-who,▒▒▒▒,
-xclock,▒▒▒▒,
+who,有誰,
+xclock,時鐘,

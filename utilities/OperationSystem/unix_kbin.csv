@@ -1,0 +1,164 @@
+指令,用途,詳細選項,其他相關程式
+abi_camx.x,逐時值比較驗證之統計檢定,在aok程式內呼叫,
+abi_camxD.x,日均值比較驗證之統計檢定,在aok程式內呼叫,
+abi_met.x,逐時氣象比較驗證之統計檢定,在aok程式內呼叫,
+afterboot.cs,重新開機後要執行的工作,,
+allow,"開啟非固定ip亦能登入電腦(與deny同組，可用secure檢視效果)
+a=$PWD
+cd /etc
+sudo cp hosts.allow.1 hosts.allow
+sudo cp hosts.deny.1 hosts.deny
+cd $a",,
+aok,CAMx模擬與觀測結果之比較,由abi_inp.txt內控制,
+awk8,pipeline指令awk後取第8欄,| awk8 ,
+awk9,pipeline指令awk後取第9欄,| awk9,
+awkk,"awk '{print $'$1'}' (awkk n, n=1,2,…列出第n行內容)",,
+BALANC.CMD,UAM程式之包括檔,,
+CAMx.v6.00.noMPInoHDF.i_linuxomp,單機多CPU版本之CAMx,控制檔為CAMx.in,
+camx600.exe,PC_64版本CAMx,,
+camx600g,gfortran CAMx,,
+camx600i,單機多CPU版本之CAMx,,
+camx600p,PA版本之CAMx,,
+cbin,接續avrg檔,cbin file1 file2 … result,
+cbin_all,接續avrg檔_符合條件者都連在一起,"cbin_all ""ConditionFiles"" result",
+cbin_avrg.par.f,接續avrg檔_平行版(時間必須連續),,
+cbin_avrg.ser,接續avrg檔_序列版(時間可以不連續),cbin file1 file2 … result,
+cbin_avrg.ser.f,接續avrg檔_序列版(時間可以不連續),,
+CHPARM.CMD,UAM程式之包括檔,,
+CNTROL.CMD,UAM程式之包括檔,,
+cpl,ifort編譯(內設 -openmp -O2 -mieee-fp -align dcommons -extend_source -convert big_endian -parallel ),cpl+任何額外設定,
+davrg,兩個avrg檔逐時逐網格相減,davrg file1 file2 result,
+davrg0.par.f,兩個avrg檔逐時逐網格相減_平行版,,
+dayavrg,取地面最大臭氧小時值、8小時值、以及PM2.5/PM10之最大日平均值，並且每一網格找出最大值，寫成ASCII SURFER GRD檔案，繪製等濃度圖,,
+dayavrg1.3.par.f,UTM版本,,
+dayavrg1.3.parG.f,geotic (LL)版本,,
+dayavrgG,geotic (LL)版本,,
+deny,"開啟固定ip才能登入電腦，拒絕其他ip登入(與allow同組，可用secure檢視效果)
+a=$PWD
+cd /etc
+sudo cp hosts.allow.0 hosts.allow
+sudo cp hosts.deny.0 hosts.deny
+cd $a",,
+depo,整併酸沉降各物質成為總沉降量(depn.grd.D),,
+depo.f,整併酸沉降各物質成為總沉降量,,
+dict123.x,各防制區取最大值,,
+dmavrg,dmavrg.f的執行檔dmavrg AVRG->AVRG.D,,
+dmavrg.f,求取每一天的日均值後，以avrg格式輸出,,
+fds,FDS6.3,see handbook,
+FILCON.CMD,UAM程式之包括檔,,
+findc,尋找目前所在目錄(current),findc FILE,
+fzl,filezilla(界面版的sftp),,
+gno,gnome(檢視電腦資源，只適用master),,
+grads,GrAds,see handbook,
+grd_utm2ll,將utm系統之GRD檔轉成經緯度系統。,,
+grd_utm2ll.f,將utm系統之GRD檔轉成經緯度系統。,,
+grd2grads,grd檔轉換成grads檔案,,
+grd2grads.f,grd檔轉換成grads檔案,,
+gtime,執行camx檢視nohup.ou最新t的時間,gtime DIR/FILE.out,
+his,看過去打過的指令,his CMD,
+howhot,檢視電腦的溫度_按node排序(cf temp),,
+imavrg.f,".avrg檔i(東西)向平均後壓縮成一層(imavrg,jmavrg,kmavrg,是為側視、前視與俯視三視圖)",結果為fileI,
+jmavrg.f,".avrg檔j(南北)向平均後壓縮成一層(imavrg,jmavrg,kmavrg,是為側視、前視與俯視三視圖)",結果為fileJ,
+juldate.f,日曆日轉JUL日,call juldat (YYMMDD),
+kil,殺掉正在執行的程式,kil EXE,
+kmavrg,.avrg檔垂直平均後壓縮成一層,kmarg file,
+kmavrg.f,".avrg檔垂直平均後壓縮成一層(imavrg,jmavrg,kmavrg,是為側視、前視與俯視三視圖)",結果為fileK,
+LOCPTR.CMD,UAM程式之包括檔,,
+lsd,看目錄名稱,"lsd ""dir""",
+lsf,find and lst,lsf file,
+lsh,看最舊的10個檔案,,
+lsr,recursive listing,"lsr ""dir/file""",
+lsS,看最大的10個檔案,,
+lst,看最新的10個檔案,"lst ""dir/file""",
+mavrg,c take MEAN of file1 file2 ... to fileN,,
+mavrg.f,c take MEAN of file1 file2 ... to fileN,,
+mm5tograds.exe,MMOUT轉成grads之.ctl與.dat檔,有namelist.input與csh檔控制,
+mm5tools,(發展中),,
+mmv,Multiple mv,"Multiple mv, 並非unix的標準指令，cygwin版本須另行下載，mmv ""met_em.d04.2013-0?-0?_*_00_00.nc"" ""met_em.d01.2013-0#1-0#2_#3_00_00.nc""",
+monpm.cs,將目錄下*PM*.png每頁4張合併起來，引數1為最後pdf之檔名,"for sp in PM10 PM25;do
+for n in {1..8};do
+m=$(( n*4 ))
+montage -geometry +4+4 $(ls -rt *$sp"".png"" |head -n$m|tail -n4) $n"".pdf""
+done
+pdf_all ? $1_$sp
+done
+",
+MSCAL.CMD,UAM程式之包括檔,,
+mxdavrg,求取各網格最大日均值，並以avrg型式輸出avrgM，變數名稱字尾會加D,,
+mxdavrg.f,求取各網格最大日均值，並以avrg型式輸出avrgM，變數名稱字尾會加D,,
+mxhavrg.f,求取各網格最大小時均值，並以avrg型式輸出avrgM,,
+ncdump,看netCDF之檔案,ncdump NC,
+NETDEP.CMD,UAM程式之包括檔,,
+ntl,檔案管理(nautilus),,
+nztm,non-zero time mean,nztm FILE(結果為fileZ),
+nztm.f,non-zero time mean,,
+ovm2grads,不必引數,,
+ovm2grads.f,空氣品質模擬比對aok結果ovm.dat轉成grads時間序列圖所需的stn2grads.datl檔案,,
+ovm2grads_all,準備outputs/con*目錄下的觀測模擬時間序列grads圖所需的CTL與stn2grads.dat,核心程式為ovm2grads，其後執行spec_all繪圖。,
+PARAMS.CMD,UAM程式之包括檔,,
+pdf_all,將目錄下所有符合(第1)引數條件的pdf檔連結在一個pdf檔內(第2引數),"#note! the argument must be quoted as ""$1""
+first=1
+for i in $(ls -rt $1"".pdf""|cut -d'.' -f 1) ;do
+if [ ""$first"" == ""1"" ]; then
+        cp -f $i"".pdf"" result.pdf
+        first=0
+else
+     gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=tmp.pdf result.pdf $i"".pdf""
+     mv tmp.pdf result.pdf
+fi
+echo $first""  ""$i
+done
+mv result.pdf $2.pdf
+",
+pick,挑選avrg檔案中特定物種與時間另存成avrg格式_datetimeB-datetimeE,,
+pick_avrg,挑選avrg檔案中特定物種與時間另存成avrg格式_datetimeB-datetimeE,,
+pick_avrg.f,挑選avrg檔案中特定物種與時間另存成avrg格式_datetimeB-datetimeE,,
+raintime,raintime.f的執行檔,,
+raintime.f,"Deposition相關處理程式
+判斷是否下雨的逐時、2Drain_flag
+讀入檔案：
+yymmDx.cr (讀RAINW_GpM3)以及 .3d file (讀ZGRID_M)
+判斷是否降雨的臨界降雨量：
+mm rain in it hour
+        if(r(i,it).ge.0.1) rain(i,it)=.true.
+",,
+readv3,readv3.f的執行檔：readv3 MMOUT,,
+READV3,readv3 $1 |grep Hours,,
+readv3.f,讀取MMOUT的程式,,
+secure,檢查系統登入與重要root動作,,
+SEGTAB.CMD,UAM程式之包括檔,,
+shk,shkavg4.4.f90的執行檔：shk avrgfile,,
+shkavg4.4.f90,整併CAMx模擬結果中VOCs與PM各成分，成為8個物質之.S.grd??,,
+slim,將avrg檔最底下一層切出另存成avrgL,,
+slim_avrg.par.f,將avrg檔最底下一層切出另存成avrgL,,
+slim_sub,將目錄下所有*S.*檔都做slim,for i in $(ls */*S.* -l|cut -d ' ' -f 9);do slim $i;done,
+smokeview,FDS6.3的後處理程式,,
+spec_all,製作outputs/con*目錄下的觀測模擬時間序列grads圖,"for i in {01..12};do
+cd con$i
+export MON=`name_of_month $i`
+for spe in so2 cmo ozn pmt nox p25 no2 voc;do
+cp ../spec.gs.BLK spec.gs
+for cmd in 3s/spe/$spe/ ;do
+sed -i $cmd spec.gs
+done
+rm ?.pdf
+grads -b -p -c 'run spec.gs'
+for j in {1..6};do
+convert $j.png $j.pdf
+done
+pdf_all ""?"" $MON$spe
+done
+cd ..
+done
+",
+ssht,ssh 的批次形式,ssh -t COMMAND,
+sub,將命令(與引數)放在背景執行(for do指令不接受&),$1 $2 $3 $4 $5 $6 $7 $8&,
+temp,檢視電腦的溫度_按id排序(cf howhot),,
+tmavrg,取avrg的時間平均另存成avrgT,,
+tmavrg.f,取avrg的時間平均另存成avrgT,,
+topu,top and sort by %CPU,top -o %CPU,
+tt_all,在node上看結果,"for N in 1 2 3;do ssh -t node0$N ""~/bin/ttime /node0$N/camxruns/2013"";done
+",
+ttime,在node上看結果,"for i in 1 2 3;do ssh -t node0$i ""./bin/gtime /node/camxruns/2010"";done",
+utmgeo.f,utm 與 geotic座標系統轉換副程式,,
+du_lsd,加總每一個目錄的總數,for i in $(lsd|awkk 9);do du -h $i|T -n1;done,

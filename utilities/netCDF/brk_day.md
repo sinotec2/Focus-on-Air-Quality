@@ -99,7 +99,7 @@ NCRCAT=${NCO}/ncrcat
 
 - `f`序列
   - 記錄所有[pr_tflag.py][pr_tflag]的結果
-  - 雙數為yyyyjjj、單數為hh0000
+  - 雙數(0起始)為yyyyjjj、單數為hh0000
 
 ```bash
 f=();for i in $(python ~/bin/pr_tflag.py $fn);do j=${i/[/};k=${j/]/};f=( ${f[@]} $k); done

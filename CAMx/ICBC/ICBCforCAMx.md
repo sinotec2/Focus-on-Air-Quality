@@ -4,7 +4,7 @@ title: ICBC for CAMx
 parent: CAMx Model System
 has_children: true
 permalink: /CAMx/ICBC
-nav_order: 99
+nav_order: 2
 ---
 
 # CAMx模擬之初始及邊界條件

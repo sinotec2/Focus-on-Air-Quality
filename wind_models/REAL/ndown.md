@@ -5,7 +5,7 @@ parent: REAL & WRF
 grand_parent: WRF
 nav_order: 3
 date: 2022-02-19 17:56:16               
-last_modified_date: 2022-02-19 17:56:21
+last_modified_date: 2022-11-29 14:03:32
 ---
 
 # ndown
@@ -23,6 +23,7 @@ last_modified_date: 2022-02-19 17:56:21
 ---
 
 ## 背景
+
 - 除了雙向巢狀網格的模擬方式，[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)當然也可以接受循序、單向之巢狀網格模擬，亦即將上層母網格結果，作為下層子網格的初始即邊界條件，所使用的讀取程式，即為[ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)。
 - 適合單向巢狀網格模擬方式的條件狀況
 	- 次網格範圍較小、獨立、不會造成上次網格明顯的差異
@@ -35,6 +36,7 @@ last_modified_date: 2022-02-19 17:56:21
 	1. 一次只能讀一層的wrfout，產生下一層domain所需的IC/BC
 
 ## namelist.input 修改重點
+
 - 執行雙向巢狀網格的[real.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)、上層單層的[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)之後。將namelist.input進行備份、修改。
 - &time_control下
 	1. interval_seconds = 21600 → 3600。這個值是邊界檔的時間間距，原來最外層的邊界檔只有每6小時1筆(配合FNL)。如果沒有FDDA則是按照wrfout的結果：每小時1筆。
@@ -45,12 +47,15 @@ last_modified_date: 2022-02-19 17:56:21
 	- time_step = 240  → 80 。時間步階適度調整(保持dt/dx<6)，以方便子網格wrf之執行。
 
 ### 當[real.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)同時run了超過2層
+
 - [ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)一次只能執行一層，只能將上層移轉第下層，namelist.input只能接受d01及d02，不能接受d03、d04...
 - 因此原本的namelist.input必須修改只留存2層，如果要[ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)第三層到第四層，必須將第三層命名為**d01**，第四層即為**d02**
 - 注意除了網格起始點位置、網格點數之外，也要修改網格間距、time_step等。
 
 ## 執行
+
 ### 檔案目錄之安排
+
 - 由於每層網格分別執行，檔案名稱將會重疊，為區別其意義，需要另建目錄以資識別。
 - 根目錄：
 	- 維持以時間、WRF版本等資訊為主。如`/nas1/WRF4.0/WRFv4.2/202208`
@@ -60,8 +65,9 @@ last_modified_date: 2022-02-19 17:56:21
  	- 以domain name識別。如CWBWRF_45k/、SECN_9k/、TWEPA_3k/
 	- 在各網格目錄連結正確的起始與邊界檔執行單層real.exe、wrf.exe、產生新的namelist.input、執行ndown.exe
 	- 更換下一層網格目錄疊代執行。
-	
+
 ### 執行步驟
+
 - 準備wrfndi_d02：Rename the wrfinput_d02 file to wrfndi_d02
 	- wrfinput_d02必須是執行[real.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)所產生下一層子網格的初始條件。
 	- 不能是單層[real]()的wrfinput_d01
@@ -73,7 +79,15 @@ last_modified_date: 2022-02-19 17:56:21
 		- [ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)之後要執行子網格的wrf，也要修改namelist.input。(~.nest4only)注意其他檔案順序，如wrffdda_d04與wrfsfdda_d04等，也必須改成d01
 - 執行子網格[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)
 
+## ndow執行範例
+
+- 這個範例是在東南中國(SECN_9k)與台灣本島(TWEPA_3k)之間使用ndown，將前者的逐時模擬結果作為後者的邊界條件
+  - SECN_9k：系東亞及東南中國2層雙向網格(tw_CWBWRF_45k)模擬結果的第2層
+  - 3者之met_em在$gfs目錄中完成
+- 腳本見於[]()
+
 ## ndown and OBS_domain 的比較 
+
 - 初期和三天後模擬結果都還算蠻接近的
 - ndown結果的規則性與系統性較高，OBSdomain在局部則較為紛亂，
 - avrgvsobss-k結果

@@ -81,12 +81,87 @@ last_modified_date: 2022-11-29 14:03:32
 
 ## ndow執行範例
 
-- 這個範例是在東南中國(SECN_9k)與台灣本島(TWEPA_3k)之間使用ndown，將前者的逐時模擬結果作為後者的邊界條件
-  - SECN_9k：系東亞及東南中國2層雙向網格(tw_CWBWRF_45k)模擬結果的第2層
+- 這個範例是在東南中國(SECN_9k)與台灣本島(TWEPA_3k)之間使用ndown，將前者的逐時模擬結果作為後者的邊界條件。
+- 個案時間長度為10天
+  - nests3：3個網格系統雙向模擬，每一天會需要電腦時間68分鐘，10天會需要10小時(不可行)。
+	- SECN_9k：系東亞及東南中國2層雙向網格(tw_CWBWRF_45k)模擬結果的第2層
   - 3者之met_em在$gfs目錄中完成
-- 腳本見於[]()
+- 腳本見於[ndown.cs](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/REAL/ndown.cs),分段說明如下
 
-## ndown and OBS_domain 的比較 
+### real之執行
+
+- 參與執行ndown的2層網格，必須先執行雙層的real
+	- 使用特殊的模板(namelist.input23_loop)
+	- 置換起訖時間
+	- 使用met_em檔案也必須置換網格編號
+	- 此處的real版本為mpich版本
+
+```bash
+i=2
+cd $gfs/${DOM[$i]}/ndown
+cp namelist.input23_loop namelist.input
+  for cmd in "s/SYEA/$yea1/g" "s/SMON/$mon1/g" "s/SDAY/$day1/g" \
+             "s/EYEA/$yea2/g" "s/EMON/$mon2/g" "s/EDAY/$day2/g" ;do
+    sed -i $cmd namelist.input
+  done
+rm metoa_em
+for d in 2 3;do
+  dd=$(( $d - 1 ))
+  for id in {0..10};do
+    for j in $(ls ../../met_em.d0${d}.${dates[$id]}_*);do
+      k=${j/d0${d}/d0${dd}}
+      l=${k/..\/..\//}
+      m=${l/met_/metoa_};ln -s $j $m;done;done;done
+LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/mpich/mpich-3.4.2-icc/lib /opt/mpich/mpich-3.4.2-icc/bin/mpirun ${MPI[$i]} /nas1/WRF4.0/WRFv4.3/WRFV4/main/real.exe >& /dev/null
+```
+
+### wrfndi_d02與wrfout之連結
+
+- 前者為real的結果
+- 後者為tw_CWBWRF_45k模擬結果中的第2層
+
+```bash
+ln -sf wrfinput_d02 wrfndi_d02
+
+for id in {0..10};do ln -sf $gfs/${DOM[3]}/wrfout_d02_${dates[$id]}_00:00:00 wrfout_d01_${dates[$id]}_00:00:00;done
+```
+
+### 置換namelist中的時間間距
+
+- 邊界檔(逐時)和FDDA檔(逐3小時)不同，似乎不構成問題
+- 逐時值邊界檔顯然對模擬會有較顯著的控制
+
+```bash
+sed -i 's/interval_seconds                    = 10800/interval_seconds                    = 3600/g' namelist.input
+```
+
+### 執行ndown
+
+```bash
+#ndown.exe is intel version
+LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib /opt/intel_f/compilers_and_libraries_2020.0.166/linux/mpi/intel64/bin/mpirun -np 10 /nas1/WRF4.0/WRFv4.3/WRFV4/main/ndown.exe >& /dev/null
+```
+
+### ndown結果應用
+
+- 取代TWEPA_3k範圍的real
+- 更新namelist.input後即可執行單層的wrf模擬
+
+```bash
+## restore the real and ndown results
+cd $gfs/${DOM[$i]}
+for f in wrfinput wrfbdy wrffdda wrflowinp;do
+  mv ndown/${f}_d02 ${f}_d01
+done
+```
+
+### 電腦時間檢討
+
+- tw_CWBWRF_45k雙向： ~ 10min computer time/day simulation
+- TWEPA_3k單層：~ 9min computer time/day simulation
+- 合計：19 min/day << 68 min/day
+
+## ndown and OBS_domain 的比較
 
 - 初期和三天後模擬結果都還算蠻接近的
 - ndown結果的規則性與系統性較高，OBSdomain在局部則較為紛亂，

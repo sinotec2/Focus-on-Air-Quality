@@ -8,6 +8,19 @@ date: 2022-06-27 13:44:29
 last_modified_date: 2022-06-27 13:44:33
 ---
 
+# 從空品檔案切割邊界濃度 BNDEXTR
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+
 ## 背景
 - 空品模式需要的邊界濃度，通常是更大範圍(全球模式、上層網格、粗網格)的模擬、或再分析結果，因此會需要從空氣品質檔案中切割出邊界上的濃度，除了座標系統的對照、切割之外，還需要進行內插。
 - CMAQ系統有[bcon][bcon]可以進行切割、也有[python][hd_bc.py]的版本。CAMx則需要[BNDEXTR][BNDEXTR]。執行則需要有c-shell 的腳本。

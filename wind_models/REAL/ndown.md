@@ -5,7 +5,7 @@ parent: REAL & WRF
 grand_parent: WRF
 nav_order: 3
 date: 2022-02-19 17:56:16               
-last_modified_date: 2022-11-29 14:03:32
+last_modified_date: 2022-12-01 14:34:15
 ---
 
 # ndown
@@ -68,9 +68,9 @@ last_modified_date: 2022-11-29 14:03:32
 
 ### 執行步驟
 
-- 準備wrfndi_d02：Rename the wrfinput_d02 file to wrfndi_d02
-	- wrfinput_d02必須是執行[real.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)所產生下一層子網格的初始條件。
-	- 不能是單層[real]()的wrfinput_d01
+- 準備wrfndi_d02：Rename(`mv`) the wrfinput_d02 file to wrfndi_d02
+	- wrfinput_d02必須是執行[real.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/doreal_4Nests.sh/)所產生下一層子網格的初始條件。(不能是單層[real]()的wrfinput_d01)
+	- 會另外產生一個新的wrfinput_d02，如在同一目錄、原檔會被覆蓋，因此不能用連結。如果原wrfinput_d02(real結果)仍要保留，需另外備份。
 - 將母網格wrfout檔案，連結成wrfout_d01檔案(時間標籤必須保持一樣)
 - 執行[ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)
 	- 將產生wrfinput_d02 and wrfbdy_d02 file.
@@ -91,10 +91,10 @@ last_modified_date: 2022-11-29 14:03:32
 ### real之執行
 
 - 參與執行ndown的2層網格，必須先執行雙層的real
-	- 使用特殊的模板(namelist.input23_loop)
-	- 置換起訖時間
-	- 使用met_em檔案也必須置換網格編號
-	- 此處的real版本為mpich版本
+  - 使用特殊的模板(namelist.input23_loop)
+  - 置換起訖時間
+  - 使用met_em檔案也必須置換網格編號
+  - 此處的real版本為mpich版本
 
 ```bash
 i=2
@@ -104,7 +104,7 @@ cp namelist.input23_loop namelist.input
              "s/EYEA/$yea2/g" "s/EMON/$mon2/g" "s/EDAY/$day2/g" ;do
     sed -i $cmd namelist.input
   done
-rm metoa_em
+for hd in metoa_em wrf;do if compgen -G "${hd}*" > /dev/null; then rm -f ${hd}*;fi;done
 for d in 2 3;do
   dd=$(( $d - 1 ))
   for id in {0..10};do
@@ -115,13 +115,17 @@ for d in 2 3;do
 LD_LIBRARY_PATH=/nas1/WRF4.0/WRFv4.3/WRFV4/LIBRARIES/lib:/opt/intel_f/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/mpich/mpich-3.4.2-icc/lib /opt/mpich/mpich-3.4.2-icc/bin/mpirun ${MPI[$i]} /nas1/WRF4.0/WRFv4.3/WRFV4/main/real.exe >& /dev/null
 ```
 
+- 注意：
+	1. 使用[compgen][compgen]判斷符合特定規則的檔案是否存在，如果有任何符合條件的檔案，將會被刪除。
+	2. met_em必須先行準備好
+
 ### wrfndi_d02與wrfout之連結
 
-- 前者為real的結果
-- 後者為tw_CWBWRF_45k模擬結果中的第2層
+- 前者為real的結果，更名為wrfndi_d02。(原本的wrfinput_d02會被覆蓋)
+- 後者為tw_CWBWRF_45k的第2層模擬結果。此處更名為第1層，為ndown的輸入檔案。
 
 ```bash
-ln -sf wrfinput_d02 wrfndi_d02
+mv wrfinput_d02 wrfndi_d02
 
 for id in {0..10};do ln -sf $gfs/${DOM[3]}/wrfout_d02_${dates[$id]}_00:00:00 wrfout_d01_${dates[$id]}_00:00:00;done
 ```
@@ -185,3 +189,5 @@ done
 
 ## Reference
 - chinagod, **WRF学习之 ch5 WRF模式（三）运行WRF（d, e）：（双向嵌套，单向嵌套）**, [博客园](https://www.cnblogs.com/jiangleads/articles/12825970.html)posted @ 2020-05-04 23:39 
+
+[compgen]: <https://www.linuxcool.com/compgen> "列出所有Linux命令，显示所有可用的命令，别名和函数。"

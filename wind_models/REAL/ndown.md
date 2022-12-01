@@ -79,7 +79,7 @@ last_modified_date: 2022-12-01 14:34:15
 		- [ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)之後要執行子網格的wrf，也要修改namelist.input。(~.nest4only)注意其他檔案順序，如wrffdda_d04與wrfsfdda_d04等，也必須改成d01
 - 執行子網格[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)
 
-## ndow執行範例
+## ndown執行腳本範例
 
 - 這個範例是在東南中國(SECN_9k)與台灣本島(TWEPA_3k)之間使用ndown，將前者的逐時模擬結果作為後者的邊界條件。
 - 個案時間長度為10天

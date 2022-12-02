@@ -30,11 +30,11 @@ last_modified_date: 2022-06-01 20:12:23
 |-|-|-|-|
 |BNDEXTR|[20sep16](https://camx-wp.azurewebsites.net/getmedia/bndextr.20sep16.tgz)|從空品濃度檔案([uamiv][uamiv]格式)切割出下層網格之邊界濃度檔案|[BC][BC]|
 |GEOS2CAMx|[30apr22](https://camx-wp.azurewebsites.net/getmedia/geos2camx.30apr22.tgz)|[GEOS][GEOS-chem]模式之轉接|-|
-|MOZART2CAMx |[6apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)|[MOZART][mzr]模式之轉接(for CAMx or CMAQ)|IC/BC|
+|MOZART2CAMx |[6apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.6apr22.tgz)|[MOZART][mzr]模式之轉接(for CAMx or CMAQ)|[MOZART2CAMx][mzr_faq]|
 ||[30apr22](https://camx-wp.azurewebsites.net/getmedia/mozart2camx.30apr22.tgz)|(for CAMx v7+)||
-|O3MAP|[20sep16](https://camx-wp.azurewebsites.net/getmedia/o3map.20sep16.tgz)|垂直臭氧柱檔案之轉接(for CAMx v6.0-v6.5)|[o3map][o3map]|
-||[31may20](https://camx-wp.azurewebsites.net/getmedia/o3map.31may20.tgz)|(for CAMx v7+)||
-|TUV v4.8|[8apr16](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx6.30.8apr16.tgz)|光解常數的函數(for CAMx v6.3-v6.5)|tuv|
+|O3MAP|[20sep16](https://camx-wp.azurewebsites.net/getmedia/o3map.20sep16.tgz)|垂直臭氧柱檔案之轉接(for CAMx v6.0-v6.5)||
+||[31may20](https://camx-wp.azurewebsites.net/getmedia/o3map.31may20.tgz)|(for CAMx v7+)|[o3map][o3map]|
+|TUV v4.8|[8apr16](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx6.30.8apr16.tgz)|光解常數的函數(for CAMx v6.3-v6.5)|[tuv][tuv]|
 ||[31may20](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx7.00.31may20.tgz)|(for CAMx v7.00)||
 ||[15dec20](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx7.10.15dec20.tgz)|(for CAMx v7.10)||
 ||[30apr22](https://camx-wp.azurewebsites.net/getmedia/tuv4.8.camx7.20.30apr22.tgz)|(for CAMx v7.10)||
@@ -63,8 +63,10 @@ last_modified_date: 2022-06-01 20:12:23
 
 [uamiv]: <https://github.com/sinotec2/camxruns/wiki/CAMx(UAM)的檔案格式> "CAMx所有二進制 I / O文件的格式，乃是遵循早期UAM(城市空氣流域模型EPA，1990年）建立的慣例。 該二進制文件包含4筆不隨時間改變的表頭記錄，其後則為時間序列的數據記錄。詳見CAMx(UAM)的檔案格式"
 [mzr]: <https://en.wikipedia.org/wiki/MOZART_(model)> "MOZART: (Model for OZone And Related chemical Tracers) is developed jointly by the (US) National Center for Atmospheric Research (NCAR), the Geophysical Fluid Dynamics Laboratory (GFDL), and the Max Planck Institute for Meteorology (MPI-Met) to simulate changes in ozone concentrations in the Earth's atmosphere. "
+[mzr_faq]: <https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/MOZART/#MOZART2CAMx> "MOZART2CAMx"
 [wrfcamx]: <https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/met/1.1wrfcamx/> "WRF模擬結果的轉接"
 [GEOS-chem]: <https://geos-chem.seas.harvard.edu/> "GEOS-Chem Community Mission: to advance understanding of human and natural influences on the environment through a comprehensive, state-of-the-science, readily accessible global model of atmospheric composition."
 [SMP]: <https://zh.wikipedia.org/wiki/对称多处理> "對稱多處理（英語：Symmetric multiprocessing，縮寫為 SMP），也譯為均衡多處理、對稱性多重處理、对称多处理机[1]，是一種多處理器的電腦硬體架構，在對稱多處理架構下，每個處理器的地位都是平等的，對資源的使用權限相同。"
 [o3map]: <https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/inputs/3.1toms/> "臭氧垂直濃度之處理"
 [BC]: <https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/ICBC/2.3BNDEXTR/> "從空品檔案切割邊界濃度 BNDEXTR"
+[tuv]: <https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/inputs/3.2TUV/> "紫外線數據與光解係數"

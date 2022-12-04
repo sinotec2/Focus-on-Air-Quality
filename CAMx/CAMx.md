@@ -45,7 +45,7 @@ last_modified_date: 2022-06-01 20:12:23
 
 |名稱|年代版本|用途|FAQ|
 |-|-|-|-|
-|CAMx2IOAPI |[camx2ioapi.8apr16.tgz](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)|[uamiv][uamiv] avrg/dep to ncf||
+|CAMx2IOAPI |[camx2ioapi.8apr16.tgz](https://camx-wp.azurewebsites.net/getmedia/camx2ioapi.8apr16_1.tgz)|[uamiv][uamiv] avrg/dep to ncf|（[排放檔之應用](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/emis/4.6CAMx2IOapi)）|
 
 ### 手冊
 

@@ -45,8 +45,6 @@ for ((i=0;i <= 312; i+=3));do
   ~/bin/sub ../UGB2
   cd $gfs
 done
-#  $curl --retry 5 -C - -OL -s -o $file $root$dir$file
-~/bin/wait_exe metgrid #make sure all metgrid executions are finished
 
 #background executions of mk_emis and mk_ptse
 for i in 0 1;do
@@ -56,6 +54,7 @@ for i in 0 1;do
 done
 ~/bin/sub $gfs/em3.cs
 
+~/bin/wait_exe metgrid #make sure all metgrid executions are finished
 # real及wrf
 ## 起迄年 、 月 、 日B
 yea1=$(echo $BEGD|cut -d'-' -f1);mon1=$(echo $BEGD|cut -d'-' -f2);day1=$(echo $BEGD|cut -d'-' -f3)

@@ -48,6 +48,14 @@ done
 #  $curl --retry 5 -C - -OL -s -o $file $root$dir$file
 ~/bin/wait_exe metgrid #make sure all metgrid executions are finished
 
+#background executions of mk_emis and mk_ptse
+for i in 0 1;do
+  ii=$(echo ${GRD[$i]}|cut -c5-)
+  cd $fcst/grid$ii/smoke
+  ~/bin/sub ../../mk_emis.py $BEGD
+done
+~/bin/sub $gfs/em3.cs
+
 # real及wrf
 ## 起迄年 、 月 、 日B
 yea1=$(echo $BEGD|cut -d'-' -f1);mon1=$(echo $BEGD|cut -d'-' -f2);day1=$(echo $BEGD|cut -d'-' -f3)

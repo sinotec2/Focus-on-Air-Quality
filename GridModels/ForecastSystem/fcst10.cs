@@ -55,6 +55,7 @@ done
 ~/bin/sub $gfs/em3.cs
 
 ~/bin/wait_exe metgrid #make sure all metgrid executions are finished
+
 # real及wrf
 ## 起迄年 、 月 、 日B
 yea1=$(echo $BEGD|cut -d'-' -f1);mon1=$(echo $BEGD|cut -d'-' -f2);day1=$(echo $BEGD|cut -d'-' -f3)
@@ -127,20 +128,13 @@ for id in {0..9};do
 done
 for i in 0 1 2;do
   ii=$(echo ${GRD[$i]}|cut -c5-)
-  cd $fcst/grid$ii/smoke
-  ../../mk_emis.py $BEGD
-  if [[ $i -eq 2 ]];then
-    /usr/bin/ncks -O -d LAY,0 TEDS.ncf TEDS0.ncf
-    /usr/bin/ncatted -a NLAYS,global,o,i,1 TEDS0.ncf
-    ./mk_ptse.py $BEGD
-  fi
   cd $fcst
   csh ./run.cctm.${ii}.csh
 
   # combine PM's
   for id in {0..9};do
     nc=$fcst/${GRD[$i]}/cctm.fcst/daily/CCTM_ACONC_v532_intel_${DOM[$i]}_${datep[$id]}.nc
-    ~/bin/sub $fcst/combine.sh $nc
+    if [[ -e $nc ]];then ~/bin/sub $fcst/combine.sh $nc;fi
   done
   if [[ $i < 2 ]];then
   # nest down BCON and ICON

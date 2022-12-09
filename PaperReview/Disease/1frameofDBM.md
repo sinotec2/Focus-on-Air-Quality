@@ -73,4 +73,4 @@ ExternE其方法論自從[1995年發表][12]以來 ，歷經[1998][13]及[2005][
 [13]: <https://trid.trb.org/view/1159668> "Holland, M., Berry, J.(, and Forster, D.( (1999). ExternE: externalities of energy: volume 7: methodology, 1998 update."
 [14]: <https://op.europa.eu/en/publication-detail/-/publication/b2b86b52-4f18-4b4e-a134-b1c81ad8a1b2> "Bickel, P., Friedrich, R., Droste-Franke, B., Bachmann, T., Greßmann, A., Rabl, A., Hunt, A., Markandya, A., Tol, R., Hurley, F., Navrud, S., Hirschberg, S., Burgherr, P., Heck, T., Torfs, R., De Nocker, L., Vermoote, S., Int Panis, L., and Tidblad, J. (2005). ExternE Externalities of Energy Methodology 2005 Update." 
 [15]: <https://e-info.org.tw/node/70593> "特約記者古國廷報導(2011) 後國光石化 學者齊聚討論成本效益分析準則"
-[16]: <> "蕭代基等，2013，環境政策與開發計畫成本效益分析作業參考手冊，委託單位：. 行政院環保署，執行單位：中華經濟研究院。"
+[16]: <https://epq.epa.gov.tw/ProjectDoc/FileDownload?proj_id=0992886881&group_id=5518> "蕭代基等，2013，環境政策與開發計畫成本效益分析作業參考手冊，委託單位：. 行政院環保署，執行單位：中華經濟研究院。"

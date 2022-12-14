@@ -13,12 +13,13 @@ last_modified_date: 2022-12-06 05:47:44
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[News at 2022-12-06][CAMx]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[News at 2022-12-14][fcst10]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
 
+- 2022-12-14 將空品預報的天數從[5天][fcst]延長到10天，表面上只是計算時間拉長一倍，實則裏面還有蠻多挑戰的，[成果的網址][fcst]未變，筆記先放在[FAQ->空品預報時距之延長][fcst10]，還想做一些嘗試與精進，例如直接從d01結果啟動d02\~d03後5日的模擬、WACCM數據低估問題也是要解決、還有批次之間、預報與再分析之間跳動的問題，等穩定一點再放到這裡。
 - 2022-12-06 [CAMx][CAMx]模式的筆記與維護算是告一段落，還增加了[CAMx模擬結果之壓縮_nc檔版本](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/PostProcess/99.7shkNC/)算是個小彩蛋，可以處理最新nc版本的模擬結果。平心而論，[CAMx][CAMx]算是個「深入淺出」的網格模式，對煙流也有較佳的處理，期待CAMx與CMAQ[雙C模式的競賽](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Models/CAMx_vs_CMAQ/)中，雙方都能有持續的進步與創新，有緣江湖還會再相見的。
 - 2022-11-25 5天的CMAQ空品預報持續運作中，雖然還是做不到無縫接軌，但也許延長預報時間(leading time)，也可以算是一點貢獻。這需要花更多的時間下載NCAR的[WACCM](https://www2.acom.ucar.edu/gcm/waccm)全球空品預報結果，詳見[WACCM模式結果之下載、讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/3WACCM/)。這期間也嘗試了mcip的gfs版本[NACC](https://github.com/noaa-oar-arl/NACC)，可惜目前還沒有找到NOAA公開gfs-FV3的全球預報結果，編譯與腳本的測試經驗可以參考[解讀GFS之MCIP版本(NACC)](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/NACC/)，真希望國內能有人自己來做gfs的預報。
 - 2022-11-16 補寫過去的新聞似乎不是件好事，比起補寫過去該寫的程式筆記應該算還好。[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests)這篇本來想投稿的，時間一久、反省越多、問題就越多，自己都覺得不好意思投稿了。[2017~2020年冬、春季臺灣北部近域氣團路徑](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/local_traj/#結果討論)這圖還有點意思，有興趣的讀者也許可以用更多年期的數據、更高的解析度自己來做看看。
@@ -38,7 +39,7 @@ last_modified_date: 2022-12-06 05:47:44
 
 ## 2022
 
-### 2022-06 
+### 2022-06
 
 - 2022-06-25 `What's New` 功能一直沒有很好的解決方案。原因在於[JTD][JTD]主題的文件功能特性，並不適合太常、或太瑣碎的更新。總之、選擇了另闢一個部落格的平台（[TeXt主題]([TeXt](https://tianqi.name/jekyll-TeXt-theme/)）來放最新、暫存、發展中的文章，取名叫[Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/)。可以有標籤系統、有檔案的時間順序。如果存夠多可以有結構出來，再放到[JTD][JTD]的文件架構下，這樣能有比較有效的檔案管理、搜尋功能、目錄瀏覽也比較強。算是經過半年的摸索、在管理面的一項進步吧。在首頁置換了討論區的按鍵成為[部落格的入口](https://sinotec2.github.io/FAQ/)。(部落格也有回到FAQHome的按鍵)
 - 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
@@ -115,3 +116,5 @@ email, or any other method with the owners of this repository before making a ch
 
 [JTD]: <https://just-the-docs.github.io/just-the-docs> "Focus on writing good documentation. Just the Docs gives your documentation a jumpstart with a responsive Jekyll theme that is easily customizable and hosted on GitHub Pages."
 [CAMx]: <https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/> "Comprehensive Air Quality Model with Extensions(CAMx)"
+[fcst10]: <https://sinotec2.github.io/FAQ/2022/12/06/fcst10days.html> "空品預報時距之延長"
+[fcst]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/> "逐日WRF與CMAQ預報系統之建置"

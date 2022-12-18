@@ -13,8 +13,14 @@ cmaq=/home/cmaqruns/2022fcst
 fcst=/nas2/cmaqruns/2022fcst
 BEGD=$(date -d "$today -0days" +%Y-%m-%d)
 ENDD=$(date -d "$BEGD  +11days" +%Y-%m-%d)
+dates=();datep=()
+for id in {0..11};do
+  dates=( ${dates[@]} $(date -d "$BEGD +${id}days" +%Y-%m-%d) )
+  datep=( ${datep[@]} $(date -d "$BEGD +${id}days" +%Y%m%d) )
+done
 sub=~/bin/sub
 DOM=( 'CWBWRF_45k' 'SECN_9k' 'TWEPA_3k' 'tw_CWBWRF_45k' 'nests3')
+bcsiz=( 0 4089480 2289360 )
 RES=( 45 09 03 )
 GRD=( 'grid45'     'grid09'  'grid03' )
 MPI=( '-f machinefile -np 200' '-f machinefile -np 196' '-f machinefile -np 140' '-f machinefile -np 120' '-f machinefile -np 120')
@@ -35,8 +41,9 @@ for ((i=0;i <= 312; i+=3));do
   sleep 5
   done
 
-  NOWD=$(date -d "$BEGD +$(( $i + 10#$BH ))hour" +%Y-%m-%d )
-  hh=$(date -d "$BEGD +$(( $i + 10#$BH ))hour" +%H )
+  nh=$(( $i + 10#$BH - 24 ))
+  NOWD=$(date -d "$BEGD +${nh}hour" +%Y-%m-%d )
+  hh=$(date -d "$BEGD +${nh}hour" +%H )
   mkdir -p ${gfs}/f$iii
   cd ${gfs}/f$iii
   ./link_grib.csh gfs*
@@ -48,11 +55,11 @@ done
 
 #background executions of mk_emis and mk_ptse
 for i in 0 1;do
-  ii=$(echo ${GRD[$i]}|cut -c5-)
-  cd $fcst/grid$ii/smoke
+  cd $fcst/${GRD[$i]}/smoke
   ~/bin/sub ../../mk_emis.py $BEGD
 done
-~/bin/sub $gfs/em3.cs
+~/bin/sub $fcst/em3.cs
+~/bin/sub $gfs/airq.cs
 
 ~/bin/wait_exe metgrid #make sure all metgrid executions are finished
 
@@ -60,10 +67,7 @@ done
 ## 起迄年 、 月 、 日B
 yea1=$(echo $BEGD|cut -d'-' -f1);mon1=$(echo $BEGD|cut -d'-' -f2);day1=$(echo $BEGD|cut -d'-' -f3)
 yea2=$(echo $ENDD|cut -d'-' -f1);mon2=$(echo $ENDD|cut -d'-' -f2);day2=$(echo $ENDD|cut -d'-' -f3)
-dates=()
-for id in {0..11};do
-  dates=( ${dates[@]} $(date -d "$BEGD +${id}days" +%Y-%m-%d) )
-done
+
 for i in 3 2;do
   cd $gfs/${DOM[$i]}
   ## 置換模版中的起迄日期
@@ -72,7 +76,7 @@ for i in 3 2;do
              "s/EYEA/$yea2/g" "s/EMON/$mon2/g" "s/EDAY/$day2/g" ;do
     sed -i $cmd namelist.input
   done
-  if [[ $i == 3 ]];then
+  if [[ $i -eq 3 ]];then
     rm metoa_em*
     ## 連結metoa_em檔案
     for d in 1 2;do for id in {0..11};do for j in $(ls ../met_em.d0${d}.${dates[$id]}_*);do k=${j};l=${k/..\//};m=${l/met_/metoa_};ln -s $j $m;done;done;done
@@ -84,7 +88,7 @@ for i in 3 2;do
   # wrf
   LD_LIBRARY_PATH=/opt/netcdf/netcdf4_gcc/lib /opt/mpich/mpich3_gcc/bin/mpirun ${MPI[$i]} /opt/WRF4/WRFv4.2/main/wrf.exe >& /dev/null
   # link the wrfout's and execute mcip(in the background)
-  if [ $i == 3 ];then
+  if [ $i -eq 3 ];then
     for d in 1 2;do
       j=$(( $d - 1))
       for f in {0..10};do
@@ -111,28 +115,34 @@ for i in 3 2;do
 done
 
 #CMAQ stream
-cd $fcst
+for i in 0 1;do
+  ii=$(echo ${GRD[$i]}|cut -c5-)
+  csh $fcst/run_icon_NC.csh $fcst/grid$ii/icon/ICON_yesterday_${DOM[$i]} >&/dev/null
+done
+
 YYYYJJJ=$(date -d ${BEGD} +%Y%j)
 mcip_start=$BEGD
 mcip_end=$(date -d ${BEGD}+9days +%Y-%m-%d)
-cp project.config_loop project.config
+cp $fcst/project.config_loop $fcst/project.config
 for cmd in 's/YYYYJJJ/'$YYYYJJJ'/g' \
            's/mcip_start/'$mcip_start'/g' \
            's/mcip_end/'$mcip_end'/g';do
-  sed -ie $cmd project.config
+  sed -ie $cmd $fcst/project.config
 done
 
-datep=()
-for id in {0..9};do
-  datep=( ${datep[@]} $(date -d "$BEGD +${id}days" +%Y%m%d) )
-done
+
+
 for i in 0 1 2;do
+
+  cd $fcst
+  idb=0
+
   ii=$(echo ${GRD[$i]}|cut -c5-)
   cd $fcst
   csh ./run.cctm.${ii}.csh
 
   # combine PM's
-  for id in {0..9};do
+  for ((id=$idb;id <= 9; id+=1));do
     nc=$fcst/${GRD[$i]}/cctm.fcst/daily/CCTM_ACONC_v532_intel_${DOM[$i]}_${datep[$id]}.nc
     if [[ -e $nc ]];then ~/bin/sub $fcst/combine.sh $nc;fi
   done
@@ -144,24 +154,56 @@ for i in 0 1 2;do
     for id in {0..9};do
       nc=$fcst/${GRD[$j]}/bcon/BCON_${datep[$id]}_${DOM[$j]}
       f=( ${f[@]} $nc )
-      if [[ -e $nc ]];then rm $nc;fi
     done
 
     # generate bcon for next nest
-    for id in {0..9};do
+    for ((id=$idb;id <= 9; id+=1));do
       nc=$fcst/${GRD[$i]}/cctm.fcst/daily/CCTM_ACONC_v532_intel_${DOM[$i]}_${datep[$id]}.nc
-      csh $fcst/run_bcon_NC.csh $nc >&/dev/null
+      rm -f ${f[$id]}
+      ~/bin/sub csh $fcst/run_bcon_NC.csh $nc >&/dev/null
+    done
+
+    #wait until all the BCON's are extracted
+    while true;do
+      ipas=0;for id in {0..9};do if ! [[ -e ${f[$id]} ]];then ipas=1;fi;done
+      if [[ $ipas -eq 0 ]];then
+        siz=$(/usr/bin/du -ac ${f[@]}|tail -n1|awk '{print $1}')
+        if [[ $siz -eq ${bcsiz[$j]} ]];then break;fi
+      fi
+      sleep 63
     done
 
     nc=$fcst/${GRD[$j]}/bcon/BCON_today_${DOM[$j]}
-    /usr/bin/ncrcat -O ${f[0]} ${f[1]} ${f[2]} ${f[3]} ${f[4]} ${f[5]} ${f[6]} ${f[7]} ${f[8]} ${f[9]} $nc
+    cmd='/usr/bin/ncrcat -O '$(echo ${f[@]})' '$nc
+    eval $cmd
     # expand the last hour to next day
     ~/bin/add_lastHr.py $nc
-    cd $fcst
-
-    target=$fcst/grid$ii/icon/ICON_yesterday_${DOM[$j]}
-    if [ -e $target ];then rm $target;fi
-    csh $fcst/run_icon_NC.csh $fcst/grid$ii/icon/ICON_yesterday_${DOM[$i]} >&/dev/null
+   if [[ $i -eq 0 ]];then
+    j=$(( $i + 2 ))
+    f=()
+    for id in {0..9};do
+      nc=$fcst/${GRD[$j]}/bcon/BCON_${datep[$id]}_${DOM[$j]}
+      f=( ${f[@]} $nc )
+    done
+    for ((id=$idb;id <= 9; id+=1));do
+      nc=$fcst/${GRD[$i]}/cctm.fcst/daily/CCTM_ACONC_v532_intel_${DOM[$i]}_${datep[$id]}.nc
+      rm -f ${f[$id]}
+      ~/bin/sub csh $fcst/run_bcon_NC13.csh $nc >&/dev/null #(only grid45 works)
+    done
+    while true;do
+      ipas=0;for id in {0..9};do if ! [[ -e ${f[$id]} ]];then ipas=1;fi;done
+      if [[ $ipas -eq 0 ]];then
+        siz=$(/usr/bin/du -ac ${f[@]}|tail -n1|awk '{print $1}')
+        if [[ $siz -eq ${bcsiz[$j]} ]];then break;fi
+      fi
+      sleep 63
+    done
+    nc=$fcst/${GRD[$j]}/bcon/BCON_today_${DOM[$j]}
+    cmd='/usr/bin/ncrcat -O '$(echo ${f[@]})' '$nc
+    eval $cmd
+    # expand the last hour to next day
+    ~/bin/add_lastHr.py $nc
+   fi #endif case of i==0
   fi
   # prepare earth json files and backup to imackuang
 

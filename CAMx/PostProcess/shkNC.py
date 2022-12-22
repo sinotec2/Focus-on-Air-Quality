@@ -21,6 +21,7 @@ os.system('cp template.nc '+path)
 nc0 = netCDF4.Dataset(sys.argv[1],'r')
 nc1 = netCDF4.Dataset(path,'r+')
 v4=list(filter(lambda x:nc0.variables[x].ndim==4, [i for i in nc0.variables]))
+lis=list(filter(lambda x:nc1.variables[x].ndim==4, [i for i in nc1.variables]))
 
 #enlarge the timeframes
 nt,nlay,nrow,ncol=nc0.variables[v4[0]].shape
@@ -30,7 +31,6 @@ for t in range(nt):
 var3=np.zeros(shape=nc1.variables['TFLAG'].shape)
 var3[:,:,:]=var[:,None,:]
 nc1.variables['TFLAG'][:]=var3[:]
-lis='CO              NO2             O3              SO2             NMHC            PM10            PM25            '.split()
 for sp in lis:
   if sp in ['NMHC','PM10','PM25']:continue
   nc1.variables[sp][:]=nc0.variables[sp][:]

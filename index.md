@@ -13,13 +13,13 @@ last_modified_date: 2022-12-06 05:47:44
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[News at 2022-12-28][okm]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [blogs](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 } [openKM][okm]{: .btn .fs-5 .mb-4 .mb-md-0 }
+[News at 2022-12-28][okm]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [blogs](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 } [OpenKM][okm]{: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
 
-- 2022-12-28 隨著5G與影音世界的開放，知識、或者知識管理(KM)有了全新的面貌，甚至openKM公司官網也將其軟體正名為檔案管理系統(DMS)。作為一個知識經濟從業者，關於KM過去還有蠻多理想與實作。過去有關openKM的文件、程式，整理放在[另外一個gh-page][okm]供參。
+- 2022-12-28 隨著5G與影音世界的開放，知識、或者知識管理(KM)有了全新的面貌，甚至OpenKM公司官網也將其軟體正名為檔案管理系統(DMS)。作為一個知識經濟從業者，關於KM過去還有蠻多理想與實作。過去有關OpenKM的文件、程式，整理放在[另外一個gh-page][okm]供參。
 - 2022-12-14 將空品預報的天數從[5天][fcst]延長到10天，表面上只是計算時間拉長一倍，實則裏面還有蠻多挑戰的，[成果的網址][fcst]未變，筆記先放在[FAQ->空品預報時距之延長][fcst10]，還想做一些嘗試與精進，例如直接從d01結果啟動d02\~d03後5日的模擬、WACCM數據低估問題也是要解決、還有批次之間、預報與再分析之間跳動的問題，等穩定一點再放到這裡。
 - 2022-12-06 [CAMx][CAMx]模式的筆記與維護算是告一段落，還增加了[CAMx模擬結果之壓縮_nc檔版本](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/PostProcess/99.7shkNC/)算是個小彩蛋，可以處理最新nc版本的模擬結果。平心而論，[CAMx][CAMx]算是個「深入淺出」的網格模式，對煙流也有較佳的處理，期待CAMx與CMAQ[雙C模式的競賽](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Models/CAMx_vs_CMAQ/)中，雙方都能有持續的進步與創新，有緣江湖還會再相見的。
 - 2022-11-25 5天的CMAQ空品預報持續運作中，雖然還是做不到無縫接軌，但也許延長預報時間(leading time)，也可以算是一點貢獻。這需要花更多的時間下載NCAR的[WACCM](https://www2.acom.ucar.edu/gcm/waccm)全球空品預報結果，詳見[WACCM模式結果之下載、讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/3WACCM/)。這期間也嘗試了mcip的gfs版本[NACC](https://github.com/noaa-oar-arl/NACC)，可惜目前還沒有找到NOAA公開gfs-FV3的全球預報結果，編譯與腳本的測試經驗可以參考[解讀GFS之MCIP版本(NACC)](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/NACC/)，真希望國內能有人自己來做gfs的預報。
@@ -119,4 +119,4 @@ email, or any other method with the owners of this repository before making a ch
 [CAMx]: <https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/> "Comprehensive Air Quality Model with Extensions(CAMx)"
 [fcst10]: <https://sinotec2.github.io/FAQ/2022/12/06/fcst10days.html> "空品預報時距之延長"
 [fcst]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/> "逐日WRF與CMAQ預報系統之建置"
-[okm]: <https://sinotec2.github.io/openKM/> "OpenKM是一個免費/自由的文檔管理系統，提供用於管理任意文件的Web界面。"
+[okm]: <https://sinotec2.github.io/OpenKM/> "OpenKM是一個免費/自由的文檔管理系統，提供用於管理任意文件的Web界面。"

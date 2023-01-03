@@ -49,9 +49,9 @@ ob-working-directory: error retrieving current directory: getcwd: cannot access 
    0:      APFS Container Scheme -                      +1.0 TB     disk2
 ```
 
-### imackuang 作業
+## imackuang 作業
 
-- search device name
+### search device name
 
 ```bash
 kuang@125-229-149-182 /Users/Seagate/data/NOAA/NCEP
@@ -60,15 +60,19 @@ $ diskutil list|grep Seagate
 
 ```
 
-- mount
+### mount device unto $vol_nam
+
+- /dev/disk3(type=`GUID_partition_scheme`)與/dev/disk3s2(type=`Microsoft Basic Data`)似乎是2個不同的區位
+- 前者無法寫入，後者則可。
+
 ```bash
-vol=/Volumes/Seagate\ Expansion\ Drive
-sudo umount $vol
-sudo mkdir  $vol
-sudo mount -o rw,auto,nobrowse -t ntfs /dev/disk3s2 $vol
+vol_nam=/Volumes/Seagate\ Expansion\ Drive
+sudo umount $vol_nam
+sudo mkdir  $vol_nam
+sudo mount -o rw,auto,nobrowse -t ntfs /dev/disk3s2 $vol_nam
 ```
 
-- results
+### results
 
 ```bash
 $ mount|grep Seagate
@@ -76,3 +80,8 @@ $ mount|grep Seagate
 $ df -h |grep Seagate
 /dev/disk3s2                                     3.6Ti  2.7Ti  961Gi    75%  468252 1007937428    0%   /Volumes/Seagate Expansion Drive
 ```
+
+### about Finder‘s control
+
+- 似乎不需（不能）由Finder來控制外接硬碟。
+- 當`sudo umount $vol_nam`之後，退出finder的連結，似乎在terminal運作外接硬碟才變得順暢。

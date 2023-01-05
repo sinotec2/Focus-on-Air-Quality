@@ -30,6 +30,14 @@ fzf is a command-line fuzzy finder. That means you can search for particles or f
 
 The homepage of the author contains a number of illustrative examples.
 
+## fd
+
+- https://juejin.cn/post/7085880670374854692
+- 一款开源的文件搜索神器，终于不用记 find 命令了
+
+HelloGitHub
+
+2022年04月13日 08:37 ·  阅读 11924
 
 [^1]: Command history in Zsh, discussed at [unix.stackexchange.com][zsh]
 [^2]: output whole history? discussed at [superuser.com][su]

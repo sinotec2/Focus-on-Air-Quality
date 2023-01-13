@@ -5,6 +5,7 @@ parent: SO Pathways
 grand_parent: Plume Models
 nav_order: 4
 last_modified_date: 2022-03-08 10:16:34
+tags: CGI_Pythons plume_model KML
 ---
 # 煙囪及建築物座標系統之旋轉計算
 {: .no_toc }

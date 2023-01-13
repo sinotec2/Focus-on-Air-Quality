@@ -6,6 +6,7 @@ grand_parent: "WRF"
 nav_order: 1
 date:               
 last_modified_date:   2021-11-28 20:31:23
+tags: wrf real
 ---
 
 # namelist.input

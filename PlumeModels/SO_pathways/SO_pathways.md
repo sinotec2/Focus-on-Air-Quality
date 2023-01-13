@@ -6,6 +6,7 @@ nav_order: 2
 last_modified_date: 2022-03-08 10:07:43
 has_children: true
 permalink: /PlumeModels/SO_pathways/
+tags:  plume_model
 ---
 
 # SO Pathways

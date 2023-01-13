@@ -6,6 +6,7 @@ grand_parent: "WRF"
 nav_order: 1
 date: 2021-12-27 16:53:48
 last_modified_date: 2021-12-27 16:53:42
+tags: wrf wrf-chem
 ---
 
 # WRF-chem 的配置及編譯 

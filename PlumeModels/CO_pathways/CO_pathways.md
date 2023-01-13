@@ -6,6 +6,7 @@ nav_order: 1
 last_modified_date: 2022-03-21 08:58:36
 has_children: true
 permalink: /PlumeModels/CO_pathways/
+tags: plume_model
 ---
 
 # CO Pathways and Program Compilations

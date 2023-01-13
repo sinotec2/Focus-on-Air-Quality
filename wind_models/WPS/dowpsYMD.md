@@ -6,6 +6,7 @@ grand_parent: "WRF"
 nav_order: 99
 date:               
 last_modified_date: 2021-12-21 22:23:21
+tags: wrf WPS
 ---
 
 # dowpsYMD.sh 

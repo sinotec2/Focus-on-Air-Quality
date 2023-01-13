@@ -6,7 +6,7 @@ nav_order: 3
 has_children: true
 permalink: /wind_models/REAL/
 last_modified_date: 2022-11-28 11:57:12
-tags: CWBWRF
+tags: CWBWRF wrf real
 ---
 
 {: .fs-6 .fw-300 }

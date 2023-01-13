@@ -5,6 +5,7 @@ parent: SO Pathways
 grand_parent: Plume Models
 nav_order: 3
 last_modified_date: 2022-06-08 11:33:42
+tags: CGI_Pythons plume_model
 ---
 # BPIPPRM之[遠端計算服務](http://125.229.149.182/BPIPPRIM.html)範例
 {: .no_toc }

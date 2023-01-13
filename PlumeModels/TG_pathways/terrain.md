@@ -5,6 +5,7 @@ parent: Plume Models
 nav_order: 3
 has_children: true
 permalink: /PlumeModels/REnTG_pathways/
+tags: CGI_Pythons plume_model
 ---
 
 # 接受點與地形之設定

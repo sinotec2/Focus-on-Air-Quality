@@ -6,6 +6,7 @@ grand_parent: WRF
 nav_order: 5
 date: 2022-01-07 09:49:07
 last_modified_date: 2022-01-07 09:49:12
+tags: wrf-chem wrf
 ---
 
 # 輸出揚沙排放量

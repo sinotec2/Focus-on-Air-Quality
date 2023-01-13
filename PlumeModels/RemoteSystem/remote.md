@@ -5,6 +5,7 @@ parent: Plume Models
 nav_order: 99
 has_children: true
 permalink: /PlumeModels/RemoteSystem/
+tags: CGI_Pythons plume_model
 ---
 
 # 遠端執行系統

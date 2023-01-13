@@ -6,6 +6,7 @@ grand_parent: Utilities
 has_children: true
 last_modified_date: 2022-05-10 19:32:12
 permalink: /utilities/Graphics/wrf-python
+tags: wrf-python
 ---
 
 # Notes on wrf-python

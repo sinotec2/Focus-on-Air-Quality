@@ -5,6 +5,8 @@ nav_order: 5
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-06-11 19:58:12
+tags: cpuff CGI_Pythons wrf-python
+
 ---
 
 # calpuff遠端計算系統之實現

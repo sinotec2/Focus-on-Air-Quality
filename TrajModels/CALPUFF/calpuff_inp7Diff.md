@@ -5,6 +5,7 @@ nav_order: 4
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-04-05 14:28:18
+tags: cpuff 
 ---
 
 # 由7.0版範例編輯calpuff.inp

@@ -5,6 +5,7 @@ nav_order: 3
 has_children: true
 parent: Trajectory Models
 permalink: /TrajModels/CALPOST
+tags: cpuff cpost
 ---
 
 # CALPOST

@@ -7,7 +7,8 @@ nav_order: 5
 date: 2022-10-13 13:23:56
 last_modified_date:  2022-10-13 13:24:00
 permalink: /wind_models/WRFOUT/
-tags: wrf
+tags: wrf wrf-python
+
 ---
 
 # WRFOUT

@@ -5,6 +5,7 @@ parent: SO Pathways
 grand_parent: Plume Models
 nav_order: 1
 last_modified_date: 2022-03-15 10:46:51
+tags: plume_model ptse
 ---
 # 臺灣地區既有點源排放資訊
 {: .no_toc }

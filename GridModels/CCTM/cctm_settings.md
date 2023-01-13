@@ -6,7 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 2
 date: 2022-04-20 20:27:59
 last_modified_date: 2022-04-20 20:28:02
-tags: CMAQ CCTM
+tags: CMAQ CCTM emis ptse mcip
 ---
 
 # CCTM之設定

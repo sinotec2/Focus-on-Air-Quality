@@ -5,6 +5,7 @@ nav_order: 6
 has_children: true
 permalink: /EmisProc/
 last_modified_date:   2021-12-01 11:24:33
+tags: CAMx emis ptse
 ---
 
 # TEDS排放處理相關程式

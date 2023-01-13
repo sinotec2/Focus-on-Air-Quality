@@ -6,6 +6,7 @@ grand_parent: TEDS Python
 nav_order: 1
 date: 2021-12-03 09:54:07               
 last_modified_date:   2021-12-08 13:33:38
+tags: CAMx ptse
 ---
 
 # 點源排放檔案準備相關副程式

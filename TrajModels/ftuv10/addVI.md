@@ -5,6 +5,7 @@ nav_order: 2
 parent: 地面二維軌跡分析
 grand_parent: Trajectory Models
 last_modified_date: 2022-11-04 14:43:02
+tags: trajectory
 ---
 
 # addVI.py程式說明

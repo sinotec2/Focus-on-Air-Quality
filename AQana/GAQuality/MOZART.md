@@ -6,6 +6,7 @@ grand_parent: "AQ Data Analysis"
 nav_order: 1
 date: 2021-12-12 16:29:31              
 last_modified_date:  2022-06-30 11:18:35
+tags: mozart2camx
 ---
 
 # MOZART模式結果之讀取及應用

@@ -6,6 +6,7 @@ grand_parent: "wind models"
 nav_order: 3
 date:               
 last_modified_date:   2021-11-28 22:04:40
+tags: CODiS
 ---
 
 # 計算距離反比加權值

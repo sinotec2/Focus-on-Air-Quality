@@ -5,6 +5,7 @@ nav_order: 1
 parent: 地面二維軌跡分析
 grand_parent: Trajectory Models
 last_modified_date: 2022-11-25 16:11:28
+tags: trajectory CWBWRF
 ---
 
 # ftuv10.py程式說明

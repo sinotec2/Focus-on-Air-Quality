@@ -8,6 +8,7 @@ nav_order: 6
 date: 2022-08-02 14:19:20
 last_modified_date:   2022-08-02 14:19:24
 permalink: /AQana/GAQuality/ECMWF_CAMS
+tags: CAMS forecast
 ---
 
 # 歐洲中期天氣預報中心[CAMS][CAMS]全球空品預報場之應用

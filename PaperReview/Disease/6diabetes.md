@@ -5,6 +5,7 @@ parent: Disease and Air Pollution
 grand_parent: Paper Reviews
 nav_order: 6
 last_modified_date: 2022-05-05 14:21:12
+tags: review HRA
 ---
 
 # 糖尿病

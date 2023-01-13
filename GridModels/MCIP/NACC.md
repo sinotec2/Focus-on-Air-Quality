@@ -6,7 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 5
 date: 2022-11-24 14:11:20
 last_modified_date:   2022-11-25 10:15:02
-tags: mcip CMAQ gfs
+tags: mcip CMAQ GFS
 ---
 
 # 解讀GFS之MCIP版本(NACC)

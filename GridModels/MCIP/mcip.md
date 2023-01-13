@@ -5,6 +5,7 @@ parent: CMAQ Model System
 nav_order: 1
 has_children: true
 permalink: /GridModels/MCIP/
+tags: mcip CMAQ
 ---
 
 # 氣象檔案之準備

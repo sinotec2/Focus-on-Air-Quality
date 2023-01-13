@@ -6,8 +6,7 @@ grand_parent: Global/Regional Emission
 nav_order: 1
 date: 2022-02-05 10:26:07
 last_modified_date: 2022-02-05 10:26:11
-tags: NCL grib CAMx mozart2camx
-
+tags: NCL grib CAMx mozart2camx emis CMAQ
 ---
 
 # 全球船隻排放量之處理_CAMx

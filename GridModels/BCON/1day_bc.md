@@ -6,6 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 7
 date: 2022-08-25 12:11:42
 last_modified_date: 2022-10-13 22:52:07
+tags: CMAQ BCON forecast
 ---
 
 # 逐日循序執行bcon.exe

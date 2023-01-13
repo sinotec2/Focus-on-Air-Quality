@@ -5,6 +5,7 @@ parent: Models and Comparisons
 grand_parent: Paper Reviews
 nav_order: 1
 last_modified_date: 2022-06-01 11:29:09
+tags: CMAQ review CAMx
 ---
 
 # CAMx vs CMAQ

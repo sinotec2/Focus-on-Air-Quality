@@ -6,6 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 4
 date: 2021-12-19 21:21:37
 last_modified_date:   2021-12-19 21:21:33
+tags: CMAQ landuse emis wrf
 ---
 
 # 整併8個批次wrfout成為全月檔案

@@ -4,6 +4,7 @@ title:  列印m3.nc的時間標籤
 parent:   NetCDF Relatives
 grand_parent: Utilities
 last_modified_date:   2021-12-18 19:21:11
+tags: CMAQ mcip emis ptse ICON BCON
 ---
 # 列印m3.nc的時間標籤
 {: .no_toc }

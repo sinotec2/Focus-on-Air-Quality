@@ -6,6 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 4
 date: 2022-01-18 13:51:37
 last_modified_date: 2022-01-18 13:51:41
+tags: CMAQ landuse emis
 ---
 
 # gridded land cover/land use

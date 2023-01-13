@@ -6,6 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 3
 date: 2021-12-16 10:59:00
 last_modified_date:   2021-12-16 10:59:04
+tags: CMAQ ICON BCON
 ---
 
 # MOZARD/WACCM模式輸出轉成CMAQ初始條件_水平內插與污染項目對照

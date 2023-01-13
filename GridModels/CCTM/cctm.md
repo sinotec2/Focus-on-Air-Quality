@@ -5,6 +5,7 @@ parent: CMAQ Model System
 nav_order: 7
 has_children: true
 permalink: /GridModels/CCTM/
+tags: CMAQ CCTM
 ---
 
 # CCTM主程式之執行

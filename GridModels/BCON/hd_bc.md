@@ -6,6 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 6
 date: 2022-03-03 15:50:20
 last_modified_date: 2022-03-03 15:50:24
+tags: CMAQ BCON
 ---
 
 # 大型網格系統切割邊界濃度

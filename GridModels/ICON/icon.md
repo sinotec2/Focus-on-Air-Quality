@@ -5,6 +5,7 @@ parent: CMAQ Model System
 nav_order: 3
 has_children: true
 permalink: /GridModels/ICON/
+tags: CMAQ ICON
 ---
 
 # 初始條件之準備

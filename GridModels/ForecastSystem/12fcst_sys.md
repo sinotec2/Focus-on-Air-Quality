@@ -7,6 +7,7 @@ has_children: true
 permalink: /GridModels/ForecastSystem/
 date:               
 last_modified_date:   2022-09-14 16:54:47
+tags: CMAQ Forecast wrf earth
 ---
 
 # 逐日WRF與CMAQ預報系統之建置

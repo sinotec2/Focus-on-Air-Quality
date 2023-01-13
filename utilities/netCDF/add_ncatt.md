@@ -4,6 +4,7 @@ title: add_ncatt
 parent: NetCDF Relatives
 grand_parent: Utilities
 last_modified_date: 2022-06-29 15:47:38
+tags: CAMx
 ---
 
 # 增添CAMx nc檔案所需之全域屬性

@@ -6,6 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 5
 date: 2021-12-18 19:47:28
 last_modified_date: 2022-01-03 20:27:23
+tags: CMAQ BCON
 ---
 
 # **CMAQ**邊界條件輸入檔案之產生

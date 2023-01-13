@@ -5,6 +5,7 @@ parent: CMAQ Model System
 nav_order: 2
 has_children: true
 permalink: /GridModels/BCON/
+tags: CMAQ BCON
 ---
 
 # 邊界條件之準備

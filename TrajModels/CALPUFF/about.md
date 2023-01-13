@@ -5,6 +5,7 @@ nav_order: 1
 parent: CALPUFF
 grand_parent: Trajectory Models
 last_modified_date: 2022-03-22 08:56:43
+tags: cpuff review
 ---
 
 # 軌跡模式的法律定位與風波

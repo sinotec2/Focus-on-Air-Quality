@@ -5,6 +5,7 @@ parent: Utilities
 has_children: true
 permalink: /utilities/CGI-pythons/
 last_modified_date: 2022-06-07 17:20:31
+tags: CGI_Pythons
 ---
 
 {: .fs-6 .fw-300 }

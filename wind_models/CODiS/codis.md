@@ -6,6 +6,7 @@ nav_order: 1
 has_children: true
 permalink: /wind_models/CODiS/
 last_modified_date:   2021-11-28 22:04:23
+tags: CODiS
 ---
 <script id="_wauw3r">var _wau = _wau || []; _wau.push(["dynamic", "qz4i71adty", "w3r", "c4302bffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
 {: .fs-6 .fw-300 }

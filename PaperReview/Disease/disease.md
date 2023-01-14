@@ -5,6 +5,7 @@ parent: Paper Reviews
 nav_order: 2
 has_children: true
 permalink: /PaperReview/Disease/
+tags: review HRA
 ---
 
 # 疾病與空氣污染

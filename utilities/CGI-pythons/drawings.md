@@ -4,6 +4,7 @@ title:  drawings CGI-pythons
 parent: CGI-pythons
 grand_parent: Utilities
 last_modified_date: 2022-06-11 21:21:57
+tags: CGI_Pythons
 ---
 # 有關繪圖的CGI-pythons
 {: .no_toc }

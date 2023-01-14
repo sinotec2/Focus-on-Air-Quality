@@ -4,7 +4,7 @@ title:  地面風wrfout檔轉json
 parent: earth
 grand_parent: Graphics
 last_modified_date: 2022-07-28 23:09:00
-tags: CWBWRF
+tags: CWBWRF earth graphics
 ---
 
 # 地面風wrfout檔轉json

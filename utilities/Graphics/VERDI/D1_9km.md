@@ -4,6 +4,7 @@ title:  VERDI圖面解析度之改善
 parent: VERDI
 grand_parent: Graphics
 last_modified_date: 2022-03-18 14:02:50
+tags: graphics VERDI
 ---
 
 # VERDI圖面解析度之改善

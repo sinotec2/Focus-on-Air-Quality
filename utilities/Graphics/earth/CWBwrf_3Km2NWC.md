@@ -5,7 +5,7 @@ parent: earth
 grand_parent: Graphics
 last_modified_date: 2022-08-21 20:22:54
 mermaid: true
-tags: forecast CWBWRF
+tags: forecast CWBWRF crontab graphics
 ---
 
 # earth套件讀取CWB_WRF數據

@@ -4,6 +4,7 @@ title:  由圖面顏色讀取濃度值
 parent: Graphics
 grand_parent: Utilities
 last_modified_date: 2022-02-08 16:05:00
+tags: graphics 
 ---
 
 # 由圖面顏色讀取濃度值

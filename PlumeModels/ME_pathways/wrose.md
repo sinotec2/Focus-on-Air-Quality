@@ -5,7 +5,7 @@ parent: ME Pathways
 grand_parent: Plume Models
 nav_order: 2
 last_modified_date: 2022-03-21 16:43:46
-tags: plume_model graphicss
+tags: plume_model graphics
 ---
 # 風花圖之繪製_wdrose.py
 {: .no_toc }

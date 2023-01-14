@@ -5,6 +5,7 @@ parent: Utilities
 has_children: true
 permalink: /utilities/Graphics/
 last_modified_date:   2022-02-05 09:41:59
+tags: graphics 
 ---
 
 {: .fs-6 .fw-300 }

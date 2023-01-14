@@ -4,7 +4,7 @@ title:  earth套件展示wrfout與CCTM_ACONC結果
 parent: earth
 grand_parent: Graphics
 last_modified_date: 2022-09-02 14:33:16
-tags: CMAQ earth combine
+tags: CMAQ earth combine crontab graphics
 ---
 
 # earth套件展示wrfout與CCTM_ACONC結果

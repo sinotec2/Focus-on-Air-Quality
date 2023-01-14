@@ -4,6 +4,7 @@ title:  2個nc檔案間的差值
 parent:   NetCDF Relatives
 grand_parent: Utilities
 last_modified_date: 2022-04-20 14:50:26
+tags: netCDF
 ---
 # 2個nc檔案間的差值
 {: .no_toc }

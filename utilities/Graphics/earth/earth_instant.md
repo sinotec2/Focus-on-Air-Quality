@@ -4,7 +4,7 @@ title:  Applications of Earth System
 parent: earth
 grand_parent: Graphics
 last_modified_date: 2022-08-31 10:50:26
-tags: earth GFS CAMS CWBWRF
+tags: earth GFS CAMS CWBWRF graphics
 ---
 
 # earth套件之建置實例

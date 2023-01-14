@@ -4,6 +4,7 @@ title:  NCf之8小時移動平均
 parent: NetCDF Relatives
 grand_parent: Utilities
 last_modified_date: 2022-02-14 10:51:59
+tags: netCDF
 ---
 # NC檔案之8小時移動平均
 {: .no_toc }

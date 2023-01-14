@@ -4,6 +4,7 @@ title:  nc檔案時空最大值
 parent:   NetCDF Relatives
 grand_parent: Utilities
 last_modified_date: 2022-04-22 11:04:44
+tags: netCDF
 ---
 # nc檔案時空最大值
 {: .no_toc }

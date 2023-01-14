@@ -5,6 +5,7 @@ nav_order: 1
 has_children: true
 parent: Trajectory Models
 permalink: /TrajModels/CALMET
+tags: cpuff cmet
 ---
 
 # CALMET

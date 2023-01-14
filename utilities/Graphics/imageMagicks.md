@@ -4,6 +4,7 @@ title: imageMagicks
 parent: Graphics
 grand_parent: Utilities
 last_modified_date: 2022-06-04 10:12:36
+tags: graphics 
 ---
 
 # imageMagicks

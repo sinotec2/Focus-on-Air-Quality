@@ -6,6 +6,7 @@ grand_parent: Utilities
 has_children: true
 last_modified_date: 2022-03-18 13:55:39
 permalink: /utilities/Graphics/VERDI
+tags: graphics VERDI
 ---
 
 # 網格模式之顯示軟體VERDI

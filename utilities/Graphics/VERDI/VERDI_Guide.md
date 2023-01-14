@@ -4,7 +4,7 @@ title:  VERDI使用說明
 parent: VERDI
 grand_parent: Graphics
 last_modified_date: 2022-03-18 14:02:50
-tags: CMAQ VERDI CAMx wrf
+tags: CMAQ VERDI CAMx wrf graphics
 ---
 
 # VERDI使用說明

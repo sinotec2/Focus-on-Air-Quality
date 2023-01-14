@@ -6,6 +6,7 @@ grand_parent: Utilities
 has_children: true
 last_modified_date: 2022-08-31 10:50:26
 permalink: /utilities/Graphics/earth
+tags: graphics earth
 ---
 
 # earth套件之應用

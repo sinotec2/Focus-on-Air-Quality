@@ -4,6 +4,7 @@ title:  shape2bin
 parent: VERDI
 grand_parent: Graphics
 last_modified_date: 2022-03-24 09:13:08
+tags: graphics VERDI
 ---
 
 # 新增/抽換VERDI底圖

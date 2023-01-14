@@ -4,7 +4,7 @@ title:  NC檔案多維度批次篩選
 parent:   NetCDF Relatives
 grand_parent: Utilities
 last_modified_date: 2022-05-01 18:54:06
-tags: ptse emis CMAQ
+tags: ptse emis CMAQ netCDF
 ---
 # NC檔案多維度批次篩選
 {: .no_toc }

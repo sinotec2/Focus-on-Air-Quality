@@ -6,7 +6,7 @@ grand_parent: Global/Regional Emission
 nav_order: 1
 date: 2022-02-25 15:04:48
 last_modified_date: 2022-02-25 15:04:52
-tags: CMAQ emis EDGAR
+tags: CMAQ emis EDGAR REAS
 ---
 
 # EDGARv5之下載與處理

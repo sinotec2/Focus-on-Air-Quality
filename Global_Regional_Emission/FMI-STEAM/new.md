@@ -6,6 +6,7 @@ grand_parent: Global/Regional Emission
 nav_order: 2
 date: 2022-02-05 16:09:08
 last_modified_date: 2022-02-05 16:09:11
+tags: REAS CAMx CMAQ emis
 ---
 
 # 全球船隻排放量之處理_CMAQ

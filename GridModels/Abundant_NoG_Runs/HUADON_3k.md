@@ -5,7 +5,7 @@ parent: Abundant NoG Runs
 grand_parent: CMAQ Model System
 nav_order: 2
 last_modified_date:   2022-03-18 16:39:52
-tags: CMAQ
+tags: CMAQ REAS
 ---
 
 # 華東地區解析度3Km之CMAQ模擬分析
@@ -116,18 +116,22 @@ wrfout_d06_7 -> wrfout_dHUADON_3k_7
 
 ```bash
 geo_em.d00.nc -> /nas1/WRF4.0/WRF_chem/WPS/geo_em.d01.nc_121.7359
-```    
+```
 
 ## 地面排放檔案
+
 - 使用REAS3.2數據庫，轉換程式[reas2cmaqD2.py](https://github.com/sinotec2/cmaq_relatives/blob/master/emis/reas2cmaqD2.py)之說明，詳見[地面排放檔之轉換(CMAQ)](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/reas2cmaq/)。
 - 雖然為逐日檔案、逐時數據，但此處沒有設定任何的時間變化，只有REAS資料庫本身逐月的差異。
 
 ## 高空排放檔案
+
 - 即為REAS之POWER_PLANTS_POINT排放量，分布詳見[高空排放檔之轉換(CMAQ)](https://sinotec2.github.io/Focus-on-Air-Quality/REASnFMI/REAS/rd_REASptsrce/)。
 - CCTM所讀取const.nc檔案內需設定正確的點源位置網格點，因此需改成CWBWRF_15k網格系統。
 
 ## CCTM之執行
+
 ### 腳本修改項目
+
 - 開啟`CTM_WB_DUST`
 - 關閉`CTM_ABFLUX`
 - 模擬期間為啟始後9天結束

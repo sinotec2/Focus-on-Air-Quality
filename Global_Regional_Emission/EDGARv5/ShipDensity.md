@@ -6,6 +6,7 @@ grand_parent: Global/Regional Emission
 nav_order: 2
 date: 2022-03-17 18:42:30
 last_modified_date: 2022-03-17 18:42:34
+tags: EDGAR REAS
 ---
 
 # EDGARv5船隻排放空間分布之重分配

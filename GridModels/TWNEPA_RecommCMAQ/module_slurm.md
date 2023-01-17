@@ -284,3 +284,39 @@ squeue|grep 'NAME|$USERNAME'
 grep -n DDD $(ls -rt CTM*|tail)|tail -n1
 ```
 
+## printenv
+
+### env settings about MPI
+
+```bash
+sinotec2@lgn303 ~
+$ printenv|grep MPI
+LMOD_FAMILY_COMPILER_VERSION=2021
+MPI_F77=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiifort
+MPI_CXX=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiicpc
+MPI_FC=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiifort
+MPICC=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiicc
+I_MPI_FABRICS=shm:ofi
+__LMOD_REF_COUNT_LOADEDMODULES=compiler/intel/2021:1;libs/ucx/1.11.2:1;IntelMPI/2021:1;szip/2.1.1:1;hdf5/1.12:1;netcdf/4.7.4:1;pnetcdf/1.12.2:1;libs/OFI/libfabric/1.11.2:1
+__LMOD_REF_COUNT__LMFILES_=/opt/ohpc/Taiwania3/modulefiles/compiler/intel/2021.lua:1;/opt/ohpc/Taiwania3/modulefiles/libs/ucx/1.11.2.lua:1;/opt/ohpc/Taiwania3/pkg/lmod/comp/intel/2021/IntelMPI/2021.lua:1;/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/szip/2.1.1.lua:1;/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/hdf5/1.12.lua:1;/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/netcdf/4.7.4.lua:1;/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/pnetcdf/1.12.2.lua:1;/opt/ohpc/Taiwania3/modulefiles/libs/OFI/libfabric/1.11.2.lua:1
+LMOD_FAMILY_MPI_VERSION=2021
+_LMFILES_=/opt/ohpc/Taiwania3/modulefiles/compiler/intel/2021.lua:/opt/ohpc/Taiwania3/modulefiles/libs/ucx/1.11.2.lua:/opt/ohpc/Taiwania3/pkg/lmod/comp/intel/2021/IntelMPI/2021.lua:/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/szip/2.1.1.lua:/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/hdf5/1.12.lua:/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/netcdf/4.7.4.lua:/opt/ohpc/Taiwania3/pkg/lmod/mpi/intel/2021/pnetcdf/1.12.2.lua:/opt/ohpc/Taiwania3/modulefiles/libs/OFI/libfabric/1.11.2.lua
+MPI_CC=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiicc
+MPIFC=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiifort
+LOADEDMODULES=compiler/intel/2021:libs/ucx/1.11.2:IntelMPI/2021:szip/2.1.1:hdf5/1.12:netcdf/4.7.4:pnetcdf/1.12.2:libs/OFI/libfabric/1.11.2
+I_MPI_VAR_CHECK_SPELLING=no
+I_MPI_OFI_PROVIDER=mlx
+MPIF77=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiifort
+I_MPI_HYDRA_BOOTSTRAP=slurm
+LMOD_FAMILY_COMPILER=compiler/intel
+LMOD_FAMILY_MPI=IntelMPI
+MPICXX=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/bin/mpiicpc
+I_MPI_ROOT=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1
+```
+
+### provider
+
+```$ printenv|grep PROV
+FI_PROVIDER_PATH=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib/prov
+I_MPI_OFI_PROVIDER=mlx
+```

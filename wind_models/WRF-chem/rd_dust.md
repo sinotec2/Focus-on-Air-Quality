@@ -88,9 +88,7 @@ tags: wrf-chem wrf
 for i in {0..54};do convert WRF_chem-$i.png -crop 950x550 a.png;mv a.png WRF_chemC-$i.png;done
 for i in {0..9};do mv WRF_chemC-$i.png WRF_chemC-0$i.png;done
 convert -dispose 2 -coalesce +repage -background none  WRF_chem-*.png -size 895x565 WRF_chem.gif
-``` 
-
-
+```
 
 - 北臺灣測點時間序列之讀取
   - `IX,IY`為[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)圖面上讀取結果，因此換到python上時須**減1**。

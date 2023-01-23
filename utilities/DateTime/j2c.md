@@ -4,7 +4,9 @@ title:  Julian Day to Calendar Day(j2c)
 parent: Dates and Times
 grand_parent: Utilities
 last_modified_date: 2022-08-29 14:28:00
+tags: datetime
 ---
+
 # Julian Day to Calendar Day
 {: .no_toc }
 
@@ -19,6 +21,7 @@ last_modified_date: 2022-08-29 14:28:00
 ---
 
 ## 背景
+
 - Julian Day([儒略日][儒略日])因其具有連續性，不會因跨月、潤年等因素而發生錯誤，是時間計算過程中很重要的一種方式。
 - 過去在Fortran程式的領域，是以一簡單的副程式計算。移轉到python平台上時，從datetime模組即能直接進行加減及轉換處理。而在bash平台上，則還需要整合一些技巧。
 - 作為平台上計算的小工具，前述作法都有一些困難：

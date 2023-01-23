@@ -6,7 +6,7 @@ grand_parent: "wind models"
 nav_order: 1
 date: 2021-11-28 22:04:32               
 last_modified_date: 2021-12-08 09:17:15
-tags: crontab CODiS
+tags: crontab CODiS Crawlers
 ---
 
 # CODiS日報表下載整併 
@@ -23,6 +23,7 @@ tags: crontab CODiS
 ---
 
 ## 背景
+
 中央氣象局每天公開其地面自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬，等等作業化系統，由於整併後以全日所有測站同一檔案儲存，具備更高的可用性。
 此處介紹台灣地區中央氣象局自動站數據之內容、下載作業方式、以及爬蟲程式設計之細節。
 CODiS數據目前作業情況：
@@ -38,7 +39,7 @@ CODiS數據目前作業情況：
     - 雲雨日(降雨、日照、幅射、能見度、UVI、雲量)等等數據。
 - 檔案範例
 
-```
+```bash
 stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGust,Precp,PrecpHour,SunShine,GloblRad,Visb,UVI,Cloud Amount
 466880_板橋,2020061901.0,1006.1,1007.3,27.7,24.6,83.0,1.1,200.0,3.0,190.0,0.0,0.0,,0.00,,,
 466880_板橋,2020061902.0,1006.0,1007.2,27.6,24.9,85.0,1.1,210.0,3.3,190.0,0.0,0.0,,0.00,20.0,,2.0
@@ -55,6 +56,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 ### 解決方案
 
 #### 現行既有方案
+
 - 年度數據之[購置](https://e-service.cwb.gov.tw/wdps/)
   - 傳統作法，數據約落後實際觀測時間**至少10日**
   - 數據是以分站儲存，單站檔案為全年逐時之[ASCII](https://zh.wikipedia.org/wiki/ASCII)碼，購入數據後仍然需要整理、消化後方能應用。
@@ -67,6 +69,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 - [muse648](http://muse6485.blogspot.com/2019/08/python1.html)這2篇網誌有完整`bs`批次下載的應用範例，是用`request.get`方式取得內容。不過因為不是氣象方面的專業，並沒有仔細處理缺漏值各項註記，程式執行應該會遭遇困難。不然就是僅儲存字串，這也不失為一個簡捷的方案。
 
 #### 方案考量
+
 - leading time
   - 國內外氣象中心主要數據更新頻率皆以**日**為單位，如非以災害應變為目標，似無需太過密集執行。
   - 對於空窗時間之氣象數據：仍有數值預報結果可供參考，不致造成數據空窗。
@@ -76,6 +79,7 @@ stno_name,ObsTime,StnPres,SeaPres,Temperature,Td dew point,RH,WS,WD,WSGust,WDGus
 ## 爬蟲程式
 
 ### 作業方式
+
 - 原始碼公開於[github](https://github.com/sinotec2/rd_cwbDay.py/blob/main/rd_cwbDay.py)
 - 需要外部檔案[stats_tab.csv](https://raw.githubusercontent.com/sinotec2/rd_cwbDay.py/main/stats_tab.csv)為測站位置座標等內容輸出檔案
 - 執行批次：執行date指令以驅動python程式，詳[get_cwb.sh](https://github.com/sinotec2/rd_cwbDay.py/blob/main/get_cwb.sh)
@@ -89,6 +93,7 @@ grep cwb /etc/crontab
 ```
 
 ### 程式說明
+
 - 輸入模組：包括[pandas](https://hackmd.io/@wiimax/10-minutes-to-pandas)與[bs4](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
 
 ```python

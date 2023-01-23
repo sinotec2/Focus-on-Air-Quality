@@ -80,7 +80,7 @@ done
 - 每個月套用起訖日期、執行長度等等變數，來形成新的[project.config](../TWNEPA_RecommCMAQ/exec.md#2-模擬案例與時間projectconfig) 檔。
   - 引數：月份，`mm=01~12`
   - `$nc`:排放檔案名稱。因為公版模式系統將模擬日數寫在檔案名稱之中，直接讀取可免計算。
-  - [./project.config_loop](#projectconfig_loop)：執行專案起訖時間之模板，以`sed`進行置換（說明如下）
+  - [./project.config_loop](#projectconfig_loop)：執行專案起訖時間之模板，以[sed](../../utilities/OperationSystem/sed.md)進行置換（說明如下）
 
 ```bash
 mm=$1
@@ -99,7 +99,7 @@ for cmd in 's/MM/'$mm'/g' 's/BEGD/'$BEGD'/g' 's/ENDD/'$ENDD'/g' 's/HHH/'$HHH'/g'
 
 ### project.config_loop
 
-- `./project.config_loop`為一通用各月的模版，以`sed`置換其中的：
+- `./project.config_loop`為一通用各月的模版，以[sed](../../utilities/OperationSystem/sed.md)置換其中的：
   - `MM`:月份，用以指定儲存目錄位置(`$cmaqproject`)
   - YYYYDDD：起始年[儒略日][jday]，起始日即為排放檔案之全域屬性`SDATE`。不另計算。
   - HHH：執行總時數，即為總日數 &times; 24

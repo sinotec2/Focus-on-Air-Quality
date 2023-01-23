@@ -6,7 +6,7 @@ grand_parent: TEDS Python
 nav_order: 7
 date: 2021-12-08 15:49:27
 last_modified_date:   2021-12-08 15:49:19
-tags: CAMx emis ptse
+tags: CAMx emis ptse TEDS
 ---
 
 # CAMx高空排放檔之網格化

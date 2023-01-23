@@ -4,6 +4,7 @@ title:  月曆日轉儒略日(c2j)
 parent: Dates and Times
 grand_parent: Utilities
 last_modified_date: 2022-10-21 12:02:32
+tags: datetime
 ---
 # 月曆日轉儒略日(c2j)
 {: .no_toc }

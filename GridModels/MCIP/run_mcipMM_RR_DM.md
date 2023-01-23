@@ -23,16 +23,17 @@ tags: mcip CMAQ wrf sed
 ---
 
 ## 背景
+
 - **mcip**程式是**WRF**與**CMAQ**程式之間的橋樑，**mcip**程式結果也是許多程式包括`bcon`、`combine`等都會讀取的重要檔案，建構**CMAQ**模式模擬應優先進行**mcip**程式。
 - **CMAQ**整體的時間、空間架構、範圍等等，都是在**mcip**腳本中決定，因此如果後續執行模擬發現必須更動模擬的時空範圍，必須回到此處重新設定。
   - 時間範圍：主要發生在雨量等等相關變數的累積特性。建議將**WRF**和**mcip**、**CMAQ**等等的執行批次設定成完全一樣，可以避免很多錯誤。**WRF**或**mcip**程式的結束時間可以更長，但起始時間必須一致。
   - 空間範圍：因為濃度邊界需要一定寬度，因此**mcip**的範圍會比**WRF**略小一些。
 - 版本的相依性：**mcip**程式對**WRF**程式的版本有相依性。**CMAQ**對**mcip**程式版本也有相依性。這些程式必須同時更新。
 
-
 ## 腳本程式說明
 
 ### 執行方式
+
 - 以`csh`環境執行腳本，呼叫[run_mcipMM_RR_DM.csh](https://github.com/sinotec2/cmaq_relatives/blob/master/mcip/run_mcipMM_RR_DM.csh)
 
 ```bash
@@ -48,11 +49,12 @@ end
 ```
 
 ### 基本定義
+
 - 引數、網格系統、資料與家目錄
-   - 為了讓同一個腳本應用在不同月份、不同**批序**(批次序號)、不同模擬範圍，讓腳本可以更換執行的條件。
-   - `APPL`個案應用標籤：加上**批序**會更方便與[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)對照。
-   - 此處沒有`d03`的選項，因為`d02`已經足夠產生`d04`的邊界條件。
-   - 網格系統名稱、編號與細節見[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)
+  - 為了讓同一個腳本應用在不同月份、不同**批序**(批次序號)、不同模擬範圍，讓腳本可以更換執行的條件。
+  - `APPL`個案應用標籤：加上**批序**會更方便與[WRF](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/obsYYMM_run.sh/#%E6%89%B9%E6%AC%A1%E7%9A%84%E5%AE%9A%E7%BE%A9)對照。
+  - 此處沒有`d03`的選項，因為`d02`已經足夠產生`d04`的邊界條件。
+  - 網格系統名稱、編號與細節見[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/#網格系統詳細定義)
 
 ```python
 kuang@114-32-164-198 /Users/cmaqruns/2016base/old_scripts
@@ -90,7 +92,8 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > set GridName   = 2016_12SE1        # 16-character maximum
 > 
 ```
-- IO目錄之設定
+
+- IO目錄之設定(使用[sed](../../utilities/OperationSystem/sed.md)將_換成/)
 
 ```python
 146,152c132,135
@@ -107,6 +110,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > set OutDir     = $DataPath/mcip/$GridName
 > set ProgDir    = $CMAQ_HOME/PREP/mcip/src
 ```
+
 - `wrfout`之連結引用
    - 此處沒有使用`wrfout`的全名，而是在`bash`腳本中執行連結(see [ln_YYMM.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/ln_YYMM/#ln_yymmcs腳本))，因為全月的**WRF**模擬主要是以`bash`腳本控制，有較多的範本可以引用。
    - 使用連結還有一個好處，可以對日期較為自由(事實上`bcon`會比WRF批次多要求**向後**1個小時、`mcip`則會要求**向前**1個小時。)。
@@ -128,6 +132,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 >                    $InMetDir/subset_wrfout_d01_2016-07-02_00:00:00 \
 >                    $InMetDir/subset_wrfout_d01_2016-07-03_00:00:00 )
 ```
+
 - 是否提供`geo_em`檔案
 
 ```python
@@ -138,6 +143,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > set IfGeo      = "F"
 > set InGeoFile  = $InGeoDir/geo_em_d01.nc
 ```
+
 - 是否輸出垂直速度。`CCTM_ACONC`也會輸出一份，其實沒有必要在這個階段輸出。
 
 ```python
@@ -146,7 +152,8 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ---
 > set LWOUT   = 0
 ```
-- 起始日期的計算，參考[批次的定義](批次的定義)
+
+- 起始日期的計算，參考[批次的定義](../../wind_models/OBSGRID/obsYYMM_run.sh.md#批次的定義)
 
 ```python
 212,217c189,190
@@ -160,6 +167,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > set MCIP_START = 2016-07-02-00:00:00.0000  # [UTC]
 > set MCIP_END   = 2016-07-03-00:00:00.0000  # [UTC]
 ```
+
 - 手動個別設定邊界內縮網格數，不需要另外再設定`BTRIM`
 
 ```python
@@ -170,10 +178,11 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ```
 
 ### 網格系統詳細定義
+
 - 各層網格系統的起始位置、網格數
-   - 為WRF各[子網格系統](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/))內縮之結果
-   - d00選項為產生最外層邊界濃度時所需用，或為單獨網格系統使用。
-   - 名稱定義詳對照表
+  - 為WRF各[子網格系統](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/WPS/geogrid/))內縮之結果
+  - d00選項為產生最外層邊界濃度時所需用，或為單獨網格系統使用。
+  - 名稱定義詳對照表
 
 |巢狀/單獨網格|網格名稱|網格編號|內縮格數|網格數|說明|
 |----|----|----|----|----|----|
@@ -224,6 +233,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 ```
 
 ### 警訊及執行
+
 - 這段是為避免執行過程的警訊，不影響結果。
 
 ```python
@@ -238,6 +248,7 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 482a432
 > setenv IOAPI_CHECK_HEADERS  T
 ```
+
 - 執行方式：與編譯方式有關。
 
 ```python
@@ -247,7 +258,8 @@ $ diff ~/GitHub/cmaq_relatives/mcip/run_mcipMM_RR_DM.csh run_mcip.csh
 > $ProgDir/${PROG}.exe
 ```
 
-### ***Mac***版本日期設定與計算方式之差異 
+### ***Mac***版本日期設定與計算方式之差異
+
 - ***Mac*** 與一般的UNIX有很大的[差異](https://www.cnblogs.com/qwj-sysu/p/5396372.html)，輸入格式`-f`在引數之前設定，日期的加減也是在引數之前。一般(如***centos***)是在引數之後。
 - run**批序**之起始日：前月15日
 
@@ -271,11 +283,14 @@ $ diff mac_mcipMM_RR_DM.csh run_mcipMM_RR_DM.csh
 ```
 
 ### mcip轉檔結果的確認
-- `mcip`的結果都是`m3.nc`格式檔案，可以用[VERDI](ttps://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或[MeteoInfo]((http://meteothink.org/))開啟
+
+- `mcip`的結果都是`m3.nc`格式檔案，可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或[MeteoInfo]((http://meteothink.org/))開啟
 - 使用[pr_tflag.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/)亦能快速檢查結果檔案的時間標籤
 
 ## 腳本下載
+
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/mcip/run_mcipMM_RR_DM.csh)
 
 ## Reference
+
 - USEPA, **run_mcip.csh**, [github](https://github.com/USEPA/CMAQ/blob/main/PREP/mcip/scripts/run_mcip.csh)

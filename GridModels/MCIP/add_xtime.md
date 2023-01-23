@@ -22,8 +22,8 @@ tags: CMAQ landuse emis wrf
 </details>
 ---
 
-
 ## 背景
+
 - 全月的空品模擬會減省許多不必要的初始化時間，減少檔案個數，一如CAMx全月模擬的架構。
 - 然而`wrfout`中有不少變數、標籤是以批次起始時間為準的。`wrfout`無法靠簡單的`ncrcat`予以整併。
 - 變數名稱與內容如下表
@@ -56,11 +56,10 @@ tags: CMAQ landuse emis wrf
 |JULYR|批次開始年代|2018|
 |JULDAY|批次開始日期|90|
 
-
 ## [add_xtime程式](https://github.com/sinotec2/cmaq_relatives/blob/master/mcip/add_xtime.py)說明
 
-
 ### 分段說明
+
 - 調用模組
 
 ```python
@@ -71,9 +70,10 @@ tags: CMAQ landuse emis wrf
      5	import sys,os
      6	from calendar import monthrange
 ```
+
 - 由所作目錄讀取年月訊息、標籤、變數等等基本定義
 
-```python     
+```python
      7	#working under 16??, the file in directory(or file by link) will be modified
      8	yrmn=subprocess.check_output('pwd',shell=True).decode('utf8').strip('\n').split('/')[-1]
      9	begd=datetime.datetime(2000+int(yrmn[:2]),int(yrmn[2:4]),1)+datetime.timedelta(days=-1)
@@ -83,6 +83,7 @@ tags: CMAQ landuse emis wrf
     13	#accumulation variables
     14	acc=['ACGRDFLX', 'ACSNOM', 'RAINC', 'RAINSH', 'RAINNC', 'SNOWNC', 'GRAUPELNC', 'HAILNC', 'ACHFX', 'ACLHF']
 ```
+
 - 由於程式將會更動`acc`變數的內容，建議先就`wrfout`的內容另存備份。
 
 ```python     
@@ -93,6 +94,7 @@ tags: CMAQ landuse emis wrf
     19	#   ncrcat -O 2016*.nc acc_d0${dm}.nc
     20	# done
 ```
+
 - 每層網格系統的迴圈
   - 讀取起始時間、年、Julian Day數據
   - 累積變數由0起算
@@ -115,13 +117,14 @@ tags: CMAQ landuse emis wrf
     35	  acmx={ac:np.zeros(shape=nc.variables[ac].shape) for ac in acc}
     36	  nc.close()
 ```
+
 - 批次的迴圈
   - 計算批次的起訖日期
   - 開啟檔案
   - 累積變數、紀錄以供下一批次起算。
   - 更改起算時間、年、Julian day
 
-```python     
+```python
     37	  #run5~12
     38	  for r in range(5,13):
     39	    d0=(r-5)*4+2
@@ -142,9 +145,10 @@ tags: CMAQ landuse emis wrf
     54	      nc.JULDAY               =JULDAY
     55	      nc.TITLE                =TITLE
 ```
+
 - 逐時更改標籤數字
 
-```python     
+```python
     56	      for t in range(24):
     57	        mins=min0+((d-1)*24+t)*60
     58	        nc.variables[x][t]=float(mins)
@@ -156,4 +160,5 @@ tags: CMAQ landuse emis wrf
 ```
 
 ## 程式下載
+
 - [github](https://github.com/sinotec2/cmaq_relatives/blob/master/mcip/add_xtime.py)

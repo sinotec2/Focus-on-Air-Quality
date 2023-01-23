@@ -4,6 +4,7 @@ title: "dbf2csv.py"
 parent: TEDS Python
 nav_order: 1
 last_modified_date::   2021-12-01 13:06:16
+tags: TEDS
 ---
 
 # 龐大`.dbf`檔案之讀取
@@ -22,12 +23,14 @@ last_modified_date::   2021-12-01 13:06:16
 ## 背景
 
 ### `.dbf`檔案格式之歷史與必須性
+
 - 在`python`、`ruby`等高階資料庫程式語言流行之前，[DBASE](https://zh.wikipedia.org/wiki/DBase)是早期常用的資料庫軟體之一，雖然目前仍然持續發展應用，然其活力已大不如前。`dbf`檔案即為[DBASE](https://zh.wikipedia.org/wiki/DBase)軟體指定使用的資料庫檔案格式，目前仍為環保署[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)資料庫之公告檔案格式，其強項包括：
   - 具有清楚規範的表頭
   - 資料表之長度可以跨越一般軟體的限制，然而**仍有上限**。
   - 為多數軟體、程式語言間互通之格式
 
 ### 方案及策略
+
 - 如前所述，使用資料庫軟體查詢、修改，會因應**資料筆數太長**而失敗
 - `fortran`無法直接讀取`dbf`檔案，只能讀取`sdf`檔案，須先將`dbf`轉成`sdf`。
 - `python`提供了許多`dbf`檔案格式的`reader`
@@ -35,9 +38,11 @@ last_modified_date::   2021-12-01 13:06:16
   - 經測試，[simpledbf](https://pypi.org/project/simpledbf/)可以正確解讀[TEDS](https://air.epa.gov.tw/EnvTopics/AirQuality_6.aspx)之`.dbf`檔，具有簡捷之特性  
 
 ## 執行
+
 - 用法：`dbf2csv.py TEDS11_AREA_WGS84.dbf`
 
 ## 程式說明
+
 - 使用[simpledbf](https://pypi.org/project/simpledbf/)的`Dbf5`模組
 - 有中文狀況會因`py27`/`py37`版本而有差異，須以嘗試錯誤法寫出
   - `py27`對寫出中文較寬鬆
@@ -66,5 +71,6 @@ except:
 ```
 
 ## Reference
+
 - Discussion on **pandas transform a dbf table into a dataframe**, [stackoverflow](https://stackoverflow.com/questions/41898561/pandas-transform-a-dbf-table-into-a-dataframe), 2018/8/3
 - Ryan Nelson, simpledbf 0.2.6, [pypi](https://pypi.org/project/simpledbf/), Released: May 14, 2015

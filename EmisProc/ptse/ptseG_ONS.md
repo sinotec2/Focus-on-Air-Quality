@@ -6,7 +6,7 @@ grand_parent: TEDS Python
 nav_order: 5
 date:               
 last_modified_date:   2021-12-06 12:09:47
-tags: CAMx ptse emis
+tags: CAMx ptse emis TEDS
 ---
 
 # 地面點源之時變係數

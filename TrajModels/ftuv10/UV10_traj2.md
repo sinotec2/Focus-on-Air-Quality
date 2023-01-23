@@ -6,7 +6,7 @@ parent: Trajectory Models
 has_children: true
 permalink: /TrajModels/ftuv10
 last_modified_date: 2022-03-31 15:20:02
-tags: Trajectory CODiS CWBWRF
+tags: trajectory CODiS CWBWRF
 ---
 
 # 地面uv10二維軌跡分析

@@ -5,7 +5,7 @@ nav_order: 10
 has_children: true
 permalink: /CAMx/
 last_modified_date: 2022-06-01 20:12:23
-tags: mozart2camx CAMx
+tags: mozart2camx CAMx wrfcamx
 ---
 
 # Comprehensive Air Quality Model with Extensions(CAMx)

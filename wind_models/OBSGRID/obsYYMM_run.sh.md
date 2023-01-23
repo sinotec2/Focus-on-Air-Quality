@@ -54,7 +54,7 @@ done
 
 ### `namelist.oa`模版
 - 因為每批次、每層網格的`namelist.oa`都有所不同，必須按照規則進行修改，此處以複製模版、局部置換的方式辦理。
-- 置換的方式採用linux [sed](https://terryl.in/zh/linux-sed-command/)指令
+- 置換的方式採用linux [sed](../../utilities/OperationSystem/sed.md)指令
 - 模版詳見[namelist.oa](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/OBSGRID/namelist.oa/)說明
 
 ### 批次的定義

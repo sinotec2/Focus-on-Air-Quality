@@ -4,6 +4,7 @@ title: note in Jekyll
 parent: Markdown
 grand_parent: Utilities
 last_modified_date: 2022-06-23 14:10:17
+tags: note_system
 ---
 
 # note in Jakyll

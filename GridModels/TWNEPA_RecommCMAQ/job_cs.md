@@ -31,7 +31,11 @@ mermaid: true
 
 ## job.cs@dev2
 
-- 這個執行批次除了逐月執行背景模擬[_teds](#base-run-scripts)之外，也執行去除TZPP[_dTPZZ](#dtzpp-run-scripts)之情境，以進行減量敏感性測試。
+### 目標
+
+- 這個執行批次除了逐月執行背景模擬([_teds](#base-run-scripts))之外，也執行去除TZPP([_dTPZZ](#dtzpp-run-scripts))之情境，以便進行全年減量敏感性測試。
+
+### 腳本內容
 
 ```bash
 for m in {01..12};do
@@ -167,6 +171,8 @@ $ diff run_teds.cs run_dTZPP.cs
 
 ## 遠端監視執行進度
 
+### 原理
+
 - 運用3台工作站的`crontab`每分鐘將最新執行成果(`prog.txt`)接連傳送到mac的網頁，以利掌握即時進度。
 - 更新頻率
   - 檔案傳送頻率為每分鐘
@@ -177,14 +183,18 @@ $ diff run_teds.cs run_dTZPP.cs
 */1 * * * * ls -lhrt /u01/cmaqruns/2019TZPP/output/2019-??/grid03/cctm.*/daily/CCTM_AC*|tail > ~/prog.txt;scp ~/prog.txt devp:~/mac/kuang/master_MailBox
 ```
 
-![prog.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/prog.png)
-
 - 注意事項
   1. 結果檔案是儲存在dev2工作站，並不是共用的nas上，因此需保持scp能夠連線(1<sup>*</sup>)。`ls`與`scp`皆有`crontab`予以控制。
   2. dev2與mac的連線不良（待解決），需要將prog.txt結果複製到devp上(1<sup>*</sup>)，以利傳送到mac。
   3. 注意devp與mac的連線(2<sup>*</sup>)，有`crontab`定期檢查。
   4. mac上的網頁內容是root權限，必須另以`crontab`定期將prog.txt複製到網頁指定目錄。
   5. 注意確保mac上的`httpd`正常運作(3<sup>*</sup>、`crontab`定期檢查)。
+
+### 網頁畫面結果
+
+![prog.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/prog.png)
+
+### 流程及工作站關係圖
 
 ```mermaid
 graph LR
@@ -198,7 +208,7 @@ graph LR
     L --> C
     L --> F
     F --> K((cp))
-    G(("crontab@mac_rootn")) --> K
+    G(("crontab@mac_root")) --> K
     K --> I(website)
     G --> J((httpd))
     J -- 3<sup>*</sup> --> I

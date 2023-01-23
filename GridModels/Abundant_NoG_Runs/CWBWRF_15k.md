@@ -137,7 +137,7 @@ if ( $DM == 'd01' ) then
 
 ### [pm10.ncl](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)
 - [ncks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/)將COMBINE中的TFLAG及PM10取出另存，再以`ncrcat`照日期連接成pm10.nc
-- 進行[NCL等值圖繪製](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL/)
+- 進行[NCL等值圖繪製](../../utilities/Graphics/NCL/cmaq2gif.md)
 ### Results
 - Gifs
   - [GIF_file@iMacKuang](http://125.229.149.182/soong/pm10.gif)

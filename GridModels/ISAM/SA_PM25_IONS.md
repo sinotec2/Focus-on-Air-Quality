@@ -196,7 +196,7 @@ for g in grp:
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間萬里測站PM<sub>10</sub>各分區**人為污染**貢獻濃度之比較</b>|
 
-- CMAQ加上**[風吹揚砂](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL/#results)**之效應
+- CMAQ加上**[風吹揚砂](../../utilities/Graphics/NCL/cmaq2gif.md#results)**之效應
 
 | ![CMAQ_WBDcomp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDcomp.PNG) |
 |:--:|

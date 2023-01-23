@@ -24,7 +24,7 @@ tags: NCL graphics
 ## 背景
 
 - 結果詳見[WRF三維軌跡分析#NCL繪圖](../../../TrajModels/btraj_WRFnests/acc_prob.md#ncl繪圖)
-- 前處理程式([acc_prob.py](../../../TrajModels/btraj_WRFnests/acc_prob.md))將軌跡通過網格的機率存成m3nc檔案，如此就可以套用[pm10.ncl](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)。
+- 前處理程式([acc_prob.py](../../../TrajModels/btraj_WRFnests/acc_prob.md))將軌跡通過網格的機率存成m3nc檔案，如此就可以套用[pm10.ncl](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)、詳見[cmaq2gif](cmaq2gif.md)。
 - 以下就差異部分進行說明。詳細程式碼請參考[terr.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/terr.ncl)。
 
 ## terr.ncl與pm10.ncl差異說明
@@ -40,7 +40,6 @@ tags: NCL graphics
 中國省界底圖|bou2_4p.shp|bou2_4p.shp|
 台灣縣市底圖|無|有|小範圍需要
 國界|有|無|後者範圍未涉及國界
-
 
 ### 輸入檔案差異
 

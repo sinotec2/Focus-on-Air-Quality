@@ -7,6 +7,7 @@ nav_order: 99
 date: 2023-01-23 09:29:59
 last_modified_date: 2023-01-23 09:30:02
 tags: CMAQ nchc_service
+mermaid: true
 ---
 
 # 全年執行批次job.cs
@@ -166,7 +167,39 @@ $ diff run_teds.cs run_dTZPP.cs
 
 ## 遠端監視執行進度
 
-- 運用`crontab`每分鐘將最新執行成果傳送到mac的網頁，以利掌握即時進度。
+- 運用3台工作站的`crontab`每分鐘將最新執行成果(`prog.txt`)接連傳送到mac的網頁，以利掌握即時進度。
+- 更新頻率
+  - 檔案傳送頻率為每分鐘
+  - mac httpd檢查頻率為每小時
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/prog.txt)
-- 
+```bash
+#report the prog of CMAQ
+*/1 * * * * ls -lhrt /u01/cmaqruns/2019TZPP/output/2019-??/grid03/cctm.*/daily/CCTM_AC*|tail > ~/prog.txt;scp ~/prog.txt devp:~/mac/kuang/master_MailBox
+```
+
+![prog.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/prog.png)
+
+- 注意事項
+  1. 結果檔案是儲存在dev2工作站，並不是共用的nas上，因此需保持scp能夠連線(1<sup>*</sup>)。`ls`與`scp`皆有`crontab`予以控制。
+  2. dev2與mac的連線不良（待解決），需要將prog.txt結果複製到devp上(1<sup>*</sup>)，以利傳送到mac。
+  3. 注意devp與mac的連線(2<sup>*</sup>)，有`crontab`定期檢查。
+  4. mac上的網頁內容是root權限，必須另以`crontab`定期將prog.txt複製到網頁指定目錄。
+  5. 注意確保mac上的`httpd`正常運作(3<sup>*</sup>、`crontab`定期檢查)。
+
+```mermaid
+graph LR
+    A(("ls on dev2")) --> B(prog.txt)
+    B --> H(("scp to devp"))
+    D(("crontab@dev2")) --> A
+    D --> H
+    H -- 1<sup>*</sup> --> C("master_MailBox@devp")
+    E(("crontab@devp")) --> L((sshfs))
+    C -- 2<sup>*</sup> --> F("master_MailBox@mac")
+    L --> C
+    L --> F
+    F --> K((cp))
+    G(("crontab@mac_rootn")) --> K
+    K --> I(website)
+    G --> J((httpd))
+    J -- 3<sup>*</sup> --> I
+```

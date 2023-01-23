@@ -25,9 +25,26 @@ tags: NCL graphics
 
 - 結果詳見[WRF三維軌跡分析#NCL繪圖](../../../TrajModels/btraj_WRFnests/acc_prob.md#ncl繪圖)
 - 前處理程式([acc_prob.py](../../../TrajModels/btraj_WRFnests/acc_prob.md))將軌跡通過網格的機率存成m3nc檔案，如此就可以套用[pm10.ncl](https://github.com/sinotec2/cmaq_relatives/blob/master/post/pm10.ncl)。
-- 以下就差異部分進行說明。詳細程式碼請參考[terr.ncl]()
+- 以下就差異部分進行說明。詳細程式碼請參考[terr.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/terr.ncl)。
 
-##
+## terr.ncl與pm10.ncl差異說明
+
+### 對照表
+
+項目|pm10.ncl|terr.ncl|說明
+:-:|:-:|:-:|-
+輸入檔|cmaq標準輸出檔|含有經緯度的m3nc檔|前者需另由GRIDCRO2D檔案讀取經緯度；後者模板為tmplateD1_27km.nc
+時間序列|有|無|
+外加軌跡線|無|有|後者有軌跡方向之迴圈
+取log10|有|無|等值界線也隨之差異
+中國省界底圖|bou2_4p.shp|bou2_4p.shp|
+台灣縣市底圖|無|有|小範圍需要
+國界|有|無|後者範圍未涉及國界
+
+
+### 輸入檔案差異
+
+- prob.nc檔案內含經緯度，不需另外給定。
 
 ```bash
 kuang@125-229-149-182 /Users/Data/cwb/e-service/btraj_WRFnests
@@ -42,8 +59,6 @@ $ diff ./kmean_FG123/terr.ncl ~/NCL_scripts/contour_with_basemap/pm10.ncl
 <   u = a->O(0,0,:,:)  
 <   u@lat2d = lt
 <   u@lon2d = ln
-< ; u = smth9_Wrap(u, 0.3, 0.15, True) ;(.5,0.25) is heavy, (0.1,0.05) is no smooth
-< ;  data = generate_2d_array(15, 20, 0., 80., 0, (/59,59/))
 < 
 <   wks   = gsn_open_wks ("png", path )  ; send graphics to PNG file
 ---
@@ -59,6 +74,11 @@ $ diff ./kmean_FG123/terr.ncl ~/NCL_scripts/contour_with_basemap/pm10.ncl
 >   st=tostring_with_format(t,"%3.3d")
 >   fname=str_concat((/"pm10",st/))
 >   wks   = gsn_open_wks ("png", fname )  ; send graphics to PNG file
+```
+
+### 標題、界限
+
+```bash
 181c180
 <   res@tiMainString   = str_concat((/"Trajectory Cluster from ",path/))
 ---
@@ -83,6 +103,11 @@ $ diff ./kmean_FG123/terr.ncl ~/NCL_scripts/contour_with_basemap/pm10.ncl
 >   res@mpMaxLatF            = max(pm10@lat2d)
 >   res@mpMinLonF            = 60;min(pm10@lon2d)
 >   res@mpMaxLonF            = max(pm10@lon2d)
+```
+
+### 等值界線的劃分方式與底圖
+
+```bash
 >   res@cnLevels           = (/-1,-0.5,0,0.5,1,1.5,2,2.5,3/)
 200,218c190,195
 <   if (path .eq. "LOCAL") then
@@ -111,6 +136,11 @@ $ diff ./kmean_FG123/terr.ncl ~/NCL_scripts/contour_with_basemap/pm10.ncl
 >   res@mpAreaMaskingOn         = True
 >   res@mpOutlineBoundarySets = "National"
 >   res@mpMaskAreaSpecifiers    = (/"China","Taiwan","Disputed area between India and China","India:Arunachal Pradesh"/)
+```
+
+### 輸出圖形
+
+```bash
 220,221c197,198
 <   plot = gsn_csm_contour_map(wks, u, res)   
 <   gsn_polyline (wks, plot, lonlat(:,0), lonlat(:,1), gres)

@@ -196,6 +196,8 @@ $ diff run_teds.cs run_dTZPP.cs
 
 ### 流程及工作站關係圖
 
+（如未能正常顯示，請至[此處](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/job_cs.md#流程及工作站關係圖)）
+
 ```mermaid
 graph LR
     A(("ls on dev2")) --> B(prog.txt)

@@ -31,15 +31,11 @@ mermaid: true
 
 ## job.cs@dev2
 
-### 目標
-
-- 這個執行批次除了逐月執行背景模擬([_teds](#base-run-scripts))之外，也執行去除TZPP([_dTPZZ](#dtzpp-run-scripts))之情境，以便進行全年減量敏感性測試。
-
 ### 前期準備
 
 1. 解壓縮
    公版模式系統包括初始、邊界條件、氣象(mcip結果)、排放量檔案(臺灣本島生物源與TEDS人為污染、東亞排放在模擬範圍之分量等3個檔案)、為分月壓縮儲存，需逐一、逐層解開。
-2. 每個月的ocean檔案：產生方式詳見[runocean.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#runoceansh)，檔案不會辨認時間、各月可以相同，連結即可。
+2. 每個月的ocean檔案：產生方式詳見[runocean.sh](exec.md#runoceansh)，檔案不會辨認時間、各月可以相同，連結即可。
 3. 逐月執行dTZPP.py、準備情境排放量。詳見[剔除特定位置之排放量](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/4dTZPP/#剔除特定位置之排放量)之說明。
 
 ```python
@@ -55,7 +51,15 @@ for v in V[3]:
 nc.close()
 ```
 
+### 目標
+
+- 這個執行批次除了逐月執行背景模擬([_teds](#base-run-scripts))之外，也執行去除TZPP([_dTPZZ](#dtzpp-run-scripts))之情境，以便進行全年減量敏感性測試。(或見[剔除特定位置之排放量](./emis_sens/4dTZPP.md#剔除特定位置之排放量)說明)
+
 ### 腳本內容
+
+- 公版模式將原來USEPA提供的[run_cctm.csh][epa]腳本拆分成專案時間設定([project.config](exec.md#2-模擬案例與時間projectconfig))、控制專案名稱及排放量的[主程式][1]、以及[科學設定][3]等3個部分。因此全年模擬只需更改前二者即可。
+- 專案時間設定：以mk_conf.cs及引數月份來控制
+- 主程式：以2個分開的腳本([run.cctm.03.csh_teds](#base-run-scripts)、[run.cctm.03.csh_dTPZZ](#dtzpp-run-scripts))依序執行
 
 ```bash
 for m in {01..12};do
@@ -90,8 +94,8 @@ for cmd in 's/MM/'$mm'/g' 's/BEGD/'$BEGD'/g' 's/ENDD/'$ENDD'/g' 's/HHH/'$HHH'/g'
 ### project.config_loop
 
 - `./project.config_loop`為一通用各月的模版，以`sed`置換其中的：
-  - `MM`:月份，用以指定儲存目錄位置
-  - YYYYDDD：起始年儒略日，起始日即為排放檔案之全域屬性`SDATE`。不另計算。
+  - `MM`:月份，用以指定儲存目錄位置(`$cmaqproject`)
+  - YYYYDDD：起始年[儒略日][jday]，起始日即為排放檔案之全域屬性`SDATE`。不另計算。
   - HHH：執行總時數，即為總日數 &times; 24
   - BEGD：`$BEGD`，起始年月日，起始日鑲嵌在排放檔案名稱之中、不另計算。
   - ENND：即`$BEGD + ${nd}days`
@@ -121,15 +125,15 @@ for cmd in 's/MM/'$mm'/g' 's/BEGD/'$BEGD'/g' 's/ENDD/'$ENDD'/g' 's/HHH/'$HHH'/g'
 
 ### base run script
 
-- 基準模擬(`_teds`)
+- 基準模擬(`_teds`)，原始腳本詳見[run.cctm.03.csh](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/run.cctm.03.csh.TXT)
 - 注意事項
   1. 執行檔：適用DEV2工作站專用版本。
   2. `NPCOL_NPROW`及`NPROCS`，調整以適應工作站核心數。
-  3. 背景排放檔案名稱（生物與東亞分量）：由於檔名冗長難以規則化，乃採`ls`方式產生。需保持目錄內檔案的單純性，避免發生錯誤。
+  3. 背景排放檔案名稱（生物與東亞分量）：由於檔名冗長難以規則化(參見[mk_emis.py](../ForecastSystem/3.mk_em.md#公版模式排放檔案命名規則))，此處乃採`ls`方式產生。然需保持目錄內檔案的單純性，否則將發生錯誤。
   4. 情境排放檔案(TEDS部分)：更名為cmaq.ncf及cmaq.ncf_dTZPP
 
 ```bash
-$ cat run_teds.cs 
+$ cat run.cctm.03.csh_teds 
 #!/bin/csh -f
 # VBird settings
 set compilerString = intel 
@@ -176,7 +180,7 @@ set NX = 92
 ### dTZPP run script
 
 ```bash
-$ diff run_teds.cs run_dTZPP.cs 
+$ diff run.cctm.03.csh_teds run.cctm.03.csh_dTZPP
 30c30
 <  set myjob   = TEDS
 ---
@@ -233,3 +237,9 @@ graph LR
     G --> J((httpd))
     J -- 3<sup>*</sup> --> I
 ```
+
+[epa]: https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts " USEPA /
+CMAQ / CCTM /scripts"
+[1]: exec.md#1-主程式runcctm03csh "runcctm03csh"
+[3]: exec.md#3-科學設定檔cctmsourcev531ae7 "科學設定檔"
+[jday]: https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/c2j "月曆日轉儒略日(c2j)"

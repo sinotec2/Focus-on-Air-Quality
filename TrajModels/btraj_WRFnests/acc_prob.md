@@ -77,7 +77,7 @@ tags: trajectory
       nc.variables[v][0,0,pv.J[i],pv.I[i]]+=pv.hr[i]
 ```
 
-## [NCL](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL)繪圖
+## NCL繪圖
 
 - 2017~2020年1~3月測站三維反軌跡機器學習之結果
   - 圖中線條為代表性軌跡

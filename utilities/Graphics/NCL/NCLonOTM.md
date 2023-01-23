@@ -1,13 +1,13 @@
 ---
 layout: default
-title:  NCLonOTM
-parent: CaaS to Graphs
+title:  NCL貼在OTM底圖上
+parent: NCL
 grand_parent: Graphics
 last_modified_date: 2022-06-07 20:21:17
-tags: NCL CGI_Pythons plume_model
+tags: NCL graphics plume_model
 ---
 
-# NCLonOTM
+# NCL貼在OTM底圖上 NCLonOTM
 
 {: .no_toc }
 
@@ -23,8 +23,12 @@ tags: NCL CGI_Pythons plume_model
 ## 背景
 
 - NCL等濃度圖檔貼在openTopo底圖([NCLonOTM][1])，是一個品質較高、又不涉及底圖版權的做法。
+- 此處並不是NCL程式，而是NCL產生圖檔的後處理加工。
+- OpenTopoMap：開放地形圖[官網](https://opentopomap.org)、[wiki](https://wiki.openstreetmap.org/wiki/OpenTopoMap)
 
 ## NCLonOTM.py
+
+- 這支程式是獨立版，令有包裝前後處理的cgi版本，[詳下](#NCLonOTM-cgi.py)說明。
 
 ### 程式下載
 
@@ -34,7 +38,7 @@ tags: NCL CGI_Pythons plume_model
 
 - 輸入檔
   1. tmp_cn.png，由[PLT_cn.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/PLT_cn.ncl)所產生（詳見[煙流模式結果繪製等值線圖](../NCL/PLT_cn))。
-  2. fitted.png：OTM/OSM底圖
+  2. fitted.png：OTM/OSM底圖，由[tiles_to_tiffFit.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py)，同樣也是在[NCLonOTM-cgi.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/NCLonOTM-cgi.py)
 - 輸出檔：NCLonOTM.png
 
 ### 讀取等值線圖檔
@@ -112,4 +116,4 @@ for j in range(j0,j0+ny2):
 cv2.imwrite("NCLonOTM.png",image3)
 ```
 
-[1]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/NCLonOTM.py "NCLonOTM.py"
+[1]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/NCLonOTM.py "NCLonOTM.py"

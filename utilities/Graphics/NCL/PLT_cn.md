@@ -25,7 +25,7 @@ tags: NCL graphics plume_model
 
 - 此處讀取煙流模式結果的PLT檔案（for SURFER的[x,y,c]濃度檔案），繪製等值線圖。
 - 程式下載：[PLT_cn.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/PLT_cn.ncl)
-- 執行之母程式：[NCLonOTM](../CaaS/NCLonOTM.md)，也將由該程式繼續完成貼上底圖。
+- 執行之母程式：[NCLonOTM-cgi.py](NCLonOTM.md)，也將由該程式繼續完成貼上底圖。
 
 ## 程式碼說明
 
@@ -74,4 +74,4 @@ end
 
 ### 後處理
 
-- 將繼續執行[NCLonOTM](../CaaS/NCLonOTM.md)將等值線圖貼在OTM底圖上。
+- 將繼續執行[NCLonOTM](NCLonOTM.md)將等值線圖貼在OTM底圖上。

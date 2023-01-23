@@ -6,7 +6,7 @@ grand_parent: CMAQ Model System
 nav_order: 2
 date: 2021-12-19 21:21:37
 last_modified_date:   2021-12-19 21:21:33
-tags: mcip CMAQ wrf
+tags: mcip CMAQ wrf sed
 ---
 
 # **mcip**程式執行腳本

@@ -1,11 +1,12 @@
 ---
 layout: default
-title: "obsYYMM_run.sh"
+title: obsYYMM_run.sh
 parent: "OBSGRID"
 grand_parent: "WRF"
 nav_order: 3
 date: 2021-11-28 20:33:12 
 last_modified_date: 2022-02-16 11:59:10
+tags: wrf OBSGRID sed
 ---
 
 # obsYYMM_run.sh

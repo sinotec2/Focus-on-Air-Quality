@@ -4,6 +4,7 @@ title:  倒數計時與自動消失的文字方塊
 parent: HTML
 grand_parent: Graphics
 last_modified_date: 2022-04-28 14:18:56
+tags: html
 ---
 
 # 倒數計時與自動消失的文字方塊
@@ -21,14 +22,16 @@ last_modified_date: 2022-04-28 14:18:56
 ---
 
 ## 背景
+
 - 網頁開啟後自動下載gif檔案，畫面上一片空白，也不知道是發生什麼事、要等待幾時？實在不是很好的網頁經驗。
 - 以既有畫面墊檔：畫面如果與即將顯示的gif不能搭配也蠻突兀的。
 - 提示文字。畫面出現後還繼續留在頁面，也頗不協調。
-- 似乎[倒數計時與自動消失的文字方塊]()是最佳的解決方案
-
+- 似乎倒數計時與自動消失的文字方塊[^1]是最佳的解決方案
 
 ## 資源
+
 ### setTimeout()，setTimeout()方法
+
 - [程式人生](https://www.796t.com/content/1549098550.html)的方案似乎與按鍵動作可以連結，提醒使用者各項按鍵的功能，但又不會造成畫面的紛亂，類似的作法可以在leaflet的對話框中也可以發現。
 - 好處是不必再連結什麼檔案，壞處是由按鍵觸發倒數，無法自動開始
 
@@ -51,9 +54,10 @@ displayed after 5 seconds.</p>
 ```
 
 ### jquery.js 方案
-- [Baidu](https://zhidao.baidu.com/question/306449269783701524.html)算是非常單純的作法，只有2個變數：
-  - #sec為倒數的秒數、
-  - #text則為顯示的文字框。
+
+- Baidu[^2]算是非常單純的作法，只有2個變數：
+  - `#sec`為倒數的秒數、
+  - `#text`則為顯示的文字框。
 
 ```html
 <span id="sec">5</span>秒后文字消失
@@ -76,6 +80,7 @@ clearInterval(interval);
 ```
 
 ## 實作範例
+
 - 最後方案：Baidu
 - 將`<span>`元件放在`<div id=text1>`內，這樣連文字、連倒數的秒數，都會一併消失。
 - 範例位址：[https://sinotec2.github.io/cpuff_forecast/](https://sinotec2.github.io/cpuff_forecast/)
@@ -99,12 +104,13 @@ clearInterval(interval);
 <h4><a href="https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/Forecast/" target="_blank">CALPUFF Forecasting</a> Results</h4>            
 <div id="text1">downloading PMF.gif, need about 10s, please wait... <span id="sec">10</span> </div>
 ...
-
 ```
+
 | ![count_down.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/count_down.png)|
 |:-:|
 | <b>CALPUFF[預測網頁](https://sinotec2.github.io/cpuff_forecast/)倒數計時畫面</b>|
 
 ## Reference
-- 阿新、程式人生，[js實現div顯示2秒後自動消失](https://www.796t.com/content/1549098550.html), 2019-02-02
-- 曉御9, Baidu, [HTML 文字自动消失效果](https://zhidao.baidu.com/question/306449269783701524.html), 2015-09-05
+
+[^1]: 阿新、程式人生，[js實現div顯示2秒後自動消失](https://www.796t.com/content/1549098550.html), 2019-02-02
+[^2]: 曉御9, Baidu, [HTML 文字自动消失效果](https://zhidao.baidu.com/question/306449269783701524.html), 2015-09-05

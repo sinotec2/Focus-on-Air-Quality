@@ -4,7 +4,7 @@ title:  VERDI的批次作業
 parent: VERDI
 grand_parent: Graphics
 last_modified_date: 2022-06-07 11:12:04
-tags: VERDI cpost crontab graphics
+tags: VERDI cpost crontab graphics sed
 ---
 
 # VERDI的批次作業

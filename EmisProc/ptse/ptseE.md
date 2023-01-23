@@ -6,7 +6,7 @@ grand_parent: TEDS Python
 nav_order: 3
 date:               
 last_modified_date:   2021-12-06 12:09:47
-tags: CAMx ptse TEDS
+tags: CAMx ptse TEDS uamiv
 ---
 
 # CAMx高空點源排放檔案之產生

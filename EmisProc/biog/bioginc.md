@@ -6,7 +6,7 @@ grand_parent: TEDS Python
 nav_order: 2
 date:               
 last_modified_date:   2021-12-02 11:08:53
-tags: TEDS
+tags: TEDS uamiv
 ---
 
 # 逐時變化與填入`nc`檔案

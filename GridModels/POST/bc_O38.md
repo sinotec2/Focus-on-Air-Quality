@@ -5,7 +5,7 @@ parent: Post Processing
 grand_parent: CMAQ Model System
 nav_order: 3
 last_modified_date: 2022-02-13 21:05:14
-tags: CMAQ LRT
+tags: CMAQ LRT uamiv
 ---
 
 # 境外O<sub>3</sub> 8小時值佔比之計算

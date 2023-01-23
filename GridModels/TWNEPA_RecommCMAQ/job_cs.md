@@ -119,9 +119,14 @@ for cmd in 's/MM/'$mm'/g' 's/BEGD/'$BEGD'/g' 's/ENDD/'$ENDD'/g' 's/HHH/'$HHH'/g'
  set END_DATE     = "ENDD" 
 ```
 
-### base run scripts
+### base run script
 
 - 基準模擬(`_teds`)
+- 注意事項
+  1. 執行檔：適用DEV2工作站專用版本。
+  2. `NPCOL_NPROW`及`NPROCS`，調整以適應工作站核心數。
+  3. 背景排放檔案名稱（生物與東亞分量）：由於檔名冗長難以規則化，乃採`ls`方式產生。需保持目錄內檔案的單純性，避免發生錯誤。
+  4. 情境排放檔案(TEDS部分)：更名為cmaq.ncf及cmaq.ncf_dTZPP
 
 ```bash
 $ cat run_teds.cs 
@@ -132,17 +137,10 @@ set mydomain    = grid03
 set mympi       = yes
 set sfile       = ./project.config
 set sourcefile  = ./cctm.source.v5.3.1.ae7
-#set CMAQ_HOME   = /nas2/cmaq2019/download/model/cmaq_recommend_ipncf
 set CMAQ_HOME   = /nas2/cmaq2019/download/model/cmaq_recommend_intelDEV2
 setenv PATH /opt/mpich/mpich-3.4.2-icc/bin:/usr/bin:$PATH
 setenv LD_LIBRARY_PATH ${PWD}/Libs
 
-#foreach checkfile ( ${sfile} ${sourcefile} )
-#        if ( ! -e ${checkfile}) then
-#                echo "cannot find '${checkfile}' Please check your settings."
-#                exit 1
-#        endif
-#end
 echo ${sfile}
 source ${sfile}
 set cmaqproject = ${cmaqproject}/${mydomain}
@@ -175,7 +173,7 @@ set NX = 92
  source ${sourcefile}
 ```
 
-### dTZPP run scripts
+### dTZPP run script
 
 ```bash
 $ diff run_teds.cs run_dTZPP.cs 

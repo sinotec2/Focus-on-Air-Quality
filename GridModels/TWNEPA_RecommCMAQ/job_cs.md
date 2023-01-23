@@ -238,8 +238,7 @@ graph LR
     J -- 3<sup>*</sup> --> I
 ```
 
-[epa]: https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts " USEPA /
-CMAQ / CCTM /scripts"
+[epa]: https://github.com/USEPA/CMAQ/tree/main/CCTM/scripts " USEPA / sCMAQ / CCTM /scripts"
 [1]: exec.md#1-主程式runcctm03csh "runcctm03csh"
 [3]: exec.md#3-科學設定檔cctmsourcev531ae7 "科學設定檔"
 [jday]: https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/c2j "月曆日轉儒略日(c2j)"

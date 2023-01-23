@@ -35,6 +35,26 @@ mermaid: true
 
 - 這個執行批次除了逐月執行背景模擬([_teds](#base-run-scripts))之外，也執行去除TZPP([_dTPZZ](#dtzpp-run-scripts))之情境，以便進行全年減量敏感性測試。
 
+### 前期準備
+
+1. 解壓縮
+   公版模式系統包括初始、邊界條件、氣象(mcip結果)、排放量檔案(臺灣本島生物源與TEDS人為污染、東亞排放在模擬範圍之分量等3個檔案)、為分月壓縮儲存，需逐一、逐層解開。
+2. 每個月的ocean檔案：產生方式詳見[runocean.sh](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#runoceansh)，檔案不會辨認時間、各月可以相同，連結即可。
+3. 逐月執行dTZPP.py、準備情境排放量。詳見[剔除特定位置之排放量](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/4dTZPP/#剔除特定位置之排放量)之說明。
+
+```python
+$ cat dTZPP.py
+import netCDF4
+import sys
+fname=sys.argv[1]
+nc = netCDF4.Dataset(fname,'r+')
+V=[list(filter(lambda x:nc[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+for v in V[3]:
+    nc[v][:,4,87,39]=0.
+    nc[v][:,4,86,39]=0.
+nc.close()
+```
+
 ### 腳本內容
 
 ```bash

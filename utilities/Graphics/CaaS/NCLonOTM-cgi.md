@@ -22,14 +22,19 @@ tags: graphics CGI_Pythons KML plume_model
 
 ## 背景
 
-- 此一包裝程式
+- 此一包裝程式提供了切割底圖與貼圖的服務
+
+方案|提供內容|產出|說明
+:-:|-|-|-
+1|GRIDCART內容文字|切割整併OTM底圖|如果工作站已有將不會另外下載
+2|煙流模式輸出之PLT檔|NCL等值線與(貼上)OTM底圖|png圖檔
+3|任意.grd檔(ascii)|NCL等值線與(貼上)OTM底圖|png圖檔
 
 ### CGI畫面
 
 | ![NCLonOTM-cgi.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/NCLonOTM-cgi.png)|
 |:--:|
 | <b>[http://125.229.149.182/NCLonOTM.html](http://125.229.149.182/NCLonOTM.html)畫面</b>|
-![]()NCLonOTM-cgi
 
 ## 程式說明
 

@@ -35,7 +35,17 @@ tags: plume_model KML
   - .grd:以SURFER繪圖
   
 ### PLOTFILE範例
--  ISC和AERMOD的PLOTFILE非常類似，如下所示：
+
+- 煙流模式可以輸出PLT檔供後續製圖使用，ISC和AERMOD的PLOTFILE非常類似，如下所示。表頭及順序如下：
+- 前8行為模式說明文字，特徵為：
+  1. 第一字元為星號*、
+  2. 第一個字為模式名稱，可能是AERMOD或ISCST。這2個模式PLT檔案主要差異在AERMOD多插入了1欄（ZHILL）。
+  3. SURFER可以略過這些文字
+  4. python讀取時要先以字元讀入，刪除前8行，再進行欄位解讀
+  5. NCL會失控。必須先刪除（如使用sed）,才能進行asciiread
+- 其後先變動X（東西方向）、再變動Y（南北）方向
+  1. 格點數不存在於文字檔內、（建議）須另行解讀
+  2. 方向由西南→東南→...北移最後到東北
 
 ```bash
 * AERMOD ( 19191):  A Simple Example Problem for the AERMOD Model with PRIME                03/28/21
@@ -55,6 +65,7 @@ tags: plume_model KML
 ...
   283680.00000 2778180.00000       0.02015   -15.50   -15.50     0.00  PERIOD  ALL       00008761  LINKO   
 ```
+
 - 讀取時先將所有內容按行讀入，再一一分解。
 
 ### 程式說明

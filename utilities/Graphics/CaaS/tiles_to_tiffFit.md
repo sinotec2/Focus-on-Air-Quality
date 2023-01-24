@@ -24,7 +24,7 @@ tags: graphics CGI_Python plume_model OpenTopoMap gdal
 ## 背景
 
 - OpenTopoMap (OTM[^1])是以圖磚形式，將各解析度圖磚放在遠端伺服器供下載顯示。
-- 因此，本程式([tiles_to_tiffFit.py][1])的重點就在下載需要的圖磚、將其整併、裁切出指定範圍的地形圖。
+- 因此，本程式([tiles_to_tiffFit.py][1])的重點就在下載需要的圖磚、將其整併、裁切出指定範圍的地形圖，可以給SURFER或其他繪圖軟體使用，詳細參閱[merged_GeoTIFF][5]之說明。
 - 本程式雖然沒有單獨的網路服務版本，卻也是個獨立的程式，而且[知乎網友][2]確實也將其發展成能夠單獨執行的GUI程式。
 
 ## 程式說明
@@ -200,9 +200,20 @@ def georeference_raster_tile(x, y, z, path):
                    outputBounds=bounds)
 ```
 
+### 圖檔的管理
+
+- png
+  - 雖然OSM/OTM的更新速度很快，沒有必要儲存在工作站，但如果在嘗試錯誤期間，同一地區地圖不斷重複下載，似乎也沒有必要。
+  - 此處修改原程式的設計，先測試是否已經有過去下載過的檔案，如果沒有，才真的進行下載。依然暫時儲存在temp目錄下。
+  - 執行裁切後，原程式內設是刪除temp目錄下所有檔案，在此修改成備份到工作站某處儲存備用。
+- tif
+  - 原程式是將結果檔案另存在output目錄之下，如此就檔案性質分類自然是為了方便檔案管理。
+  - cgi_python每次呼叫會開一個暫存目錄(cntr_????)，output似乎沒有必要存在，為減少目錄的複雜性，在此取消output，將裁切結果直接存在cntr_????下即可。
+
 ### 求解最適解析度與下載
 
-- 為避免解析度太高、下載檔案太多，以及解析度太低精度不足等等情況，經嘗試錯誤，下載檔案個數以20～150之間為合宜，需一一測試以得到最佳解析度（`zoom`）
+- 為避免解析度太高、下載檔案太多，以及解析度太低精度不足等等情況，以致等值圖與地圖的像素數差異太大。
+- 經嘗試錯誤，下載檔案個數以20～150之間為合宜，需一一測試以得到最佳解析度（`zoom`）
 - 以此解析度與範圍進行檔案下載。
 
 ```python
@@ -263,11 +274,33 @@ os.system(convert+' fitted.tif fitted.png >&/dev/null')
 #os.makedirs(temp_dir)
 ```
 
+### 輸出圖檔格式的選擇
+
+- [原程式][5]是設計讓圖檔自帶座標資料，因此使用GeoTiff格式
+  - 如果NCL的等值線是按照座標繪製、地圖也是按照座標裁切，
+  - 二者疊圖是再沒有需要知道座標值或任何座標系統相關資訊，tiff似無必要
+- 經比較tiff的RGB色譜與png格格不入，縮放、疊圖時，都會發生變色的情形，
+- 結論就是不必再維護tiff檔、利用Imagmagic的convert指令，將裁切結果都轉成png檔
+
 ### 程式下載
 
 {% include download.html content="[tiles_to_tiffFit.py][1]" %}
 
 ## mtg.cs
+
+### 合併(merge)或拼接(montage)
+
+- [原程式][5]是使用gdal_merge.py這支程式進行下載圖檔的合併。但遭遇困難：
+
+1. 整合時衛星圖像不會改變顏色，造成突兀。
+2. OSM/OTM每個圖檔的顏色種類個數不同，合併是會按照第一個圖片的色譜來解讀後續圖檔，因此合併後全變成黑白版，因為如此才能達成最大公約數。
+- 解決方案
+  - 使用OSMosis(未執行)
+  - 改採[ImageMagicK montage][mtg]拼接：
+    - 唯一要修改檔案命名方式，原本x-y-z的檔名，轉變成z-y-x，以利程式按照各圖所在位置直接拼接
+    - 需使用批次檔mtg.cs
+
+### 腳本內容
 
 - 使用[ImageMagicK的蒙太奇][mtg]程式
 - 拼接之後檔案的地理訊息會消失，需執行[gdalwarp][gdalwarp]再予以定義。
@@ -287,13 +320,22 @@ cd ..
 /opt/anaconda3/envs/env_name/bin/gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -to DST_METHOD=NO_GEOTRANSFORM merged.tif merged_montage.tif
 ```
 
+## 範例
+
+    STR:    290700 40 1250 2746400 40 1250
+    檔案大小：3.7MB
+    像素矩陣： (1464, 1457)
+
+
+
 [^1]: OpenTopoMap：開放地形圖[官網](https://opentopomap.org)、[wiki](https://wiki.openstreetmap.org/wiki/OpenTopoMap)
 [^2]: Python+gdal制作一个简单的地图下载器（支持高德、arcgis、google）、tom的gis笔记 (编辑于 2022-04-29 21:51)，[知乎專欄][2]。
-[^3]: tiles-to-tiff, Jimmy Utterström(2019), [programtalk][3]
+[^3]: tiles-to-tiff, Jimmy Utterström(2019), [programtalk][3] or [bolg][5]
 
 [1]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py "tiles_to_tiffFit.py"
 [2]: https://zhuanlan.zhihu.com/p/505288791 "tom的gis笔记（編按：含PysimpleGUI封包"
 [3]: https://programtalk.com/vs4/python/jimutt/tiles-to-tiff/ "python/jimutt/tiles-to-tiff"
+[5]: https://jimmyutterstrom.com/blog/2019/06/05/map-tiles-to-geotiff/ "Generate merged GeoTIFF imagery from web maps (xyz tile servers) with Python, Jimmy Utterström(2019)"
 [IM]: https://imagemagick.org/index.php "mageMagick® is a free and open-source software suite for displaying, converting, and editing raster image and vector image files. It can read and write over 200 image file formats, and can support a wide range of image manipulation operations, such as resizing, cropping, and color correction."
 [gdalinfo]: https://www.osgeo.cn/gdal/programs/gdalinfo.html "gdalinfo 程序列出了有关GDAL支持的栅格数据集的各种信息。"
 [gdal_translate]: https://www.osgeo.cn/gdal/programs/gdal_translate.html "gdal_translate 程序可用于在不同格式之间转换栅格数据，可能在处理过程中执行一些操作，如子设置、重采样和重缩放像素。"

@@ -38,14 +38,18 @@ tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 |:--:|
 | <b>[http://125.229.149.182/NCLonOTM.html](http://125.229.149.182/NCLonOTM.html)畫面</b>|
 
+### 標籤主題關係圖
+
+![NCLonOTM_star](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NCLonOTM_star.png)
+
 ## 程式說明
 
 ### 外部程式
 
 1. cut指令、[sed](../../OperationSystem/sed.md)指令
 2. tiles_to_tiffFit.py[^1]
-3. NCLonOTM.py[^2]
-4. PLT_cn.ncl[^3]
+3. NCL貼在OTM底圖上 NCLonOTM.py[^2]
+4. 煙流模式結果繪製等值線圖 PLT_cn.ncl[^3]
 
 ```python
 ran=tf.NamedTemporaryFile().name.replace('/','').replace('tmp','')

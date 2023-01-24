@@ -320,13 +320,17 @@ cd ..
 /opt/anaconda3/envs/env_name/bin/gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -to DST_METHOD=NO_GEOTRANSFORM merged.tif merged_montage.tif
 ```
 
-## 範例
+## 基隆某電廠附近地形範例
+
+### 控制條件
 
     STR:    290700 40 1250 2746400 40 1250
     檔案大小：3.7MB
     像素矩陣： (1464, 1457)
 
+### fitted.png
 
+![fitted.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/fitted.png)
 
 [^1]: OpenTopoMap：開放地形圖[官網](https://opentopomap.org)、[wiki](https://wiki.openstreetmap.org/wiki/OpenTopoMap)
 [^2]: Python+gdal制作一个简单的地图下载器（支持高德、arcgis、google）、tom的gis笔记 (编辑于 2022-04-29 21:51)，[知乎專欄][2]。

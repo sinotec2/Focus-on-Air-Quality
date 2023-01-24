@@ -4,7 +4,7 @@ title:  NCLonOTM遠端服務
 parent: CaaS to Graphs
 grand_parent: Graphics
 last_modified_date: 2023-01-24 05:17:03
-tags: graphics CGI_Pythons KML plume_model
+tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 ---
 # NCLonOTM遠端服務
 {: .no_toc }
@@ -32,22 +32,22 @@ tags: graphics CGI_Pythons KML plume_model
 
 ### CGI畫面
 
+- 包括1個文字輸入窗、1個檔案選擇器、以及1個執行鍵。
+
 | ![NCLonOTM-cgi.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/NCLonOTM-cgi.png)|
 |:--:|
 | <b>[http://125.229.149.182/NCLonOTM.html](http://125.229.149.182/NCLonOTM.html)畫面</b>|
 
 ## 程式說明
 
+### 外部程式
+
+1. cut指令、[sed](../../OperationSystem/sed.md)指令
+2. tiles_to_tiffFit.py[^1]
+3. NCLonOTM.py[^2]
+4. PLT_cn.ncl[^3]
+
 ```python
-#!/opt/anaconda3/envs/py27/bin/python
-# /cluster/miniconda/envs/py37/bin/python
-# -*- coding: UTF-8 -*-
-
-import cgi, os, sys
-import cgitb 
-import tempfile as tf
-from load_surfer import load_surfer
-
 ran=tf.NamedTemporaryFile().name.replace('/','').replace('tmp','')
 
 WEB='/Library/WebServer/Documents/'
@@ -63,7 +63,11 @@ OUT=' >> '+pth+'isc.out'
 SED='/usr/bin/sed "1,8d" '
 
 os.system('mkdir -p '+pth)
+```
 
+### 解讀PLT之內容(PLT_parser)
+
+```python
 def PLT_parser(fname):
   with open(fname,'r') as f:
     l=[line.strip('\n') for line in f]
@@ -81,14 +85,22 @@ def PLT_parser(fname):
   	"""  % (fname.replace(WEB,'../../../'),fname.split('/')[-1])
     sys.exit('not a regular RE GRIDCART system')
   return ' %d %d %d %d %d %d ' % (int(min(X)),nx,int(dx[0]),int(min(Y)),ny,int(dy[0]))
+```
 
+### CGI 檔頭與輸入
 
+```python
 print 'Content-Type: text/html\n\n'
 print open(CGI+'header.txt','r')
 
 form = cgi.FieldStorage()
 STR = str(form.getvalue("iscinp"))
 os.system('echo "'+STR+'"'+OUT)
+```
+
+### 執行tiles_to_tiffFit.py
+
+```python
 if len(STR)>=4: #in case of input a string
   cmd ='cd '+pth+';'	  
   cmd+= FIT+STR+OUT+';'	
@@ -122,7 +134,13 @@ else:
     cmd+= FIT+' tmp.PLT '+OUT+';'	
     os.system('echo "'+cmd+'"'+OUT)
     r=os.system(cmd+OUT)
+```
 
+### 執行副程式PLT_parser
+
+- 產生param.txt與title.txt，用以執行[PLT_cn.ncl](../NCL/NCLonOTM.md)
+
+```python
     STR=PLT_parser(pth+'tmp.PLT')	
     cmd ='cd '+pth+';'	  
     cmd+='echo "'+STR+'">param.txt;'
@@ -136,7 +154,11 @@ else:
     descip={ 'fitted.png':'OpenTopoMap: ',
 	'tmp_cn.png':'CLN_contour: ',
 	'NCLonOTM.png':'contour post on OTM: '}
- 
+```
+
+### 輸出成果檔案
+
+```python
 for fn in fnames:
   fname=pth+fn
   print """\
@@ -147,3 +169,7 @@ print """\
   </html>
   """
 ```
+
+[^1]: 集合OTM圖磚並修剪成tiff檔之py程式，詳見[tiles_to_tiffFit.py程式說明](tiles_to_tiffFit.md)，或下載[tiles_to_tiffFit.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py)
+[^2]: NCL貼在OTM底圖上之轉接程式，詳見[NCLonOTM程式說明](../NCL/NCLonOTM.md)，或下載[NCLonOTM.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/NCLonOTM.py)
+[^3]: 煙流模式結果繪製等值線圖之NCL程式，詳見[程式說明](../NCL/PLT_cn.md)，或下載[PLT_cn.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/PLT_cn.ncl)

@@ -4,7 +4,7 @@ title: 地圖數位板
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-03-15 10:41:25
-tags: GIS KML
+tags: GIS KML OpenTopoMap
 ---
 # 地圖數位板_座標之讀取
 {: .no_toc }

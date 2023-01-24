@@ -4,6 +4,7 @@ title:  GeoTiff檔之讀取
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-01-27 11:57:06
+tags: GIS gdal geotiff
 ---
 
 # python解析GeoTiff檔

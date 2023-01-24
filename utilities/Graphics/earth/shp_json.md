@@ -5,7 +5,7 @@ parent: earth
 grand_parent: Graphics
 date: 2022-08-08
 last_modified_date: 2022-09-02 11:57:54
-tags: graphics earth
+tags: graphics earth gdal
 ---
 
 # natural earth shp檔轉topo.json
@@ -22,6 +22,7 @@ tags: graphics earth
 ---
 
 ## 背景
+
 - 當增加[cambecc(2016)][eth] [earth][ens]套件的解析度時，會需要有較詳盡的底圖做為參考基準。這項作業的緣起是想重置[earth][eth]套件的底圖，在海岸線及湖泊外加上省(中國範圍)、縣(臺灣地區)等行政區向量圖，以備未來套用高解析度數據。
 - [cambecc(2016)][eth]提供的向量底圖網址已經失效，同樣的內容改在[github][NTV]或[naturalearthdata官網][NE]提供。
   - 前者可供一次性全下載(約16GB)：`git clone https://github.com/nvkelso/natural-earth-vector.git`
@@ -52,8 +53,8 @@ tags: graphics earth
   1. 座標系統由原來離散點的經緯度浮點實數，轉變成整數、且據關連性的indexing。
   1. topojson[轉換程式](https://trac.osgeo.org/gdal/wiki/Release/1.11.0-News)是OGR gdal套件中的一個程式，安裝時會複製到`/usr/bin/topojson`，其使用詳`topojson --help`
 
-
 ## 使用gdal套件轉換
+
 - [cambecc(2016)][eth]建議使gdal套件來轉換.shp檔到.json檔、最後由`topojson`轉換程式轉成earth-topo.json檔案。經增修其腳本如下：
 
 ### oo.cs腳本
@@ -97,10 +98,12 @@ river_50m.json river_tiny.json \
 city_10m.json city_110m.json \
 bounds_10m.json bounds_110m.json bounds_tiny.json
 ```
+
 - 增加城市、河川、行政區界
 - 還需修改的.js程式如下
 
 ### earth.js
+
 - 畫面提交後會出現底圖，主要是在函數buildRenderer內控制
 - 定義變數。原僅呼叫海岸線及湖泊，以下增加((...)內為json檔內之變數名稱)：
   1. 河川(rivers_lake_centerlines)
@@ -118,6 +121,7 @@ bounds_10m.json bounds_110m.json bounds_tiny.json
         d3.selectAll("path").attr("d", path);  // do an initial draw -- fixes issue with safari
 ...
 ```
+
 - 在停等滑鼠動作過程的起、迄點，呼叫到前述項目的最小、與最大解析度條件
 
 ```java
@@ -196,20 +200,25 @@ bounds_10m.json bounds_110m.json bounds_tiny.json
 ```
 
 ### globes.js
+
 - 有3處定義需注意新增：
   1. function standardGlobe() {defineMap: function(mapSvg, foregroundSvg) 
   1. function orthographic() {defineMap: function(mapSvg, foregroundSvg)
   1. function waterman() {defineMap: function(mapSvg, foregroundSvg) 
 
 ## GeoJson版本
+
 - 由於[earth][ens]套件中不能接受多邊形之geometry，乃構想將shape檔中的多邊形轉換成之GeoJson，直接併入EN json檔中再進行轉換。
+
 ### shape to GeoJSON
+
 - 轉換方式
   1. shape檔轉GeoJson可以借助[線上轉檔服務](https://products.aspose.app/gis/conversion/shapefile-to-geojson)。需提供.shp、.shx、.pro、.dbf等4個檔。
   2. 或直接取得臺縣市界的geoJSON檔案([eg. G0V@github](https://github.com/g0v/twgeojson/raw/master/json/twCounty2010.geo.json))
 - 轉成(或取得)geometry皆為MultiPolygon或polygon，與EN海岸線屬同一性質。
 
 ### coastline_10m.json 檔案之整理合併
+
 1. 將coastline_10m.json檔案中臺灣部分(及離島)予以去除，以避免重疊干擾。(搜尋經緯度、整批物件一併去除)
 2. 將前述轉成(取得)GeoJson檔案中features的物件，貼在coastline_10m.json檔案後面，(features是個序列，要記得逗點區格)。
 3. 重新進行oo.cs當中的topojson動作，合併各個json檔。
@@ -219,16 +228,13 @@ bounds_10m.json bounds_110m.json bounds_tiny.json
 topojson --help
  ...
  --q1, --post-quantization      maximum number of differentiable points along either dimension               [default: 10000]
-``` 
+```
 
 ### 結果
 
 | ![GeoJson版本.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/GeoJson版本.png) |
 |:--:|
 | <b>圖 以g0v之twCounty2010.geo.json置換臺灣島海岸線之成果</b>|  
-
-
-
 
 [NTV]: <https://github.com/nvkelso/natural-earth-vector> "Natural Earth is a public domain map dataset available at 1:10m, 1:50m, and 1:110 million scales. Featuring tightly integrated vector (here) and raster data (over there:https://github.com/nvkelso/natural-earth-raster), with Natural Earth you can make a variety of visually pleasing, well-crafted maps with cartography or GIS software."
 [eth]: <https://github.com/cambecc/earth> "cambecc(2016), earth building, launching and etc on GitHub. "

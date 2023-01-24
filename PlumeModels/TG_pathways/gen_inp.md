@@ -5,7 +5,7 @@ parent: RE & TG Pathways
 grand_parent: Plume Models
 nav_order: 1
 last_modified_date: 2022-02-11 10:57:05
-tags: CGI_Pythons plume_model
+tags: CGI_Pythons plume_model gdal
 ---
 # AERMAP之準備與執行
 {: .no_toc }

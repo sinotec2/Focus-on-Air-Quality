@@ -4,6 +4,7 @@ title:  shape_to_raster
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date:   2021-12-21 14:46:36
+tags: gdal GIS geotiff
 ---
 
 # shape files convert to rasters

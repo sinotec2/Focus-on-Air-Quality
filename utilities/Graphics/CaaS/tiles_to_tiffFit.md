@@ -25,6 +25,7 @@ tags: graphics CGI_Python plume_model OpenTopoMap gdal
 
 - OpenTopoMap (OTM[^1])是以圖磚形式，將各解析度圖磚放在遠端伺服器供下載顯示。
 - 因此，本程式([tiles_to_tiffFit.py][1])的重點就在下載需要的圖磚、將其整併、裁切出指定範圍的地形圖。
+- 本程式雖然沒有單獨的網路服務版本，卻也是個獨立的程式，而且[知乎網友][2]確實也將其發展成能夠單獨執行的GUI程式。
 
 ## 程式說明
 

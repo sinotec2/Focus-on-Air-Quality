@@ -22,7 +22,7 @@ tags: CGI_Pythons plume_model
 
 ## 背景
 - 為快速累積複雜地形中煙流模式的執行經驗，建立相應之執行規範，此處針對TEDS中所有點源進行AERMAP之模式模擬。
-- 使用之程式即為前述[AERMAP之遠端執行](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathwaysways/aermap_caas/)之python程式，應用SuperMicron工作站，以bash腳本控制同步計算。
+- 使用之程式即為前述[AERMAP之遠端執行](../../utilities/CGI-pythons/aermap_caas.md)之python程式，應用SuperMicron工作站，以bash腳本控制同步計算。
 - 計算結果檔案
   - 以uMap提供[鏈結](http://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)下載。
   - 有關uMap的使用方法，可以詳見[鏈結資訊之地圖展現(uMap)](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/UMAP/)

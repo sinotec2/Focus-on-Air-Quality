@@ -22,7 +22,6 @@ tags: CGI_Pythons review
 
 ---
 
-
 ## 前言
 
 ### 背景

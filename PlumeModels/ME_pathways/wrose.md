@@ -4,6 +4,7 @@ title: 風花圖之繪製_wdrose.py
 parent: ME Pathways
 grand_parent: Plume Models
 nav_order: 2
+date: 2022-03-21
 last_modified_date: 2022-03-21 16:43:46
 tags: plume_model graphics
 ---
@@ -21,16 +22,20 @@ tags: plume_model graphics
 ---
 
 ## 背景
-### 目標：
+
+### 目標
+
 - 熟悉python的語法，從範例中找到如何應用的連結方式。
 - 建立ISCST氣象檔的風花圖繪圖程式，以做為檢核之用。
-### 資源：
+
+### 資源
+
 - 程式位置 /Users/cybee/bin/wrose.py
   執行方式(範例)：
 	- ISC 氣象檔：wrose.py FNAME 
 	- aermod 氣象檔：wrose_mm.py FNAME 
 	- csv自由格式檔案：wrose_csv.py FNAME
-- 風花圖套件([pypi](https://pypi.python.org/pypi/windrose)
+- 風花圖套件(goto [pypi](https://pypi.python.org/pypi/windrose))
 - [有關pandas的快速入門](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html)
 - 有關python的入門課程
   - [工具介面ipython簡介](https://blog.csdn.net/qq_27825451/article/details/84320859)
@@ -59,20 +64,24 @@ ax.figure.savefig(fname+'.png')
 - ax.set_legend產生風速的表示圖例
 - figure.savefig儲存檔案
 
+![wrose0.png](https://drive.google.com/uc?id=1gf9_dFPcSRL_18bpzqaelpOe82Us-5mi)
 
 ### 應用(修改)策略
+
 - ws wd須另行產生，套用真實的數據
 
 ## ISCST氣象檔之讀取
+
 - 氣象檔為具有格式的文字檔，不能用簡單的split來切割欄位，必須按照欄位數精確定位。
 - 可以用mobaXterm的內設編輯軟體(MobaTextEditor)打開如下圖，
   第1行為站名、年代名，第2行以後則為逐時數據，
   黃色螢光筆部分為風去的方向(度)，與風向差異180度。藍色底線部份則為風速，單位為公尺每秒。
 
-
+![467440ASC.png](https://drive.google.com/uc?id=1qdhpB5BM5Lc-dyOqjHHPaNnbc7c__rHd)
 
 - 將游標移到風向及風速的前面，由MobaTextEditor下方的位置數字可以得知(如下圖)，分別自第9及第18欄位置開始，各為9格的長度。
 
+![467440ASC_2.png](https://drive.google.com/uc?id=1wTotsGXcDHFyQeHCUdYWPt-p-f5kpB7E)
 
 - 程式寫法如下:
   - 使用with來開啟檔案的好處是，不必再做關閉的動作。
@@ -92,7 +101,9 @@ aermod氣象檔之讀取
 wd=[float(i.split()[16]) for i in l]
 ws=[float(i.split()[15]) for i in l]
 ```
+
 ### 任意自由格式csv檔之氣象檔
+
 1. 刪除型態為字元的欄位
 2. 如果最大值超過360度，不論是什麼，也不會是風速風向數據，刪除
 3. 剩下欄位來做級值的排序，最大者為風向，其次則為風速
@@ -113,26 +124,39 @@ ws=[float(i.split()[15]) for i in l]
     32    wd,ws=(list(df[df.columns[i]]) for i in [iwd,iws])
 ```
 
-
 ## 計算結果
-(46744.ASC， 台南站2017年數據)
 
+### 46744.ASC
 
-(46777.ASC， 梧棲站2017年數據)
+台南站2017年數據
 
+![46741v01.asc.png](https://drive.google.com/uc?id=1AZDaMww6QwK_YWKPEvjk3-xMOdZDmbPs)
 
-749 台中    
+### 46777.ASC
 
+梧棲站2017年數據
 
+![46777v01.asc.png](https://drive.google.com/uc?id=1vk9Exf81bKoHIzB1aCTML61Spn_YFMdj)
 
-### 討論：
+### 46749.ASC
+
+749 台中
+
+![46749v01.asc.png](https://drive.google.com/uc?id=11n6xeZHICB0kZ7ejLPt5Uw96coJISzam)
+
+### 討論
+
 - 全年最多風向為北風～東北風，是東北季風的特色，風速較大。
 - 台南的風向較為複雜，梧棲較為單純，因前者風速較低，近市區風系複雜。
-- 西南季風的特性，台南有西南與東南風，梧棲則為東南風，可能受到陸風的干擾。
-### TODO:
+- 西南季風的特性，台南有西南與東南風，梧棲則為東南風，可能受到陸風的干擾
+
+### TODO
+
 - 部分方向的頻率超低，如何確認？
 - 分時、分季的特性如何？
-### BUGs
+
+### Known bug
+
 - 由於windrose模組內的指令大多會呼叫系統的視窗程式，如jupyter在browser上產生畫面，如果ssh登入與主機登入的使用者不同，系統不知如何出現畫面，因而提出警訊。
 - 本案採savefig因此即使沒有畫面顯示，依然可以執行。
 
@@ -140,5 +164,3 @@ ws=[float(i.split()[15]) for i in l]
 $ wrose.py b.asc
 _RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
 ```
-
-

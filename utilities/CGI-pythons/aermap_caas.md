@@ -39,22 +39,23 @@ tags: CGI_Pythons plume_model sed gdal
 - 完整之地形前處理，詳見[AERMAP](../../PlumeModels/TG_pathways/gen_inp.md)。
   - 此處因在伺服器執行，因此仍然維持[eio](https://pypi.org/project/elevation/)下載數據、
   - 此外，[gdal_translate](https://gdal.org/programs/gdal_translate.html)改變格式，準備好aermap.inp執行aermap等程序，與[AERMAP](../../PlumeModels/TG_pathways/gen_inp.md)一樣。
-- html及cgi_python的內容，詳見[網頁計算服務軟體系統的建置]七。此處說明因應caas所做的重要更動。
+- html及cgi_python的設定，詳見[網頁計算服務軟體系統的建置](CaaS_review.md)。此處說明因應caas所做的重要更動。
 
 ### 主要的問題
 
 1. 發生在網頁使用者的身份，與平常一般用ssh登入的使用者，二者在環境的設定上有著很大的差異，
-	- 造成可以登入執行流程，卻不能由cgi_python操縱流程。
-	- 理論上cgi_python是由root之分身www(Mac是_www)，其權限能力是很高的，但是環境設定也是空白一片。
+   - 造成可以登入執行流程，卻不能由cgi_python操縱流程。
+   - 理論上cgi_python是由root之分身www(Mac是_www)，其權限能力是很高的，但是實際執行時環境變數仍然不能自動設定，執行外部其他程式時會發生錯誤。
 2. cgi_python的standard output or error (stdout, stderr)
-	- cgi_python所有產生的standard output，都會是html的內容，因此，
-	- 如果呼叫os中的其他程式如果有輸出，也將會干擾正常的html功能，發生AH02429誤錯(contains invalid characters)
-	- 解決方案就是將所有stdout/err都導向檔案、或者是/dev/null，讓html保持乾淨。
+   - cgi_python所有產生的standard output，都會是html的內容，因此，
+   - 如果呼叫os中的其他程式如果有輸出，也將會干擾正常的html功能，發生AH02429誤錯(contains invalid characters)
+   - 解決方案就是將所有stdout/err都導向檔案、或者是/dev/null，讓html保持乾淨。
+
 - 由於本系統的外部批次檔內容較為複雜，此一經驗將可以作為未來發展的重要參考。
 
 ### 成果
 
-- terrain.py建置結果與使用者界面、詳計算服務網址：[http://125.229.149.182/terrain.html][1]
+- terrain.py建置結果與使用者界面、詳計算服務網址：[http://125.229.149.182/terrain.html][1][^1]
 
 |![terr_html.png](https://drive.google.com/uc?id=1-dYmAoM5i5sXt3sf1FFVnnSNMli7f0Rt)|
 |:-:|
@@ -105,7 +106,6 @@ $ cat -n /opt/local/bin/gen_inp.py|grep '/'
 ```
 
 - 組合結果
-- 
   - 每次都要執行gd_data內容
   - 因為有PATH，因此執行程式不必再另加絕對路徑了。
 
@@ -181,4 +181,26 @@ $ cat -n $(which gen_inp.py)|grep NUL
    193  os.system('echo "'+cmd+'"'+NUL)
 ```
 
+## 程式下載
+
+### terrain.py
+
+{% include download.html content="煙流模式地形前處理CGI主程式：[terrain.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrain.py)" %}
+
+### terrainTXT.py
+
+{% include download.html content="地形前處理文字解析與執行控制程式：[terrainTXT.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrainTXT.py)" %}，程式說明詳[執行控制程式](../../PlumeModels/TG_pathways/terrainTXT.md)
+
+### terrainXYINC.py
+
+{% include download.html content="地形前處理座標計算副程式：[terrainXYINC.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrainXYINC.py)" %}
+
+### terrainLOCAT.py
+
+{% include download.html content="地形前處理位置解析副程式：[terrainLOCAT.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrainLOCAT.py)" %}
+
 ## Reference
+
+[^1]: 煙流模式的地形處理，提供ISCST3/AERMOD等煙流模式所需地型數據之[前處理][1]。
+
+[1]: http://125.229.149.182/terrain.html "煙流模式的地形處理 "

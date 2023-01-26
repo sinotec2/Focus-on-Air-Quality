@@ -330,7 +330,7 @@ cd ..
 
 ### fitted.png
 
-![fitted.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/fitted.png)
+![fitted.png](https://drive.google.com/uc?id=1QjRN3gTShz3jDu8hGgRhAlhAtqAOIpYF)
 
 [^1]: OpenTopoMap：開放地形圖[官網](https://opentopomap.org)、[wiki](https://wiki.openstreetmap.org/wiki/OpenTopoMap)
 [^2]: Python+gdal制作一个简单的地图下载器（支持高德、arcgis、google）、tom的gis笔记 (编辑于 2022-04-29 21:51)，[知乎專欄][2]。

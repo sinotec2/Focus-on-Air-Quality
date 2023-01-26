@@ -135,4 +135,4 @@ dy|1250|南北向格點間距(m)
 
 ### 結果圖檔
 
-![tmp_cn](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/tmp_cn.png)
+![tmp_cn.png](https://drive.google.com/uc?id=1DK7QFdVjCEk-MRA9K8klC-IsnUhyqa5W)

@@ -1,11 +1,12 @@
 ---
 layout: default
 title:  地形前處理文字解析與執行控制程式
-parent: CGI-pythons
-grand_parent: Utilities
+parent: RE & TG Pathways
+grand_parent: Plume Models
+nav_order: 2
 last_modified_date: 2023-01-26 21:43:56
-tags: CGI_Pythons plume_model sed gdal
----
+tags: plume_model sed gdal
+------
 # 地形前處理文字解析與執行控制程式
 {: .no_toc }
 
@@ -22,9 +23,8 @@ tags: CGI_Pythons plume_model sed gdal
 ## 背景
 
 - 這支程式是一支可以獨立運作、呼叫[gen_inp](../../PlumeModels/TG_pathways/gen_inp.md)、執行aermap的外部控制程式。
-- 呼叫的母程式為terrain.py[^1]
+- 仿照本程式另外發展有CGI程式 terrain.py[^1]
 - 其連續版本terrainTXT2.py，則應用在[全臺AERMAP之批次執行](../../PlumeModels/TG_pathways/twnTERR.md)
-
 
 ## 程式說明
 
@@ -40,13 +40,13 @@ tags: CGI_Pythons plume_model sed gdal
 
 - /opt/local/bin/gen_inp.py：見[gen_inp.py](../../PlumeModels/TG_pathways/gen_inp.md#geninppy程式分段說明)
 - /opt/local/bin/aermap
-- [sed](../OperationSystem/sed.md)
+- [sed](../../utilities/OperationSystem/sed.md)
 
 ## 程式下載
 
 ### terrainTXT.py
 
-{% include download.html content="地形前處理文字解析副程式：[terrainTXT.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrainTXT.py)" %}，程式說明詳[文字解析副程式](terrainTXT.md)
+{% include download.html content="地形前處理文字解析與執行控制程式：[terrainTXT.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/terrainTXT.py)" %}，程式說明詳[文字解析副程式](terrainTXT.md)
 
 ### terrain.py
 

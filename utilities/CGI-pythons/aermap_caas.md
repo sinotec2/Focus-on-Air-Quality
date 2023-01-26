@@ -189,7 +189,9 @@ $ cat -n $(which gen_inp.py)|grep NUL
 
 ### terrainTXT.py
 
-{% include download.html content="地形前處理文字解析與執行控制程式：[terrainTXT.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrainTXT.py)" %}，程式說明詳[執行控制程式](../../PlumeModels/TG_pathways/terrainTXT.md)
+- 類似獨立執行之控制程式。
+
+{% include download.html content="地形前處理文字解析與執行控制程式：[terrainTXT.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/terrainTXT.py)" %}，程式說明詳[執行控制程式](../../PlumeModels/TG_pathways/terrainTXT.md)
 
 ### terrainXYINC.py
 

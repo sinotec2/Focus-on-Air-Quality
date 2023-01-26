@@ -80,7 +80,7 @@ tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 
 - 包括1個文字輸入窗、1個檔案選擇器、以及1個執行鍵。
 
-| ![NCLonOTM-cgi.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/NCLonOTM-cgi.png)|
+| ![NCLonOTM-cgi.png](https://drive.google.com/uc?id=1p4Zu6FEiv8bWUu5nE0LATSaE4PMw2VTe)|
 |:--:|
 | <b>[http://125.229.149.182/NCLonOTM.html](http://125.229.149.182/NCLonOTM.html)畫面</b>|
 

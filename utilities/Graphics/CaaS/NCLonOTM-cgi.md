@@ -24,6 +24,7 @@ tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 
 - 此一包裝程式提供了切割底圖與貼圖的服務
 - 本項作業取代傳統SURFER、NCL、或[dat2kml](../../GIS/wr_kml.md)等繪圖方式，以cgi-python程式直接進行NCL與OTM地圖進行疊加，並以CaaS形式對外提供計算服務。
+- 或參：[集合OTM圖磚並修剪成tiff檔](../CaaS/tiles_to_tiffFit.md)、[煙流模式結果繪製等值線圖](../NCL/PLT_cn.md)
 
 ### 整體策略檢討
 

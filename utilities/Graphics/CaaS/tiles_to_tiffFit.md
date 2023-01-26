@@ -26,6 +26,7 @@ tags: graphics CGI_Python plume_model OpenTopoMap gdal
 - OpenTopoMap (OTM[^1])是以圖磚形式，將各解析度圖磚放在遠端伺服器供下載顯示。
 - 因此，本程式([tiles_to_tiffFit.py][1])的重點就在下載需要的圖磚、將其整併、裁切出指定範圍的地形圖，可以給SURFER或其他繪圖軟體使用，詳細參閱[merged_GeoTIFF][5]之說明。
 - 本程式雖然沒有單獨的網路服務版本，卻也是個獨立的程式，而且[知乎網友][2]確實也將其發展成能夠單獨執行的GUI程式。
+- 或參母程式NCLonOTM[^4]、[NCL繪製煙流模式等值圖](../NCL/PLT_cn.md) [^5]
 
 ## 程式說明
 
@@ -335,6 +336,8 @@ cd ..
 [^1]: OpenTopoMap：開放地形圖[官網](https://opentopomap.org)、[wiki](https://wiki.openstreetmap.org/wiki/OpenTopoMap)
 [^2]: Python+gdal制作一个简单的地图下载器（支持高德、arcgis、google）、tom的gis笔记 (编辑于 2022-04-29 21:51)，[知乎專欄][2]。
 [^3]: tiles-to-tiff, Jimmy Utterström(2019), [programtalk][3] or [bolg][5]
+[^4]: 獨立程式說明[NCL貼在OTM底圖上](../NCL/NCLonOTM.md)或NCLonOTM遠端服務,[NCLonOTM-cgi.py](../CaaS/NCLonOTM-cgi.md)
+[^5]: 煙流模式結果繪製等值線圖之NCL程式，詳見[程式說明](../NCL/PLT_cn.md)，或下載[PLT_cn.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/PLT_cn.ncl)
 
 [1]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py "tiles_to_tiffFit.py"
 [2]: https://zhuanlan.zhihu.com/p/505288791 "tom的gis笔记（編按：含PysimpleGUI封包"

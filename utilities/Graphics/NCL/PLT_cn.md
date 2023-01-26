@@ -25,7 +25,8 @@ tags: NCL graphics plume_model
 
 - 此處讀取煙流模式結果的PLT檔案（for SURFER的[x,y,c]濃度檔案），繪製等值線圖。
 - 程式下載：[PLT_cn.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/PLT_cn.ncl)
-- 執行之母程式：[NCLonOTM-cgi.py](../CaaS/NCLonOTM-cgi.md)，也將由該程式繼續完成貼上底圖。
+- 執行之母程式[^2]：[NCLonOTM-cgi.py](../CaaS/NCLonOTM-cgi.md)，也將由該程式繼續完成貼上底圖。
+- 等值線圖需要的底圖，可以參考[^1]。
 
 ## 程式碼說明
 
@@ -136,3 +137,6 @@ dy|1250|南北向格點間距(m)
 ### 結果圖檔
 
 ![tmp_cn.png](https://drive.google.com/uc?id=1DK7QFdVjCEk-MRA9K8klC-IsnUhyqa5W)
+
+[^1]: 集合OTM圖磚並修剪成tiff檔之py程式，詳見[tiles_to_tiffFit.py程式說明](tiles_to_tiffFit.md)，或下載[tiles_to_tiffFit.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py)
+[^2]: 獨立程式說明[NCL貼在OTM底圖上](../NCLonOTM.md)或NCLonOTM遠端服務,[NCLonOTM-cgi.py](../CaaS/NCLonOTM-cgi.md)

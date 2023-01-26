@@ -338,27 +338,8 @@ cat -n isc_parser.py
     97    </body>
     98    </html>
     99    """
-七、terrain
-terrain.html
-網頁計算服務網址：http://114.32.164.198/terrain.html
 
 
-terrain.html
-與前述iscParser.html雷同，但多出結果表格之說明
-terrain.html
-3.4 KB
-terrain.py
-與前述isc_parser.py雷同，執行數個os.system()批次，啟動gen_inp.py及aermap
-terrain.py
-3.5 KB
-
-34 os.system('cd '+web+'trj_results;touch '+snamo+'.dem;'+geninp+' -f '+snamo+' -d \"'+inp+'\">> '+out+';'+
-35    'sed \"s/test/'+snamo+'/g\" aermap.inp_template>aermap.inp;'+aermap+' >> '+out+';'+
-36    '/usr/bin/zip '+fname+' '+snamo+'.* *out *OUT aermap.inp;sleep 10s')
-
-
-
-terrain.py因呼叫外部程式的次數還頗多的，因此遭到客戶身份及標準輸出的干擾還不少，因應對策及最終結果詳見說明(terrain_caas)專案說明。
 
 八、wrose
 wrose.html

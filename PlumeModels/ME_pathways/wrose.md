@@ -6,7 +6,7 @@ grand_parent: Plume Models
 nav_order: 2
 date: 2022-03-21
 last_modified_date: 2022-03-21 16:43:46
-tags: plume_model graphics
+tags: plume_model graphics wrose
 ---
 # 風花圖之繪製_wdrose.py
 {: .no_toc }
@@ -36,6 +36,7 @@ tags: plume_model graphics
 	- aermod 氣象檔：wrose_mm.py FNAME 
 	- csv自由格式檔案：wrose_csv.py FNAME
 - 風花圖套件(goto [pypi](https://pypi.python.org/pypi/windrose))
+- 計算服務網站：[繪製煙流模式氣象檔案之風花圖](../../utilities/CGI-pythons/wrose_caas.md)
 - [有關pandas的快速入門](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html)
 - 有關python的入門課程
   - [工具介面ipython簡介](https://blog.csdn.net/qq_27825451/article/details/84320859)

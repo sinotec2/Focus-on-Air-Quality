@@ -80,7 +80,7 @@ tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 
 - 包括1個文字輸入窗、1個檔案選擇器、以及1個執行鍵。
 
-| ![NCLonOTM-cgi.png](https://drive.google.com/uc?id=1p4Zu6FEiv8bWUu5nE0LATSaE4PMw2VTe)|
+| ![NCLonOTM.png](https://drive.google.com/uc?id=1p4Zu6FEiv8bWUu5nE0LATSaE4PMw2VTe)|
 |:--:|
 | <b>[http://125.229.149.182/NCLonOTM.html](http://125.229.149.182/NCLonOTM.html)畫面</b>|
 
@@ -221,6 +221,18 @@ print """\
   </html>
   """
 ```
+
+## 範例
+
+![fitted.png](https://drive.google.com/uc?id=1QjRN3gTShz3jDu8hGgRhAlhAtqAOIpYF)|![tmp_cn.png](https://drive.google.com/uc?id=1DK7QFdVjCEk-MRA9K8klC-IsnUhyqa5W)
+:-:|:-:
+模擬範圍地形圖整併結果|模擬結果等值線圖
+
+### 疊圖結果
+
+- NCLonOTM.png 
+
+![NCLonOTM_ok.png ](https://drive.google.com/uc?id=1A9KI_MtGwRBDJDFcPCBUqnRIfAMVdtzh)
 
 [^1]: 集合OTM圖磚並修剪成tiff檔之py程式，詳見[tiles_to_tiffFit.py程式說明](tiles_to_tiffFit.md)，或下載[tiles_to_tiffFit.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py)
 [^2]: NCL貼在OTM底圖上之轉接程式，詳見[NCLonOTM程式說明](../NCL/NCLonOTM.md)，或下載[NCLonOTM.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/NCLonOTM.py)

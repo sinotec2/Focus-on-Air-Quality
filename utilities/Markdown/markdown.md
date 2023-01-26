@@ -37,6 +37,10 @@ last_modified_date: 2022-06-17 10:21:23
 ![Example Image](https://drive.google.com/uc?id=1bXzYeegauqB2M6-VZwitEeXHmMiYZIUY)
 ```
 
+結果
+
+![Example Image](https://drive.google.com/uc?id=1bXzYeegauqB2M6-VZwitEeXHmMiYZIUY)
+
 - 文中還介紹了html語言的圖片設定範例
 
 ```bash

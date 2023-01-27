@@ -279,7 +279,7 @@ cat -n isc_parser.py
     39  if pav=='AREA':
     40    lab=['p'+str(i) for i in range(4)]
     41    X,Y=[float(inp[i]) for i in range(3,5)]
-    42    P=[[0,0],[X,0],[X,Y],[0,Y]]
+    42    P=[ [0,0],[X,0],[X,Y],[0,Y] ]
     43    angl=-float(inp[5])
     44    Pn=[rotate_about_a_point(pnt,P[0],angl) for pnt in P]
     45    ttt=np.array(Pn)+np.array(orig*4).reshape(4,2)
@@ -338,23 +338,8 @@ cat -n isc_parser.py
     98    </html>
     99    """
 
-
-
-八、wrose
-wrose.html
-網頁計算服務網址：http://114.32.164.198/wrose.html
-
-雖然風花圖的程式已經有很多軟體套件，但是為了檢查煙流模式目的而寫的界面，目前應該是沒有。為了通用在不同的模式之間、也為了打開格式限制，wrose.py加進了輸入檔案格式的辨識，同時也在網頁上貼上範例，讓使用者可以檢視檔案內容，經由比較來了解模式。
-wrose.html
-與前述MMIF雷同，但多出範例表格之說明、減省email的詢問。
-wrose.html
-3.4 KB
-save_wrose.py
-與前述terrain.py雷同（data-auto-download），啟動wrose.py。因應cgi的套件是python 2 的平台，wrose.py也必須改成python 2
-save_wrose.py
-1.5 KB
-
 Reference
+
 Articles
 
     Wiki 

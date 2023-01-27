@@ -27,7 +27,7 @@ tags: CGI_Pythons mmif
 或參自動版：[臺灣地區高解析度軌跡產生/自動分析系統](surf_trajLL2.md)
 
 五、traj
-網頁計算服務網址：http://125.229.149.182/traj.html
+網頁計算服務網址：http://125.229.149.182/traj.html @iMacKuang[^9]
 畫面：
 
     畫面左側的5個物件，主要是3個下拉選單(selectmenu)、一個日期選單(datepicker)、以及一個button submit物件做為整體提交並呼叫cgi_python(traj/surf_traj3.py)的觸發。右方則為一典型範例，說明模式計算能力(軌跡會繞山)。
@@ -516,3 +516,5 @@ $ cat -n index.js
     51      }); 
     52  }(window));
 ```
+
+[^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

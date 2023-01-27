@@ -20,10 +20,12 @@ last_modified_date: 2022-10-24 10:48:43
 
 ---
 ## 背景
+
 - 點狀資訊之地圖展現，即按照地圖上地標來尋找標的物，是最接近直覺的互動體驗。除了提供地圖上的參考物件之外，所欲提供的物件（Points Of Interest POI's）也必須清楚有效的呈現，以便使用者點選、下載、或其他進一步動作。
 - POI應用實例有2種，包括簡單的點狀資訊、以及格狀之**鏈結資訊**。此處介紹後者，應用在MMIF與AERMAP結果的提供。
 
 ### 方案比較
+
 - 傳統做法
 	- 以ftp層級提供：為最簡便之方案。然而由於網格點是空間相對意義的一組數字，作為ftp的檔名難以對使用者產生意義。
 	- 提供行政區位之網頁界面，以工廠所在行政區階層下拉選單點選：選單太多選取不易、選錯空間位置會差很大。
@@ -57,6 +59,7 @@ last_modified_date: 2022-10-24 10:48:43
 ## 資料之準備與上載
 
 ### uMap的規格與選項
+
 - uMap可以接受上傳檔案、URL連結、或者是直接在對話框貼上POI之文字。
 	- 末者應為少量資訊、測試過程提供的界面，不適用在大量的數據
 	- URL可以在讓使用者隨時更動客戶端的內容保持協作地圖上的資訊是最新的、減少圖層更新的作業。應適用更新頻率較高的情況
@@ -68,6 +71,7 @@ last_modified_date: 2022-10-24 10:48:43
 	- 本次作業網格分布之位置如以點狀似嫌呆板，以網格邊界4方形較符合實際，然數據量也將擴增5倍，過去google map對上千點的kml速度降低很多、且有拒絕服務的限制，不知uMap是否也會(經證實不會)，因此以kml點狀先行測試，最終仍以4邊形來展示POI內容為目標。
 
 ### 資料之準備
+
 - 自point_QC.csv(詳[read_point.py]()))中歸納出台灣地區已設有工廠的網格位置，另存成point_ij.csv，使用python程式如下：
 
 ```python
@@ -96,6 +100,7 @@ $ cat -n point_ij.py
 ```
 
 其表頭如下：
+
 ```bash
 kuang@114-32-164-198 /Users/1.PlumeModels/AERMOD/mmif/TWN_3X3
 $ head point_ij.csv
@@ -110,9 +115,11 @@ IJ,X,Y,lon,lat
 13048,-84000.0,-60000.0,120.142,23.047
 13053,-84000.0,-45000.0,120.141,23.187
 ```
+
 - IJ = I*1000 + J，為東西、南北向網格標籤的組合
 - X,Y：lambert projection座標值，原點在台灣中心點
 - 貼上連結位置之說明descriptions
+- 連結的位置在工作站$web@iMackuang[^2]
 
 ```python
 kuang@114-32-164-198 /Users/1.PlumeModels/AERMOD/mmif/TWN_3X3
@@ -138,6 +145,7 @@ col=['lon','lat','IJ','lab']
 df[col].set_index('lon').to_csv('mmifTWN_3X3.csv')
 os.system('/opt/local/bin/csv2kml.py -f mmifTWN_3X3.csv -n N -g LL')
 ```
+
 ### kml成果
 
 ```html
@@ -252,3 +260,5 @@ $ cat -n point_ijP.py
 [token2]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08"
 [token3]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg"
 [token4]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"
+
+[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

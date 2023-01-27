@@ -22,11 +22,14 @@ tags: forecast CWBWRF crontab graphics
 ---
 
 ## 背景
+
 ### 動機與目的
+
 - 中央氣象局雖然每天進行[WRF數值預報][wrf_3km]，網路上卻沒有開發者使用來做氣流線等加值應用。雖然過去發展了[高解析度軌跡近5日預報](https://sinotec2.github.io/traj/)、[calpuff每日的預報](https://sinotec2.github.io/cpuff_forecast/)等等，卻還沒有嘗試以[earth.nullschool][ens]套件來加以延伸、展示。
 - 除了每日、即時的展示之外，還有儲存、檢視的內部需求。相較[windy][windy]，[earth.nullschool][ens]可以按照使用者的需要，在url地址列簡單的指令，即可顯示過去特定時間的氣象與(或)濃度場。這個方案目前似乎是網路存取、檢視龐雜的氣象-空品模擬系統成果的最佳平台。
 
 ### [earth][ens]的發展與應用
+
 - [earth][ens]套件是Cameron Beccario(cambecc)早期為[東京都環境局環境改善部][tkw]撰寫的套件，後來發展成全球的服務網站，同時也被大陸地方選擇做為[氣象預報可視化系統的設計項目][陈晖2016]。
 - [ESRI][esri] 2017年也將其繼續發展成類似[油畫質感](http://esri.github.io/wind-js/)的動畫版本。
 - 持續的商業版本除了[windy][windy]之外，[ventusky](https://www.ventusky.com/)也有類似的應用。
@@ -42,6 +45,7 @@ graph TD
     D --> E((products.js))
     E --> F((web rendering))
 ```
+
 - uv10_json.py
   - [source code](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/cwbWRF_3Km/uv10_json.py)
   - [IO and program descriptions][uv10_json]
@@ -49,11 +53,12 @@ graph TD
   - 找到有關gfs的程式碼：`grep gfs $(find . -name "*.js")|more`
 - web rendering
   - intializing by `node dev-server.js 80` or 
-  - reload browser
+  - reload browser@iMacKuang[^2]
   - d3：`http://125.229.149.182/#current/wind/surface/level/orthographic=-237.53,23.30,2000`
   - d1：`http://125.229.149.182/#current/wind/surface/level/orthographic=-236.33,23.30,800`
 
 ## diff of first paramter between gfs and cwbwrf_15Km files
+
 - [earth][ens]套件與gfs檔案的連結靠的是[grib2json][g2j]這支程式，cambecc也將其公開在github上。其下載、編譯、與應用的細節歷程可以參考[FAQ->json][json]。
 - 經由下列簡單的python指令，可以列出gfs與cwb二者grib檔案內容的差異，作為修改([uv10_json.py][uv10_json])的重要指引。
 
@@ -154,7 +159,9 @@ forecastTime| 3|6
  refTime(eg)|2014-01-31T00:00:00.000Z|2021-10-11T06:00:00.000Z
 
 ## installation of [earth][ens]
+
 ### download and compile
+
 - `git clone https://github.com/cambecc/earth.git` 
 - `cd earth`
 - `npm install`
@@ -163,17 +170,21 @@ forecastTime| 3|6
 - node dev-server.js 8080 (or 80 for usual port)
 
 ## modifications of js
+
 ### zoom limits
+
 - from 3000 to 60,000
 - function scaleExtent in file `./public/libs/earth/1.0.0/globes.js`
 
 ### FilePath function
+
 - 原本(`gfs1p0degPath`)指定檔名的函數，寫死一定要開`current-wind-surface-level-gfs-1.0.json`
   - 引數只提供`attr, type, surface, level`
 - 增加`src, res` 2個引數，來源（gfs或cwb）與解析度(`'1p90', '15K', '3K'`)
 - in file `./public/libs/earth/1.0.0/products.js`
 
 ### default settings
+
 - in file: `./public/libs/earth/1.0.0/micro.js:14:`
 - 可設定：
   1. 時間
@@ -185,6 +196,7 @@ forecastTime| 3|6
 ```java
 var DEFAULT_CONFIG = "current/wind/surface/level/orthographic";
 ```
+
 - 修正為
 
 ```java
@@ -192,6 +204,7 @@ var DEFAULT_CONFIG = "current/wind/surface/level/orthographic=-238.80,23.73,7500
 ```
 
 ### 縣市界
+
 要在[earth][ens]套件中更改海岸線、湖泊線，或是加上縣市界，可以參考詳見[shp檔轉json][shp_json]說明
 - topojson檔案放在./public/data/topo目錄下
 - 有關的js檔包括
@@ -199,6 +212,7 @@ var DEFAULT_CONFIG = "current/wind/surface/level/orthographic=-238.80,23.73,7500
   1. ./public/libs/earth/1.0.0/globes.js (變數定義)
 
 ### 氣流線之調整
+
 [earth][ens]套件的動態氣流線在其程式中稱為particle，可能因為看起來像是顆粒的軌跡動態。particle相關設定有：
 1. ./public/libs/earth/1.0.0/[products.js][js1]：` particles: {velocityScale: 1/3000000, maxIntensity: 1 }`，這2個設定前者為風速的尺度(1/3M ~ 1/60K)，其值越小，流線越短。後者為密集度(1 ~ 17)，其值越小會有越多處有particle起點，即使風速很低，適用在小比例尺圖面。
 1. ./public/libs/earth/1.0.0/earth.js
@@ -217,8 +231,8 @@ var DEFAULT_CONFIG = "current/wind/surface/level/orthographic=-238.80,23.73,7500
 流線的長度|earth.js|MAX_PARTICLE_AGE|10~100|短(無動感無法辨認方向)~長(遮蔽底圖)
 流線寬度|earth.js|PARTICLE_LINE_WIDTH|0.8~1.0|細(辨識不清)~寬(遮蔽底圖)
 
-
 ## 下載與執行
+
 - CWB WRF程式結果每6小時更新，分別為每天的2/8/14/20時等4次。每次預報84-6=78小時(0~6小時warm up)
   - 由於CWB是陸續更新，而其檔名系統又以預報起始時間為0，因此有可能發生錯亂覆蓋的情形。
   - 解決方式：解析結果按照檔案內的時間(grbs[1].validDate)來命名
@@ -229,7 +243,9 @@ var DEFAULT_CONFIG = "current/wind/surface/level/orthographic=-238.80,23.73,7500
   - current目錄下之檔案：每小時執行連結。
 
 ### node03作業
+
 #### 腳本
+
 - [grbuv10_json.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/cwbWRF_3Km/grbuv10_json.py)的概略說明可以參考[地面風wrfout檔轉json->grib2 to json directly](https://sinotec2.github.io/FAQ/2022/07/27/uv10_json.html#grib2-to-json-directly)。
   - node03版本加入了後處理項目：
     1. 在mac上創新目錄
@@ -250,6 +266,7 @@ for ((i=6; i<=84; i=i+6)); do
 done
 done
 ```
+
 #### crontab內容
 
 ```bash
@@ -257,8 +274,11 @@ crontab -l|grep earth
 # earth CWB_WRF
 55 2,8,14,20 * * * /nas1/Data/javascripts/D3js/earthCWB/public/data/weather/current/earth_cwbwrf.cs
 ```
+
 ### mac上的任務
+
 #### lnk_curr.cs腳本
+
 - mac的任務就是保持current檔案隨時都是當下的時間
 - 執行方式是每小時進行UTC時間的計算，並將對的檔案連結到current
   - `UTC = LST - 8H`
@@ -292,11 +312,13 @@ fi
 ```
 
 #### crontab
+
 ```bash
 0 * * * * /Users/Data/javascripts/D3js/earthCWB/public/data/weather/current/lnk_curr.cs
 ```
 
 ## 成果檢討
+
 ### 3公里解析度範圍與流線場
 
 | ![uv10_json.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/uv10_json.PNG) |
@@ -310,6 +332,7 @@ fi
 - 內陸風場細節：GFS無法模擬
 
 ### TODO
+
 - other timeframe, fields
 - webGL controler
 - fine resolution shape file
@@ -319,6 +342,7 @@ fi
 ## resource
 
 ### earth package and D3js implements
+
 - cambecc(2016), [earth building, launching and etc](https://github.com/cambecc/earth) on GitHub. 
 - cambecc(2017), [grib2json](https://github.com/cambecc/grib2json) on GitHub.
 - Roger Veciana i Rovira(2018), [Drawing wind barbs with D3js from a GeoTIFF](https://bl.ocks.org/rveciana/206956c3e142040432c477d75b038749), on bl.ocks.org
@@ -326,6 +350,7 @@ fi
 - Kuan-Jung, Huang(2019), [透過 D3.js 調用外部資料集](https://mybaseball52.medium.com/d3-js-using-external-datasets-21f12cb386dc), mybaseball52.medium.com
 
 ### about GFS downloading
+
 - curl command in Github
   - `curl "http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs.pl?file=gfs.t00z.pgrb2.1p00.f000&lev_10_m_above_ground=on&var_UGRD=on&var_VGRD=on&dir=%2Fgfs.${YYYYMMDD}00" -o gfs.t00z.pgrb2.1p00.f000`  
 - nomads website has been upgraded since cambecc released [earth][ens]. 
@@ -341,13 +366,14 @@ dir name|/gfs.${YYYYMMDD}00|/gfs.${YYYYMMDD}/00/atmos|actually no other choice
 windows of LL|?|addative|may be omitted for global range
 
 ### about HTTPS
+
 - 詮力科技(2019),[為您的網站加上「-ssl憑證-」，成為https網頁](https://blog.ite2.com/為您的網站加上「-ssl憑證-」，成為https網頁/),十二月 13,2019/[技術探討](https://blog.ite2.com/category/technical-discussion-tw/)
 - Mangle Kuo(2021),[設定macOS本地端HTTPs/SSL證書](https://manglekuo.medium.com/設定macos本地端https-ssl證書-b2f79bcdedf0)
 - Bharath(2021) [How to install the Securly SSL certificate on Mac OSX ?](https://support.securly.com/hc/en-us/articles/206058318-How-to-install-the-Securly-SSL-certificate-on-Mac-OSX-),support.securly.com
 
 ### about json TypeError
-- 咸魚(2020), [TypeError: Object of type 'float32' is not JSON serializable解决方案](https://blog.csdn.net/yitanjiong4414/article/details/105902697), blog.csdn.net
 
+- 咸魚(2020), [TypeError: Object of type 'float32' is not JSON serializable解决方案](https://blog.csdn.net/yitanjiong4414/article/details/105902697), blog.csdn.net
 
 [wrf_3km]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/> "中央氣象局WRF_3Km數值預報產品"
 [ens]: <https://earth.nullschool.net/> "earth, a visualization of global weather conditions, forecast by supercomputers, updated every three hours"
@@ -362,3 +388,5 @@ windows of LL|?|addative|may be omitted for global range
 [json]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/netcdf2json/> "FAQ -> utilities -> netCDF -> grib2json"
 [tst]: <https://github.com/cambecc/earth/blob/master/public/test/products-test.html> "equal(config.toHash(), '2013/11/20/0800Z/a/b/c/x');  equal(paths.primary(), '/data/weather/2013/11/20/0800-a-b-c-gfs-1.0.json');"
 [shp_json]: <https://sinotec2.github.io/FAQ/2022/08/08/shp_json.html> "natural earth shp檔轉json"
+
+[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

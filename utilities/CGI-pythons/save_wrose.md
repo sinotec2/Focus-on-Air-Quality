@@ -35,9 +35,43 @@ tags: CGI-python graphics wrose
 
 ## wrose.html
 
-與前述MMIF雷同，但多出範例表格之說明、減省email的詢問。
+- 與前述MMIF雷同，但多出範例表格之說明、減省email的詢問。
+- 執行cgi-python save_wrose.py,引數則是檔名`name=filename`,filepicker之結果
+
+```html
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <form enctype="multipart/form-data" action="/cgi-bin/save_wrose.py" method="post">
+        <p><input data-label="File:" class="filepicker-jquery-ui" type="file" 
+		   placeholder="Select a file..." multiple="multiple"
+		   name="filename"/> </p> 
+		   <p style="text-align:center;"> <input type="submit" value="Upload and Run wrose remotely" /></p>
+		  </form><p>	 </p><p>	 </p>
+		<p>Contact: Dr. Yungchuan Kuang, sinotec2@gmail.com or <a href="https://www.evernote.com/shard/s125/sh/12eaea92-0fcc-4f54-9782-cb16f5a91be8/4653be8827311800fd1e237da43af3df">Dr. Kuang's Evernotes</a></p> 
+    </div>
+  </div>
+</div>
+```
 
 ## save_wrose.py
+
+### 讀取檔案
+
+```python
+import cgi, os, sys
+import cgitb; cgitb.enable()
+
+
+form = cgi.FieldStorage()
+
+pth='/tmp/wrose/'
+fileitem = form['filename']
+if fileitem.filename:
+  fn = os.path.basename(fileitem.filename)
+  open(pth+fn, 'wb').write(fileitem.file.read())
+```
 
 ### 執行外部風花圖製作程式
 
@@ -63,6 +97,8 @@ os.system(cmd)
 ```
 
 ### 程式下載
+
+{% include download.html content="風花圖製作之CGI版本[save_wrose.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/save_wrose.py)" %}
 
 {% include download.html content="風花圖製作之CGI版本[save_wrose.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/save_wrose.py)" %}
 

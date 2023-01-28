@@ -37,6 +37,8 @@ tags: CGI_Pythons plume_model gdal AERMAP
   5. 將數據寫成isc格式之地形檔案備用
   6. 將數據寫成kml格式以備檢查
 - 有關GeoTiff格式的讀取、寫出等等，可以參考[筆記](../../utilities/GIS/GeoTiff.md)及[df範例](../../GridModels/LAND/Soils#tiff2df)、[nc範例](../../GridModels/LAND/Soils#tiff2nc)
+- 遠端計算版本[煙流模式地形前處理](../../utilities/CGI-pythons/aermap_caas.md)
+- [地形前處理文字解析與執行控制程式](terrainTXT.md)、[全臺AERMAP之執行](twnTERR.md)
 
 ## 下載數值地形資料
 

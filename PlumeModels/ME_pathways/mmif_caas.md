@@ -29,8 +29,8 @@ tags: plume_model CGI_Pythons CWBWRF sed mmif
 由於mmif時間範圍經年，執行時間會超過瀏覽器停等時間(造成瀏覽器time out)，CGI及mmif程式都會停擺。mmif程式必須轉到背景執行與CGI脫勾才能順利完成。因應此一需求，有以下3個作法：
 
 1. 以自動執行之批次檔案承接，結束後以email通知
-	- 此一版本的背景執行交由crontab來管控
-	- 適用在頻繁呼叫、頻繁起、停的情況(課堂習作)
+  - 此一版本的背景執行交由crontab來管控
+  - 適用在頻繁呼叫、頻繁起、停的情況(課堂習作)
 2. 直接在cgi_python內啟動背景執行，由使用者自行上網確認結果
 3. 預先以工作站完成各年度WRF在各網格之MMIF轉檔，再由網頁或(及)CaaS系統提供
 
@@ -43,99 +43,102 @@ CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.h
 ### 系統元件
 
 1. 網址為：http://125.229.149.182/mmif.html，屬於個人負責營運維護的伺服器系統。
-	- select a file:選擇要執行的mmif.inp檔案。檔名必須是小寫、名字完全相符，不接受壓縮檔。設定方式詳下述。
-	- EMAIL:輸入回函email 信箱。系統不會寄發檢核信件。
-	- Upload and Run mmif remotely:上傳檔案到伺服器上、並等候crontab來執行mmif。
+  - select a file:選擇要執行的mmif.inp檔案。檔名必須是小寫、名字完全相符，不接受壓縮檔。設定方式詳下述。
+  - EMAIL:輸入回函email 信箱。系統不會寄發檢核信件。
+  - Upload and Run mmif remotely:上傳檔案到伺服器上、並等候crontab來執行mmif。
 2. 回函：
-	- 系統寄件者名稱為cybee、主旨分別為MMIF ACCEPTED及MMIF RESULT。
-	- 第一封回函會在開始執行程式之前寄到信箱，視伺服器壅塞的程度而異，內設執行批次個數少於6時，會接受新的批次。
-	- 第二封回函會在完成執行後寄達。視指定mmif執行模擬的時間長短而異，時間長、批次多，等候的時間就會很久。
-	- 點選連結會自動下載到使用者的“下載”目錄，只要用一般解壓縮軟體就能打開。
-	- 如果沒有收到回函，有可能：
-		1. 前述正常的等候時間
-		2. 被當成垃圾信
-		3. 如果垃圾箱沒有，請確認email是否有誤
+  - 系統寄件者名稱為cybee、主旨分別為MMIF ACCEPTED及MMIF RESULT。
+  - 第一封回函會在開始執行程式之前寄到信箱，視伺服器壅塞的程度而異，內設執行批次個數少於6時，會接受新的批次。
+  - 第二封回函會在完成執行後寄達。視指定mmif執行模擬的時間長短而異，時間長、批次多，等候的時間就會很久。
+  - 點選連結會自動下載到使用者的“下載”目錄，只要用一般解壓縮軟體就能打開。
+  - 如果沒有收到回函，有可能：
+    1. 前述正常的等候時間
+    2. 被當成垃圾信
+    3. 如果垃圾箱沒有，請確認email是否有誤
 3. 特色及好處：
-	- 不需在使用者電腦上編譯mmif的執行檔。USEPA並無義務提供任意平台的程式執行檔。
-	- 不需登入主機、不用登記會員、不做cookie紀錄追蹤、不佔用電腦資源。
-	- 輕量化系統。由於潛在使用者並不多，系統沒有經常性的執行壓力。
-	- 使用CWB的WRF結果（中央氣象局WRF_3Km數值預報產品之下載及轉檔），有一定的公信力。
+  - 不需在使用者電腦上編譯mmif的執行檔。USEPA並無義務提供任意平台的程式執行檔。
+  - 不需登入主機、不用登記會員、不做cookie紀錄追蹤、不佔用電腦資源。
+  - 輕量化系統。由於潛在使用者並不多，系統沒有經常性的執行壓力。
+  - 使用CWB的WRF結果（中央氣象局WRF_3Km數值預報產品之下載及轉檔），有一定的公信力。
 4. 待改進處：
-	- 目前只有2020年WRF數據、且CWB有缺漏情形。
-	- 目前只提供台灣本島範圍的經緯度座標，外島部分尚待開發。
-	- mmif.inp 的準備，尚涉及aermod模式模擬時間、空間範圍的設定，有待建置互動界面以減少錯誤。
-	- 伺服器計算速度以及網路頻寬有待提升。
+  - 目前只有2020年WRF數據、且CWB有缺漏情形。
+  - 目前只提供台灣本島範圍的經緯度座標，外島部分尚待開發。
+  - mmif.inp 的準備，尚涉及aermod模式模擬時間、空間範圍的設定，有待建置互動界面以減少錯誤。
+  - 伺服器計算速度以及網路頻寬有待提升。
 
-### cybee crontab contents:
+### cybee crontab contents
+
 - 執行頻率
-	- doing per min..
-```
-*/1 * * * * /Users/cybee/mmif_cron.cs >& /Users/cybee/mmif_cron.out
-```
-- 執行內容(計算啟動之檢查、控制、執行、郵寄)
-	- /Users/cybee/mmif_cron.cs contents
-		- 執行邏輯
-			1. 電腦負荷太多時、跳開不執行（設定為6個mmif工作）(line 6)
-			2. 使用者開了目錄（隨機產生名字），才能執行。開了目錄的2天後將不會存在。
-			3. 依照目錄順序進行檢查、執行：(line 11)
-				1. 如果有email但是還沒有寄過ACCEPTED第一封信，則執行寄信動作。指標為emai_bak檔案是否存在(line 14~22)。
-				2. 目錄下如果有mmif.inp檔案、卻沒有mmif.out檔案，則開始執行程式、製作成果壓縮檔、寄發第二封信RESULT。(line 24~39)
-				3. 下一個目錄
+  - doing per min..
 
 ```bash
-  1	
-  2	#ensure not to many mmif are running
-  3	n=$(ps -ef|grep /opt/local/bin/mmif|wc -l)
-  4	n=$(( $n - 1 ))
-  5	if [ $n -le 6 ];then
-  6	
-  7	#ensure mmif.inp was put to the directory
-  8	m=$(ls /tmp|grep mmif_|wc -l)
-  9	if [ $m -gt 0 ];then
-10	
-11	for dr in $(ls /tmp|grep mmif_);do
-12	dir=/tmp/$dr
-13	#ensure email was given
-14	if ! [ -e $dir/mmif.email_bak ] && [ -e $dir/mmif.email ];then
-15	#send first email     
-16	    emailadd=$(cat $dir/mmif.email)
-17	    echo "Hello MMIF user:\n Your mmif submit was accepted, please wait and check this email.\
-18		since $n mmif are running    
-19		The resultant tgz file will send to you and the file will be erased after 24 hrs! \n \
-20		(sent by machine do not reply)" | mail -s "MMIF ACCEPTED" $emailadd
-21	    cp $dir/mmif.email $dir/mmif.email_bak
-22	fi
-23	
-24	#ensure mmif.inp exist and perform mmif
-25	if [ -e $dir/mmif.inp ];then
-26	    if ! [ -e $dir/mmif.out ];then
-27	    	cd $dir
-28	    	cp mmif.inp mmif.recieved
-29	    	/opt/local/bin/mmif>mmif.out
-30	    	/usr/bin/zip result.zip *
-31		emailadd=$(cat $dir/mmif.email)
-32	    	echo "Hello MMIF user:\n Your mmif result was at http://125.229.149.182$dir/result.zip\n \
-33			Please fetch the file as soon as possible,\n \
-34		    	The file will be erased after 24 hrs!\n \
-35			(sent by machine do not reply)" | mail -s "MMIF RESULT" $emailadd
-36	#        for i in $(ls|grep -v result.zip);do rm -f $i;done
-37	#    	rm -f $dir/result.zip|at now+24 hours
-38	    fi
-39	fi
-40	done
-41	fi
-42	fi
+*/1 * * * * /Users/cybee/mmif_cron.cs >& /Users/cybee/mmif_cron.out
+```
+
+- 執行內容(計算啟動之檢查、控制、執行、郵寄)
+  - /Users/cybee/mmif_cron.cs contents
+    - 執行邏輯
+      1. 電腦負荷太多時、跳開不執行（設定為6個mmif工作）(line 6)
+      2. 使用者開了目錄（隨機產生名字），才能執行。開了目錄的2天後將不會存在。
+      3. 依照目錄順序進行檢查、執行：(line 11)
+        1. 如果有email但是還沒有寄過ACCEPTED第一封信，則執行寄信動作。指標為emai_bak檔案是否存在(line 14~22)。
+        2. 目錄下如果有mmif.inp檔案、卻沒有mmif.out檔案，則開始執行程式、製作成果壓縮檔、寄發第二封信RESULT。(line 24~39)
+        3. 下一個目錄
+
+```bash
+  1  
+  2  #ensure not to many mmif are running
+  3  n=$(ps -ef|grep /opt/local/bin/mmif|wc -l)
+  4  n=$(( $n - 1 ))
+  5  if [ $n -le 6 ];then
+  6  
+  7  #ensure mmif.inp was put to the directory
+  8  m=$(ls /tmp|grep mmif_|wc -l)
+  9  if [ $m -gt 0 ];then
+10  
+11  for dr in $(ls /tmp|grep mmif_);do
+12  dir=/tmp/$dr
+13  #ensure email was given
+14  if ! [ -e $dir/mmif.email_bak ] && [ -e $dir/mmif.email ];then
+15  #send first email     
+16      emailadd=$(cat $dir/mmif.email)
+17      echo "Hello MMIF user:\n Your mmif submit was accepted, please wait and check this email.\
+18    since $n mmif are running    
+19    The resultant tgz file will send to you and the file will be erased after 24 hrs! \n \
+20    (sent by machine do not reply)" | mail -s "MMIF ACCEPTED" $emailadd
+21      cp $dir/mmif.email $dir/mmif.email_bak
+22  fi
+23  
+24  #ensure mmif.inp exist and perform mmif
+25  if [ -e $dir/mmif.inp ];then
+26      if ! [ -e $dir/mmif.out ];then
+27        cd $dir
+28        cp mmif.inp mmif.recieved
+29        /opt/local/bin/mmif>mmif.out
+30        /usr/bin/zip result.zip *
+31    emailadd=$(cat $dir/mmif.email)
+32        echo "Hello MMIF user:\n Your mmif result was at http://125.229.149.182$dir/result.zip\n \
+33      Please fetch the file as soon as possible,\n \
+34          The file will be erased after 24 hrs!\n \
+35      (sent by machine do not reply)" | mail -s "MMIF RESULT" $emailadd
+36  #        for i in $(ls|grep -v result.zip);do rm -f $i;done
+37  #      rm -f $dir/result.zip|at now+24 hours
+38      fi
+39  fi
+40  done
+41  fi
+42  fi
 ```
 
 ### root crontab contents
 
 - 執行頻率
-	-  doing per day.
+  -  doing per day.
 - 執行內容(檔案管理)
-		- 執行成果、設定必須定期清理，避免硬碟消耗。此處設定為24小時後，考慮到時間差，最長為2日。
-		- 必須由root來清理的理由是使用者(_www)開啟的目錄、檔案，即使由CGI_python程式宣告屬性為777，仍然不能被其他一般使用者（如mmif的實際執行者cybee）刪除。
-		- macOS的ls沒有ISO格式，必須使用gls (詳[參](https://apple.stackexchange.com/questions/15170/how-do-i-change-the-time-format-used-by-ls-command-line-on-osx))
-		- MacOS的date也有差異。
+    - 執行成果、設定必須定期清理，避免硬碟消耗。此處設定為24小時後，考慮到時間差，最長為2日。
+    - 必須由root來清理的理由是使用者(_www)開啟的目錄、檔案，即使由CGI_python程式宣告屬性為777，仍然不能被其他一般使用者（如mmif的實際執行者cybee）刪除。
+    - macOS的ls沒有ISO格式，必須使用gls (詳[參](https://apple.stackexchange.com/questions/15170/how-do-i-change-the-time-format-used-by-ls-command-line-on-osx))
+    - MacOS的date也有差異。
 ```
 #remove the mmif_* 2 days ago
 0 0  *  *  * cd /tmp;dd=$(/bin/date -j -v-2d +"%Y-%m-%d");for i in $(/usr/local/bin/gls -l --time-style=full-iso|grep mmif_|grep $dd|/opt/local/bin/awkk 9);do rm -fr $i;done
@@ -288,17 +291,17 @@ $ cat -n mmif.py
 
 - WRF年代：以工作站目前已有成果為基準。由於風險評估所需模擬至少需要完整的5年，恰等於目前2016~迄今之5年。
 - 空間範圍與解析度：
-	- 考量TWN_3X3 (D4範圍解析度)
-	- 台灣地區並非所有地方均能(適合)開發污染源，此處就已經開發工廠之地區為考量，自TEDS10點源資料庫中讀取點位。其它點位則由使用者啟動MMIF來轉檔。
-	- 由於一般AERMOD模擬範圍約3~30Km範圍，在D4範圍內有1~10格，只能取一處氣象數據做為代表。就此而言，3Km之解析度應屬充分足夠。
-	- 在WRF系統內，小於此一空間範圍亦無其他訊息，無法提供更小解析度之數據。
+  - 考量TWN_3X3 (D4範圍解析度)
+  - 台灣地區並非所有地方均能(適合)開發污染源，此處就已經開發工廠之地區為考量，自TEDS10點源資料庫中讀取點位。其它點位則由使用者啟動MMIF來轉檔。
+  - 由於一般AERMOD模擬範圍約3~30Km範圍，在D4範圍內有1~10格，只能取一處氣象數據做為代表。就此而言，3Km之解析度應屬充分足夠。
+  - 在WRF系統內，小於此一空間範圍亦無其他訊息，無法提供更小解析度之數據。
 - 平行運作：
-	- mmif雖然沒有平行計算的能力，但如能將執行批次分開創建目錄，將程式的IO檔案分目錄存放，批次之間將不會彼此干擾可以平行作業。
-	- 運用動態控制執行緒數的原理(詳entry linux*)，可以在os平台上實現平行運作。
+  - mmif雖然沒有平行計算的能力，但如能將執行批次分開創建目錄，將程式的IO檔案分目錄存放，批次之間將不會彼此干擾可以平行作業。
+  - 運用動態控制執行緒數的原理(詳entry linux*)，可以在os平台上實現平行運作。
 
 ### 空間點位之歸納
 
-自point_QC.csv(詳read_point.py(*))中歸納出台灣地區已設有工廠的網格位置，另存成point_ij.csv，其表頭如下：
+自point_QC.csv(詳[點源排放檔案準備](../../EmisProc/ptse/ptse_sub.md)或早期[read_point.py][1]版本)中歸納出台灣地區已設有工廠的網格位置，另存成point_ij.csv，其表頭如下：
 
 ```python
 kuang@114-32-164-198 /Users/1.PlumeModels/AERMOD/mmif/TWN_3X3 
@@ -315,12 +318,14 @@ IJ,X,Y,lon,lat
 13053,-84000.0,-45000.0,120.141,23.187
 ...
 ```
+
 - IJ = I*1000 + J，為東西、南北向網格標籤的組合
-	- 每網格分開、分批作業，具有獨立性
-	- 將可作為檔案目錄、命名之依據
+  - 每網格分開、分批作業，具有獨立性
+  - 將可作為檔案目錄、命名之依據
 - X,Y：lambert projection座標值，原點在台灣中心點
 
-### 使用整併程式如下：
+### 使用整併程式如下
+
 - 先求出點源所在位置的IJ(整數化)、再以pivot_table取平均。因同一網格中心的XY值都相同，平均值即為取集合之代表值。
 - 經緯度取3位截尾，以使在mmif.inp檔案內置換後有較佳的可讀性
 - (83,137)為d4範圍之網格數
@@ -348,6 +353,7 @@ pv['lon']=[round(i,3) for i in lon]
 pv['lat']=[round(i,3) for i in lat] 
 pv.set_index('IJ').to_csv('point_ij.csv')
 ```
+
 ### mmif.inp樣版之準備
 
 與前述樣版一致，作法略異
@@ -356,10 +362,10 @@ pv.set_index('IJ').to_csv('point_ij.csv')
 2. 經緯度(LATI、LONG)(line 11, 18, 20 )：後續執行批次以sed修改
 3. 結果檔案名稱(line 23~24)：後續執行批次以sed修改
 4. 各年度WRF檔案路徑之收集(line 25~)
-	- 先將各批次執行成果蒐集在各月份的wrfout下，再彙總到$btn/links下(詳WRF三維軌跡與叢集分析*)
-	- 由於2020年係來自CWB WRF_3Km(中央氣象局WRF_3Km數值預報產品之下載及轉檔*)結果，有不同目錄，須分別處理。
-	- 形成fname.txt_yy之後，再手工加入前後跨年度檔案路徑。
-	- 將fname.txt_yy貼在mmif.inp_blank之後即可
+  - 先將各批次執行成果蒐集在各月份的wrfout下，再彙總到$btn/links下(詳WRF三維軌跡與叢集分析*)
+  - 由於2020年係來自CWB WRF_3Km(中央氣象局WRF_3Km數值預報產品之下載及轉檔*)結果，有不同目錄，須分別處理。
+  - 形成fname.txt_yy之後，再手工加入前後跨年度檔案路徑。
+  - 將fname.txt_yy貼在mmif.inp_blank之後即可
 
 ```bash
 for y in {16..19};do for i in {01..12};do for j in $(ls /nas1/backup/data/cwb/e-service/btraj_WRFnests/links/wrfout_d04_20${y}-${i}*);do echo INPUT $j;done;done>fname.txt_$y done
@@ -403,6 +409,7 @@ $ cat -n do_mmif2.cs
 28  done 
 29
 ```
+
 - 主要3層迴圈，由外而內依序為：WRF年代(y line3\~28)、每格點(LINE line4\~27)、與動態檢核CPU執行緒數n之while迴圈(keep n<90, line 9\~26)
 - 網格IJ、經緯度等訊息藉由echo cut來傳到批次檔內
 - 每執行批次所需的mmif.inp，以sed來替換(line 13~17)，置換之邏輯與前述版本CaaS相同。
@@ -412,8 +419,8 @@ $ cat -n do_mmif2.cs
 
 - 放在$web/mmif_results/20yy下，以供使用者在[uMap下載](https://umap.openstreetmap.fr/zh-tw/map/mmif-resultstwn_3x3_grids_588696#9/24.2983/121.8186)(詳[地圖上貼連結](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/UMAP/))、及(或)其他應用調用(主要是aermods.html或AERMOD.html)。
 - 降雨量：
-	- 降雨量是HRA評估必須要有的項目
-	- 一般wrfout有降雨量，但在CWB_WRF須注意另外讀取([rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/3.rd_grbCubicA/#rd_grbcubicapy分段說明)、[fil_grb_nc.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/4.fil_grb_nc/))。
+  - 降雨量是HRA評估必須要有的項目
+  - 一般wrfout有降雨量，但在CWB_WRF須注意另外讀取([rd_grbCubicA.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/3.rd_grbCubicA/#rd_grbcubicapy分段說明)、[fil_grb_nc.py](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/4.fil_grb_nc/))。
 - CWB_WRF資料缺漏補遺(mod_Times.py)
 
 ### 點位選取方式
@@ -428,14 +435,14 @@ $ cat -n do_mmif2.cs
 - [crontab](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)
 - Ask Difference, [How do I change the time format used by ls command line on osx?](https://apple.stackexchange.com/questions/15170/how-do-i-change-the-time-format-used-by-ls-command-line-on-osx)
 - browser timeout
-	- [请问chrome浏览器的默认超时时间是多久？](https://segmentfault.com/q/1010000011041316)
-		- 测试时间：2019/02/26
-		- MacOS 环境下，timeout在各浏览器默认值为（以下浏览器都为当前时间最新版本）
-		- chrome 72.x 为4min
-		- safari 12 为8min
-		- firefox 65 貌似没有超时时间(編按：非然也，約3min)
-	- [如何在 Internet Explorer 中變更預設的 keep-alive 超時值](https://docs.microsoft.com/zh-tw/troubleshoot/browsers/change-keep-alive-time-out)
-	- [網站Time Out時自動轉到指定頁面告知使用者解決方法](https://ithelp.ithome.com.tw/questions/10185433)
+  - [请问chrome浏览器的默认超时时间是多久？](https://segmentfault.com/q/1010000011041316)
+    - 测试时间：2019/02/26
+    - MacOS 环境下，timeout在各浏览器默认值为（以下浏览器都为当前时间最新版本）
+    - chrome 72.x 为4min
+    - safari 12 为8min
+    - firefox 65 貌似没有超时时间(編按：非然也，約3min)
+  - [如何在 Internet Explorer 中變更預設的 keep-alive 超時值](https://docs.microsoft.com/zh-tw/troubleshoot/browsers/change-keep-alive-time-out)
+  - [網站Time Out時自動轉到指定頁面告知使用者解決方法](https://ithelp.ithome.com.tw/questions/10185433)
 
 ### Family
 
@@ -443,3 +450,5 @@ $ cat -n do_mmif2.cs
 - 地圖上貼連結*
 
 [^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
+
+[1]: https://www.evernote.com/shard/s125/client/snv?noteGuid=f92ff5d6-fd53-4b50-aae3-d29e7f550667&noteKey=fcb3b01f192bd695&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs125%2Fsh%2Ff92ff5d6-fd53-4b50-aae3-d29e7f550667%2Ffcb3b01f192bd695&title=read_point.py "read_point.py TEDS點源數據之讀取及品質管制"

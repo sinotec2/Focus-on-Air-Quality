@@ -95,4 +95,4 @@ OU FINISHED
 
 {% include download.html content="煙流模式地形前處理CGI主程式：[terrain.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrain.py)" %}
 
-[^1]: [煙流模式地形前處理CGI主程式 terrain.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrain.py)，程式說明[terrain_py.md]
+[^1]: [煙流模式地形前處理CGI主程式 terrain.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/terrain.py)，程式說明[terrain_py.md](../../utilities/CGI-pythons/terrain_py.md)

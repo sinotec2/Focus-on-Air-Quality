@@ -4,7 +4,7 @@ title:  煙流模式地形前處理
 parent: CGI-pythons
 grand_parent: Utilities
 last_modified_date: 2022-06-07 20:21:17
-tags: CGI_Pythons plume_model sed gdal
+tags: CGI_Pythons plume_model sed gdal AERMAP
 ---
 # 煙流模式地形前處理-AERMAP之遠端執行
 {: .no_toc }

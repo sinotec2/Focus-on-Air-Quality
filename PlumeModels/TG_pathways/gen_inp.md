@@ -6,7 +6,7 @@ grand_parent: Plume Models
 nav_order: 1
 date: 2022-02-11
 last_modified_date: 2023-01-28 16:48:04
-tags: CGI_Pythons plume_model gdal
+tags: CGI_Pythons plume_model gdal AERMAP
 ---
 
 # AERMAP之準備
@@ -24,7 +24,7 @@ tags: CGI_Pythons plume_model gdal
 
 ## 背景
 
-- [AERMAP][1]是[AERMOD](https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#aermod)地形檔案的前處理程式，執行複雜地形中的煙流模擬必經的程序。最大的障礙在於必須要以美國地理調查局的[DEM格式](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem)讀取數值地形資料，過去的作法包括：
+- [AERMAP][1]是[AERMOD][2]地形檔案的前處理程式，執行複雜地形中的煙流模擬必經的程序。最大的障礙在於必須要以美國地理調查局的[DEM格式](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem)讀取數值地形資料，過去的作法包括：
   - 直接按照[AERMAP][1]結果格式將地形高程與山丘高度(特徵高)，寫出檔案，完全取代[AERMAP][1]。
   - 事先處理台灣地區20M的數值地形成為DEM格式，為[鳥哥](https://linux.vbird.org/enve/aermap-op.php)的作法，好處是一般使用者不需自行轉檔，較為單純。且為內政部最新調查成果較符合實況。壞處是DEM檔會非常大，且增加[AERMAP][1]篩選的時間。
   - 事先將台灣地區數值地形切割並處理成較小範圍的DEM檔案，因為[AERMAP][1])可以同時讀取數個DEM檔案。從其中整併出所需要的範圍進行內插。(not tried)
@@ -32,11 +32,11 @@ tags: CGI_Pythons plume_model gdal
 - 執行步驟
   1. 由GeoTiff檔案中切割指定範圍之地形數據，內插、再以GeoTiff格式寫出數據。
   2. 呼叫[gdal_translate](https://gdal.org/programs/gdal_translate.html)程式進行轉檔
-  3. 準備其他[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)所需參數
+  3. 準備其他[aermap.inp][3]所需參數
   4. 呼叫[AERMAP][1]程式完成作業
   5. 將數據寫成isc格式之地形檔案備用
   6. 將數據寫成kml格式以備檢查
-- 有關GeoTiff格式的讀取、寫出等等，可以參考[筆記](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/)及[df範例](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)、[nc範例](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)
+- 有關GeoTiff格式的讀取、寫出等等，可以參考[筆記](../../utilities/GIS/GeoTiff.md)及[df範例](../../GridModels/LAND/Soils#tiff2df)、[nc範例](../../GridModels/LAND/Soils#tiff2nc)
 
 ## 下載數值地形資料
 
@@ -60,6 +60,7 @@ llmax=pnyc(xmax+2000.*dx/100-Xcent, ymax+2000*dx/100.-Ycent, inverse=True)
 smax=str(llmax[0])+' '+str(llmax[1])                #long/lati
 smin=str(llmin[0])+' '+str(llmin[1])+' '+smax
 ```
+
 - 雖然是動態連結下載，程式可以將原始數據(cache檔)儲存至指定目錄，如下次有下載需求時，就不會重複下載檔案。
   - 如下例將cache儲存在(`--cache_dir`)/tmp/gdal目錄
   - 須指定環境變數GDAL_DATA之位置
@@ -78,7 +79,9 @@ os.system('echo "'+cmd+'"'+NUL)
 os.system(cmd)
 ```
 
-## [gen_inp.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/gen_inp.py)
+## gen_inp.py
+
+- [gen_inp.py 程式碼](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/gen_inp.py)
 
 ### 引數
 
@@ -94,36 +97,36 @@ os.system(cmd)
 
 - taiwan2020.tiff([2020全臺20M_DTM](https://data.gov.tw/dataset/138563))
 - 模版
-  - [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)
+  - [aermap.inp模版][3]
   - template.tiff
 
 ### 輸出檔案
 
-- 輸入[aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)
+- 修改過後的輸入檔[aermap.inp][3]
 - 檔名為gd3(範例)為首之6個檔案
-	- gd3.kml→模擬範圍的等高線，彙入google map-my map作圖
-	- gd3_re.dat→文字檔。以DISCCART方式標示每一格點的地形高程，併入iscst3的控制檔(.INP)內，取代原有XYINC設定
-	- gd3_TG.txt→文字檔。iscst3所需要的地形網格外部檔案，須在控制檔(.INP)內設定TG INPUTFIL gd3_TG.txt，以進行連結。
-		- 第1行：Xnum Ynum Xinit Yinit Xend Yend Xdelta Ydelta (Xend/Yend為東北角座標)
-		- 第2行→第1個Y值，自西到東X方向所有點之高程，
-		- 第3行→第2個Y值，自西到東X方向所有點之高程，
-		- ...
-	- gd3.tiff→作DEM檔案時使用。
-		- 可以用QGIS檔GIS程式檢視。
-		- 或以tif2kml.py檢視
-		  - tif2kml.py -f  gd3.tiff
-			- 結果檔為gd3.tiff.kml
-	- gd3.dem→文字檔。aermap所需數值地形之外部檔案。aermap輸入檔案格式中較容易處理者(格式詳[DEM](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem))。
+  - gd3.kml→模擬範圍的等高線，彙入google map-my map作圖
+  - gd3_re.dat→文字檔。以DISCCART方式標示每一格點的地形高程，併入iscst3的控制檔(.INP)內，取代原有XYINC設定
+  - gd3_TG.txt→文字檔。iscst3所需要的地形網格外部檔案，須在控制檔(.INP)內設定TG INPUTFIL gd3_TG.txt，以進行連結。
+    - 第1行：Xnum Ynum Xinit Yinit Xend Yend Xdelta Ydelta (Xend/Yend為東北角座標)
+    - 第2行→第1個Y值，自西到東X方向所有點之高程，
+    - 第3行→第2個Y值，自西到東X方向所有點之高程，
+    - ...
+  - gd3.tiff→作DEM檔案時使用。
+    - 可以用QGIS檔GIS程式檢視。
+    - 或以tif2kml.py檢視
+      - tif2kml.py -f  gd3.tiff
+      - 結果檔為gd3.tiff.kml
+  - gd3.dem→文字檔。aermap所需數值地形之外部檔案。aermap輸入檔案格式中較容易處理者(格式詳[DEM](https://gdal.org/drivers/raster/usgsdem.html?highlight=dem))。
 - aermap執行結果
   - aermap.out：回饋輸入數據及錯誤訊息
   - MAPDETAIL.OUT：地圖的細節
   - MAPPARAMS.OUT：確認DEM的正確性
   - DOMDETAIL.OUT：如四角未落在DEM檔內，檢查範圍的設定  
-  - gd3.REC：此檔將輸入[AERMOD]()模式中，設定地形及特徵山高
+  - gd3.REC：此檔將輸入[AERMOD][2]模式中，設定地形及特徵山高
 
 ### gen_inp.py程式下載
 
-- [PlumeModels/REnTG_pathwaysways@FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/gen_inp.py)  
+- [PlumeModels/REnTG_pathways@FAQ](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/gen_inp.py)
 
 ### 修改呼叫程式之路徑
 
@@ -251,7 +254,7 @@ os.system(cmd)
 
 ### aermap.inp之改寫與執行
 
-- [aermap.inp](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/REnTG_pathwaysways/aermap.inp)為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
+- [aermap.inp][3]為aermap控制檔案之模版，此檔案會加入指定範圍之參數與接受點座標
   - DATAFILE：aermap的結果檔，輸出給aermod使用(.REC)
   - DOMAINXY：接受點的UTM範圍，確認邊界角落都在DEM檔案範圍內
   - ANCHORXY：接受點自訂座標值(台灣地區建議直接使用twd97座標系統)與UTM間錨定點的對照關係。
@@ -302,12 +305,38 @@ for l in range(iend,len(d)):
     text_file.write( "%s" % d[l])
 text_file.close()
 ```
-- [AERMAP][1]之執行
+
+- [AERMAP][1]之執行：需將aermap執行檔連結到工作目錄
 
 ```python
 # execute the aermap
 aermap_path='./'
 os.system(aermap_path+'aermap >& isc.out')
+```
+
+## AERMAP之編譯
+
+- USEPA 官網程式壓縮檔中提供了window版本的gfortran（32及64位元）與ifort編譯批次檔，可供參考。
+- linux/macOS者編譯並沒有特別需求，只需先將`main1.mod`、`tifftags.mod`等2個檔案產生出來，以便其他程式的引用。
+
+### gfortran 編譯選項設定
+
+```bash
+set COMPILE_FLAGS=-fbounds-check -Wuninitialized -static -O2
+set LINK_FLAGS=-static -O2
+```
+
+### ifort 編譯選項設定
+
+```bash
+kuang@125-229-149-182 /Users/1.PlumeModels/AERMOD/aermap/src
+$ head intel-aermap.bat 
+ifort mod_main1.f         /compile_only /O3 /Qipo /Qprec-div- /QaxPT /traceback                   
+ifort mod_tifftags.f      /compile_only /O3 /Qipo /Qprec-div- /QaxPT /traceback                   
+ifort aermap.f            /compile_only /O3 /Qipo /Qprec-div- /QaxPT /traceback                   
+ifort sub_calchc.f        /compile_only /O3 /Qipo /Qprec-div- /QaxPT /traceback  /assume:byterecl 
+ifort sub_chkadj.f        /compile_only /O3 /Qipo /Qprec-div- /QaxPT /traceback                   
+...
 ```
 
 ## 其他處理
@@ -355,3 +384,5 @@ with open(fname + '_TG.txt','w') as f:
 ## Reference
 
 [1]: https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#aermap "AERMAP is a terrain preprocessor for AERMOD. AERMAP processes commercially available Digital Elevation Data and creates a file suitable for use within an AERMOD control file. This file would contain elevation and hill-height scaling factors for each receptor in the air dispersion study."
+[2]: https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#aermod "AERMOD Modeling System: The American Meteorological Society/Environmental Protection Agency Regulatory Model Improvement Committee (AERMIC) was formed to introduce state-of-the-art modeling concepts into the EPA's air quality models. Through AERMIC, a modeling system, AERMOD, was introduced that incorporated air dispersion based on planetary boundary layer turbulence structure and scaling concepts, including treatment of both surface and elevated sources, and both simple and complex terrain. As of December 9, 2006, AERMOD is fully promulgated as a replacement to ISC3, in accordance with Appendix W (PDF)(54 pp, 761 K, 01-17-2017)."
+[3]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/PlumeModels/TG_pathways/aermap.inp " Focus-on-Air-Quality/PlumeModels/TG_pathways/aermap.inp 模版"

@@ -5,9 +5,11 @@ parent: ME Pathways
 grand_parent: Plume Models
 nav_order: 2
 last_modified_date: 2022-03-28 11:04:39
-tags: plume_model CGI_Pythons CWBWRF sed
+tags: plume_model CGI_Pythons CWBWRF sed mmif
 ---
+
 # MMIF之遠端執行系統
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -32,7 +34,7 @@ tags: plume_model CGI_Pythons CWBWRF sed
 2. 直接在cgi_python內啟動背景執行，由使用者自行上網確認結果
 3. 預先以工作站完成各年度WRF在各網格之MMIF轉檔，再由網頁或(及)CaaS系統提供
 
-CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.html)
+CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.html)@iMacKuang[^9]
 
 ## 自動執行搭配版本
 
@@ -189,6 +191,7 @@ $ cat -n mmif.inp_blank20|more
 2. 結果檔案名稱(line 23~24)：後續執行時以sed修改
 
 ### CGI_Python程式
+
 - 客戶如果提供的是mmif.inp，複製一份到工作目錄下。(line 31~32)
 - 如客戶提供的是kml檔，先讀取個案名稱與座標，以sed由模版複製一份，並以sed置換其中經緯度與檔名，準備好mmif.inp。(line 33~42)
 - 在背景執行mmif(line 43~49)
@@ -438,4 +441,5 @@ $ cat -n do_mmif2.cs
 
 - [中央氣象局WRF_3Km數值預報產品之下載及轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/1.get_M-A0064/)
 - 地圖上貼連結*
-- 
+
+[^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.

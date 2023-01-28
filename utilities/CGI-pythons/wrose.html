@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>wrose</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+     
+     
+    <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css">
+    
+    <script src="filepicker/samples/jquery.example.js"></script>
+    <!script src="../../mugen.js/src/mugine.js"></script>
+    <script src="filepicker/src/js/jquery.filepicker.js"></script>
+    <link rel="stylesheet" href="filepicker/src/css/filepicker.default.css">
+    
+    <script>
+       $(document).ready(function() {
+         $("input[type='file'].filepicker-jquery-ui").filepicker({
+           style: 'jquery-ui'
+         });
+       });
+    </script>
+    
+    <style>
+      .filepicker-preview .thumbnail {
+        max-width: 100px;
+        display: inline-block;
+      }
+      .filepicker-preview .thumbnail img {
+        max-width: 100%;
+      }
+    </style>
+    <script>
+    $(document).ready(function(){
+    // Get value on button click and show alert
+        $("#myBtn").click(function(){
+            var str = $("#myInput").val();
+            alert(str);
+        });
+    });
+    </script>    
+<style> #SIDE { width:500px; float:right; } </style> 
+  </head>
+  
+  <body>
+
+    <header class="subhead" id="overview">
+      <div class="container">
+        <h1>繪製煙流模式氣象檔案之風花圖</h1>
+        <p class="lead">
+上傳準備好的氣象檔案，遠端執行wrose程式結束後，系統會自動下載結果給您(恕僅保留24小時)。		
+        </p>
+      </div>
+    </header>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+		<form enctype="multipart/form-data" action="/cgi-bin/save_wrose.py" method="post">
+           <p><input data-label="File:" class="filepicker-jquery-ui" type="file" 
+		   placeholder="Select a file..." multiple="multiple"
+		   name="filename"/> </p> 
+		   <p style="text-align:center;"> <input type="submit" value="Upload and Run wrose remotely" /></p>
+		</form><p>	 </p><p>	 </p>
+		<p>Contact: Dr. Yungchuan Kuang, sinotec2@gmail.com or <a href="https://www.evernote.com/shard/s125/sh/12eaea92-0fcc-4f54-9782-cb16f5a91be8/4653be8827311800fd1e237da43af3df">Dr. Kuang's Evernotes</a></p> 
+         </div>
+      </div>
+	<div id="SIDE"><img src="wrose_png/example.png" width="300" height="300"></div>
+<table border-collapse=collapse width="50%">
+  <tr>
+    <th>檔案類型</th>
+    <th>檔案特徵</th>
+    <th>範例</th>
+  </tr>
+  <tr>
+    <td width="15%">ISCST3 input file</td>
+    <td width="25%">第二行開始的年月日時格式為yymmddhh</td>
+    <td width="10%"><a href="wrose_png/46692v01.txt">46692v01.txt</a></td>
+  </tr>
+  <tr>
+    <td>aermod input file(sfc)</td>
+    <td>第二行開始的年月日時格式為yymmmdddjjjhhh</td>
+    <td><a href="wrose_png/xiehe.sfc">xiehe.sfc</a></td>
+  </tr>
+  <tr>
+    <td>aermod input file(pfl)</td>
+    <td>年月日時格式為
+	yymmmdddhhh</td>
+    <td><a href="wrose_png/xiehe.pfl">xiehe.pfl</a></td>
+  </tr>
+  <tr>
+    <td>csv file</td>
+    <td>整理成至少含風速(m/s)、風向(deg)2欄實數的csv檔案(不解析中文字形)</td>
+    <td><a href="wrose_png/datan2015.csv">datan2015.csv</a></td>
+  </tr>
+
+    </div>
+  </body>
+  
+</html>

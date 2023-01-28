@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Exec. and Effects of AERMAP
-[label](.)parent: RE & TG Pathways
+parent: RE & TG Pathways
 grand_parent: Plume Models
-nav_order: 5
+nav_order: 2
 date: 2023-01-28
 last_modified_date: 2023-01-28 16:53:44
 tags: plume_model AERMAP

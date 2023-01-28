@@ -1,0 +1,119 @@
+; This file can be space-delimited or comma-delimited, or a mixture.
+; Comment characters are #, ;, and !.  Blank lines are ignored.
+; Omitting optional keywords is the same as giving their default values.
+; START, STOP, and TimeZone are the only required keywords, the rest are optional.
+; Keywords are case in-sensitve, filenames are not (depends on your OS).
+; Filenames may contain spaces, if enclosed in quotes. 
+
+# START and STOP can be either of the forms below, or YYYY-MM-DD_HH:mm:ss.
+
+start      2008 07 04 01 ; start time in LST for TimeZone, hour-ending format
+stop       2008070600    ; end   time in LST for TimeZone, hour-ending format
+
+# TimeZone is relative to GMT, i.e. -5 (GMT-05) is the US East Coast
+
+TimeZone   -10   ! default is zero, i.e. GMT-00
+
+# MMIFv3.x auto-detects if INPUT files are MM5 or WRF files, so METFORM
+# needs to be included only if MMIF guesses wrong, and you need to over-ride.
+
+# MetForm WRF
+
+# ORIGIN (optional) can be used to OVER-RIDE the origin of X,Y projected 
+# coordinate system, which is normally set from the parameters of the MM5/WRF
+# file.  This keyword is REQUIRED for Mercator projections.
+
+# origin 40.0 -97.0  ! RPO Projection
+
+# GRID has three options: IJ, LL (or latlon), or KM (or PROJ,LCC,PS,EM),
+# followed by two lower-left coordinates, and two upper-right coordinates.
+# Default is to output the whole grid, after trimming 5 points off each edge.
+
+grid       IJ -5,-5 -5,-5   ! default
+
+# LAYERS has three options: TOP, MID, or K; followed by the values to be used.
+# TOP and MID are in meters. Default is from the EPA/FLM 2009 Guidance.
+# TOP is preferred: MMIF interpolates between MID points to get TOPs.
+
+layers top 20 40 80 160 320 640 1200 2000 3000 4000   ! FLM CALMET Guidance (2009)
+
+# PG STABILITY class calculation method is either SRDT or GOLDER (default)
+# PG stability is used only for CALPUFF output.
+
+stability  GOLDER      ! default
+
+# CLOUDCOVER source is one of WRF, ANGEVINE, or RANDALL
+#   WRF      use WRF's internal CLDFRA variable
+#   ANGEVINE use Angevine et al. (2012) RH function (default in MMIF >= 2.2)
+#   RANDALL  use Randall (1994)/Zhao (1995) method (default in MMIF < 2.2)
+
+CLOUDCOVER ANGEVINE    ! default
+
+# CALSCI_MIXHT is either WRF (default) or MMIF, to pass-through or 
+# re-calculate the WRF mixing height for CALPUFF and SCICHEM outputs. 
+# Use AER_MIXHT (below) for AERMET and AERMOD modes.
+
+CALSCI_MIXHT WRF       ! default
+
+# AER_MIXHT (WRF, MMIF, or AERMET) controls the source of mixing height
+#     values you want to use in AERMET mode.
+# AER_MIN_MIXHT is the lower bound on both Convective and Mechanical
+#     Mixing Heights in AERMOD mode.
+# AER_MIN_OBUK  is the lower bound on Monin-Obukhov length, such that
+#     ABS(L) > AER_min_Obuk, in AERMOD mode.
+# AER_MIN_SPEED is the lower bound on windspeed in AERMOD mode,
+#     passed through to THRESHOLD in AERMET mode.
+
+aer_mixht     WRF  ! default
+aer_min_mixht 1.0  ! default (same as AERMET)
+aer_min_obuk  1.0  ! default (same as AERMET)
+aer_min_speed 0.0  ! default (following Apr 2018 MMIF Guidance)
+
+# See the Users Guide for the OUTPUT keyword details
+
+Output qaplot     BLN      domain.bln
+Output qaplot     BNA      domain.bna
+Output qaplot     DAT      points.dat
+Output qaplot     KML      qaplot.kml
+
+Output calpuff    useful   calmet.info.txt
+Output calpuff    calmet   calmet.met
+Output calpuff    terrain  terrain.grd
+
+Output calpuffv6  useful   calmetv6.info.txt
+Output calpuffv6  calmet   calmetv6.met
+Output calpuffv6  aux      calmetv6.aux # (basename must match calmet file)
+Output calpuffv6  terrain  terrainv6.grd
+
+Output scichem    useful   scichem.info.txt
+Output scichem    binary   scichem.bin.mcw
+Output scichem    ascii    scichem.asc.mcw
+Output scichem    sampler  scichem.smp
+Output scichem    terrain  scichem.ter
+
+point  latlon     21.203   -157.925
+Output aercoare   useful   aercoare.near.Honolulu.info.inp
+Output aercoare   data     aercoare.near.Honolulu.csv
+
+POINT  LL         21.324   -157.929  -9   ! in GMT-9 timezone
+AER_layers        1        4  ! write 2m, 10m, and the 4 lowest WRF layers
+Output aermet     BAT      PHNL.BAT ! basename for SFC/PFL files
+Output aermet     CSH      PHNL.csh ! basename for SFC/PFL files
+Output aermet     useful   PHNL.useful.txt
+Output aermet     onsite   PHNL.dat
+Output aermet     upperair PHNL.fsl
+Output aermet     aersfc   PHNL.aersfc.dat
+
+FSL_INTERVAL      6        ! output every 6 hours, not 12 (the default)
+POINT  IJ         73       32
+Output aermet     FSL      'Upper air at PHTO.FSL'
+POINT  KM         60.0     -12.0
+Output aermet     FSL      "Upper air at PHOG.FSL"
+
+POINT  latlon     20.963   -156.675  -9 ! in GMT-9 timezone
+AER_layers        0        0            ! write only 2m and 10m data
+Output aermod     useful   PJHJ.info.txt
+Output aermod     sfc      PJHJ.sfc
+Output aermod     PFL      PJHJ.pfl
+
+# INPUT gives filenames of either MM5 or WRF files

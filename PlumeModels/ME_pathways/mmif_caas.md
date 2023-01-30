@@ -451,4 +451,4 @@ $ cat -n do_mmif2.cs
 
 [^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
 
-[1]: https://www.evernote.com/shard/s125/client/snv?noteGuid=f92ff5d6-fd53-4b50-aae3-d29e7f550667&noteKey=fcb3b01f192bd695&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs125%2Fsh%2Ff92ff5d6-fd53-4b50-aae3-d29e7f550667%2Ffcb3b01f192bd695&title=read_point.py "read_point.py TEDS點源數據之讀取及品質管制"
+[1]: https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs125%2Fsh%2Ff92ff5d6-fd53-4b50-aae3-d29e7f550667%2Ffcb3b01f192bd695&title=read_point.py "read_point.py TEDS點源數據之讀取及品質管制"

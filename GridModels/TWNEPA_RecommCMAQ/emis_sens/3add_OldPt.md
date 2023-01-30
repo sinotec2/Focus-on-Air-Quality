@@ -5,8 +5,8 @@ parent: 背景及增量排放量
 grand_parent: Recommend System
 nav_order: 3
 has_children: true
-date: 2022-04-18 09:28:55
-last_modified_date: 2022-05-02 15:44:10
+date: 2022-04-18 
+last_modified_date: 2023-01-30 12:03:00
 tags: CMAQ nchc_service emis ptse
 ---
 
@@ -24,13 +24,17 @@ tags: CMAQ nchc_service emis ptse
 ---
 
 ## 背景
+
 - 基於點源在公版模式排放檔案中已被網格均化，除非是大型污染源獨佔網格空間，否則難以由背景其他污染源當中切割出來。
-- 此處範例以臺中電廠燃煤機組為例，該廠坐落臺中市西南角，燃煤機組排放高度達250m，周圍沒有其他污染源。
+- 此處範例以中部某電廠機組為例，該廠因排放高度超過第1格範圍，周圍沒有其他污染源，因此辨識較為容易。
 
 ## 直接選取TEDS11點源資料庫
-- 這個(台中電廠燃煤機組為例)方案較前述[新增點源增量方案](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_NewPt/#程式碼)單純一些，程式碼控制在100行之內
 
-### [add_tzpp.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_tzpp.py)
+- 這個方案較前述[新增點源增量方案](2add_NewPt.md#程式碼)單純一些，程式碼控制在100行之內
+
+### add_tzpp.py程式說明
+
+- 完整程式碼詳[add_tzpp.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_tzpp.py)
 - TEDS11資料庫(有管制編號CP_NO)：/nas1/cmaqruns/2019base/data/ptse/twn/目錄下之fortBE.413_teds11.ptse01.nc([CAMx nc file](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/))
   - 按照管制編號及煙囪高度2個變數來搜尋資料庫
 - 常數與時變量檔案模版：目錄下之teds11.1901.timvar.nc、及teds11.1901.const.nc
@@ -86,23 +90,28 @@ nc.close()
 ```
 
 ## add TZPP on BASE2 and BASE3 background
-- 將同樣高空點源排放量([add_tzpp.py](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/add_OldPt/#add_tzpppy))、加在2組不同背景條件下敏感性的比較
+
+- 將同樣高空點源排放量([add_tzpp.py](#add_tzpppy程式說明)、加在2組不同背景條件下敏感性的比較
+
 ### 背景條件說明
+
 - 氣象：2019年1月
 - BASE2:2組面源，分別是生物源及背景基準排放量(剔除特定高空點源)
   - bio3taiwan：${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
-  - basetaiwan：${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf_0-8[NoTZPP](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/emis_sens/dTZPP/#剔除特定位置之排放量)
+  - basetaiwan：${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf_0-8[NoTZPP](4dTZPP.md#剔除特定位置之排放量)
 - BASE3：除了前述2者，再加上egts第3層網格排放內插之排放量
   - bio3taiwan：${cmaqproject}/smoke/b3gts_l.20181225.38.d4.ea2019_d4.ncf
   - basetaiwan：${cmaqproject}/smoke/cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
   - d3_to_d4：${cmaqproject}/smoke/egts_l.20181225.38.d4.ea2019_d4.ncf
 
 ### Background O3 Max Hr Comparisons
+
 | ![BASE2_O3M.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/BASE2_O3M.PNG) |![BASE3_O3M.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/BASE3_O3M.PNG) |
 |:--:|:--:|
 | <b>BASE2之O<sub>3</sub>全月最大小時值</b>|<b>BASE3之O<sub>3</sub>全月最大小時值</b>|
 
 ### TZPP PM2.5 Increments
+
 - 2019年1月最大日均值
 - BASE2環境背景TZPP之最大增量：3.41 &mu;g/m<sup>3</sup>
 - BASE3環境背景TZPP之最大增量：3.59 &mu;g/m<sup>3</sup>

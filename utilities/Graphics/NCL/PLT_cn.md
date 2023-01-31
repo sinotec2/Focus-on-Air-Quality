@@ -138,5 +138,5 @@ dy|1250|南北向格點間距(m)
 
 ![tmp_cn.png](https://drive.google.com/uc?id=1DK7QFdVjCEk-MRA9K8klC-IsnUhyqa5W)
 
-[^1]: 集合OTM圖磚並修剪成tiff檔之py程式，詳見[tiles_to_tiffFit.py程式說明](tiles_to_tiffFit.md)，或下載[tiles_to_tiffFit.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py)
-[^2]: 獨立程式說明[NCL貼在OTM底圖上](../NCLonOTM.md)或NCLonOTM遠端服務,[NCLonOTM-cgi.py](../CaaS/NCLonOTM-cgi.md)
+[^1]: 集合OTM圖磚並修剪成tiff檔之py程式，詳見[tiles_to_tiffFit.py程式說明](../CaaS/tiles_to_tiffFit.md)，或下載[tiles_to_tiffFit.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/tiles_to_tiffFit.py)
+[^2]: 獨立程式說明[NCL貼在OTM底圖上](NCLonOTM.md)或NCLonOTM遠端服務,[NCLonOTM-cgi.py](../CaaS/NCLonOTM-cgi.md)

@@ -4,7 +4,7 @@ title:  鏈結資訊之地圖展現(uMap)
 parent: GIS Relatives
 grand_parent: Utilities
 last_modified_date: 2022-10-24 10:48:43
-tags: AERMAP graphics
+tags: AERMAP graphics geojson
 ---
 
 # 鏈結資訊之地圖展現(uMap)

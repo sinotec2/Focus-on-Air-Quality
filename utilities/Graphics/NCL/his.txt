@@ -1,0 +1,287 @@
+cd /nas2/cmaqruns/2019TZPP/output/Annual/aTZPP
+import netCDF4
+fname='town_gridmask.nc'
+nc = netCDF4.Dataset(fname,'r+')
+nrow,nt,nlay,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+V=[list(filter(lambda x:nc.variables[x].ndim==j, [i for i in nc.variables])) for j in [1,2,3,4]]
+nrow,nt,nlay,ncol=(nc.variables[V[3][0]].shape[i] for i in range(4))
+nrow
+nc.close()
+nc = netCDF4.Dataset(fname,'r+')
+ncol,nt,nlay,nrow=(nc.variables[V[3][0]].shape[i] for i in range(4))
+ncol
+for j in range(ncol,92):
+  for v in V[3]:
+    nc[v][j,0,0,:]=0.
+nc.NCOLS=92
+nc.NROWS=131
+nc.close()
+nc = netCDF4.Dataset(fname,'r+')
+nc['']
+nc['TFLAG'].shape
+for j in range(135,354):
+    nc['TFLAG'][j,:,0]=nc['TFLAG'][0,0,0]
+    nc['TFLAG'][j,:,1]=nc['TFLAG'][0,0,1]
+nc.NVARS
+nc.close()
+from pandas import *
+dft=read_csv('town_aqstEnew.csv')
+dft.head()
+fname='TEDS2019.ncT'
+nc = netCDF4.Dataset(fname,'r')
+townid=nc.variables['VOC'][0,0,:,:]
+import numpy as np
+tid=np.array(townid).flatten()
+tid[:5]
+tid[50:55]
+tid[500:505]
+tid[1500:1505]
+list(set(tid))[:10]
+dft.head()
+64000000 in dft.new_code
+64000010 in dft.new_code
+a=dft.new_code
+a=list(dft.new_code)
+a.sort()
+a[-5:]
+dft.loc[dft.new_code//1000000==64]
+64000010 in df.new_code
+64000010 in dft.new_code
+64000010 in list(dft.new_code)
+64000000 in list(dft.new_code)
+64000012 in list(dft.new_code)
+64000016 in list(dft.new_code)
+a=list(set(tid))
+a.sort()
+a[:5]
+import geopandas as gpd
+!pip install geopandas
+import geopandas as gpd
+gdf = gpd.read_file('twTown1982.geojson')
+gdf.head()
+sn_id={i:j for i,j in zip(gdf.TOWNSN,gdf.TOWNID)}
+tsn=tid[:]
+sn_id.update({-1:-1})
+tsn=[int(i) for i in tid[:]]
+set(tsn)-set(gdf.TOWNSN)
+set(tsn)-set(list(gdf.TOWNSN))
+a=set(tsn)-set(list(gdf.TOWNSN))
+len(a)
+type(list(gdf.TOWNSN)[0])
+a=set(tsn)-set([int(i) for i in gdf.TOWNSN])
+len(a)
+a
+'63000000' in list(gdf.TOWNSN)
+'63000010' in list(gdf.TOWNSN)
+fname='GRIDCRO2D.nc'
+nc = netCDF4.Dataset(fname,'r')
+townid=nc.variables['MSFX2'][0,0,:,:]
+tid=np.array(townid).flatten()
+tsn=[int(i) for i in tid[:]]
+64000010 in tsn
+a=set(tsn)-set(list(gdf.TOWNSN))
+len(a)
+a=set(tsn)-set([int(i) for i in gdf.TOWNSN])
+len(a)
+a
+64000000 in tid
+64000000 in townid
+64000000 in nc.variables['MSFX2'][0,0,:,:]
+nc.close()
+nc = netCDF4.Dataset(fname,'r')
+fname
+townid=nc.variables['MSFX2'][0,0,:,:]
+64000014.0 in townid
+64000000.0 in townid
+df2=read_csv('gridLL.csv')
+df2=read_csv('gridLL.csv')
+!lst
+df2=read_csv('gridLL.csv')
+df2.head()
+'63000010' in list(df2.TOWNSN)
+63000010 in list(df2.TOWNSN)
+63000000 in list(df2.TOWNSN)
+tsn=list(df2.TOWNSN)
+a=set(tsn)-set([int(i) for i in gdf.TOWNSN])
+len(a)
+a
+dft.head()
+df2.head()
+a=list(set(tsn))
+a.sort()
+a[:10]
+a[-10:]
+b=[i//1000 for i in a]
+set(b)
+gdf.head()
+b=[sn_id[i]//100 for i in a]
+a[:10]
+gdf.loc[gdf.TOWNSN.map(x:'16003' in x)]
+!grep map ~/bin/*py|M
+gdf.loc[gdf.TOWNSN.map(lambda x:'16003' in x)]
+sn_id['16003']
+b=[sn_id[str(i)]//100 for i in a]
+sn_id.update({'-1':-1})
+b=[sn_id[str(i)]//100 for i in a]
+b=[int(sn_id[str(i)])//100 for i in a]
+set(b)
+df2.head()
+df2['TOWNID']=[sn_id[str(i)] for i in tsn]
+df2.head()
+a=df2.loc[df2.TOWNSN!=-1]
+a.head()
+gdf.loc[gdf.TOWNSN.map(lambda x:'10013036' in x)]
+a.tail
+sn_id={i:j for i,j in zip(gdf.TOWNSN,gdf.name)}
+name_id={i:j for i,j in zip(gdf.TOWNSN,gdf.name)}
+sn_id={i:j for i,j in zip(gdf.TOWNSN,gdf.TOWNID)}
+sn_id.update({'-1':-1})
+df2['name']=[name_id[str(i)] for i in tsn]
+name_id.update({'-1':'海上'})
+df2['name']=[name_id[str(i)] for i in tsn]
+df2.head()
+a=df2.loc[df2.TOWNSN!=-1]
+a.tail()
+a.tail()
+a.head()
+len(df2)
+a=set(list(df2.TOWNID))
+a.sort()
+a=list(set(list(df2.TOWNID)))
+a.sort()
+a=list(set([int(i) for i in list(df2.TOWNID)]))
+a.sort()
+a[:10]
+a[-10:]
+b=df2.loc[df2.TOWNID.map(lambda x:int(x)//100000==63)]
+b
+set(b.name)
+len(set(b.name))
+dft.head()
+set(df2.TOWNID)-set(dft.new_code)
+set([int(i) for i in df2.TOWNID])-set(dft.new_code)
+dft.head()
+type(dft.new_code[0])
+b=set([int(i) for i in df2.TOWNID])-set(dft.new_code)
+len(b)
+df2.head()
+len('63000010'),len('6300008')
+sn_id.update({'-1':'7654321'})
+df2['TOWNID']=[sn_id[str(i)] for i in tsn]
+df2.head()
+df2['TOWNID8']=[i[:2]+'0'+i[2:] for i in df2.TOWNID]
+df2.head()
+b=set([int(i) for i in df2.TOWNID8])-set(dft.new_code)
+len(b)
+b=list(set([int(i) for i in df2.TOWNID8])-set(dft.new_code))
+b.sort()
+b[:10]
+b[-10:]
+b=[int(sn_id[str(i)])//100 for i in a]
+dft.head()
+df2.head()
+'63000010' in df2.TOWNID
+a=set([int(i)%10000 for i in df2.TOWNID])
+a-set(dft.code)
+a=list(a)
+a.sort()
+a[-10:]
+a[:10]
+len(a)
+type(dft.code[0])
+18 in dft.code1
+dft.loc[dft.code1==18]
+18 in list(dft.code1)
+from pypinyin import pinyin, lazy_pinyin
+def cvt(cha):
+    ll=lazy_pinyin(cha)
+    if len(ll)==0:return
+    s=''
+    for l in ll:
+      s=s+l
+    return s
+cvt('測試')
+df2['name_eng']=[cvt(i) for i in df2.name]
+df2.head()
+a=df2.loc[df2.TOWNSN!=-1]
+a.head()
+a.tail()
+dft.head()
+df2['name_eng']=[cvt(i.replace('/','')) for i in df2.name]
+a=set(df2.name_eng)-set(dft.Name)
+len(a)
+a
+df2.loc[df2.name_eng=='gaoxiongshigushanqu(hai)']
+df2['name_eng']=[cvt(i.replace('/','').replace('(海)','').replace('(海區)','')) for i in df2.name]
+a=set(df2.name_eng)-set(dft.Name)
+len(a)
+dft.loc[dft.Name.map(lambda: 'zhanghuaxian' in x)]
+dft.loc[dft.Name.map(lambda x: 'zhanghuaxian' in x)]
+eng_corr={'zhanghuaxianpuxinxiang':'zhanghuaxianbuyanxiang','zhanghuaxianpuxinxiang':'zhanghuaxianbuxinxiang','zhanghuaxianyuanlinzhen':'zhanghuaxianyuanlinshi','zhanghuaxiandaichengxiang','zhanghuaxiandachengxiang'}
+eng_corr={'zhanghuaxianpuxinxiang':'zhanghuaxianbuyanxiang','zhanghuaxianpuxinxiang':'zhanghuaxianbuxinxiang','zhanghuaxianyuanlinzhen':'zhanghuaxianyuanlinshi','zhanghuaxiandaichengxiang':'zhanghuaxiandachengxiang'}
+dft.loc[dft.Name.map(lambda: 'xinbeishi' in x)]
+dft.loc[dft.Name.map(lambda x: 'xinbeishi' in x)]
+dft.loc[dft.Name.map(lambda x: 'xinzhu' in x)]
+s
+a
+dft.loc[dft.Name.map(lambda x: 'jiayi' in x)]
+dft.loc[dft.Name.map(lambda x: 'jilongsh' in x)]
+dft.loc[dft.Name.map(lambda x: 'miaolix' in x)]
+dft.loc[dft.Name.map(lambda x: 'nantouxia' in x)]
+dft.loc[dft.Name.map(lambda x: 'pingdon' in x)]
+dft.loc[dft.Name.map(lambda x: 'tainanshi' in x)]
+dft.loc[dft.Name.map(lambda x: 'taizhon' in x)]
+dft.loc[dft.Name.map(lambda x: 'taoyuan' in x)]
+pwd
+df3=read_csv('df2_dft.csv')
+df3.head()
+a=set(df2.name_eng)
+eng_corr={i:i for i in a}
+eng_corr.updat({i:j for i,j in zip(df3.df2,df3.dft)})
+eng_corr.update({i:j for i,j in zip(df3.df2,df3.dft)})
+df2.name_eng=[eng_corr[i] for i in df2.name_eng]
+a=set(df2.name_eng)-set(dft.Name)
+len(a)
+a
+df3=read_csv('df2_dft.csv')
+eng_corr.update({i:j for i,j in zip(df3.df2,df3.dft)})
+df2.name_eng=[eng_corr[i] for i in df2.name_eng]
+df2['name_eng']=[cvt(i.replace('/','').replace('(海)','').replace('(海區)','')) for i in df2.name]
+df2.name_eng=[eng_corr[i] for i in df2.name_eng]
+a=set(df2.name_eng)-set(dft.Name)
+a
+df2[0]
+df.loc[0]
+df2.loc[0]
+df2.loc[1000]
+df2.loc[6000]
+df2.loc[8000]
+df2.loc[18000]
+df2.loc[10000]
+name_id8={i,j for i,j in zip(dft.Name,dft.new_code)}
+name_id8={i:j for i,j in zip(dft.Name,dft.new_code)}
+df2.TOWNID8=[name_id8[i] for i in df2.name_eng]
+name_id8.update({'haishang':0})
+df2.TOWNID8=[name_id8[i] for i in df2.name_eng]
+df2.loc[10000]
+df2.set_index('TOWNSN').to_csv('gridLL.csv')
+fname
+fname='TEDS2019.ncT'
+nc = netCDF4.Dataset(fname,'r')
+pm25=np.array(nc['PM25_TOT'][0,0,:,:]).flatten()
+df2['pm25']=pm25
+a=pivot_table(index='TOWNID8',values='pm25').reset_index(drop=True)
+a=pivot_table(df2,index='TOWNID8',values='pm25',aggfunc=np.mean).reset_index()
+a
+a.to_csv('teds2019pm25t.csv',header=None)
+ls /var/www/html/*html
+a['CNTY']=[i//1000 for i in a.TOWNID8]
+a.head()
+a['TOWN']=[i%1000 for i in a.TOWNID8]
+a=a.loc[a.CNTY>0]
+col=['CNTY','TOWN','pm25']
+a[col].to_csv('teds2019pm25t.csv',header=None)
+pwd
+!head teds2019pm25t.csv
+a[col].set_index('CNTY').to_csv('teds2019pm25t.csv',header=None)
+%history -f his.txt

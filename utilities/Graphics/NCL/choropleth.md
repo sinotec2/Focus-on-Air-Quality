@@ -57,6 +57,12 @@ tags: NCL graphics choropleth
 
 (三) 解決方案規劃
 
-    由網頁獲知客戶要處理的檔案路徑名稱
-    執行cgi_python進行新舊代碼之辨識、對照、執行NCL程式、將結果自動下載到客戶端的Downloads目錄
-    ncl腳本：參考DKRZ的作法，在shape檔範圍內填入彩虹色階。
+- 由網頁獲知客戶要處理的檔案路徑名稱
+- 執行cgi_python進行新舊代碼之辨識、對照、執行NCL程式、將結果自動下載到客戶端的Downloads目錄
+- ncl腳本：參考DKRZ的作法，在shape檔範圍內填入彩虹色階。
+
+## NCL程式說明
+
+### 程式碼下載
+
+{% include download.html content="[grb2D1m3.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)" %}

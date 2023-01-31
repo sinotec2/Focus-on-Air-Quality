@@ -1,5 +1,5 @@
-kuang@node03 /nas2/cmaqruns/2019TZPP/output/Annual/aTZPP
-$ cat /var/www/html/taiwan/stw.ncl
+;kuang@node03 /nas2/cmaqruns/2019TZPP/output/Annual/aTZPP
+;$ cat /var/www/html/taiwan/stw.ncl
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"

@@ -264,14 +264,14 @@ begin
     end do
   else
     x=var1d
-        ip = dim_pqsort(x, 2)
+    ip = dim_pqsort(x, 2)
     if (ntowns .gt. 20) then
-          nint=toint(ntowns/20)
+      nint=toint(ntowns/20)
       do i=0,20
-            ii=i*nint
+        ii=i*nint
         levels(i)=x(ii)
       end do
-        else
+    else
       do i=0,ntowns-1
         levels(i)=x(i)
       end do

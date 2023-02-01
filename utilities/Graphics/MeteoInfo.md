@@ -36,7 +36,7 @@ MeteoInfo擁有龐大之案檔支援種類，依據2014的發表，計有12項�
 |NetCDF|Grid|Binary|Difficult, need API library|[Unidata](https://www.unidata.ucar.edu/software/netcdf/)|Widely used, some conventions are used by atmospheric community|
 |GRIB 1 and 2|Grid|Binary|Difficult|WMO|Atmospheric community|
 |GrADS binary|Grid and station|Binary|Moderate|[IGES](http://opengrads.org/)|Atmospheric community|
-|HDF EOS5|Grid and swath|Binary|Difficult, need API library|HDF group and NASA|Satellite community|
+|HDF EOS5|Grid and swath|Binary|Difficult, need API library|HDF group and NASA|Satellite community(MCD19A2.006沒有經緯度座標無法繪圖)|
 |ARL packed|Grid|Binary|Moderate|NOAA ARL|ARL model users|
 |HYSPLIT output|Grid, station and trajectory|Binary (grid and station) or text (trajectory)|Easy|NOAA ARL|HYSPLIT model users|
 |MICAPS|Grid, station and trajectory|Most are text|Easy|CMA|Atmospheric community in China|
@@ -51,14 +51,19 @@ MeteoInfo擁有龐大之案檔支援種類，依據2014的發表，計有12項�
 * 套用Jython語言進行自動化
 
 ## 下載安裝
+
 ### 下載點
+
 - [http://meteothink.org](http://meteothink.org/downloads/index.html)
 
 ### 安裝
+
 * 隨插即用、適用在ms win、linux、macOS等所有平台
+* 需搭配正確的java runtime版本
+* ms win會需要管理者權限來安裝java
 
 ## 範例
-- 
+
 Relatives:
 * 報告品質等值線+中文地形底圖OTM與NCL等值圖遠端計算服務
 * line coordinates(in csv format) convert to KML file csv2kml

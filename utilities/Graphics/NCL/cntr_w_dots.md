@@ -24,13 +24,15 @@ tags: NCL graphics
 
 ## 背景
 
+- ncl參考：[NCL Graphics: Regional Climate Model](https://www.ncl.ucar.edu/Applications/rcm.shtml)
+
 ## NCL程式
 
 ### IO
 
 - GRIDCRO2D.nc：讀取網格點之經緯度
 - COMBINE_ACONC.nc：讀取CMAQ模擬結果
-- EPA_ALL2016102013.csv：該小時測站測值，由[rd_O3.py]()前處理而得。
+- EPA_ALL2016102013.csv：該小時測站測值，由[rd_O3.py][1]前處理而得。
 - COUNTY_MOI_1090820.shp：內政部官網縣市界線圖檔
 - rcm.000001.png, rcm.000002.png：結果圖檔
 
@@ -45,6 +47,25 @@ tags: NCL graphics
 
 {% include download.html content="等值圖加上色點之NCL腳本[o3.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/o3.ncl)" %}
 
+## 前處理程式
+
+- 因NCL需要測站的經緯度座標，[rd_O3.py][1]除了讀取該小時測值外，另行加上測站位置座標。
+
+### IO
+
+- 引數：*YYYYMMDDHH*
+- 外部程式：[specHrSliderRect.py](../../../AQana/TWNAQ/specHrSlider.md)
+- 測站經緯度：`/nas1/cmaqruns/2019base/data/wsites/sta_ll.csv`
+- 無表頭、無行號之csv檔(lat,lon,O3)：EPA_ALL*YYYYMMDDHH*.csv
+
+### 程式下載
+
+{% include download.html content="全台測站濃度前處理程式[rd_O3.py][1]" %}
+
 ## 結果
 
-![rcm.000002.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/rcm.000002.png)
+|![rcm.000002.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/rcm.000002.png)|
+|:-:|
+|<br>2016年10月20日海馬颱風外圍環流造成竹苗地區臭氧高值之CMAQ模擬結果</br>|
+
+[1]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/rd_O3.py "全台測站濃度前處理程式[rd_O3.py]"

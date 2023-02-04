@@ -1,13 +1,13 @@
 ---
 layout: default
 title: LGHAP
-parent: "Global AQ Data Analysis"
+parent: Regional AQ Data
 grand_parent: "AQ Data Analysis"
 has_children: true
-nav_order: 10
+nav_order: 2
 date: 2023-02-04 14:11:54
 last_modified_date: 2023-02-04 14:11:58
-permalink: /AQana/GAQuality/LGHAP
+permalink: /AQana/RegAQ/LGHAP
 tags: NASA Satellite
 ---
 

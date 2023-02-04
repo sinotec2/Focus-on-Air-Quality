@@ -1,6 +1,6 @@
 ---
 layout: default
-title: NASA MCD19A2.006
+title: MCD19A2.006
 parent: "Global AQ Data Analysis"
 grand_parent: "AQ Data Analysis"
 has_children: true

@@ -7,8 +7,7 @@ has_children: true
 nav_order: 9
 date: 2023-02-03
 last_modified_date: 2023-02-03 11:13:39
-permalink: /AQana/GAQuality/NASA_MCD19A2.006
-tags: NASA Satellite
+permalink: /AQana/GAQuality/NASA_MCD19A2
 ---
 
 # NASA MCD19A2.006衛星數據之應用

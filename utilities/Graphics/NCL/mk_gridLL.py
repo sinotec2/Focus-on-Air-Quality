@@ -28,18 +28,18 @@ for i in range(ndf):
   found=0
   for j in range(ngdf):
     if df.Point[i].within(gdf.geometry[j]):
-      townid.append(gdf.TOWNID[j])
+      townid.append(gdf.TOWNCODE[j])
       found=1
       break
-  if found==0:townid.append('00000000`')
+  if found==0:townid.append('00000000')
 
 df['TOWNCODE']=townid
 
 tn={i:j for i,j in zip(gdf.TOWNCODE, gdf.TOWNNAME)}
 cn={i:j for i,j in zip(gdf.COUNTYCODE, gdf.COUNTYNAME)}
-df['COUNTYCODE']=[i[:5] for i in df.TOWNCODE]
 cn.update({'00000':'海'})
 tn.update({'00000000':'海'})
+df['COUNTYCODE']=[i[:5] for i in df.TOWNCODE]
 df['COUNTYNAME']=[cn[i] for i in df.COUNTYCODE]
 df['TOWNNAME']=[tn[i] for i in df.TOWNCODE]
 df.set_index('LAT').to_csv('gridLL.csv')

@@ -1,9 +1,8 @@
 ---
 layout: default
 title: 行政區範圍格點化
-parent: NCL Programs
-grand_parent: Graphics
-has_children: true
+parent: GIS Relatives
+grand_parent: Utilities
 date: 2023-02-06
 last_modified_date: 2023-02-06 10:55:57
 tags: choropleth GIS

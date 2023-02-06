@@ -212,6 +212,7 @@ bounds_10m.json bounds_110m.json bounds_tiny.json
 
 ### shape to GeoJSON
 
+- [mbostock, Mike Bostock](https://github.com/mbostock/shapefile)製作了一個好用的命令列執行檔。
 - 轉換方式
   1. shape檔轉GeoJson可以借助[線上轉檔服務](https://products.aspose.app/gis/conversion/shapefile-to-geojson)。需提供.shp、.shx、.pro、.dbf等4個檔。
   2. 或直接取得臺灣縣市界的geoJSON檔案([eg. G0V@github](https://github.com/g0v/twgeojson/raw/master/json/twCounty2010.geo.json))

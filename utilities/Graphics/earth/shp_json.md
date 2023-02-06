@@ -215,6 +215,7 @@ bounds_10m.json bounds_110m.json bounds_tiny.json
 - 轉換方式
   1. shape檔轉GeoJson可以借助[線上轉檔服務](https://products.aspose.app/gis/conversion/shapefile-to-geojson)。需提供.shp、.shx、.pro、.dbf等4個檔。
   2. 或直接取得臺灣縣市界的geoJSON檔案([eg. G0V@github](https://github.com/g0v/twgeojson/raw/master/json/twCounty2010.geo.json))
+  3. 只是前述作法仍需注意年代版本，版本如果太舊會無法與現況對應。因[內政部](https://data.gov.tw/dataset/7441)不時更新數據，還是以最新版本shape檔進行轉換為宜。
 - 轉成(或取得)geometry皆為MultiPolygon或polygon，與EN海岸線屬同一性質。
 
 ### coastline_10m.json 檔案之整理合併

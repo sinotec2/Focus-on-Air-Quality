@@ -12,7 +12,10 @@ root='l:/nas2/cmaqruns/2019TZPP/output/Annual/aTZPP/'
 gdf = gpd.read_file(root+'twTown1982.geojson')
 fname=root+'GRIDCRO2D.nc'
 nc = netCDF4.Dataset(fname,'r+')
-df=pd.DataFrame({'LAT':np.array(nc.variables['LAT'][0,0,:,:]).flatten(),'LON':np.array(nc.variables['LON'][0,0,:,:]).flatten()})
+lat=np.array(nc.variables['LAT'][0,0,:,:]).flatten()
+lon=np.array(nc.variables['LON'][0,0,:,:]).flatten()
+df=pd.DataFrame({'LAT':lat,'LON':lon})
+df['Point']=[Point(i,j) for i,j in zip(lon,lat)]
 ngdf=len(gdf);ndf=len(df)
 townid=[]
 for i in range(ndf):

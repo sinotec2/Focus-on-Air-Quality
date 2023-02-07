@@ -34,4 +34,4 @@ tags: NCL graphics
   - [Transition in/out markers with CSS3 transitions. It supports jitter for staggering markers into view to prevent visual overload.](http://naturalatlas.github.io/leaflet-transitionedicon/)
   - [Leaflet Point Animator with Keyframes](https://onaci.github.io/leaflet-point-animator/)
   - [Leaflet.GridCluster with animation](http://andy-kay.github.io/Leaflet.GridCluster/)
-  - [Fast rendering for large (+100MB) GeoJSON datasets with WebGL.](https://onaci.github.io/Leaflet.glify.layer/)
+[[2023-02-07]]

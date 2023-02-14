@@ -27,6 +27,7 @@ tags: choropleth GIS
 - 然因為使用了shapely模組，所以技術上會歸併在GIS類別，與[shape_to_raster](shape_to_raster.md)是很類似的作業，只是靠著geojson資料庫與shapely模組，大大提升了程式碼的簡潔特性。
 - 簡言之，之前式直接處理shape檔案，而這個版本是處理geojson檔，有較多的支援。
 - 過去相關程式如[mk_town.py][1]、[mk_townNew.py][2]詳[shape_to_raster](shape_to_raster.md)及[CAM-chem模式結果之校正](../../AQana/GAQuality/NCAR_ACOM/2.correct.md)應用
+- 同樣是前處理，將2維點陣線性化成為1維的工作表、以CSV儲存，似乎較符合直覺。
 
 ## 程式說明
 

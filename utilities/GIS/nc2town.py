@@ -13,7 +13,7 @@ df.COUNTYCODE=['{:05d}'.format(i) for i in df.COUNTYCODE]
 tn={i:j for i,j in zip(df.TOWNCODE, df.TOWNNAME)}
 cn={i:j for i,j in zip(df.COUNTYCODE, df.COUNTYNAME)}
 
-df['var']=np.array(nc['PM25_TOT'][0,0,:,:]).flatten()
+df['var']=np.array(nc[v][0,0,:,:]).flatten()
 df0=df.loc[df['var']>0].reset_index(drop=True)
 df_tm=pivot_table(df0,index='TOWNCODE',values='var',aggfunc=np.mean).reset_index()
 df_tm=df_tm.sort_values('var',ascending=False)

@@ -20,6 +20,7 @@ last_modified_date: 2023-02-15 20:43:39
 
 number|usage|note
 :-:|-|-
+80|http|aermods.html etc.
 3000|forecast pngs|
 8000|[Wiki.js]()|
 8080|[tiddlyWiki]()|

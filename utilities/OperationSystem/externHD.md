@@ -72,6 +72,10 @@ sudo mkdir  $vol_nam
 sudo mount -o rw,auto,nobrowse -t ntfs /dev/disk3s2 $vol_nam
 ```
 
+- Terminal 與 Finder 似為2種控制方式，互不相容。（Todo:待證實處理）
+  - Terminal：umount之後，Finder就看不到了。
+  - Finder拔插或斷電再開：Terminal看不到
+
 ### restart seagate before fus.cs action
 
 - crontab as root

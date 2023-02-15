@@ -72,6 +72,25 @@ sudo mkdir  $vol_nam
 sudo mount -o rw,auto,nobrowse -t ntfs /dev/disk3s2 $vol_nam
 ```
 
+### restart seagate before fus.cs action
+
+- crontab as root
+- at 20:55 (before 21:00 sharp)
+
+```bash
+55 20 * * * ~/restart_seagate.cs >& ~/restart_seagate.out
+```
+
+- content of restart_seagate.cs
+
+```bash
+#$ sudo cat /var/root/restart_seagate.cs
+vol_nam=/Volumes/Seagate\ Expansion\ Drive
+umount $vol_nam
+mkdir -p  $vol_nam
+mount -o rw,auto,nobrowse -t ntfs /dev/disk3s2 $vol_nam
+```
+
 ### results
 
 ```bash

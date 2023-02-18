@@ -23,7 +23,8 @@ number|usage|note
 80|http|aermods.html etc.
 3000|forecast pngs|
 8000|[Wiki.js]()|
-8080|[tiddlyWiki]()|
+8081|GFS wind and ozone|
+8082|[tiddlyWiki]()|
 8083|CWB_WRF earth|
 8084|earthFcst45|eastern asia
 8085|earthFcst09|south-eastern China

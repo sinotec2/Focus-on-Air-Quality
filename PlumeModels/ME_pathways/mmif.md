@@ -4,7 +4,7 @@ title: MMIF
 parent: ME Pathways
 grand_parent: Plume Models
 nav_order: 1
-last_modified_date: 2022-03-28 11:02:41
+last_modified_date: 2023-02-18 10:29:34
 tags: plume_model mmif
 ---
 
@@ -28,9 +28,9 @@ tags: plume_model mmif
 
 由於aermet需要綜合彙整大量觀測數據、地區土地利用、蒸散、粗糙度等參數，而這些數據在中尺度大氣動力模式、如WRF或不再更新的MM5中，已經詳細考慮納入了，其空間解析度為1\~9公里、時間解析度為1\~6小時。因此以其模擬結果取代aermet來產生氣象數據檔案，將會有最高的地區代表性與資料的完整性。
 
-[USEPA](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#mmif)多年來持續發展並維護mmif程式（Mesoscale Model Interface Program），其目的就是從大氣模式結果中，讀取並轉換AERMOD所需的氣象檔案。最新版本為06-30-2021，使用該轉接程式有官方提供持續性的技術支援。
+[USEPA](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#mmif)多年來持續發展並維護mmif程式（Mesoscale Model Interface Program），其目的就是從大氣模式結果中，讀取並轉換AERMOD所需的氣象檔案。最新版本為06-27-2022，使用該轉接程式有官方提供持續性的技術支援。
 
-詳細使用方式可以參考[MMIF使用手冊](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/mmif/MMIFv3.4.2_Users_Manual.pdf)。
+詳細使用方式可以參考[MMIF使用手冊][1]。
 
 mmif將會生成aermod執行所需要的氣象檔案，包括地面氣象要素與參數.sfc檔，以及垂直探空數據檔.pfl檔案。
 
@@ -41,8 +41,8 @@ mmif將會生成aermod執行所需要的氣象檔案，包括地面氣象要素�
 
 ## 版本差異
 
-- MMIF目前最新版本為2021年版。
-- 2019年至2021年間新增之改變
+- MMIF目前最新版本為4.0(06-27-2022)版。
+- 2019年至2022年間新增之改變
 
 |date|change|
 |-|:-|
@@ -56,19 +56,20 @@ mmif將會生成aermod執行所需要的氣象檔案，包括地面氣象要素�
 |2020-11-30|  Changed format statement for ASCII MEDOC files to avoid rounding roughness length values to 0.0000 (impossible value).|
 |2020-12-15|  When using MMIF’s re-diagnosis of the mixing height, use temporal smoothing – the same as AERMET does.|
 |2021-06-24|  Add ability to use WRF's hybrid vertical coordinate.|
+|2022-06-27|  compatible with AERMET 22112 and later, outputs additional variables in the ONSITE files|
 
 ## 準備及編譯
 
 雖然USEAP SCRAM網頁提供有PC上可執行的程式，但隨著電腦世界的發展，可能無法在每一個使用者平台上可以運作，因此有必要下載其程式原始碼，在本地平台上進行編譯。
 
-- Source Code ：[ZIP](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/mmif/MMIFv3.4.2_2021-06-30.zip)
+- Source Code ：[ZIP](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/mmif/MMIFv4.0.zip)
 
-- 以下為centOS及macOS作業系統所面對到的問題與解決方案(2019及2021年版)。
+- 以下為centOS及macOS作業系統所面對到的問題與解決方案(2019及2021年版、2022也相同)。
 
 |作業系統|Compilations|問題|
 |-|-|-|
 |centOS|ifort|(取消-static設定)|
-|macOS|gfortran(9~11)|crt0.o、-fbounds-check、 mismatch between  arguments|
+|macOS|gfortran(9~12)|crt0.o、-fbounds-check、 mismatch between  arguments|
 
 - 問題1：missing of crt0.o, macOS沒有這個C的obj。
   - 解決：參考ifort的問題與解法，不要static link即可
@@ -167,4 +168,6 @@ cat fnames.wrf >> mmif.inp
 
 ## Reference
 
-- [MMIF使用手冊](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/mmif/MMIFv3.4.2_Users_Manual.pdf)，2021-06-30
+- [MMIF使用手冊][1]， 06-09-2022。
+
+[1]: https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/mmif/MMIFv4.0_Users_Manual.pdf "MMIFv4.0_Users_Manual"

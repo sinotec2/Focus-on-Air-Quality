@@ -38,5 +38,8 @@ if debug:
 da=xr.Dataset(data_vars=dict(pm=(["lat","lon"],var1)),coords=dict(lon=(["lon"],x1_1d),lat=(["lat"],y1_1d)))
 pr=da.rio.set_spatial_dims("lon", "lat")
 pr.rio.set_crs("epsg:4326")
-fname=fname.replace('.nc','.tiff')
+if fname[-3:]=='.nc':
+  fname=fname.replace('.nc','.tiff')
+else:
+  fname=fname+'.tiff'
 pr.rio.to_raster(fname,driver="COG")

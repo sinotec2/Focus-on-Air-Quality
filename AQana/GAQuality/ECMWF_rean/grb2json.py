@@ -54,7 +54,7 @@ x1, y1 = np.meshgrid(lon1d, lat1d)
 
 idx=np.where((x>0)&(x>=lon_min)&(x<=lon_max)&(y>=lat_min)&(y<=lat_max))
 mp=len(idx[0])
-xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
+[[2023-02-20]]
 
 for i in range(nr):
   gfs[i]['header']['centerName']="AMS_global_atmospheric_composition_forecasts"

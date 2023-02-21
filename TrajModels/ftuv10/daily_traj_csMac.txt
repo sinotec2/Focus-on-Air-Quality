@@ -32,20 +32,10 @@ for f in today_marks.csv today_marksV.geojson;do
 done
 
 for d in $today $Tomorr $AftTmw;do
-cd /Library/WebServer/Documents
 for t in zhongshan zhongming jiayi qianjin;do
-  $PY -t $t -d ${d}12 -b True
-  fn=trj_results/btrj${t}${d}12_mark.csv
-  rm -f trj_results/today_$t.csv
-  if [ -e $fn ];then cp $fn trj_results/today_$t.csv;fi
+~/bin/sub /Library/WebServer/Documents/trj_results/daily_trajSt.cs $PY $t $d
 done
-
-#add num column
-cd /Library/WebServer/Documents/trj_results
-for t in zhongshan zhongming jiayi qianjin;do
-c=0;for i in $(cat today_$t.csv);do echo $i,$c;c=$(( $c + 1 ));if [ $c -gt 120 ];then break;fi;done >todayM_$t.csv
-done
-
+~/bin/wait.cs daily_trajSt.cs
 #join the trajectories
 cat todayM_[jqz]*.csv > today.csv
 

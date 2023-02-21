@@ -1,0 +1,11 @@
+PY=$1
+t=$2
+d=$3
+  cd /Library/WebServer/Documents
+  $PY -t $t -d ${d}12 -b True
+  fn=trj_results/btrj${t}${d}12_mark.csv
+  rm -f trj_results/today_$t.csv
+  if [ -e $fn ];then cp $fn trj_results/today_$t.csv;fi
+  #add num column
+  cd /Library/WebServer/Documents/trj_results
+  c=0;for i in $(cat today_$t.csv);do echo $i,$c;c=$(( $c + 1 ));if [ $c -gt 120 ];then break;fi;done >todayM_$t.csv

@@ -4,7 +4,7 @@ title: ftuv10.py
 nav_order: 1
 parent: 地面二維軌跡分析
 grand_parent: Trajectory Models
-last_modified_date: 2022-11-25 16:11:28
+last_modified_date: 2023-02-21 16:57:22
 tags: trajectory CWBWRF CODiS geojson
 ---
 
@@ -45,7 +45,7 @@ for t in zhongshan zhongming jiayi qianjin;do
   $PY -t $t -d ${today}12 -b True
 ```
 
-## 程式碼差異
+## 2/3維程式碼差異
 
 項目|3維版本[bt2_DVP.py][bt2_DVP]|2維版本[ftuv10.py][ftuv10]|說明
 :-:|:-:|:-:|:-:|
@@ -299,11 +299,29 @@ $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-ser
 > os.system('/opt/local/bin/csv2bln.cs '+name)
 ```
 
+## 3/5天上限版本差異
+
+- 為增加擴大模擬範圍，軌跡終點的時間差自3天延長至5天。
+- 5天上限版本除了放寬日數的限制之外，也改用了風場的內插方式，以減少錯誤的可能，提高計算的效率。另為與WRF模式10天預報接軌，檔名中的時間標記採用變數定義，以配合新的系統設定。
+- 5天上限版本應用在軌跡的逐日預報工作中([daily_traj.cs](daily_traj_cs.md))
+- 提供WRF網格層數M=2/M=3的選項，前者為CWB_WRF數值產品，後者則為10天fcst_WRF預報結果
+
+項目|[ftuv10.py][ftuv10]|[ftuv10_5d.py][ftuv10_5d]|說明
+:-:|:-:|:-:|-
+上限日數|3|5|擴大範圍。d1範圍可以達到中國東半壁
+模式中心點|固定在[23.61000, 120.990]|由wrfout內設定|便利使用不同來源之模擬結果
+wrfout來源|CWB_WRF|CWB_WRF/fcst_WRF|M值須在程式內修改
+wrfout檔名時間標籤|_06:00:00|任意起始時間|前者為配合CWB WRF之起始時間。
+內插法|cubic spline|linear|前者雖然較為平緩但有可能發生錯誤、計算速度也較慢
+
+
 ## 程式下載
 
 {% include download.html content="[地面uv10二維軌跡分析程式ftuv10.py][ftuv10]" %}
+{% include download.html content="[地面uv10軌跡分析(上限五天版本)ftuv10_5d.py][ftuv10_5d]" %}
 
 [ftuv10]: <https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/ftuv10/ftuv10.py> "地面uv10二維軌跡分析程式ftuv10.py"
+[ftuv10_5d]: <https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/TrajModels/ftuv10/ftuv10.py> "地面uv10二維軌跡分析程式(上限五天版本)ftuv10_5d.py"
 [bt2_DVP]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/bt2_DVP/> "三維反軌跡線之計算"
 [traj2kml.py]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/#軌跡程式說明> "traj2kml.py"
 [daily_traj_cs]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/daily_traj_cs/> "daily_traj.cs程式說明"

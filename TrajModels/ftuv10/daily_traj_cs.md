@@ -5,7 +5,7 @@ nav_order: 3
 parent: 地面二維軌跡分析
 grand_parent: Trajectory Models
 date: 2022-11-04
-last_modified_date: 2023-02-21 14:15:34
+last_modified_date: 2023-02-22 09:47:19
 tags: trajectory CWBWRF CODiS geojson
 ---
 
@@ -93,28 +93,51 @@ done
   - `$fn`時間標籤自00Z開始(`_00:00:00`)
   - 地面風場之切割與傳送插入[fcst][fcst]之執行流程中，直接存到指定目錄，不必另行複製。
 
-
 ### 執行[ftuv10.py][ftuv10]
 
-- 4個空品測站：北部(中山站)、中部(忠明站)、南部(嘉義及前金站)
-- 時間：今日、明日、後日之中午12時
-  - 每天的today_*.csv經處理後會儲存在對應之目錄下
+- 12個測站日之迴圈
+  - 4個空品測站：北部(中山站)、中部(忠明站)、南部(嘉義及前金站)
+  - 時間：今日、明日、後日之中午12時
+  - 每天4個測站的`today_*.csv`經整合、加上表頭(`header.txt`)處理後會儲存在對應之目錄下
 
 ```bash
 for d in $today $Tomorr $AftTmw;do
 cd /Library/WebServer/Documents
 for t in zhongshan zhongming jiayi qianjin;do
-  $PY -t $t -d ${d}12 -b True
-  fn=trj_results/btrj${t}${d}12_mark.csv
-  rm -f trj_results/today_$t.csv
-  if [ -e $fn ];then cp $fn trj_results/today_$t.csv;fi
+~/bin/sub /Library/WebServer/Documents/trj_results/daily_trajSt.cs $PY $t $d
 done
-...
+~/bin/wait.cs $d
+#join the trajectories
+cat todayM_[jqz]*.csv > today.csv
+
 test $d == $today && dir=00
 test $d == $Tomorr && dir=p1
 test $d == $AftTmw && dir=p2
 cat header.txt today.csv > $dir/today_marks.csv
 done
+```
+
+- 回圈內呼叫個案批次檔daily_trajSt.cs，並將執行批次放在背景執行，以啟動平行運作提高計算效能。
+- 主程式則以`wait.cs $d`以等候該日所有測站之python都結束，以進一步將個別測站結果予以整合。
+
+### 背景執行批次daily_trajSt.cs內容
+
+- 每執行一站次反軌跡計算約需10 ~ 11分鐘，因此如果依序進行12站次計算，全部需要2 ~ 2.5小時。似有待精進(2023-02-22)。
+- 引數：軌跡程式`$PY`、測站名稱`$t`、日期`$d`
+- 上述迴圈將會啟動4個python程式同時運作
+
+```bash
+PY=$1
+t=$2
+d=$3
+  cd /Library/WebServer/Documents
+  $PY -t $t -d ${d}12 -b True
+  fn=trj_results/btrj${t}${d}12_mark.csv
+  rm -f trj_results/today_$t.csv
+  if [ -e $fn ];then cp $fn trj_results/today_$t.csv;fi
+  #add num column
+  cd /Library/WebServer/Documents/trj_results
+  c=0;for i in $(cat today_$t.csv);do echo $i,$c;c=$(( $c + 1 ));if [ $c -gt 120 ];then break;fi;done >todayM_$t.csv
 ```
 
 ### 執行[csv_to_geojson][cj]
@@ -175,9 +198,24 @@ $GT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git main
 0    4    *   *   *   /Library/WebServer/Documents/trj_results/daily_traj.cs >& /Library/WebServer/Documents/trj_results/daily_traj.out
 ```
 
-## 程式下載
+- 時程檢討
+  - CWB_WRF之格式轉換需時較久，自0時開始，3個多小時結束。
+  - fcst_WRF也需要3~4個小時。
+  - 因此4點開始應屬OK
 
-- {% include download.html content="軌跡線上通風指數之計算[daily_traj.cs][daily_traj]" %}
+## 成果
+
+### GitHub Page
+
+- 臺灣地區高解析度軌跡近5日預報@[https://sinotec2.github.io/traj/](https://sinotec2.github.io/traj/)
+
+|![2023-02-22-09-52-03.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/2023-02-22-09-52-03.png){:width="360px"} |
+|:-:|
+| <b>臺灣地區高解析度軌跡近5日預報成果畫面</b>|
+
+### 程式下載
+
+- {% include download.html content="台灣近5日軌跡線之自動執行批次檔[daily_traj.cs][daily_traj]" %}
 
 [get_M-A0064]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/1.get_M-A0064/> "中央氣象局WRF_3Km數值預報產品之下載、空間內插與轉檔"
 [ftuv10]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/ftuv10/> "ftuv10.py程式說明"

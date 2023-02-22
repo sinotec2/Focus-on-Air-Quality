@@ -142,7 +142,7 @@ d=$3
 
 ### 執行[csv_to_geojson][cj]
 
-- csv_to_geojson是網友[miquel-vv][cj]提供的套件，可以將csv檔案中的經緯度位置，轉成[geojson檔案格式][geojson]的線格式，以順利讓leaflet地圖可以讀取。
+- csv_to_geojson是網友[miquel-vv][cj]提供的套件，可以將csv檔案中的經緯度位置，轉成[geojson檔案格式][geojson]的線段格式，以順利讓leaflet地圖可以讀取。
 
 ```bash
 CJ=/opt/anaconda3/bin/csv_to_geojson

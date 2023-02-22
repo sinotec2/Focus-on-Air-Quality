@@ -309,11 +309,10 @@ $ diff /Users/Data/cwb/e-service/btraj_WRFnests/bt2_DVP.py /Users/Data/cwb/e-ser
 項目|[ftuv10.py][ftuv10]|[ftuv10_5d.py][ftuv10_5d]|說明
 :-:|:-:|:-:|-
 上限日數|3|5|擴大範圍。d1範圍可以達到中國東半壁
-模式中心點|固定在[23.61000, 120.990]|由wrfout內設定|便利使用不同來源之模擬結果
-wrfout來源|CWB_WRF|CWB_WRF/fcst_WRF|M值須在程式內修改
+模式中心點|固定在[23.61000, 120.990]|由wrfout內設定|適應不同來源之模擬結果
+wrfout來源|CWB_WRF|CWB_WRF(M=2) / fcst_WRF(M=3)|M值(網格層數) 須在程式內指定
 wrfout檔名時間標籤|_06:00:00|任意起始時間|前者為配合CWB WRF之起始時間。
-內插法|cubic spline|linear|前者雖然較為平緩但有可能發生錯誤、計算速度也較慢
-
+內插法|cubic spline|linear|前者雖然較為平緩, 但有可能發生錯誤、計算速度也較慢
 
 ## 程式下載
 

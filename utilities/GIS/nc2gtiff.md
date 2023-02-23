@@ -27,7 +27,7 @@ tags: GeoTiff netCDF GIS
 - 意即經由regrid、resampling作業，將m3nc檔轉成GeoTiff檔案格式。
 - 此處選擇scipy 的griddata模組進行內插，以xarrayio來進行轉檔。
 - 解讀GeoTiff之程式另見[GeoTiff.md](GeoTiff.md)內之討論
-- 其他nc2geotiff的討論，詳[geoserver]()
+- 其他nc2geotiff的討論，詳[geoserver](https://sinotec2.github.io/FAQ/2023/02/22/GeoServer.html#nc2tiff)
 
 ## 程式說明
 
@@ -53,3 +53,7 @@ pr.rio.set_crs("epsg:4326")
 ...
 pr.rio.to_raster(fname,driver="COG")
 ```
+
+## 程式下載
+
+{% include download.html content="[grb2D1m3.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2D1m3.py)" %}

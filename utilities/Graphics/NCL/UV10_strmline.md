@@ -83,6 +83,7 @@ done
 ```
 
 ### 圖說
+
 - 讀取wrfout的時間標籤作為圖說[tiMainString](https://www.ncl.ucar.edu/Document/Graphics/Resources/ti.shtml#tiMainString)
 
 ```python
@@ -92,6 +93,7 @@ done
 ```
 
 ### 色標單位
+
 - 色標距離主題（[pmLabelBarOrthogonalPosF](http://ncl.ucar.edu/Document/Graphics/Resources/pm.shtml#pmLabelBarOrthogonalPosF)）太靠近，放不進單位之文字
 - 文字與字型大小（[lbTitleString](https://www.ncl.ucar.edu/Document/Graphics/Resources/lb.shtml#lbTitleString) / [lbTitleFontHeightF](https://www.ncl.ucar.edu/Document/Graphics/Resources/lb.shtml#lbTitleFontHeightF)）
 
@@ -101,6 +103,7 @@ done
   res@lbTitleFontHeightF= .01
   res@pmLabelBarOrthogonalPosF = .10
 ```
+
 ## 結果範例
 
 | ![wrf_gsn.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/wrf_gsn.png) |
@@ -109,7 +112,7 @@ done
 
 ## [wrf_gsn_8.ncl][wrf_gsn_8.ncl]程式下載
 
-{% include download.html content="將CWB數據填入WRF客觀分析場之程式：[wrf_gsn_8.ncl][wrf_gsn_8.ncl]" %}
+{% include download.html content="繪製wrfout地面氣流線：[wrf_gsn_8.ncl][wrf_gsn_8.ncl]" %}
 
 [eth]: <https://github.com/cambecc/earth> "cambecc(2016), earth building, launching and etc on GitHub. "
 [wrf_gsn_8.ncl]: <https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/wrf_gsn_8.ncl> "Drawing streamlines colored by another field over a map"

@@ -47,13 +47,16 @@ done
 ```
 
 ## [wrf_gsn_8.ncl][wrf_gsn_8.ncl]修改說明
+
 - 原始的程式可以參考[NCL官網wrfgsn](https://www.ncl.ucar.edu/Applications/Scripts/wrf_gsn_8.ncl)
 
 ### IO
+
 - input file name: `wrfout`
 - output png filename: `wrf_gsn.png`
 
 ### 流線圖面密度調整
+
 - NCL函數沒有提供調整密度的選項，必須自行篩選要進入繪圖程式的數據
 - `dimsizes()`:輸出矩陣的維度
 - `div=8`:每8格取樣。將結果存到u10/v10/lon/lat矩陣，適用原本的繪圖程式。

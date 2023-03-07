@@ -113,9 +113,67 @@ done
 |:--:|
 | <b>CWBWRF_3k範圍地面氣流線 </b>|  
 
-## [wrf_gsn_8.ncl][wrf_gsn_8.ncl]程式下載
+## d4範圍版本
 
-{% include download.html content="繪製wrfout地面氣流線：[wrf_gsn_8.ncl][wrf_gsn_8.ncl]" %}
+### 修改項目
+
+- 台灣範圍因為面積較小，流線必須密一點，div取2。
+- 海岸線的解析度也必須高一些，取HighRes
+  - 須至[Leibniz Institute for Baltic Sea Research Warnemünde](https://www.io-warnemuende.de/rangs-en.html)下載rags及gshhs壓縮檔，並放在正確的目錄下。
+
+```bash
+mkdir -p $NCARG_ROOT/lib/ncarg/database/rangs
+cd $NCARG_ROOT/lib/ncarg/database/rangs
+for i in {0..4};do wget https://www.io-warnemuende.de/tl_files/staff/rfeistel/download/rangs\(${i}\).zip;done
+for i in {0..4};do wget https://www.io-warnemuende.de/tl_files/staff/rfeistel/download/gshhs\(${i}\).zip;done
+for i in $(ls *zip);do unzip $i;done
+```
+
+- 光靠海岸線，台灣地區內部參考還蠻少的，需加入縣市界shape檔
+  - 先暫緩plot的匯出，等待疊圖
+  - 台灣內部高風速的機會較少，為使底圖具有較高的辨識效果，將shape檔的線條設成紅色
+  - 呼叫gsn_add_shapefile_polylines貼上shape檔
+  - 參考[shapefiles_3.ncl](https://www.ncl.ucar.edu/Applications/Scripts/shapefiles_3.ncl)與[等值圖加上色點](./cntr_w_dots.md)。
+
+### 程式碼差異
+
+```bash
+$ diff wrf_gsn_8.ncl streamlineTW.ncl
+52c52
+<   div= 8 ; more is sparse, less is condense
+---
+>   div= 2 ; more is sparse, less is condense
+99c99
+<   res@mpDataBaseVersion  = "MediumRes"    ; better map outlines
+---
+>   res@mpDataBaseVersion  = "HighRes"    ; better map outlines
+141a142,143
+>   res@gsnDraw             = False          ; don't draw plot yet
+>   res@gsnFrame            = False          ; don't advance frame yet
+142a145,158
+>
+>    shapefile_dir  = "/home/kuang/NCL_scripts/shapes/"       ;-- directory containing the shapefiles
+>    shp_name2      = "COUNTY_MOI_1090820.shp"                         ;-- shapefile to be used
+>    shp_fname2      = shapefile_dir+shp_name2
+> ;---Section to add polylines to map.
+>   plres             = True           ; resource list for polylines
+>   plres@gsLineColor = "red"
+>
+>    id = gsn_add_shapefile_polylines(wks,plot,shp_fname2,plres)
+>    draw(plot)   ; This will draw attached polylines and map
+>    frame(wks)   ; Advanced frame.
+```
+
+## 程式下載
+
+### [wrf_gsn_8.ncl][wrf_gsn_8.ncl]
+
+{% include download.html content="繪製wrfout地面氣流線(東亞範圍)：[wrf_gsn_8.ncl][wrf_gsn_8.ncl]" %}
+
+### [streamlineTW.ncl][streamlineTW.ncl]
+
+{% include download.html content="繪製wrfout地面氣流線(臺灣範圍)：[streamlineTW.ncl][streamlineTW.ncl]" %}
 
 [eth]: <https://github.com/cambecc/earth> "cambecc(2016), earth building, launching and etc on GitHub. "
 [wrf_gsn_8.ncl]: <https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/wrf_gsn_8.ncl> "Drawing streamlines colored by another field over a map"
+[streamlineTW.ncl]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/streamlineTW.ncl "streamlineTW"

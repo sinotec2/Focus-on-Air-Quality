@@ -109,7 +109,7 @@ done
   res@pmLabelBarOrthogonalPosF = .10
 ```
 
-## 結果範例
+### 結果範例
 
 | ![wrf_gsn.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/wrf_gsn.png) |
 |:--:|
@@ -180,6 +180,12 @@ for i in {0..265..6};do
   mv wrf_gsn.png stln_$iii.png;
 done
 ```
+
+### 臺灣範圍結果
+
+| ![stln_060.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/stln_060.png) |
+|:--:|
+| <b>台灣地區範圍地面氣流線。夜間山區有明顯的山風。</b>|  
 
 ## 程式下載
 

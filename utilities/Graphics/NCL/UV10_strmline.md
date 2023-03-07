@@ -22,6 +22,7 @@ tags: NCL graphics
 ---
 
 ## 背景
+
 - 快速繪製地面氣流線，除了可以使用meteoinfo之外，似乎沒有好的方式。
   - 新版VERDI不再有vector的功能。
   - meteoinfo似乎不能直接開wrfout，還是需要ncks將數據取出
@@ -30,6 +31,7 @@ tags: NCL graphics
 - NCL的介紹與文件檔案連結，可以到[NCL Programs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/NCL) 去找。
 
 ## 執行批次
+
 - 繪製流線圖至少需要wrfout的經緯度、時間標籤、以及U10/V10等變數。
 - 環境變數NCAR_ROOT設定在執行檔前面，這是for crontab的執行方式，一般命令列也是可行執行。
 - 下面範例會畫出2022-08-10～17日每天00Z的流線圖
@@ -52,7 +54,7 @@ done
 
 ### IO
 
-- input file name: `wrfout`
+- input file name: `wrfout`，只會讀取U10及V10與時間標籤。
 - output png filename: `wrf_gsn.png`
 
 ### 流線圖面密度調整
@@ -162,6 +164,21 @@ $ diff wrf_gsn_8.ncl streamlineTW.ncl
 >    id = gsn_add_shapefile_polylines(wks,plot,shp_fname2,plres)
 >    draw(plot)   ; This will draw attached polylines and map
 >    frame(wks)   ; Advanced frame.
+```
+
+### 執行批次2
+
+- 因每日的作業結果中已經有U10V10檔案(逐日檔、for [daily_traj](../../../TrajModels/ftuv10/daily_traj_cs.md))，因此只要將其連結起來，再按所需要的時間間隔一一繪圖。
+
+```bash
+source ~/conda_ini ncl_stable
+ncrcat U10V10_d03_2023-03-* U10.nc
+for i in {0..265..6};do 
+  ncks -O -d Time,$i UV10.nc wrfout; 
+  ncl ~/NCL_scripts/streamlineTW.ncl;
+  iii=$(printf "%03d" $i);
+  mv wrf_gsn.png stln_$iii.png;
+done
 ```
 
 ## 程式下載

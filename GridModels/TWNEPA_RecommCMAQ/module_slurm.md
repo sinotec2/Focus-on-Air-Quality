@@ -192,9 +192,8 @@ conda activate Evaluate
       Use "module spider" to find all possible modules.
       Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
-
-
 ## slurm commands
+
 - [slurm](https://zh.wikipedia.org/wiki/Slurm工作调度工具)是全球超級電腦或叢集電腦常用的資源調度工具，也為國網所採用。
 - [簡易指令](https://www2.nsysu.edu.tw/gpu/submit.html) screen類似tmux可以設置特定slurm環境
 
@@ -212,6 +211,7 @@ conda activate Evaluate
       +-----------------------------------------------------------------------------+
 
 ### SBATCH
+
 - $1=200
 - $2=run.cctm.03.csh
 
@@ -224,6 +224,7 @@ queue="ct224"
 
 sbatch --get-user-env --account=$pro --job-name=cmaqruns --partition=${queue} --ntasks=${1} --cpus-per-task=1 --nodes=5 --ntasks-per-node=40  ${2}
 ```
+
 ### SQUEUE
 
 ```bash
@@ -243,15 +244,17 @@ squeue|grep 'NAME|$USERNAME'
     1403119      ct56 config-S u5411358  R    1:23:47      1 cpn3020
 
 ### SCONTROL
+
 ```bash
 #scontrol show job $j
 ```
+
 ### SREPORT
   Workload Characterization Key (WCKey)
 
 ```bash
 #$ sreport cluster AccountUtilizationByUser All_Clusters accounts=ent111046 start=4/15/22 end=4/17/22 format=Accounts,Cluster,TresCount,Login,Proper,Used
-```
+
 --------------------------------------------------------------------------------
     Cluster/Account/User Utilization 2022-04-15T00:00:00 - 2022-04-16T23:59:59 (172800 secs)
     Usage reported in CPU Minutes
@@ -260,11 +263,10 @@ squeue|grep 'NAME|$USERNAME'
 --------------- --------- ---------- --------- --------------- -------- 
       ent111046 taiwania3          0                               5218 
       ent111046 taiwania3          0  sinotec2        sinotec2     5218 
-
+```
 
 ```bash
 #sreport job sizesbyaccount accounts=ent111046 start=4/15/22 end=4/17/22
-```
 --------------------------------------------------------------------------------
     Job Sizes 2022-04-15T00:00:00 - 2022-04-16T23:59:59 (172800 secs)
     Time reported in Minutes
@@ -272,9 +274,10 @@ squeue|grep 'NAME|$USERNAME'
       Cluster   Account     0-49 CPUs   50-249 CPUs  250-499 CPUs  500-999 CPUs  >= 1000 CPUs % of cluster 
 --------- --------- ------------- ------------- ------------- ------------- ------------- ------------ 
     taiwania3 ent111046             0          5176            42             0             0      100.00% 
-
+```
 
 ### slurm-$JOB_ID.out
+
 - 為執行檔的standard output，會從一開始執行就累積
   - 相對的CTM*只會記錄每日的print_out，檔案較小
   - 可以用grepDDD檢視進度

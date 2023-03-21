@@ -59,7 +59,6 @@ tags: CMAQ emis ptse mcip
 
 {% include download.html content="[brk_day2.cs](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/netCDF/brk_day2.cs)" %}
 
-
 ### 平行運作
 
 - ncks可以平行運做，但不見得有較高的效率，涉及檔案存取的速度瓶頸、以及工作站的記憶體。
@@ -169,6 +168,53 @@ for ((h=0;h < $nt; h+=1));do
 ### brk_day3.cs腳本程式內容
 
 {% include download.html content="[brk_day2.cs](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/netCDF/brk_day3.cs)" %}
+
+## python 版本
+
+- 這個版本的必要性在於能夠擺脫OS環境的選擇，原來的bash有其方便性，然而在csh中就不能隨意套用。
+- 按日分開，並且在最後增加一個小時，特別適用邊界檔案[add_lastHr.py](../../utilities/netCDF/add_lastHr.md)。
+
+```python
+#sinotec2@lgn301 /work/sinotec2/opt/cmaq_recommend/bin
+#$ cat brk_day.py 
+#!/opt/ohpc/pkg/rcec/pkg/python/wrfpost/bin/python
+import numpy as np
+import netCDF4
+import datetime
+import sys,os
+
+def j2c(j):
+  y=int(j)//1000
+  d=int(j)%1000
+  return (datetime.datetime(y,1,1)+datetime.timedelta(days=(d-1))).strftime("%Y%m%d")
+
+fname=sys.argv[1]
+
+last=fname.split('/')[-1]
+outdir=fname.split('.')[-1]
+if '/' in fname:
+  i1=fname.index(last)
+  outdir=fname[:i1]+fname.split('.')[-1]
+fnroot=last.split('.')[0]
+nc = netCDF4.Dataset(fname,'r')
+nt=nc.dimensions['TSTEP'].size
+v='TFLAG'
+dates=np.array(nc.variables[v][:,0,0])
+sdates=list(set(dates))
+sdates.sort()
+
+fnames=[outdir+'/'+fnroot+'.'+j2c(i) for i in sdates]
+os.system('mkdir -p '+outdir)
+df={i:j for i,j in zip(sdates,fnames)}
+opt='/work/sinotec2/opt/cmaq_recommend'
+for d in df:
+  idx=np.where(dates==d)[0]
+  i1,i2=str(idx[0]),str(idx[-1])
+  if i1==i2:continue
+  os.system(opt+'/bin/ncks -O -d TSTEP,'+i1+','+i2+' '+fname+' '+df[d])
+  os.system(opt+'/bin/ncatted -a SDATE,global,o,i,'+str(d)+' '+df[d])
+  os.system(opt+'/bin/add_lastHr.py '+df[d])
+```
 
 [pr_tflag]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/pr_tflag/> "列印m3.nc的時間標籤"
 [ln_run12cs]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/PTSE/3.pt_timvarWork/#ln_run12cs> "ln_run12.cs"

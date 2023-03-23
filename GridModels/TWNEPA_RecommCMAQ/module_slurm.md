@@ -149,6 +149,66 @@ python|wrfpost|ncdump/ncgen/tiff*
       Use "module spider" to find all possible modules.
       Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
+### bash腳本中執行module及mpirun
+
+- module load指令會啟動需要的環境設定，包括執行模式需要的`$PATH`、`$LD_LIBRARY_PATH`等，不必另外再設定。
+- 如以下腳本，可以直接用sbatch啟動
+
+```bash
+#!/bin/bash
+#SBATCH -A ENT111040             # Account name/project number
+#SBATCH -J wrf                   # Job name
+#SBATCH -p ct224                 # Partiotion name
+#SBATCH -n 120                   # Number of MPI tasks (i.e. processes)
+#SBATCH -c 1                     # Number of cores per MPI task
+#SBATCH -N 3                     # Maximum number of nodes to be allocated
+#SBATCH --ntasks-per-node=40     # Maximum number of tasks on each node
+#SBATCH -o rsl.out.%j            # Path to the standard output file
+#SBATCH -e rsl.error.%j          # Path to the standard error ouput file
+
+module load compiler/intel/2021 IntelMPI/2021 hdf5/1.12 netcdf/4.7.4 pnetcdf/1.12.2
+
+mpiexec.hydra -bootstrap slurm -n 120 ~/MyPrograms/wrf_install_intel/WRF-4.2.1/main/real.exe
+```
+
+- `#SBATCH` 並非註記，而是slurm的directory，以其為首的內容將會控制後面的slurm執行方式。
+- 如範例所示，裝置模組後，路徑中就會出現mpiexec.hyda(mpirun)，以及hdf5、netcdf等等程式庫。
+
+### csh 中執行module
+
+- 因module並不是一個執行檔，而是一函數組(function)，因此如果切換到其他的shell時，要重新設定，否則會找不到指令。[參segmentfault](https://segmentfault.com/a/1190000020743031)
+- 在bash、其內容為
+  
+```bash
+$ type module
+module is a function
+module ()
+{
+    eval $($LMOD_CMD bash "$@") && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+```
+
+- 基本上module這個函數會執行2個動作，一個是`$LMOD_CMD bash "$@"`所產出(打印)所有模組有關的內容，包括路徑及環境變數(參[printenv](#printenv))，然後再以此環境設定的組合，啟動原來的shell。
+- 在csh的語法有些不同，在csh中module是個別名、用意相同，定義如下：
+
+```bash
+[sinotec2@lgn303 forecast]$ which module
+module:          aliased to eval `$LMOD_CMD tcsh  !*`  && eval `$LMOD_SETTARG_CMD -s csh`
+```
+
+- 因此如果在csh的腳本中要執行module load指令，可以直接寫成：
+
+```bash
+eval `$LMOD_CMD tcsh load compiler/intel/2021 IntelMPI/2021 hdf5/1.12 netcdf/4.7.4 pnetcdf/1.12.2`  && \ 
+eval `$LMOD_SETTARG_CMD -s csh`
+```
+
+- 在csh環境中，`!*` 指得就是`$LMOD_CMD tcsh`之後所有的引數，類似bash中的`$@`
+  - `$LMOD_CMD`就是`/opt/ohpc/admin/lmod/lmod/libexec/lmod`
+  - 前半個指令會將所有模組需要的路徑等等環境設定都打印出來，因此`eval`就會將其執行，將打印內容設成環境變數。
+- `$LMOD_SETTARG_CMD`是個冒號，在`eval`之後，會將之前的環境變數傳到其後的shell中，詳見[chatGPT的解釋](#lmod_settarg_cmd)。
+
+
 ## slurm commands
 
 - [slurm](https://zh.wikipedia.org/wiki/Slurm工作调度工具)是全球超級電腦或叢集電腦常用的資源調度工具，也為國網所採用。
@@ -280,3 +340,21 @@ I_MPI_ROOT=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1
 FI_PROVIDER_PATH=/opt/ohpc/Taiwania3/pkg/intel/2021/mpi/2021.1.1/libfabric/lib/prov
 I_MPI_OFI_PROVIDER=mlx
 ```
+
+### `$LMOD_SETTARG_CMD`
+
+> 請解釋$LMOD_SETTARG_CMD的內容與作用
+
+$LMOD_SETTARG_CMD是Lmod軟件的一個環境變量，用於設置Lmod如何將軟件模塊加載到用戶的環境中。
+
+在使用Lmod管理軟件模塊時，用戶可以使用module命令來查詢和加載模塊。而$LMOD_SETTARG_CMD則是用來設置Lmod如何設置環境變量，以便使已加載的模塊生效。
+
+具體來說，$LMOD_SETTARG_CMD環境變量可以設置三種不同的值：
+
+export：當$LMOD_SETTARG_CMD被設置為export時，Lmod將使用export命令將所有已加載的模塊中定義的環境變量添加到用戶的環境中。這使得這些環境變量可以在後續的命令中使用，而不需要額外的操作。
+
+setenv：當$LMOD_SETTARG_CMD被設置為setenv時，Lmod將使用setenv命令將所有已加載的模塊中定義的環境變量添加到用戶的環境中。這也使得這些環境變量可以在後續的命令中使用。
+
+eval：當$LMOD_SETTARG_CMD被設置為eval時，Lmod將使用eval命令來執行所有已加載的模塊中定義的命令。這樣可以更靈活地設置環境變量或執行其他命令。
+
+總之，$LMOD_SETTARG_CMD環境變量是Lmod軟件用於設置如何將軟件模塊加載到用戶環境中的一個重要設置，它可以設置為export、setenv或eval，以便將已加載的模塊中定義的環境變量或其他命令添加到用戶的環境中。

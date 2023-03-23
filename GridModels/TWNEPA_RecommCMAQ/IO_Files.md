@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 輸入輸出檔案管理
+title: 輸出入檔案及傳輸
 parent: Recommend System
 grand_parent: CMAQ Model System
 nav_order: 2
@@ -9,7 +9,7 @@ last_modified_date: 2023-02-20 09:18:18
 tags: CMAQ nchc_service
 ---
 
-# 公版模式輸入輸出檔案管理
+# 公版模式輸入輸出檔案及傳輸管理
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,6 +23,7 @@ tags: CMAQ nchc_service
 ---
 
 ## 背景
+
 - inputs and model sources
 
 ```bash
@@ -51,6 +52,7 @@ tags: CMAQ nchc_service
 ```
 
 ## Inputs
+
 - input tree
 
 ```bash
@@ -77,7 +79,9 @@ tags: CMAQ nchc_service
 `-- smoke
     `-- cmaq_cb06r3_ae7_aq.01-20181225.38.TW3-d4.BaseEms.ncf
 ```
+
 ### ICBC
+
 ```bash
 #kuang@master /nas2/cmaq2019/download/input/201901/grid03
 #$ ll icon/*9 bcon/*9
@@ -184,4 +188,24 @@ ln -s ${project.config}/${mydomain}/cctm.${myjob}/daily/CCTM_CGRID_${CAS}_201901
 148K    ./ocean/
 59G     ./smoke/
 ```
+
 - 單一個案、12個月估計：最大約需4.5T，至少1.5T
+
+## 檔案傳輸方案
+
+### scp
+
+- 傳統的scp會需要OTP，不適合自動化傳送。
+- 有最快的速度，適合大型檔案的傳送。
+- 建議還是需要先壓縮後再傳送
+
+### s3fs
+
+- 雖然官方提供了好幾個設置網路磁碟機的說明檔案(包括aws s3、google drive等等)，但雲端並非專用，能夠用到的頻寬非常有限，檔案傳送的速度非常慢。只能適用小型檔案。
+- 詳NCHC[利用 s3fs 掛載 S3 bucket 儲存使用說明](https://iservice.nchc.org.tw/download_file.php?f=BKLavuxfqIbbhpoWDidwFNkhwCvMFdKZFi5R94gI_b2NmqXxUH5S59lqbpAsUptGNdOMn6RLqs3mDwkFqjbo0g)
+- ~/.aws/credential檔案的設法，可以參考[AWS Command Line Interface -> User Guide for Version 2](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+### git
+
+- 國網環境中提供了git指令，經測試與github之間的聯繫還算正常速度，也沒有額外的安全需求。
+- 如果模擬可以簡化到圖檔層次，建議可以採用git方式直接上傳。

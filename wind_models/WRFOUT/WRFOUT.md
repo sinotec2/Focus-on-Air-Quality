@@ -42,7 +42,7 @@ tags: wrf wrf-python wrfcamx
 
 ### 整併wrfout
 
-- 成為全月檔案[add_xtime程式](../../GridModels/MCIP/add_xtime.md)：雖然此一方式證實不甚可行、串連的程式尚具有參考價值。
+- 成為全月檔案[add_xtime程式](../../GridModels/MCIP/5.add_xtime.md)：雖然此一方式證實不甚可行、串連的程式尚具有參考價值。
 - [對時間軸整併任意批次WRF之結果](1.acc_DM.md):其危險性詳見文中說明。
 
 ## 轉檔與顯示小工具

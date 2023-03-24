@@ -41,7 +41,7 @@ tags: CMAQ CWBWRF REAS
 
 ### 網格系統
 
-- 將d00設定如下(相較其他巢狀網格設定詳見[網格系統詳細定義](../../GridModels/MCIP/run_mcipMM_RR_DM#網格系統詳細定義))：
+- 將d00設定如下(相較其他巢狀網格設定詳見[網格系統詳細定義](../MCIP/3.run_mcipMM_RR_DM.md#網格系統詳細定義))：
   - 網格名稱GridName   = CWBWRF_15k
   - 內縮X0    =   3
   - 內縮Y0    =   3

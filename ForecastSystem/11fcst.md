@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Forecast System
+title: Forecast Systems
 nav_order: 11
 has_children: true
 permalink: /ForecastSystem/

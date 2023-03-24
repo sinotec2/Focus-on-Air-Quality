@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 5 days version
-parent: Forecast System
+parent: Forecast Systems
 nav_order: 1
 date: 2022-08-20
 last_modified_date: 2022-09-16 15:02:14

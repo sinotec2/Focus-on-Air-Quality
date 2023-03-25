@@ -43,7 +43,7 @@ last_modified_date: 2022-12-06 05:47:44
 ### 2022-06
 
 - 2022-06-25 `What's New` 功能一直沒有很好的解決方案。原因在於[JTD][JTD]主題的文件功能特性，並不適合太常、或太瑣碎的更新。總之、選擇了另闢一個部落格的平台（[TeXt主題]([TeXt](https://tianqi.name/jekyll-TeXt-theme/)）來放最新、暫存、發展中的文章，取名叫[Dr. Kuang's Utilities](https://sinotec2.github.io/FAQ/)。可以有標籤系統、有檔案的時間順序。如果存夠多可以有結構出來，再放到[JTD][JTD]的文件架構下，這樣能有比較有效的檔案管理、搜尋功能、目錄瀏覽也比較強。算是經過半年的摸索、在管理面的一項進步吧。在首頁置換了討論區的按鍵成為[部落格的入口](https://sinotec2.github.io/FAQ/)。(部落格也有回到FAQHome的按鍵)
-- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/) 也提出策略建議，請參考。
+- 2022-06-22 電廠造成環境中O<sub>3</sub>或PM局部濃度的降低(負的增量)，這在法規中的增量分析該如何看待?學界和開發單位(顧問公司)立場不一。公版模式的後處理是某顧問公司做的，這讓我們在審查時遭遇困難，因為教授不認為負值增量是開發單位的優惠。這一題關係到後處理該怎麼做，整理在 [增量濃度分析程序與檢討](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5.IncProc/) 也提出策略建議，請參考。
 - 2022-06-13 第一次用markdown來寫Jurnal paper，心得是...七零八落，套用先師名言：腦子裏整理清楚比整潔的桌面更容易。使用這麼多的工具還不如用腦子先想清楚。對環境議題有興趣的可以[點進去](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Disease/HRA_PMnO3/page8/)參考。
 - 2022-06-10 這一題算是遲到了很久。一直都想簡化濃度檔作圖的程序，至少傳檔案可以省些時間。請參考[m3nc檔案轉GIF](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif/#結果比較)
 - 2022-06-04 把[2018/3/31~4/8 東亞地區解析度15Km之沙塵暴模擬分析](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)整理在一起，也用[imageMagicks](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/imageMagicks)改善了VERDI圖檔留太多空白、背景重現的問題。
@@ -56,13 +56,13 @@ last_modified_date: 2022-12-06 05:47:44
 
 ### 2022-04 sinotec2.github.io、煙流與軌跡
 
-- 2022-04-19 疫情來了，有網友把每天公告的數據用leaflet寫了網頁公開在github.io。這引起我的興趣，也把一些靜態(廣播)網頁陸續搬到[https://sinotec2.github.io/](https://sinotec2.github.io/)，實則也想關閉httpd一下，好好找個防止[駭客攻擊](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/IPBlackNameList)的方法（不過這題基本上應該算是完成了@2022-04-23:）。
+- 2022-04-19 疫情來了，有網友把每天公告的數據用leaflet寫了網頁公開在github.io。這引起我的興趣，也把一些靜態(廣播)網頁陸續搬到[https://sinotec2.github.io/](https://sinotec2.github.io/)，實則也想關閉httpd一下，好好找個防止[駭客攻擊](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5.IncProc/IPBlackNameList)的方法（不過這題基本上應該算是完成了@2022-04-23:）。
 - 2022-04-09 新增了[煙流模式](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/)與[軌跡模式](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/)的筆記、遠端計算網站也新增了[CALPUFF](http://125.229.149.182/CALPUFF.html)以及[CALINE](http://125.229.149.182/CALINE3.html)的功能。這2個加州開始發展的模式有著天壤之別的命運，是否開放原始碼似乎是蠻關鍵的因素，引以為戒啊。
 
 ### 2022-02 千格模擬、iMac OS進版
 
 - 2022-02-20 公司新購了工作站，意味著更大範圍、更多網格數的模擬變得更可能實現。不過初步嘗試，同時執行CWBWRF_15及3k雙向巢狀網格的[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)作業並沒有成功，只得以[ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)及單向套疊進行，看起來是OK的。這表示對臺灣佔有80%貢獻的華東～華南地區，以後會跟臺灣本島同框進行空品模擬，這好像比較符合比例原則，有待爾後詳細的ISAM分析加以確認。
-- 2022-02-11 自從過年期間iMac更新到Monterey之後，遠端執行的[CGI系統無法運作](https://discussions.apple.com/thread/253579026)，AERMAP的前處理程式[gen_inp](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/gen_inp/)只得重新發布成讀取2020內政部[20M_dtm](https://data.gov.tw/dataset/138563)版本，不再以[EIO](https://pypi.org/project/elevation/)讀取30M_dtm，但還是維持本地執行[gdal_translate](https://gdal.org/programs/gdal_translate.html)的方案。(後續：參考[程式人生](https://www.796t.com/article.php?id=453663)建議重裝Apache/2.4.52，[遠端執行系統教學網站](http://125.229.149.182/aermods.html)終究還是修好了，不過也表示還欠很多相關遠端執行的筆記還沒有寫。重裝的筆記詳[monterey-pbms](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5IncProc/MacNetWorks/#monterey-pbms))
+- 2022-02-11 自從過年期間iMac更新到Monterey之後，遠端執行的[CGI系統無法運作](https://discussions.apple.com/thread/253579026)，AERMAP的前處理程式[gen_inp](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/gen_inp/)只得重新發布成讀取2020內政部[20M_dtm](https://data.gov.tw/dataset/138563)版本，不再以[EIO](https://pypi.org/project/elevation/)讀取30M_dtm，但還是維持本地執行[gdal_translate](https://gdal.org/programs/gdal_translate.html)的方案。(後續：參考[程式人生](https://www.796t.com/article.php?id=453663)建議重裝Apache/2.4.52，[遠端執行系統教學網站](http://125.229.149.182/aermods.html)終究還是修好了，不過也表示還欠很多相關遠端執行的筆記還沒有寫。重裝的筆記詳[monterey-pbms](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5.IncProc/MacNetWorks/#monterey-pbms))
 
 ### 2022-01 重作REAS
 

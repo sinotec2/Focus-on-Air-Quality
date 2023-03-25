@@ -65,7 +65,7 @@ py37                  *  /opt/anaconda3/envs/py37
 ## 程式系統架構與執行
 ### 整體架構
 - 目前只提供tar檔裏Performance目錄項下的檔案，如[2022年2月17日我國CMAQ公告模式教育訓練─後製工具操作教學](https://drive.google.com/drive/folders/1_GdUsRXQU1p8QhwwDbhz-nVhgUQBbftX)圖所示。
-- 理論上如果使用公版模式的所有條件，應該是不需要提供模擬驗證比對的相關圖表。只需要提供增量濃度分布圖([Air_Increment_tool](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/post_process/Air_Increment/))
+- 理論上如果使用公版模式的所有條件，應該是不需要提供模擬驗證比對的相關圖表。只需要提供增量濃度分布圖([Air_Increment_tool](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/post_process/4.Air_Increment/))
 - 此處乃就所提供的程式一一執行，以了解公版模式的定性、定量的表現，以及符合性能規範的程度。
 
 | ![post_process.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/post_process.png) |

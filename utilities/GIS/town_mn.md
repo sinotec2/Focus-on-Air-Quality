@@ -28,7 +28,7 @@ tags: choropleth GIS CMAQ CAMS CAM-chem LGHAP MOZART
 
 ### 從屬與歸併
 
-- 雖然檔案是網格化之nc檔，卻不必然是網格模式需要的前後處理程序(雖然[公版模式](../../GridModels/TWNEPA_RecommCMAQ/post_process/Air_Increment.md)之[Air_Increment][Air_Increment]確實有處理這題)，也不隸屬於某個特定的模式(標籤將所有的類網格模式都標上去)，看來這項工作不適合放在哪一項網格模式項下。
+- 雖然檔案是網格化之nc檔，卻不必然是網格模式需要的前後處理程序(雖然[公版模式](../../GridModels/TWNEPA_RecommCMAQ/post_process/4.Air_Increment.md)之[Air_Increment][Air_Increment]確實有處理這題)，也不隸屬於某個特定的模式(標籤將所有的類網格模式都標上去)，看來這項工作不適合放在哪一項網格模式項下。
 - 而就GIS而言，網格模式的格距解析度似乎又太大，不是一般GIS軟體處理的題目。
 - 引此類工作在網格系統改變、行政區域劃分更新等等狀況，都會需要更新計算程式，所以放在GIS項下應該比較容易找到。
 

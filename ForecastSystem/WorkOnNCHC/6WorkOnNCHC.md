@@ -45,3 +45,7 @@ tags: forecast CMAQ nchc_service m3nc2gif
 {:toc}
 
 ---
+
+[nchc]: https://iservice.nchc.org.tw/nchc_service/nchc_service_twn3_hpc.php "國研院國網中心台灣杉三號(Taiwania 3)為國內提供開放服務申請的最大CPU高速計算主機(2021年)，擁有900個計算節點。"
+[trans]: ../../wind_models/WRFOUT/2.TransWrfout.md "因應intel MPI轉換wrfout格式"
+[fs]: ../../GridModels/TWNEPA_RecommCMAQ/IO_Files.md#公版模式輸入輸出檔案及傳輸管理 "公版模式輸入輸出檔案及傳輸管理"

@@ -34,14 +34,11 @@ tags: CWBWRF forecast CMAQ GFS wrf CAMS wrf-python REAS crontab m3nc2gif
   - mcip轉接
   - 逐日CMAQ之模擬與nest down
   - 後處理的問題(詳見另目錄)
-- 因為時間太短，初始濃度的影響太大，東亞地區3天的現象不夠完整，因此這個版本就沒有繼續營運。轉到10天預報的版本。
+- 因為時間太短，初始濃度的影響太大，東亞地區3天的現象不夠完整，因此這個版本就沒有繼續營運。轉到[10天預報](../10daysVersion/10daysVersion.md)的版本。
 
-{: .fs-6 .fw-300 }
 
-## Table of contents
 {: .no_toc .text-delta }
 
-1. TOC
 {:toc}
 
 ---

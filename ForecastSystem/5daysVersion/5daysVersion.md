@@ -26,9 +26,9 @@ tags: CWBWRF forecast CMAQ GFS wrf CAMS wrf-python REAS crontab m3nc2gif
 
 ## 背景
 
-- 這個初期的版本整合了CAMS 5天預報、CWBWRF 3天預報，來進行wrf及CMAQ模擬。因為預報時間較短，計算需求較小，作為預報系統初期建立的版本，有其必要性與適當性。
+- 這個初期的版本整合了CWBWRF 3天預報(進行wrf FDDA)、CAMS 5天預報(當成CMAQ ICBC)、來進行東亞~台灣區域的空品模擬。 因為預報時間較短、下載及處理數據量及計算需求規模都較小一些，作為預報系統初期建立的版本，有其必要性與適當性。
 - 這個階段要(已)解決的問題
-  - 東亞ICBC之建立(詳見另目錄)
+  - 東亞ICBC之建立(詳見[另目錄]())
   - GFS數據下載與應用
   - CWBWRF數據之應用
   - mcip轉接

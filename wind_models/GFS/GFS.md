@@ -2,7 +2,7 @@
 layout: default
 title: 全球模式GFS
 parent: "wind models"
-nav_order: 99
+nav_order: 6
 has_children: true
 permalink: /wind_models/GFS/
 last_modified_date: 2022-08-05 13:37:05

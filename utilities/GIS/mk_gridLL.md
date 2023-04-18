@@ -33,6 +33,7 @@ tags: choropleth GIS
 
 ### IO's
 
+- 作業目錄：`/nas2/cmaqruns/2019TZPP/output/Annual/aTZPP/LGHAP.PM25.D001`
 - 引數：無
 - 網格模板
   - 不限制是哪個範圍區位或解析度，只是要能夠與geojson檔匹配

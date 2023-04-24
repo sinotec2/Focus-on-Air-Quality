@@ -21,13 +21,14 @@ tags: earth GFS CAMS graphics
 ---
 
 ## 背景
+
 - 雖然臭氧是光化煙霧的重要指標，也是本土石化業與汽機車污染所影響的空品項目，然而[earth.nullschool][ens]或是[windy][windy]目前都沒有貼上臭氧濃度之實例，原因不明，可能並不是很多人這麼瞭解臭氧的指標意義吧。
 - [ECWMF][ECWMF]的[CAMS][CAMS]全球空品預報有這個項目，解析度為0.4度每12小時更新，貼在背景1度的[GFS][GFS]風場，檔案小、反應快、有其便利性。
   - [CAMS][CAMS]有每半年更新的再分析數據、有近實時再分析、也有[空品預報數據][CAMS_FCST]，這三者雖然精確性以最後者最低，但時效性卻最高。
   - [GFS][GFS]雖然也有提供臭氧的混合比(var_O3MR)，但只有1000mb等壓面值，並沒有地面值，因此也無法應用。
   - [CAMS][CAMS]與[GFS][GFS]數據之間需合併的項目如表所示
 
-###   [CAMS][CAMS]與[GFS][GFS]數據之間需合併的項目
+### [CAMS][CAMS]與[GFS][GFS]數據之間需合併的項目
 
 項目|[CAMS][CAMS]|[GFS][GFS]|說明
 :-:|:-:|:-:|:-
@@ -37,9 +38,10 @@ tags: earth GFS CAMS graphics
 預報時間(leadtime_hour)|3小時|3小時|相同
 官方圖面|[哥白尼網站](https://atmosphere.copernicus.eu/charts/cams/ozone-forecasts)|[NWS](https://digital.weather.gov/)|後者沒有展示美國以外地區預報結果
 
-
 - 把下載與應用的流程自動化後，不僅可以提供檢視目前的氣流與光化煙霧跨境傳輸現象，也可以使高解析度空品即時模擬向前推動一大步。
+
 ### 色階的選擇
+
 - [earth.nullschool][ens]chem的色階多應用在原生性污染物，其特性為少數高值，大多位置濃度均不高。用在濃度差異不大的空品項目圖面顏色將會太少。
 - 參考[earth.nullschool][ens]的Particulates展現方式，基本上為一彩虹色階。
 

@@ -144,6 +144,41 @@ plt.show()
 
 ![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)
 
+### 程式下載
+
+{% include download.html content="從shp檔繪製空品測站的Voronoi分區圖：[Voronoi.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/Voronoi.py)" %}
+
+## 分區之應用
+
+### 公版模式範圍1公里解析度網格之分區
+
+- 網格座標詳[mk_gridLL](mk_gridLL.md)
+- 同樣使用`shapely.geometry.Point`的內設函數`within`來判斷。
+- 由
+
+```python 
+ll=pd.read_csv('/nas2/cmaqruns/2019TZPP/output/Annual/aTZPP/LGHAP.PM25.D001/gridLL.csv')
+ll['AQID']=0
+for i in range(len(ll)):
+    p=ll.Point[i]
+    p=Point([float(i) for i in p.replace('(','').strip(')').split()[1:]])
+    if not p.within(boundary_shape):continue
+    j=0
+    for b in dfv.geometry:
+        if p.within(b):
+            ll.AQID[i]=dfv.COUNTYSN[j]
+            break
+        j+=1
+
+import netCDF4
+fname='tempTW.nc'
+nc = netCDF4.Dataset(fname,'r+')
+nc['PM25_TOT'][0,0,:,:]=np.array(ll.AQID).reshape(393,276)
+```
+
+![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-03-49.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-00-42.png)
+|:-:|:-:|
+|<b>測站Voronoi分區圖</b>|<b>鄉鎮區範圍平均後之分布</b>|
 
 [^1]: Ditsuhi Iskandaryan(2023) Study and Prediction of Air Quality in Smart Cities through Machine Learning Techniques Considering Spatiotemporal Components, A dissertation presented for the degree of Doctor of Computer Science, Universitat Jaume I.([pdf](https://www.tdx.cat/bitstream/handle/10803/687959/2023_Tesis_Iskandaryan_Ditsuhi.pdf))
 [^2]: Deligiorgi, Despina, 及Kostas Philippopoulos. 「Spatial Interpolation Methodologies in Urban Air Pollution Modeling: Application for the Greater Area of Metropolitan Athens, Greece」, 2011. https://doi.org/10.5772/17734.

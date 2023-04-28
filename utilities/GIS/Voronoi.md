@@ -176,7 +176,7 @@ nc = netCDF4.Dataset(fname,'r+')
 nc['PM25_TOT'][0,0,:,:]=np.array(ll.AQID).reshape(393,276)
 ```
 
-![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-03-49.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-00-42.png)
+|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-03-49.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-00-42.png)|
 |:-:|:-:|
 |<b>測站Voronoi分區圖</b>|<b>鄉鎮區範圍平均後之分布</b>|
 

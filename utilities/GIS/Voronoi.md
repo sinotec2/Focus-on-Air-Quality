@@ -27,7 +27,7 @@ tags: GIS Voronoi
   - 詳細發展歷程見[wiki](https://zh.wikipedia.org/zh-tw/沃罗诺伊图)
   - 點狀資訊將會影響到著鄰近的資訊，所以「最靠近」、「距離最短」之類的問題，多半可以透過Voronoi Diagram 解決，如幾何、晶體學、建築學、地理學、氣象學、信息系統等許多領域有廣泛的應用。如空氣品質測站[^1][^2][^3][^5]。
 - Instance：
-  1. Sinica 勢力分佈圖 (Voronoi Diagram)@[PM2.5 開放資料入口網站](https://pm25.lass-net.org/GIS/voronoi/)
+  1. Sinica 勢力分佈圖 (Voronoi Diagram)@[PM2.5 開放資料入口網站][sinica]
   2. Visualising air quality data with Voronoi diagrams@[MODULO ERRORS](https://maths.straylight.co.uk/archives/1257)
   3. Mapping Air Quality Data with D3js - VORONOI by [Ian Johnson(2020)](https://observablehq.com/@enjalot/mapping-air-quality-data-with-d3-voronoi/2)
 
@@ -46,6 +46,14 @@ from shapely.ops import cascaded_union, unary_union
 from shapely.geometry import Point
 from geovoronoi.plotting import subplot_for_map, plot_voronoi_polys_with_points_in_area
 from geovoronoi import voronoi_regions_from_coords, points_to_coords
+```
+
+- python3.6早期的netCDF安裝過程需指定HDF5及netCDF4的包括檔頭(header of include files)環境變數，否則裝不起來
+
+```bash
+export NETCDF4_DIR=/opt/netcdf/netcdf4_gcc
+export HDF5_DIR=/opt/hdf/hdf5_gcc
+pip install netCDF4
 ```
 
 ### IO's
@@ -144,6 +152,9 @@ plt.show()
 
 ![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)
 
+- 大致還能保持方、圓形為主的分布，表示測站在範圍內還算均勻分配。
+- 細長條情況仍然存在(如屏東站)，然較[Sinica][sinica]少很多。
+
 ### 程式下載
 
 {% include download.html content="從shp檔繪製空品測站的Voronoi分區圖：[Voronoi.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/Voronoi.py)" %}
@@ -154,7 +165,6 @@ plt.show()
 
 - 網格座標詳[mk_gridLL](mk_gridLL.md)
 - 同樣使用`shapely.geometry.Point`的內設函數`within`來判斷。
-- 由
 
 ```python 
 ll=pd.read_csv('/nas2/cmaqruns/2019TZPP/output/Annual/aTZPP/LGHAP.PM25.D001/gridLL.csv')
@@ -176,6 +186,11 @@ nc = netCDF4.Dataset(fname,'r+')
 nc['PM25_TOT'][0,0,:,:]=np.array(ll.AQID).reshape(393,276)
 ```
 
+### 分區結果
+
+- 由於縣市界多半是以山稜分水嶺等自然界限為準，北宜、竹宜、中投、投花等交界似乎還能符合。
+
+
 |![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-03-49.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-00-42.png)|
 |:-:|:-:|
 |<b>測站Voronoi分區圖</b>|<b>鄉鎮區範圍平均後之分布</b>|
@@ -185,3 +200,5 @@ nc['PM25_TOT'][0,0,:,:]=np.array(ll.AQID).reshape(393,276)
 [^3]:Chen, Ling-Jyh, Yao Ho, Hu-Cheng Lee, Hsuan-Cho Wu, Hao Min Liu, Hsin-Hung Hsieh, Yu-Te Huang and Shih-Chun Candice Lung. 「An Open Framework for Participatory PM2.5 Monitoring in Smart Cities」. IEEE Access PP ([2017年7月6日](https://doi.org/10.1109/ACCESS.2017.2723919)): 1–1. .。
 [^4]: Markus Konrad markus.konrad@wzb.eu / post@mkonrad.net, March 2022, geovoronoi – a package to create and plot Voronoi regions inside geographic areas.
 [^5]: Liu, Xiaohong, Ying Zhu, Weili Wang及Fengmin Liu. 「3D GIS modeling of air pollution effects」. 收入 2010 3rd International Congress on Image and Signal Processing, 6:2714–17, 2010. https://doi.org/10.1109/CISP.2010.5647463.
+
+[sinica]: https://pm25.lass-net.org/GIS/voronoi/ "PM2.5 開放資料入口網站"

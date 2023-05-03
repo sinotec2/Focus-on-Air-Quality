@@ -33,7 +33,7 @@ tags: GIS Voronoi
 
 ## 程式說明
 
-- 程式運用到第3方模組[geovoronoi](https://github.com/WZBSocialScienceCenter/geovoronoi)[^4]，約定是python 3.1 <= 3.6。過高版本將無法執行。
+- 程式運用到第3方模組[geovoronoi](https://github.com/WZBSocialScienceCenter/geovoronoi)[^4]，綁定版本python 3.1 <= 3.6。過高版本將無法執行。
 
 ### 相依性
 
@@ -58,8 +58,9 @@ pip install netCDF4
 
 ### IO's
 
-- 讀取內政部之縣市界。從中讀取本島海岸線。
+- 讀取內政部之縣市界shp檔。從中讀取本島海岸線範圍(島內縣市範圍之聯集)。
   - 採排他法：去除金門澎湖與連江範圍之物件
+  - 本島縣市也可能有離島(綠島、蘭嶼、龜山、小琉球等)，因此以最大面積之多邊形為代表。這個邏輯需要每個縣市一一檢討。
 
 ```python
 shp_fname="/home/kuang/bin/TWN_COUNTY.shp"
@@ -82,8 +83,8 @@ for c in list(CNTYNAM)[:]:
         df0=gpd.GeoDataFrame(pd.concat([df0,b],ignore_index=True))
 ```
 
-- 讀取測站經緯度csv檔案
-  - 並將資料表寫成GeoDataFrame方便繪圖
+- 讀取[測站經緯度csv檔案](../../GridModels/POST/6.wsite.md#測站模擬值之讀取)
+  - 並將資料表寫成GeoDataFrame方便後續繪圖
 
 ```python
 stn=pd.read_csv('/nas1/cmaqruns/2016base/data/sites/sta_ll.csv')
@@ -119,6 +120,10 @@ df2=df2.reset_index(drop=True)
 
 ### 執行第3方模組
 
+- `points_to_coords`這個函數是否有必要值得挑戰，檢討原始碼發現也沒有太大的作用，就是將geometry形式的物件改成array而已。
+- 此處主要呼叫`voronoi_regions_from_coords`，會輸出2個字典(dict)，編號為其內定順序，並無意義，只是用來串聯點及多邊形。 
+  - 如果需要測點原來的ID，還是需要從[測站經緯度csv檔案](../../GridModels/POST/6.wsite.md#測站模擬值之讀取)來連結。
+
 ```python
 gdf_proj = df2.to_crs(boundary.crs)
 coords = points_to_coords(gdf_proj.geometry)
@@ -127,7 +132,7 @@ region_polys, region_pts = voronoi_regions_from_coords(coords, boundary_shape)
 
 ### 繪製本島之邊框範圍
 
-- 做為測試
+- 做為測試邊框及內部測點
 
 ```python
 boundary = gpd.read_file("mainisland.shp")
@@ -150,7 +155,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)
+![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-03-10-27-27.png)
+|:-:|:-:|
+|<b>環保署測站</b>|<b>環保署+微型感測</b>|
 
 - 大致還能保持方、圓形為主的分布，表示測站在範圍內還算均勻分配。
 - 細長條情況仍然存在(如屏東站)，然較[Sinica][sinica]少很多。

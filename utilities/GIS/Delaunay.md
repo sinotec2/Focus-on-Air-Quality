@@ -144,7 +144,7 @@ ax.set_title('Voronoi and Delaunay links of Taiwan Air Quality Station Networks'
 plt.show()
 ```
 
-![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-11-16-13-05.png)
+|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-11-16-13-05.png)|
 |:-:|:-:|
 |<b>環保署測站Voronoi</b>|<b>Voronoi+Delaunay</b>|
 

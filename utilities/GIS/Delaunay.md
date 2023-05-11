@@ -1,13 +1,13 @@
 ---
 layout: default
-title:  空品測站之Voronoi圖
+title:  空品測站之Delaunay圖
 parent: GIS Relatives
 grand_parent: Utilities
-last_modified_date: 2023-04-28 11:47:31
-tags: GIS Voronoi
+last_modified_date: 2023-05-11 16:01:26
+tags: GIS Voronoi Delaunay
 ---
 
-# 空品測站之Voronoi圖
+# 空品測站之Delaunay圖
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,13 +23,8 @@ tags: GIS Voronoi
 
 ## 背景
 
-- 測站網絡內之個別站能代表甚麼範圍的地區，即測站代表性問題，是測站測值解釋的重要議題。此處要運用的技巧稱之為「Voronoi沃羅諾伊」圖。
-  - 詳細發展歷程見[wiki](https://zh.wikipedia.org/zh-tw/沃罗诺伊图)
-  - 點狀資訊將會影響到著鄰近的資訊，所以「最靠近」、「距離最短」之類的問題，多半可以透過Voronoi Diagram 解決，如幾何、晶體學、建築學、地理學、氣象學、信息系統等許多領域有廣泛的應用。如空氣品質測站[^1][^2][^3][^5]。
-- Instance：
-  1. Sinica 勢力分佈圖 (Voronoi Diagram)@[PM2.5 開放資料入口網站][sinica]
-  2. Visualising air quality data with Voronoi diagrams@[MODULO ERRORS](https://maths.straylight.co.uk/archives/1257)
-  3. Mapping Air Quality Data with D3js - VORONOI by [Ian Johnson(2020)](https://observablehq.com/@enjalot/mapping-air-quality-data-with-d3-voronoi/2)
+- Delaunay Graph[^1]這個主題主要目的在建立各個測站(node)之間的關聯性(edge)，當然我們可以建立倆倆的關聯，但我們也知道那樣數量太過龐大，而且不切實際。
+- 一般在輸入CNN會使用[networkx(nx)](https://networkx.org/)輸出的json檔案，而nx官網介紹地理方面應用的範例中，就是以
 
 ## 程式說明
 
@@ -164,7 +159,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-03-10-27-27.png)
+![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-11-16-13-05.png)
 |:-:|:-:|
 |<b>環保署測站</b>|<b>環保署+微型感測</b>|
 
@@ -175,46 +170,7 @@ plt.show()
 
 {% include download.html content="從shp檔繪製空品測站的Voronoi分區圖：[Voronoi.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/Voronoi.py)" %}
 
-## 分區之應用
 
-### 公版模式範圍1公里解析度網格之分區
-
-- 網格座標詳[mk_gridLL](mk_gridLL.md)
-- 同樣使用`shapely.geometry.Point`的內設函數`within`來判斷。
-
-```python 
-ll=pd.read_csv('/nas2/cmaqruns/2019TZPP/output/Annual/aTZPP/LGHAP.PM25.D001/gridLL.csv')
-ll['AQID']=0
-for i in range(len(ll)):
-    p=ll.Point[i]
-    p=Point([float(i) for i in p.replace('(','').strip(')').split()[1:]])
-    if not p.within(boundary_shape):continue
-    j=0
-    for b in dfv.geometry:
-        if p.within(b):
-            ll.AQID[i]=dfv.COUNTYSN[j]
-            break
-        j+=1
-
-import netCDF4
-fname='tempTW.nc'
-nc = netCDF4.Dataset(fname,'r+')
-nc['PM25_TOT'][0,0,:,:]=np.array(ll.AQID).reshape(393,276)
-```
-
-### 分區結果
-
-- 由於縣市界多半是以山稜分水嶺等自然界限為準，北宜、竹宜、中投、投花等交界似乎還能符合。
-
-
-|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-03-49.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/ef19481462c9664879c757e4faa40a691b0d0a62/attachments/2023-04-28-15-00-42.png)|
-|:-:|:-:|
-|<b>測站Voronoi分區圖</b>|<b>鄉鎮區範圍平均後之分布</b>|
-
-[^1]: Ditsuhi Iskandaryan(2023) Study and Prediction of Air Quality in Smart Cities through Machine Learning Techniques Considering Spatiotemporal Components, A dissertation presented for the degree of Doctor of Computer Science, Universitat Jaume I.([pdf](https://www.tdx.cat/bitstream/handle/10803/687959/2023_Tesis_Iskandaryan_Ditsuhi.pdf))
-[^2]: Deligiorgi, Despina, 及Kostas Philippopoulos. 「Spatial Interpolation Methodologies in Urban Air Pollution Modeling: Application for the Greater Area of Metropolitan Athens, Greece」, 2011. https://doi.org/10.5772/17734.
-[^3]:Chen, Ling-Jyh, Yao Ho, Hu-Cheng Lee, Hsuan-Cho Wu, Hao Min Liu, Hsin-Hung Hsieh, Yu-Te Huang and Shih-Chun Candice Lung. 「An Open Framework for Participatory PM2.5 Monitoring in Smart Cities」. IEEE Access PP ([2017年7月6日](https://doi.org/10.1109/ACCESS.2017.2723919)): 1–1. .。
-[^4]: Markus Konrad markus.konrad@wzb.eu / post@mkonrad.net, March 2022, geovoronoi – a package to create and plot Voronoi regions inside geographic areas.
-[^5]: Liu, Xiaohong, Ying Zhu, Weili Wang及Fengmin Liu. 「3D GIS modeling of air pollution effects」. 收入 2010 3rd International Congress on Image and Signal Processing, 6:2714–17, 2010. https://doi.org/10.1109/CISP.2010.5647463.
+[^1]: 在數學和計算幾何領域，平面上的點集P的德勞內三角剖分是一種是点P的一个三角剖分DT，使在P中沒有點嚴格處於 DT(P) 中任意一個三角形外接圓的內部。德勞內三角剖分最大化了此三角剖分中三角形的最小角，換句話，此算法儘量避免出現「極瘦」的三角形。此算法命名來源於鮑里斯·德勞內(B. Delaunay)，以紀念他自1934年在此領域的工作。([wiki](https://zh.wikipedia.org/wiki/德勞內三角剖分))。
 
 [sinica]: https://pm25.lass-net.org/GIS/voronoi/ "PM2.5 開放資料入口網站"

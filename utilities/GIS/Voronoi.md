@@ -48,6 +48,16 @@ from geovoronoi.plotting import subplot_for_map, plot_voronoi_polys_with_points_
 from geovoronoi import voronoi_regions_from_coords, points_to_coords
 ```
 
+- 安裝過程有些順序需要遵守
+
+```python
+ 1381  pip install --user fiona
+ 1382  pip install --user pyproj
+ 1383  pip install --user fiona
+ 1384  pip install --user geovoronoi
+ 1390  pip install --user descartes
+```
+
 - python3.6早期的netCDF安裝過程需指定HDF5及netCDF4的包括檔頭(header of include files)環境變數，否則裝不起來
 
 ```bash

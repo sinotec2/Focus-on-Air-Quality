@@ -23,10 +23,11 @@ tags: GIS Voronoi Delaunay
 
 ## 背景
 
-- Delaunay Graph(DG)[^1]這個主題主要目的在建立各個測站(node)之間的關聯性(edge)。
+- Delaunay Triangulation(DT)[^1]這個主題主要目的在建立各個測站(node)之間的關聯性(edge)。
   - 當然我們可以建立倆倆的關聯，但我們也知道那樣數量太過龐大，而且不具太大的物理意義，會花費太多力氣在無謂的計算上。
   - 我們也可以定義測站的「鄰近性」，但恐怕不是一個固定的數字可以清楚定義，或具有任何客觀性。
-- 一般在輸入NN會使用[networkx(nx)](https://networkx.org/)輸出的json檔案，而nx官網介紹地理方面應用的[範例][dg]中，就是以DG來做為範例。
+  - 篩選沒有必要計算的組合，在graph sample and aggregate([graphSAGE][^10])過程中也是非常必要、省時的關鍵點。
+- 一般在輸入NN會使用[networkx(nx)](https://networkx.org/)輸出的json檔案，而nx官網介紹地理方面應用的[範例][dg]中，就是以DT來做為範例。
 - 學術上有不少的討論，可以詳見Deligiorgi and Philippopoulos(2011)[^3]、王友群與陳冠瑋(2017)[^5]、Li and Shen(2023)[^6]、Bruce Denby et al.(2005)[^7]、Boso et al.(2022)[^8]、與Diego Mendez and Miguel A. Labrador(2013)[^9]，ChatGPT的說明也鼓舞了這方面的應用[^2]。
 
 ## 模組安裝
@@ -163,6 +164,7 @@ plt.show()
 [^7]: Bruce Denby, Jan Horálek, Sam Erik Walker, Jaroslav Fiala (2005). Interpolation and assimilation methodsfor European scale air qualityassessment and mappingPart I: Review and recommendations. The European Topic Centre on Air and Climate Change.[ETC/ACC Technical Paper 2005/7](https://www.eionet.europa.eu/etcs/etc-atni/products/etc-atni-reports/etcacc_technpaper_2005_7_spatial_aq_interpol_part_i/@@download/file/ETCACC_TechnPaper_2005_7_SpatAQ_Interpol_Part_I.pdf)
 [^8]: Boso, À., Martínez, A., Somos, M., Álvarez, B., Avedaño, C., Hofflinger, Á. (2022). No Country for Old Men. Assessing Socio-Spatial Relationships Between Air Quality Perceptions and Exposures in Southern Chile. Appl. Spatial Analysis 15, 1219–1236. [doi](https://doi.org/10.1007/s12061-022-09446-2)
 [^9]: Diego Mendez, Miguel A. Labrador (2013). On Sensor Data Verification for Participatory Sensing Systems - ProQuest. [JOURNAL OF NETWORKS 8, 576.](https://www.proquest.com/openview/afc2ebb0ff60953101af08e3e6f54e15/1?pq-origsite=gscholar&cbl=136095)
-
+[^10]: GraphSAGE: Scaling up Graph Neural Networks, Introduction to GraphSAGE with PyTorch Geometric, by Maxime Labonne(2022), Towards Data Science, Published in Towards Data Science, Apr 21, [2022][sage]
 
 [dg]: https://networkx.org/documentation/latest/auto_examples/geospatial/plot_delaunay.html#sphx-glr-auto-examples-geospatial-plot-delaunay-py "Delaunay graphs from geographic points"
+[sage]: https://towardsdatascience.com/introduction-to-graphsage-in-python-a9e7f9ecf9d7 "GraphSAGE: Scaling up Graph Neural Networks"

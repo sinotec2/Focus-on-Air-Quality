@@ -35,7 +35,8 @@ twn=twn.loc[twn.TOWNCODE.map(lambda s:s in lastTwn)]
 df=df.loc[df.TOWNCODE.map(lambda s:s in lastTwn)].reset_index(drop=True)
 if len(df)>len(lastTwn):
   df=df[:len(lastTwn)]
-df_itm={i:j for i,j in zip(list(df.TOWNCODE),list(df[itm_nam]))}
+df_itm={i:0 for i in twn.TOWNCODE}
+df_itm.update({i:j for i,j in zip(list(df.TOWNCODE),list(df[itm_nam]))})
 twn[itm_nam]=[df_itm[i] for i in twn.TOWNCODE]
 
 #plotting

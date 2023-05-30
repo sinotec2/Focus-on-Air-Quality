@@ -1,7 +1,7 @@
 ---
 layout: default
 title: geoplot行政區範圍等值圖
-parent: geoplot Programs
+parent: matplotlib Programs
 grand_parent: Graphics
 has_children: true
 date: 2023-05-30

@@ -5,7 +5,7 @@ parent: Graphics
 grand_parent: Utilities
 has_children: true
 permalink: /utilities/Graphics/matplotlib
-last_modified_date: 2022-02-05 09:43:40
+last_modified_date: 2023-05-30 11:09:00
 tags: matplotlib graphics
 ---
 

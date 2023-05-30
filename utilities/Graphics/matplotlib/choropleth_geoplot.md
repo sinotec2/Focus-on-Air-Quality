@@ -133,4 +133,4 @@ plt.show()
 
 ## 程式下載
 
-{% include download.html content="[csv_choro.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/matplotlib/csv_choro.py") %}
+{% include download.html content="[csv_choro.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/matplotlib/csv_choro.py)" %}

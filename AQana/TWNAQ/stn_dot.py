@@ -30,7 +30,6 @@ if len(old)>0:
 if len(new)>0:
   df=df.loc[df.stn.map(lambda x:x not in new)].reset_index(drop=True)
 nt,ns,ni=len(set(df.ymd)),len(set(df.stn)),len(col)
-var=np.zeros(shape=(ni,nt,ns))
 if len(df)!=nt*ns:
 #sys.exit('time or station data missing!')
   pv=pivot_table(df,index='ymd',values='stn',aggfunc='count').reset_index()
@@ -46,6 +45,7 @@ if len(df)!=nt*ns:
 df=df.sort_values(['ymd','stn']).reset_index(drop=True)
 df=df.fillna(-999)
 dta=df.values
+var=np.zeros(shape=(ni,nt,ns))
 m=0
 for t in range(nt):
   var[:,t,:]=dta[m:m+ns,2:].T
@@ -81,5 +81,5 @@ for c in col:
   dd[c]=res[i,:,:].flatten()
   dd.loc[dd[c]<0,c]=np.nan
   i+=1
-dd=dd.loc[dd.TOWNCODE>=0].reset_index(drop=True)
+dd=dd.loc[dd.TOWNCODE>0].reset_index(drop=True)
 dd.set_index('ymd').to_csv(yr+'res.csv')

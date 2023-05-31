@@ -66,7 +66,7 @@ YMD,TOWNCODE,PM25,COUNTYCODE,COUNTYNAME,TOWNNAME
   1. 要繪製的項目名稱(在csv中的欄位名稱)，會認大小寫
   2. csv檔案名稱
      1. 一般的pandas.DataFrame。
-     2. 必須有TOWNCODE欄位。其內容可以是整數，程式會字型轉成8碼的字串
+     2. 必須有TOWNCODE欄位。其內容可以是整數，程式會自動轉成8碼的字串
 - 內政部鄉鎮區分界檔
 - 輸出
   - 目前程式只提供圖面檢視

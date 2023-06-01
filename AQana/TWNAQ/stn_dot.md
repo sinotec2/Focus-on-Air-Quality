@@ -24,11 +24,17 @@ tags: python
 
 - 測站及鄉鎮區都是空間上的維度，但因為同一個鄉鎮區有可能有2個以上的測站，需要平均。還有更多的鄉鎮區並沒有測站，這需要內、外插。
 - 平均方式：此處使用內積`np.dot`方式，以加快計算速度。
-- 內、外插方式有很多，此處以鄰近測站之值做為沒有測站鄉鎮區之值，依據[town_aqstEnew.csv][town_aqstEnew.csv]之關聯。
+  - 內積的定義`A[m,n] o B[n,l] = C[m,l]`(`o`為內積符號dot)
+  - 讓`n`為測站之維度，`l`為鄉鎮區。其他不改變的維度如日期、測項序等，則放在`m`。
+  - 讓`B[n,l]`中的第1個維度的總和為`1`，如此就不會變化`A`的值，其結果為`A`的加權平均(此處各測站的加權都相同)。
+- 內、外插方式有很多，此處以鄰近測站之值做為沒有測站鄉鎮區之值，依據[town_aqstEnew.csv][town_aqstEnew.csv]之關聯(參考[CAM-chem模式結果之校正](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/2.correc))。
 - 時間上，本程式讀取全年日均值處理結果，詳[說明](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/daymean/)。
-- 處理結果的檢視：參[geoplot繪製行政區範圍等值圖](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/matplotlib/choropleth_geoplot/)
+- 處理結果
+  - 以外積方式，將日期及鄉鎮區的維度向量，與1維的單位矩陣進行外積(`np.outer`)，以張開成維2維的矩陣，在壓平成為資料表格式輸出。
+  - 矩陣轉資料表過去的迴圈作法可以參考[移動源排放檔案之轉檔-整併與輸出][lineinc]
+  - 檢視：參[geoplot繪製行政區範圍等值圖][geoplot]
 
-## 程式重點說明
+## 程式基本
 
 ### IO's
 
@@ -69,11 +75,12 @@ if len(new)>0:
   df=df.loc[df.stn.map(lambda x:x not in new)].reset_index(drop=True)
 ```
 
+## 程式重點說明
 
 ### 測站缺值之填入
 
 - 在排序、轉成矩陣之前，需對測站是否不存在造成缺值情況進行處理。
-- 此處填入`np.nan`，在一併以`fillna`全部改成負值。
+- 此處以`pivot_table`進行計數，篩出測站數不足的日數，先填入`np.nan`，再一併以`fillna`全部將`np.nan`改成負值，以利後續遮罩之應用。
 
 ```python
 nt,ns,ni=len(set(df.ymd)),len(set(df.stn)),len(col)
@@ -137,7 +144,9 @@ res=np.ma.dot(var,fac)
 
 ### 將矩陣轉為資料表
 
-- 使用`np.outer`將維度向量(日期、鄉鎮區代碼)重複足夠多次，以符合二者長度的乘積。
+- 資料操作使用矩陣，表示的資料的維度具有規則性，即使改成資料表的型態，其內容也具有重複性，[過去][lineinc]即以迴圈方式來進行複製。
+- 此處使用1維的單位矩陣(unit matrix、`np.ones`)即單位向量、與維度向量進行外積(`np.outer`)，將維度向量(日期、鄉鎮區代碼)重複足夠多次，以使壓平後的總長度符合二者長度的乘積。
+- 外積的定義`A[m] x B[n] = C[m,n]`(`x`為外積符號cross)
 
 ```python
 ymd=list(set(df.ymd));ymd.sort()
@@ -156,6 +165,13 @@ for c in col:
   i+=1
 ```
 
+1. 最終的維度順序仍然保持[日期,鄉鎮區]
+2. 外積2個向量、長度依序為m,n，則將會產生一個[m,n]的矩陣。因此順序非常重要。
+   1. 日期向量(`ymd[m]`)外積時，必須在前、單位向量(`one[n]`)在後
+   2. 鄉鎮區向量外積時、必須單位向量(`one[m]`)在前、鄉鎮區向量(`cod[n]`)在後
+   3. 配合的單位向量長度，也必須有相應的長度。
+3. 相較過去[迴圈的做法][lineinc]，此法減省非常多時間。
+
 ### 結果輸出
 
 ```python
@@ -163,8 +179,17 @@ dd=dd.loc[dd.TOWNCODE>0].reset_index(drop=True)
 dd.set_index('ymd').to_csv(yr+'res.csv')
 ```
 
+## 結果檢視
+
+- 因只有測站附近的鄉鎮區有值，位相鄰測站的其他鄉鎮區，則為空白
+- 繪圖程式參[geoplot繪製行政區範圍等值圖][geoplot]
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-01-09-36-35.png)
+
 ## 程式下載
 
 {% include download.html content="[stn_dot.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/TWNAQ/stn_dot.py)" %}
 
 [town_aqstEnew.csv]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/town_aqstEnew.csv "鄉鎮區與測站編號的對照表"
+[geoplot]: https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/matplotlib/choropleth_geoplot/ "geoplot繪製行政區範圍等值圖"
+[lineinc]: https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/lineinc/#整併與輸出 "移動源排放檔案之轉檔-整併與輸出"

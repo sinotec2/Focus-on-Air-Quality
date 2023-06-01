@@ -23,9 +23,10 @@ tags: python
 ## 背景
 
 - 環保署測站檔案是個以日為單位的文字檔案，過去如果要計算日均值，需以迴圈計算。如果還遇到要計算風速風向的向量平均，分屬檔案不同段落，須逐一檢視。
-- 本程式的特色是只有在計算向量平均值時，才對日的時間軸進行迴圈計算。
+- 本程式的特色是將數據以`np.array`型式批次處理，並且只有在計算向量平均值時，才對日的時間軸進行迴圈計算。
+- 測站日均值計算結果可作為地區整併之基礎，如[鄉鎮區平均值計算](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/stn_dot/)、空品區極值之計算等等。
 
-## 程式重點說明
+## 程式基本
 
 ### IO's
 
@@ -99,29 +100,30 @@ for fname in fnames:
 3. 先開啟一個空白的資料表，包括了日期、測站編號、以及各個測項名稱之欄位。
 4. 經測試，雖然原始檔是各文字格式檔案，似乎只有簡單跳行指令，但實際上可能會有其他內碼無法辨識，因此以`'rb'`格式讀取較為妥當。
 
+## 程式重點說明
+
 ### 原始檔資料表化
 
 - 原始檔案的特性
   - 以日期與測項為縱軸、以小時為橫軸的24小時值表
-  - 行內以逗號或空格分開(前者為大多數)
+  - 行內以逗號或空格分開(前者為大多數)，再沒有其他分隔方式。
 - 策略上除了保持縱軸的順序之外，橫軸須先進行平均，以簡化表格。
 
 ```python
-  if ',' not in fn[0]:
-    itms,ymds=(np.array([int(line.split()[j]) for line in fn],dtype=int) for j in [1,2])
-    cons=np.array([np.array([i.strip('\n') for i in line.split(',')[3:]], dtype=str) for line in fn])
-  else:
-    n=3
+  if ',' in fn[0]:
     itms,ymds=(np.array([int(line.split(',')[j]) for line in fn],dtype=int) for j in [2,3])
     cons=np.array([np.array([i.strip('\n') for i in line.split(',')[4:]], dtype=str) for line in fn])
+  else:
+    itms,ymds=(np.array([int(line.split()[j]) for line in fn],dtype=int) for j in [1,2])
+    cons=np.array([np.array([i.strip('\n') for i in line.split(',')[3:]], dtype=str) for line in fn])
   if ymds.mean()<20000000:ymds+=20000000
   for m in marks:
     cons=np.where(cons==m,'-999',cons)
 ```
 
 - `itms,ymds`為測項序位、日期等2欄位
-- `cons`為監測成果，為2維矩陣。因監測成果可能會有缺值、也有以全形空白來替代者。需先挑出替換。並加上遮罩(mask)，以避免造成平均時的錯誤。
-- 此處即以平均的方式，消除其第二個維度，成為形狀與`itms,ymds`一樣的向量。
+- `cons`為監測成果，為2維矩陣。因監測成果可能會有缺值、也有以全形空白、星號(`mark`)等來替代者。需先挑出替換。並加上遮罩(mask)，以避免在平均時造成錯誤。
+- 此處即以`np.ma.mean`平均的方式，消除其第二個維度，成為形狀與`itms,ymds`一樣的向量。
 
 ```python
   cons=np.array(cons,dtype=float)
@@ -137,8 +139,8 @@ for fname in fnames:
 
 ### 向量平均的風速風向
 
-- 環保署測站的風項紀錄會出現888的錯值
-- 應為靜風測值不具代表性
+- 環保署測站的風向紀錄會出現**888**的錯值
+- 應為靜風測值、不具代表性
 - 此處將該小時的風速設為0，將不會對平均值產生影響
 
 ```python

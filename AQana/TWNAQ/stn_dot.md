@@ -30,7 +30,7 @@ tags: python
 - 內、外插方式有很多，此處以鄰近測站之值做為沒有測站鄉鎮區之值，依據[town_aqstEnew.csv][town_aqstEnew.csv]之關聯(參考[CAM-chem模式結果之校正](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/2.correc))。
 - 時間上，本程式讀取全年日均值處理結果，詳[說明](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/daymean/)。
 - 處理結果
-  - 以外積方式，將日期及鄉鎮區的維度向量，與1維的單位矩陣進行外積(`np.outer`)，以張開成維2維的矩陣，在壓平成為資料表格式輸出。
+  - 以外積方式，將日期及鄉鎮區的維度向量，與1維的單位矩陣進行外積(`np.outer`)，以張開成為2維的矩陣，再壓平成為資料表格式輸出。
   - 矩陣轉資料表過去的迴圈作法可以參考[移動源排放檔案之轉檔-整併與輸出][lineinc]
   - 檢視：參[geoplot繪製行政區範圍等值圖][geoplot]
 
@@ -128,8 +128,8 @@ seqn={seq[i]:i for i in range(len(seq))}
 
 ### 矩陣內積之執行
 
-- 疏鬆矩陣fac的形成
-- 因var矩陣中存在有缺值，是個遮蔽矩陣，因此必須使用`np.ma.dot`，否則只要有一個`nan`值，該日全部的鄉鎮區平均結果都會是`nan`
+- 形成疏鬆矩陣fac，個別鄉鎮區的總和為1。
+- 因`var`矩陣中存在有缺值，是個遮蔽矩陣，因此必須使用`np.ma.dot`，否則只要有一個`nan`值，該日全部的鄉鎮區平均結果都會是`nan`
 
 ```python
 fac=np.zeros(shape=(ns,nw))

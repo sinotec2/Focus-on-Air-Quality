@@ -164,7 +164,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-03-10-27-27.png)
+|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-04-28-10-57-17.png)|![](https://raw.githubusercontent.com/sinotec2/FAQ/main/attachments/2023-05-03-10-27-27.png)|
 |:-:|:-:|
 |<b>環保署測站</b>|<b>環保署+微型感測</b>|
 

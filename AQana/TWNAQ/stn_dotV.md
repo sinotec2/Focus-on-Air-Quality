@@ -88,9 +88,9 @@ res=np.ma.dot(res1,fac2)
 
 - discrete color scale
 
-|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-14-33.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/mainattachments/2023-06-02-10-19-25.png)|
-|:-:|:-:|
-|stn_dot結果|stn_dotV結果|
+|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-14-33.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-19-25.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-24-20.png)|
+|:-:|:-:|:-:|
+|stn_dot結果|stn_dotV結果|LGHAP2009結果|
 
 ## 程式下載
 

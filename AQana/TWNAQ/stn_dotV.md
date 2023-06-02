@@ -80,7 +80,15 @@ res=np.ma.dot(res1,fac2)
 
 ## 處理結果比較
 
+- hue color scale
+
 |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-01-14-56-35.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-01-14-53-38.png)|
+|:-:|:-:|
+|stn_dot結果|stn_dotV結果|
+
+- discrete color scale
+
+|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-14-33.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/mainattachments/2023-06-02-10-19-25.png)|
 |:-:|:-:|
 |stn_dot結果|stn_dotV結果|
 

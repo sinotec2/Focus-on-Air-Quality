@@ -86,7 +86,7 @@ res=np.ma.dot(res1,fac2)
 |:-:|:-:|
 |stn_dot結果|stn_dotV結果|
 
-- discrete color scale
+- discrete color scale(參考[m3nc檔案轉GIF-浮動的濃度等級](../../utilities/Graphics/wrf-python/4.m3nc2gif.md#浮動的濃度等級))
 
 |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-14-33.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-19-25.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-02-10-24-20.png)|
 |:-:|:-:|:-:|

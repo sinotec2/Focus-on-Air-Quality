@@ -124,6 +124,9 @@ def click_run_save(d,t,w,s1,s2):
 driver = webdriver.Firefox(executable_path="/usr/bin/geckodriver")
 driver.get("https://1968.freeway.gov.tw/tp_future")
 ```
+注意事項
+1. 如果是遠端工作站，需要讓firefox能夠呈現畫面的DISPLAY設定，如mobaxterm的XWINDOW。
+2. 如果是在一般PC上，也必須保持不關機。
 
 ### 停等的爬蟲
 
@@ -151,8 +154,8 @@ df=DataFrame({i:[] for i in col})
 d0=DataFrame({i:[0] for i in col})
 d0.set_index('date').to_csv('tp_future.csv')
 i=0
-for d in range(1,2):
-  for t in range(1,49):
+for d in range(1,10):
+  for t in range(1,50,7):
     for w in range(1,11):
       for s1 in range(SegOfWay[w]-1):
         s2=s1+1
@@ -161,6 +164,7 @@ for d in range(1,2):
         df.iloc[i,1:]=[t,w,s1,s2]+lags
         d0.iloc[0,:]=[d,t,w,s1,s2]+lags
         i+=1
+        d0.set_index('date').to_csv('tp_future.csv',header=None,mode='a')
         time.sleep(1)
 
         lags=click_run_save(d,t,w,s2,s1)
@@ -183,6 +187,95 @@ d0.set_index('date').to_csv('tp_future.csv')
 ...
         d0.set_index('date').to_csv('tp_future.csv',header=None,mode='a')
 ```
+
+## 後處理與結果分析
+
+### 維度的考量
+
+由於車行時間之預報結果共有6個維度(日期、小時、路線、*起點*、*迄點*、*方向*)太過複雜，檢討如下：
+1. 起、迄點雖然具有空間的解析度的意義，但因
+   1. 起、迄匝道如果太近，車行時間又以分鐘計，有效位數不足，需要長一點的距離。
+   2. TEDS本身的解析度3公里，且具有空間的變化，現在缺的是未來的時間變化。
+   3. 因這兩個維度太長(228個匝道，國1、國3也有84~85個匝道，2個維度張開動輒上千)，會消耗太多下載的時間，未及時在模式開始執行前完成，失去預報的意義。
+   4. 經考量，將此2個維度取消，以路線端點之總車行時間予以均化。
+2. 方向：由於高速公路車流具有顯著的方向性(晨昏小時、放收假日期的車流會相反)，然而在模式模擬中並不會呈現，因此還是需要下載，但下載後須先將其平均。
+
+```python
+colv='t1   t2   t3   t4   t5   t6   t7'.split()
+coli='date  hr  highway'.split()
+ave=pivot_table(df0,index=coli,values=colv,aggfunc=np.mean).reset_index()
+```
+
+### 字串解讀
+
+- 預報結果的行車時間是字串(如4小時32分、02分)，需統一將其轉成整數分鐘，以利平均值之計算。
+- 作法分成2段，有小時者先處理，避免先處理分鐘會損壞規則
+
+```python
+for c in ["t"+str(i) for i in range(1,8)]:
+  idx=df.loc[df[c].map(lambda t: '小時' in t)].index
+  ll=[int(s.split('小時')[0])*60+int(s[-3:-1]) for s in df.loc[idx,c]]
+  df.loc[idx,c]=ll
+for c in ["t"+str(i) for i in range(1,8)]:
+  idx=df.loc[df[c].map(lambda t: '分' in str(t))].index
+  ll=[int(s.split('分')[0]) for s in df.loc[idx,c]]
+  df.loc[idx,c]=ll
+```
+
+### 陣列轉置
+
+- 由於網站一次預報出7個出發時間的結果，這點可以減省小時迴圈的次數，但結果需要轉置。
+- 轉置的作法參考[環保署測站數據鄉鎮區平均值之計算](../../../AQana/TWNAQ/stn_dot.md)的外積(vector cross)的作法，將座標軸項量予以外積3次，以取得資料表的引數欄位(`coli`)。
+- 3個維度向量之宣告
+
+```python
+dates=np.arange(1,11) #未來10天
+hrs=np.arange(1,50) #每半小時一個預報，1天有49筆(第49筆重複)
+hws=np.arange(1,11) #10條路線 國1,高架,國2,國3,國3甲,國4,國5,國6,國8,國10
+one=np.ones(shape=(49*10),dtype=int)
+one1=np.ones(shape=(10),dtype=int)
+```
+
+- 3個引數欄位之張量與資料表
+
+```python
+dd=np.outer(dates,one).flatten()
+h1=np.outer(one1,hrs).flatten()
+hh=np.outer(h1,one1).flatten()
+ww=np.outer(one,hws).flatten()
+df=DataFrame({'date':dd,"hr":hh,"highway":ww})
+```
+
+- 引數欄位完成後，將橫向的7個欄位(`colv`)依序填入空格中
+
+```python
+df['mins']=0
+for h in range(1,50,7):
+  idx=a.loc[a.hr==h].index
+  for i in range(7):
+    t=h+i
+    c='t'+str(i+1)
+    df.loc[df.hr==t,'mins']=list(a.loc[idx,c])
+```
+
+### 使用powerBI進行分析
+
+多維度動態圖形檢視乃powerBI的強項
+
+總體來說，國1國3因為距離較長，全路線有最長的行車時間，其次則為國5與五楊高架。就日期來說，6/15(星期四)預測會有較長行車時間，原因未明。而小時變化則顯示明顯的昏峰。
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-03-20.png)
+---
+
+國1工作日(周一)：有顯著的晨峰上班車潮
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-12-28.png)
+---
+
+周末現象：國3、國5、國6等具有顯著的周日車潮，特別是在昏峰。此預測符合現實。
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-09-21.png)
+---
 
 ## 程式下載
 

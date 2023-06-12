@@ -128,6 +128,7 @@ def click_run_save(d,t,w,s1,s2):
 driver = webdriver.Firefox(executable_path="/usr/bin/geckodriver")
 driver.get("https://1968.freeway.gov.tw/tp_future")
 ```
+
 注意事項
 1. 如果是遠端工作站，需要讓firefox能夠呈現畫面的DISPLAY設定，如mobaxterm的XWINDOW。
 2. 如果是在一般PC上，也必須保持不關機。
@@ -144,7 +145,6 @@ driver.get("https://1968.freeway.gov.tw/tp_future")
   3. 迴圈之間，4～30秒之間取隨機值停等(`time.sleep(np.random.randint(low=5,high=30))`)。以規避對方防火牆的分析。
 
 ### 迴圈下載
-
 
 ```python
 SegOfWay={1:84,2:12,3:7,4:84,5:4,6:8,7:7,8:8,9:6,10:8}
@@ -269,16 +269,19 @@ for h in range(1,50,7):
 總體來說，國1國3因為距離較長，全路線有最長的行車時間，其次則為國5與五楊高架。就日期來說，6/15(星期四)預測會有較長行車時間，原因未明。而小時變化則顯示明顯的昏峰。
 
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-03-20.png)
+
 ---
 
 國1工作日(周一)：有顯著的晨峰上班車潮
 
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-12-28.png)
+
 ---
 
 周末現象：國3、國5、國6等具有顯著的周日車潮，特別是在昏峰。此預測符合現實。
 
 ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-09-21.png)
+
 ---
 
 ## 程式下載

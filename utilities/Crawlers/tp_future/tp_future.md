@@ -4,7 +4,7 @@ title:  Download Hiway Forecasting Data
 parent: Crawlers
 grand_parent: Utilities
 has_children: true
-last_modified_date: 2023-06-07 16:17:56
+last_modified_date: 2023-06-12 08:56:43
 permalink: /utilities/Crawlers/tp_future
 tags: Crawlers tp_future
 ---
@@ -28,6 +28,10 @@ tags: Crawlers tp_future
 - 該預測時間與路況相關，具有未來交通量之參考價值。唯數據並未提供批次下載，須一一選單後執行「立即規劃行程」，方能得知。
 - 此處以selenium(4.9.1版)與BeautifulSoup(4.12.2版)作為下載與解析之模組，並將結果存成csv檔案。
 - 程式見於[github][tp_future]
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-55-14.png)
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-56-12.png)
 
 ## 程式說明
 

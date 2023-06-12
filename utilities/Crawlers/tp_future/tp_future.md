@@ -25,13 +25,20 @@ tags: Crawlers tp_future
 ## 背景
 
 - 高速公路局對外提供未來任意日時、10條路線、共228個匝道出入口作為起、迄端之行車時間預測([高速公路1968](https://1968.freeway.gov.tw/tp_future))。
-- 該預測時間與路況相關，具有未來交通量之參考價值。唯數據並未提供批次下載，須一一選單後執行「立即規劃行程」，方能得知。
-- 此處以selenium(4.9.1版)與BeautifulSoup(4.12.2版)作為下載與解析之模組，並將結果存成csv檔案。
+- 該預測時間與路況相關，具有未來交通量之參考價值。唯數據並未提供批次下載，須一一點擊選單後執行「立即規劃行程」，方能得知。
+- 此處以[selenium](https://www.selenium.dev/selenium/docs/api/py/api.html)(4.9.1版)與[BeautifulSoup](https://zh.wikipedia.org/zh-tw/Beautiful_Soup)(4.12.2版、一般簡稱bs4)作為下載與解析之模組，並將結果存成csv檔案。
+  - 介紹selenium的文章有很多，[Selenium with Python中文翻译文档](https://selenium-python-zh.readthedocs.io/en/latest/)這篇算是完整、更新至第4版、也有支援中文。
+  - bs4的說明介紹也不少，[wikipedia](https://zh.wikipedia.org/zh-tw/HTML解析器对比)有綜合比較各個html解析器的版本、授權、語言、連結等項目。
+  - 由於高公局所建立的模型雖然還能保持線性、但因維度太多，還需要進行整併、或均化，以利多維度之分析。
 - 程式見於[github][tp_future]
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-55-14.png)
+|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-55-14.png)|
+|:-:|
+|<b> 高公局行車時間預測選單與執行</b>|
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-56-12.png)
+|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-56-12.png)|
+|:-:|
+|<b> 前後共7個出發時間的旅行時間預測結果</b>|
 
 ## 程式說明
 
@@ -130,7 +137,7 @@ driver.get("https://1968.freeway.gov.tw/tp_future")
 ```
 
 注意事項
-1. 如果是遠端工作站，需要讓firefox能夠呈現畫面的DISPLAY設定，如mobaxterm的XWINDOW。
+1. 如果是遠端工作站，需要讓firefox能夠呈現畫面的DISPLAY設定，如[mobaxterm](http://blog.ittraining.com.tw/2020/09/ssh-client-mobaxterm.html)的X-Window，且本地電腦必須保持不關機。
 2. 如果是在一般PC上，也必須保持不關機。
 
 ### 停等的爬蟲
@@ -229,15 +236,15 @@ for c in ["t"+str(i) for i in range(1,8)]:
 ### 陣列轉置
 
 - 由於網站一次預報出7個出發時間的結果，這點可以減省小時迴圈的次數，但結果需要轉置。
-- 轉置的作法參考[環保署測站數據鄉鎮區平均值之計算](../../../AQana/TWNAQ/stn_dot.md)的外積(vector cross)的作法，將座標軸項量予以外積3次，以取得資料表的引數欄位(`coli`)。
+- 轉置的作法參考[環保署測站數據鄉鎮區平均值之計算](../../../AQana/TWNAQ/stn_dot.md)的外積([cross product](https://zh.wikipedia.org/zh-tw/叉积))的作法，將座標軸向量予以外積連乘3次，以取得資料表的引數欄位(`coli`)。
 - 3個維度向量之宣告
 
 ```python
 dates=np.arange(1,11) #未來10天
 hrs=np.arange(1,50) #每半小時一個預報，1天有49筆(第49筆重複)
 hws=np.arange(1,11) #10條路線 國1,高架,國2,國3,國3甲,國4,國5,國6,國8,國10
-one=np.ones(shape=(49*10),dtype=int)
-one1=np.ones(shape=(10),dtype=int)
+one=np.ones(shape=(49*10),dtype=int) #單位向量
+one1=np.ones(shape=(10),dtype=int)  #單位向量
 ```
 
 - 3個引數欄位之張量與資料表
@@ -264,7 +271,7 @@ for h in range(1,50,7):
 
 ### 使用powerBI進行分析
 
-多維度動態圖形檢視乃powerBI的強項
+多維度動態圖形檢視乃powerBI(參[教學課程：將維度模型轉變為令人驚豔的 Power BI Desktop 報表](https://learn.microsoft.com/zh-tw/power-bi/create-reports/desktop-dimensional-model-report))
 
 總體來說，國1國3因為距離較長，全路線有最長的行車時間，其次則為國5與五楊高架。就日期來說，6/15(星期四)預測會有較長行車時間，原因未明。而小時變化則顯示明顯的昏峰。
 

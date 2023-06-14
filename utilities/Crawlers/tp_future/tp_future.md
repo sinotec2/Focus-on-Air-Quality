@@ -271,7 +271,7 @@ for h in range(1,50,7):
 
 ### 使用powerBI進行分析
 
-多維度動態圖形檢視乃powerBI(參[教學課程：將維度模型轉變為令人驚豔的 Power BI Desktop 報表](https://learn.microsoft.com/zh-tw/power-bi/create-reports/desktop-dimensional-model-report))
+多維度動態圖形檢視乃powerBI強項(參[教學課程：將維度模型轉變為令人驚豔的 Power BI Desktop 報表](https://learn.microsoft.com/zh-tw/power-bi/create-reports/desktop-dimensional-model-report))
 
 總體來說，國1國3因為距離較長，全路線有最長的行車時間，其次則為國5與五楊高架。就日期來說，6/15(星期四)預測會有較長行車時間，原因未明。而小時變化則顯示明顯的昏峰。
 

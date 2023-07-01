@@ -3,7 +3,7 @@ layout: default
 title: eccodes程式編譯與應用
 parent: grib Relatives
 grand_parent: Utilities
-nav_order: 2
+nav_order: 3
 date: 2023-06-30 11:26:00
 last_modified_date: 2023-06-30 11:26:11
 tags: grib ecmwf eccodes
@@ -62,7 +62,7 @@ make install
 ```
 
 - 與python3結合在一起
-  - 不知道是我的pip(22.3.1)比較新還是甚麼原因，官網建議的選項行不通(`--install-option="--prefix==..." `)，
+  - 不知道是dev2工作站本地的pip(22.3.1)比較新還是甚麼原因，官網建議的選項無法運作(`--install-option="--prefix==..." `)，
   - 必須如下設定
 
 ```bash

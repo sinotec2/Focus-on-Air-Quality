@@ -3,7 +3,7 @@ layout: default
 title: git and github
 parent:   Operation System
 grand_parent: Utilities
-last_modified_date: 2022-06-13 09:02:53
+last_modified_date: 2023-07-18 14:49:54
 tags: cpuff CMAQ sed git
 ---
 
@@ -177,6 +177,30 @@ if [ -e $d/index.mde ];then rm $d/index.mde;fi
 - [sed](../../utilities/OperationSystem/sed.md)如果要置換含有`/`(slash)的字串，可以將deliminator轉成其他(任何接在s指令之後的字元，如此處的`#`)，詳見[Unix & Linux：find and replace with sed with slash in find and replace string][1]
 
 [1]: <https://unix.stackexchange.com/questions/378990/find-and-replace-with-sed-with-slash-in-find-and-replace-string> "Not sure if you know, but sed has a great feature where you do not need to use a / as the separator. So, your example could be written as: sed -i 's#/var/www#/home/lokesh/www#g' lks.php It does not need to be a # either, it could be any single character. For example, using a 3 as the separator: echo 'foo' | sed 's3foo3bar3g' bar"
+
+## 命令列新創/移除遠端Repo
+
+### 新創
+
+參考：[stackoverflow](https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br)
+
+```bash
+curl -u 'USER' https://api.github.com/user/repos -d '{"name":"REPO"}'
+# Remember replace USER with your username and REPO with your repository/application name!
+git remote add origin git@github.com:USER/REPO.git
+git push origin master
+```
+
+1. 'USER': sinotec2:$TOKEN (w/o quote)
+2. "REPO": "test_repo" (w/t quote in json style)
+
+### 移除
+
+參考[stackoverflow](https://stackoverflow.com/questions/27868636/how-can-i-delete-a-remote-git-repository-from-the-command-line-git-bash)
+
+```bash
+curl -u USER -X "DELETE" https://api.github.com/repos/USER/REPO
+```
 
 ## Reference
 

@@ -5,7 +5,7 @@ nav_order: 3
 parent: 地面二維軌跡分析
 grand_parent: Trajectory Models
 date: 2022-11-04
-last_modified_date: 2023-02-22 09:47:19
+last_modified_date: 2023-07-20 11:19:38
 tags: trajectory CWBWRF CODiS geojson
 ---
 
@@ -35,6 +35,7 @@ tags: trajectory CWBWRF CODiS geojson
 - 其後(2021/06/23)發展電腦自動分析系統，預設反軌跡的時間、測站，並按照中央氣象局預報的天數，套用實際之風場，逐日由crontab自動執行，進行圖面的更換。
 - 2022/04仿照疫情數據公開也使用github.io的平台，乃將在imac上的html自動分析的成果部分放在github pages上，使用者自行產生部分仍然留在imac上。
 - 2023/02因[CWB_WRF預報結果][get_M-A0064]的解讀耗費大量記憶體，因此停止使用，改用[fcst][fcst]之wrf預報。
+- 2023/07因應公司防火牆擋住了家用的IP，也限制了檔案對外的傳輸，後者雖然還是可以有方法解決，但前者完全限制了遠端服務的使用。因此有必要將網站服務功能在公司也建置一套。(詳見)
 
 ### 重要選項考量與未來可能發展
 

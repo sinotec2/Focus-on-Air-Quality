@@ -4,7 +4,7 @@ title: Forecast Systems
 nav_order: 11
 has_children: true
 permalink: /ForecastSystem/
-last_modified_date:  2023-03-24 08:55:48
+last_modified_date:  2023-07-25 14:23:36
 tags: forecast
 ---
 
@@ -14,7 +14,7 @@ tags: forecast
 - 全球空品預報
   - [CAMS網站][1]有每12小時進行未來5天全項目、逐3小時之空氣品質預報，數值產品包括全球與個別分區時序圖檔、以及數據檔案。
   - NCAR [CAM-chem][CAM-chem]及[WACCM ][WACCM]模式
-  - 空品預報的準確度除了排放量之外，最主要的影響因素來自氣象的預報，而其不準度會隨著時間增加，WMO現正積極努力投入在天氣預報這一領域，以支援空品預報品質的提升。[^1]。
+  - 空品預報的準確度除了排放量之外，最主要的影響因素來自氣象的預報，而其不準度會隨著時間增加，WMO現正積極努力投入在天氣預報這一領域，以支援空品預報品質的提升[^1]，此外也致力於北美模式間之[每季比較](https://hpfx.collab.science.gc.ca/~svfs000/na-aq-mm-fe/dist/)。
 - 區域性
   - 美國領土：NASA [GMO][2]
   - [日本大氣污染情報網站](https://pm25.jp/)

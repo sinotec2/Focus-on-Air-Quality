@@ -30,14 +30,18 @@ tags: graphics
 
 ## 使用範例
 
-### 格式轉換
+### png2gif
+
 - 使用[imageMagick](https://imagemagick.org/script/convert.php)串連連續圖檔成為gif
   - 轉換成gif時，convert會自動回復成原來的背景，`-background none`即可取消。
   - 範例:[wrf-python](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/3.vertica/#gif-producing)、[NCL and VERDI](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)、
+
 ```bash
 convert pm10*.png pm10.gif
 convert -dispose 2 -coalesce +repage -background none  WRF_chem-*.png -size 895x565 WRF_chem.gif
 ```
+
+### gif2png without basemap
 
 - 解開gif檔案：`convert WRF_chem.gif WRF_chem.png`
   - 如果沒有指定數字格式，會產生WRF_chem-0.png, WRF_chem-1.png,..., WRF_chem-NN.png檔案，要注意檔案的排序。
@@ -49,7 +53,17 @@ $ grep convert *cs
 sss.cs:    convert a$j.png a$j.pdf
 ```
 
+### gif2png with basemap
+
+- 問題：在形成gif檔時為壓縮空間，會將重複的背景、底圖、色標、圖框等都去除，在反轉時則發生困難，除了第1張圖之外，其餘png檔皆為差異內容。
+- 解法詳見[get the original view](https://superuser.com/questions/558790/how-do-i-convert-gif-to-png-this-image-to-get-the-original-view)
+
+```bash
+convert -verbose -coalesce image.gif image.png
+```
+
 ### 裁減
+
 - 修剪png檔案
   - 使用imagineMagicks `convert`一次修剪所有[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_batch/#程式外批次檔calpuff結果時間序列圖檔展示)輸出的png檔案、再予以組合成gif
   - 或使用`-bordercolor white -trim` + `-bordercolor white -border 10%x10% `會比較整齊 (5% is enough)

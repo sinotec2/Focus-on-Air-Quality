@@ -72,8 +72,23 @@ convert -verbose -coalesce image.gif image.png
 for i in {0..54};do convert WRF_chem-$i.png -crop 950x550 a.png;mv a.png WRF_chemC-$i.png;done
 for i in {0..9};do mv WRF_chemC-$i.png WRF_chemC-0$i.png;done
 convert -dispose 2 -coalesce +repage -background none  WRF_chem-*.png -size 895x565 WRF_chem.gif
-``` 
+```
 
+### 縮放尺寸
+
+```bash
+convert origin/$fn -resize 77% $fn
+```
+
+### 水平拼接
+
+- 使用+append選項設定
+
+```bash
+convert 1.png 1.png 1.png +append PM25_d03_2023072715.png
+```
+
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-07-27-15-44-27.png)
 
 ## Reference
 - fmw42, [stackoverflow:How to trim animated gif (using imagemagick)?](https://stackoverflow.com/questions/44555789/how-to-trim-animated-gif-using-imagemagick), Jun 15, 2017 at 3:34

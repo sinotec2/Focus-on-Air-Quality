@@ -178,6 +178,22 @@ if [ -e $d/index.mde ];then rm $d/index.mde;fi
 
 [1]: <https://unix.stackexchange.com/questions/378990/find-and-replace-with-sed-with-slash-in-find-and-replace-string> "Not sure if you know, but sed has a great feature where you do not need to use a / as the separator. So, your example could be written as: sed -i 's#/var/www#/home/lokesh/www#g' lks.php It does not need to be a # either, it could be any single character. For example, using a 3 as the separator: echo 'foo' \| sed 's3foo3bar3g' bar"
 
+## gh - Work seamlessly with GitHub from the command line.
+
+- official sites
+  - general: [GitHub CLI](https://github.com/cli/cli)
+  - [manual](https://cli.github.com/manual/)
+- ms win or macos, linux version
+
+### installation
+
+```bash
+brew install gh
+```
+
+### remove a repository
+
+
 ## 命令列新創/移除遠端Repo
 
 ### 安裝github cli指令

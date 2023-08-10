@@ -33,6 +33,8 @@ cmd="/home/anaconda3/bin/curl -u sinotec2:$TOKEN https://api.github.com/user/rep
 eval $cmd
 
 $GIT init
+$GIT lfs install
+$GIT lfs track "*.tar.gz"
 $GIT add .
 cmd="$GIT commit -m 'create $repo'"
 eval $cmd

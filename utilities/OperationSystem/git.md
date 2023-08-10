@@ -242,6 +242,7 @@ git push origin master
   "subscribers_count": 0
 }
 ```
+
 ### 移除
 
 - 移除遠端Repo會需要特別權限的個人金鑰。
@@ -258,6 +259,67 @@ curl -u USER -X "DELETE" https://api.github.com/repos/USER/REPO
 last4d=$(date -d "$today -4day" +%Y%m%d)
 repo=cmaq_$last4d
 $GH repo delete https://github.com/sinotec2/${repo}.git --yes
+```
+
+## 大檔(LFS)之上傳
+
+- 安裝使用詳見[Git Large File Storage (LFS) ](https://git-lfs.com/)。
+- 因官網並沒有centos7的作法，以下為整併其他網友的建議。
+
+### 必要性與好處
+
+- github對大於50MB檔案的上傳，就會提出警訊，但仍可傳送。對大於100MB的檔案，則會直接拒絕。
+- 好處：上下載更快速、空間更大、免費
+
+### 安裝
+
+- 因原來的git(1.8.3.1)並不能接受lfs指令，解決方案為安裝`git-lfs`。
+
+```bash
+sudo yum install git-lfs
+```
+
+### 啟動與設定
+
+- 安裝之後，每個機器、每個repo都須啟動lfs、並在add之前指定大檔的附加檔名，讓git進行追蹤。
+
+```bash
+$ git lfs install
+Updated git hooks.
+Git LFS initialized.
+$ git lfs track "*.tar.gz"
+Tracking "*.tar.gz"
+```
+
+### 上傳結果
+
+- 按照一般程序進行add->commit->push
+- 程式反饋訊息中會出現lfs的訊息
+  1. `create mode 100644 .gitattributes`：啟動lfs檔名屬性
+  2. `Uploading LFS objects:`標示為lfs物件
+  3. `Delta compression using up to 96 threads.`：更多的執行緒、拆成更多的小物件。
+
+```bash
+$ $GIT add .
+$ cmd="$GIT commit -m 'create $repo'"
+
+kuang@DEVP ~/GitHubRepos/test_depo
+$ eval $cmd
+[master (root-commit) 927af5d] create test_depo
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitattributes
+ create mode 100644 png1_2023-08-09.tar.gz
+
+kuang@DEVP ~/GitHubRepos/test_depo
+$ $GIT push -f https://sinotec2:$TOKEN@github.com/sinotec2/${repo}.git master
+Uploading LFS objects: 100% (1/1), 91 MB | 8.0 MB/s, done.
+Counting objects: 4, done.
+Delta compression using up to 96 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 420 bytes | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+remote: To https://sinotec2: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@github.com/sinotec2/test_depo.git
+ * [new branch]      master -> master
 ```
 
 ## Reference

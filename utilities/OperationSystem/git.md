@@ -176,9 +176,27 @@ if [ -e $d/index.mde ];then rm $d/index.mde;fi
 - dos系統不能適用
 - [sed](../../utilities/OperationSystem/sed.md)如果要置換含有`/`(slash)的字串，可以將deliminator轉成其他(任何接在s指令之後的字元，如此處的`#`)，詳見[Unix & Linux：find and replace with sed with slash in find and replace string][1]
 
-[1]: <https://unix.stackexchange.com/questions/378990/find-and-replace-with-sed-with-slash-in-find-and-replace-string> "Not sure if you know, but sed has a great feature where you do not need to use a / as the separator. So, your example could be written as: sed -i 's#/var/www#/home/lokesh/www#g' lks.php It does not need to be a # either, it could be any single character. For example, using a 3 as the separator: echo 'foo' | sed 's3foo3bar3g' bar"
+[1]: <https://unix.stackexchange.com/questions/378990/find-and-replace-with-sed-with-slash-in-find-and-replace-string> "Not sure if you know, but sed has a great feature where you do not need to use a / as the separator. So, your example could be written as: sed -i 's#/var/www#/home/lokesh/www#g' lks.php It does not need to be a # either, it could be any single character. For example, using a 3 as the separator: echo 'foo' \| sed 's3foo3bar3g' bar"
 
 ## 命令列新創/移除遠端Repo
+
+### 安裝github cli指令
+
+- 參考[Installing gh on Linux and BSD](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)，用`dnf config-manager`增加cli-github的repo，再用dnf安裝gh
+
+```bash
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install gh
+```
+
+- 如果`dnf-command(config-manager)`安裝不起來，可以先用yum安裝`dnf-plugins-core`，也可以增加`dnf config-manager`功能
+
+```bash
+sudo yum install dnf-plugins-core
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install gh
+```
 
 ### 新創
 
@@ -194,12 +212,147 @@ git push origin master
 1. 'USER': sinotec2:$TOKEN (w/o quote)
 2. "REPO": "test_repo" (w/t quote in json style)
 
+```json
+{
+"id": 676754110,
+  "node_id": "R_kgDOKFZyvg",
+  "name": "cmaq_20230810",
+  "full_name": "sinotec2/cmaq_20230810",
+  "private": false,
+  "owner": {
+    "login": "sinotec2",
+    "id": 18201072,
+    "node_id": "MDQ6VXNlcjE4MjAxMDcy",
+    "avatar_url": "https://avatars.githubusercontent.com/u/18201072?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/sinotec2",
+    "html_url": "https://github.com/sinotec2",
+    "followers_url": "https://api.github.com/users/sinotec2/followers",
+    "following_url": "https://api.github.com/users/sinotec2/following{/other_user}",
+    "gists_url": "https://api.github.com/users/sinotec2/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/sinotec2/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/sinotec2/subscriptions",
+    "organizations_url": "https://api.github.com/users/sinotec2/orgs",
+    "repos_url": "https://api.github.com/users/sinotec2/repos",
+    "events_url": "https://api.github.com/users/sinotec2/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/sinotec2/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "html_url": "https://github.com/sinotec2/cmaq_20230810",
+  "description": null,
+  "fork": false,
+  "url": "https://api.github.com/repos/sinotec2/cmaq_20230810",
+  "forks_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/forks",
+  "keys_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/keys{/key_id}",
+  "collaborators_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/collaborators{/collaborator}",
+  "teams_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/teams",
+  "hooks_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/hooks",
+  "issue_events_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/issues/events{/number}",
+  "events_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/events",
+  "assignees_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/assignees{/user}",
+  "branches_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/branches{/branch}",
+  "tags_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/tags",
+  "blobs_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/git/blobs{/sha}",
+  "git_tags_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/git/tags{/sha}",
+  "git_refs_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/git/refs{/sha}",
+  "trees_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/git/trees{/sha}",
+  "statuses_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/statuses/{sha}",
+  "languages_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/languages",
+  "stargazers_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/stargazers",
+  "contributors_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/contributors",
+  "subscribers_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/subscribers",
+  "subscription_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/subscription",
+  "commits_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/commits{/sha}",
+  "git_commits_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/git/commits{/sha}",
+  "comments_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/comments{/number}",
+  "issue_comment_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/issues/comments{/number}",
+  "contents_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/contents/{+path}",
+  "compare_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/compare/{base}...{head}",
+  "merges_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/merges",
+  "archive_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/{archive_format}{/ref}",
+  "downloads_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/downloads",
+  "issues_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/issues{/number}",
+  "pulls_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/pulls{/number}",
+100  6070  100  6046  100    24   5221     20  0:00:01  0:00:01 --:--:--  5241
+/sinotec2/cmaq_20230810/milestones{/number}",
+  "notifications_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/notifications{?since,all,participating}",
+  "labels_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/labels{/name}",
+  "releases_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/releases{/id}",
+  "deployments_url": "https://api.github.com/repos/sinotec2/cmaq_20230810/deployments",
+  "created_at": "2023-08-10T00:00:05Z",
+  "updated_at": "2023-08-10T00:00:06Z",
+  "pushed_at": "2023-08-10T00:00:06Z",
+  "git_url": "git://github.com/sinotec2/cmaq_20230810.git",
+  "ssh_url": "git@github.com:sinotec2/cmaq_20230810.git",
+  "clone_url": "https://github.com/sinotec2/cmaq_20230810.git",
+  "svn_url": "https://github.com/sinotec2/cmaq_20230810",
+  "homepage": null,
+  "size": 0,
+  "stargazers_count": 0,
+  "watchers_count": 0,
+  "language": null,
+  "has_issues": true,
+  "has_projects": true,
+  "has_downloads": true,
+  "has_wiki": true,
+  "has_pages": false,
+  "has_discussions": false,
+  "forks_count": 0,
+  "mirror_url": null,
+  "archived": false,
+  "disabled": false,
+  "open_issues_count": 0,
+  "license": null,
+  "allow_forking": true,
+  "is_template": false,
+  "web_commit_signoff_required": false,
+  "topics": [
+
+  ],
+  "visibility": "public",
+  "forks": 0,
+  "open_issues": 0,
+  "watchers": 0,
+  "default_branch": "main",
+  "permissions": {
+    "admin": true,
+    "maintain": true,
+    "push": true,
+    "triage": true,
+    "pull": true
+  },
+  "allow_squash_merge": true,
+  "allow_merge_commit": true,
+  "allow_rebase_merge": true,
+  "allow_auto_merge": false,
+  "delete_branch_on_merge": false,
+  "allow_update_branch": false,
+  "use_squash_pr_title_as_default": false,
+  "squash_merge_commit_message": "COMMIT_MESSAGES",
+  "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
+  "merge_commit_message": "PR_TITLE",
+  "merge_commit_title": "MERGE_MESSAGE",
+  "network_count": 0,
+  "subscribers_count": 0
+}
+```
 ### 移除
 
-參考[stackoverflow](https://stackoverflow.com/questions/27868636/how-can-i-delete-a-remote-git-repository-from-the-command-line-git-bash)
+- 移除遠端Repo會需要特別權限的個人金鑰。
+- 參考[stackoverflow](https://stackoverflow.com/questions/27868636/how-can-i-delete-a-remote-git-repository-from-the-command-line-git-bash)
 
 ```bash
 curl -u USER -X "DELETE" https://api.github.com/repos/USER/REPO
+```
+
+- 或直接使用`gh repo delete`指令更加方便。
+- 事先將金鑰輸入到環境變數`$GH_TOKEN`之內，不必另外再行登入。(詳參範例[cp_timebar.cs]()之應用)
+
+```bash
+last4d=$(date -d "$today -4day" +%Y%m%d)
+repo=cmaq_$last4d
+$GH repo delete https://github.com/sinotec2/${repo}.git --yes
 ```
 
 ## Reference

@@ -287,6 +287,7 @@ sudo yum install git-lfs
 $ git lfs install
 Updated git hooks.
 Git LFS initialized.
+
 $ git lfs track "*.tar.gz"
 Tracking "*.tar.gz"
 ```
@@ -303,14 +304,12 @@ Tracking "*.tar.gz"
 $ $GIT add .
 $ cmd="$GIT commit -m 'create $repo'"
 
-kuang@DEVP ~/GitHubRepos/test_depo
 $ eval $cmd
 [master (root-commit) 927af5d] create test_depo
  2 files changed, 4 insertions(+)
  create mode 100644 .gitattributes
  create mode 100644 png1_2023-08-09.tar.gz
 
-kuang@DEVP ~/GitHubRepos/test_depo
 $ $GIT push -f https://sinotec2:$TOKEN@github.com/sinotec2/${repo}.git master
 Uploading LFS objects: 100% (1/1), 91 MB | 8.0 MB/s, done.
 Counting objects: 4, done.
@@ -318,7 +317,7 @@ Delta compression using up to 96 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (4/4), 420 bytes | 0 bytes/s, done.
 Total 4 (delta 0), reused 0 (delta 0)
-remote: To https://sinotec2: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@github.com/sinotec2/test_depo.git
+remote: To https://sinotec2:ghp_***@github.com/sinotec2/test_depo.git
  * [new branch]      master -> master
 ```
 

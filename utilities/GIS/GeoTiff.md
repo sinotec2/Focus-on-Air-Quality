@@ -3,11 +3,12 @@ layout: default
 title:  GeoTiff檔之讀取
 parent: GIS Relatives
 grand_parent: Utilities
-last_modified_date: 2022-01-27 11:57:06
-tags: GIS gdal geotiff
+last_modified_date: 2023-09-08 09:23:35
+tags: GIS gdal geotiff netCDF
 ---
 
 # python解析GeoTiff檔
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -20,11 +21,14 @@ tags: GIS gdal geotiff
 </details>
 
 ---
+
 ## 背景
+
 - python 2.7 時代有libtiff可用，可參考[githup](https://github.com/pearu/pylibtiff)
 - 這篇對GeoTiff解析及應用有完整的比較說明：[introduction to python libraries for working with GeoTiff or satellite images](https://towardsdatascience.com/reading-and-visualizing-geotiff-images-with-python-8dcca7a74510)
 
 ## [rasterio](https://rasterio.readthedocs.io/en/latest/)
+
 ### 檔案開啟、參數及數據之讀取
 
 ```python
@@ -49,6 +53,7 @@ data=np.flip(data[0,:,:],[0]) #轉向
 ```
 
 ### 寫出檔案
+
 - 寫出GeoTiff的情況不多，如提供gdal_translate進行轉檔、或在(Q)GIS內進一步檢視處理。
   - `resx,resy`：gdal_translate讀取的tiff檔是以經緯度為系統的，因此需先計算經緯度的格距。
   - `translate`：指定座標轉換的函數，因南北向是由北向南，間距為負值
@@ -67,16 +72,23 @@ new_dataset.write(data, 1) #寫出數據
 new_dataset.close() #關閉檔案
 ```
 
+### [df2tiff](town_tiff.md)
+
+- 由GML檔案讀取鄉鎮區的多邊形，另行輸出成csv檔，再逐點進行`shapely.polygon.within()`確認其town_ID，最後輸出成tiff檔案。以供[make_townNew.py](../../AQana/GAQuality/NCAR_ACOM/4.mk_townNew.md)使用。
+
 ### [tif2df](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)
+
 - 此一應用的情況是因為檔案切割成約10.5公里見方的250m高解析度tiff檔，須同步進行轉換方符合效益。
 - 轉成(無檔頭)csv檔之後，以cat合併成完整檔案進行解讀與轉換。
 
 ### [tif2nc](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)
+
 - 應用在全球250M解析度之土壤參數tiff檔[解讀](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2nc)，採**平均**方式合併，然因記憶體需求較大，須先進行範圍切割。
 - 高解析度作物檔案轉到解析度較低(1~10Km)之[應用](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Crops/#tif2nc)，採**加總**方式進行合併。
 - 高解析度(500m)船隻密度tiff檔案為基底，作為[重新分配排放量](https://github.com/sinotec2/Focus-on-Air-Quality/Global_Regional_Emission/EDGARv5/ShipDensity/)的依據。
 
 ### [tif2kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/tif2kml.py)
+
 - 顧名思義，此程式將tiff檔轉成kml檔案，便於檢視等值圖。
 - 呼叫[cntr_kml.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/cntr_kml.py)，詳見[等值線之KML檔](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/)
 - 引數：tiff檔的名稱(TIF)
@@ -104,6 +116,10 @@ result=cntr_kml(data, lon, lat, fname)
 ```
 
 ## Reference
+
 - Mohit Kaushik, **Reading and Visualizing GeoTiff \| Satellite Images with Python**, [towardsdatascience](https://towardsdatascience.com/reading-and-visualizing-geotiff-images-with-python-8dcca7a74510),Aug 2, 2020
 - Mapbox Revision, **Rasterio: access to geospatial raster data**, [readthedocs](https://rasterio.readthedocs.io/en/latest/), 2018
 - Chimin, **Day26 網格資料的處理-Rasterio初探**, [ithome](https://ithelp.ithome.com.tw/articles/10209222)2018-11-10 21:56:37
+- 本篇在github.io的[連結網址][geotiff]
+
+[geotiff]: https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/GeoTiff/ "python解析GeoTiff檔"

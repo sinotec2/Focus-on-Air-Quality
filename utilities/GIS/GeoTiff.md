@@ -74,7 +74,7 @@ new_dataset.close() #關閉檔案
 
 ### [df2tiff](town_tiff.md)
 
-- 由GML檔案讀取鄉鎮區的多邊形，另行輸出成csv檔，再逐點進行`shapely.polygon.within()`確認其town_ID，最後輸出成tiff檔案。以供[make_townNew.py](../../AQana/GAQuality/NCAR_ACOM/4.mk_townNew.md)使用。
+- 由GML檔案讀取鄉鎮區的多邊形，另行輸出成csv檔，再逐點進行`shapely.polygon.within()`確認其town_ID，最後輸出成tiff檔案。以供[make_townNew.py](../../AQana/GAQuality/NCAR_ACOM/3.mk_townNew.md)使用。
 
 ### [tif2df](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/LAND/Soils/#tiff2df)
 

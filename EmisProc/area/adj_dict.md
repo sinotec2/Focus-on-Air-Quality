@@ -23,12 +23,20 @@ tags: TEDS
 
 ## 背景
 
-### adj_dict.py
+
 
 - 這支[程式](adj_dict_Rect.py)的目的是找出每個鄉鎮區旁邊的其他鄉鎮區名稱，建立對照的關係，以便後續的應用。
+
+## 矩形範圍之判別
+
 - 因早期並不孰悉shapely模組的使用，因此採用較原始的boolean判斷方式。相同功能應存在有更好的做法。
+
+### IO's  
+
 - 輸入：前述`dict_xy.csv`
 - 輸出：`adj_dict.json`
+
+### 程式說明
 
 - 應用模組與數據輸入
 
@@ -90,14 +98,22 @@ fn=open(fname,'w')
 json.dump(adj_dict,fn)
 ```
 
-### shapely版本adj_dict.py
+### 程式下載
+
+{% include download.html content="[adj_dict_Rect.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/adj_dict_Rect.py)" %}
+
+## shapely版本adj_dict.py
+
+### touches版本
 
 - 這個版本使用shapely的模組功能polygon.touches來判斷2個行政區多邊形是否相鄰。
 - 可能的問題
   - 行政區邊界如果是在河川的中央、港區海域等等，有可能無法緊鄰相接，會有落差
 - 程式下載
 
-{% include download.html content="[adj_dict_Touch.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)" %}
+{% include download.html content="[adj_dict_Touch.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/adj_dict_Touch.py)" %}
+
+- touches的用法如下
 
 ```python
 ...
@@ -114,6 +130,28 @@ for i in range(len(df)):
 ...  
 ```
 
+### intersects與buffer(最後版本)
+
+- 這個版本用了2個shapely的模組，分別是intersects與buffer
+- 使用buffer
+  - 將多邊形向外擴張一些，以便確定會有交集，且向
+  - 外擴張代表範圍。如下例，拓展0.15度約15公里。效果如圖所示。
+
+```python
+df['polygon']=[Polygon(i).buffer(0.15) for i in df.lonlats] #0.1deg~10Km
+```
+
 |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-31-58.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-39-32.png)|
 |:-:|:-:|
 |<br>buffer=0.1 deg</br>|<br>buffer=0.15 deg</br>|
+
+- 使用intersects與前述touches一樣用法。
+
+```python
+...
+  for j in range(len(df)):
+    if df.polygon[i].intersects(df.polygon[j]):touched.append(df.twnid[j])
+...
+```
+
+{% include download.html content="[adj_dict_IntersectBuff.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/adj_dict_IntersectBuff.py)" %}

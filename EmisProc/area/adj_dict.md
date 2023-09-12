@@ -25,7 +25,7 @@ tags: TEDS
 
 ### adj_dict.py
 
-- 這支[程式](adj_dict.py)的目的是找出每個鄉鎮區旁邊的其他鄉鎮區名稱，建立對照的關係，以便後續的應用。
+- 這支[程式](adj_dict_Rect.py)的目的是找出每個鄉鎮區旁邊的其他鄉鎮區名稱，建立對照的關係，以便後續的應用。
 - 因早期並不孰悉shapely模組的使用，因此採用較原始的boolean判斷方式。相同功能應存在有更好的做法。
 - 輸入：前述`dict_xy.csv`
 - 輸出：`adj_dict.json`
@@ -90,38 +90,28 @@ fn=open(fname,'w')
 json.dump(adj_dict,fn)
 ```
 
-### shapely版本adj_dict.py 
+### shapely版本adj_dict.py
+
+- 這個版本使用shapely的模組功能polygon.touches來判斷2個行政區多邊形是否相鄰。
+- 可能的問題
+  - 行政區邊界如果是在河川的中央、港區海域等等，有可能無法緊鄰相接，會有落差
+- 程式下載
+
+{% include download.html content="[adj_dict_Touch.py](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/grb2bc.py)" %}
 
 ```python
-kuang@master /home/QGIS/Data/TWN_town
-$ cat adj_dict.py
-
-from shapely.geometry import Polygon
-from pandas import *
-import numpy as np
-import sys
-import os
-import json
-
-fname='/home/QGIS/Data/TWN_town/polygons.csv'
-df=read_csv(fname,encoding='big5')
-df['lonlats']=[j.replace(',','').replace(')','').replace('(','').replace('[','').replace(']','').split() for j in df.lonlats]
-df['lonlats']=[[float(i) for i in j] for j in df.lonlats]
-df['lonlats']=[[(j[i],j[i+1]) for i in range(0,len(j),2)] for j in df.lonlats]
-df['polygon']=[Polygon(i) for i in df.lonlats]
+...
 adj_dict={}
 for i in range(len(df)):
   touched=[]
-  for j in range(i+1,len(df)):
+  for j in range(len(df)):
     if df.polygon[i].touches(df.polygon[j]):touched.append(df.twnid[j])
   if len(touched)==0:touched=[0]
   s=''
   for t in touched:
    s+=str(t)+';'
   adj_dict.update({str(df.twnid[i]):s})
-fname='adj_dict.json'
-fn=open(fname,'w')
-json.dump(adj_dict,fn)
+...  
 ```
 
 |![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-31-58.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-39-32.png)|

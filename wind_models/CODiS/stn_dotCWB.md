@@ -24,7 +24,6 @@ tags: python
 
 - 這項作業是仿照[環保署測站數據鄉鎮區平均值之計算](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/stn_dot/)的作法，將測站上的數值，向外推展到鄰近的鄉鎮區。
 - 平均方式：此處一樣使用內積`np.dot`方式，以加快計算速度。
-- 
 - 時間上，本程式讀取全年日均值處理結果，詳[說明](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/daymean/)。
 - 處理結果
   - 以外積方式，將日期及鄉鎮區的維度向量，與1維的單位矩陣進行外積(`np.outer`)，以張開成為2維的矩陣，再壓平成為資料表格式輸出。
@@ -37,7 +36,7 @@ tags: python
 
 - 引數
   - 需要1個引數：年代(4碼)
-- 鄉鎮區與測站編號的對照表[town_aqstEnew.csv][town_aqstEnew.csv]
+- 鄉鎮區與測站編號的對照表[town_cwb.csv][town_cwb.csv]
 - 輸出：YYYYres.csv
 
 ### 檔案讀取與測站之確認
@@ -47,18 +46,53 @@ tags: python
 ```python
 yr=sys.argv[1]
 
-fname='/nas1/CAM-chem/Annuals/town_aqstEnew.csv'
+path='/home/backup/data/cwb/e-service/'
+fname=path+'read_web/town_cwb.csv'
 twn=read_csv(fname)
-twn=twn.loc[twn.aq_st.map(lambda x:'0;' not in x)].reset_index(drop=True)
+twn=twn.loc[twn.aq_st.map(lambda x:x!='0;')].reset_index(drop=True)
 twn['stns']=[Series([int(i) for i in j[:-1].split(';')]) for j in twn.aq_st]
-all_stn=[]
+all_stn=set()
 for i in twn.stns:
-  if len(i)==0:continue
-  a=all_stn+list(i)
-  all_stn=list(set(a))
-all_stn=set(all_stn)
+  all_stn|=set(i)
+```
 
-df=read_csv(yr+'.csv')
+- cwb數據是逐時紀錄，一天一個檔案，因此需形成一個迴圈來累積
+  - 全日缺值：以前一天來替代
+  - 日平均值：在迴圈內執行，以減少記憶體容量
+
+```Python
+directory = path+yr+'/'
+file_extension = '.csv'
+fnames=[fname for fname in os.listdir(directory) if fname.endswith(file_extension)]
+fnames.sort()
+df=DataFrame({})
+cols=['stn','ObsTime','RH']#,'Precp']
+col2=['stn','ymd','RH']#,'Precp']
+dt_old=datetime.strptime(yr+'0101','%Y%m%d')
+for fname in fnames:
+  try:
+    dfi=read_csv(directory+fname)
+  except:
+    dfi=read_csv(directory+fname,encoding='big5')
+  dfi['stn']=[i[:6] for i in dfi.stno_name]
+  dfi.ObsTime=np.array(dfi.ObsTime,dtype=int)
+  dfi=dfi[cols]
+  dfi=dfi.dropna(axis=0).reset_index(drop=True)
+  if len(dfi)==0:
+    ymd=dt_old.strftime("%Y%m%d")
+    dfi=df.loc[df.ymd==int(ymd)]
+    ymd1=(dt_old+timedelta(days=1)).strftime("%Y%m%d")
+    dfi['ymd']=int(ymd1)
+  else:
+    dfi['ymd']=dfi.ObsTime//100
+  dfi=pivot_table(dfi,index=col2[:2],values=col2[2:],aggfunc=np.mean).reset_index()
+  df=df.append(dfi[col2],ignore_index=True)
+  dt_old=datetime.strptime(str(list(df.ymd)[-1]),'%Y%m%d')
+```
+
+- 處理測站集合
+
+```python
 df.stn=[int(i) for i in df.stn]
 col=df.columns[2:]
 s=set(df.stn)
@@ -131,11 +165,13 @@ seqn={seq[i]:i for i in range(len(seq))}
 ```python
 fac=np.zeros(shape=(ns,nw))
 for t in range(nw):
-  n=len(twn.stns[t])
-  if n==0:sys.exit('no stations in this town')
-  for i in twn.stns[t]:
-    if i in old:continue
-    fac[seqn[i],t]=1/n
+  it=[i for i in twn.stns[t] if i in seqn]
+  n=len(it)
+  if n==0:
+    continue #sys.exit('no stations in this town')
+  for i in it:
+    fac[seqn[i],t]=1./n
+
 res=np.ma.dot(var,fac)
 ```
 
@@ -144,6 +180,7 @@ res=np.ma.dot(var,fac)
 - 資料操作使用矩陣，表示的資料的維度具有規則性，即使改成資料表的型態，其內容也具有重複性，[過去][lineinc]即以迴圈方式來進行複製。
 - 此處使用1維的單位矩陣(unit matrix、`np.ones`)即單位向量、與維度向量進行外積(`np.outer`)，將維度向量(日期、鄉鎮區代碼)重複足夠多次，以使壓平後的總長度符合二者長度的乘積。
 - 外積的定義`A[m] x B[n] = C[m,n]`(`x`為外積符號cross)
+- 相對濕度不可能為0，須將其列為NaN
 
 ```python
 ymd=list(set(df.ymd));ymd.sort()
@@ -158,7 +195,7 @@ dd=DataFrame({'ymd':ymds.flatten(),'TOWNCODE':cods.flatten()})
 i=0
 for c in col:
   dd[c]=res[i,:,:].flatten()
-  dd.loc[dd[c]<0,c]=np.nan
+  dd.loc[dd[c]<=0,c]=np.nan
   i+=1
 ```
 
@@ -178,15 +215,16 @@ dd.set_index('ymd').to_csv(yr+'res.csv')
 
 ## 結果檢視
 
-- 因只有測站附近的鄉鎮區有值，位相鄰測站的其他鄉鎮區，則為空白
+- 因RH的測站併不多，且常有極中在同一行政區的情形，此處將鄉鎮區代表範圍向外擴張約15公里(0.15度)，以取得較平緩、充滿大多數行政區範圍之結果。
+- 由圖中結果看來，鄉鎮區所代表的空間範圍確實有其地理上的意義，圖中顯示在新竹有較高的相對濕度，而蘭陽平原、雲嘉彬海及高雄地區則較低，高山範圍也較低(低溫)。
 - 繪圖程式參[geoplot繪製行政區範圍等值圖][geoplot]
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-01-09-36-35.png)
+![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-39-32.png)
 
 ## 程式下載
 
-{% include download.html content="[stn_dot.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/TWNAQ/stn_dot.py)" %}
+{% include download.html content="[stn_dotCWB.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/wind_models/CODiS/stn_dotCWB.py)" %}
 
-[town_aqstEnew.csv]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/town_aqstEnew.csv "鄉鎮區與測站編號的對照表"
+[town_cwb.csv]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/town_cwb.csv "鄉鎮區與測站編號的對照表"
 [geoplot]: https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/matplotlib/choropleth_geoplot/ "geoplot繪製行政區範圍等值圖"
 [lineinc]: https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/line/lineinc/#整併與輸出 "移動源排放檔案之轉檔-整併與輸出"

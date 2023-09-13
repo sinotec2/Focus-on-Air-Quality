@@ -5,7 +5,7 @@ parent: CWB Obs. Data Inquire Sys.
 grand_parent: "wind models"
 nav_order: 1
 date: 2021-11-28 22:04:32               
-last_modified_date: 2021-12-08 09:17:15
+last_modified_date: 2023-09-13 08:11:25
 tags: crontab CODiS Crawlers
 ---
 
@@ -24,9 +24,16 @@ tags: crontab CODiS Crawlers
 
 ## 背景
 
-中央氣象局每天公開其地面自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，其數據過去曾應用在風場的產生、[反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬，等等作業化系統，由於整併後以全日所有測站同一檔案儲存，具備更高的可用性。
-此處介紹台灣地區中央氣象局自動站數據之內容、下載作業方式、以及爬蟲程式設計之細節。
-CODiS數據目前作業情況：
+- 中央氣象局每天公開其地面自動站觀測結果在[CODiS](https://e-service.cwb.gov.tw/HistoryDataQuery/)(CWB Observation Data Inquire System)網站，項目齊備、測站密度非常高、時間可以追溯到1995年，是非常完整的資料庫。
+- 其數據過去曾應用在風場的產生、[反軌跡](https://github.com/sinotec2/cwb_Wind_Traj)之追蹤、以及轉成MM5/WRF之[little_r](https://www2.mmm.ucar.edu/wrf/users/wrfda/OnlineTutorial/Help/littler.html)格式，以備應用在WRF模式的4階同化模擬，等等作業化系統，
+- 由於整併後以全日所有測站同一檔案儲存，具備更高的可用性。
+- 此處介紹台灣地區中央氣象局自動站數據之內容、下載作業方式、以及爬蟲程式設計之細節。
+
+### 網址及畫面
+
+![](ttps://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-13-08-10-16.png)
+
+### CODiS數據目前作業情況：
 - 更新頻率時間：每日12(L)時更新，更新至前一日24時(落後實際時間**12小時**)。
 - 日報(總)表之內容
   - 以每站報表格式，記錄前一日24小時觀測數據

@@ -1,8 +1,9 @@
 ---
 layout: default
-title:行政區座標的整理
-parent: "Area Sources"
-grand_parent: TEDS Python
+title: 行政區座標的整理
+parent: cnty/town processing
+grand_parent: Area Sources
+nav_order: 2
 date: 2019-10-10
 last_modified_date: 2023-09-11 08:41:09
 tags: TEDS
@@ -28,7 +29,7 @@ tags: TEDS
 
 ## 網格座標與行政區的對照
 
-這2支程式[cnty_xy](cnty_xy.py)以及[dict_xy](dict_xy.py)是從TEDS面源檔案轉成csv(`'areagrid.csv'`)之後開始轉換的第一步。主要處理幾個問題：
+- 這2支程式[cnty_xy](cnty_xy.py)以及[dict_xy](dict_xy.py)是從TEDS面源檔案轉成csv(`'areagrid.csv'`)之後開始轉換的第一步。主要處理幾個問題：
   - 海上網格：海上可能會有排放量(船舶)，但是沒有行政區劃分。
   - 外島網格：外島座標適用不同分區的UTM值，因此需要平移，否則會發生錯誤。
   - 名稱：套用新的行政區名稱(`town3.csv`)
@@ -159,4 +160,3 @@ $ diff cnty_xy.py dict_xy.py
 > df['name']=[d_cnty[i] for i in df['dict']]
 > df.set_index('dict').to_csv('dict_xy.csv')
 ```
-

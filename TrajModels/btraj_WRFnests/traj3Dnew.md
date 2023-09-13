@@ -47,7 +47,7 @@ tags: trajectory CODiS wrf
 - 軌跡點時間間距：15S
 - 程式內掛後處理(不執行不影響主要結果)
   - [csv2kml.py][csv2kml]：繪製google map
-  - [csv2bln.cs](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/#csv2bln)：bln file is used for surfer plotting
+  - [csv2bln.cs](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/5.traj/#csv2bln)：bln file is used for surfer plotting
 
 ### download bt2.py
 

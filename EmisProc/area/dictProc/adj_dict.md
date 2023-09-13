@@ -1,8 +1,9 @@
 ---
 layout: default
 title:附近行政區之定位
-parent: "Area Sources"
-grand_parent: TEDS Python
+parent: cnty/town processing
+grand_parent: Area Sources
+nav_order: 1
 date: 2019-10-10
 last_modified_date: 2023-09-11 08:41:09
 tags: TEDS
@@ -22,8 +23,6 @@ tags: TEDS
 ---
 
 ## 背景
-
-
 
 - 這支[程式](adj_dict_Rect.py)的目的是找出每個鄉鎮區旁邊的其他鄉鎮區名稱，建立對照的關係，以便後續的應用。
 
@@ -154,4 +153,4 @@ df['polygon']=[Polygon(i).buffer(0.15) for i in df.lonlats] #0.1deg~10Km
 ...
 ```
 
-{% include download.html content="[adj_dict_IntersectBuff.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/adj_dict_IntersectBuff.py)" %}
+{% include download.html content="[adj_dict_IntersectBuff.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/area/dictProc/adj_dict_IntersectBuff.py)" %}

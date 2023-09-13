@@ -30,4 +30,4 @@ tags: trajectory CODiS CWBWRF
 - 假設空氣質點沒有高度的位移，可以顯示整體地面風場的平移效果，因此使用在風速較為顯著的天候。對於靜風、垂直擴散強烈之天候，會有過於保守的評估。3維軌跡線的分析可以詳見[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests)系列筆記的說明。
 
 [ftuv10]: <https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/ftuv10/ftuv10/> "地面uv10二維軌跡分析程式"
-[traj]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/> "由CWB數據計算軌跡"
+[traj]: <https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/5.traj/> "由CWB數據計算軌跡"

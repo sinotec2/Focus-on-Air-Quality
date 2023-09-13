@@ -59,7 +59,7 @@ tags: terrain trajectory CODiS AERMAP
   - 當天2時北高雄某廠燃燒塔之正軌跡(紅色)
   - 夜間：北風\~東北風，為秋冬季盛行風、山風、陸風
   - 日間：西北\~西風，為海風
-  - 軌跡線繪製詳參[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
+  - 軌跡線繪製詳參[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/5.traj/)
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ1.PNG)|
 |:-:|

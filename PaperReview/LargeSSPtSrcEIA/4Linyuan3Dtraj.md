@@ -43,7 +43,7 @@ tags: terrain trajectory CODiS
 - 以中央氣象局地面風速風向測值分析當日地面之二維正、反軌跡
   - 環保署林園站中午O<sub>3</sub>尖峰時間反軌跡(白色) vs. 當天2時北高雄某廠燃燒塔之正軌跡(紅色)
   - 參考[林園臭氧事件與氣流軌跡線](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#林園臭氧事件與氣流軌跡線)
-  - 作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/traj/)
+  - 作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/5.traj/)
 
 | ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ1.PNG)|
 |:-:|

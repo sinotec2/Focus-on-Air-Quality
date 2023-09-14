@@ -49,14 +49,15 @@ pdfFileObj = open(fname, 'rb')
 pdfReader = PyPDF2.PdfReader(pdfFileObj)
 a=''
 i=1
+if '7-' not in pdfReader.pages[0].extract_text():i=0
+if '7 -' not in pdfReader.pages[0].extract_text():i=0
 for pageObj in pdfReader.pages:
-    a+=pageObj.extract_text().replace('7-'+str(i)+' ','')
+    a+=pageObj.extract_text().replace('7-'+str(i),'\n').replace('7 - '+str(i),'\n')
     i+=1
 lines=a.split('\n')
-outlines=[l.split(':')[0].split('：')[0].strip() for l in lines]
+outlines=[l.strip().split(':')[0].split('：')[0] for l in lines]
 outlines=[l for l in outlines if (dots(l) or CNnum(l) or ENnum(l))  and len(l)<60]# and FloatNotInLine(l)]
-outlines=[l for l in outlines if '-' not in l]
-#outlines=[l for l in outlines if CharNotAhead(l)]
+outlines=[l for l in outlines if '-' not in l and '所示' not in l]
 fname=fname.replace('.pdf','outline.txt')
 with open(fname,'w', encoding='utf-8') as f:
     for i in outlines:

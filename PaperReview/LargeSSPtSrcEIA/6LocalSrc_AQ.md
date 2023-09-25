@@ -39,6 +39,10 @@ last_modified_date: 2022-05-16 09:42:56
 關鍵字：煙流三維軌跡、局部PM2.5污染事件、污染物尖峰濃度發生機率差異、異常排放溯源。
 論文主題：排放源特性與源解析、氣膠監測評估及空氣品質模式。
 
+|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-25-15-00-14.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-25-15-00-47.png)|
+|:-:|:-:|
+|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-25-15-01-46.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-25-15-02-19.png)|
+
 ## Source
 - 原文發表於[第26屆國際氣膠科技研討會ICAST26th](http://www.taar.org.tw/uploads/conference/1016/2019ICAST手冊_0925r1.pdf)
   - 曠永銓、簡誌良、李其霈、郭子豪、宋國安、陳金瀛, 2019, 高雄屏地區空氣污染物的空間及時間序列差異特性分析, 26屆國際氣膠科技研討會, 中原大學, 10/4 ~ 5, 2019.

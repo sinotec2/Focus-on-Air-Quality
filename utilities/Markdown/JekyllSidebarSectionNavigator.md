@@ -31,7 +31,17 @@ tags: note_system
   - [jekyllhowto-sidebar-navigation.md](https://github.com/amzn/jekyll-doc-project/blob/master/_docs/Jekyll%20Doc%20Project/Theme%20Instructions/jekyllhowto-sidebar-navigation.md)
 
 ### Blog Style
-- https://gaohaoyang.github.io/
+- reference → https://gaohaoyang.github.io/
+- [pwittrock@github](https://pwittrock.github.io/docs/home/contribute/style-guide/#note)
+
+|.Action|color|
+|:-:|:-:|
+|caution|yellow|
+|note|blue|
+|warning|red|
+
+**Warning:** Beware. 
+{: .warning}
 
 {: .caution }
 Do not blah blah blah...

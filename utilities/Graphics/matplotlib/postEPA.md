@@ -97,6 +97,6 @@ cv2.imwrite("postEPA.png",imageFrame)
 
 ## 結果
 
-![](./postEPA.png)
+![](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/utilities/Graphics/matplotlib/postEPA.png)
 
 [m3nc2gif]: https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/wrf-python/4.m3nc2gif/ "m3nc檔案轉GIF"

@@ -35,3 +35,9 @@ tags: reboot
 
 - nas1的格式是nfs3，但是-t沒有nfs3的選項，需用-o
 - `mount -o vers=3 200.200.121.71:/nas1 /nas1`
+
+## gmond
+
+- 檢查狀態：`systemctl status gmond`
+- 重新啟動：`systemctl restart gmond`
+

@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb='http://www.facebook.com/2008/fbml' xmlns:og='http://ogp.me/ns#' lang="" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="urn:user-namespace-here">
+<head>
+
+<link href="icon/watch_DM_2017_2.jpg" rel="image_src" type="image/jpeg">
+<link rel="shortcut icon" href="icon/watch_icon_02.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="icon/watch_icon_02.ico" />
+<link rel="stylesheet" type="text/css" href="css/style.css?tt=20170903" />
+<link rel="stylesheet" type="text/css" href="css/style_2019.css?tt=20170903" />
+<link rel="stylesheet" type="text/css" href="css/inn_style.css?tt=20170903" />
+<link rel="stylesheet" type="text/css" href="css/w3.css?tt=20170903" />
+<link rel="stylesheet" type="text/css" href="css/questionnaire.css?tt=20170903" />
+<script language="JavaScript" src="js/function.js?tt=20170903"></script>
+<script language="JavaScript" src="js/inn_func.js?tt=20170903"></script>
+<script language="JavaScript" src="js/pageitem.js?tt=20170903"></script>
+<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+<link rel="shortcut icon" href="icon/watch_icon_02.ico" type="image/x-icon" />
+<meta property="og:image" content="https://watch.ncdr.nat.gov.tw/icon/watch_DM_2017_2.jpg"/>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title>CMAQ空品預報</title>
+
+<!-- buttons -->
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <style> #toolbar { padding: 4px; display: inline-block; }
+  /* support: IE7 */
+  *+html #toolbar { display: inline; } </style>
+  <script>
+  $(function() {
+    $( "#beginning" ).button({ text: false, icons: { primary: "ui-icon-seek-start" } });
+    $( "#rewind" ).button({ text: false, icons: { primary: "ui-icon-seek-prev" } })
+    .click(function() {
+        var options;
+        $( this ).button( "option", options ); });
+    $( "#play" ).button({ text: false, icons: { primary: "ui-icon-play" } })
+    .click(function() {
+        var options;
+        if ( $( this ).text() === "播放") {
+                options = { label: "停止", icons: { primary: "ui-icon-pause" } };
+
+                if(timelineID) { clearTimeout(timelineID); }
+                loop_pic();
+        } else {
+                options = { label: "播放", icons: { primary: "ui-icon-play" } };
+                if(timelineID) { clearTimeout(timelineID); }
+                if(timeID) { clearTimeout(timeID); }
+        }
+        $( this ).button( "option", options ); });
+    $( "#stop" ).button({ text: false, icons: { primary: "ui-icon-stop" } })
+    .click(function() { $( "#play" ).button( "option", { label: "play", icons: { primary: "ui-icon-play" } }); });
+    $( "#forward" ).button({ text: false, icons: { primary: "ui-icon-seek-next" } });
+    $( "#end" ).button({ text: false, icons: { primary: "ui-icon-seek-end" } });
+    $( "#shuffle" ).button();
+    $( "#repeat" ).buttonset();
+  });
+  </script>
+<!-- buttons -->
+
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+
+
+</head>
+<body class="index" text="#000000" bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
+<table id="fulltable_id" border="0" width="1150" cellspacing="0" cellpadding="0" align="center" >
+<script>
+  This_MainItem=11;
+  This_SubItem=8;
+</script>
+
+  <tr><td id="bannerid" width="1150" height="100" background="icon/cover.jpg" valign="bottom">
+       <div class="head">
+          <div class="head01" style="font-size:30px">&nbsp; &nbsp;<a href="/">中國東南沿海地區未來10天CMAQ空品預報</a></div>
+
+          <div class="head02">
+          <div class="head02cell" style="width:10px;"></div>
+
+          <div class="head02cell" style="width:50px;">
+            <div class="list1">
+                <a href="watch_user"> 說明 </a>
+              </div>
+          </div>
+
+  <div class="head02cell" style="width:50px;">
+    <div class="list1" onMouseOver="showlist('list2_8')" onMouseout="hidelist('list2_8')">關於
+          <div class="list2s" id="list2_8">
+            <div class="list3t">&nbsp;</div>
+                <div class="list3"><a href="https://www.ncdr.nat.gov.tw" target="_blank">NCDR</a></div>
+            <div class="list3"><a href="/watch_metintro">氣象組介紹</a></div>
+                <div class="list3"><a href="/watch_ebook">電子書</a></div>
+                <div class="list3"><a href="/watch_ebook_2020">電子書2020</a></div>
+                <div class="list3"><a href="/ebook/2021">電子書2021</a></div>
+                <div class="list3"><a href="/student_2022">2022暑期實習</a></div>
+                <div class="list3"><a href="/watch_api_open">開放資料</a></div>
+                <div class="list3"><a href="/watch_online">瀏覽統計</a></div>
+          </div>
+        </div>
+  </div>
+
+
+
+
+  <div class="head02cell" style="width:70px;">
+    <div class="list1" onMouseOver="showlist('list2_2')" onMouseout="hidelist('list2_2')">氣象模式
+          <div class="list2" id="list2_2">
+          </div>
+        </div>
+  </div>
+
+  <div class="head02cell" style="width:70px;">
+    <div class="list1" onMouseOver="showlist('list2_1')" onMouseout="hidelist('list2_1')">天氣監測
+          <div class="list2" id="list2_1">
+            <div class="list3t">&nbsp;</div>
+                <div class="list3"><a href="/watch_dbzprofile_map">回波剖面地圖</a></div>
+          </div>
+        </div>
+  </div>
+  <div class="head02cell" style="width:40px;">
+    <div class="list1"><a href="/"> 首頁 </a>
+        </div>
+  </div>
+
+  </div>
+  </div>
+  <div class="head03" id="watchinformation">
+     <div class="countclass" id="countdiv" align="right"></div>
+     <div style="float:left;height:20px;padding-top:10px;"></div>
+  </div>
+
+  </div>
+    <table height="25" border="0" cellspacing="0" cellpadding="0"><tr>
+      <td>
+          <script>loadsubitem()</script>
+          </td>
+    </tr></table>
+
+  </td></tr>
+
+<!--  第一層選項 -->
+  <form name="ncdrwrf">
+  <tr><td width="1150" height="30" bgcolor="#9abee3" valign="middle" align="center">
+     <div id="lbs_info_id" style="float:right;margin-left:20px;margin-right:10px;height:25px;width:400px;line-height:25px;font-size:21px;text-align:right;"></div>
+  </td></tr>
+     </form>
+<!--  第二層選項-->
+  <tr><td width="1150" height="30" bgcolor="#ffffff" valign="middle" align="center" id="timesbutton">
+     <!--<div id="" style="margin-left:0px;margin-right:0px;height:30px;line-height:30px;font-size:26px;font-weight:bold;color:#cc3333;">懸浮微粒模式模擬─實驗測試調整階段</div>-->
+     <!--<div style="font-size:20px;font-weight:bold;color:#ee0000;">5/23設備維護，部分模式預報產品暫停更新。待設備維護完成後將盡快恢復服務</div>-->
+  </td></tr>
+<!-- 主要內容頁面 -->
+  <tr><td width="1150" height="660" bgcolor="#ffffff" align="center" valign="middle">
+
+     <div style="border:0px #dddddd solid;">
+
+        <div class="product_block" id="">
+            <div class="product_title_block" id="">
+               <div class="product_title_icon"><img src="icon/wicon_aqi.png" style="width:100%;height:100%;"></div>
+               <div class="product_title_cls">空氣品質模擬</div>
+                  <div class="product_opt_select_four" title="污染物及範圍" id="" style="float:right;margin-top:0px;margin-left:10px;margin-right:10px;" onclick="focusto('select_list_id');">
+                     <img src="icon/icon_list.png" style="float:left;height:100%;" onclick="focusto('select_list_id');" oncontextmenu="supermode=1;return false;">
+                     <select id="select_list_id" class="product_opt_select_four_text" size="1" onchange="change_varlist()"; style="text-align:left;">
+                        <optgroup title="東亞範圍(中亞到換日線)解析度45k" label="D01">
+                           <option value="PM25_d01">PM2.5</option>
+                        <optgroup title="中國東南(上海以南到呂宋島)解析度9k" label="D02">
+                           <option value="PM25_d02">PM2.5</option>
+                        </optgroup>
+                        <optgroup title="台灣本島與澎湖解析度3k" label="D03">
+                           <option value="PM25_d03" selected>PM2.5</option>
+                        <optgroup title="SES,sinica,NCU比較" label="D03CF">
+                           <option value="PM25_all">PM2.5</option>
+                        </optgroup>
+                     </select>
+                  </div>
+            </div>
+
+            <div class="product_cont_block" id="cold_warnmain_id" style="display:inline-block;">
+               <div class="product_cont_opt" id="">
+
+                <div class="product_opt_button_two" id="" title="前1小時" style="float:left;margin-left:10px;margin-right:10px;" onclick="move1_pic(-1)"><img src="icon/icon_vleft.png" style="height:100%;"></div>
+                <div class="product_opt_button_two" id="play" style="float:left;margin-left:5px;margin-right:5px;">播放</div>
+                <div class="product_opt_button_two" id="" title="後1小時" style="float:left;margin-left:10px;margin-right:10px;" onclick="move1_pic(1);"><img src="icon/icon_vright.png" style="height:100%;"></div>
+
+
+                <div class="product_opt_button_two" id="" title="初始自後1日" style="float:right;margin-left:10px;margin-right:10px;" onclick="move1_init(1);"><img src="icon/icon_vright.png" style="height:100%;"></div>
+                  <div class="product_opt_button_four" id="select_date_btn" style="font-size:15px;float:right;margin-left:10px;margin-right:10px;display:block;" onclick="change_init();">選擇日期</div>
+                <!-- input type="text" id="datepicker" -->
+                  <div class="product_opt_input_ten" id="" style="float:right;margin-left:10px;margin-right:10px;" onclick="focusto('initid');">
+                     <img src="icon/icon_pen.png" id="" title="回到現在" style="float:left;height:100%;" onclick="load_initial(listdate);" oncontextmenu="return false;">
+                     <input id="initid" class="product_opt_input_ten_text" type='text' size="10" value="" maxlength="10" style="background:#ffffff;">
+                     <input id="init_id" class="product_opt_input_ten_text" type='text' size="12" value="" maxlength="12" style="display:none;">
+                </div>
+                <div class="product_opt_button_two" id="" title="初始自前1日" style="float:right;margin-left:10px;margin-right:10px;" onclick="move1_init(-1)"><img src="icon/icon_vleft.png" style="height:100%;"></div>
+
+
+
+
+               </div>
+               <div class="product_cont_opt" id="" style="margin-bottom:30px;display:inline-block;">
+                   <div style="margin-bottom:5px;width:924px;height:20px;font-size:20px;font-weight:bold;">
+                      <div style="float:left;width:924px;height:20px;border-right:0px #aaaaaa solid;"><div style="margin-top:5px;margin-left:5px;width:914px;height:10px;background:#eea0a0;"><font style="position:relative;top:-10px;font-size:20px;font-weight:bold;">預報</font></div></div>
+                   </div>
+                   <div id="maintimeline_1" style="margin:0 auto;padding-left:15px;padding-right:15px;width:924px;height:30px;line-height:30px;border:1px #bbbbbb solid;border-radius:15px;color:#555555;" ></div>
+               </div>
+               <div class="product_cont_main" id="">
+                  <!-- div style="float:right;width:60px;height:770px;"> </div -->
+                  <div id="TAIWAN_TOWN_id_1_p" style="float:center;;width:1100px;height:550px;border:1px #aaaaaa solid;background:#ffffff;overflow:hidden;-webkit-user-select: none;" >
+                     <img id="apic_id" src="icon/empty_3.png" style="height:100%;">
+                  </div>
+               </div>
+
+<!--
+               <div class="product_cont_desc" id="">
+                  <div style="float:top;margin-top:10px;width:1100px;line-height:40px;font-size:21px;font-weight:bold;text-align:left;">【學研技術合作】</div>
+                  <div style="float:top;margin-top:10px;width:1060px;line-height:40px;font-size:21px;font-weight:bold;text-align:left;">※ 「CMAQ空污模式」及「排放源」是與 國立中央大學 大氣科學系 多維空氣品質模擬實驗室<U>鄭芳怡教授</U>合作落實</div>
+               </div>
+-->
+
+            </div>
+        </div>
+
+    </div>
+  </td></tr>
+<!--
+    <tr>
+    <td width="1150" height="80" >
+       <div class="tail_cont_cls">
+          <div style="float:left;"> &nbsp; &nbsp; 國家災害防救科技中心 &nbsp; 氣象組</div>
+          <div style="float:right;"> 歡迎使用本網站資料，引用請註明出處 &nbsp; &nbsp;</div>
+       </div>
+       <div class="tail_line_cls">&nbsp;</div>
+    </td>
+  </tr>
+-->
+</table><iframe src="wh/sp_count_use?uri=/watch_cmaq" style="height:0;width:0;visibility:hidden;"></iframe>
+
+
+</body>
+<!-- Global site tag (gtag.js) - Google Analytics
+<script //-- async src="https://www.googletagmanager.com/gtag/js?id=UA-111680807-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111680807-1');
+</script>
+-->
+
+
+
+<script src="js/timebar_min_v1_1.js"></script>
+<script type="text/javascript" src="js/mouse.js"></script>
+
+<script>
+  window.onload = function() {
+    chgbanner();
+    init();
+  }
+</script>
+
+<script language="JavaScript">
+var cidarr=[63,64,65,66,67,68,10002,10004,10005,10007,10008,10009,10010,10013,10014,10015,10016,10017,10018,10020,9007,9020];
+var control_mode=0;
+//timebar
+var total_timetip=72;
+var start_timetip=0;
+var intval_timetip=1;
+var intval_minutes=60;
+
+var curr_ntimeline=start_timetip;
+//timebar
+var timelineID;
+var timeID;
+var apic=new Image();
+
+//
+var init_id=0;
+//
+//
+//==============================================================================
+function init() {
+
+   loadtimebar_min(1,924,30,total_timetip,start_timetip,intval_timetip,0,12,12,'init_id',60);
+   list_load('php/list_realtime_date_csv?v=CHART_NCDR_CMAQ','NCDRCMAQ');
+}
+function load_initial(listdate) {
+   document.getElementById('init_id').value=caldatemn(0,listdate);
+   document.getElementById('initid').value=listdate.substr(0,10);
+   load_current();
+}
+function load_current() {
+
+   initlst=document.getElementById('init_id').value;
+   hrdif=Math.ceil(minutediff(initlst,getnowmnUL())/60);
+   hrdif=hrdif>72 ? 6 : hrdif;
+
+   curr_ntimeline=hrdif;
+   timelineUsercontral_min('timeitem_'+hrdif,'init_id',1,intval_minutes);
+   clickshow_pic(hrdif,0)
+}
+function change_varlist() {
+   clickshow_pic(curr_ntimeline,0);
+}
+function change_init() {
+   initday=document.getElementById('initid').value;
+   if (initday.length==10) {
+      if(timelineID) { clearTimeout(timelineID); }
+      document.getElementById('init_id').value=caldatemn(0,initday+'00');
+      timelineUsercontral_min('timeitem_'+curr_ntimeline,'init_id',1,intval_minutes);
+   }
+}
+function move1_init(a) {
+   initday=document.getElementById('initid').value;
+   if (initday.length==10) {
+      if(timelineID) { clearTimeout(timelineID); }
+      document.getElementById('init_id').value=caldatemn(a*24*60,initday+'00');
+      document.getElementById('initid').value=caldatehr(a*24,initday);
+      curr_ntimeline += - a*24
+      nt=curr_ntimeline
+      end_timetip=start_timetip+(total_timetip-1)*intval_timetip
+      nt=nt>end_timetip ? end_timetip : nt;
+      nt=nt<start_timetip ? start_timetip : nt;
+      curr_ntimeline = nt
+      timelineUsercontral_min('timeitem_'+curr_ntimeline,'init_id',1,intval_minutes);
+//      console.log(document.getElementById('play').title);
+      if( document.getElementById('play').title === "停止") { loop_pic(); }
+   }
+}
+//==============================================================================
+// called by timebar_min_v1_1.js:86
+function timebaraction_min(id,n) {
+   clickshow_pic(parseInt(n),0);
+}
+function stop_loop() {
+   if(timelineID) { clearTimeout(timelineID); }
+   if(timeID) { clearTimeout(timeID); }
+}
+function play_loop() {
+   if(timelineID) { clearTimeout(timelineID); }
+   loop_pic();
+}
+function move1_pic(i) {
+   clickshow_pic(curr_ntimeline,60*i);
+   nt=curr_ntimeline+intval_timetip*i;
+   nt=nt>start_timetip+(total_timetip-1)*intval_timetip ? start_timetip : nt;
+   nt=nt<start_timetip?(total_timetip-1)*intval_timetip : nt;
+   var async_func=async function() {
+      a=await show_pic(parseInt(nt),0);
+   }
+   async_func();
+   curr_ntimeline=nt;
+}
+
+function loop_pic() {
+
+   nt=curr_ntimeline+intval_timetip;
+   nt=nt>start_timetip+(total_timetip-1)*intval_timetip ? start_timetip : nt;
+
+   var async_func=async function() {
+      a=await show_pic(parseInt(nt),0);
+   }
+   async_func();
+
+
+   curr_ntimeline=nt;
+   timelineID = setTimeout('loop_pic()',500)
+}
+function show_pic(a,b) {
+   nid=parseInt(a)/10;
+   timelineUsercontral_min('timeitem_'+nt,'init_id',1,intval_minutes);
+}
+function clickshow_pic(a,b) {
+   avar=document.getElementById('select_list_id').value;
+   dirlst=document.getElementById('initid').value;
+   initlst=document.getElementById('init_id').value;
+   thislst=caldatemn((a)*intval_minutes+b, initlst);
+   url='00_Wxmap/8F4_CMAQ/'+dirlst.substr(0,6)+'/'+dirlst.substr(0,10)+'/'+avar+'_'+thislst.substr(0,10)+'.png';
+   apic.src=url;
+   document.getElementById('apic_id').src=apic.src;
+}
+//==============================================================================
+function opendiv(a,b) {
+   if (document.getElementById(b)!==null) {
+      if (document.getElementById(b).style.display=='inline-block') {
+         document.getElementById(b).style.display='none';
+         apic.src='icon/icon_opendiv.png';
+         document.getElementById(a).src=apic.src;
+      }else{
+         document.getElementById(b).style.display='inline-block';
+         apic.src='icon/icon_closediv.png';
+         document.getElementById(a).src=apic.src;
+      }
+   }
+}
+function focusto(a) {
+  document.getElementById(a).focus();
+}
+function errimg( thisimg ) {
+ missimg="icon/empty_bk.gif";
+ document.getElementById(thisimg.id).src=missimg;
+}
+function chgselvalue(divid,a) {
+   document.getElementById(divid).value=a;
+}
+//==============================================================================
+function list_load(xmllink,divid) {
+reportfile =xmllink;
+
+
+var txtFile = new XMLHttpRequest();
+txtFile.open("GET", reportfile, true);
+txtFile.setRequestHeader( "Content-Type", "text/html;charset=big5" );
+txtFile.setRequestHeader("charset","utf-8");
+txtFile.onreadystatechange = function() {
+  var outText="";
+  if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+    if (txtFile.status === 200) {  // Makes sure it's found the file.
+      outText = txtFile.responseText;
+
+      if (outText.length>10) {
+
+          avar=outText.split(",");
+          cattype=avar[0];
+          listdate=avar[1];
+
+          if (divid=='NCDRCMAQ') {load_initial(listdate); }
+      }
+
+    }
+  }
+}
+txtFile.send(null);
+
+}
+//==============================================================================
+</script>

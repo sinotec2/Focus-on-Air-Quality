@@ -1,11 +1,9 @@
 ---
 layout: default
 title:  環評書件書目表之全部下載與整理
-parent: Crawlers
-grand_parent: Utilities
-has_children: true
+pparent: PDF檔案大綱之讀取與整理
+grand_parent: Crawlers
 last_modified_date: 2023-06-12 08:56:43
-permalink: /utilities/Crawlers/PDF\'s
 tags: Crawlers pdf
 ---
 

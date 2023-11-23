@@ -135,7 +135,7 @@ for i in range(2,npage):
 - 下載完成後，將所有`all_page*.html`檔名存成`fnames.txt`(用`ls all_page*.html >fnames.txt` 指令)
 - 以下這支程式([htm2csv.py](./html2csv.py))將`html`轉成`csv`資料表
 
-本程式使用了Pandas和Beautiful Soup函式庫來解析一系列HTML文件，並從中擷取表格數據，最後將這些資料合併為一個Pandas DataFrame。 以下是對程式碼的詳細解釋：
+本程式使用了 `Pandas` 和 `Beautiful Soup` 函式庫來解析一系列HTML文件，並從中擷取表格數據，最後將這些資料合併為一個 `Pandas DataFrame`。 以下是對程式碼的詳細解釋：
 
 1. **導入所需庫**:
     - 導入Pandas（用於資料處理）、Beautiful Soup（用於解析HTML）和os（用於作業系統功能，如檔案路徑）。
@@ -170,9 +170,10 @@ for i in range(2,npage):
 
 ### 「計畫類別」代碼及名稱對照表之讀取
 
-- 從`html`檔案中的`<select>`片段中讀取選項代碼(`B01`~`B99`)與其顯示的名稱，建立`proj_class.json`對照表備用，詳見[proj_class.py][./proj_class.py]的[程式說明](./proj_class.md)。須注意：
+- 從`html`檔案中的`<select>`片段中讀取選項代碼(`B01`~`B99`)與其顯示的名稱，建立`proj_class.json`對照表備用，詳見[proj_class.py](./proj_class.py)的[程式說明](./proj_class.md)。須注意：
   - 代碼並非連續
   - 中文名稱可能也有版本的差異
+  - 需調用`json`
 
 ```python
 with open('proj_class.json','r') as f:

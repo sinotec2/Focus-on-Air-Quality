@@ -153,4 +153,77 @@ for i in range(2,npage):
 
 ## 給定計畫類別索引
 
-### 
+### 「計畫類別」代碼及名稱對照表之讀取
+
+- 從`html`檔案中的`<select>`片段中讀取選項代碼(`B01`~`B99`)與其顯示的名稱，建立`proj_class.json`對照表備用，詳見[proj_class.py][./proj_class.py]的[程式說明](./proj_class.md)。須注意：
+  - 代碼並非連續
+  - 中文名稱可能也有版本的差異
+
+```python
+with open('proj_class.json','r') as f:
+    pc=json.load(f)
+```
+
+### 從「計畫類別」下拉選單建立書目類別
+
+- 指定類別所得到的書目，自然就可以帶有該類別的屬性。這部分的工作雖然只涵蓋了7500本中的2000多本，然而也算是幫了不少的忙。
+- 建立類別書目可以使用[get_htmlCat.py](./get_htmlCat.py)，詳見[程式說明](./get_html.md)
+- 因為書目中文件的名稱是唯一的，可以建立文件名稱與計畫類別的對照表，在將此對照表應用在7500本的書目表，即可有效減少無類別的本數。
+  - `df0`為7500本的書目表，`df`為2000多本書目表
+
+```python
+st=set(df0.name)-set(df.name)
+a=df0.loc[df0.name.map(lambda x:x not in st),"name"]
+
+nam_cat={i:j for i,j in zip(df.name,df.cat)}
+df0.loc[a.index,'cat']=[nam_cat[i] for i in list(a)]
+```
+
+### B27_能源或輸變電工程之開發
+
+- 這類的特徵還蠻顯著的，關鍵詞為：`kw=['電廠','風力','發電','電力']`
+
+```python
+for i in kw:
+    a=df0.loc[(df0.cat.map(lambda x:x[0]!='B')) & (df0.name.map(lambda x:i in x and '和平水泥廠計畫' not in x))]
+    df0.loc[a.index,'cat']='B27'
+```
+
+- 值得注意的是和平水泥廠使用和平電廠飛灰來資源化，計畫的主體是和平水泥，是屬於工廠設立類別，不是電廠，所以要排除該項計劃。
+
+### B05_大眾捷運系統之開發
+
+- 這項計畫有別於鐵道計畫，以城內交通之捷運、輕軌為主。不包括高鐵。
+- 機場捷運有點不太清楚，此處還是歸類在B05
+- 要注意捷運站有共構計畫，主體為商辦計畫，不算在B05之內。
+
+```python
+a=df0.loc[(df0.name.map(lambda x:x in st)) & (df0.name.map(lambda x:'捷運' in x and '富邦人壽' not in x and '冠德建設' not in x)) & (df0.cat.map(lambda x:x[0]!='B'))]
+df0.loc[a.index,'cat']='B05'
+a=df0.loc[(df0.cat.map(lambda x:x[0]!='B')) & (df0.name.map(lambda x:'輕軌' in x ))]
+df0.loc[a.index,'cat']='B05'
+```
+
+### B02_園區之開發
+
+- 由於計畫名稱中有園區的非常多，此處的園區是集合性的工廠性質、生產服務過程具有非生活污染排放的可能性。`kw=['創新園區','軟體園區','科技商務園區','林口園區','醫學園區','科學城','工業區','工商綜合專用區','研發科技中心','產業園區','工業園區','智慧園區','科技園區',]`
+
+```python
+for i in kw:
+    a=df0.loc[(df0.cat.map(lambda x:x[0]!='B')) & (df0.name.map(lambda x:i in x))]
+    df0.loc[a.index,'cat']='B02'
+```
+
+### 結果輸出
+
+- 定義年代：環評書件的`id`是以民國年代為前3碼，因此可將其選取、轉成數字加上判斷，便可選擇所要年代的書件
+    - 近5年：`near0=(df0.id.map(lambda x:int(x[:3])>=107))`
+- 定義計畫類別：`bs=['B02','B05','B27']`
+- 定義程序：`(df0.prog!='審查中')`
+- 將類別代碼後面加上中文名稱，方便歸檔。
+
+```python
+a=df0.loc[(df0.cat.map(lambda x:x in bs)) & (df0.prog!='審查中') & near0].reset_index(drop=True)
+a.cat=[i+'_'+pc[i] for i in a.cat]
+a.set_index('cat').to_csv('cat4all.csv')
+```

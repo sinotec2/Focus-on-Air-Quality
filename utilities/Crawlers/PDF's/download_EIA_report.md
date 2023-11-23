@@ -8,7 +8,7 @@ last_modified_date: 2023-06-12 08:56:43
 tags: Crawlers pdf
 ---
 
-# 環評書件之下載與整理
+# 環評書件書目表之全部下載與整理
 {: .no_toc }
 
 <details open markdown="block">
@@ -28,9 +28,10 @@ tags: Crawlers pdf
   - 下載一本報告約需10分鐘、全部下載約需52天。
   - 一本報告約230MB，全部估計1.7T
 - 由於報告索引的建立並不是很完整，最直覺的「計畫類別」不單有前後對照不一的問題，也有很多案件並未給定類別，導致搜尋時的嚴重落差。需自行重建索引。
-  - 按照各個「計畫類別」分別下載的[程式](./get_html.py)[說明](./get_html.md)
+  - 按照各個「計畫類別」分別下載的[程式](./get_html.py)與[說明](./get_html.md)
+  - 按照書目`csv`檔案內容分批下載，可以詳見[環評書件章節附錄之下載](./get_eia4.md)
 - 位詳細介紹在此分兩個段落說明。此處先介紹索引表格的建立，再進一步介紹下載的爬蟲程式。
-- 因網頁設有防爬蟲的隨機驗證碼，只能藉由`selenium`的點擊動作來觸發網站程式。還好一頁有10條報告內容，經重複750次可以完整下載索引表。
+- 因網頁設有防爬蟲的隨機驗證碼，只能藉由`selenium`的點擊動作來觸發網站程式。還好一頁有10條書目內容，經重複750次可以完整下載索引表，需時約2個小時多一些。
 
 ## 程式說明
 
@@ -79,6 +80,8 @@ tags: Crawlers pdf
 ```python
 for i in range(2,npage):
     ii=str(i);pth=By.LINK_TEXT
+    if i<=4: #skip the meeting pages selection
+        pth=By.XPATH;ii='(//a[text()="'+ii+'"])[2]'
     if (i-1)%5==0:
         if i<=6:
             ii="...";pth=By.LINK_TEXT
@@ -99,9 +102,13 @@ for i in range(2,npage):
 2. **確定如何選擇頁面**:
     - `ii` 和 `pth` 變數用於決定如何選擇頁面連結。
     - `ii=str(i); pth=By.LINK_TEXT`：預設情況下，使用頁面上的連結文字來定位元素。
+    - 情況1:閃避選到環評會議。一般可能有4～5頁。
+      - 如果`i<=4`,則 `pth` 改為 `By.XPATH`，`ii='(//a[text()="'+ii+'"])[2]'`第2個數字的 `LINK_TEXT` 。
     - 如果 `(i-1) % 5 == 0`，表示每隔五頁，頁面的選擇邏輯會改變。
-      - 如果 `i <= 6`，則 `ii` 設定為 `"..."`（通常用於網頁中的「下一批」連結），`pth` 保持為 `By.LINK_TEXT`。
+      - 如果 `i <= 6`，則 `ii` 設定為 `"..."`（用於網頁中的「下一批」連結），`pth` 保持為 `By.LINK_TEXT`。
       - 如果 `i > 6`，則 `pth` 改為 `By.XPATH`，以適應同時有「上一批」「下一批」連結，都是用省略符號("...")，並且選取第2個省略符號，使用特定的 XPath 來點擊正確的物件。
+
+
 
 3. **檢查文件是否已存在**:
     - `if os.path.exists(fnames[i]): continue`：這行程式碼檢查對應的檔案是否已經存在。 如果存在，那麼跳過目前迭代，不再重新下載該頁面。
@@ -228,3 +235,5 @@ a=df0.loc[(df0.cat.map(lambda x:x in bs)) & (df0.prog!='審查中') & near0].res
 a.cat=[i+'_'+pc[i] for i in a.cat]
 a.set_index('cat').to_csv('cat4all.csv')
 ```
+
+- 按照書目`csv`檔案內容分批下載，可以詳見[環評書件章節附錄之下載](./get_eia4.md)

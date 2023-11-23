@@ -60,6 +60,8 @@ if not os.path.exists(fnames[1]):
     time.sleep(10)
 for i in range(2,npage):
     ii=str(i);pth=By.LINK_TEXT
+    if i<=4: #skip the meeting pages selection
+        pth=By.XPATH;ii='(//a[text()="'+ii+'"])[2]'
     if (i-1)%5==0:
         if i<=6:
             ii="...";pth=By.LINK_TEXT

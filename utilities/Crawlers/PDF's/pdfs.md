@@ -1,10 +1,11 @@
 ---
 layout: default
-title:  PDF檔案大綱之讀取與整理
-parent: PDF檔案之下載與整理
-grand_parent: Crawlers
-nav_order: 5
+title:  PDF檔案之下載與整理
+parent: Crawlers
+grand_parent: Utilities
+has_children: true
 last_modified_date: 2023-06-12 08:56:43
+permalink: /utilities/Crawlers/PDF\'s
 tags: Crawlers pdf
 ---
 

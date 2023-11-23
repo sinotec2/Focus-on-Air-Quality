@@ -23,21 +23,32 @@ tags: Crawlers pdf
 
 ## 背景
 
-- 此處介紹特定書目之章節與附錄檔案的下載。
+- 此處介紹特定書目之章節與附錄檔案的下載。書目的產生參考[按照計畫類別下載環評書件書目表](./get_html.md)及[環評書件書目表之全部下載與整理](./download_EIA_report.md)。
 - 由於環評書件(環說書、環評報告書)的章節是固定且各自存檔的、各個附錄也都切割成一個個的檔案，按照順序編列C00~C13、A01~A99。
-- 環評書件查詢系統(本系統)是以類似REST指令方式提供檔案。檔案url雖然不能以`wget`或是`curl`等指令直接下載，卻可以用`selenium`的`webdriver`連線取得。
-- `url`內含了3個程式的引數：書目的`id`、計畫名稱`name`、以及PDF檔案名稱。
-- 因此程式設計的重點就是正確給定這3個引數，並將結果搬移到正確的目錄下(因PDF檔案名稱沒有計畫或id的訊息)
+- 環評書件查詢系統(本系統)是以類似[REST][rest]指令方式提供檔案。檔案url雖然不能以`wget`或是`curl`等指令直接下載，卻可以用`selenium`的`webdriver`連線取得。
+  - `url`內含了2個程式的引數：書目的`id`(`shcode`)、以及PDF檔案名稱(`sFileName`)。
+  - `url`通式：
+
+```python
+iend={'C':14,'A':31}
+...
+      url_root='https://eiadoc.epa.gov.tw/eiaweb/DownloadFiles.ashx?shcode='+id+'&sFileName='
+      for ac in 'CA':
+        pdf_files=[ac+'{:02d}'.format(i)+'.PDF' for i in range(1,iend[ac])]
+        urls = [url_root+p for p in pdf_files] # 循环遍历 URL 列表并下载文件
+```
+
+- 因此程式設計的重點就是正確給定這3個引數，並將結果搬移到正確的目錄下(因`PDF`檔案名稱沒有計畫或`id`的訊息)
 
 ## 程式說明
 
 ### 重要IO與參數
 
-[get_eia4.py](./get_eia4.py)程式碼主要是用來從環評書件網站(eiadoc.epa.gov.tw)上自動下載指定環評報告的 PDF 檔案。
+[get_eia4.py](./get_eia4.py)程式碼主要是用來從環評書件網站(eiadoc.epa.gov.tw)上自動下載指定環評報告的 `PDF` 檔案。
 
 主要參數說明:
 
-1. `df`: 從 CSV 檔案讀入的待下載報告基本資訊
+1. `df`: 從 `CSV` 檔案讀入的待下載報告基本資訊
 2. `id`: 報告編號
 3. `cat`: 報告分類
 4. `nam`: 報告名稱  
@@ -48,7 +59,7 @@ tags: Crawlers pdf
 
 主要邏輯:
 
-1. 讀取 CSV,提取下載清單資訊 
+1. 讀取 `CSV`,提取下載清單資訊 
 2. 迴圈逐一下載報告:
    - 組合目標儲存路徑及檔案名
    - 判斷檔案是否已存在
@@ -58,15 +69,16 @@ tags: Crawlers pdf
 3. 關閉瀏覽器結束
 
 輸入:
+
 1. 報告分類與編號區間參數
-2. 報告基本資訊 `CSV` 
+2. 報告基本書目資訊 `CSV` 
 
 輸出:
-下載的 PDF 報告檔案
+下載的 `PDF` 報告檔案
 
 ### 程式說明
 
-您的腳本 [get_eia.py](./get_eia4.py) 用於從網站上下載PDF檔案並將它們移至特定的目錄中。 這是一個自動化的資料收集腳本，使用了Selenium庫來模擬瀏覽器行為。 以下是對您腳本的逐行解釋：
+您的腳本 [get_eia.py](./get_eia4.py) 用於從網站上下載 `PDF` 檔案並將它們移至特定的目錄中。 這是一個自動化的資料收集腳本，使用了`Selenium`庫來模擬瀏覽器行為。 以下是對您腳本的逐行解釋：
 
 1. **導入必要的庫**:
     - 匯入了`webdriver`用於控制瀏覽器，`Options`用於設定瀏覽器選項，以及`pandas`、`os`、`sys`、`time`、`random`、`glob`和`shutil` 等常用函式庫。
@@ -117,3 +129,5 @@ tags: Crawlers pdf
 0 7 25 11 * cd /XXX2/sespub/epa_reports/works;./get_eia4.py cat4all 180 270
 0 7 26 11 * cd /XXX2/sespub/epa_reports/works;./get_eia4.py cat4all 270 350
 ```
+
+[rest]: https://chat.openai.com/ "REST(Representational State Transfer)是一種網路軟體架構風格,被廣泛用於客戶端和伺服器互動類別的軟體系統設計。主要的特徵有:1. 資源導向(Resource) - REST 面向的資料單元是資源,每個資源都有一個唯一識別碼。2. 對資源的操作 - 主要透過HTTP動詞表示對資源的操作行為,如 GET、POST、PUT、DELETE。3. 狀態lessness - 服務端不保留客戶端請求的上下文資訊,從客戶端請求單獨判斷回應。4. 統一介面 - 採用統一的介面與資源進行互動,最典型的是HTTP介面。5. 分層系統 - 系統分為客戶端、伺服器、快取等層,層間互動遵循分散式架構原則。REST架構風格倡導以資源為中心,使用HTTP作為傳輸協定,無狀態,軟體介面一致化的設計概念,被許多網路服務採用,是建構高效網路應用的重要方式。 它簡化了軟體介面的設計,而與具體實現解耦。"

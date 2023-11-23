@@ -1,13 +1,14 @@
 ---
 layout: default
-title:  計劃類別類碼與名稱之對照
+title:  計劃類別碼與名稱之對照
 parent: PDF檔案大綱之讀取與整理
 grand_parent: Crawlers
+nav_order: 1
 last_modified_date: 2023-06-12 08:56:43
 tags: Crawlers pdf
 ---
 
-# 計劃類別類碼與名稱之對照
+# 計劃類別碼與名稱之對照
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,7 +24,6 @@ tags: Crawlers pdf
 ## 背景
 
 - 「計畫類別」是環評書件書目的重要項目，此處建立其代碼與名稱的對照表。
-
 
 ## 程式說明
 

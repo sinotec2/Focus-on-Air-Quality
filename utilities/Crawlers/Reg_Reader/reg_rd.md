@@ -1,10 +1,10 @@
 ---
 layout: default
-title:  Reg_Reader
+title:  Regulation Reader
 parent: Crawlers
 grand_parent: Utilities
 has_children: true
-last_modified_date: 2023-06-12 08:56:43
+last_modified_date: 2023-11-28 04:55:25
 permalink: /utilities/Crawlers/Reg_Reader
 tags: Crawlers pdf
 ---

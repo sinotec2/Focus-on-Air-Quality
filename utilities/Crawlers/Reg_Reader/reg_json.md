@@ -3,7 +3,7 @@ layout: default
 title:  環境法規之下載
 parent: Regulation Reader
 grand_parent: Crawlers
-nav_order: 3
+nav_order: 2
 last_modified_date: 2023-11-29 04:45:34
 tags: Crawlers pdf
 ---
@@ -23,11 +23,11 @@ tags: Crawlers pdf
 
 ## 背景
 
-- 這個 Python 腳本（[reg_json.py](reg_json.py)）用於從內政部法規條文查詢網頁中提取法律文本、並保存為 JSON 檔案。
-- 同樣是url字串存在著問號及等號的情況，內政部法規條文查詢系統不接受`requests`、不接受browser的`driver.get`，甚至也不接受`os.system`執行`wget`。
+- 這個 Python 腳本（[reg_json.py](reg_json.py)）用於從法務部[全國法規資料庫](https://law.moj.gov.tw/Index.aspx)(下稱**系統**)個別法規網頁中提取法律文本、並保存為 JSON 檔案備用。
+- 同樣是url字串存在著問號及等號的情況，**系統**不接受`requests`、不接受browser的`driver.get`，甚至也不接受`os.system`執行`wget`。
 - 只接受將url寫在執行腳本中、透過bash來執行。
-- 詳細原因不明，GPT暗示可能是網站的防爬策略，但是卻對簡易批次的`wget`開放，這點似乎不符邏輯。
-- 此腳本適用於自動化提取和儲存特定格式的網頁上的法律文件信息，但它依賴於特定 HTML 結構的網頁，針對不同的網站會需要進行調整。
+- 詳細原因不明，GPT暗示可能是網站的防爬策略，但是**系統**卻對簡易批次的`wget`開放，這點似乎不符邏輯。
+- 此腳本適用於自動化提取和儲存**系統**特定格式的網頁上的法律文件信息，但它依賴於該**系統** HTML 結構的網頁，針對不同的網站會需要進行調整。
 
 ## 程式說明
 

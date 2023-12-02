@@ -1,31 +1,37 @@
 
 
-這個 Python 腳本([get_title.py]())是用來從 HTML 檔案中提取特定的專案訊息，並將其儲存為一個 CSV 檔案。這裡是腳本的主要步驟：
+Python 這個[腳本](get_links.py)使用 Selenium 和 BeautifulSoup 庫從一個特定的網站（「https://epq.moenv.gov.tw/Query/ResultList」）提取數據，並保存到本地 HTML 文件中。以下是腳本的詳細步驟：
 
-1. **定義來源目錄和搜尋 HTML 檔案**：
-   - 設定 `source_directory` 為目前目錄 (`"./"`)。
-   - 使用 `glob.glob` 函數來尋找目前目錄下的所有 HTML 檔案。
+1. **導入所需的庫**：
+   - 匯入了 Selenium 和 BeautifulSoup 庫，以及必要的功能，如 `WebDriverWait` 和 `expected_conditions`。
 
-2. **初始化 Pandas DataFrame**：
-   - 建立一個空的 DataFrame `df0`。
-   - 建立一個空的字典 `gp_cat` 用於儲存項目類別。
-3. **遍歷 HTML 檔案**：
-   - 遍歷每個 HTML 檔案。
-   - 使用 BeautifulSoup 解析 HTML 內容。
+2. **定義點選等待函數** (`click_wait`)：
+   - 此函數用於點擊頁面元素，並等待頁面更新後再繼續執行。
 
-4. **提取資料**：
-   - 在每個 HTML 檔案中尋找所有帶有類別 `download_icon` 的 `<a>` 標籤。
-   - 對於每個鏈接，提取 `href` 屬性，進而提取 `proj_id` 和 `group_id`。
-   - 從連結的 `title` 屬性中提取項目標題。
-   - 將擷取的資料儲存在一個字典中，並加入到 `data_list` 清單中。
+3. **瀏覽分類**：
+   - 使用`for`循環遍歷不同的類別`cat`（編號從02到19）。
 
-5. **轉換資料到 DataFrame 並合併**：
-   - 將 `data_list` 轉換為一個新的 DataFrame `df`。
-   - 將 `df` 合併到初始的 `df0` DataFrame 中。
+4. **設定無頭模式的Firefox瀏覽器驅動程式**：
+   - 建立一個無頭 Firefox 瀏覽器實例（不顯示介面的瀏覽器）。
 
-6. **新增類別資訊並儲存 CSV 檔案**：
-   - 對於 `df0` 中的每個 `group_id`，從 `gp_cat` 字典中尋找對應的類別 `cat` 並加入 DataFrame 中。
-   - 設定 `proj_id` 為 DataFrame 的索引。
-   - 將 DataFrame 儲存為 CSV 檔案 `env_prj.csv`。
+5. **造訪網站並等待元素載入**：
+   - 造訪特定類別的頁面。
+   - 使用 `WebDriverWait` 等待頁面中的特定元素載入完成。
 
-這個腳本主要用於從多個 HTML 文件中提取相關的連結信息，並將這些資訊匯總和格式化為一個結構化的 CSV 文件，以便於進一步的數據分析和處理。
+6. **選擇每頁顯示的出境數**：
+   - 找到並顯示選擇下拉式選單來改變每頁的條目數。
+
+7. **儲存目前頁面的內容**：
+   - 把目前頁面的 HTML 原始碼儲存到一個本機檔案。
+
+8. **使用BeautifulSoup解析HTML，取得總頁數**：
+   - 解析已儲存的頁面內容，找到表示頁碼的元素，從而決定總頁碼。
+
+9. **瀏覽所有頁面**：
+   - 對於每一頁，使用前面定義的 `click_wait` 函數點擊頁面上的頁面代碼鏈接，切換到對應的頁面。
+   - 將每個頁面的 HTML 原始碼儲存到本機檔案。
+
+10. **關閉瀏覽器**：
+   - 完成資料摘要後，關閉瀏覽器。
+
+此主要腳本用於自動化從網站上提取分頁數據，將每一頁的內容保存為本地 HTML 文件，然後進行後續的數據處理和分析。

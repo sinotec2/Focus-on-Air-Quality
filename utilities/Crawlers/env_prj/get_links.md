@@ -1,4 +1,32 @@
+---
+layout: default
+title:  環保專案成果書目之下載
+parent: 環保專案報告之下載
+grand_parent: Crawlers
+nav_order: 1
+last_modified_date: 2023-12-01 22:01:33
+tags: Crawlers pdf
+---
 
+# 環保專案成果書目之下載
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+---
+## 背景
+
+- 環保專案成果報告查詢系統有基本的分類，分別是01水質保護～19國際環保議題。
+- 點進去之後，會出現20～50條的書目，依序每頁另存即可。
+- 總共有幾頁的頁數，會出現在第一頁，用bs4讀出來就行。
+
+## 程式說明
 
 Python 這個[腳本](get_links.py)使用 Selenium 和 BeautifulSoup 庫從一個特定的網站（「https://epq.moenv.gov.tw/Query/ResultList」）提取數據，並保存到本地 HTML 文件中。以下是腳本的詳細步驟：
 

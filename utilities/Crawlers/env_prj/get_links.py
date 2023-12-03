@@ -20,7 +20,7 @@ firefox_options = Options()
 firefox_options.add_argument("--headless")  # 启用无头模式
 
 wait_time = 10
-for cat in ['{:02d}'.format(i) for i in range(2,20)]:
+for cat in ['{:02d}'.format(i) for i in range(1,2)]:
     driver = webdriver.Firefox(options=firefox_options)
     driver.get("https://epq.moenv.gov.tw/Query/ResultList?Classification="+cat+"#")
 

@@ -125,3 +125,80 @@ else:
 
 请确保替换 `url` 变量中的网址和 `payload` 变量中的参数值为实际的值。此外，如果目标网站使用了验证码保护，您可能需要查看网站的相关规则，并使用适当的方法来处理验证码。
 
+## main.py37
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def get_captcha:
+    from PIL import Image
+
+    # 打开截图文件
+    screenshot_path = "screenshot.png"
+    screenshot = Image.open(screenshot_path)
+
+    # 设置裁剪区域的位置和大小
+    x = 100  # 距左边界的像素
+    y = 750  # 距顶部的像素
+    w = 80  # 宽度
+    h = 50  # 高度
+
+    # 裁剪图像
+    cropped_image = screenshot.crop((x, y, x + w, y + h))
+
+    # 保存裁剪后的图像
+    cropped_image.save("cropped_image.png")
+    return CaptchaCode
+
+# 设置 Chrome 驱动器的路径
+chrome_driver_path = '/path/to/chromedriver'
+
+# 创建 Chrome 驱动器
+driver = webdriver.Firefox()
+
+# 打开网页
+url = "https://epq.moenv.gov.tw/ProjectDoc/FileDownload?proj_id=1111564042&group_id=22357"
+driver.get(url)
+driver.save_screenshot("screenshot.png")
+
+try:
+    # 输入验证码（如果需要）
+    captcha_input = driver.find_element(By.ID, "CaptchaCode")
+    captcha_input.send_keys("ccQ1")
+
+    # 点击 "我同意"
+    agree_button = driver.find_element(By.XPATH, "//input[@value='我同意']")
+    agree_button.click()
+
+    # 等待文件下载完成，您可能需要根据实际情况调整等待时间
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.url_contains("YourDownloadedFileName"))
+
+finally:
+    # 关闭浏览器
+    driver.quit()
+```
+
+## OCR methods
+
+```python
+#!/home/anaconda3/envs/py37/bin/python
+import cv2
+import pytesseract
+from PIL import Image
+
+# 读取图像
+image = cv2.imread('./input.png', 0)
+
+# 二值化
+_, binary_image = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
+
+# 使用 Tesseract 进行 OCR
+text = pytesseract.image_to_string(Image.fromarray(binary_image))
+
+print(text)
+```

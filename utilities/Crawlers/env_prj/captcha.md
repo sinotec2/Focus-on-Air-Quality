@@ -127,61 +127,6 @@ else:
 
 ## main.py37
 
-```python
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-def get_captcha:
-    from PIL import Image
-
-    # 打开截图文件
-    screenshot_path = "screenshot.png"
-    screenshot = Image.open(screenshot_path)
-
-    # 设置裁剪区域的位置和大小
-    x = 100  # 距左边界的像素
-    y = 750  # 距顶部的像素
-    w = 80  # 宽度
-    h = 50  # 高度
-
-    # 裁剪图像
-    cropped_image = screenshot.crop((x, y, x + w, y + h))
-
-    # 保存裁剪后的图像
-    cropped_image.save("cropped_image.png")
-    return CaptchaCode
-
-# 设置 Chrome 驱动器的路径
-chrome_driver_path = '/path/to/chromedriver'
-
-# 创建 Chrome 驱动器
-driver = webdriver.Firefox()
-
-# 打开网页
-url = "https://epq.moenv.gov.tw/ProjectDoc/FileDownload?proj_id=1111564042&group_id=22357"
-driver.get(url)
-driver.save_screenshot("screenshot.png")
-
-try:
-    # 输入验证码（如果需要）
-    captcha_input = driver.find_element(By.ID, "CaptchaCode")
-    captcha_input.send_keys("ccQ1")
-
-    # 点击 "我同意"
-    agree_button = driver.find_element(By.XPATH, "//input[@value='我同意']")
-    agree_button.click()
-
-    # 等待文件下载完成，您可能需要根据实际情况调整等待时间
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.url_contains("YourDownloadedFileName"))
-
-finally:
-    # 关闭浏览器
-    driver.quit()
-```
 
 ## OCR methods
 
@@ -202,3 +147,69 @@ text = pytesseract.image_to_string(Image.fromarray(binary_image))
 
 print(text)
 ```
+
+## 程式說明
+
+這個 Python 腳本是用來從 HTML 檔案中提取特定的專案訊息，並將其儲存為一個 CSV 檔案。 這裡是腳本的主要步驟：
+
+1. **定義來源目錄和搜尋 HTML 檔案**：
+    - 設定 `source_directory` 為目前目錄 (`"./"`)。
+    - 使用 `glob.glob` 函數來尋找目前目錄下的所有 HTML 檔案。
+
+2. **初始化 Pandas DataFrame**：
+    - 建立一個空的 DataFrame `df0`。
+    - 建立一個空的字典 `gp_cat` 用於儲存項目類別。
+
+3. **遍歷 HTML 檔案**：
+    - 遍歷每個 HTML 檔案。
+    - 使用 BeautifulSoup 解析 HTML 內容。
+
+4. **提取資料**：
+    - 在每個 HTML 檔案中尋找所有帶有類別 `download_icon` 的 `<a>` 標籤。
+    - 對於每個鏈接，提取 `href` 屬性，進而提取 `proj_id` 和 `group_id`。
+    - 從連結的 `title` 屬性中提取項目標題。
+    - 將擷取的資料儲存在一個字典中，並加入到 `data_list` 清單中。
+
+5. **轉換資料到 DataFrame 並合併**：
+    - 將 `data_list` 轉換為一個新的 DataFrame `df`。
+    - 將 `df` 合併到初始的 `df0` DataFrame 中。
+
+6. **新增類別資訊並儲存 CSV 檔案**：
+    - 對於 `df0` 中的每個 `group_id`，從 `gp_cat` 字典中尋找對應的類別 `cat` 並加入 DataFrame 中。
+    - 設定 `proj_id` 為 DataFrame 的索引。
+    - 將 DataFrame 儲存為 CSV 檔案 `env_prj.csv`。
+
+這個腳本主要用於從多個 HTML 文件中提取相關的連結信息，並將這些資訊匯總和格式化為一個結構化的 CSV 文件，以便於進一步的數據分析和處理。 這個腳本的目的是從特定網站下載 PDF 文件，並根據驗證碼進行驗證。 以下是腳本的主要步驟：
+
+1. **導入必要的庫**：
+    - 使用 Selenium 進行網頁自動化。
+    - 使用 pytesseract 和 OpenCV 進行驗證碼識別。
+    - 使用 Pandas 處理資料。
+    - 使用 glob 和 os 處理檔案。
+
+2. **定義驗證碼取得函數**：
+    - `get_captcha(i)` 函數用來取得驗證碼。
+    - 使用 Pillow 庫裁剪和儲存螢幕截圖。
+    - 使用 pytesseract 進行 OCR 識別驗證碼。
+
+3. **載入已有的 DataFrame**：
+    - 從名為 'df0.csv' 的 CSV 檔案中載入一個 DataFrame（`df0`）。
+
+4. **建立 Chrome 驅動器**：
+    - 使用 Firefox 磁碟機啟動 Selenium。
+
+5. **循環遍歷資料集**：
+    - 對 `df0` 中的每一行執行下列步驟。
+
+6. **開啟網頁並下載 PDF 檔案**：
+    - 使用 Selenium 開啟目標網頁。
+    - 截取螢幕截圖，並呼叫驗證碼取得函數以取得驗證碼。
+    - 將驗證碼輸入網頁。
+    - 點擊 "我同意" 按鈕。
+    - 檢查是否出現 "OK" 按鈕，如果是，則點擊 "OK" 按鈕，重新進行循環。
+    - 否則，等待一段時間，然後將下載的 PDF 檔案移至指定目錄。
+
+7. **關閉瀏覽器**：
+    - 在循環結束後，關閉瀏覽器。
+
+請注意，此腳本假設驗證碼輸入框的id 為"CaptchaCode"，同意按鈕的XPath 為"//input[@value='我同意']"，OK 按鈕的XPath 為"//button[text() ='OK']"。 確保這些元素在網頁中存在且正確。 如果有任何網頁結構的變化，可能需要相應地調整腳本中的元素選擇器。

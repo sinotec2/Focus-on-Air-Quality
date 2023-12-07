@@ -8,7 +8,7 @@ last_modified_date: 2023-12-05 05:33:40
 tags: Crawlers pdf
 ---
 
-# 環保專案成果書目之下載
+# 環保專案成果檔案之下載
 {: .no_toc }
 
 <details open markdown="block">
@@ -280,6 +280,8 @@ options.set_preference("pdfjs.disabled", True)
 2. 同意按鈕的XPath 為`"//input[@value='我同意']"`，
 3. 無檔案情況XPath 為`"//div[@id='swal2-content']"), "本文件系統調整中，暫不提供下載；請聯絡業務單位"`
 4. OK(驗證錯誤、重新產生驗證碼)按鈕的XPath 為`"//button[text() ='OK']"`。
+
+
 
 [epq]: https://epq.moenv.gov.tw/ "「環保專案成果報告查詢系統」平臺提供本部業務單位及地方環保局登錄上傳其委辦專案計畫資料及成果報告，公開民眾查閱與運用。"
 [dr]: https://github.com/DrMahdiRezaei "Assistant Professor in Computer Science and University Academic Fellow at the University of Leeds, Leeds, UK"

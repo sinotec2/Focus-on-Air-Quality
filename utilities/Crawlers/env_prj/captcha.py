@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 import cv2, os, time, glob, sys
 import pytesseract
 from PIL import Image
@@ -66,7 +67,7 @@ for i in range(600):#len(df0)):
     # 打开网页
     proj_id=str(df0.proj_id[i])
     cat_nam=df0.cat_nam[i]
-    title=df0.title[i].replace(' ','').replace('(','\(').replace(')','\)')
+    title=df0.title[i].replace(' ','').replace('/','-') #replace('(','\(').replace(')','\)')
     group_id=str(df0.group_id[i])
     target_directory="/nas2/sespub/EPA_PrjReports/"+group_id+"_"+cat_nam
     os.makedirs(os.path.expanduser(target_directory), exist_ok=True)
@@ -93,31 +94,51 @@ for i in range(600):#len(df0)):
         captcha_input = driver.find_element(By.ID, "CaptchaCode")
         print_single_line('{:d} '.format(ii)+CaptchaCode+title)
         captcha_input.send_keys(CaptchaCode)
-        time.sleep(3)
+        time.sleep(1)
         # 点击 "我同意"
         agree_button = driver.find_element(By.XPATH, "//input[@value='我同意']")
         agree_button.click()
-        wait = WebDriverWait(driver, 30)
+        time.sleep(1) #wait = WebDriverWait(driver, 30)
         try:
-            ok_button = driver.find_element(By.XPATH, "//button[text()='OK']")
-            # 点击 OK 按钮
-            ok_button.click()
-            sys.exit()
-            continue
-        except:
-            pdf_files=[]
-            iii=0
-            while iii<10 and len(pdf_files)==0:
-                wait = WebDriverWait(driver, 30)
-                
-                pdf_files = glob.glob(os.path.join(os.path.expanduser(source_directory), "*.pdf"))
-                iii+=1
-            if len(pdf_files)==0:
+            WebDriverWait(driver, 1).until(
+            EC.text_to_be_present_in_element((By.XPATH, "//div[@id='swal2-content']"), "本文件系統調整中，暫不提供下載；請聯絡業務單位")
+            )
+            # 如果找到元素，表示弹窗出现，处理你的逻辑
+            break
+        except TimeoutException:
+            # 如果等待时间超过1秒，或者找不到元素，表示弹窗未出现，继续执行后续逻辑        
+            try:
+                ok_button = driver.find_element(By.XPATH, "//button[text()='OK']")
+                # 点击 OK 按钮
+                ok_button.click()
+                continue
+            except:
+                pdf_files=[]
+                iii=0
+                while iii<10 and len(pdf_files)==0:
+                    time.sleep(10) #wait = WebDriverWait(driver, 30)
+                    pdf_files = glob.glob(os.path.join(os.path.expanduser(source_directory), "*.pdf"))
+                    iii+=1
+                if len(pdf_files)==0:
+                    driver.quit()    # 关闭浏览器
+                    break
+                pdf_files[0]=pdf_files[0].replace('(','\(').replace(')','\)').replace(' ','\ ')
+                tfile=tfile.replace('(','\(').replace(')','\)').replace(' ','\ ')
+                sfile=os.path.join(os.path.expanduser(source_directory), pdf_files[0])
+                os.system("mv "+sfile+" "+tfile)
+                if len(pdf_files)>1:
+                    sfile=os.path.join(os.path.expanduser(source_directory), '*.pdf')
+                    os.system("rm "+sfile)
                 driver.quit()    # 关闭浏览器
                 break
-            pdf_files[0]=pdf_files[0].replace('(','\(').replace(')','\)').replace(' ','\ ')
-            sfile=os.path.join(os.path.expanduser(source_directory), pdf_files[0])
-            os.system("mv "+sfile+" "+tfile)
-            driver.quit()    # 关闭浏览器
-            break
-    if j==1:break
+    # 判断 WebDriver 是否存在并关闭
+    if 'driver' in locals() or 'driver' in globals():
+        try:
+            driver.quit()
+            print("Selenium WebDriver 已关闭。")
+        except:
+            print("关闭 Selenium WebDriver 时出现错误。")
+        else:
+            print("Selenium WebDriver 未找到。")
+
+#    if j==1:break

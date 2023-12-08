@@ -281,6 +281,44 @@ options.set_preference("pdfjs.disabled", True)
 3. 無檔案情況XPath 為`"//div[@id='swal2-content']"), "本文件系統調整中，暫不提供下載；請聯絡業務單位"`
 4. OK(驗證錯誤、重新產生驗證碼)按鈕的XPath 為`"//button[text() ='OK']"`。
 
+## 程式運作之注意事項
+
+### headless not functions
+
+- 因為要在空格內填入驗證碼，webdrive不能在headless狀態下運作。意味著一定要開啟(X)window、或在jupyter-notebook環境中執行。視窗關閉後，程式將不能運作。
+
+### 無檔案可供下載情況
+
+- 因每次執行程式都會從頭檢查一遍，看看有哪些專案成果漏了。如果[網站][epq]本來就沒有檔案可供下載，每次執行都會花時間再嘗試一遍。
+- 最後還是決定直接錄下這些專案名稱，直接跳開比較快。
+- 當然要遇到才知道哪些檔案是不存在的。這個名單需要不斷更新、增加。
+
+```python
+not_found=['111年度雲林縣石化業專用監測車操作維護計畫','111年度土壤及地下水污染調查及查證工作計畫-臺南市',
+           '111年度土壤污染評估調查及檢測資料勾稽查核計畫','111年綠島鄉及蘭嶼鄉環境衛生計畫']
+...
+    if title in not_found:continue
+```
+
+### 檔案太大、下載超過停等時間
+
+- 雖然程式已經設計停等130秒的時間，但似乎還是有下載超過停等時間的情況發生。原因不明，似乎與當時伺服器的頻寬限制有關。
+- 此時browser會因強制關閉而出現確認對話框，需使用者選擇繼續下載、或跳開不存檔。
+  - 繼續下載：會發生錯亂，因同時新的browser會下載下一個檔案，這會造成新檔名與內容錯亂的困擾。
+  - 放棄下載、跳開不存：在結果目錄下會產生一個長度0的新檔案，直接刪除即可。下此再從頭檢查一遍，就可補上。
+
+### jupyter使用的firefox不正常閃退
+
+- jupyter及程式都還在運作、但主要的browser閃退，錯誤訊息如下：
+
+```bash
+Gdk-Message: 09:27:17.591: firefox: Fatal IO error 11 (Resource temporarily unavailable) on X server localhost:10.0.
+Exiting due to channel error.
+...
+```
+
+- GPT認為應該是工作站記憶體的問題。(不合理)
+- 因程式並沒有因此而停止，只要再啟動firefox、restore sessions即可。
 
 
 [epq]: https://epq.moenv.gov.tw/ "「環保專案成果報告查詢系統」平臺提供本部業務單位及地方環保局登錄上傳其委辦專案計畫資料及成果報告，公開民眾查閱與運用。"

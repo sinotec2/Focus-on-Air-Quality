@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-import cv2, os, time, glob, sys
+import cv2, os, time, glob, sys, subprocess
 import pytesseract
 from PIL import Image
 from pandas import *
@@ -47,10 +47,11 @@ def print_single_line(msg):
     print(msg)
 
 df0=read_csv('df0.csv')
-df0=df0.loc[df0.yr_mg>=110].reset_index(drop=True)
+df0=df0.loc[df0.yr_mg>=100].reset_index(drop=True)
 
 # 创建 Chrome 驱动器
-source_directory="/home/kuang/Downloads"
+home=subprocess.check_output('echo $HOME',shell=True).decode('utf8').strip('\n')
+source_directory=home+"/Downloads"
 
 #firefox_options = Options()
 #firefox_options.add_argument("--headless")  
@@ -61,13 +62,23 @@ options.set_preference("pdfjs.disabled", True)
 
 # 禁用內建的 PDF 下載器
 #options.set_preference("plugin.disable_full_page_plugin_for_types", "application/pdf")
-
+not_found=['111年度雲林縣石化業專用監測車操作維護計畫','111年度土壤及地下水污染調查及查證工作計畫-臺南市',
+        '111年度土壤污染評估調查及檢測資料勾稽查核計畫','111年綠島鄉及蘭嶼鄉環境衛生計畫',
+        '111年度產品碳足跡資訊揭露與發展雲端審查標示制度專案工作計畫',
+           '屏東縣-屏東縣殺蛇溪水質淨化場設計案',
+           '110年度嘉義縣固定空氣污染源許可暨揮發性有機物稽查管制計畫',
+               "110年度臺東縣營建工程污染管制暨電子e化系統設置計畫",
+           "110年度土壤及地下水污染調查及查證工作計畫-雲林縣",
+           "110年土壤及地下水相關計畫檢測作業品保監督查核計畫",
+           "110年度非農地環境雜草管理計畫__臺北市"
+          ]
 j=1
-for i in range(600):#len(df0)):
+for i in range(len(df0)):
     # 打开网页
     proj_id=str(df0.proj_id[i])
     cat_nam=df0.cat_nam[i]
-    title=df0.title[i].replace(' ','').replace('/','-') #replace('(','\(').replace(')','\)')
+    title=df0.title[i].replace(' ','').replace('/','-').replace('\t','') #replace('(','\(').replace(')','\)')
+    if title in not_found:continue
     group_id=str(df0.group_id[i])
     target_directory="/nas2/sespub/EPA_PrjReports/"+group_id+"_"+cat_nam
     os.makedirs(os.path.expanduser(target_directory), exist_ok=True)
@@ -89,7 +100,7 @@ for i in range(600):#len(df0)):
         driver.save_screenshot("./screenshot.png")
         CaptchaCode=get_captcha(ii)
         if len(CaptchaCode)!=4:continue
-        if len(set(list(CaptchaCode))-set(list('/?,.!@#$%^&*()[]|')+['\n']+["'"]+['"'])) != len(CaptchaCode):continue
+        if len(set(list(CaptchaCode))-set(list('/?,.!@#$%^&*()[]|')+['\n']+["'"]+['"']+["`"])) != len(CaptchaCode):continue
         # 输入验证码（如果需要）
         captcha_input = driver.find_element(By.ID, "CaptchaCode")
         print_single_line('{:d} '.format(ii)+CaptchaCode+title)

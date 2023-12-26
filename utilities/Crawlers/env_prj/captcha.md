@@ -175,6 +175,8 @@ else:
 - 這個程式轉寫成[captcha.py](captcha.py)副程式`get_captcha`的內容。
 - 使用`cv2.threshold`從圖形中擷取明顯的圖樣，而不是利用顏色辨識。此法會簡單許多，即便驗證碼提供了鮮明的色彩。
 
+![](../../../attachments/2023-12-21-12-04-53.png)
+
 ```python
 #!/home/anaconda3/envs/py37/bin/python
 import cv2

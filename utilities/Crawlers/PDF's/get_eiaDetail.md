@@ -26,9 +26,12 @@ tags: Crawlers pdf
 - 因為專案的目標是環評書件的全文搜索，下載解讀檔案、完成搜索之後，發現還是會希望在畫面上能夠看到摘要資訊，來確認文章內容的正確性。
 - 考量到下載的便捷性，最後還是以使用requests模組來連線比較方便
 
-## HTML的畫面與內容
+## 環評書件「摘要內容」HTML的畫面與內容範例
 
 ![](../../../attachments/2023-12-20-13-54-42.png)
+
+- 基本上有2個頁面(`<table ...>`)，一個是「摘要內容」(範例如上)、一個是「審查結論」，2個頁面的內容都要讀取、下載、解析
+- 
 
 ```html
 <!-- 書件摘要 -->
@@ -44,7 +47,7 @@ tags: Crawlers pdf
                         <span id="lbDOCTYP" tabindex="700" Name="lbDOCTY" class="form-control input-sm" style="width: 150px;">說明書</span>
                     </td>
                     <th id="l" style="width: 15%;">
-                        <label for="txDST">基地行政區</label>
+                        <label for="[[2023-12-21]]">基地行政區</label>
                     </th>
                     <td headers="l">
                         <input name="ctl00$txDST" type="text" value="高雄市" readonly="readonly" id="txDST" tabindex="711" Name="txDST" class="form-control input-sm" />
@@ -205,7 +208,7 @@ tags: Crawlers pdf
 - 因表格分成2頁(大多數狀況、即使有超過2頁的情況，數據也會存在最先的2頁)，因此需先找出全部頁面的表格，再仔細耙梳
 - 可以使用中文或英文作為表頭，此處選擇以英文(`{'input':'id'}`)
 - 第1頁表格的值位在`value`，類似dict，可以使用`.get()`來取得其數值。
-- 第2頁表格的值為整段文字，因此用`.text`
+- 第2頁表格的值為整段文字(`<textarea ...>`)，因此用`.text`
 
 ```python
 from bs4 import BeautifulSoup

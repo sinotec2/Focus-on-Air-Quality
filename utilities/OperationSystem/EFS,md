@@ -1,0 +1,64 @@
+---
+layout: default
+title: window 檔案系統加密
+parent:   Operation System
+grand_parent: Utilities
+last_modified_date: 2022-11-11 09:01:53
+tags: crontab
+---
+
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+# window 檔案系統加密
+
+
+
+## 利用加密檔案系統進行個人資料防護
+
+張文瀞(2012) / 計算機及資訊網路中心程式設計組副理 [source](https://www.cc.ntu.edu.tw/chinese/epaper/0023/20121220_2305.html)
+
+這篇文章提供了有關Windows作業系統中加密檔案系統（EFS）的詳細介紹，以及如何使用這一功能來保護資料的安全性。以下是一些該文章的重點：
+
+基本原理： 文章解釋了EFS的基本運作原理，包括對稱式和非對稱式加密方法的混合使用。使用者可以使用公開金鑰加密檔案，而系統會自動處理密鑰管理和解密的過程。
+
+![](https://www.cc.ntu.edu.tw/chinese/epaper/0023/201212202305001.jpg)
+
+注意事項： 文章列舉了一些使用EFS時需要注意的事項，例如檔案系統必須為NTFS、加密檔案夾的辨識、系統檔案無法以EFS進行加密等。這些注意事項有助於使用者更好地理解和運用EFS功能。
+
+操作步驟： 文章提供了使用EFS的具體操作步驟，包括如何對資料夾進行加密、測試加密檔案的讀取權限、列出加密檔案等。這有助於讀者實際應用所學知識。
+
+備份加密金鑰： 重要的一點是備份加密金鑰，文章詳細介紹了如何在憑證管理中心匯出私密金鑰，以便在另一台電腦上還原加密檔案。
+
+參考資料
+http://en.wikipedia.org/wiki/Encrypting_File_System
+http://technet.microsoft.com/zh-tw/library/dd571087(WS.10).aspx
+http://windows.microsoft.com/zh-TW/windows7/What-is-Encrypting-File-System-EFS
+ http://www.pczone.com.tw/vbb3/thread/3/124864/
+
+
+## Synology NAS上加密和解密共用資料夾的詳細指南
+
+群暉科技股份有限公司 2023年7月26日 ([source](https://kb.synology.com/zh-tw/DSM/tutorial/How_to_encrypt_and_decrypt_shared_folders_on_my_Synology_NAS))
+
+加密共用資料夾： 文章提到使用administrators群組的使用者可以在新增或編輯共用資料夾時進行加密。在加密過程中，會生成並自動下載金鑰，這個金鑰將來在需要掛載加密共用資料夾時會派上用場。文章強調了保存金鑰的重要性，因為如果**遺失金鑰**，即使將硬碟裝到其他裝置上，也**無法破解加密**以存取資料。
+
+管理加密共用資料夾的金鑰： 文章建議將加密金鑰保存在安全的地方，同時介紹了初始化金鑰管理員的過程。金鑰管理員可以協助管理共用資料夾金鑰、同時解密多個加密共用資料夾，以及開機後自動掛載加密共用資料夾。
+
+掛載加密的共用資料夾： 文章解釋了在加密共用資料夾後，需要手動或自動將其掛載至NAS以進行存取的步驟。這是為了確保資料的安全性和隱私。
+
+解密加密的共用資料夾： 解密共用資料夾使所有擁有權限的使用者都能夠存取。文章指出只有已經掛載的加密共用資料夾才能被解密。
+
+注意事項： 文章列舉了一些需要注意的事項，例如無法加密系統預設的**共用資料夾**、在DSM 6.2及更舊版本中無法透過NFS存取加密共用資料夾等。
+
+
+![](../../attachments/2023-12-28-15-32-35.png)
+
+https://supply.tsmc.com.tw/supply360/dist/SupplierReq

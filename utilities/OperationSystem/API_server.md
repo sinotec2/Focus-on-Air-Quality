@@ -19,6 +19,11 @@ tags: API
 
 # API之設定
 
+## 背景
+
+- [fastChat]()系統提供了網頁界面和OpenAI兼容的RESTful API，方便用戶進行模型服務和交換。可以像openAI一樣，經提供token後，使用雲端服務業者所提供的推理計算資源。
+- see Shuo Yang and Siyuan Zhuang, (Jun 09, 2023) [Building a Truly "Open" OpenAI API Server with Open Models Locally](https://lmsys.org/blog/2023-06-09-api-server/) 
+
 ## API的使用需要一個API server隨時等候提供API服務嗎?
 
 是的，通常情況下，API 的使用需要一個 API 伺服器（API Server）隨時等候提供 API 服務。API 伺服器是一個運行在網際網路上或內部網路中的伺服器，負責接收、處理和回應 API 請求。API 伺服器允許應用程式或服務通過 API 進行通信，進而實現資訊的交換和功能的擴展。
@@ -62,6 +67,17 @@ GraphQL 伺服器的結構可以包含多個元件，這些元件協同工作以
    - 如果要支援即時數據，可以使用 WebSocket 來實現訂閱（Subscription）功能。WebSocket 允許伺服器主動推送數據給客戶端，實現即時通訊。
 
 總的來說，GraphQL 伺服器的結構主要包含模式、解析器、資料來源、中介軟體以及與 Web 框架和可能的 WebSocket 集成。這種結構提供了一個靈活且擴展性強的方式，以滿足不同應用的需求。
+
+## fastChat API
+
+OpenAI-Compatible RESTful APIs & SDK
+FastChat provides OpenAI-compatible APIs for its supported models, so you can use FastChat as a local drop-in replacement for OpenAI APIs. The FastChat server is compatible with both openai-python [library](https://github.com/openai/openai-python) and cURL commands. See [docs/openai_api.md](https://pypi.org/project/fschat/0.2.11/docs/openai_api.md).
+
+Hugging Face Generation APIs
+See fastchat/serve/huggingface_api.py.
+
+LangChain Integration
+See docs/langchain_integration.
 
 ## Terminology
 

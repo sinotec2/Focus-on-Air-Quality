@@ -13,12 +13,13 @@ last_modified_date: 2022-12-06 05:47:44
 這裡分享有關空氣品質及模式的分析工具與經驗
 {: .fs-6 .fw-300 }
 
-[News at 2022-12-28][okm]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [blogs](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 } [OpenKM][okm]{: .btn .fs-5 .mb-4 .mb-md-0 } [AIEE][aiee]{: .btn .fs-5 .mb-4 .mb-md-0 }
+[News at 2024-01-15][okm]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [sinotec2.github.io](https://sinotec2.github.io/){: .btn .fs-5 .mb-4 .mb-md-0 } [blogs](https://sinotec2.github.io/FAQ/){: .btn .fs-5 .mb-4 .mb-md-0 } [OpenKM][okm]{: .btn .fs-5 .mb-4 .mb-md-0 } [AIEE][aiee]{: .btn .fs-5 .mb-4 .mb-md-0 }[Utilities][util]{: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## What's New
 
+- 2024-01-15 慢慢將FAQ系統切分成好查詢的小系統，例如小工具utilites.
 - 2023-06-17 這半年來似乎乏善可陳，主要卡在[預報系統](http://sinotec2.github.io/Focus-on-Air-Quality/ForecastSystem)的枝微細節，晚上斷電的問題、國網的調適問題、畫面輸出與使用者介面等等，方案定不下來，重複卻少許變動的筆記越寫越多，也不敢說什麼才是真正新的、值得分享的。或許發展系統最終的結局就是等著被替代更新吧！
 - 2022-12-28 隨著5G與影音世界的開放，知識、或者知識管理(KM)有了全新的面貌，甚至OpenKM公司官網也將其軟體正名為檔案管理系統(DMS)。作為一個知識經濟從業者，關於KM過去還有蠻多理想與實作。過去有關OpenKM的文件、程式，整理放在[另外一個gh-page][okm]供參。
 - 2022-12-14 將空品預報的天數從[5天][fcst]延長到10天，表面上只是計算時間拉長一倍，實則裏面還有蠻多挑戰的，[成果的網址][fcst]未變，筆記先放在[FAQ->空品預報時距之延長][fcst10]，還想做一些嘗試與精進，例如直接從d01結果啟動d02\~d03後5日的模擬、WACCM數據低估問題也是要解決、還有批次之間、預報與再分析之間跳動的問題，等穩定一點再放到這裡。
@@ -122,5 +123,6 @@ email, or any other method with the owners of this repository before making a ch
 [fcst]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/> "逐日WRF與CMAQ預報系統之建置"
 [okm]: <https://sinotec2.github.io/OpenKM/> "OpenKM是一個免費/自由的文檔管理系統，提供用於管理任意文件的Web界面。"
 [aiee]: <https://sinotec2.github.io/AIEE/> "這裡分享有關環境工程方面AI的應用及學習成果"
+[util]: <https://sinotec2.github.io/Utilities/> "這裡分享有關環境工程方面AI的應用及學習成果"
 
 [^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.

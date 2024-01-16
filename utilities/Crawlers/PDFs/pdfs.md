@@ -5,7 +5,7 @@ parent: Crawlers
 grand_parent: Utilities
 has_children: true
 last_modified_date: 2023-06-12 08:56:43
-permalink: /utilities/Crawlers/PDF\'s
+permalink: /utilities/Crawlers/PDFs
 tags: Crawlers pdf
 ---
 

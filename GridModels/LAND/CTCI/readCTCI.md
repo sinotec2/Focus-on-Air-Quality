@@ -30,7 +30,7 @@ tags: CMAQ landuse emis
 
 ### 輸入檔
 
-- `land.txt`
+- `land.txt`->[github repo](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/master/GridModels/LAND/CTCI/land.txt)
   - 這個表示中鼎網格資料中每個土地使用類別所占的面積
   - D2~D108共23個變數
   - D2單位是人口、其餘是面積M<sup>2</sup>。
@@ -44,7 +44,7 @@ tags: CMAQ landuse emis
 UTME UTMN DICT D2 D3 D5 D5A D5B D5C  D7   D7A  D7B  D7C  D7D D8 D9 D10 D11 D12 D13 D14 D18 D103 D106 D108 D99
 ```
 
-- `taiwan1km.dat`：1公里地形檔
+- `taiwan1km.dat`：1公里地形檔[github repo](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/master/GridModels/LAND/CTCI/taiwan1km.dat)
   - UTME、UTMN、與地形高程(m)
 
 ```bash
@@ -60,7 +60,7 @@ $head taiwan1km.dat
 
 ### 程式說明
 
-這段 Fortran 程式碼主要是對土地使用和地形進行一些映射和處理。以下是主要的功能：
+這段 Fortran 程式碼([readCTCI.f](https://github.com/sinotec2/Focus-on-Air-Quality/blob/master/GridModels/LAND/CTCI/readCTCI26.f))主要是對土地使用和地形進行一些映射和處理。以下是主要的功能：
 
 1. **定義參數和數據結構：**
    - 定義了格點範圍的常數，如 `minX`、`maxX`、`minY`、`maxY`，以及2維數組和變數，如 `Area`、`LandUse`、`ele` 等。

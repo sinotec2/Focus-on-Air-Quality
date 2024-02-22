@@ -82,8 +82,8 @@ for v in V[3]:
   nc[v][:ibeg,:,:,:]=var[iv,:ibeg,:,:,:]
   nc[v][ibeg:nt0,:,:,:]=var[iv,:(nt0-ibeg),:,:,:]
 nc['SO2'][:,0,:,0]=flows[:,:]*sn_conc[0]
-nc['NO' ][:,0,:,0]=flows[:,:]*sn_conc[0]*0.9
-nc['NO2'][:,0,:,0]=flows[:,:]*sn_conc[0]*0.1
+nc['NO' ][:,0,:,0]=flows[:,:]*sn_conc[1]*0.9
+nc['NO2'][:,0,:,0]=flows[:,:]*sn_conc[1]*0.1
 
 #attributes
 atts=['SDATE','STIME', 'P_ALP', 'P_BET', 'P_GAM', 'XCELL', 'XCENT', 'XORIG', 'YCELL', 'YCENT', 'YORIG']

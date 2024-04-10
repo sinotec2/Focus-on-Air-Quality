@@ -27,7 +27,7 @@ tags: trajectory CWBWRF CGI_Pythons NCL
 ## 相關資源
 
 - 服務網頁位址：[http://125.229.149.182/traj2.html](http://125.229.149.182/traj2.html)
-- python程式[下載](./surf_trajLL2.py)。不同版本說明與修改細節詳見[內網版本與新增功能](../../TrajModels/ftuv10/4.daily_traj%40ses.md)
+- python程式[下載](./traj/surf_trajLL2.py)。不同版本說明與修改細節詳見[內網版本與新增功能](../../TrajModels/ftuv10/4.daily_traj%40ses.md)
 - 軌跡計算詳見[ftuv10](../../TrajModels/ftuv10/ftuv10.md)
 - 呼叫程式
   - [traj2kml.py](../../wind_models/CODiS/5.traj.md)

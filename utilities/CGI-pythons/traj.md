@@ -36,19 +36,24 @@ tags: CGI_Pythons mmif
 - http://sinotec24.com/traj.html @iMacKuang[^9]
 - http://node03.sinotech-eng.com/traj2.html @node03
 
-### html畫面
+## 整體服務架構
 
-![](../../attachments/2024-04-10-11-19-22.png)
+![](traj/2024-04-10-14-11-58.png)
 
-- 今日12時北(中山)、中(忠明)、南(嘉義)、高(前金)測站反軌跡
-- 近5日測站反軌跡選項
-  - 
-- 畫面左側的9個物件
-  - 主要是6個下拉選單(selectmenu)、
-  - 一個日期選單(datepicker)、以及一個button submit物件做為整體提交並呼叫cgi_python(traj/surf_traj3.py)的觸發。
-- 右方
-  - traj.html：一典型計算結果範例，說明模式計算能力(軌跡會繞山)。
-  - traj2.html：今日12時北、中、南、高空品測站反軌跡計算結果
+## html說明
+
+### 前端畫面
+
+![](traj/2024-04-10-11-19-22.png)
+
+- 這個畫面的設計概念延續前一版的traj.html，畫面右側維持靜態的展示，為今日12時北(中山)、中(忠明)、南(嘉義)、高(前金)測站反軌跡。左側則為選項及操作執行
+  - 近5日測站反軌跡、通風指數選項
+  - 畫面左側的8個選項，分成3組
+    - 軌跡設定：風速風向數據及正/反軌跡選項
+    - 地點：空品區縣市測站、或任意經緯度座標
+    - 軌跡線起/迄之日期時間
+  - html物件型態：包括jquery的下拉選單(selectmenu)、文字輸入、及日期選單(datepicker)
+  - button submit物件做為整體提交並呼叫cgi_python(traj/surf_traj3.py)的觸發。
 - 選單都是jquery套件，其中測站較為複雜，是連動下拉選單，主要應用append方法，按照前一選擇結果，依序帶出後一選單的內容。
 - 提供cgi_python的變數4項變數
   - dirFB(正/反軌跡的方向選擇)
@@ -59,7 +64,10 @@ tags: CGI_Pythons mmif
 
 ### traj.html
 
-- traj2.html說明詳見[node03](https://node03.sinotech-eng.com/traj2.html_程式說明.html)或[boostnote](https://boostnote.io/shared/05cd78db-c218-49dc-8864-46c8e77fd2c6)，
+- traj2.html說明詳見[node03](https://node03.sinotech-eng.com/traj2.html_程式說明.html)或[boostnote](https://boostnote.io/shared/05cd78db-c218-49dc-8864-46c8e77fd2c6)
+- 程式下載
+  - {% include download.html content="臺灣地區高解析度軌跡產生/自動分析系統[traj2.html](./traj/traj2.html)" %}
+
 
 ### surf_traj3.py
 

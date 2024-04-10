@@ -26,6 +26,11 @@ tags: trajectory CWBWRF CODiS geojson
 
 - 這支[程式(腳本)][daily_traj]每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)及traj2.html(@[node03](http://node03.sinotech-eng.com/traj2.html) and [@sinotec24](http://sinotec24.com/traj2.html))網頁畫面。
 - 程式結果將會上載至網頁，因此必須由root執行
+- 整體服務說詳見[臺灣地區高解析度軌跡產生/自動分析系統](../../utilities/CGI-pythons/traj.md)及下圖
+
+![](../../utilities/CGI-pythons/traj/2024-04-10-14-11-58.png)
+![](../../utilities/CGI-pythons/traj/2024-04-10-14-11-58.png)
+- mac版本及centos版本之進版比較詳見[地面二維軌跡分析服務網站搬遷至公司內網暨功能提升](../ftuv10/4.daily_traj@ses.md)
 
 ### 重要核心工作
 

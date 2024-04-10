@@ -5,7 +5,7 @@ nav_order: 3
 parent: 地面二維軌跡分析
 grand_parent: Trajectory Models
 date: 2022-11-04
-last_modified_date: 2023-07-20 11:19:38
+last_modified_date: 2024-04-10 13:56:32
 tags: trajectory CWBWRF CODiS geojson
 ---
 
@@ -24,7 +24,27 @@ tags: trajectory CWBWRF CODiS geojson
 
 ## 背景
 
-- 這支[程式(腳本)][daily_traj]每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)網頁畫面。
+- 這支[程式(腳本)][daily_traj]每天凌晨進行北中南測站反軌跡的計算，並將結果更新到[GitHub Pages](https://sinotec2.github.io/traj/)及traj2.html(@[node03](http://node03.sinotech-eng.com/traj2.html) and [@sinotec24](http://sinotec24.com/traj2.html))網頁畫面。
+- 程式結果將會上載至網頁，因此必須由root執行
+
+### 重要核心工作
+
+- 開始
+- 計算今天、明天和後天的日期
+- 遍歷三個日期：
+  - 遍歷四個地點：
+    - 為每個時間、地點提交軌跡線之計算([daily_trajSt.cs](#背景執行批次daily_trajstcs內容))
+  - 等待(詳見[wait.cs](#waitcs))並休息
+  - 合併並準備軌跡數據
+  - 若當天為今天，則執行額外的檔案操作
+  - 轉換為[GeoJSON](#執行csv_to_geojson)格式
+  - 執行通風指數計算任務([addVI.py](#執行addvipy))
+  - 清理檔案
+- 同步並更新GitHub倉庫
+- 結束
+
+![](../../attachments/2024-04-10-13-34-36.png)
+(流程圖由GPTs Whimsical Diagrams製作，詳見[whimsical.com](https://whimsical.com/bash-UVyQuu4McTvAvCTksDyDaK))
 
 ### 發展歷程
 
@@ -35,7 +55,7 @@ tags: trajectory CWBWRF CODiS geojson
 - 其後(2021/06/23)發展電腦自動分析系統，預設反軌跡的時間、測站，並按照中央氣象局預報的天數，套用實際之風場，逐日由crontab自動執行，進行圖面的更換。
 - 2022/04仿照疫情數據公開也使用github.io的平台，乃將在imac上的html自動分析的成果部分放在github pages上，使用者自行產生部分仍然留在imac上。
 - 2023/02因[CWB_WRF預報結果][get_M-A0064]的解讀耗費大量記憶體，因此停止使用，改用[fcst][fcst]之wrf預報。
-- 2023/07因應公司防火牆擋住了家用的IP，也限制了檔案對外的傳輸，後者雖然還是可以有方法解決，但前者完全限制了遠端服務的使用。因此有必要將網站服務功能在公司也建置一套。(詳見)
+- 2023/07因應公司防火牆擋住了家用的IP，也限制了檔案對外的傳輸，後者雖然還是可以有方法解決，但前者完全限制了遠端服務的使用。因此有必要將網站服務功能在公司也建置一套。(詳見[臺灣地區高解析度軌跡產生/自動分析系統](../../utilities/CGI-pythons/traj.md))
 
 ### 重要選項考量與未來可能發展
 
@@ -118,8 +138,8 @@ cat header.txt today.csv > $dir/today_marks.csv
 done
 ```
 
-- 回圈內呼叫個案批次檔daily_trajSt.cs，並將執行批次放在背景執行，以啟動平行運作提高計算效能。
-- 主程式則以`wait.cs $d`以等候該日所有測站之python都結束，以進一步將個別測站結果予以整合。
+- 迴圈內呼叫個案批次檔daily_trajSt.cs，並將執行批次放在背景執行，以啟動平行運作提高計算效能。
+- 主程式則以`wait.cs $d`(詳見[wait.cs](#waitcs))以等候該日所有測站之python都結束，以進一步將個別測站結果予以整合。
 
 ### 背景執行批次daily_trajSt.cs內容
 
@@ -139,6 +159,52 @@ d=$3
   #add num column
   cd /Library/WebServer/Documents/trj_results
   c=0;for i in $(cat today_$t.csv);do echo $i,$c;c=$(( $c + 1 ));if [ $c -gt 120 ];then break;fi;done >todayM_$t.csv
+```
+
+### wait.cs
+
+這個腳本檔案是一個 Bash 腳本，名為 `wait.cs`，其功能是等待特定的執行檔結束運行。以下是腳本的說明：
+
+#### 腳本說明
+
+- `EXE=$1`：設置變數 `EXE` 為命令行參數 `$1`，即要等待的執行檔名稱或關鍵字。
+
+- `while true; do`：進入無限循環。
+
+- `n=$(ps -ef | grep ${EXE} | wc -l)`：使用 `ps` 命令搭配管道和 `grep` 命令來查找包含指定執行檔名稱或關鍵字的進程數量，然後將結果賦值給變數 `n`。
+
+- `if [ $n -lt 2 ]; then`：檢查變數 `n` 是否小於 2。
+
+  - 如果是，表示只有一個符合條件的進程，即該執行檔已經結束運行，則執行 `break` 跳出循環。
+  
+  - 否則，表示仍然有兩個或更多符合條件的進程在運行，即該執行檔尚未結束運行，則執行 `sleep 1` 指令，暫停一秒後繼續檢查。
+
+- `done`：結束循環。
+
+#### 使用方式
+
+要使用這個腳本，可以通過命令行將要等待結束的執行檔名稱或關鍵字作為參數傳遞給腳本，例如：
+
+```bash
+bash ~/bin/wait.cs my_executable
+```
+
+這將等待名為 `my_executable` 的執行檔結束運行。
+
+#### scripts內容及位置
+
+```bash
+# root@node03 ~
+# cat ~/bin/wait.cs
+EXE=$1
+while true;do
+  n=$(ps -ef|grep ${EXE}|wc -l)
+  if [ $n -lt 2 ];then
+    break
+  else
+    sleep 1
+  fi
+done
 ```
 
 ### 執行[csv_to_geojson][cj]

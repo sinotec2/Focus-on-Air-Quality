@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 空品測站正/反軌跡kml檔案產生系統
+title: 臺灣地區高解析度軌跡產生/自動分析系統
 parent: CGI-pythons
 grand_parent: Utilities
 date: 2023-01-26
@@ -8,7 +8,7 @@ last_modified_date: 2024-04-09 17:56:15
 tags: CGI_Pythons mmif
 ---
 
-# 空品測站正/反軌跡kml檔案產生系統
+# 臺灣地區高解析度軌跡產生/自動分析系統
 
 {: .no_toc }
 
@@ -29,19 +29,33 @@ tags: CGI_Pythons mmif
 
 ## 實例
 
+- 以下皆更新至traj2.html版本
+
 ### 網頁計算服務網址
 
 - http://sinotec24.com/traj.html @iMacKuang[^9]
 - http://node03.sinotech-eng.com/traj2.html @node03
 
-### 畫面
+### html畫面
 
-- 畫面左側的5個物件
-  - 主要是3個下拉選單(selectmenu)、
+![](../../attachments/2024-04-10-11-19-22.png)
+
+- 今日12時北(中山)、中(忠明)、南(嘉義)、高(前金)測站反軌跡
+- 近5日測站反軌跡選項
+  - 
+- 畫面左側的9個物件
+  - 主要是6個下拉選單(selectmenu)、
   - 一個日期選單(datepicker)、以及一個button submit物件做為整體提交並呼叫cgi_python(traj/surf_traj3.py)的觸發。
-- 右方則為一典型範例，說明模式計算能力(軌跡會繞山)。
+- 右方
+  - traj.html：一典型計算結果範例，說明模式計算能力(軌跡會繞山)。
+  - traj2.html：今日12時北、中、南、高空品測站反軌跡計算結果
 - 選單都是jquery套件，其中測站較為複雜，是連動下拉選單，主要應用append方法，按照前一選擇結果，依序帶出後一選單的內容。
-    提供cgi_python的變數：dirFB(正/反軌跡的方向選擇)、AQSname(測站代碼)、date(日期)、number(小時)，4項變數。
+- 提供cgi_python的變數4項變數
+  - dirFB(正/反軌跡的方向選擇)
+  - AQSname(測站代碼)、
+  - date(日期)、
+  - number(小時)。
+
 
 ### traj.html
 

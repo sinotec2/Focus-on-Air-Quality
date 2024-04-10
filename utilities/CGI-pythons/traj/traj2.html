@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TRAJ Selectmenu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css">
+  <style>
+    fieldset {
+      border: 0;
+    }
+    label {
+      display: block;
+      margin: 30px 0 0 0;
+    }
+    .overflow {
+      height: 200px;
+    }
+  </style>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+$('.changer').change(function () {
+    $(this).next().attr('src', this.value);
+});
+  </script>
+<style> #SIDE { width:600px; position:absolute; top:120px; right:100px;  } </style>
+<style> #SID2 { width:300px; position:absolute; top:620px; right:800px;  } </style>
+</head>
+<body>
+
+    <header class="subhead" id="overview">
+      <div class="container">
+<h1>
+臺灣地區高解析度軌跡產生/自動分析系統
+</h1>
+  <fieldset>
+    <label for="days">近5日預報軌跡</label>
+    <select class="changer" name="days" id="MySelectMenu">
+      <option value="/trj_results/m2">前日</option>
+      <option value="/trj_results/m1">昨日</option>
+      <option value="/trj_results/00" selected="selected">今日</option>
+      <option value="/trj_results/p1">明日</option>
+      <option value="/trj_results/p2">後日</option>
+    </select>
+    <button onClick="newSrc();">View Trajectories</button>
+    <button onClick="newVIs();">View VI</button>
+  </fieldset>
+<h6>
+<p>觀測數據：中央氣象局逐時自動站+WRF_3KM預報(2016/1/1至2023/12/31) </p>
+<p>內插網格：臺灣本島範圍、解析度1公里 </p>
+<p>軌跡點時間間距：15秒(曲線)、1小時(氣球)</p>
+<p>通風指數(VI)= 風速  x  混合層高度 (m**2/s)</p>
+<p>風速=U10 and V10 from WRF_3Km預報(2023/8/1至未來5天)</p>
+<p>混合層高度=以預報位溫及Holzworth Method求得</p>
+<p class="lead"> </p>
+</h6>
+        <p class="lead">
+空品測站正/反軌跡kml檔案產生系統
+</br>
+選取正/反軌跡、環保署空氣品質測站、以及到達(起始)之時間，
+</br>
+系統將在遠端工作站進行計算。
+</br>
+點選檔案下載到使用者電腦即可進行google map/OSM繪圖。(恕僅保留24小時)
+        </p>
+      </div>
+    </header>
+    <div id="SIDE">
+     <iframe width="80%" height="700px" frameborder="0" id="MyFrame"
+     allowfullscreen src= "/trj_results/00" ></iframe><p>
+     enlarge:<a href="/trj_results/m2"  target="_block">
+前日
+</a>/<a href="/trj_results/m1" target="_block">
+昨日
+</a>/<a href="/trj_results/00" target="_block">
+今日
+</a>/<a href="/trj_results/p1" target="_block">
+明日
+</a>/<a href="/trj_results/p2" target="_block">
+後日
+</a>
+</a></p>
+    </div>
+    <div id="SID2">
+     <iframe width="300" height="200" src="https://embed.windy.com/embed2.html?lat=23.435&lon=120.788&detailLat=25.050&detailLon=121.532&width=300&height=200&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
+    </div>
+
+<div class="container">
+<div class="col-md-4">
+<form enctype="multipart/form-data" action="/cgi-bin/traj/surf_trajLL2.py" method="post">
+
+  <fieldset>
+    <label for="dirOF">觀測/預測</label>
+    <select name="dirOF" id="dirOF">
+      <option value="forc"  selected="selected">中央氣象局WRF_3KM預報</option>
+      <option value="fine">中央氣象局逐時自動站觀測數據(高解析度)</option>
+      <option value="obsv">中央氣象局逐時自動站觀測數據(全台範圍)</option>
+    </select>
+    <label for="dirFB">正/反軌跡</label>
+    <select name="dirFB" id="dirFB">
+      <option value="btrj">反軌跡</option>
+      <option value="ftrj">正軌跡</option>
+    </select>
+
+    <label for="KPQname"> 空氣品質區及測站 </label>
+    <select name="KPQname" id="KPQname">
+        <option value="0">請選擇</option>
+        <option value="1"  selected="selected">北部空品區</option>
+        <option value="2">竹苗空品區</option>
+        <option value="3">中部空品區</option>
+        <option value="4">雲嘉南空品區</option>
+        <option value="5">高屏空品區</option>
+        <option value="6">宜蘭花東</option>
+        <option value="7">離島</option>
+    </select>
+    <select name="CNTname" id="CNTname"></select>
+    <select name="AQSname" id="AQSname"></select>
+
+    <label for="latlon">
+        任意點之緯度與經度(10進位)
+        </label><p> <input type="text" name="latlon" id="ll"></p>
+
+    <label for="date">
+        到達(起始)日期
+        </label><p> <input type="text" name="date" id="dt1"></p>
+    <label for="number">到達(起始)時間 </label>
+    <select name="number" id="number">
+      <option value="01">1</option>
+      <option value="02">2</option>
+      <option value="03">3</option>
+      <option value="04">4</option>
+      <option value="05">5</option>
+      <option value="06">6</option>
+      <option value="07">7</option>
+      <option value="08">8</option>
+      <option value="09">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12" selected="selected">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+    </select>
+
+  </fieldset>
+<p style="text-align:left;"> <input type="submit" value="OK and Run TRAJ remotely..." /></p>
+<h6><p>Contact: Dr. Yungchuan Kuang, sinotec2@gmail.com</p></h6>
+</form>
+
+</div>
+</div>
+
+        <script>
+        $("#KPQname").change(function(){
+  switch (parseInt($(this).val())){
+  default:
+  case 0:
+      $("#CNTname option").remove();
+      break;
+  case 1:
+      $("#CNTname option").remove();
+      var array = [   "請選擇",  "基隆市", "台北市", "新北市", "桃園市"    ];
+      var CNTva = [ "0", "1", "3", "2", "4" ];
+      $.each(array, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + array[i] + "</option>"));
+      });
+      break;
+  case 2:
+      $("#CNTname option").remove();
+      var CNTnm = [ "請選擇",  "竹苗" ];
+      var CNTva = [ "0", "5", ];
+      $.each(CNTnm, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + CNTnm[i] + "</option>"));
+      });
+      break;
+  case 3:
+      $("#CNTname option").remove();
+      var CNTnm = [  "請選擇",   "台中市", "彰化南投"  ];
+      var CNTva = [ "0", "6", "7" ];
+      $.each(CNTnm, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + CNTnm[i] + "</option>"));
+      });
+      break;
+  case 4:
+      $("#CNTname option").remove();
+      var CNTnm = [  "請選擇",   "雲林縣", "嘉義縣市", "台南市"  ];
+      var CNTva = [ "0", "8", "9", "10" ];
+      $.each(CNTnm, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + CNTnm[i] + "</option>"));
+      });
+      break;
+  case 5:
+      $("#CNTname option").remove();
+      var CNTnm = [ "請選擇",  "高雄市","(原高雄縣)", "屏東縣" ];
+      var CNTva = [ "0", "12", "11", "13"];
+      $.each(CNTnm, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + CNTnm[i] + "</option>"));
+      });
+      break;
+  case 6:
+      $("#CNTname option").remove();
+      var CNTnm = [ "請選擇",  "宜蘭花東" ];
+      var CNTva = [ "0", "14" ];
+      $.each(CNTnm, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + CNTnm[i] + "</option>"));
+      });
+      break;
+  case 7:
+      $("#CNTname option").remove();
+      var CNTnm = [ "not available" ];
+      var CNTva = [ "0" ];
+      $.each(CNTnm, function(i, val) {
+        $("#CNTname").append($("<option value='" + CNTva[i] + "'>" + CNTnm[i] + "</option>"));
+      });
+      break;
+ }
+});
+        </script>
+        <script>
+        $("#CNTname").change(function(){
+  switch (parseInt($(this).val())){
+  default:
+  case 0:
+      $("#AQSname option").remove();
+      break;
+  case 1:
+      $("#AQSname option").remove();
+      var AQSnm = [ "基隆"  ];
+      var AQSva = [ "1" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 2:
+      $("#AQSname option").remove();
+      var array = [ "汐止","萬里","新店","土城","板橋","新莊","菜寮","林口","淡水","三重","永和"  ];
+      var AQSva = [ "2","3","4","5","6","7","8","9","10","67","70" ];
+      $.each(array, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + array[i] + "</option>"));
+      });
+      break;
+  case 3:
+      $("#AQSname option").remove();
+      var AQSnm = [ "士林","中山","萬華","古亭","松山","大同","陽明" ];
+      var AQSva = [  "11","12","13","14","15","16","64" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 4:
+      $("#AQSname option").remove();
+      var AQSnm = [  "桃園","大園","觀音","平鎮","龍潭","中壢"    ];
+      var AQSva = [  "17","18","19","20","21","68"];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 5:
+      $("#AQSname option").remove();
+      var AQSnm = [  "湖口","竹東","新竹","頭份","苗栗","三義"  ];
+      var AQSva = [ "22", "23","24","25","26","27" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 6:
+      $("#AQSname option").remove();
+      var AQSnm = [ "豐原","沙鹿","大里","忠明","西屯"   ];
+      var AQSva = ["28","29","30","31","32" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 7:
+      $("#AQSname option").remove();
+      var AQSnm = ["彰化","線西","二林","南投","竹山","埔里"   ];
+      var AQSva = [ "33","34","35","36","69","72" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 8:
+      $("#AQSname option").remove();
+      var AQSnm = [ "斗六","崙背","台西","麥寮"  ];
+      var AQSva = [  "37","38","41","83"];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 9:
+      $("#AQSname option").remove();
+      var AQSnm = [ "新港","朴子","嘉義"  ];
+      var AQSva = [ "39","40","42" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 10:
+      $("#AQSname option").remove();
+      var AQSnm = ["新營","善化","安南","台南"  ];
+      var AQSva = [ "43","44","45","46" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 11:
+      $("#AQSname option").remove();
+      var AQSnm = ["美濃","橋頭","仁武","鳳山","大寮","林園","楠梓"  ];
+      var AQSva = ["47","48","49","50","51","52","53"  ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 12:
+      $("#AQSname option").remove();
+      var AQSnm = [ "左營","前金","前鎮","小港","復興"  ];
+      var AQSva = [ "54","56","57","58","71" ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 13:
+      $("#AQSname option").remove();
+      var AQSnm = [ "屏東","潮州","恆春"  ];
+      var AQSva = [ "59","60","61"  ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+  case 14:
+      $("#AQSname option").remove();
+      var AQSnm = ["花蓮","宜蘭","冬山","關山","臺東"  ];
+      var AQSva = [ "63","65","66","80","62"  ];
+      $.each(AQSnm, function(i, val) {
+        $("#AQSname").append($("<option value='" + AQSva[i] + "'>" + AQSnm[i] + "</option>"));
+      });
+      break;
+ }
+});
+        </script>
+    <script>
+        $(function () {
+            $("#dt1").datepicker({
+                dateFormat: "yymmdd",
+                onSelect: function () {
+                    var startDate = $(this).datepicker('getDate');
+                        }
+                });
+        });
+        </script>
+  <script>
+  $( function() {
+    $( "#days" ).selectmenu();
+    $( "#dirFB" ).selectmenu();
+    $( "#KPQname" )
+      .selectmenu("menuWidget")
+        .addClass( "overflow" );
+    $( "#CNTname" ).selectmenu();
+    $( "#AQSname" ).selectmenu();
+    $( "#number" )
+      .selectmenu()
+        .addClass( "overflow" );
+    $( "#emailadd" ).selectmenu();
+  } );
+  </script>
+<script type="text/javascript">
+     function newSrc() {
+      var e = document.getElementById("MySelectMenu");
+      var newSrc = e.options[e.selectedIndex].value;
+      document.getElementById("MyFrame").src=newSrc;
+     }
+    </script>
+<script type="text/javascript">
+     function newVIs() {
+      var e = document.getElementById("MySelectMenu");
+      var newVIs = e.options[e.selectedIndex].value + "/VI.html";
+      document.getElementById("MyFrame").src=newVIs;
+     }
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@ layout: default
 title: 地圖數位板
 parent: GIS Relatives
 grand_parent: Utilities
-last_modified_date: 2022-03-15 10:41:25
+last_modified_date: 2024-04-10 15:19:04
 tags: GIS KML OpenTopoMap
 ---
 # 地圖數位板_座標之讀取
@@ -227,7 +227,7 @@ $ cat -n js/main.js
 
 ## JS
 
-有關地圖的設定是在docs/index.js內
+有關地圖的設定是在[docs/index.js](../CGI-pythons/traj/index.js)內
 
 ### 內設中心點、縮放比例、顏色與透明度
 
@@ -237,62 +237,6 @@ $ cat -n js/main.js
 * 顏色與透明度在style項下的color、opacity、fillopacity變數(line 15~17)
     * 顏色選藍色有最高的鑑別率
     * 透明度經嘗試錯誤選擇0.4~0.5
-
-```java
-$ cat -n index.js
-     1    (function (window) {
-     2        'use strict';
-     3        var L = window.L;
-     4    
-     5        function initMap() {
-     6            var control;
-     7            var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-     8                attribution: 'Map data &copy; 2013 OpenStreetMap contributors'
-     9            });
-    10            var map = L.map('map', {
-    11                center: [23.6, 120.9,],
-    12                zoom: 7
-    13            }).addLayer(osm);
-    14            var style = {
-    15              color: 'blue',
-    16                opacity: 0.5,
-    17                fillOpacity: 0.4,
-    18                weight: 1,
-    19                clickable: false
-    20            };
-    21            L.Control.FileLayerLoad.LABEL = '<img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Gnome-folder.svg" alt="file icon"/>';
-    22            control = L.Control.fileLayerLoad({
-    23                fitBounds: true,
-    24                layerOptions: {
-    25                    style: style,
-    26                    pointToLayer: function (data, latlng) {
-    27                        return L.circleMarker(
-    28                            latlng,
-    29                            { style: style }
-    30                        );
-    31                    }
-    32                }
-    33            });
-    34            control.addTo(map);
-    35            control.loader.on('data:loaded', function (e) {
-    36                var layer = e.layer;
-    37                var kk=Object.keys(layer._layers);
-    38                var i=kk[0];
-    39                var lat0=layer._layers[i]["_latlng"]["lat"];
-    40                var lon0=layer._layers[i]["_latlng"]["lng"];
-    41                var ymd=layer._layers[i]["feature"]["properties"]["description"];
-    42                console.log(layer._layers[i]["feature"],layer._layers[i]["_latlng"]);
-    43            L.marker([lat0, lon0]).addTo(map)
-    44        .bindPopup(ymd)
-    45        .openPopup(); 
-    46            });
-    47        }
-    48    
-    49        window.addEventListener('load', function () {
-    50            initMap();
-    51        });
-    52    }(window));
-```
 
 ### 標記
 

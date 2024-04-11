@@ -33,7 +33,7 @@ tags: trajectory CWBWRF CGI_Pythons NCL
 ### 相關資源
 
 - 服務網頁位址：[http://125.229.149.182/traj2.html](http://125.229.149.182/traj2.html)
-- python程式[下載](./traj/surf_trajLL2.py)。不同版本說明與修改細節詳見[內網版本與新增功能](../../TrajModels/ftuv10/4.daily_traj%40ses.md)
+- python程式[下載](traj/surf_trajLL2Mac.py)。不同版本說明與修改細節詳見[內網版本與新增功能](../../TrajModels/ftuv10/4.daily_traj%40ses.md)
 - 軌跡計算詳見[ftuv10](../../TrajModels/ftuv10/ftuv10.md)
 - 呼叫程式
   - [traj2kml.py](../../wind_models/CODiS/5.traj.md)
@@ -65,17 +65,37 @@ tags: trajectory CWBWRF CGI_Pythons NCL
 
 這個版本可以提供多人同時運作，以發揮node03工作站的算力，為避免覆蓋檔案，採取的對策有二
 
+- NCL更改輸出檔名
+  - `topo.png` $\rightarrow$ 從`filename.txt`中讀取檔名
+  - 但是`filename.txt`還是會被覆蓋
+  ```python
+  topo = asciiread("filename.txt",-1,"string")
+  wks = gsn_open_wks(wks_type,topo) ; send graphics to PNG file
+  ``` 
 - 隨機目錄
   - centos似乎不允許apache在`/tmp`建立目錄，因此將其建在`WEB`之下，並加上前綴(`tmp_`)以利批次維護。
   - 開啟目錄後，測試新增一個空白檔
 
+  ```python
+  ...
+  import tempfile as tf
+  ...
+  trj=WEB+'trj_results/'
+  ran=tf.NamedTemporaryFile().name.replace('/tmp','')
+  pth=trj+'trj_'+ran+'/'
+  result=os.system('mkdir -p '+pth+';touch '+pth+'a')
+  ```
+
+### filename.txt
+
+- 這個文字檔的內容儲存個案的csv檔名，除用做檔案的連結以外，也會做為NCL圖標題、以及圖檔名稱。
+- 這個檔案改在軌跡計算程式內([`root+'/cwb/e-service/btraj_WRFnests/ftuv10_10d.py'`](../../TrajModels/ftuv10/ftuv10_10d.py))產生
+- 是否有'trj_results'目錄，取決於單機版還是多人隨機目錄版，前者是有的、後者取消，檔案將存在工作目錄。
+
 ```python
 ...
-import tempfile as tf
+  name=dr+'trj'+nam[0]+DATE+'.csv'
 ...
-trj=WEB+'trj_results/'
-ran=tf.NamedTemporaryFile().name.replace('/tmp','')
-pth=trj+'trj_'+ran+'/'
-result=os.system('mkdir -p '+pth+';touch '+pth+'a')
-
+with open('filename.txt','w') as f:
+  f.write(name.split('/')[1])
 ```

@@ -28,7 +28,7 @@ tags: html
 
 ### instance
 
-- [http://125.229.149.182/status.html](http://125.229.149.182/status.html)
+- [http://sinotec24.com/status.html](http://sinotec24.com/status.html)
 - 不使用github.io的理由(...還沒時間完成。)
 
 | ![status.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/status.png)|

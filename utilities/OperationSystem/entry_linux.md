@@ -34,7 +34,7 @@ last_modified_date: 2022-12-03 05:34:22
   1. 局部網路計算節點(node: node01~node03)、
   1. NAS(nas1、nas2)、
   1. 寬頻控制器、UPS等設備
-- 外部測試機(IMacKuang@125.229.149.182)
+- 外部測試機(IMacKuang@sinotec24.com)
 
 ### 遠端登入(ssh)軟體
 

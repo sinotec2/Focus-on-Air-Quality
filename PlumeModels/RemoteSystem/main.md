@@ -22,13 +22,13 @@ tags: CGI_Pythons plume_model
 
 ## 背景
 ### instance
-- 煙流模式主程式的[遠端計算](http://125.229.149.182/AERMOD.html)網頁。
+- 煙流模式主程式的[遠端計算](http://sinotec24.com/AERMOD.html)網頁。
 - 主要服務那些已經準備好各項輸入檔案的使用者，Javascripts將會讀取使用者提供的檔案存到伺服器上(至少2個檔案、最多4個檔案)，並啟動CGI_Python程式進行煙流模式的遠端計算與監看。
-  - 如果需要前處理([氣象](http://125.229.149.182/mmif.html)、[地形](http://125.229.149.182/terrain.html)等)、或後處理([kml](http://125.229.149.182/Leaflet/docs/index.html)、[NCL](http://125.229.149.182/NCLonOTM.html))，可以回到[遠端模擬首頁](http://125.229.149.182/aermods.html)
+  - 如果需要前處理([氣象](http://sinotec24.com/mmif.html)、[地形](http://sinotec24.com/terrain.html)等)、或後處理([kml](http://sinotec24.com/Leaflet/docs/index.html)、[NCL](http://sinotec24.com/NCLonOTM.html))，可以回到[遠端模擬首頁](http://sinotec24.com/aermods.html)
   - 監看網頁
-    - iMacKuang:[http://125.229.149.182/status.html](http://125.229.149.182/status.html)
-    - aermod：[http://125.229.149.182/isc_results/arem_RAND/prog.html](http://125.229.149.182/isc_results/arem_RAND/prog.html)
-    - iscst：[http://125.229.149.182/isc_results/isc3_RAND/prog.html](http://125.229.149.182/isc_results/isc3_RAND/prog.html)
+    - iMacKuang:[http://sinotec24.com/status.html](http://sinotec24.com/status.html)
+    - aermod：[http://sinotec24.com/isc_results/arem_RAND/prog.html](http://sinotec24.com/isc_results/arem_RAND/prog.html)
+    - iscst：[http://sinotec24.com/isc_results/isc3_RAND/prog.html](http://sinotec24.com/isc_results/isc3_RAND/prog.html)
   - 服務僅限模式計算，後處理部分讓使用者視需要自行下載結果檔案，再啟動其他程式進行處理、繪圖。
 - 服務僅限模式計算，後處理部分讓使用者視需要自行下載結果檔案，再啟動其他程式進行處理、繪圖。
 
@@ -63,7 +63,7 @@ tags: CGI_Pythons plume_model
 ### 畫面
 | ![isc_aermod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/isc_aermod.PNG)|
 |:--:|
-| <b>isc_aermod主程式[遠端執行](http://125.229.149.182/AERMOD.html)界面</b>|
+| <b>isc_aermod主程式[遠端執行](http://sinotec24.com/AERMOD.html)界面</b>|
 
 ### 執行成果範例
 
@@ -82,7 +82,7 @@ AER_CO_Y.PLT.kml
 AER_CO_01H.PLT.grd
 AER_CO_Y.PLT.grd
 ```
-- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://125.229.149.182/Leaflet/docs/index.html)服務進行檢視(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
+- 工作完成提示網頁中提醒可以使用免費的[Leaflet](http://sinotec24.com/Leaflet/docs/index.html)服務進行檢視(詳[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板))
 - 事實上 Visual Code也提供了預覽KML檔案的[插件](https://marketplace.visualstudio.com/items?itemName=jumpinjackie.vscode-map-preview)，效果也還不錯。
 
 ### Coding

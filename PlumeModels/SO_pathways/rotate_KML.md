@@ -27,7 +27,7 @@ tags: CGI_Pythons plume_model KML
 - 除此之外，程式還提供由背景資料中找到個案所在地的**煙囪基地高程E**([步驟5](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定步驟與內容))、煙囪頂的**離地高度H**([步驟6](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/#設定步驟與內容))等功能，以便進行計算。
 
 ## 輸入檔
-- 此處設定為[KML格式](https://zh.wikipedia.org/wiki/KML)檔案，範例如[example.kml](http://125.229.149.182/isc_results/example.kml)
+- 此處設定為[KML格式](https://zh.wikipedia.org/wiki/KML)檔案，範例如[example.kml](http://sinotec24.com/isc_results/example.kml)
 - 使用KML格式的理由詳見[討論](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/RemoteSystem/aermods/#以kml檔案做為輸入座標介面的理由)
 
 ### 輸入檔說明
@@ -211,10 +211,10 @@ tags: CGI_Pythons plume_model KML
 
 ## RESULTS
 ### CaaS
-- [Rotate a KML file](http://125.229.149.182/rotate_kml.html)
+- [Rotate a KML file](http://sinotec24.com/rotate_kml.html)
 
 ### 結果檢視
-- 檢討由KML產生bpip.inp，再由[iscParser](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)檢查，結果如下([TSMC.kml](http://125.229.149.182/isc_results/TSMC/TSMC.kml))
+- 檢討由KML產生bpip.inp，再由[iscParser](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)檢查，結果如下([TSMC.kml](http://sinotec24.com/isc_results/TSMC/TSMC.kml))
   - 並無系統性之錯誤
   - 仍然存在描圖的不準度，然誤差已在可接受範圍。
   - 建築物輪廓線尚可保持方向之一致性

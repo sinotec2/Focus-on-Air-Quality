@@ -88,4 +88,4 @@ tags: CGI_Pythons mmif
 - 這個版本能夠讀取任意點的經緯度，並且更新了軌跡模式。詳見[surf_trajLL2程式說明](./surf_trajLL2.md)，[程式碼](traj/surf_trajLL2Mac.py)。
 - 
 
-[^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^9]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

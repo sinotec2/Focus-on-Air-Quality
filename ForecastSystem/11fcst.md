@@ -26,11 +26,11 @@ tags: forecast
 
 範圍|動畫|解析度|公司內|公司外
 :-:|:-:|:-:|:-:|:-:
-全球|earth|1度|[GFS/CAMS](http://200.200.31.47:8080)|[GFS/CAMS](http://125.229.149.182:8080)
-東南中國|earth|3Km|[CWBWRF/CAMS](http://200.200.31.47:8083)|[CWBWRF/CAMS](http://125.229.149.182:8083)
-東亞|earth|45Km|[WRF/CMAQ](http://200.200.31.47:8084)|[WRF/CMAQ](http://125.229.149.182:8084)
-東南中國|earth|9Km|[WRF/CMAQ](http://200.200.31.47:8085)|[WRF/CMAQ](http://125.229.149.182:8085)
-臺灣|earth|3Km|[WRF/CMAQ](http://200.200.31.47:8086)|[WRF/CMAQ](http://125.229.149.182:8086)
+全球|earth|1度|[GFS/CAMS](http://200.200.31.47:8080)|[GFS/CAMS](http://sinotec24.com:8080)
+東南中國|earth|3Km|[CWBWRF/CAMS](http://200.200.31.47:8083)|[CWBWRF/CAMS](http://sinotec24.com:8083)
+東亞|earth|45Km|[WRF/CMAQ](http://200.200.31.47:8084)|[WRF/CMAQ](http://sinotec24.com:8084)
+東南中國|earth|9Km|[WRF/CMAQ](http://200.200.31.47:8085)|[WRF/CMAQ](http://sinotec24.com:8085)
+臺灣|earth|3Km|[WRF/CMAQ](http://200.200.31.47:8086)|[WRF/CMAQ](http://sinotec24.com:8086)
 東亞～臺灣|GIF|3~45Km|-|[GithubPageSite](https://sinotec2.github.io/cmaq_forecast/)
 
 {: .fs-6 .fw-300 }
@@ -50,6 +50,6 @@ tags: forecast
 [3]: https://airtw.epa.gov.tw/CHT/Forecast/Forecast_3days.aspx "全國各空品區空氣品質指標(AQI)預報"
 [4]: https://watch.ncdr.nat.gov.tw/watch_cmaq "「CMAQ空污模式」及「排放源」是與 國立中央大學 大氣科學系 多維空氣品質模擬實驗室鄭芳怡教授合作落實"
 [5]: https://ci.taiwan.gov.tw/dsp/Views/dataset/forecast_air.aspx "中研院環境變遷研究中心高解析度空氣品質診斷與預報模式發展計畫模擬預報資料"
-[6]: http://125.229.149.182/time-bar "中國東南沿海地區未來10天CMAQ空品預報"
+[6]: http://sinotec24.com/time-bar "中國東南沿海地區未來10天CMAQ空品預報"
 [CAM-chem]: <https://wiki.ucar.edu/display/camchem/Home> "The Community Atmosphere Model with Chemistry (CAM-chem) is a component of the NCAR Community Earth System Model (CESM) and is used for simulations of global tropospheric and stratospheric atmospheric composition."
 [WACCM]: <https://www2.acom.ucar.edu/gcm/waccm> "The Whole Atmosphere Community Climate Model (WACCM) is a comprehensive numerical model, spanning the range of altitude from the Earth's surface to the thermosphere"

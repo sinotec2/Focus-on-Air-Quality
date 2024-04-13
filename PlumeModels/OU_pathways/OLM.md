@@ -67,7 +67,7 @@ tags: plume_model sed
 - 輸出逐時之模式模擬結果：要在OU段落設POSTFILE，格式選用PLOT以產生.dat格式檔備用。
 - 2個矩陣逐點比較後選小值，在numpy的函數為minimum，詳參官網說明。
 ### CaaS
-- 網址： http://125.229.149.182/OLM.html
+- 網址： http://sinotec24.com/OLM.html
 - 注意事項：
   - 濃度單位不另轉換，須配合環保署資料，全為ppb。
   - 接受點系統的排列順序為：GRIDCART -》 DISCCART。NRcart、NRdisc可以為零，但順序不能弄錯。
@@ -81,7 +81,7 @@ tags: plume_model sed
 
 | ![OLM2.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/OLM2.png)|
 |:--:|
-| <b>煙流模式NOx逐時結果之臭氧限制法後處理畫面與程式[界面](http://125.229.149.182/OLM.html)</b>|
+| <b>煙流模式NOx逐時結果之臭氧限制法後處理畫面與程式[界面](http://sinotec24.com/OLM.html)</b>|
 
 ## 環保署測站數據之讀取與準備
 ### [specHrSliderRect.py](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/TWNAQ/specHrSlider/)
@@ -314,8 +314,8 @@ group ALL
 csv2kml.py -f NOx-Y.DAT -d ALL (*)
 ```
 
-- KML檢視，可以使用[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板)：http://125.229.149.182/Leaflet.FileLayer/docs/index.html
-- http://125.229.149.182/iscParser.html
+- KML檢視，可以使用[地圖貼板](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板)：http://sinotec24.com/Leaflet.FileLayer/docs/index.html
+- http://sinotec24.com/iscParser.html
 
 - AERMOD
 ```bash

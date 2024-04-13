@@ -206,7 +206,7 @@ for ir in range(nr):
 ```
 
 ## 結果討論
-- 實例網址：[http://125.229.149.182:8080](http://125.229.149.182:8080)
+- 實例網址：[http://sinotec24.com:8080](http://sinotec24.com:8080)
 - 數據提交earth系統之圖面
 
 | ![wind_ozone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/wind_ozone.PNG) |

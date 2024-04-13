@@ -34,7 +34,7 @@ tags: plume_model CGI_Pythons CWBWRF sed mmif
 2. 直接在cgi_python內啟動背景執行，由使用者自行上網確認結果
 3. 預先以工作站完成各年度WRF在各網格之MMIF轉檔，再由網頁或(及)CaaS系統提供
 
-CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.html)@iMacKuang[^9]
+CaaS網址為：[http://sinotec24.com/mmif.html](http://sinotec24.com/mmif.html)@iMacKuang[^9]
 
 ## 自動執行搭配版本
 
@@ -42,7 +42,7 @@ CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.h
 
 ### 系統元件
 
-1. 網址為：http://125.229.149.182/mmif.html，屬於個人負責營運維護的伺服器系統。
+1. 網址為：http://sinotec24.com/mmif.html，屬於個人負責營運維護的伺服器系統。
   - select a file:選擇要執行的mmif.inp檔案。檔名必須是小寫、名字完全相符，不接受壓縮檔。設定方式詳下述。
   - EMAIL:輸入回函email 信箱。系統不會寄發檢核信件。
   - Upload and Run mmif remotely:上傳檔案到伺服器上、並等候crontab來執行mmif。
@@ -117,7 +117,7 @@ CaaS網址為：[http://125.229.149.182/mmif.html](http://125.229.149.182/mmif.h
 29        /opt/local/bin/mmif>mmif.out
 30        /usr/bin/zip result.zip *
 31    emailadd=$(cat $dir/mmif.email)
-32        echo "Hello MMIF user:\n Your mmif result was at http://125.229.149.182$dir/result.zip\n \
+32        echo "Hello MMIF user:\n Your mmif result was at http://sinotec24.com$dir/result.zip\n \
 33      Please fetch the file as soon as possible,\n \
 34          The file will be erased after 24 hrs!\n \
 35      (sent by machine do not reply)" | mail -s "MMIF RESULT" $emailadd
@@ -449,6 +449,6 @@ $ cat -n do_mmif2.cs
 - [中央氣象局WRF_3Km數值預報產品之下載及轉檔](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/cwbWRF_3Km/1.get_M-A0064/)
 - 地圖上貼連結*
 
-[^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
+[^9]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
 
 [1]: https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/ "read_point.py TEDS點源數據之讀取及品質管制"

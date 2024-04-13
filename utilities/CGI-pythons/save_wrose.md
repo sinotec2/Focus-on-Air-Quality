@@ -33,7 +33,7 @@ tags: CGI-python graphics wrose PlumeModels
 
 ### 界面
 
-網頁計算服務網址：[http://125.229.149.182/wrose.html][1][^1]
+網頁計算服務網址：[http://sinotec24.com/wrose.html][1][^1]
 
 ![wrose_caas.png](https://drive.google.com/uc?id=1x2KtpcwwV8zzomMuRiiKMecMLy4_4TYt)
 
@@ -107,7 +107,7 @@ os.system(cmd)
 {% include download.html content="風花圖製作之CGI版本[save_wrose.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/CGI-pythons/save_wrose.py)" %}
 
 
-[^1]: 繪製煙流模式氣象檔案之風花圖。上傳準備好的氣象檔案，遠端執行wrose程式結束後，系統會自動下載結果給您(恕僅保留24小時)。[http://125.229.149.182/wrose.html][1][^2]
-[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
+[^1]: 繪製煙流模式氣象檔案之風花圖。上傳準備好的氣象檔案，遠端執行wrose程式結束後，系統會自動下載結果給您(恕僅保留24小時)。[http://sinotec24.com/wrose.html][1][^2]
+[^2]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
 
-[1]: http://125.229.149.182/wrose.html "繪製煙流模式氣象檔案之風花圖。上傳準備好的氣象檔案，遠端執行wrose程式結束後，系統會自動下載結果給您(恕僅保留24小時)。"
+[1]: http://sinotec24.com/wrose.html "繪製煙流模式氣象檔案之風花圖。上傳準備好的氣象檔案，遠端執行wrose程式結束後，系統會自動下載結果給您(恕僅保留24小時)。"

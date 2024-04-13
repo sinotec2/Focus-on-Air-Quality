@@ -61,7 +61,7 @@ convert pm10*.png pm10.gif
 ## Results
 
 - CCTM模擬d01範圍PM<sub>10</sub>之時間變化([內容說明](../../../GridModels/Abundant_NoG_Runs/CWBWRF_15k.md))
-  - [GIF_file@iMacKuang](http://125.229.149.182/soong/pm10.gif)
+  - [GIF_file@iMacKuang](http://sinotec24.com/soong/pm10.gif)
   - [GifPlayer@sinotec2.github.io](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)
 
 | ![pm10_ncl.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pm10_ncl.PNG) |

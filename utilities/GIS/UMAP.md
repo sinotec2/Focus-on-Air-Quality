@@ -131,7 +131,7 @@ import os
 pth='/Users/1.PlumeModels/AERMOD/mmif/TWN_3X3/'
 df=read_csv(pth+'point_ij.csv')
 A=[]
-a='http://125.229.149.182/mmif_results/'
+a='http://sinotec24.com/mmif_results/'
 for ij in df.IJ:
     i=str(ij)
     s=''
@@ -156,16 +156,16 @@ $ head mmifTWN_3X3.csv.kml
 <Document><name>mmifTWN_3X3.csv</name><description>mmifTWN_3X3.csv</description>
 <Style id="normalPlacemark"><IconStyle><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href> </Icon> </IconStyle></Style>
 <Placemark><name>IJ7152</name><description>
-http://125.229.149.182/mmif_results/2016/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2016/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2017/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2017/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2018/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2018/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2019/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2019/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2020/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2020/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2016/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2016/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2017/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2017/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2018/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2018/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2019/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2019/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2020/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2020/7152/IJ7152.pfl 
 </description><styleUrl>#normalPlacemark</styleUrl>
 <Point><coordinates>
 119.936,25.961,0</coordinates></Point></Placemark>
@@ -272,4 +272,4 @@ $ cat -n point_ijP.py
 [token3]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg"
 [token4]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"
 
-[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^2]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

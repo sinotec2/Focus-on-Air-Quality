@@ -86,12 +86,12 @@ tags: crontab Crawlers CODiS
 ## Reference
 
 [^1]: wiki、網路爬蟲（英語：web crawler），也叫網路蜘蛛（spider），是一種用來自動瀏覽全球資訊網的網路機器人。其目的一般為編纂網路索引。"
-[^2]: 運用GFS/CWB/CAMS數值預報數進行台灣地區CMAQ模擬實例、[http://125.229.149.182:8084/](http://125.229.149.182:8084/)@iMacKuang[^9]
+[^2]: 運用GFS/CWB/CAMS數值預報數進行台灣地區CMAQ模擬實例、[http://sinotec24.com:8084/](http://sinotec24.com:8084/)@iMacKuang[^9]
 [^3]: G. T. Wang, Linux 設定 crontab 例行性工作排程教學與範例,[G. T. Wang, 2019/06/28](https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/)
 [^4]: [知乎](https://www.zhihu.com/question/19598302)：cURL 和 Wget 的优缺点各是什么？
-[^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^9]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
 
 [crawler]: <http://200.200.12.191/?c=SinoTech&m=load_one&r=hour&s=by%20name&hc=4&mc=2> "網路爬蟲（英語：web crawler），也叫網路蜘蛛（spider），是一種用來自動瀏覽全球資訊網的網路機器人。其目的一般為編纂網路索引。"
-[fcst]: <http://125.229.149.182:8084/> "運用GFS/CWB/CAMS數值預報數進行台灣地區CMAQ模擬實例"
+[fcst]: <http://sinotec24.com:8084/> "運用GFS/CWB/CAMS數值預報數進行台灣地區CMAQ模擬實例"
 [crontab]: <https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/> "G. T. Wang, Linux 設定 crontab 例行性工作排程教學與範例,G. T. Wang, 2019/06/28"
 [w_c]: <https://www.zhihu.com/question/19598302> "知乎：cURL 和 Wget 的优缺点各是什么？"

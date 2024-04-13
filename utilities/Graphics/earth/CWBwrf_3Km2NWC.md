@@ -54,8 +54,8 @@ graph TD
 - web rendering
   - intializing by `node dev-server.js 80` or 
   - reload browser@iMacKuang[^2]
-  - d3：`http://125.229.149.182/#current/wind/surface/level/orthographic=-237.53,23.30,2000`
-  - d1：`http://125.229.149.182/#current/wind/surface/level/orthographic=-236.33,23.30,800`
+  - d3：`http://sinotec24.com/#current/wind/surface/level/orthographic=-237.53,23.30,2000`
+  - d1：`http://sinotec24.com/#current/wind/surface/level/orthographic=-236.33,23.30,800`
 
 ## diff of first paramter between gfs and cwbwrf_15Km files
 
@@ -389,4 +389,4 @@ windows of LL|?|addative|may be omitted for global range
 [tst]: <https://github.com/cambecc/earth/blob/master/public/test/products-test.html> "equal(config.toHash(), '2013/11/20/0800Z/a/b/c/x');  equal(paths.primary(), '/data/weather/2013/11/20/0800-a-b-c-gfs-1.0.json');"
 [shp_json]: <https://sinotec2.github.io/FAQ/2022/08/08/shp_json.html> "natural earth shp檔轉json"
 
-[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^2]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

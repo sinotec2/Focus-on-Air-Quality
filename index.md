@@ -26,7 +26,7 @@ last_modified_date: 2022-12-06 05:47:44
 - 2022-12-06 [CAMx][CAMx]模式的筆記與維護算是告一段落，還增加了[CAMx模擬結果之壓縮_nc檔版本](https://sinotec2.github.io/Focus-on-Air-Quality/CAMx/PostProcess/99.7shkNC/)算是個小彩蛋，可以處理最新nc版本的模擬結果。平心而論，[CAMx][CAMx]算是個「深入淺出」的網格模式，對煙流也有較佳的處理，期待CAMx與CMAQ[雙C模式的競賽](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/Models/CAMx_vs_CMAQ/)中，雙方都能有持續的進步與創新，有緣江湖還會再相見的。
 - 2022-11-25 5天的CMAQ空品預報持續運作中，雖然還是做不到無縫接軌，但也許延長預報時間(leading time)，也可以算是一點貢獻。這需要花更多的時間下載NCAR的[WACCM](https://www2.acom.ucar.edu/gcm/waccm)全球空品預報結果，詳見[WACCM模式結果之下載、讀取及應用](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/3WACCM/)。這期間也嘗試了mcip的gfs版本[NACC](https://github.com/noaa-oar-arl/NACC)，可惜目前還沒有找到NOAA公開gfs-FV3的全球預報結果，編譯與腳本的測試經驗可以參考[解讀GFS之MCIP版本(NACC)](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/NACC/)，真希望國內能有人自己來做gfs的預報。
 - 2022-11-16 補寫過去的新聞似乎不是件好事，比起補寫過去該寫的程式筆記應該算還好。[WRF三維軌跡分析](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests)這篇本來想投稿的，時間一久、反省越多、問題就越多，自己都覺得不好意思投稿了。[2017~2020年冬、春季臺灣北部近域氣團路徑](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/btraj_WRFnests/local_traj/#結果討論)這圖還有點意思，有興趣的讀者也許可以用更多年期的數據、更高的解析度自己來做看看。
-- 2022-10-13 6月底到10月這期間主要完成了[東亞](http://125.229.149.182:8084/)、[中國東南](http://125.229.149.182:8085/)與[臺灣](http://125.229.149.182:8086/)3個範圍、未來5天之[空氣品質預報系統](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/)，建立了[earth顯示系統](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/earth)，也陸續將過去做的[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/)做一個整理與更新[^2]。
+- 2022-10-13 6月底到10月這期間主要完成了[東亞](http://sinotec24.com:8084/)、[中國東南](http://sinotec24.com:8085/)與[臺灣](http://sinotec24.com:8086/)3個範圍、未來5天之[空氣品質預報系統](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/ForecastSystem/)，建立了[earth顯示系統](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/earth)，也陸續將過去做的[爬蟲程式](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Crawlers/)做一個整理與更新[^2]。
 
 {: .no_toc }
 
@@ -59,16 +59,16 @@ last_modified_date: 2022-12-06 05:47:44
 ### 2022-04 sinotec2.github.io、煙流與軌跡
 
 - 2022-04-19 疫情來了，有網友把每天公告的數據用leaflet寫了網頁公開在github.io。這引起我的興趣，也把一些靜態(廣播)網頁陸續搬到[https://sinotec2.github.io/](https://sinotec2.github.io/)，實則也想關閉httpd一下，好好找個防止[駭客攻擊](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5.IncProc/IPBlackNameList)的方法（不過這題基本上應該算是完成了@2022-04-23:）。
-- 2022-04-09 新增了[煙流模式](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/)與[軌跡模式](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/)的筆記、遠端計算網站也新增了[CALPUFF](http://125.229.149.182/CALPUFF.html)以及[CALINE](http://125.229.149.182/CALINE3.html)的功能。這2個加州開始發展的模式有著天壤之別的命運，是否開放原始碼似乎是蠻關鍵的因素，引以為戒啊。
+- 2022-04-09 新增了[煙流模式](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/)與[軌跡模式](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/)的筆記、遠端計算網站也新增了[CALPUFF](http://sinotec24.com/CALPUFF.html)以及[CALINE](http://sinotec24.com/CALINE3.html)的功能。這2個加州開始發展的模式有著天壤之別的命運，是否開放原始碼似乎是蠻關鍵的因素，引以為戒啊。
 
 ### 2022-02 千格模擬、iMac OS進版
 
 - 2022-02-20 公司新購了工作站，意味著更大範圍、更多網格數的模擬變得更可能實現。不過初步嘗試，同時執行CWBWRF_15及3k雙向巢狀網格的[wrf.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/dowrf/)作業並沒有成功，只得以[ndown.exe](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/REAL/ndown/)及單向套疊進行，看起來是OK的。這表示對臺灣佔有80%貢獻的華東～華南地區，以後會跟臺灣本島同框進行空品模擬，這好像比較符合比例原則，有待爾後詳細的ISAM分析加以確認。
-- 2022-02-11 自從過年期間iMac更新到Monterey之後，遠端執行的[CGI系統無法運作](https://discussions.apple.com/thread/253579026)，AERMAP的前處理程式[gen_inp](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/gen_inp/)只得重新發布成讀取2020內政部[20M_dtm](https://data.gov.tw/dataset/138563)版本，不再以[EIO](https://pypi.org/project/elevation/)讀取30M_dtm，但還是維持本地執行[gdal_translate](https://gdal.org/programs/gdal_translate.html)的方案。(後續：參考[程式人生](https://www.796t.com/article.php?id=453663)建議重裝Apache/2.4.52，[遠端執行系統教學網站](http://125.229.149.182/aermods.html)終究還是修好了，不過也表示還欠很多相關遠端執行的筆記還沒有寫。重裝的筆記詳[monterey-pbms](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5.IncProc/MacNetWorks/#monterey-pbms))
+- 2022-02-11 自從過年期間iMac更新到Monterey之後，遠端執行的[CGI系統無法運作](https://discussions.apple.com/thread/253579026)，AERMAP的前處理程式[gen_inp](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/gen_inp/)只得重新發布成讀取2020內政部[20M_dtm](https://data.gov.tw/dataset/138563)版本，不再以[EIO](https://pypi.org/project/elevation/)讀取30M_dtm，但還是維持本地執行[gdal_translate](https://gdal.org/programs/gdal_translate.html)的方案。(後續：參考[程式人生](https://www.796t.com/article.php?id=453663)建議重裝Apache/2.4.52，[遠端執行系統教學網站](http://sinotec24.com/aermods.html)終究還是修好了，不過也表示還欠很多相關遠端執行的筆記還沒有寫。重裝的筆記詳[monterey-pbms](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/5.IncProc/MacNetWorks/#monterey-pbms))
 
 ### 2022-01 重作REAS
 
-- 2022-01-30 東亞範圍15Km解析度的CMAQ模擬一直是個挑戰，除了資料的準備外，工作站是不是負荷得了也是關鍵。初步成果看來還好，因為是用手機操作，先貼上[結果](http://125.229.149.182/soong/pm10.gif)，過程與細節再慢慢補上囉。(2022-02-11已補上[東亞地區解析度15Km之CMAQ模擬分析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/Abundant_NoG_Runs))
+- 2022-01-30 東亞範圍15Km解析度的CMAQ模擬一直是個挑戰，除了資料的準備外，工作站是不是負荷得了也是關鍵。初步成果看來還好，因為是用手機操作，先貼上[結果](http://sinotec24.com/soong/pm10.gif)，過程與細節再慢慢補上囉。(2022-02-11已補上[東亞地區解析度15Km之CMAQ模擬分析](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/Abundant_NoG_Runs))
 - 2022-01-05 日本國立環境研究所[REAS](https://www.nies.go.jp/REAS/)排放量有簡單的處理方式了。解析度15~27公里採內插、81公里採加總，結果如[圖](https://sinotec2.github.io/Focus-on-Air-Quality/Global_Regional_Emission/REAS/reas2cmaq/#結果檢視)。
 
 ## 2021
@@ -125,4 +125,4 @@ email, or any other method with the owners of this repository before making a ch
 [aiee]: <https://sinotec2.github.io/AIEE/> "這裡分享有關環境工程方面AI的應用及學習成果"
 [util]: <https://sinotec2.github.io/Utilities/> "這裡分享有關環境工程方面AI的應用及學習成果"
 
-[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.
+[^2]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。使用者敬請見諒，逕洽作者：sinotec2@gmail.com.

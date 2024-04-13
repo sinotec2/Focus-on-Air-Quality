@@ -49,7 +49,7 @@ tags:  plume_model
 1. 重複上一動作，量測所有建築物頂點座標及煙囪基地座標值，(X,Y)單位為公尺
 1. 開啟Google地圖的地形圖，量測建築物及**煙囪基地高程E**，單位為公尺
 1. 建築物與煙囪頂端的**離地高度H**，單位為公尺，可以用陰影長度的比例關係粗略推估。一般工廠辦公室為2層樓建築高度為6公尺。
-1. 按照範例之模板輸入D, (X,Y), E, H等數據，存檔、(上傳工作站或[CaaS](http://125.229.149.182/BPIPPRIM.html))。
+1. 按照範例之模板輸入D, (X,Y), E, H等數據，存檔、(上傳工作站或[CaaS](http://sinotec24.com/BPIPPRIM.html))。
 1. 執行[BPIP]()批次檔[run_bpip.sh]() A1P.INP A1P.OUT A1P.SUM
 1. 將OUT檔案中的SO路徑及參數，貼在[ISCST]()或[AERMOD]()的執行控制檔內
   - ISCST不接受[BPIPPRM]()結果之`BUILDLEN`、`XBADJ`、`YBADJ`等參數
@@ -60,7 +60,7 @@ tags:  plume_model
 | <b>從航照圖中定義實例廠區座標軸系統、量測夾角、與廠房頂點XY值</b>|
 
 ### L形建築物(USEPA提供範例EG1)輸入檔內容說明
-- [A1P.INP](http://125.229.149.182/isc_results/BPIP_EG1/A1P.INP)為一L形建築物的範例，另有4座煙囪stk100~3(如下圖)
+- [A1P.INP](http://sinotec24.com/isc_results/BPIP_EG1/A1P.INP)為一L形建築物的範例，另有4座煙囪stk100~3(如下圖)
 - 所有的字串輸入需有引號。其餘為自由格式
 - 1~4行為整體設定
   1. 個案之文字說明，(原點座標應用在[iscParser]](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser/)之繪圖過程)
@@ -111,7 +111,7 @@ bpipprm
 | <b>L形建築物之BPIP輸出結果</b>|
 
 ## BPIPPRM之遠端計算服務
-- 位置: [http://125.229.149.182/BPIPPRIM.html](http://125.229.149.182/BPIPPRIM.html)
+- 位置: [http://sinotec24.com/BPIPPRIM.html](http://sinotec24.com/BPIPPRIM.html)
 - [架構](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP_remote/)說明
 - CGI-python詳細說明見[bpipprim.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/CGI-pythons/bpipprim/)
 ## Reference and Resource
@@ -129,7 +129,7 @@ bpipprm
 
 {% include downloadFL.html content="[bpipd.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipd.pdf)、[bpipdup.pdf](https://www3.epa.gov/ttn/scram/userg/relat/bpipdup.pdf)" %}
 
-- 工作站（cybee@125.229.149.182 PW=cybee123）
+- 工作站（cybee@sinotec24.com PW=...）
   - 執行檔 
     - /Users/1.PlumeModels/ISC/Building_Profile_Input_Program/src/ Bpip.exe
     -  /Users/1.PlumeModels/ISC/BPIPPRM/bpipprm

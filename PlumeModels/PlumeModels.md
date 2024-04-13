@@ -23,3 +23,4 @@ tags:  plume_model
 - [ISC/AERMODs 遠端執行系統教學網站](https://sinotec24.com/aermods.html)
 - [空氣品質模式模擬規範](https://www.rootlaw.com.tw/LawArticle.aspx?LawID=A040300031010900-1101220)
 - [健康風險評估技術規範](https://www.rootlaw.com.tw/LawArticle.aspx?LawID=A040300071011500-1000720)
+- GPTs(需注意) [AERMOD Helper](https://chat.openai.com/g/g-REsU1hWpG-aermod-helper)

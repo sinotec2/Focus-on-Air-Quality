@@ -123,7 +123,7 @@ bpipprm
 - BPIP/BPIPPRM美國環保署[官方網址](https://www.epa.gov/scram/air-quality-dispersion-modeling-related-model-support-programs#bpip)
 - 原始碼
 
-{% include downloadFL.html content="[BIPI原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)、[BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip" %}
+{% include downloadFL.html content="[BPIP原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpip.zip)、[BPIPPRM原始碼](https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip)" %}
 
 - 使用手冊
 

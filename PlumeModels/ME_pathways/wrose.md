@@ -65,7 +65,7 @@ ax.figure.savefig(fname+'.png')
 - ax.set_legend產生風速的表示圖例
 - figure.savefig儲存檔案
 
-![wrose0.png](https://drive.google.com/uc?id=1gf9_dFPcSRL_18bpzqaelpOe82Us-5mi)
+![wrose0.png](wrose1.png)
 
 ### 應用(修改)策略
 
@@ -78,11 +78,11 @@ ax.figure.savefig(fname+'.png')
   第1行為站名、年代名，第2行以後則為逐時數據，
   黃色螢光筆部分為風去的方向(度)，與風向差異180度。藍色底線部份則為風速，單位為公尺每秒。
 
-![467440ASC.png](https://drive.google.com/uc?id=1qdhpB5BM5Lc-dyOqjHHPaNnbc7c__rHd)
+![467440ASC.png](ASCtxt.png)
 
 - 將游標移到風向及風速的前面，由MobaTextEditor下方的位置數字可以得知(如下圖)，分別自第9及第18欄位置開始，各為9格的長度。
 
-![467440ASC_2.png](https://drive.google.com/uc?id=1wTotsGXcDHFyQeHCUdYWPt-p-f5kpB7E)
+![467440ASC_2.png](467440ASC_2.png)
 
 - 程式寫法如下:
   - 使用with來開啟檔案的好處是，不必再做關閉的動作。
@@ -131,19 +131,19 @@ ws=[float(i.split()[15]) for i in l]
 
 台南站2017年數據
 
-![46741v01.asc.png](https://drive.google.com/uc?id=1AZDaMww6QwK_YWKPEvjk3-xMOdZDmbPs)
+![46741v01.asc.png](46741v01.asc.png)
 
 ### 46777.ASC
 
 梧棲站2017年數據
 
-![46777v01.asc.png](https://drive.google.com/uc?id=1vk9Exf81bKoHIzB1aCTML61Spn_YFMdj)
+![46777v01.asc.png](46777v01.asc.png)
 
 ### 46749.ASC
 
 749 台中
 
-![46749v01.asc.png](https://drive.google.com/uc?id=11n6xeZHICB0kZ7ejLPt5Uw96coJISzam)
+![46749v01.asc.png](46749v01.asc.png)
 
 ### 討論
 

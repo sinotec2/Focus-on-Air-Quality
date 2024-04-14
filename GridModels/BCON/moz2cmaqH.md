@@ -28,7 +28,7 @@ tags: CMAQ ICON BCON
   - [數據下載](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality)、
   - 使用nc轉換成m3格式[ncf2ioapi](https://www.camx.com/download/support-software/)、[垂直層數切割](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)、以及
   - 逐6小時空白濃度[模版檔案之準備](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/gen_templateD1/)等。  
-- 由於CMAQ濃度檔案可以使用[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/run_combMM_R_DM/)予以整併，(或直接)就可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或進行檢視。
+- 由於CMAQ濃度檔案可以使用[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/1.run_combMM_R_DM/)予以整併，(或直接)就可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或進行檢視。
 - 後續作業
   - 邊界濃度的製作，包括時間的內插、邊界框濃度的解析等，將在[bcon](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/)程式內進行。
   - 直接以初始濃度引用：在`run_cctm.csh`內指定即可

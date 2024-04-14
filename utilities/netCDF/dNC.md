@@ -22,7 +22,7 @@ tags: netCDF
 ## 背景
 - 執行2個netCDF檔案的相減，在空品模式分析過程中算是經常會遇到。
 - 套件方案
-  - 雖然NCO程式包中有個小工具[ncap2](https://linux.die.net/man/1/ncap2)可以執行4則運算，但需要每個變數一一指定(`ncap2 -s "T2=T*T" in.nc out.nc`)，那可不是一件小事了(也許[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs)後的9\~12個變數可以使用一下)。
+  - 雖然NCO程式包中有個小工具[ncap2](https://linux.die.net/man/1/ncap2)可以執行4則運算，但需要每個變數一一指定(`ncap2 -s "T2=T*T" in.nc out.nc`)，那可不是一件小事了(也許[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/2.do_shk/#shkcs)後的9\~12個變數可以使用一下)。
   - [CDO](https://code.mpimet.mpg.de/projects/cdo/embedded/cdo.pdf#subsection.2.7.4)對[CF格式](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.9/cf-conventions.html)檔案也有其方便性，可以將所有變數一次計算。但畢竟[ioapi格式](https://www.cmascenter.org/ioapi/)與CF格式還是差異蠻大的，尤其是TFLAG相減為0後，檔案將失去其時間標籤了。
   - [ncdiff -x -v TFLAG](https://linux.die.net/man/1/ncdiff)不會執行TFLAG的相減，也似乎一樣效果，因為結果檔案根本不存在TFLAG。
   - 應用GUI程式：如[廣告](https://www.originlab.com/index.aspx?pid=4373&gclid=Cj0KCQjwmPSSBhCNARIsAH3cYgZf0EGPvjoWChpxjOl8IjgZAbtw82MO4GK0-19YPFQjB5U_Iv9x4awaAk21EALw_wcB)，需要上、下載檔案到微軟平台上作業。  

@@ -312,4 +312,4 @@ for day in range(5):
 
 [eth]: <https://github.com/cambecc/earth> "cambecc(2016), earth building, launching and etc on GitHub. "
 [combine]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/exec/#combine-腳本> "CMAQ Model System->Recommend System->執行檔與程式庫->COMBINE 腳本"
-[shks]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs> "CMAQ Model System->Post Processing->跨日結果之篩選整併->COMBINE_ACONC檔案之篩選整併->shk.cs"
+[shks]: <https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/2.do_shk/#shkcs> "CMAQ Model System->Post Processing->跨日結果之篩選整併->COMBINE_ACONC檔案之篩選整併->shk.cs"

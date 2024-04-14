@@ -137,7 +137,7 @@ setenv CTM_ABFLUX N
 ## 後處理
 ### COMBINE
 - 修改`GRID_NAME`
-- 無需修改腳本日期，只需將原本屬於run6的日期予以更名即可直接使用[原腳本](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)。
+- 無需修改腳本日期，只需將原本屬於run6的日期予以更名即可直接使用[原腳本](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/1.1.run_combMM_R_DM/)。
 
 ```bash
 ...

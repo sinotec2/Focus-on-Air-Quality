@@ -36,7 +36,7 @@ tags: CMAQ ptse REAS
 ## 結果檢視
 - m3.nc檔案可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視，如以下：
 
-| ![REAS_pointXY.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_pointXY.PNG) |
+| ![REAS_pointXY.PNG](../../assets/images/REAS_pointXY.PNG) |
 |:--:|
 | <b>圖 REAS 2015年電廠排放點位置之分布</b>|
 

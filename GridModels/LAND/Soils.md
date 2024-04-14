@@ -305,7 +305,7 @@ nc.close()
 
 ### Results
 
-| ![CEC.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC.PNG) |
+| ![CEC.PNG](../../assets/images/CEC.PNG) |
 |:--:|
 | <b>圖 d01範圍表土0~5cm之CEC(mmolc/Kg)</b>|  
 
@@ -414,7 +414,7 @@ def tif2nc(tif_name,nc_name,lev):
 
 ### Results
 
-| ![CEC_glob.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CEC_glob.PNG) |
+| ![CEC_glob.PNG](../../assets/images/CEC_glob.PNG) |
 |:--:|
 | <b>圖 d01範圍表土0cm之CEC(cmolc/Kg)</b>|  
 
@@ -484,7 +484,7 @@ nc.close()
 ```
 ### Results
 
-| ![por.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/por.PNG) |
+| ![por.PNG](../../assets/images/por.PNG) |
 |:--:|
 | <b>圖 d01範圍表土0cm之Porosity(Vv/Vs_Fraction)</b>|  
 

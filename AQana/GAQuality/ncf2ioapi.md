@@ -90,7 +90,7 @@ INCLUDE = -I/opt/ioapi/fixed_src \
 
 CAM模式與CMAQ模式成分對照如下表：
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM-chemSpec.png)
+![](../../assets/images/CAM-chemSpec.png)
 
 ## Reference
 - WEG Administrator, **Welcome to the CAM-chem Wiki**,[wiki.ucar](https://wiki.ucar.edu/display/camchem/Home),13 Jun 2021

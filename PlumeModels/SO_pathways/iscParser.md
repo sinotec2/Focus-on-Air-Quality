@@ -232,10 +232,10 @@ $ cat -n $(which csv2kml.py)
 ### 圖檔
 - [isc_parserSO.py](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/isc_parser/isc_parserSO.py)結果
 
-| ![iscParser1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/iscparser1.png)|
+| ![iscParser1.png](../../assets/images/iscparser1.png)|
 |:--:|
 | <b>面源及體源空間位置之解析結果</b>|
-| ![iscParser2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/iscparser2.png)|
+| ![iscParser2.png](../../assets/images/iscparser2.png)|
 | <b>敏感接受點及污染源相對位置</b>|
 
 - [isc_parserBP.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/isc_parserBP.py)結果

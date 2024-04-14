@@ -264,8 +264,8 @@ $ cat -n bioginc.py
 ```
 
 ## 結果檢核
-- 比較teds10及teds11之植物排放[如圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds11-10biog.PNG)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds11-10biog.PNG)
+- 比較teds10及teds11之植物排放[如圖](../../assets/images/teds11-10biog.PNG)
+![](../../assets/images/teds11-10biog.PNG)
 
 ## 檔案下載
 

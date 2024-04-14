@@ -27,7 +27,7 @@ tags: EDGAR REAS
 - 雖然[EDGAR(Emissions Database for Global Atmospheric Research)](https://edgar.jrc.ec.europa.eu/)解析度0.1度與HUADON_3k的解析度已經相差不大，然而原生污染物如SO<sub>2</sub>、NO<sub>2</sub>等的模擬結果卻顯示出海上具有濃度分布的奇異點。
   - 2018/3/31~4/4 東亞模擬結果([動畫檔](https://youtu.be/keO9LgCcAmo))
 
-| ![20180404_SO2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404_SO2.PNG)|  
+| ![20180404_SO2.PNG](../../assets/images/20180404_SO2.PNG)|  
 
 - 當風向與船隻路線有顯著交角時，突高的面源產生類似點源的效應，圖面上呈現出平行的煙流，而不是均勻的片狀線源貢獻之濃度分布。
 - 造成此一結果的主要原因是EDGAR在同一路線上的排放量本身就具有很大的差異性，當程式進行內插時就很難避免加深此一差異而造成路線上的不連續結果。
@@ -131,10 +131,10 @@ variables:
 ## Results
 ### 比較內插與合併方式之成果
 
-| ![EDG_Intp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Intp.PNG)|
+| ![EDG_Intp.PNG](../../assets/images/EDG_Intp.PNG)|
 |:--:|
 | <b>griddata內插HUADON_3k範圍的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>|
-| ![EDG_Aggr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EDG_Aggr.PNG) |
+| ![EDG_Aggr.PNG](../../assets/images/EDG_Aggr.PNG) |
 | <b>重新分配後HUADON_3k範圍船舶的SO<sub>2</sub>排放量（log<sub>10</sub> gmole/s/cell）</b>| 
 
 ### 討論

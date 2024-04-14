@@ -61,7 +61,7 @@ tags: CGI_Pythons plume_model
   - `4個檔案`：**依序**為run stream、氣象檔(AERMOD會需要獨立的高空數據檔)、以及(或)複雜地型時需要的地形檔。
   - `model`：模式之選項，ISCST或AERMOD二擇一
 ### 畫面
-| ![isc_aermod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/isc_aermod.PNG)|
+| ![isc_aermod.PNG](../../assets/images/isc_aermod.PNG)|
 |:--:|
 | <b>isc_aermod主程式[遠端執行](http://sinotec24.com/AERMOD.html)界面</b>|
 

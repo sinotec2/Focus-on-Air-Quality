@@ -132,7 +132,7 @@ pathIJ,centIJ,dx,dy,inp,nx,ny,path,x0,y0
 - 呼叫[csv2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/csv2kml/#點狀資訊kml檔之撰寫csv2kmlpy):
   -n 選項選擇**P**，輸出多邊形之KML。
 
-| ![twnTERR.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/twnTERR.png)|
+| ![twnTERR.png](../../assets/images/twnTERR.png)|
 |:--:|
 | <b>uMap結果範例</b>|
 

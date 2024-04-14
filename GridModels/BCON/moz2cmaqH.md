@@ -34,7 +34,7 @@ tags: CMAQ ICON BCON
   - 直接以初始濃度引用：在`run_cctm.csh`內指定即可
 - 有鑒於全球空品模擬結果越來越多，且Mozart模式不再維護，有更多直接轉換之程式與作業方式(如ecmwf之[EAC4](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2bc/))，可以簡化程序。
 
-## [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)說明
+## [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/moz2cmaqHd1J.py)說明
 
 ### 執行方式
 - (eg.)執行2018年4月1日0時之內插：`python moz2cmaqHd1J.py 1809100`
@@ -105,7 +105,7 @@ done
 done
 ```
 
-### [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)分段說明
+### [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/moz2cmaqHd1J.py)分段說明
 - 調用模組
 
 ```python
@@ -232,7 +232,7 @@ nc.close()
 ```
 
 ## 程式下載
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)
+- [github](https://raw.githubusercontent.com/sinotec2/cmaq_relatives/2c9e78bf0bf268f8abc5472d928a7bc3c22decee/bcon/moz2cmaqHd1J.py)
 
 ## Reference
 - lizadams, **Visualization Environment for Rich Data Interpretation (VERDI): User’s Manual**, [github](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md), August 03, 2021

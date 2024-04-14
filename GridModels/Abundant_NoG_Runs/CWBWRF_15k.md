@@ -159,7 +159,7 @@ if ( $DM == 'd01' ) then
   - [GIF_file](http://sinotec24.com/soong/pm10.gif) @iMacKuang [^9]
   - [GifPlayer@sinotec2.github.io](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)
 
-| ![pm10_ncl.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pm10_ncl.PNG) |
+| ![pm10_ncl.PNG](../../assets/images/pm10_ncl.PNG) |
 |:--:|
 | <b>圖 CCTM模擬d01範圍PM10之結果(NCL繪製)，單位log<sub>10</sub>&mu;g/M<sup>3</sup> </b>|  
 

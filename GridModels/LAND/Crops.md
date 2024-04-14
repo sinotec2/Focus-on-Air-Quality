@@ -174,10 +174,10 @@ nc.close()
 ```
 ### Results
 
-| ![Rice.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Rice.PNG) |
+| ![Rice.PNG](../../assets/images/Rice.PNG) |
 |:--:|
 | <b>圖 d01範圍大米種植面積的網格佔比(%)</b>|  
-| ![Rice_irr.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Rice_irr.PNG) |
+| ![Rice_irr.PNG](../../assets/images/Rice_irr.PNG) |
 |:--:|
 | <b>圖 d01範圍大米(灌溉)種植面積的網格佔比(%)</b>|  
 

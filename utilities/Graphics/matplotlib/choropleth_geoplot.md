@@ -45,7 +45,7 @@ YMD,TOWNCODE,PM25,COUNTYCODE,COUNTYNAME,TOWNNAME
 20000101,10002070,33.260458754091715,10002,宜蘭縣,員山鄉
 ```
 
-|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-05-30-10-51-07.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-05-30-09-47-27.png)|
+|![](../../attachments/2023-05-30-10-51-07.png)|![](../../attachments/2023-05-30-09-47-27.png)|
 |:-:|:-:|
 |<b>NCL版本之等值圖</b>|<b>geoplot版本之等值圖</b>|
 

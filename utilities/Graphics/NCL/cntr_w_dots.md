@@ -64,7 +64,7 @@ tags: NCL graphics
 
 ## 結果
 
-|![rcm.000002.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/rcm.000002.png)|![PM25.000002.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PM25.000002.png)|
+|![rcm.000002.png](../../assets/images/rcm.000002.png)|![PM25.000002.png](../../assets/images/PM25.000002.png)|
 |:-:|:-:|
 |<p><br>2016年10月20日海馬颱風外圍環流</p>造成竹苗地區臭氧高值之CMAQ模擬結果</br>|<br>2019全年PM2.5模擬與測站平均結果<br>|
 

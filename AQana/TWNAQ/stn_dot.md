@@ -184,7 +184,7 @@ dd.set_index('ymd').to_csv(yr+'res.csv')
 - 因只有測站附近的鄉鎮區有值，位相鄰測站的其他鄉鎮區，則為空白
 - 繪圖程式參[geoplot繪製行政區範圍等值圖][geoplot]
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-01-09-36-35.png)
+![](../../attachments/2023-06-01-09-36-35.png)
 
 ## 程式下載
 

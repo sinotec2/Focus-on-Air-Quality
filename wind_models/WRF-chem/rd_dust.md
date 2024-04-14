@@ -93,7 +93,7 @@ convert -dispose 2 -coalesce +repage -background none  WRF_chem-*.png -size 895x
 - 北臺灣測點時間序列之讀取
   - `IX,IY`為[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)圖面上讀取結果，因此換到python上時須**減1**。
   - `wrfout`的時間標籤為`Times`，為12個`byte`的序列，因此須先轉成(`decode`)字元，串成(`join`)字串，再讀成`datetime`，轉成所要的格式。詳情見[WRF的時間標籤](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/DateTime/WRF_Times/)之說明
-  - `csv`檔案可以用Excel等軟體繪製[時間序列圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
+  - `csv`檔案可以用Excel等軟體繪製[時間序列圖](../../assets/images/WRFchemVSwanli.PNG)
 
 ```python
 strT=[''.join([i.decode('utf-8') for i in nc.variables['Times'][t,:]]) for t in range(nt)]
@@ -146,9 +146,9 @@ nc.close()
 - 2018/4/5~4/7東亞沙塵暴傳播之模擬結果
   - [Youtube](https://youtu.be/kvF1gLMlE0Q)
   - [GIF](http://sinotec24.com/soong/20180405WRFchem.gif)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018040616.PNG)
+![](../../assets/images/2018040616.PNG)
 - 比較EC再分析、WRF-chem模擬以及萬里實測PM<sub>10</sub>數據(時間軸為UTC)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WRFchemVSwanli.PNG)
+![](../../assets/images/WRFchemVSwanli.PNG)
 - 其他再分析與觀測
   - [nullschool](https://earth.nullschool.net/#2018/04/05/0000Z/particulates/surface/level/overlay=pm10/orthographic=-238.92,24.73,2072/loc=117.900,32.438)
   - 環保署官方[說明](https://drive.google.com/file/d/1cTQhDlfEl8w8ikw2SwdmPKJngayCZKy5/view)(https://airtw.epa.gov.tw/CHT/Forecast/Sand.aspx)

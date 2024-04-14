@@ -154,26 +154,26 @@ $ cat -n D1_9km.py
 
 圖1為原始VERDI之圖面，由於數據解析度的限制(包括氣象與排放量檔案的解析度)，網格為53X53，解析度為81km。在珠江三角洲的西南側有最高值，在嶺南地區有最低值。
 
-| ![D1_9Km1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/D1_9Km1.png)|
+| ![D1_9Km1.png](../../assets/images/D1_9Km1.png)|
 |:--:|
 | <b>原始VERDI之圖面，網格數53X53</b>|
 
 圖2為內插後的結果(linear)：階梯狀完全消除、海面上色階可以呈現出合理的曲線。最大值不變，但範圍略有減少，仍能保持濃度顯著的空間梯度。最低值不變，但範圍顯著減少。東南沿海的4個較高網格連成一個高濃度帶，有模糊化的趨勢。
 
-| ![D1_9Km2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/D1_9Km2.png)|
+| ![D1_9Km2.png](../../assets/images/D1_9Km2.png)|
 |:--:|
 | <b>線性內插結果，網格數增加9X9倍</b>|
 
 圖3為內插後的結果(cubic)：較線性內插更圓緩，容許更大的濃度梯度。高低值範圍較linear更寬廣。
 
-| ![D1_9Km3.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/D1_9Km3.png)|
+| ![D1_9Km3.png](../../assets/images/D1_9Km3.png)|
 |:--:|
 | <b>cubic內插結果，網格數增加9X9倍</b>|
 
 
 圖4為同一日[ecmwf](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF/NRTdownload/)的GO3數據：模式對西側內地有低估，東南沿海則有高估。
 
-| ![D1_9Km4.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/D1_9Km4.png)|
+| ![D1_9Km4.png](../../assets/images/D1_9Km4.png)|
 |:--:|
 | <b>GO3再分析數據之內插結果</b>|
 

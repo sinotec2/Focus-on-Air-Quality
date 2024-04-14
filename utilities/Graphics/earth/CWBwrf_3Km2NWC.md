@@ -321,10 +321,10 @@ fi
 
 ### 3公里解析度範圍與流線場
 
-| ![uv10_json.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/uv10_json.PNG) |
+| ![uv10_json.PNG](../../assets/images/uv10_json.PNG) |
 |:--:|
 | <b>2021070206中央氣象局WRF預報之地面風氣流線</b>| 
-| ![gfs.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/gfs2021070206.PNG) |
+| ![gfs.PNG](../../assets/images/gfs2021070206.PNG) |
 | <b>同時間的GFS地面風</b>| 
 
 - CWB預報有颱風、GFS並沒有發現

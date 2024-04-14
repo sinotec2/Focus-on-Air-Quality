@@ -215,7 +215,7 @@ CMAQ的氣象前處理MCIP (5.0)模式有較高標準的限制，除了土地使
 分析臺南市、高雄市及屏東縣等3縣市108個鄉鎮區，年度含蓋2007~2017年共11年，PM<sub>2.5</sub>及O<sub>3</sub>濃度乃讀自CAM-chem ([Community Atmosphere Model][CAM-chem]) 模式模擬結果，並以環保署在縣市測站之年平均值進行校正，作為相關性分析之依據。
 
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDobs.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDsim.png)|
+| ![](../../AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDobs.png)|![](../../AQana/GAQuality/NCAR_ACOM/CAM_pys/box_AQDsim.png)|
 |:--:|:--:|
 | <b>環保署測值</b>|<b>CAM-chem結果</b>|
 
@@ -227,18 +227,18 @@ CMAQ的氣象前處理MCIP (5.0)模式有較高標準的限制，除了土地使
 ### 空間分布
 - 臺灣各鄉鎮區之PM25平均值
 
-| ![recm_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/recm_byTown.PNG){:width="360px"}|![cmaqPMfT.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cmaqPMfT.png){:width="360px"}|
+| ![recm_byTown.PNG](../../assets/images/recm_byTown.PNG){:width="360px"}|![cmaqPMfT.PNG](../../assets/images/cmaqPMfT.png){:width="360px"}|
 |:--:|:--:|
 |<b>環保署模擬結果</b>|<b>本文模擬結果</b>|
 
 - 臺灣各鄉鎮區之O3平均值
 
-| ![recm_byTown.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/recmO3T.png){:width="360px"}|![cmaqPMfT](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/cmaqO3T.png){:width="360px"}|
+| ![recm_byTown.PNG](../../assets/images/recmO3T.png){:width="360px"}|![cmaqPMfT](../../assets/images/cmaqO3T.png){:width="360px"}|
 |:--:|:--:|
 |<b>環保署模擬結果</b>|<b>本文模擬結果</b>|
 
 #### 圖4經調整後CAM-chem平均值之空間分布
 
-| ![CAM_byTown.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAM_byTown.PNG){:width="360px"}|![y_s_vO3T.csv.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/y_s_vO3T.csv.png){:width="360px"}|
+| ![CAM_byTown.png](../../assets/images/CAM_byTown.PNG){:width="360px"}|![y_s_vO3T.csv.PNG](../../assets/images/y_s_vO3T.csv.png){:width="360px"}|
 |:--:|:--:|
 |<b>PM<sub>2.5</sub> (μg/m<sup>3</sup>)</b>|<b>O<sub>3</sub></b>|

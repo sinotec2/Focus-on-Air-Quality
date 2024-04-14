@@ -88,7 +88,7 @@ tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 
 ### 標籤主題關係圖
 
-![NCLonOTM_star](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NCLonOTM_star.png)
+![NCLonOTM_star](../../assets/images/NCLonOTM_star.png)
 
 ## 程式說明
 

@@ -45,7 +45,7 @@ tags: CWBWRF landuse wrf WPS
   - 模擬範圍可以完整包括[青康藏高原](https://zh.wikipedia.org/wiki/青康藏高原)、[蒙古高原](https://zh.wikipedia.org/wiki/蒙古高原)的主要部分，對地形效應有較完整的掌握。
   - 東側海面則以換日線為界，在資料整合上也能保持便利性。
 
-| ![geo_emWRF_15Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_15Km.PNG) |
+| ![geo_emWRF_15Km.PNG](../../assets/images/geo_emWRF_15Km.PNG) |
 |:--:|
 | <b>圖1 中央氣象局WRF15公里解析度模擬範圍之地形高程。東西向範圍9,000公里、南北向6,000公里</b>|
   
@@ -53,7 +53,7 @@ tags: CWBWRF landuse wrf WPS
   - 包括了中國大陸東半壁，韓、日、中南半島與東南亞等主要境外污染來源。
   - 因大陸西部及海上無顯著污染源，縮減範圍也可減省計算資源。
 
-| ![geo_emWRF_81Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_81Km.PNG) |
+| ![geo_emWRF_81Km.PNG](../../assets/images/geo_emWRF_81Km.PNG) |
 |:--:|
 | <b>圖2 CMAQ 東亞範圍之地形高程，東西南北皆為4,860公里</b>|
 
@@ -96,7 +96,7 @@ tags: CWBWRF landuse wrf WPS
   - 由於沒有化學反應之計算，其網格數多達1166 X 681
   - 因d01的解析度也很高，足以反映局部重要特性，因此並不需要雙向套疊關係，d01即能呈現足夠的預報度。
 
-| ![geo_emWRF_3Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_3Km.PNG) |
+| ![geo_emWRF_3Km.PNG](../../assets/images/geo_emWRF_3Km.PNG) |
 |:--:|
 | <b>圖3 中央氣象局WRF3公里解析度模擬範圍之地形高程。東西向範圍3,500公里、南北向2,050公里</b>|
   
@@ -105,13 +105,13 @@ tags: CWBWRF landuse wrf WPS
   - 每個網格系統皆以臺灣為中心點，讓網格範圍有最大程度之重疊。
   - 因主要模擬標的為d04臺灣本島範圍，其餘範圍則保持雙向套疊關係
   
-| ![geo_emWRF_27Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_27Km.PNG) |
+| ![geo_emWRF_27Km.PNG](../../assets/images/geo_emWRF_27Km.PNG) |
 |:--:|
 | <b>圖4 CMAQ 東南沿海範圍之地形高程，東西南北皆為1,890公里</b>|
-| ![geo_emWRF_9Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emWRF_9Km.PNG) |
+| ![geo_emWRF_9Km.PNG](../../assets/images/geo_emWRF_9Km.PNG) |
 |:--:|
 | <b>圖5 CMAQ 臺澎金馬範圍之地形高程，東西向範圍552公里、南北向684公里</b>|
-| ![geo_emCMAQ_3Km.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/geo_emCMAQ_3Km.PNG) |
+| ![geo_emCMAQ_3Km.PNG](../../assets/images/geo_emCMAQ_3Km.PNG) |
 |:--:|
 | <b>圖6 CMAQ 臺灣本島範圍之地形高程，東西向範圍282公里、南北向444公里</b>|
 
@@ -154,13 +154,13 @@ total 6.1M
 - EROD風蝕係數之維度須先以[ncwa](https://linux.die.net/man/1/ncwa)予以[去除](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncks/#維度刪除ncwa)方能以[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視。
   - EROD的維度名稱為：` EROD(Time, dust_erosion_dimension, south_north, west_east) `，其中`dust_erosion_dimension`VERDI無法辨識
 
-| ![erod.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/erod.PNG) |
+| ![erod.PNG](../../assets/images/erod.PNG) |
 |:--:|
 | <b>圖7 d01範圍的風蝕係數(EROD)</b>|
-| ![crayfrac.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/crayfrac.PNG) |
+| ![crayfrac.PNG](../../assets/images/crayfrac.PNG) |
 |:--:|
 | <b>圖8 d01範圍的黏土比例係數(CRAYFRAC)</b>|
-| ![SANDFRAC.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SANDFRAC.PNG) |
+| ![SANDFRAC.PNG](../../assets/images/SANDFRAC.PNG) |
 |:--:|
 | <b>圖9 d01範圍的沙土比例係數(SANDFRAC)</b>|
 

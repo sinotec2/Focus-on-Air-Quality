@@ -340,9 +340,9 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
 
 ## 結果檢視
 - 2018/4/5～6 大陸沙塵暴之EAC4濃度**水平**分布[mov](https://youtu.be/S3z9j7V-O0w)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180405eac4H.PNG)
+![](../../assets/images/20180405eac4H.PNG)
 - 2018/4/5～6 大陸沙塵暴之EAC4濃度**垂直**分布（臺灣為中心）[mov](https://youtu.be/tiXA1L3IaEI )
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180405eac4V.PNG)
+![](../../assets/images/20180405eac4V.PNG)
 
 ## 程式下載
 

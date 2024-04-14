@@ -68,7 +68,7 @@ py37                  *  /opt/anaconda3/envs/py37
 - 理論上如果使用公版模式的所有條件，應該是不需要提供模擬驗證比對的相關圖表。只需要提供增量濃度分布圖([Air_Increment_tool](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/TWNEPA_RecommCMAQ/post_process/4.Air_Increment/))
 - 此處乃就所提供的程式一一執行，以了解公版模式的定性、定量的表現，以及符合性能規範的程度。
 
-| ![post_process.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/post_process.png) |
+| ![post_process.PNG](../../assets/images/post_process.png) |
 |:--:|
 | <b>圖1公版模式後製工具程式庫、數據檔案目錄架構</b>|
 

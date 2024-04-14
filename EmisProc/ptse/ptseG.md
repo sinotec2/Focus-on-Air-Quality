@@ -213,10 +213,10 @@ $ diff ptseG.py ptseE.py
 
 
 ## 結果檢視
-- [TEDS 10~11之地面點源排放量差異](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePAR.PNG)
-- [排放量時間變化](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/teds10-11ptsePARtimvar.PNG)
+- [TEDS 10~11之地面點源排放量差異](../../assets/images/teds10-11ptsePAR.PNG)
+![](../../assets/images/teds10-11ptsePAR.PNG)
+- [排放量時間變化](../../assets/images/teds10-11ptsePARtimvar.PNG)
+![](../../assets/images/teds10-11ptsePARtimvar.PNG)
 ## 檔案下載
 
 {% include download.html content="python程式：[ptseG.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseG.py)" %}

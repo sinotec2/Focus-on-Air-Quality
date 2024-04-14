@@ -140,7 +140,7 @@ for i in range(len(df)):
 df['polygon']=[Polygon(i).buffer(0.15) for i in df.lonlats] #0.1deg~10Km
 ```
 
-|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-31-58.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-12-14-39-32.png)|
+|![](../../attachments/2023-09-12-14-31-58.png)|![](../../attachments/2023-09-12-14-39-32.png)|
 |:-:|:-:|
 |<br>buffer=0.1 deg</br>|<br>buffer=0.15 deg</br>|
 

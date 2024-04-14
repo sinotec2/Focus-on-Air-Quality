@@ -170,7 +170,7 @@ for level in levels[:]:
 
 ### Google Map 貼圖結果(林口電廠範例)
 
-| ![kml_demo.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/kml_demo.png) |
+| ![kml_demo.png](../../assets/images/kml_demo.png) |
 |:--:|
 | <b>圖 林口電廠周邊地形KML檔案輸出結果範例</b>|  
 

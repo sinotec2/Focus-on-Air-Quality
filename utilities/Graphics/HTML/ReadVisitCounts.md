@@ -86,7 +86,7 @@ tags: html
 ```
 ## 結果
 
-![ReadVisitCount](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ReadVisitCount.PNG)
+![ReadVisitCount](../../assets/images/ReadVisitCount.PNG)
 
 - 計數會連到[busuanzi.ibruce.info]()網站，計數結果顯示速度會有些慢。
 - Github如果正在執行workflow，js會算不出來結果。

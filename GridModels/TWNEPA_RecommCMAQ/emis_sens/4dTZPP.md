@@ -95,12 +95,12 @@ nc.close()
 
 ### PM<sub>25</sub>年均值差異
 
-| ![dTZPPp25tm](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/dTZPPp25tm.png) |![aTZPPp25tm.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/aTZPPp25tm.png) |
+| ![dTZPPp25tm](../../assets/images/dTZPPp25tm.png) |![aTZPPp25tm.PNG](../../assets/images/aTZPPp25tm.png) |
 |:--:|:--:|
 | <b>TZPP個案</b>|<b>TZPP'個案</b>|
 
 ### PM<sub>25</sub>日均值差異之最大值
 
-| ![dTZPPp25dm](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/dTZPPp25dm.png) |![aTZPPp25dm.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/aTZPPp25dm.png) |
+| ![dTZPPp25dm](../../assets/images/dTZPPp25dm.png) |![aTZPPp25dm.PNG](../../assets/images/aTZPPp25dm.png) |
 |:--:|:--:|
 | <b>TZPP個案</b>|<b>TZPP'個案</b>|

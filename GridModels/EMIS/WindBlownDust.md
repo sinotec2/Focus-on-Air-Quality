@@ -281,7 +281,7 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 ## CMAQ Wind-Blown Dust Incremental Results
 ### Maximun PM10 During Episode
 
-| ![CMAQ_WBDinc.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDinc.PNG) |
+| ![CMAQ_WBDinc.PNG](../../assets/images/CMAQ_WBDinc.PNG) |
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間d01範圍PM10最大增量之分布</b>|
 
@@ -290,7 +290,7 @@ This variable is used in combination with the variables in the **DUST_LU_1** fil
 - [EC Reanalysis](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2D1m3/#結果檢視)
 - [CWBWRF_15k CMAQ Simulation](../../utilities/Graphics/NCL/cmaq2gif.md#results)
 
-| ![CMAQ_WBDcomp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDcomp.PNG) |
+| ![CMAQ_WBDcomp.PNG](../../assets/images/CMAQ_WBDcomp.PNG) |
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間萬里測站PM<sub>10</sub>濃度之比較</b>|
 

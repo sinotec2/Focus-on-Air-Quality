@@ -103,7 +103,7 @@ xyc= [(x[idx[0][i],idx[1][i]],y[idx[0][i],idx[1][i]]) for i in range(mp)]
 
 ## Results
 
-| ![ship_co.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ship_co.PNG) |
+| ![ship_co.PNG](../../assets/images/ship_co.PNG) |
 |:--:|
 | <b>圖 d01範圍船舶CO排放之分布(log gmole/s)</b>|  
 

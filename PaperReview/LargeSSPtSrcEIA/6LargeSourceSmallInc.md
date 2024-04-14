@@ -32,7 +32,7 @@ last_modified_date: 2022-05-16 09:42:56
 ## (一) 冬日煙霧
 冬季最常發生嚴重空氣污染狀況的氣象特徵，在於垂直溫度分布發生所謂的「逆溫層」，高空溫度較高，地面或煙囪高度位置的氣溫較低，限制了污染的垂直擴散，持續幾天下來，可能造成嚴重的空氣污染事件。
 
-| ![inversion.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/inversion.png)|
+| ![inversion.png](../../assets/images/inversion.png)|
 |:-:|
 | <b>冬日逆溫層降低，污染擴散不良造成嚴重空氣污染，主要是工廠排放之硫氧化物、危害性物質或農藥。([Alannah Johns][Alannah Johns])</b>|
 
@@ -45,7 +45,7 @@ last_modified_date: 2022-05-16 09:42:56
 在冬季煙霧中，污染物集中在排放源的附近，其化學形態大多不太會被轉化，即所謂的「原生性」污染物質，包括危害性很高的懸浮微粒、農藥等物質，以及硫氧化物等等。由於冷氣團或輻射冷卻效應的強度在夜間較強，因此夜間的污染排放、夜間操作的工廠、夜班的交通污染等，將對污染事件的發生，有非常大的貢獻。
 
 
-| ![fumigation.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/fumigation.png)|
+| ![fumigation.png](../../assets/images/fumigation.png)|
 |:-:|
 | <b>冬日逆溫層降低，污染擴散不良造成嚴重空氣污染，主要是工廠排放之硫氧化物、危害性物質或農藥。([中時資料照][中時資料照])</b>|
 
@@ -60,13 +60,13 @@ last_modified_date: 2022-05-16 09:42:56
 ## (二)夏日煙霧
 夏日煙霧的發生機會、原因、污染源特色、影響範圍等等，與前述冬日煙霧有很大的區別。台灣地區來說，這兩者特性似乎又有些許重疊的情形。
 
-| ![smog.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/smog.png)|
+| ![smog.png](../../assets/images/smog.png)|
 |:-:|
 | <b>夏日煙霧：同樣也是逆溫層降低污染擴散不良，空氣污染受陽光照射反應形成更加危害性之物質，主要是氮氧化物和揮發性有機物。([Alannah Johns][Alannah Johns])</b>|
 
 有別於冬日煙霧，夏日煙霧的特徵在於陽光所啟動的大氣化學現象，如圖所示，從地面家戶、交通、以及工廠的高空排放等等。這些污染源所排放出來的氮氧化物以及揮發性有機物，會在陽光的照射下，反應生成具有高氧化力的臭氧、毒性高的醛類物質、以及對氣喘患者非常敏感衍生性的懸浮微粒等等，所謂的「光化學煙霧」，對健康有更大的威脅。近50年來，光化煙霧已經成為各國都會區空氣污染管制上的頭號敵人。
 
-| ![mechanism.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/mechanism.png)|
+| ![mechanism.png](../../assets/images/mechanism.png)|
 |:-:|
 | <b>光化煙霧的主要成份與化應途經：經由陽光作用後分解成高氧化力之其他物質，取代臭氧，因此造成這些物質濃度大量累積。。([shannanmaisey][shannanmaisey])</b>|
 
@@ -84,7 +84,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 台灣的冬季何以不會有所謂的光化污染現象呢？北部地區的冬季是陰雨的天氣，可能因此沒有光化污染，南部地區可能因為陽光強度不如春秋季節強，或者可能因為溫度較低，石化廠逸散性揮發物排放量較低。
 
 
-| ![FPG.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/FPG.png)|
+| ![FPG.png](../../assets/images/FPG.png)|
 |:-:|
 | <b>晨光中的麥寮六輕計畫，風速很低，煙流因其熱量而垂直向上擴散，煙汽中的水汽遇冷凝結，集中在逆溫層的頂端，而形成這個有趣的畫面。</b>|
 
@@ -105,13 +105,13 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 - 小港機場附近的大林電廠、中鋼公司，甚至
 - 離島的蘭嶼電廠
 
-| ![zhangbinPP.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/zhangbinPP.png)|
+| ![zhangbinPP.png](../../assets/images/zhangbinPP.png)|
 |:-:|
 | <b>大型煙流在大氣穩定狀況下觸山的情形。圖中電廠位在彰濱工業區，與附近八卦山的相對高度。</b>|
 
 等等，煙囪的高度還受到法規嚴格的限制。通常在夜間電力負載降低、或操作量減少、煙流的熱量或動量不高的情況下，煙流無法突破穩定的氣層，就會直接「衝撞」(Impingement)到山丘的表面，由於煙流中心的濃度非常高，因此所造成的地面濃度增量，也將非常之高。即使沒有空氣品質的影響，因煙氣中的水蒸汽，在山丘氣流的交互作用下，很容易形成局部的雲雨甚至雷雨現象。
 
-| ![SteamPlume.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SteamPlume.png)|
+| ![SteamPlume.png](../../assets/images/SteamPlume.png)|
 |:-:|
 | <b>大型煙流所排出的蒸汽在複雜地形中形成局部雲雨([Plant Storm][Plant Storm])。</b>|
 
@@ -130,7 +130,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 ### 1. 台灣北部地區事件日「總臭氧」污染濃度與氣流的特徵
 在此以台灣北部地區長期的光化煙霧特徵為例，做一說明。挑選出民國86～95年空品區內任一測站臭氧小時濃度大於120 ppb的污染事件，分別計算各小時之平均「總臭氧」(臭氧加上二氧化氮)，再進行空間上網格的內插，畫成等濃度圖，加上平均之風標如圖所示。為了呈現出事件日的特徵，也繪出「非事件」該小時的等值圖與風標圖，做為比較。
 
-| ![TPsmog.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TPsmog.png)|
+| ![TPsmog.png](../../assets/images/TPsmog.png)|
 |:-:|
 | <b>台灣北部地區民國86～95年平均非事件及事件日「總臭氧」時間變化</b>|
 
@@ -145,7 +145,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 ### 2. 台灣北部地區事件日非甲烷碳氫化合物污染濃度與氣流的特徵
 由前述氣流動力的特性可知，盆地西側上午的污染團對於當天光化污染事件，具有關鍵性的影響，進一步分析5～11時事件日總臭氧（在清晨及上午此值將以二氧化氮為主），以及非甲烷碳氫化合物相對一般日長期平均值的增量濃度分布情形，如圖所示。
 
-| ![TPsmogHC.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TPsmogHC.png)|
+| ![TPsmogHC.png](../../assets/images/TPsmogHC.png)|
 |:-:|
 | <b>北部地區民國86～95年事件日前驅物相對一般日增加量之時間變化</b>|
 
@@ -163,7 +163,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 
 雖然以上兩種機制可能同時發生，可能一前一後，然而實務上以台灣北、中、南等地區的模式模擬經驗，這兩個機制中，對單一電廠而言，其「酸性沉降」均以「就地移除」為主要的作用機制。
 
-| ![acidrain.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/acidrain.png)|
+| ![acidrain.png](../../assets/images/acidrain.png)|
 |:-:|
 | <b>大型污染源產生酸雨的重要機制</b>|
 
@@ -172,11 +172,11 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 
 [臺灣未來3天火力機組空品影響預報](https://sinotec2.github.io/cpuff_forecast/)這個網站應用環保署公開的[發電量即時資訊](https://data.gov.tw/dataset/8931)、TEDS數據、以及中央氣象局開放數據中的[WRF模式3公里預報](https://opendata.cwb.gov.tw/dataset/mathematics/M-A0064-048)檔，建立了[CALPUFF每日的模擬](https://sinotec2.github.io/Focus-on-Air-Quality/TrajModels/CALPUFF/Forecast/)。以近期2022/5/19/16時結果為例，因南北風場夾擊，在彰、雲、嘉、南地區造成較高濃度，其值最高約4 ~ 5 &mu; g/M<sup>3</sup>。
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/WND_static_topoconcrec000010.jpg)|
+| ![](../../assets/images/WND_static_topoconcrec000010.jpg)|
 |:-:|
 | <b>臺灣地區附近2022/5/19/16時之氣流線及風速，臺灣東側及南方均為南風，臺灣海峽為強勁的東北風，在高雄台南交界處幅合([earth.NullScholl](https://earth.nullschool.net/#2022/05/19/800Z/wind/surface/level/orthographic=-238.92,24.73,2066)]網站)</b>|
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PMF_static_topoconcrec000009.jpg)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/EPA_static_topoconcrec000010.jpg)|
+| ![](../../assets/images/PMF_static_topoconcrec000009.jpg)|![](../../assets/images/EPA_static_topoconcrec000010.jpg)|
 |:-:|:--:|
 | <b>CALPUFF模擬2022/5/19/16時全臺火力發電機組造成之粒狀物增量濃度分布</b>| <b>同時間環保署空氣品質監測網畫面</b>|
 
@@ -196,7 +196,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 對一個濱海地區的大型污染源而言，經常在海陸風循環的氣象條件控制之下，所以我們探討它們的環境影響，不能將環境因素予以過度簡化。
 既有光化煙霧發生的氣象條件，經常發生在天氣系統交替的期間，一般北部發生在春季，南部地區發生在秋季，不論大陸或者太平洋上的控制系統強度非常微弱，日照又非常強烈，因此局部地區可以發展較為明顯的環流系統，在濱海地區經常可以觀察到顯著的海陸風與山谷風現象。夜間大多有較低的混合層或逆溫層，足以累積足夠的污染氣團。日間則日照強烈、通風不良。
 
-| ![PP_noSmog.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PP_noSmog.PNG)|
+| ![PP_noSmog.PNG](../../assets/images/PP_noSmog.PNG)|
 |:-:|
 | <b>電廠(位於圖形中央)煙流對海(圖形右邊)陸(圖形左邊)環境中光化煙霧的作用，在日夜不同風向與混合層高度的控制下，有著特殊的作用模型。</b>|
 
@@ -229,7 +229,7 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 除了上述短期之污染事件模式模之外，經由執行「污染月」全月份的模式模擬，也可以歸納出大型污染源形成光化煙霧的必要條件。觀察臭氧發生的歷程與機制，簡化如下圖，說明如下：
 
 
-| ![PP_Smog.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/PP_Smog.PNG)|
+| ![PP_Smog.PNG](../../assets/images/PP_Smog.PNG)|
 |:-:|
 | <b>濱海電廠造成光化煙霧顯著增量的必要因素分析示意圖</b>|
 

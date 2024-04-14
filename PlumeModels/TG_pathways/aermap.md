@@ -33,7 +33,7 @@ tags: plume_model AERMAP
 - 解析度50m、範圍取5公里、共10,000個接受點。
 - 切出之地形tiff檔經處理成kml貼在google map結果如下
 
-| ![kml_demo.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/kml_demo.png) |
+| ![kml_demo.png](../../assets/images/kml_demo.png) |
 |:--:|
 | <b>圖 林口電廠周邊地形[KML檔案](../../utilities/GIS/wr_kml.md)輸出結果範例</b>|  
 
@@ -61,6 +61,6 @@ tags: plume_model AERMAP
 - mmif氣象1/21\~31
 - 有建築物
 
-| ![noterr.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/noterr.png) |![withterr.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/withterr.png)|
+| ![noterr.png](../../assets/images/noterr.png) |![withterr.png](../../assets/images/withterr.png)|
 |:--:|:--:|
 | <b>無地形，煙流偏西南方，為東北季風影響</b>|有地形，煙流方向偏南，擴散範圍受到限制，集中在河谷低地。受限於80\~100M等高線範圍。最大值較高51\~754&mu;/M<sup>3</sup>|

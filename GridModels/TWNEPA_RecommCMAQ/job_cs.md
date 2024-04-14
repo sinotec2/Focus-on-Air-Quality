@@ -27,7 +27,7 @@ mermaid: true
 
 - 標籤主題關係圖
 
-![star1](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/star1.png)
+![star1](../../assets/images/star1.png)
 
 ## 國網上執行的困難（未解決）
 
@@ -220,7 +220,7 @@ $ diff run.cctm.03.csh_teds run.cctm.03.csh_dTZPP
 
 ### 網頁畫面結果
 
-![prog.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/prog.png)
+![prog.png](../../assets/images/prog.png)
 
 ### 流程及工作站關係圖
 

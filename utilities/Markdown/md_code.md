@@ -33,7 +33,7 @@ last_modified_date: 2022-11-15 10:21:23
   - 點選大綱會跳到指定位置，而移動滑鼠也會按照游標位置自動切換大綱。
   - 點選箭頭可以開合特定目錄、檔案、或內容、進而切換游標位置。(即使關閉檔案總管也能運作檔案開啟)
 
-| ![path_above_doc](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/path_above_doc.png "圖1 檔案上方與左側之大綱")|
+| ![path_above_doc](../../assets/images/path_above_doc.png "圖1 檔案上方與左側之大綱")|
 |:--:|
 | 圖1 檔案上方(黃標)與左側(紅標)之大綱|
 

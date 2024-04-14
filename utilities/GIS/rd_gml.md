@@ -114,7 +114,7 @@ last_modified_date: 2023-09-13 10:01:39
   - xzqy：「**行政區域**」(為字串序44以後)
   - xzqudm：行政區域代碼(為新的8碼)，為序列中第2項。
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-09-13-09-57-45.png)
+![](../../attachments/2023-09-13-09-57-45.png)
 
 ### [rd_gml.py](https://github.com/sinotec2/cmaq_relatives/blob/master/land/gridmask/rd_gml.py)程式說明
 

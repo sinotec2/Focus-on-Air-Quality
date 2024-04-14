@@ -32,11 +32,11 @@ tags: Crawlers tp_future
   - 由於高公局所建立的模型雖然還能保持線性、但因維度太多，還需要進行整併、或均化，以利多維度之分析。
 - 程式見於[github][tp_future]
 
-|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-55-14.png)|
+|![](../../attachments/2023-06-12-08-55-14.png)|
 |:-:|
 |<b> 高公局行車時間預測選單與執行</b>|
 
-|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-12-08-56-12.png)|
+|![](../../attachments/2023-06-12-08-56-12.png)|
 |:-:|
 |<b> 前後共7個出發時間的旅行時間預測結果</b>|
 
@@ -275,19 +275,19 @@ for h in range(1,50,7):
 
 總體來說，國1國3因為距離較長，全路線有最長的行車時間，其次則為國5與五楊高架。就日期來說，6/15(星期四)預測會有較長行車時間，原因未明。而小時變化則顯示明顯的昏峰。
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-03-20.png)
+![](../../attachments/2023-06-09-13-03-20.png)
 
 ---
 
 國1工作日(周一)：有顯著的晨峰上班車潮
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-12-28.png)
+![](../../attachments/2023-06-09-13-12-28.png)
 
 ---
 
 周末現象：國3、國5、國6等具有顯著的周日車潮，特別是在昏峰。此預測符合現實。
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-06-09-13-09-21.png)
+![](../../attachments/2023-06-09-13-09-21.png)
 
 ---
 

@@ -144,7 +144,7 @@ np.max(sumv)
 ```
 - [VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)繪圖
 
-| ![MODIS_16.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/MODIS_16.PNG) |
+| ![MODIS_16.PNG](../../assets/images/MODIS_16.PNG) |
 |:--:|
 | <b>圖 CWBWRF_15k範圍土地使用(MODIS_16)之分布</b>|
 

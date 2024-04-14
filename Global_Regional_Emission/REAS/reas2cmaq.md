@@ -296,10 +296,10 @@ nc.close()
 
 - m3.nc檔案可以用[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)檢視，如以下：
 
-| ![REAS_roadTransBenz.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_roadTransBenz.PNG) |
+| ![REAS_roadTransBenz.PNG](../../assets/images/REAS_roadTransBenz.PNG) |
 |:--:|
 | <b>圖 d00範圍REAS 2015年1月道路交通BENZ排放量之分布</b>|
-| ![REAS_FertNH3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/REAS_FertNH3.PNG) |
+| ![REAS_FertNH3.PNG](../../assets/images/REAS_FertNH3.PNG) |
 |:--:|
 | <b>圖 d01範圍REAS 2015年1月肥料NH3排放量之分布</b>|
 

@@ -192,13 +192,13 @@ for g in grp:
   - [Eastern China(YZD) Source Contributions](https://youtu.be/A9wQUbw_8yc)
 - 萬里觀測與各分區**人為污染**貢獻濃度之時間序列
 
-| ![20180404ISAM-wanli.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180404ISAM-wanli.PNG) |
+| ![20180404ISAM-wanli.PNG](../../assets/images/20180404ISAM-wanli.PNG) |
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間萬里測站PM<sub>10</sub>各分區**人為污染**貢獻濃度之比較</b>|
 
 - CMAQ加上**[風吹揚砂](../../utilities/Graphics/NCL/cmaq2gif.md#results)**之效應
 
-| ![CMAQ_WBDcomp.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CMAQ_WBDcomp.PNG) |
+| ![CMAQ_WBDcomp.PNG](../../assets/images/CMAQ_WBDcomp.PNG) |
 |:--:|
 | <b>2018/03/31-04/07沙塵暴期間萬里測站PM<sub>10</sub>**風吹揚砂**濃度之比較</b>|
 

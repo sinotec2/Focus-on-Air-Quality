@@ -152,7 +152,7 @@ tags: review plume_model
 [OCD]: <https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#ocd> "Offshore and Coastal Dispersion Model Version 5"
 
 ### AERMOD執行流程
-| ![Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png)|
+|![Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png)|
 |:-:|
 |<b>AERMOD模式系統與設定流程([Cerqueira et. al 2019][Cerqueira et. al 2019])</b>|
 

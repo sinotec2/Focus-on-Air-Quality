@@ -63,7 +63,7 @@ tags: CMAQ REAS
 
 ## MCIP之執行
 ### 網格系統
-- 將d06設定如下(相較其他巢狀網格設定詳見[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/#網格系統詳細定義))：
+- 將d06設定如下(相較其他巢狀網格設定詳見[網格系統詳細定義](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/3.run_mcipMM_RR_DM/#網格系統詳細定義))：
   - 網格名稱GridName   = HUADON_3k
   - 內縮X0    =   1
   - 內縮Y0    =   1

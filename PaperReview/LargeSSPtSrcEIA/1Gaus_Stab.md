@@ -22,7 +22,9 @@ tags: review plume_model
 ---
 
 ## 大氣紊流的特性
+
 ### 局布尺度
+
 - 時間
   - 瞬時 ~ 小時
   - quasi-steady state
@@ -38,6 +40,7 @@ tags: review plume_model
 [Slade 1968]: <https://www.osti.gov/biblio/4492043> "D. H. Slade, Meteorology and Atomic Energy—1968, USAEC Report TID-24190, 1968."
 
 ### 中尺度
+
   - 50 Km ~ 500 Km
   - 數小時 ~ 數日
   - 受延散現象、地區環流、地形效應控制為主
@@ -58,6 +61,7 @@ tags: review plume_model
 [Randerson 1984]: <https://www.osti.gov/biblio/6503687-atmospheric-science-power-production> "Randerson, D. (1984). Atmospheric science and power production (No. DOE/TIC-27601). USDOE Technical Information Center, Oak Ridge, TN."
 
 ### 穩定大氣
+
 - 溫度傾率 &gt; 絕熱傾率、逆溫、等溫
 - 不存在高層逆溫層：Fanning
 
@@ -72,9 +76,9 @@ tags: review plume_model
 |<b>穩定大氣與Lofting</b>|
 
 ### 中性大氣
+
 - 溫度傾率 = 絕熱傾率。是否存在高層逆溫層
 - 存在高層逆溫層：Fumigation
-
 
 | ![plumes_3.PNG](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/plumes_3.PNG)|
 |:-:|
@@ -87,6 +91,7 @@ tags: review plume_model
 |<b>中性大氣無高層逆溫：Coning</b>|
 
 ### 不穩定大氣
+
 - 溫度傾率 &lt; 絕熱傾率、逆溫、等溫
 - Looping
 
@@ -95,6 +100,7 @@ tags: review plume_model
 |<b>不穩定大氣：Looping</b>|
 
 ### 垂直穩定度在空間中的不均勻特性
+
 - Shoreline Internal Boundary Layer
   - Convective-internal-boundary-layer-formed-by-advection-of-cool-marine-air-over-a-warm.png
 
@@ -105,6 +111,7 @@ tags: review plume_model
 [Hsu , 1988]: <https://www.biblio.com/9780123579553> "Hsu, S. A., Coastal Meteorology, 260 pp., Academic, San Diego,Calif., 1988."
 
 ### 混合層日變化與污染擴散現象
+
 - 混合層與地面污染
   - [Yamada and Mellor 1975][Yamada and Mellor 1975], A Simulation of the Wangara Atmospheric Boundary Layer Data, Atmos Sci, 32 2309-2329
 
@@ -127,6 +134,7 @@ tags: review plume_model
 ## 煙流模式的架構流程
 
 ### [USEPA SCRAM](https://www.epa.gov/scram)模式種類架構
+
 - Dispersion Modeling
   - Preferred/Recommended Models 
     - AERMOD Modeling System ([**AER**MIC][AERMIC] **MOD**el)
@@ -152,12 +160,14 @@ tags: review plume_model
 [OCD]: <https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models#ocd> "Offshore and Coastal Dispersion Model Version 5"
 
 ### AERMOD執行流程
-| ![Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png)|
+
+|![Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/Modeling-system-of-Aermod-View-software-Source-Lakes-Environmental-2017.png)|
 |:-:|
 |<b>AERMOD模式系統與設定流程([Cerqueira et. al 2019][Cerqueira et. al 2019])</b>|
 
 [Cerqueira et. al 2019]: <https://www.researchgate.net/publication/328505586_Atmospheric_pollutants_modeling_with_Aermod_software> "Cerqueira, J., Albuquerque, H., and Sousa, F. (2019). Atmospheric pollutants: modeling with Aermod software. Air Quality, Atmosphere & Health 12. doi:10.1007/s11869-018-0626-9."
 
 ### AERMOD在臺灣之應用
+
 - 有關AERMOD在臺灣應用的實務討論，可以參考[環工技師會訊11007pp39-55(pdf)](http://www.tpeea.org.tw/upload/news/files/7eea35bc4c7a4189b42566fffe2f2fee.pdf)
 - [Markdown format](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/AERMODinTWN/)

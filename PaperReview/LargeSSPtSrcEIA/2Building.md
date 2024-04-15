@@ -45,7 +45,7 @@ last_modified_date: 2022-05-16 09:42:56
     - 視頻中以FDS模擬穩定大氣情況、建築物頂部排放的三維煙流行為。
   - [Plume characteristics for three different stack scenarios](https://www.youtube.com/watch?v=qQJRSrfv8eQ)
     - 在模式無法預期的特殊條件，風洞模擬試驗是一個直觀的解決方案。這個英文旁白的視頻介紹了大致上風洞模擬煙流在格柵狀與實心建築物尾流的行為、以及模式高估的可能性。
-  - [www.cppwind.com：Building Downwash – Problems, Solutions and Next Generation](ftp://newftp.epa.gov/Air/aqmg/SCRAM/conferences/2015_11th_Conference_On_Air_Quality_Modeling/Presentations/3-6_Building_Downwash-CPP-11thMC.pdf)
+  - [www.cppwind.com：Building Downwash – Problems, Solutions and Next Generation](https://gaftp.epa.gov/Air/aqmg/SCRAM/conferences/2015_11th_Conference_On_Air_Quality_Modeling/Presentations/3-6_Building_Downwash-CPP-11thMC.pdf)
     - 這篇[CPP wind](https://cppwind.com/)(Cermak Peterka Petersen, Inc)公司2015年的研討會論文，檢討了多孔(鏤空)建築物、流線形、極寬或極長建築物的尾流效應。
   - [BREEZE AERMOD 7: Gridded Plume Downwash](https://www.youtube.com/watch?v=bgoU9GTNYHs)
     - 這是一家商用軟體([BREEZE AERMOD](https://www.trinityconsultants.com/software/dispersion/aermod))的介紹短片，雖然是模式輸出的結果，卻也可以略略描繪煙流受到建築物尾流影響的推估概念。  

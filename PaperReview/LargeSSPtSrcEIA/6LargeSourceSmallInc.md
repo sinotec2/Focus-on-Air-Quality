@@ -70,8 +70,7 @@ last_modified_date: 2022-05-16 09:42:56
 |:-:|
 | <b>光化煙霧的主要成份與化應途經：經由陽光作用後分解成高氧化力之其他物質，取代臭氧，因此造成這些物質濃度大量累積。。([shannanmaisey][shannanmaisey])</b>|
 
-[shannanmaisey]: <http://lowcarbonlivingcrc.com.au/sites/all/files/invitedtalk_shannanmaisey.pdf> "I
-nvited talk of Shannan Maisey, Low Carbon Living CRC"
+
 
 光化煙霧經常發生在大型都會區以及下游地區，因其具有反應性，其濃度不像原生性污染物會因為傳輸擴散的過程中而消失無蹤，甚至可能飄洋過海數百公里，形成所謂的「都市煙流」(Urban Plume)，在歐洲中北部地區發現的高臭氧污染事件，經科學上實驗證實，雖然局部污染源有其重要的貢獻，然而其「基礎濃度」，則來自於美國東部的都會區。這是夏日煙霧特別的地方。
 
@@ -253,3 +252,6 @@ nvited talk of Shannan Maisey, Low Carbon Living CRC"
 
 # 七、	參考文獻與延伸閱讀
 行政院環保署網站，空氣品質管理https://air.epa.gov.tw/
+
+[shannanmaisey]: <http://lowcarbonlivingcrc.com.au/sites/all/files/invitedtalk_shannanmaisey.pdf> "I
+nvited talk of Shannan Maisey, Low Carbon Living CRC"

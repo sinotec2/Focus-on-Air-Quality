@@ -192,8 +192,8 @@ cat ../../OBS12/$o ../../OBS11/$o ../../OBS0?/$o > OBS_DOMAIN201
 ```
 ## 執行成果檢核
 - 正常執行結果，`wrfsfdda`檔案長度將會有`24*天數`個小時，可以用[ncdump](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/ncdump) -h $nc指令來檢查。
-- `wrfsfdda`檔案可以使用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)、[METINFO](http://meteothink.org/)或其他軟體開啟。如[下圖](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)即以`wrfsfdda`中的`(U10_NDG_NEW,V10_NDG_NEW)`，使用[METINFO](http://meteothink.org/)繪製的向量與流線圖：
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/UV10_NDG_NEW_2018040500.png)
+- `wrfsfdda`檔案可以使用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)、[METINFO](http://meteothink.org/)或其他軟體開啟。如[下圖](../../assets/images/UV10_NDG_NEW_2018040500.png)即以`wrfsfdda`中的`(U10_NDG_NEW,V10_NDG_NEW)`，使用[METINFO](http://meteothink.org/)繪製的向量與流線圖：
+![](../../assets/images/UV10_NDG_NEW_2018040500.png)
 
 ## 下載`obsYYMM_run.sh`
 點選[github](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/wind_models/OBSGRID/obsYYMM_run.sh_txt)

@@ -245,11 +245,11 @@ with open(fnameO,'w',newline='') as jsonfile:
 |SO2|5.694006|2.3229647|
 |VOC|1.1403809|1.1473083|
 
-| ![N3GM_O3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GM_O3.PNG) |![G-Bm_O3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/G-Bm_O3.PNG) |
+| ![N3GM_O3.PNG](../../assets/images/N3GM_O3.PNG) |![G-Bm_O3.PNG](../../assets/images/G-Bm_O3.PNG) |
 |:--:|:--:|
 | <b>公版模式模擬臭氧增量</b>|<b>2019base模擬臭氧增量</b>|
 
-| ![N3GM_PMf.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/N3GM_PMf.PNG) |![G-Bm_PMf.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/G-Bm_PMf.PNG) |
+| ![N3GM_PMf.PNG](../../assets/images/N3GM_PMf.PNG) |![G-Bm_PMf.PNG](../../assets/images/G-Bm_PMf.PNG) |
 |:--:|:--:|
 | <b>公版模式模擬PMf增量</b>|<b>2019base模擬PMf增量</b>|
 

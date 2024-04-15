@@ -168,7 +168,7 @@ ln -s ${project.config}/${mydomain}/cctm.${myjob}/daily/CCTM_CGRID_${CAS}_201901
 ```
 - 似缺少生物源排放量
 
-| ![Old-New_dVOCs.gif](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Old-New_dVOCs.gif) |
+| ![Old-New_dVOCs.gif](../../assets/images/Old-New_dVOCs.gif) |
 |:--:|
 | <b>重跑第1日與下載output的差值(VOC_logPPBC)</b>|
 

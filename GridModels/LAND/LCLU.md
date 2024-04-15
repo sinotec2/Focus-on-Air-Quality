@@ -137,10 +137,10 @@ nc.close()
 
 ### results
 
-| ![irr04.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/irr04.PNG) |
+| ![irr04.PNG](../../assets/images/irr04.PNG) |
 |:--:|
 | <b>圖 d01範圍第4類灌溉面積的佔比(%)</b>|  
-| ![irr_all.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/irr_all.PNG) |
+| ![irr_all.PNG](../../assets/images/irr_all.PNG) |
 |:--:|
 | <b>圖 d01範圍所有種類灌溉面積的佔比(%)</b>|  
 
@@ -165,10 +165,10 @@ nc.close()
 
 ### Results
 
-| ![lulc-1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/lulc-1.PNG) |
+| ![lulc-1.PNG](../../assets/images/lulc-1.PNG) |
 |:--:|
 | <b>圖 d01範圍第1類土地使用/植被(地面水灌溉)面積的佔比(%)</b>|  
-| ![barren].PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/barren.PNG) |
+| ![barren].PNG](../../assets/images/barren.PNG) |
 |:--:|
 | <b>圖 d01範圍第8類土地使用/空曠、沙漠或植被稀疏地的面積佔比(%)</b>|  
 

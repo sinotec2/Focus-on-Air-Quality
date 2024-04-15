@@ -96,7 +96,7 @@ nc.close()
 ## 船舶排放造成的空氣品質增量
 - 基準空氣品質扣除去除船舶排放後之模擬空氣品質，即為船舶排放所造成的增量。2019年1月份月均值模擬結果比較如圖所示。
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2SHIP_JanT.PNG)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/SO2_JanT.PNG)|
+| ![](../../assets/images/SO2SHIP_JanT.PNG)|![](../../assets/images/SO2_JanT.PNG)|
 |:-:|:--:|
 | <b>船舶排放所造成的濃度差異(增量)</b>| <b>一月份SO2月平均濃度</b>|
 

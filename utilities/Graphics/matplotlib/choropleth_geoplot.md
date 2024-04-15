@@ -24,7 +24,7 @@ tags: geoplot graphics choropleth
 ## 背景
 
 - 以行政區為等值圖範圍的數據圖稱之為[choropleth](https://en.wikipedia.org/wiki/Choropleth_map)，為模式重要的後處理形式之一。
-- 以[NCL（NCAR Command Language）](https://www.ncl.ucar.edu/)的網站服務方式([CaaS](http://125.229.149.182/chrpleth.html))，提供之解決方案如[NCL/choropleth](../NCL/choropleth.md)所示，仍有不足之處:
+- 以[NCL（NCAR Command Language）](https://www.ncl.ucar.edu/)的網站服務方式([CaaS](http://sinotec24.com/chrpleth.html))，提供之解決方案如[NCL/choropleth](../NCL/choropleth.md)所示，仍有不足之處:
   1. 系統複雜，維護困難
   2. NCL語言難以接近、且不再更新版次令人擔憂
   3. 圖面顏色與畫質不佳
@@ -45,7 +45,7 @@ YMD,TOWNCODE,PM25,COUNTYCODE,COUNTYNAME,TOWNNAME
 20000101,10002070,33.260458754091715,10002,宜蘭縣,員山鄉
 ```
 
-|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-05-30-10-51-07.png)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-05-30-09-47-27.png)|
+|![](../../attachments/2023-05-30-10-51-07.png)|![](../../attachments/2023-05-30-09-47-27.png)|
 |:-:|:-:|
 |<b>NCL版本之等值圖</b>|<b>geoplot版本之等值圖</b>|
 

@@ -206,16 +206,16 @@ for ir in range(nr):
 ```
 
 ## 結果討論
-- 實例網址：[http://125.229.149.182:8080](http://125.229.149.182:8080)
+- 實例網址：[http://sinotec24.com:8080](http://sinotec24.com:8080)
 - 數據提交earth系統之圖面
 
-| ![wind_ozone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/wind_ozone.PNG) |
+| ![wind_ozone.PNG](../../assets/images/wind_ozone.PNG) |
 |:--:|
 | <b>earth貼上臭氧濃度之色階應用(2022080112)</b>|
 
 - 哥白尼官網之圖面(下拉選項，不能放大縮小)
 
-| ![CAMS_ozone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CAMS_ozone.PNG) |
+| ![CAMS_ozone.PNG](../../assets/images/CAMS_ozone.PNG) |
 |:--:|
 | <b>同一時間哥白尼官網之圖面</b>|
 - 前者高濃度較為明顯、後者限於13個濃度層級，數字對照較為清晰。

@@ -39,19 +39,19 @@ tags: CMAQ nchc_service
     - 如果出現紅字表示最後3秒鐘、可以等等、再點一次
   - 再到ssh登入對話框，貼上(shift-Insert)數字即可
   
-| ![OTP_iphone.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/OTP_iphone.PNG) |
+| ![OTP_iphone.PNG](../../assets/images/OTP_iphone.PNG) |
 |:--:|
 | <b>圖1以手機相機取得國網OTP並由Edge自動填入</b>|
 
 - 啟動延伸套件後，在瀏覽器右上方會出現套件的icon(小二維碼)
 
-| ![chrome_extend.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/chrome_extend.PNG) |
+| ![chrome_extend.PNG](../../assets/images/chrome_extend.PNG) |
 |:--:|
 | <b>圖2啟動Chrome Authenticator擴充套件後右上方出現icon </b>|
 
 - 登記使用者及網域後，點選icon後就會出現6位數字。只要在數字上點選1次就會複製到剪貼簿。
 
-| ![6digit.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/6digit.PNG) |
+| ![6digit.PNG](../../assets/images/6digit.PNG) |
 |:--:|
 | <b>圖3Chrome顯示6位數OTP，只需在數字上點1次即複製到剪貼簿</b>|
 

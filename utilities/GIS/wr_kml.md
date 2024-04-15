@@ -128,7 +128,7 @@ for level in levels[:]:
 ```
 
 ## 各種點陣圖數據檔之應用
-### [dat2kml](http://125.229.149.182/dat2kml.html)遠端計算服務
+### [dat2kml](http://sinotec24.com/dat2kml.html)遠端計算服務
 - [PLT2kml.py](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/OU_pathways/PLT2kml/):讀取煙流模式之輸出檔，進行REGRID並寫成kml檔案
 - Convert ISC/AERMOD PLOTFILE result to KML file and regrid to SURFER grd file ASCII TXT, csv (X,Y,C). 
 
@@ -170,7 +170,7 @@ for level in levels[:]:
 
 ### Google Map 貼圖結果(林口電廠範例)
 
-| ![kml_demo.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/kml_demo.png) |
+| ![kml_demo.png](../../assets/images/kml_demo.png) |
 |:--:|
 | <b>圖 林口電廠周邊地形KML檔案輸出結果範例</b>|  
 

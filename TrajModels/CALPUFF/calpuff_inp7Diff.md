@@ -190,7 +190,7 @@ diff calpuff_7.0.inp calpuff.inp
 
 ## 執行結果
 - 下載CALPOST結果grd檔案
-- 使用[http://125.229.149.182/dat2kml.html](http://125.229.149.182/dat2kml.html)進行轉檔
+- 使用[http://sinotec24.com/dat2kml.html](http://sinotec24.com/dat2kml.html)進行轉檔
 - 將kml檔案貼到google map結果
 
 | ![cpuff_result.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/cpuff_result.png)|

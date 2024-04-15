@@ -111,7 +111,7 @@ done
 
 ### 結果範例
 
-| ![wrf_gsn.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/wrf_gsn.png) |
+| ![wrf_gsn.png](../../assets/images/wrf_gsn.png) |
 |:--:|
 | <b>CWBWRF_3k範圍地面氣流線 </b>|  
 
@@ -183,7 +183,7 @@ done
 
 ### 臺灣範圍結果
 
-| ![stln_060.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/stln_060.png) |
+| ![stln_060.png](../../assets/images/stln_060.png) |
 |:--:|
 | <b>台灣地區範圍地面氣流線。夜間山區有明顯的山風。</b>|  
 

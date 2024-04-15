@@ -106,7 +106,7 @@ for kcrs in range(nlays):
 nc.close()
 ```
 ## 程式下載
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqV.py)
+- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/moz2cmaqV.py)
 
 ## Reference
 -  純淨天空, **Python numpy.searchsorted()用法及代碼示例** [vimsky](https://vimsky.com/zh-tw/examples/usage/numpy-searchsorted-in-python.html)

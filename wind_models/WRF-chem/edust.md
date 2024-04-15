@@ -59,10 +59,10 @@ for d in 03-3{0..1} 04-0{1..9};do nc=EDUST_$d.nc;ncrename -O -d klevs_for_dust,b
 ## 結果檢核
 - 2018/3/30~4/9東亞沙塵暴之模擬結果
 
-| ![edust1_xy.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/edust1_xy.PNG) |
+| ![edust1_xy.PNG](../../assets/images/edust1_xy.PNG) |
 |:--:|
 | <b>圖1 WRF-chem V4.0模擬期間最大小時揚沙排放量之分布，單位為&mu;g m<sup>-2</sup>s<sup>-1</sup></b>|
-| ![edust1_t.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/edust1_t.PNG) |
+| ![edust1_t.PNG](../../assets/images/edust1_t.PNG) |
 |:--:|
 | <b>圖2 WRF-chem V4.0模擬期間地區排放量之逐時變化，單位為&mu;g m<sup>-2</sup>s<sup>-1</sup></b>|
   

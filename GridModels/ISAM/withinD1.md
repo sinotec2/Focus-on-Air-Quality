@@ -190,7 +190,7 @@ tags: CMAQ ISAM emis
 
 ## 成果檢視
 中國大陸空品質量預報分區圖
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/gridmask_d1.PNG)
+![](../../assets/images/gridmask_d1.PNG)
 
 ## Reference
 - USEPA, **Integrated Source Apportionment Method (CMAQ-ISAM)**, CMAQ User's Guide (c) 2021, [github](https://github.com/USEPA/CMAQ/blob/main/DOCS/Users_Guide/CMAQ_UG_ch11_ISAM.md), Latest commit  on 18 Aug, 2021

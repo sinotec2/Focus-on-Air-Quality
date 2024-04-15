@@ -84,11 +84,11 @@ tags: graphics CGI_Pythons KML plume_model OpenTopoMap
 
 | ![NCLonOTM.png](https://drive.google.com/uc?id=1p4Zu6FEiv8bWUu5nE0LATSaE4PMw2VTe)|
 |:--:|
-| <b>[http://125.229.149.182/NCLonOTM.html](http://125.229.149.182/NCLonOTM.html)畫面</b>|
+| <b>[http://sinotec24.com/NCLonOTM.html](http://sinotec24.com/NCLonOTM.html)畫面</b>|
 
 ### 標籤主題關係圖
 
-![NCLonOTM_star](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NCLonOTM_star.png)
+![NCLonOTM_star](../../assets/images/NCLonOTM_star.png)
 
 ## 程式說明
 
@@ -240,7 +240,7 @@ print """\
 [^2]: NCL貼在OTM底圖上之轉接程式，詳見[NCLonOTM程式說明](../NCL/NCLonOTM.md)，或下載[NCLonOTM.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/NCLonOTM.py)
 [^3]: 煙流模式結果繪製等值線圖之NCL程式，詳見[程式說明](../NCL/PLT_cn.md)，或下載[PLT_cn.ncl](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/CaaS/PLT_cn.ncl)
 [^4]: 擷取 Google/OSM 地圖的方法, 小宜(2018-09-14), [易普印 e知識百科][4]
-[^5]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^5]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
 
 [4]: https://blog.eprint.com.tw/export-openstreetmap-as-files/ "擷取 Google/OSM 地圖的方法, 小宜(2018-09-14), 易普印 e知識百科"
 [5]: https://jimmyutterstrom.com/blog/2019/06/05/map-tiles-to-geotiff/ "Generate merged GeoTIFF imagery from web maps (xyz tile servers) with Python, Jimmy Utterström(2019)"

@@ -12,7 +12,7 @@ tags: CMAQ BCON
 {: .no_toc }
 
 **CMAQ**模式的邊界條件有3種給定方式：
-1. 由全球模式模擬結果檔案解讀(`REGRID`)，如MOZART或由ecwmf之[再分析濃度檔直接產生](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2bc/)、[CAMS]()
+1. 由全球模式模擬結果檔案解讀(`REGRID`)，如MOZART或由ecwmf之[再分析濃度檔直接產生](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2bc/)、[CAMS預報數據寫成CMAQ邊界檔](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_CAMS/3.CAMS_bc/)
 1. 由巢狀網格**CMAQ**執行成果解讀(`REGRID`)
 1. 以一組觀測值或符合化學平衡的模擬結果設定(`PROFILE`)。敏感測試時使用。
 

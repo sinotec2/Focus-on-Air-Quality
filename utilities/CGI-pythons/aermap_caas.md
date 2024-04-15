@@ -55,7 +55,7 @@ tags: CGI_Pythons plume_model sed gdal AERMAP
 
 ### 成果
 
-- terrain.py建置結果與使用者界面、詳計算服務網址：[http://125.229.149.182/terrain.html][1][^1]
+- terrain.py建置結果與使用者界面、詳計算服務網址：[http://sinotec24.com/terrain.html][1][^1]
 
 |![terr_html.png](https://drive.google.com/uc?id=1-dYmAoM5i5sXt3sf1FFVnnSNMli7f0Rt)|
 |:-:|
@@ -205,4 +205,4 @@ $ cat -n $(which gen_inp.py)|grep NUL
 
 [^1]: 煙流模式的地形處理，提供ISCST3/AERMOD等煙流模式所需地型數據之[前處理][1]。
 
-[1]: http://125.229.149.182/terrain.html "煙流模式的地形處理 "
+[1]: http://sinotec24.com/terrain.html "煙流模式的地形處理 "

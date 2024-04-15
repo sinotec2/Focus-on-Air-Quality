@@ -36,7 +36,7 @@ tags: CGI_Pythons plume_model
   - 面源、體源是否重疊(有高估濃度可能)、或太分散無法覆蓋區域範圍(低估之嫌)
   - [建築物頂點位置][2]的確認
 
-[3]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板> "詳見【地圖貼板】、與 【Leaflet Filelayer on iMacKuang】(http://125.229.149.182/Leaflet/docs/index.html)】的連結"
+[3]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/digitizer/#地圖貼板> "詳見【地圖貼板】、與 【Leaflet Filelayer on iMacKuang】(http://sinotec24.com/Leaflet/docs/index.html)】的連結"
 
 [2]: <https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/BPIP/> "有關建築物效應的前處理方式，可以參考【建築物煙流下洗現象之模擬設定】及【BPIPPRM之遠端計算服務】"
 ### 作業進路方法之考慮
@@ -66,12 +66,12 @@ tags: CGI_Pythons plume_model
 [1]: <https://sinotec2.github.io/Focus-on-Air-Quality/utilities/GIS/wr_kml/#dat2kml> "詳見【等值圖KML檔之撰寫】、【dat2kml遠端計算服務】"
 
 ## 服務網頁
-- CaaS位置：[ISC/AERMOD 座標點位之KML轉檔系統](http://125.229.149.182/iscParser.html)
+- CaaS位置：[ISC/AERMOD 座標點位之KML轉檔系統](http://sinotec24.com/iscParser.html)
 - 畫面
 
 | ![iscParser.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/iscParser.png)|
 |:--:|
-| <b>[http://125.229.149.182/iscParser.html](http://125.229.149.182/iscParser.html)畫面</b>|
+| <b>[http://sinotec24.com/iscParser.html](http://sinotec24.com/iscParser.html)畫面</b>|
 
 
 ### 輸入範例
@@ -221,21 +221,21 @@ $ cat -n $(which csv2kml.py)
 
 ### 建築物之設定
 - 由於建築物設定為直角座標之工廠地圖系統，與背景地圖之間需要有夾角及原點座標值。
-- **夾角D**在fort.10檔案中已經登錄，因此設計[rotate_KML](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML/)在產生fort.10時，順便將KML檔中的第1個點設為原點，並將其座標寫在[檔頭](http://125.229.149.182/isc_results/ZhongHuaPaper/fort.10)，以利[iscParser]()讀取應用。
+- **夾角D**在fort.10檔案中已經登錄，因此設計[rotate_KML](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML/)在產生fort.10時，順便將KML檔中的第1個點設為原點，並將其座標寫在[檔頭](http://sinotec24.com/isc_results/ZhongHuaPaper/fort.10)，以利[iscParser]()讀取應用。
 - 因前述污染源對象已經太過複雜了，因此另將解析寫在程式[isc_parserBP.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/isc_parserBP.py)中。
 
 
 ## 結果
 ### 檢視
-- 使用[Leaflet FileLayer](http://125.229.149.182/Leaflet/docs/index.html)
+- 使用[Leaflet FileLayer](http://sinotec24.com/Leaflet/docs/index.html)
 
 ### 圖檔
 - [isc_parserSO.py](https://github.com/sinotec2/CGI_Pythons/blob/main/drawings/isc_parser/isc_parserSO.py)結果
 
-| ![iscParser1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/iscparser1.png)|
+| ![iscParser1.png](../../assets/images/iscparser1.png)|
 |:--:|
 | <b>面源及體源空間位置之解析結果</b>|
-| ![iscParser2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/iscparser2.png)|
+| ![iscParser2.png](../../assets/images/iscparser2.png)|
 | <b>敏感接受點及污染源相對位置</b>|
 
 - [isc_parserBP.py](https://github.com/sinotec2/CGI_Pythons/blob/main/isc/isc_parserBP.py)結果
@@ -243,7 +243,7 @@ $ cat -n $(which csv2kml.py)
 | <b>圖1實例廠區數位化結果，雖然數位板點選結果有些歪斜，[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)程式會將其均化修正</b>|
 | ![BPIP4.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/BPIP4.png)|
 |:--:|
-| <b>實例廠區[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之[輸入檔](http://125.229.149.182/isc_results/ZhongHuaPaper/fort.10)，經[ISCPARSER](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀結果</b>|
+| <b>實例廠區[rotate_kml](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/rotate_KML)旋轉後之[輸入檔](http://sinotec24.com/isc_results/ZhongHuaPaper/fort.10)，經[ISCPARSER](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/SO_pathways/iscParser)解讀結果</b>|
 
 ## Reference
 

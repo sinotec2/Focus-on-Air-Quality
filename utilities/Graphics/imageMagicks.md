@@ -88,7 +88,7 @@ convert origin/$fn -resize 77% $fn
 convert 1.png 1.png 1.png +append PM25_d03_2023072715.png
 ```
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-07-27-15-44-27.png)
+![](../../attachments/2023-07-27-15-44-27.png)
 
 ## Reference
 - fmw42, [stackoverflow:How to trim animated gif (using imagemagick)?](https://stackoverflow.com/questions/44555789/how-to-trim-animated-gif-using-imagemagick), Jun 15, 2017 at 3:34

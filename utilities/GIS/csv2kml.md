@@ -32,7 +32,7 @@ tags: KML GIS
 csv是常見的資料表格式，[KML](https://zh.wikipedia.org/wiki/KML)則是google提供的語言介面，好讓使用者也可以在google map上貼圖，現已成為開放式地理空間協會地理資訊的[編碼標準](https://www.ogc.org/standards/kml/)。
 因此csv2kml顧名思義就是嘗試把一個存有座標的csv檔案，寫成kml檔案，最終能貼在google map、openstreet map等網路地圖上，完成這項工作的python小程式。(成果如附圖)
 
-| ![csv2kml.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/csv2kml.png)|
+| ![csv2kml.png](../../assets/images/csv2kml.png)|
 |:--:|
 | <b>csv2kml結果範例</b>|
 

@@ -106,7 +106,7 @@ nc.close()
 
 ### Background O3 Max Hr Comparisons
 
-| ![BASE2_O3M.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/BASE2_O3M.PNG) |![BASE3_O3M.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/BASE3_O3M.PNG) |
+| ![BASE2_O3M.PNG](../../assets/images/BASE2_O3M.PNG) |![BASE3_O3M.PNG](../../assets/images/BASE3_O3M.PNG) |
 |:--:|:--:|
 | <b>BASE2之O<sub>3</sub>全月最大小時值</b>|<b>BASE3之O<sub>3</sub>全月最大小時值</b>|
 
@@ -116,6 +116,6 @@ nc.close()
 - BASE2環境背景TZPP之最大增量：3.41 &mu;g/m<sup>3</sup>
 - BASE3環境背景TZPP之最大增量：3.59 &mu;g/m<sup>3</sup>
 
-| ![TZPP_PM25DM.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TZPP_PM25DM.PNG) |![TZPP3_PM25DM.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/TZPP3_PM25DM.PNG) |
+| ![TZPP_PM25DM.PNG](../../assets/images/TZPP_PM25DM.PNG) |![TZPP3_PM25DM.PNG](../../assets/images/TZPP3_PM25DM.PNG) |
 |:--:|:--:|
 | <b>BASE2之PM<sub>2.5</sub>增量</b>|<b>BASE3之PM<sub>2.5</sub>增量</b>|

@@ -34,7 +34,7 @@ tags: terrain trajectory CODiS
 - [https://www1.wetter3.de/Archiv/](https://www1.wetter3.de/Archiv/)可以查到[GFS](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast)模擬這2天鋒面通過臺灣高低層虛位溫差異([KO-index](http://www.eumetrain.org/data/2/20/Content/theory_ko.htm)、等值線)及高層垂直運動(hPa/h以色塊標示)的分布與變化
   - 事件日當天KO指標0值正好通過高雄地區，海面為負值、陸地為正值，如圖所示：
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101200_10_as.gif)|![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018101300_10_as.gif)|
+| ![](../../assets/images/2018101200_10_as.gif)|![](../../assets/images/2018101300_10_as.gif)|
 |:-:|:-:|
 | <b>2018101200</b>|<b>2018101300</b>|
 
@@ -45,7 +45,7 @@ tags: terrain trajectory CODiS
   - 參考[林園臭氧事件與氣流軌跡線](https://sinotec2.github.io/Focus-on-Air-Quality/PaperReview/LargeSSPtSrcEIA/3TerrainEffect/#林園臭氧事件與氣流軌跡線)
   - 作法詳[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/5.traj/)
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ1.PNG)|
+| ![](../../assets/images/LinyuanBTRJ1.PNG)|
 |:-:|
 | <b>中央氣象局風速風向數據繪製2018/10/13/12:00時林園測站之反軌跡(白色)與北高雄污染源正軌跡(紅色)，林園站O<sub>3</sub>=126ppb</b>|
 
@@ -54,7 +54,7 @@ tags: terrain trajectory CODiS
   - 合併所有特工站及環保署測站尖峰臭氧濃度，以解析度1公里進行Kriging內插。Surfer繪圖。
   - 林園特工站之間的間距約為2Km，以南方濱海的3個測站具有相同特性，而其他測站測值較低，由此可以推斷此一臭氧煙流超標範圍在本市範圍的空間尺度僅約2Km。然而對潮州站與下游大範圍，都有可能是超標的狀況。
 
-| ![20181013Surfer.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20181013Surfer.png)|
+| ![20181013Surfer.png](../../assets/images/20181013Surfer.png)|
 |:-:|
 | <b>2018/10/13 高屏地區環保署測站(白點)及特工測站(紅點)臭氧尖峰濃度之分布，林園測站測值尖峰濃度為126 ppb</b>|
 
@@ -63,7 +63,7 @@ tags: terrain trajectory CODiS
   - 而NOx/NMHC前驅物濃度來看，符合地區週變化的特性(週四 ~ 週日)，唯10/12及13日零時皆出現NMHC及NOx之異常高值。
   - 由特工區測站顯示為乙烯，除鄰近污染源排放，亦可能來自北方仁大工業區)。夜間同時排放NMHC及NOx之污染源很可能是燃燒塔。
 
-| ![O3@20181011fengshanxiaogangdaliaolinyuanrenwu.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/O3@20181011fengshanxiaogangdaliaolinyuanrenwu.png)|![NOxO3NMHC@20181011linyuan.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NOxO3NMHC@20181011linyuan.png)|
+| ![O3@20181011fengshanxiaogangdaliaolinyuanrenwu.png](../../assets/images/O3@20181011fengshanxiaogangdaliaolinyuanrenwu.png)|![NOxO3NMHC@20181011linyuan.png](../../assets/images/NOxO3NMHC@20181011linyuan.png)|
 |:--:|:--:|
 |<b>2018/10/13事件日前後、林園站及鄰近其他4站之臭氧歷線</b>|<b>同時段林園站NOx及NMHC與臭氧歷線</b>|
 
@@ -74,7 +74,7 @@ tags: terrain trajectory CODiS
   - 因此最上面的歷線即為工業區總流量之小時變化
   - 數據來源：[環保署空保處固定污染源CEMS廢氣燃燒塔一小時監測紀錄值](https://data.epa.gov.tw/dataset/detail/AQX_P_493)
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20181013CEMS.png)|
+| ![](../../assets/images/20181013CEMS.png)|
 |:-:|
 | <b>2018/10/13臭氧事件高雄市所有工業區燃燒塔流量</b>|
 
@@ -97,10 +97,10 @@ tags: terrain trajectory CODiS
 - 林園特工站乙烯濃度也有夜間較高(尖峰濃度)的趨勢，監測中心站最高，其次為汕尾站。濃度值振盪幅度較大，為窄煙流特性。
 - 林園站NMHC高值與汕尾里乙烯值較為相關，與其他特工站之變化差異較大
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NMHC@20181011fengshanxiaogangdaliaolinyuanrenwu.png)|
+| ![](../../assets/images/NMHC@20181011fengshanxiaogangdaliaolinyuanrenwu.png)|
 |:-:|
 | <b>2018/10/13臭氧事件林園站NMHC濃度變化</b>|
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ethylene@20181011linyuanPK.png)|
+| ![](../../assets/images/ethylene@20181011linyuanPK.png)|
 | <b>2018/10/13臭氧事件林園特工站乙烯濃度變化</b>|
 
 ## 林園臭氧事件污染源三維正軌跡分析
@@ -118,7 +118,7 @@ tags: terrain trajectory CODiS
 - 污染粒子自子夜開始，每 15 秒釋放、逐一追蹤其通過網格位置，每小時結算其出現機率。
 
 
-| ![3dTraj1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/3dTraj1.PNG)|
+| ![3dTraj1.PNG](../../assets/images/3dTraj1.PNG)|
 |:-:|
 | <b>2018/10/13北高雄污染源三維正軌跡累積頻率之ZY、XY平面分布圖(上：ZY平面，X向加總。下：XY平面，地面第1層)</b>|
 
@@ -127,7 +127,7 @@ tags: terrain trajectory CODiS
 ### 南高雄污染源三維正軌跡累積頻率
 - 污染源位於大發工業區，同樣自子夜開始釋放
 
-| ![3dTraj2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/3dTraj2.PNG)|
+| ![3dTraj2.PNG](../../assets/images/3dTraj2.PNG)|
 |:-:|
 | <b>2018/10/13南高雄污染源三維正軌跡累積頻率之ZY、XY平面分布圖(上圖：ZY側面圖，X方向加總結果。下圖：XY平面圖，地面第1層)</b>|
 

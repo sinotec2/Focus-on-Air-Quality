@@ -34,7 +34,7 @@ last_modified_date: 2022-12-03 05:34:22
   1. 局部網路計算節點(node: node01~node03)、
   1. NAS(nas1、nas2)、
   1. 寬頻控制器、UPS等設備
-- 外部測試機(IMacKuang@125.229.149.182)
+- 外部測試機(IMacKuang@sinotec24.com)
 
 ### 遠端登入(ssh)軟體
 
@@ -48,13 +48,13 @@ last_modified_date: 2022-12-03 05:34:22
   - 指令PageUP(或↑)補滿上個指令
   - 顏色區別工作環境
 
-![entry1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry1.png)
+![entry1.png](../../assets/images/entry1.png)
 
-![entry2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry2.png)
+![entry2.png](../../assets/images/entry2.png)
 
-![entry3.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry3.png)
+![entry3.png](../../assets/images/entry3.png)
 
-![entry4.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry4.png)
+![entry4.png](../../assets/images/entry4.png)
 
 {% include download.html content="[登入工作站與下載全球任何範圍的數值地型高程數據之作業方式.doc](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/OperationSystem/登入工作站與下載全球任何範圍的數值地型高程數據之作業方式.doc)" %}
 
@@ -100,7 +100,7 @@ last_modified_date: 2022-12-03 05:34:22
   - 修改屬性(change mode) `chmod -R og+w *`
 - 更改別人擁有之唯讀檔案，須由原擁有者、或管理者才能做。
 
-![entry5.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry5.png)
+![entry5.png](../../assets/images/entry5.png)
 
 ## 檔案管理
 
@@ -151,7 +151,7 @@ last_modified_date: 2022-12-03 05:34:22
   - 點選Session後連到遠端工作站，隨即在左側出現遠端的目錄與檔案瀏覽器，如果沒有，可以選擇sftp頁面或按下綠色微笑小圓點重新整理。
   - 雙擊黃色檔案夾可以進入目錄、雙擊檔案可以開啟檔案。如果要使用Moba內設的編輯軟體(有行號)，可以點選檔案後按右鍵選單(第二個Open with default editor)
 
-![entry6.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry6.png)
+![entry6.png](../../assets/images/entry6.png)
 
 - FileZilla（遠端管理）
 - [IDE][ide]（本地管理，詳參[VS Code安裝使用](https://sinotec2.github.io/FAQ/2022/11/10/code_ug.html)）
@@ -208,8 +208,8 @@ last_modified_date: 2022-12-03 05:34:22
 - 範例：在node01~03同時執行高雄市CEMS固定源逐月的calpuff模式模擬
 kuang@master /home/cpuff/2018
 
-![entry7.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry7.png)
+![entry7.png](../../assets/images/entry7.png)
 
-![entry8.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/entry8.png)
+![entry8.png](../../assets/images/entry8.png)
 
 [ide]: <https://zh.wikipedia.org/zh-tw/集成开发环境> "集成开发环境、整合開發環境"

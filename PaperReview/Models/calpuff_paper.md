@@ -28,7 +28,7 @@ tags: cpuff review
 - Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (1990). [MODEL FORMULATION AND USER’S GUIDE FOR THE CALPUFF DISPERSION MODEL](https://ww2.arb.ca.gov/sites/default/files/classic/research/apr/past/a025-2a.pdf).
 - Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (2000). [A User’s Guide for the CALPUFF Dispersion Model (version 5)](http://www.src.com/calpuff/download/CALPUFF_UsersGuide.pdf).
 - Scire, J.S., Strimaitis, D.G., and Yamartino, R.J. (2011). [CALPUFF Modeling System Version 6 User Instructions](http://www.src.com/calpuff/download/CALPUFF_Version6_UserInstructions.pdf).
-- Exponent, Inc. (2019). [CALPUFF Version 7 Users Guide Addendum](http://www.src.com/calpuff/download/CALPUFF_v7_UserGuide_Addendum.pdf) (No. Doc. no. Z170308064614-0072).
+- Exponent, Inc. (2019). [CALPUFF Version 7 Users Guide Addendum](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.src.com/calpuff/download/CALPUFF_v7_UserGuide_Addendum.pdf&ved=2ahUKEwjTgLaO4MKFAxUCU_UHHQrZB60QFnoECBMQAQ&usg=AOvVaw1nE7qiJEzGO3rd4FItFkSS) (No. Doc. no. Z170308064614-0072).
 
 
 ## Evaluations of CALPUFF

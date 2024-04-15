@@ -137,7 +137,7 @@ setenv CTM_ABFLUX N
 ## 後處理
 ### COMBINE
 - 修改`GRID_NAME`
-- 無需修改腳本日期，只需將原本屬於run6的日期予以更名即可直接使用[原腳本](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)。
+- 無需修改腳本日期，只需將原本屬於run6的日期予以更名即可直接使用[原腳本](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/1.1.run_combMM_R_DM/)。
 
 ```bash
 ...
@@ -156,10 +156,10 @@ if ( $DM == 'd01' ) then
 ### Results
 
 - Gifs
-  - [GIF_file](http://125.229.149.182/soong/pm10.gif) @iMacKuang [^9]
+  - [GIF_file](http://sinotec24.com/soong/pm10.gif) @iMacKuang [^9]
   - [GifPlayer@sinotec2.github.io](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)
 
-| ![pm10_ncl.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pm10_ncl.PNG) |
+| ![pm10_ncl.PNG](../../assets/images/pm10_ncl.PNG) |
 |:--:|
 | <b>圖 CCTM模擬d01範圍PM10之結果(NCL繪製)，單位log<sub>10</sub>&mu;g/M<sup>3</sup> </b>|  
 
@@ -167,4 +167,4 @@ if ( $DM == 'd01' ) then
 
 - 陳依涵、戴俐卉、賴曉薇、陳怡儒、林伯勳、黃小玲、江琇瑛、江晉孝、陳白榆、洪景山、馮欽賜（2017）[中央氣象局區域模式2017 年更新 (OP41)](https://conf.cwb.gov.tw/media/cwb_past_conferences/106/2017_ppt/A2/A2-26-中央氣象局區域模式2017年更新_陳依涵.pdf)，中央氣象局氣象資訊中心
 
-[^9]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^9]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

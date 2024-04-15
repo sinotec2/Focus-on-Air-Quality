@@ -242,7 +242,7 @@ nc.close()
 
 ## Results
 
-| ![NOx_EastAsia.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NOx_EastAsia.PNG) |![NO2_D6.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/NO2_D6.PNG) |
+| ![NOx_EastAsia.PNG](../../assets/images/NOx_EastAsia.PNG) |![NO2_D6.PNG](../../assets/images/NO2_D6.PNG) |
 |:--:|:--:|
 | <b>圖 Ding(2017) 衛星反衍東亞地區NOx排放之分布</b>|<b>圖 HUADON_3k範圍EDGARv5 NO<sub>2</sub>排放之分布(log gmole/s)</b>|  
 

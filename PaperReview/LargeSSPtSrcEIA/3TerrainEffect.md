@@ -61,12 +61,12 @@ tags: terrain trajectory CODiS AERMAP
   - 日間：西北\~西風，為海風
   - 軌跡線繪製詳參[由CWB數據計算軌跡](https://sinotec2.github.io/Focus-on-Air-Quality/wind_models/CODiS/5.traj/)
 
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ1.PNG)|
+| ![](../../assets/images/LinyuanBTRJ1.PNG)|
 |:-:|
 | <b>(a)2018/10/13/12:00時，O<sub>3</sub>=126ppb</b>|
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/2018102712linyuan.png)|
+| ![](../../assets/images/2018102712linyuan.png)|
 | <b>(b)2018/10/27/13:00時，O<sub>3</sub>=121ppb</b>|
-| ![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/LinyuanBTRJ3.PNG)|
+| ![](../../assets/images/LinyuanBTRJ3.PNG)|
 | <b>(c)2018/12/3/13:00時，O<sub>3</sub>=126ppb</b>|
 
 - 燃燒塔正軌跡分析證實了以北高雄燃燒塔對反應生成測站O<sub>3</sub>高值有較大的可能性  
@@ -86,7 +86,7 @@ tags: terrain trajectory CODiS AERMAP
 - F<sub>H</sub> &ge; 0.9 : 中心線可翻越、阻體後渦流隨F<sub>H</sub>增加而減少
 
 
-| ![FrRe.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/FdRe.PNG)|
+| ![FrRe.PNG](../../assets/images/FdRe.PNG)|
 |:-:|
 | <b>不同流況水洞試驗攝影結果，流體自左方流入，3維鐘形獨立山高H。([Hunt et. al 1978][Hunt et. al 1978])</b>|
 
@@ -94,7 +94,7 @@ tags: terrain trajectory CODiS AERMAP
 
 - 繞山煙流之濃度分布
 
-| ![Lin1974.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/Lin1974.PNG)|
+| ![Lin1974.PNG](../../assets/images/Lin1974.PNG)|
 |:-:|
 | <b>水洞模擬煙流通過3維鐘形獨立山之濃度分布，並與平坦地形分布相比([Lin et. al 1974][Lin et. al 1974])</b>|
 
@@ -103,19 +103,19 @@ tags: terrain trajectory CODiS AERMAP
 
 ### CTDMPLUS 模式的作法
 
-| ![CTDMPLUS1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS1.PNG)|
+| ![CTDMPLUS1.PNG](../../assets/images/CTDMPLUS1.PNG)|
 |:-:|
 | <b>分流點前仍為平坦地形，分流點後其上翻越山嶺，其下繞行山嶺左右。([Perry 1992][Perry 1992])</b>|
 
-| ![CTDMPLUS2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS2.PNG)|
+| ![CTDMPLUS2.PNG](../../assets/images/CTDMPLUS2.PNG)|
 |:-:|
 | <b>翻越部分煙流的計算方式([Perry 1992][Perry 1992])，此一機制與ISCST3相同</b>|
 
-| ![CTDMPLUS.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS.PNG)|
+| ![CTDMPLUS.PNG](../../assets/images/CTDMPLUS.PNG)|
 |:-:|
 | <b>分流點下繞山煙流的計算概念：將山嶺壓縮成延流方向之直線線段([Perry 1992][Perry 1992])</b>|
 
-| ![CTDMPLUS3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/CTDMPLUS3.PNG)|
+| ![CTDMPLUS3.PNG](../../assets/images/CTDMPLUS3.PNG)|
 |:-:|
 | <b>以橢圓形等高線模擬山嶺之組合逼近實際複雜地形([Perry 1992][Perry 1992])</b>|
 
@@ -126,13 +126,13 @@ tags: terrain trajectory CODiS AERMAP
   - 高於分流線者將翻越山嶺。以山嶺不存在情況估算。
   - 低者將繞山、或直接撞擊地表面。以山嶺地表面高度計算。
 
-| ![AERMOD1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD1.png)|
+| ![AERMOD1.png](../../assets/images/AERMOD1.png)|
 |:-:|
 |<b>地形影響煙流的2個極端情況概念圖。地表高度與絕對高度之定義如圖(AERMAP Training, [Roger 2007][Roger 2007])</b>|
 
 - 最後濃度為二者之加權平均
 
-| ![AERMOD2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/AERMOD2.png)|
+| ![AERMOD2.png](../../assets/images/AERMOD2.png)|
 |:-:|
 | <b>AERMOD地形效應的加權計算方式示意圖。from AERMAP Training([Roger 2007][Roger 2007])</b>|
 
@@ -143,19 +143,19 @@ tags: terrain trajectory CODiS AERMAP
   - mmif氣象1/21\~31
   - 有建築物
 
-| ![noterr.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/noterr.png) |![withterr.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/withterr.png)|
+| ![noterr.png](../../assets/images/noterr.png) |![withterr.png](../../assets/images/withterr.png)|
 |:--:|:--:|
 | <b>無地形，煙流偏西南方，為東北季風影響</b>|有地形，煙流方向偏南，擴散範圍受到限制，集中在河谷低地。受限於80\~100M等高線範圍。最大值較高51\~754&mu;/M<sup>3</sup>|
 
 - 中華紙漿(AERMOD)
 
-| ![zhonghuaTer.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/zhonghuaTer.PNG)|
+| ![zhonghuaTer.PNG](../../assets/images/zhonghuaTer.PNG)|
 |:-:|
 | <b></b>|
 
 - 和平水泥(file:///I:/home/kuang/AQMP/202201/20220401_固定污染源模式模擬技術審查研習會/02.高斯擴散模式模擬審查實務議題.pdf)
 
-| ![hepingTer.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/hepingTer.PNG)|
+| ![hepingTer.PNG](../../assets/images/hepingTer.PNG)|
 |:-:|
 | <b></b>|
 
@@ -164,7 +164,7 @@ tags: terrain trajectory CODiS AERMAP
   - 由環保署提供處理程式、處理結果、
   - 由遠端執行方式分享既有處理系統與結果
 - [煙流模式的地形處理說明](https://sinotec2.github.io/Focus-on-Air-Quality/PlumeModels/REnTG_pathways/)
-- [遠端執行](http://125.229.149.182/terrain.html)
+- [遠端執行](http://sinotec24.com/terrain.html)
 - TEDS點源附近地形檔案處理結果
   - [TEDS10](http://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.712/121.009)
   - [TEDS11](https://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)

@@ -28,13 +28,13 @@ tags: CMAQ ICON BCON
   - [數據下載](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality)、
   - 使用nc轉換成m3格式[ncf2ioapi](https://www.camx.com/download/support-software/)、[垂直層數切割](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/moz2cmaqV/)、以及
   - 逐6小時空白濃度[模版檔案之準備](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/gen_templateD1/)等。  
-- 由於CMAQ濃度檔案可以使用[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/run_combMM_R_DM/)予以整併，(或直接)就可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或進行檢視。
+- 由於CMAQ濃度檔案可以使用[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/1.run_combMM_R_DM/)予以整併，(或直接)就可以用[VERDI](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md)或進行檢視。
 - 後續作業
   - 邊界濃度的製作，包括時間的內插、邊界框濃度的解析等，將在[bcon](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/BCON/run_bconMM_RR_DM/)程式內進行。
   - 直接以初始濃度引用：在`run_cctm.csh`內指定即可
 - 有鑒於全球空品模擬結果越來越多，且Mozart模式不再維護，有更多直接轉換之程式與作業方式(如ecmwf之[EAC4](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/ECMWF_rean/grb2bc/))，可以簡化程序。
 
-## [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)說明
+## [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/moz2cmaqHd1J.py)說明
 
 ### 執行方式
 - (eg.)執行2018年4月1日0時之內插：`python moz2cmaqHd1J.py 1809100`
@@ -105,7 +105,7 @@ done
 done
 ```
 
-### [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)分段說明
+### [程式](https://github.com/sinotec2/cmaq_relatives/blob/master/bcon/moz2cmaqHd1J.py)分段說明
 - 調用模組
 
 ```python
@@ -232,7 +232,7 @@ nc.close()
 ```
 
 ## 程式下載
-- [github](https://github.com/sinotec2/cmaq_relatives/blob/master/moz2cmaqHd1J.py)
+- [github](https://raw.githubusercontent.com/sinotec2/cmaq_relatives/2c9e78bf0bf268f8abc5472d928a7bc3c22decee/bcon/moz2cmaqHd1J.py)
 
 ## Reference
 - lizadams, **Visualization Environment for Rich Data Interpretation (VERDI): User’s Manual**, [github](https://github.com/CEMPD/VERDI/blob/master/doc/User_Manual/VERDI_ch01.md), August 03, 2021

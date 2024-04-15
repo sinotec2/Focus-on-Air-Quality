@@ -131,7 +131,7 @@ import os
 pth='/Users/1.PlumeModels/AERMOD/mmif/TWN_3X3/'
 df=read_csv(pth+'point_ij.csv')
 A=[]
-a='http://125.229.149.182/mmif_results/'
+a='http://sinotec24.com/mmif_results/'
 for ij in df.IJ:
     i=str(ij)
     s=''
@@ -156,16 +156,16 @@ $ head mmifTWN_3X3.csv.kml
 <Document><name>mmifTWN_3X3.csv</name><description>mmifTWN_3X3.csv</description>
 <Style id="normalPlacemark"><IconStyle><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href> </Icon> </IconStyle></Style>
 <Placemark><name>IJ7152</name><description>
-http://125.229.149.182/mmif_results/2016/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2016/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2017/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2017/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2018/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2018/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2019/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2019/7152/IJ7152.pfl 
-http://125.229.149.182/mmif_results/2020/7152/IJ7152.sfc 
-http://125.229.149.182/mmif_results/2020/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2016/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2016/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2017/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2017/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2018/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2018/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2019/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2019/7152/IJ7152.pfl 
+http://sinotec24.com/mmif_results/2020/7152/IJ7152.sfc 
+http://sinotec24.com/mmif_results/2020/7152/IJ7152.pfl 
 </description><styleUrl>#normalPlacemark</styleUrl>
 <Point><coordinates>
 119.936,25.961,0</coordinates></Point></Placemark>
@@ -262,14 +262,14 @@ $ cat -n point_ijP.py
   - [teds11(含aermap package)](https://umap.openstreetmap.fr/zh/map/teds11-point-data-pm25_728979#8/24.172/120.086)
 - AERMAP執行成果
   - [地形前處理文字解析與執行控制程式](../../PlumeModels/TG_pathways/terrainTXT.md)、[全臺AERMAP之執行](../../PlumeModels/TG_pathways/twnTERR.md)
-  - [teds10 1X1解析度位置，煙囪高假設100m](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
+  - [teds10 1X1解析度位置，煙囪高假設100m(deprecated)](https://umap.openstreetmap.fr/zh/map/twn1x1-aermap-results_593832#8/23.675/121.278)
   - [teds11個別廠位置、各廠最高煙囪高度](https://umap.openstreetmap.fr/zh/map/taiwan-aermap_11-points_730878#7/23.671/121.084)
 
 ## Reference
 
-[token1]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8"
-[token2]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08"
-[token3]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg"
-[token4]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"
+[token1-mmif results@TWN_3X3_grids]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/590688:816_TwImUNZ8vGgdj1d6wcfT_m8"
+[token2-tedsSRCPARAM.csv.kml]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/594438:sgYy7grMYiZNU03jduB-A1h3W08"
+[token3-TEDS11+aermap]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/728979:G_O0DTrDIlbBsB2zl61AM1aJvWg"
+[token4-aermap]: <http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM> "http://umap.openstreetmap.fr/zh/map/anonymous-edit/730878:5iVuLBTmsNc5G3KzIN90KKRkbfM"
 
-[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^2]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

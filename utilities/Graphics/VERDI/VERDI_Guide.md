@@ -179,7 +179,7 @@ Content-type: application/octet-stream; charset=iso-8859-1
   - HUC→台灣地區縣市分區圖(右圖)
   - Roads→台灣地區鄉鎮區分區圖
 
-| ![VERDI1.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI1.png)|![VERDI2.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/VERDI2.png)|
+| ![VERDI1.png](../../assets/images/VERDI1.png)|![VERDI2.png](../../assets/images/VERDI2.png)|
 |:--:|:--:|
 | <b>D2模擬結果。VERDI內設海岸線| <b>加上大陸省份及臺灣縣份行政區底圖</b>|
 

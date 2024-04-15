@@ -25,7 +25,7 @@ tags: CAMS EAC4 ICON mcip
 
 ## 背景
 - 歐洲中期天氣預報中心(ECMWF)之EAC4 ([ECMWF Atmospheric Composition Reanalysis 4](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-global-reanalysis-eac4?tab=overview))數據下載整併後，此處將其轉成`m3.nc`檔案，以供[VERDI](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/Graphics/VERDI/VERDI_Guide/)等顯示軟體、以及後續光化模式所需。
-- 由於EAC4粒狀物單位(重量混合比)轉換過程需要大氣的密度，不單是高度的函數，也隨著天氣系統而有時空的變化。可以由[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/run_mcipMM_RR_DM/)計算結果（`METCRO3D`）中讀取，需在執行轉換前預備好。
+- 由於EAC4粒狀物單位(重量混合比)轉換過程需要大氣的密度，不單是高度的函數，也隨著天氣系統而有時空的變化。可以由[mcip](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/MCIP/3.run_mcipMM_RR_DM/)計算結果（`METCRO3D`）中讀取，需在執行轉換前預備好。
 
 ## 逐日密度檔案之準備
 - 由於此處EAC4檔案的時間範圍為全月，而mcip結果是彼此會有重疊的批次作業，因此需以[brk_day.cs](https://sinotec2.github.io/Focus-on-Air-Quality/utilities/netCDF/brk_day/)拆解、讓程式可以逐日讀取，以降低複雜度。程序如下：
@@ -340,9 +340,9 @@ RHO.20180404.nc  RHO.20180409.nc  RHO.20180414.nc  RHO.20180419.nc  RHO.20180424
 
 ## 結果檢視
 - 2018/4/5～6 大陸沙塵暴之EAC4濃度**水平**分布[mov](https://youtu.be/S3z9j7V-O0w)
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180405eac4H.PNG)
+![](../../assets/images/20180405eac4H.PNG)
 - 2018/4/5～6 大陸沙塵暴之EAC4濃度**垂直**分布（臺灣為中心）[mov](https://youtu.be/tiXA1L3IaEI )
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/20180405eac4V.PNG)
+![](../../assets/images/20180405eac4V.PNG)
 
 ## 程式下載
 

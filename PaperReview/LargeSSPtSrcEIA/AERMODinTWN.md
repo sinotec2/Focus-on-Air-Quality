@@ -29,7 +29,7 @@ tags: review plume_model AERMAP
 
 隨著國內環保意識的普及，環保法規的完備，「審查」時因模式模擬結果不通過的情形越來越少，太過保守反而不符合實際。因此環保署歷年來也持續發包委託計畫(環保署2010～2019)，思考本土化與取代ISC3的可能性。
 
-本文除回顧AERMOD在臺灣應用遭遇之困難、未來在「審查」時可能之爭議、並以自建之教學系統(http://http://125.229.149.182/aermods.html，下簡稱「系統」)，提供廣泛之模擬經驗，以供業界參考，甚或自行測試以快速累積模式經驗。該「系統」程式自2018年陸續建立，並自2020開始服務中原大學環工所、臺大環工所、陽明大學環衛所研究生教學，迄今持續運轉。
+本文除回顧AERMOD在臺灣應用遭遇之困難、未來在「審查」時可能之爭議、並以自建之教學系統(http://http://sinotec24.com/aermods.html，下簡稱「系統」)，提供廣泛之模擬經驗，以供業界參考，甚或自行測試以快速累積模式經驗。該「系統」程式自2018年陸續建立，並自2020開始服務中原大學環工所、臺大環工所、陽明大學環衛所研究生教學，迄今持續運轉。
 
 以下就模擬範圍、接受點密度、氣象檔案之前處理、地形檔案之前處理、沉降議題、建築物議題等依序討論。
 
@@ -69,7 +69,7 @@ tags: review plume_model AERMAP
 
 #### 圖3 濱海及盆地內污染源之模擬範圍與年均值結果
 - 三角形為污染源位置。白色框為合理的模擬範圍。
-- AERMOD 遠端計算服務，作業網址http://125.229.149.182/AERMOD.html
+- AERMOD 遠端計算服務，作業網址http://sinotec24.com/AERMOD.html
 
 | ![TWN3f.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN3f.png)|
 |:--:|
@@ -146,7 +146,7 @@ AERMOD的氣象檔案內容項目比ISC3多，無法再像過去單以氣象局�
 | ![TWN6b.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/TWN6b.png)|
 | <b>(b)結果檔案連結|
 							
-mmif 遠端執行系統，作業網址http://125.229.149.182/mmif.html
+mmif 遠端執行系統，作業網址http://sinotec24.com/mmif.html
 地圖查詢http://umap.openstreetmap.fr/zh/map/3km_590688#8/23.712/122.009
  
 圖6中可見即使是平地範圍，也並布滿計算網格，這是因為河川地、水體、農地、鹽田等，目前並無工廠開發，未來也不太可能開發。
@@ -195,7 +195,7 @@ AERMAP計算結果中的REC檔案，內容即為模擬範圍之地形高及「�
 |TG.TXT|ISC3地形內含文件|
 |REC檔|AERMOD地形內含文件|
 
-煙流模式的地形處理，遠端作業網址http://125.229.149.182/terrain.html
+煙流模式的地形處理，遠端作業網址http://sinotec24.com/terrain.html
 
 ## 五、建築物議題
 BPIP前處理在ISC3時代就存在了，AERMOD也繼續延用BPIP(PRIME版本)，使用者可以自訂座標系統簡單點出建築物頂點與煙囪位置、輸入高度、高程至控制檔，程式就會計算ISC3或AERMOD所需的建築物參數。
@@ -236,7 +236,7 @@ AERMOD具有內設之OLM模組，按照美國空品模式指引，可以分階�
 ||NO2O3@20180101qiaotou.png |2018年橋頭站NO2O3|
 ||NO2O3@20180101renwu.png|2018年仁武站NO2O3 |
 
-煙流模式NOx逐時結果之臭氧限制法後處理，遠端作業網址http://125.229.149.182/OLM.html
+煙流模式NOx逐時結果之臭氧限制法後處理，遠端作業網址http://sinotec24.com/OLM.html
 ## 七、結語：遠端計算之必要性
 本文彙整並探討了AERMOD在國內的模擬經驗，以及在模擬範圍、解析度、氣象、地形與建築物等條件方面的議題，以供未來模式標準化相關討論之參考依據。
 -	在氣象方面，本文提出以WRF+MMIF流程，應為目前最容易標準化、充分代表性、並與中央氣象局作業完全結合的作法。
@@ -255,6 +255,6 @@ AERMOD具有內設之OLM模組，按照美國空品模式指引，可以分階�
 - 行政院環保署(2019)建置AERMOD本土化模式及空品模式審驗制度專案工作計畫 108A047
 
 ## 附表 臺灣地區應用AERMOD之學位論文一覽表
-- 搜尋排序互動表格 http://125.229.149.182/AERMOD_review.html
+- 搜尋排序互動表格 http://sinotec24.com/AERMOD_review.html
 ## Source
 - 原文發表於[2021環工技師會訊11007pp39-55](http://www.tpeea.org.tw/upload/news/files/7eea35bc4c7a4189b42566fffe2f2fee.pdf)，經部分修正更新。

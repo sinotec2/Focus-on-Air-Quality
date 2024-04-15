@@ -51,7 +51,7 @@ tags: note_system
 - 程式網址[https://vscode.dev/](https://vscode.dev/)
 
 
-| ![web_code.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/web_code.png "圖1 GitHub檔案編輯之提示，讓使用者可以選擇是否使用Code或傳統編輯界面")|
+| ![web_code.PNG](../../assets/images/web_code.png "圖1 GitHub檔案編輯之提示，讓使用者可以選擇是否使用Code或傳統編輯界面")|
 |:--:|
 | <b>圖1 [GitHub][gh]檔案編輯之提示，讓使用者可以選擇是否使用Code或傳統編輯界面</b>| 
 
@@ -83,7 +83,7 @@ tags: note_system
   - 如果要同時開起其他位置的檔案，必須啟動另一個[VS Code][vsc_wiki]來開啟該檔案所在[Repo][repo]。
   - 不同[VS Code][vsc_wiki]的檔案總管(Explorer)間可以使用滑鼠**拖放**
 
-| ![code_2.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_2.PNG)|![code_1.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_1.PNG)|
+| ![code_2.PNG](../../assets/images/code_2.PNG)|![code_1.PNG](../../assets/images/code_1.PNG)|
 |:--:|:--:|
 | <b>圖2 window開始點選[VS Code][vsc_wiki]右邊箭頭可以選取最近開啟目錄([Repo][repo])</b>| <b>圖3 [VS Code][vsc_wiki]歡迎畫面提示</b>|
 
@@ -92,7 +92,7 @@ tags: note_system
 - 或者由**Git存放庫**下載(即為GitHub Code點選複製的clone https，如圖4)。
 - 在空格處貼上.git網址後，需要指定[Repo][repo]之根目錄絕對路徑(圖5)。
 
-| ![code_3.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_3.PNG)|![code_4.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_4.PNG)|
+| ![code_3.PNG](../../assets/images/code_3.PNG)|![code_4.PNG](../../assets/images/code_4.PNG)|
 |:--:|:--:|
 | <b>圖4 在空格處貼上.git網址按enter下載檔案</b>| <b>圖5 指定[Repo][repo]之根目錄絕對路徑</b>|
 
@@ -103,7 +103,7 @@ tags: note_system
   - 如已建立，每次編輯需先從雲端Pull最新版本
   - 再開啟Code、繼續編輯或新增檔案
 
-| ![code_5.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/ghdesktop_welcom.png)|
+| ![code_5.PNG](../../assets/images/ghdesktop_welcom.png)|
 |:--:|
 | <b>圖6 在[GitHub Desktop][gh_dt]p歡迎畫面開啟指定[Repo][repo]為根目錄的Code作業</b>| 
 
@@ -125,7 +125,7 @@ tags: note_system
   1. 延伸模組。可下載特輸功能的外掛(免費)。
   1. [Docker][Docker]。如果需要整個[Repo][repo]做備份或傳遞給他人，可以考慮使用[Docker][Docker]。
 
-| ![code_5.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_5.PNG)|![code_6.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_6.PNG)|
+| ![code_5.PNG](../../assets/images/code_5.PNG)|![code_6.PNG](../../assets/images/code_6.PNG)|
 |:--:|:--:|
 | <b>圖7 [VS Code][vsc_wiki]界面左上角功能</b>| <b>圖8 左下角功能</b>|
 
@@ -153,7 +153,7 @@ tags: note_system
     1. 更多操作
     1. 文件[縮圖](#縮圖顯示)。對捲動長檔案時非常好用。
 
-| ![code_7.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_7.PNG)|![code_8.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/code_8.PNG)|
+| ![code_7.PNG](../../assets/images/code_7.PNG)|![code_8.PNG](../../assets/images/code_8.PNG)|
 |:--:|:--:|
 | <b>圖9 [VS Code][vsc_wiki]界面右上角功能、文件右上側為整個文件之[縮圖預覽](#縮圖顯示)(含[大綱開合](#大綱開合及移動)及[編輯](#編輯窗格)、[尋找](#文件內搜尋取代)之效果)</b>| <b>圖10 右下角功能</b>|
 
@@ -187,7 +187,7 @@ tags: note_system
   - 紅色向下箭頭：刪除行
   - Push更新GitHub之後，這些顏色就會消失
 
-| ![find_snip.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/find_snip.png "圖11 右側文件縮圖與拉桿上顏色的分布：尋到之關鍵字詞(橘色底橫線與方塊)、新增文字區塊(綠色)、修改(藍色)")|
+| ![find_snip.PNG](../../assets/images/find_snip.png "圖11 右側文件縮圖與拉桿上顏色的分布：尋到之關鍵字詞(橘色底橫線與方塊)、新增文字區塊(綠色)、修改(藍色)")|
 |:--:|
 | <b>圖11 右側文件縮圖與拉桿上顏色的分布：[搜尋](#文件內搜尋取代)到之關鍵字詞(橘色底橫線與方塊)、新增文字區塊(綠色)、修改(藍色)</b>| 
 
@@ -331,7 +331,7 @@ tags: note_system
 
 ### 移至(G)下拉選單
 
-| ![goto](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/goto_win.png){:width="360px"}|![goto](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/goto_mac.png){:width="360px"}|
+| ![goto](../../assets/images/goto_win.png){:width="360px"}|![goto](../../assets/images/goto_mac.png){:width="360px"}|
 |:--:|:--:|
 | <b>圖12(a)window版</b>| <b>圖12(b)mac版</b>|
 

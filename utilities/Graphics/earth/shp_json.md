@@ -234,7 +234,7 @@ topojson --help
 
 ### 結果
 
-| ![GeoJson版本.png](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/GeoJson版本.png) |
+| ![GeoJson版本.png](../../assets/images/GeoJson版本.png) |
 |:--:|
 | <b>圖 以g0v之twCounty2010.geo.json置換臺灣島海岸線之成果</b>|  
 

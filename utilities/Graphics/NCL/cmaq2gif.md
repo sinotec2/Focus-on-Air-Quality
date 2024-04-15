@@ -40,7 +40,7 @@ tags: NCL graphics m3nc2gif
 ### IO Files
 
 - Input Files
-  - CMAQ濃度檔案；將[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/run_combMM_R_DM/)後之PM10及TFLAG(以[ncks]())切割出來單獨成檔即可。
+  - CMAQ濃度檔案；將[combine](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/1.run_combMM_R_DM/)後之PM10及TFLAG(以[ncks]())切割出來單獨成檔即可。
   - GRIDCRO2D_1804_run5.nc：只會讀取其中的經緯度(4階)矩陣
   - bou2_4p.shp：[大陸地區之行政區界](https://github.com/GuangchuangYu/chinamap/blob/master/inst/extdata/china/bou2_4p.shp)
 - Output Files
@@ -61,10 +61,10 @@ convert pm10*.png pm10.gif
 ## Results
 
 - CCTM模擬d01範圍PM<sub>10</sub>之時間變化([內容說明](../../../GridModels/Abundant_NoG_Runs/CWBWRF_15k.md))
-  - [GIF_file@iMacKuang](http://125.229.149.182/soong/pm10.gif)
+  - [GIF_file@iMacKuang](http://sinotec24.com/soong/pm10.gif)
   - [GifPlayer@sinotec2.github.io](https://sinotec2.github.io/cmaqprog/NCL_China_WBDust/)
 
-| ![pm10_ncl.PNG](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/assets/images/pm10_ncl.PNG) |
+| ![pm10_ncl.PNG](../../assets/images/pm10_ncl.PNG) |
 |:--:|
 | <b>圖 CCTM模擬d01範圍PM10之結果(NCL繪製)，單位log<sub>10</sub>&mu;g/M<sup>3</sup> </b>|  
 

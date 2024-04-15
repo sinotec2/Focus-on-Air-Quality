@@ -190,4 +190,4 @@ begin
 {% include download.html content="[軌跡線貼在Marble底圖上之ncl程式](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/Graphics/NCL/taiMarbleScale.ncl)" %}
 ## 結果
 
-![](https://github.com/sinotec2/Focus-on-Air-Quality/raw/main/attachments/2023-07-21-09-25-35.png)
+![](../../attachments/2023-07-21-09-25-35.png)

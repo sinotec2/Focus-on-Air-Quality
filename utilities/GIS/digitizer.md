@@ -58,7 +58,7 @@ tags: GIS KML OpenTopoMap
 
 ## 成果應用說明
 
-- CaaS成果位置：[http://125.229.149.182/LeafletDigitizer/](http://125.229.149.182/LeafletDigitizer/)
+- CaaS成果位置：[http://sinotec24.com/LeafletDigitizer/](http://sinotec24.com/LeafletDigitizer/)
 - 圖層：
   - 為加速網頁的服務速度，並未內設圖層。使用者必須在左側面版中自選圖層
   - openstreet 街道圖、中文顯示
@@ -218,12 +218,12 @@ $ cat -n js/main.js
 
 ## CaaS
 
-- 位置：http://125.229.149.182/Leaflet/docs/index.html(@iMacKuang[^2])
+- 位置：http://sinotec24.com/Leaflet/docs/index.html(@iMacKuang[^2])
 - 貼圖成果
 
 | ![leaflet_demo.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/leaflet_demo.png)|
 |:--:|
-| <b>[http://125.229.149.182/Leaflet/docs/index.html](http://125.229.149.182/Leaflet/docs/index.html)畫面</b>|
+| <b>[http://sinotec24.com/Leaflet/docs/index.html](http://sinotec24.com/Leaflet/docs/index.html)畫面</b>|
 
 ## JS
 
@@ -273,4 +273,4 @@ $ cat -n js/main.js
   * 軌跡線之NCL繪圖： tai and chnMarble.ncl
   * 地圖數位板
 
-[^2]: 125.229.149.182為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.
+[^2]: sinotec24.com為Hinet給定，如遇機房更新或系統因素，將不會保留。敬請逕洽作者：sinotec2@gmail.com.

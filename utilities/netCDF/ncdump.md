@@ -48,7 +48,7 @@ tags: netCDF
 - 從nc檔案的歷史紀錄中找到含有ncks的特定文字(見[nc檔案更名](https://sinotec2.github.io/Focus-on-Air-Quality/AQana/GAQuality/NCAR_ACOM/MOZART/#nc檔案更名))：`ncdump -h $nc|grep ncks|cut -d/ -f10|cut -d . -f11|cut -c -10`
 - 從變數的個數來判斷是什麼模式產生的結果
   - `v=$(ncdump -h $nc|grep PM25|wc -l);a=$(ncdump -h $nc|grep AVERAGE|wc -l)`
-  - 參見[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/do_shk/#shkcs)
+  - 參見[shk.cs](https://sinotec2.github.io/Focus-on-Air-Quality/GridModels/POST/2.do_shk/#shkcs)
 
 ## pncdump
 - [pseudonetcdf][pseudonetcdf]套件中也有類似ncdump的程式pncdump，提供更多輸入/輸出格式的選項。有關pncdump支援的格式，可以參考[pncgen][pncgen]。

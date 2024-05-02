@@ -26,6 +26,7 @@ tags: CWBWRF cpuff cmet forecast wrf-python crontab sed
 - 自從2023/9/5起，不知什麼原因，氣象署在open data的WRF預報檔案不再更新了。需要改用[GFS-WRF](../../wind_models/GFS/2.GFS2WRF.md)的預報結果。
 - 除了m3d檔案是由[calwrf](../CALMET/calwrf.md)所產生之外，座標系統與時間框架需要做一些微調、後處理也要因應改變。
 - 大體上仍然依循[Run.sh](./Forecast.md#download-runsh)的架構內容，新增`$runCALWRF`的開關來控制。
+- calwrf的完整說明，可以詳見[CALMET/calwrf](../CALMET/calwrf.md)。
 
 ## calwrf的控制
 
@@ -33,7 +34,21 @@ tags: CWBWRF cpuff cmet forecast wrf-python crontab sed
 - 新增`CALPUFF_INP/calwrf_template.inp`模版檔案，如下：
 
 ```bash
+kuang@master /home/cpuff/UNRESPForecastingSystem/CALPUFF_INP
+$ cat calwrf_template.inp
+Create 3D.DAT file for WRF output
+calwrf.lst          ! Log file name
+/home/cpuff/UNRESPForecastingSystem/CWB_data/processed/met_?BEGD?.dat ! Output file name
+-1,-1,-1,-1,1,15  ! Beg/End I/J/K ("-" for all)
+?BEGDH?          ! Start datetime (UTC yyyymmddhh, "-" for all)
+?ENDDH?          ! End   datetime (UTC yyyymmddhh, "-" for all)
+4                   ! Number of WRF output files
 ```
+
+- 注意
+  - 這個模板沒有列出指定的wrfout路徑檔名，是等著附加的。因此模板的最後一行必須保持是檔案個數(`4`)
+  - 結果檔案的位置，也是跟著預報系統而定。
+  - 模擬空間與時間範圍：是跟著wrfout的內容而定，如為低解析度、大範圍之wrfout檔案，須另行設定。
 
 ### 日期時間
 

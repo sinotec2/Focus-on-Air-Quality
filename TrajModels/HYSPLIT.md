@@ -3,7 +3,7 @@ layout: default
 title: HYSPLIT
 nav_order: 4
 parent: Trajectory Models
-last_modified_date: 2022-03-31 15:20:02
+last_modified_date:2024-05-02 09:49:56
 tags: HYSPLIT trajectory
 ---
 
@@ -21,20 +21,28 @@ tags: HYSPLIT trajectory
 ---
 
 ## 背景
+
 ###   地面二維軌跡分析程式的困難
-1. 以地面測站觀測的風速風向數據為主，沒有高空及山區的數據。山區、海面上則必須要數值模式產生。
+
+1. 以地面測站觀測的風速風向數據為依據(如[範例](../PaperReview/LargeSSPtSrcEIA/4Linyuan3Dtraj.md))，沒有高空及山區的數據。山區、外海之海面上則必須要數值模式產生。
 2. 分析模式僅適用在台灣局部地區，沒有中國大陸與其他地區的數據，軌跡線超過範圍即沒有數據，需要國際研究機構的支援。
 3. 模式作業化程度需較高，並套用高解析度地圖，以應付經常性之解析需求。
 
 ### HYSPLIT簡介
+
 1. 美國海洋與大氣總署空氣資源研究室(NOAA ARL)所發展的HYSPLIT(Hybrid Single Particle Lagrangian Integrated Trajectory Model )模式，為國內外學術及作業單位經常應用的軌跡模式，
 2. 應用NOAA或NCEP再分析模式之輸出結果，不必另外再執行數值模式。
 3. 解析度可以到1度x1度、範圍則為全球。
 4. 其GIS結果(包括.shp與.kmz)可與高解析度地圖套疊，以解析大氣邊界層運動與可能的跨國污染現象。
 
+### HYSPLIT之國內學位論文
+
+- [空品模式學位論文整理表格/trajectory models](https://sinotec2.github.io/aermod/traj_review.html)
+
 ## 執行步驟
 
 ### 選擇軌跡種類
+
 1. 進入HYSPLIT-WEB網站(NOAA ARL網站 HYSPLIT-WEB (Internet-based) ,[http://ready.arl.noaa.gov/HYSPLIT.php](http://ready.arl.noaa.gov/HYSPLIT.php))
 
 | ![HYSPLIT1.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT1.png)|
@@ -81,6 +89,7 @@ tags: HYSPLIT trajectory
   - 設定好個數與種類之後，即可進行下一步” Next>>”
 
 ### 位置及時間點
+
 1. 選取氣象資料庫與起迄點： 
   - 東亞地區必須選取GDAS(Global Data Assimilation System)。此一資料庫為美國國家天氣環境預報中心(The National Weather Service's National Centers for Environmental Prediction NCEP)的模式產品，為ARL應用在空氣品質計算最主要的依據。
   - 設定軌跡起始/終點的座標。可以由圖中點選、或直接輸入座標。 
@@ -89,11 +98,13 @@ tags: HYSPLIT trajectory
 |:-:|
 | <b>Source Location</b>|
 
-  - 注意：如果直接設定緯度與經度， 注意數字之前不可以有空格。台灣地區的城市名稱、測站與機場等，均不在其資料庫中按”Continue”繼續。
-  - 垂直高度解析度：第一層為1000mb(80~90m)、第二層為975mb(300m)、第三層為950mb(500m)。此一設定與空氣污染有關。
+  - 注意：如果直接設定緯度與經度， 注意數字之前不可以有空格。
+  - 台灣地區的城市名稱、測站與機場等，均不在其資料庫中。
+  - 按”Next”繼續，選擇氣象檔案的時間。
 
 2. 選定氣象檔案的時間 
   - 以下拉選單選取最近7天或其他GDAS時間檔案(Select the GDAS1 File) 
+  - (按照每月第幾個星期分列檔案)。
   
 
 | ![HYSPLIT8.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT8.png)|
@@ -140,6 +151,8 @@ tags: HYSPLIT trajectory
         meters AGL (Above Ground Level地面高)
         meters AMSL(Above mean-sea Level平均海面高)...
 
+- 垂直高度解析度：第一層為1000mb(80~90m)、第二層為975mb(300m)、第三層為950mb(500m)。此一設定與空氣污染有關。
+
 - 設定輸出圖面的內容，如下表 
 
 | ![HYSPLIT11.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT11.png)|
@@ -149,14 +162,14 @@ tags: HYSPLIT trajectory
     結果型式
       GIS等值線輸(KMZ/SHP)_可以另存GIF/SHP/KMZ。
       軌跡的座標等其他輸出，也包括模式的設定與控制檔案，可以用在本機的計算。
-    Plot resolution (dpi):  解析度
-    Zoom factor: 0(含蓋範圍最小)~100
-    Plot projection:地圖投影方式 
+    Plot resolution (dpi):  解析度。可選72~300，測試用低解析度，正式出圖用高解析度。
+    Zoom factor: 0(含蓋範圍最小)~100。會出現最佳值。
+    Plot projection:地圖投影方式(小範圍選直角系統Lambert，大範圍可另選用) 
       Default(按所在緯度提供最佳投影)、
       Polar(極座標系統)、
       Lambert(直角座標、地圖中心為原點)、 
       Mercator(麥卡脫投影、赤道原點)
-    Vertical plot height units:高度單位 
+    Vertical plot height units:高度單位(小範圍選公尺)
       Pressure、 
       Meters AGL、
       Theta(1~0無因次，與地面壓力差之比值)
@@ -181,7 +194,6 @@ tags: HYSPLIT trajectory
       Mixed Layer Depth (m)
       Relative Humidity (%)
       Downward Solar Radiation Flux (W/m**2)
-
 
 
 | ![HYSPLIT12.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT12.png)|
@@ -231,7 +243,6 @@ tags: HYSPLIT trajectory
 | ![HYSPLIT15.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT15.png)|![HYSPLIT16.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT16.png)| ![HYSPLIT17.png](https://raw.githubusercontent.com/sinotec2/Focus-on-Air-Quality/main/assets/images/HYSPLIT17.png)|
 |:-:|:-:|:-:|
 |萬里(2013/12/27 3:00L)|三義(2013/12/27 6:00L)|橋頭(2013/12/27 9:00L)|
-
 
 
 - 由中北部測站之反軌跡可以發現，主要經過中國長三角一帶之污染源，為典型的大陸霧霾事件。

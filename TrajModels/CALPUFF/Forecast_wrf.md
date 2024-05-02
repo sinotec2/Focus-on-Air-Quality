@@ -91,4 +91,43 @@ calwrf.lst          ! Log file name
 
 ## 結果
 
+- 重啟每天預報的服務：[sinotec2.github.io/cpuff_forecast/](https://sinotec2.github.io/cpuff_forecast/)
+  - master：每日0時開始進行[Run.sh -c](./Run.sh)，約到1:00會有結果。
+  - dev2：每日8時開始製圖、上載到Github。
+
 ![](./cpuff_wrf.png)
+
+### Run.sh_DEVP
+
+- 使用[m3nc2gif.py](../../utilities/Graphics/wrf-python/4.m3nc2gif.md)製作等值線。
+
+```bash
+$ cat Run.sh_DEVP
+#/bin/bash -
+GIT=/usr/bin/git
+gtd=~/GitHubRepos/sinotec2.github.io
+TOKEN=$(cat ~/bin/git.token)
+today=$(date +%Y%m%d)
+rundate=$(date -d "$today - 1 day" +%Y%m%d)
+yr=$(date -d "$today - 1 day" +%Y)
+vis=/nas2/cpuff/UNRESPForecastingSystem/vis/${rundate}
+mkdir -p $vis
+
+TDY=$(echo $today|cut -c 5-8)
+cd $vis
+mv ../../PM10.nc $TDY
+ln -s ~/MyPrograms/wrf-python/m3nc2gif/wrfout_d04 .
+~/bin/m3nc2gif.py $TDY
+rm -f $gtd/cpuff_forecast/example_gifs/PMF.gif
+cp PM10.gif $gtd/cpuff_forecast/example_gifs/PMF.gif
+
+#ln -s /nas1/Data/cwb/WRF_3Km/$yr/$rundate/M-A0064-084.grb2 .
+#~/bin/grbuv10_nc.py M-A0064-084.grb2
+#cp wrf_gsn.png $gtd/cpuff_forecast/example_gifs/wrf_gsn.png
+
+cd $gtd
+$GIT pull
+$GIT add cpuff_forecast/example_gifs/PMF.gif cpuff_forecast/example_gifs/wrf_gsn.png
+$GIT commit -m "revised PMF.gif $rundate"
+$GIT push https://sinotec2:$TOKEN@github.com/sinotec2/sinotec2.github.io.git >> ~/bat.log
+```

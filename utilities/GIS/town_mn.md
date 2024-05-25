@@ -4,7 +4,7 @@ title: 網格濃度在行政區範圍內之平均
 parent: GIS Relatives
 grand_parent: Utilities
 date: 2023-02-14
-last_modified_date: 2023-02-14 10:18:47
+last_modified_date: 2024-05-25 16:28:21
 tags: choropleth GIS CMAQ CAMS CAM-chem LGHAP MOZART
 ---
 
@@ -88,6 +88,48 @@ TOWNCODE,var,COUNTYCODE,COUNTYNAME,TOWNNAME
 
 {% include download.html content="網格濃度在行政區範圍內之平均[town_mn.py][town_mn.py]" %}
 {% include download.html content="網格濃度在行政區範圍內之平均[nc2town.py][nc2town.py]" %}
+
+## nc2county.py
+
+- 與前述程式很類似，只是行政區範圍是縣/市
+
+{% include download.html content="網格濃度在縣市範圍內之平均[nc2county.py][nc2county.py]" %}
+
+## nc3_to_1.py
+
+- 使用`scipy.interpolate import griddata`來內插
+- 適用不同的汙染項目(一個檔案一個汙染物)
+
+```python
+#interpolation scheme, for D0/D2 resolution(3Km/1Km)
+ispec=0
+for v in V[3]:
+  for t in range(nt3):
+    zz=np.zeros(shape=(nrow,ncol))
+    c = np.array([var[ispec,t,idx[0][i], idx[1][i]] for i in range(mp)])
+    zz[:,:] = griddata(xyc, c[:], (x1, y1), method='linear')
+    zz=np.where(np.isnan(zz),0,zz)
+    nc[v][t,0,:,:] =zz[:,:]
+```
+
+{% include download.html content="3公里網格內插至1公里[nc3_to_1.py][nc3_to_1.py]" %}
+
+### 模板的預備及操作
+
+- 改`VAR-LIST`屬性須以`ncatted`進行
+
+```bash
+#kuang@master /nas2/cmaqruns/2019TZPP/output/Annual/iTZPP
+#$ cat prep_temp.cs
+for s in CO NO2 O3 PM10 SO2 VOC;do cp tempTW_1x1.nc tempTW_${s}_1x1.nc;done
+for s in CO NO2 O3 PM10 SO2 VOC;do ncrename -v PM25_TOT,${s} tempTW_${s}_1x1.nc;done
+for s in CO  O3 ;do ncatted -a VAR-LIST,global,o,c,${s}'              ' tempTW_${s}_1x1.nc;done
+for s in NO2 SO2 VOC;do ncatted -a VAR-LIST,global,o,c,${s}'             ' tempTW_${s}_1x1.nc;done
+for s in PM10 ;do ncatted -a VAR-LIST,global,o,c,${s}'            ' tempTW_${s}_1x1.nc;done
+for i in PPT PPM PPDM;do for j in $(ls *$i);do python nc3_to_1.py $j;done;done
+for s in CO NO2 O3 PM10 SO2 VOC;do for i in $(ls ${s}*[TM]_1x1);do for py in nc2town.py nc2county.py;do python $py ${i};done;done;done
+```
+
 
 [Air_Increment]:  "空品增量模擬工具(Air_Increment_tool)-縣市最大值分析"
 [town_mn.py]: https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/utilities/GIS/town_mn.py "網格濃度在行政區範圍內之平均"

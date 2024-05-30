@@ -59,23 +59,25 @@ done
 |7|1079~1483|471.907|0.001|0.000|0.000|0.0001|
 
 ### 第2層(K1)排放造成的地面污染增量
+
 - 氣象條件：201901～31
 - K1高度：地面以上39.7\~79.55m約40m厚度
 - 高雄小港地區似有集中之PM<sub>2.5</sub>高值
   - 沒有延長的煙流形狀，疑似為中鋼原生性污染所致。
   - 比較第2層PMOTHR排放量分布，當地確實有較高排放量
 
-| ![PM25K1.PNG](../../assets/images/PM25K1.png) |![PMOTHR_K2.PNG](../../assets/images/PMOTHR_K2.PNG) |
+| ![PM25K1.PNG](../../../assets/images/PM25K1.png) |![PMOTHR_K2.PNG](../../../assets/images/PMOTHR_K2.PNG) |
 |:--:|:--:|
 | <b>公版K1排放量造成PM<sub>25</sub>濃度增量(月均值)</b>|<b>公版K1 PMOTHR排放量(月均值g/s)</b>|
 
 ### 第2\~5層(K1\~4)排放造成的地面污染增量
+
 - 氣象條件：201901～31
 - 並非排放高度越高對地面影響較輕微
 - 高空衍生性PM<sub>25</sub>濃度佔大宗，影響具大型煙流形狀
 
-| ![PM25K1.PNG](../../assets/images/PM25K1.png) |![PMOTHR_K2.PNG](../../assets/images/PM25K2.png) |
+| ![PM25K1.PNG](../../../assets/images/PM25K1.png) |![PMOTHR_K2.PNG](../../../assets/images/PM25K2.png) |
 |:--:|:--:|
 | <b>公版K1排放量造成PM<sub>25</sub>濃度增量(月均值)</b>|<b>公版K2排放量造成PM<sub>25</sub>濃度增量(月均值)</b>|
-| ![PM25K3.PNG](../../assets/images/PM25K3.png) |![PMOTHR_K4.PNG](../../assets/images/PM25K4.png) |
+| ![PM25K3.PNG](../../../assets/images/PM25K3.png) |![PMOTHR_K4.PNG](../../../assets/images/PM25K4.png) |
 | <b>公版K3排放量造成PM<sub>25</sub>濃度增量(月均值)</b>|<b>公版K4排放量造成PM<sub>25</sub>濃度增量(月均值)</b>|

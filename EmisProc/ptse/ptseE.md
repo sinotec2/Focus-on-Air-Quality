@@ -83,7 +83,9 @@ $ cat -n cluster_xy.py
     25    return df
     26
 ```
+
 #### XY_pivot
+
 - 工廠點源個數太多者(如中鋼)，在座標叢集化之前，以pivot_tab取其管道(**管煙**編號=**管編**+**煙編**)排放量之加總值
   - 調用模組
 
@@ -95,6 +97,7 @@ $ cat -n cluster_xy.py
     31    from pandas import pivot_table,merge
     32    import numpy as np
 ```
+
 - 3類不同屬性欄位適用不同的`aggfunc`
   - 排放量(`col_em`)：加總
   - 煙道高度(`col_mx`)：最大值
@@ -117,6 +120,7 @@ $ cat -n cluster_xy.py
 ## 主程式說明
 
 ### 程式之執行
+
 - 此處按月執行。由於nc檔案時間展開後，檔案延長非常緩慢，拆分成主程式（`ptseE.py`）與輸出程式（`wrtE.py`）二段進行。
 
 ```bash
@@ -125,6 +129,7 @@ for m in 0{1..9} 1{0..2};do python wrtE.py 19$m;done
 ```
 
 ### 程式基本定義、資料庫檔案QC、nc檔案之延展
+
 - 調用模組
   - 因無另存處理過後的資料庫，因此程式還是會用到[ptse_sub](https://sinotec2.github.io/Focus-on-Air-Quality/EmisProc/ptse/ptse_sub/)中的副程式`CORRECT`, `add_PMS`, `check_nan`, `check_landsea`, `FillNan`, `WGS_TWD`, `Elev_YPM`
 
@@ -148,6 +153,7 @@ $ cat -n ptseE.py
     15  from cluster_xy import cluster_xy, XY_pivot
     16
 ```
+
 - 程式相依性及年月定義(由引數)
   - `pncgen`、`ncks`是在`wrtE.py`階段使用
 
@@ -165,11 +171,13 @@ $ cat -n ptseE.py
     27  mo=int(mm)
     28  yr=2000+int(ym[:2]);TEDS='teds'+str((yr-2016)/3+10)
 ```
+
 - 使用`Hs`進行篩選「高空」點源
 
 ```python   
     29  Hs=10 #cutting height of stacks
 ```
+
 - 起迄日期、模擬範圍中心點位置
  
 ```python   
@@ -179,6 +187,7 @@ $ cat -n ptseE.py
     33  Latitude_Pole, Longitude_Pole = 23.61000, 120.9900
     34  Xcent, Ycent = twd97.fromwgs84(Latitude_Pole, Longitude_Pole)
 ```
+
 - nc模版的應用與延展。注意`name`在新版`NCF`可能會被保留不能更改。(另在`CAMx`程式碼中處理)
 
 ```python   
@@ -215,6 +224,7 @@ $ cat -n ptseE.py
     65  #template OK
     66
 ```
+
 - 污染物名稱對照、變數群組定義
 
 ```python   
@@ -227,6 +237,7 @@ $ cat -n ptseE.py
     73  colc=['CCRS','FCRS','CPRM','FPRM']
     74
 ```
+
 - 讀取點源資料庫並進行品質管控。新版`coding`只接受`big5`
 
 ```python   
@@ -252,6 +263,7 @@ $ cat -n ptseE.py
     94
     95  #
 ```
+
 - 座標轉換
 
 ```python   
@@ -626,6 +638,6 @@ $ cat -n ptseE.py
 ## 檔案下載
 
 {% include download.html content="python程式：[ptseE.py](https://github.com/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.py)" %}
-{% include download.html content="ipynb：[ptseE.ipynb]((https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.ipynb)" %}
+{% include download.html content="ipynb：[ptseE.ipynb](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.ipynb)、[nbviewer](https://nbviewer.org/github/sinotec2/Focus-on-Air-Quality/blob/main/EmisProc/ptse/ptseE.ipynb)" %}
 
 ## Reference

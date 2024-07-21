@@ -4,7 +4,7 @@ title: "海溫的讀取"
 parent: "wind models"
 nav_order: 5
 include: footer_custom               
-last_modified_date:   2021-11-25 16:21:12
+last_modified_date:   2024-07-20 16:21:12
 tags: GFS Crawlers WPS
 ---
 
@@ -87,13 +87,16 @@ c.retrieve(
 
 ## NOAA GFS模式輸出
 
-模式輸出的好處是有較高的系統性，也有逐時、高解析度的架構，雖然沒有歷史數據，但還是可以藉由每一天自動化下載排程，逐漸累積。
+- GFS模式輸出的好處是有較高的系統性，也有逐時、高解析度的架構，雖然沒有歷史數據，但還是可以藉由每一天自動化下載排程，逐漸累積。
+- 2022/06/28之後，NCEP更改目錄。
+  - 舊的FTP仍然提供服務，但是`ftp://ftp.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/`目錄下沒有SST(`sst.{$yesd}/rtgssthr_grb_0.083.grib2`)。
+  - SST搬去`https://nomads.ncep.noaa.gov/pub/data/nccf/com/nsst/prod/nsst.{yesd}/rtgssthr_grb_0.083.grib2`
 
 ```bash
 kuang@114-32-164-198 /Users/WRF4.1/NCEP/SST
 $ cat get_noaa.cs
 wget=/opt/local/bin/wget
-ftp=ftp://ftp.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/sst.
+ftp=https://nomads.ncep.noaa.gov/pub/data/nccf/com/nsst/prod/nsst.
 today=$(date +"%Y%m%d")
 yesd=$(date -v-1d -j -f "%Y%m%d" "${today}" +%Y%m%d)
 yr=$(date -v-1d -j -f "%Y%m%d" "${today}" +%Y)

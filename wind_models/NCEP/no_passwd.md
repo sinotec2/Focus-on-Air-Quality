@@ -33,8 +33,39 @@ tags: Crawlers WPS
 
 ### python script
 
-```python
+- 少了驗證帳密的動作
+- 目錄設定的原則並沒有改變
+- `http`改成了`https`。提升了安全性。
 
+```python
+#kuang@MiniWei /Users/WRF4.1/NCEP/SRF_ds461.0/2024
+#$ cat rda-download.py 
+#!/usr/bin/env python
+""" 
+Python script to download selected files from rda.ucar.edu.
+After you save the file, don't forget to make it executable
+i.e. - "chmod 755 <name_of_script>"
+"""
+import sys, os
+from urllib.request import build_opener
+
+opener = build_opener()
+
+filelist = [
+  'https://data.rda.ucar.edu/ds461.0/little_r/2024/SURFACE_OBS:2024022700',
+...
+  'https://data.rda.ucar.edu/ds461.0/little_r/2024/SURFACE_OBS:2024030118'
+]
+
+for file in filelist:
+    ofile = os.path.basename(file)
+    sys.stdout.write("downloading " + ofile + " ... ")
+    sys.stdout.flush()
+    infile = opener.open(file)
+    outfile = open(ofile, "wb")
+    outfile.write(infile.read())
+    outfile.close()
+    sys.stdout.write("done\n")
 ```
 ### csh script
 

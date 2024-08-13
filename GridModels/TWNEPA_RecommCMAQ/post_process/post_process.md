@@ -4,7 +4,7 @@ title: 後製工具
 parent: Recommend System
 grand_parent: CMAQ Model System
 nav_order: 4
-date: 2022-04-22 10:28:51
+date: 2024-08-13 09:42:38
 has_children: true
 last_modified_date: 2022-04-22 10:28:56
 permalink: /GridModels/TWNEPA_RecommCMAQ/post_process
@@ -36,6 +36,7 @@ tags: CMAQ nchc_service air_tool
 
 - 下載點：國網1號：/work1/simenvipub01/download/model/post_process.tar.xz
 - 解壓縮： `tar xvfJ ...`
+- 2024-08-13 note：國網(twn3)最新版本(2024-7-16)的壓縮檔並沒有放入`Performance`目錄下的數據及程式，要注意不要被其覆蓋了。
 
 ```bash
 scp sinotec2@twn1:/work1/simenvipub01/download/model/post_process.tar.xz .
@@ -65,8 +66,8 @@ py27                     /opt/anaconda3/envs/py27
 py37                  *  /opt/anaconda3/envs/py37
 ```
 
-- 目前環保署提供了Performance目錄下的程式，
-- Compare/目錄下並沒有任何檔案
+- 目前環保署提供了Performance目錄下的程式，但Compare/目錄下並沒有任何檔案
+- 2024-08-13 note：公司關閉了source-forge的連線，因此可能會無法在本地安裝。建議還是得在國網上執行。
 
 ## 程式系統架構與執行
 
@@ -95,9 +96,16 @@ py37                  *  /opt/anaconda3/envs/py37
 
 - 公版模式後製工具的引數都是以標準輸入([standard input](https://blog.xuite.net/tzeng015/twblog/113272123-Standard+Input+and+Output))方式執行，引發執行時間過長tty被斷線的問題、此種長時間卦網的執行方式也是國網中心所不樂見的。
 - 解決方式
-  - 將輸入內容寫成文字檔，以`<`輸入：`python ..py < YrMn.txt &`
+  - 將輸入內容寫成文字檔，以`<`輸入：`python ..py < YrMn.txt &`，如下所示。
   - 使用`tmux`開啟工作段。也會使作業在背景執行。
   - 修改python程式，將`input(...)`改成`sys.argv[1]`
+
+```bash
+for mm in {01..12};do 
+  echo 2019-${mm} >& YrMn.txt
+  python AirEva_Taiwan_d4.py < YrMn.txt
+done
+```
 
 ### 有關增量模擬分析
 
